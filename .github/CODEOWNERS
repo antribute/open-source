@@ -1,0 +1,9 @@
+# Core Monorepo Files
+.gitignore @jrkienle @tyler-mitchell
+.nvmrc @jrkienle @tyler-mitchell
+./package.json @jrkienle @tyler-mitchell
+pnpm-workspace.yaml @jrkienle @tyler-mitchell
+turbo.json @jrkienle @tyler-mitchell
+
+# GitHub Actions Configurations
+.github/* @jrkienle
