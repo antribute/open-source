@@ -1,0 +1,33 @@
+{
+  "scripts": {
+    "build": "turbo run build",
+    "build:apps": "turbo run build --filter=./apps/*",
+    "build:packages": "turbo run build:package",
+    "build:servers": "turbo run build --filter=./servers/*",
+    "clean": "turbo run clean",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint -- --fix",
+    "postinstall": "simple-git-hooks",
+    "reset": "pnpm run clean && turbo run reset && rm -r ./node_modules && pnpm i",
+    "style:format": "prettier --ignore-unknown --write .",
+    "style:lint": "prettier --ignore-unknown --check .",
+    "test": "turbo run test"
+  },
+  "devDependencies": {
+    "lint-staged": "^13.0.3",
+    "prettier": "2.7.1",
+    "simple-git-hooks": "^2.8.1",
+    "turbo": "latest"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=7"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm exec lint-staged"
+  },
+  "lint-staged": {
+    "*": "pnpm run style:format"
+  }
+}

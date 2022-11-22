@@ -1,0 +1,6 @@
+# Dependencies
+node_modules
+**/node_modules
+
+System Files
+.DS_Store
