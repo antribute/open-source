@@ -1,0 +1,30 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "pipeline": {
+    "build": {
+      "dependsOn": ["build:package"],
+      "outputs": ["dist/**"]
+    },
+    "build:package": {
+      "outputs": ["dist/**"]
+    },
+    "dev": {
+      "cache": false,
+      "dependsOn": ["^build:package"]
+    },
+    "format": {
+      "cache": false
+    },
+    "lint": {
+      "dependsOn": ["^build:package"],
+      "outputs": [".eslintcache"]
+    },
+    "reset": {
+      "cache": false
+    },
+    "test": {
+      "dependsOn": ["^build:package"],
+      "outputs": ["coverage/**", "test-results/**"]
+    }
+  }
+}
