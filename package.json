@@ -19,6 +19,7 @@
     "simple-git-hooks": "^2.8.1",
     "turbo": "latest"
   },
+  "prettier": "./packages/configs/prettier/.prettierrc.js",
   "private": true,
   "engines": {
     "node": ">=18",
