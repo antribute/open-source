@@ -29,9 +29,9 @@ Additionally, the following things are nice to have, and have built-in support i
 
 ## List of Packages
 
-| Name                | Location       | Purpose           |
-| ------------------- | -------------- | ----------------- |
-| `Todo: Add Package` | `packages/bar` | Todo: add purpose |
+| Name     | Location          | Purpose                                                                             |
+| -------- | ----------------- | ----------------------------------------------------------------------------------- |
+| `Config` | `packages/config` | Stores common configuration files to be shared between apps, packages, and services |
 
 ## List of Servers
 

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "./tsconfig.reacy.json",
+  "extends": "./tsconfig.react.json",
   "compilerOptions": {
     "jsx": "preserve"
   },

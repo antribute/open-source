@@ -7,3 +7,6 @@ turbo.json @jrkienle @tyler-mitchell
 
 # GitHub Actions Configurations
 .github/* @jrkienle
+
+# Configuration Change
+packages/config/* @jrkienle @tyler-mitchell

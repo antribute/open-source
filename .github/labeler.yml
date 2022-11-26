@@ -6,3 +6,7 @@
   - './package.json'
   - 'pnpm-workspace.yaml'
   - 'turbo.json'
+'Dependency':
+  - 'pnpm-lock.yaml'
+'Package: Config':
+  - 'packages/config/**'

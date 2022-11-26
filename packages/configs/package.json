@@ -4,7 +4,11 @@
   "description": "Common configuration files used between all Antribute projects",
   "files": [
     "eslint/**",
-    "prettier/**"
+    "postcss/**",
+    "prettier/**",
+    "tsconfig/**",
+    "tsup/**",
+    "vitest/**"
   ],
   "scripts": {
     "clean": "rm -r node_modules"
