@@ -1,5 +1,5 @@
 {
-  "name": "@antribute/configs",
+  "name": "@antribute/config",
   "version": "1.0.0",
   "description": "Common configuration files used between all Antribute projects",
   "files": [

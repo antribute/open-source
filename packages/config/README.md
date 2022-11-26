@@ -14,19 +14,19 @@ pnpm i @antribute/config
 
 ```json
 {
-  "extends": ["@antribute/configs/eslint/eslint-config-antribute.base.js"]
+  "extends": ["@antribute/config/eslint/eslint-config-antribute.base.js"]
 }
 ```
 
 ```json
 {
-  "extends": ["@antribute/configs/eslint/eslint-config-antribute.nextjs.js"]
+  "extends": ["@antribute/config/eslint/eslint-config-antribute.nextjs.js"]
 }
 ```
 
 ```json
 {
-  "extends": ["@antribute/configs/eslint/eslint-config-antribute.react.js"]
+  "extends": ["@antribute/config/eslint/eslint-config-antribute.react.js"]
 }
 ```
 
@@ -44,7 +44,7 @@ module.exports = require('@antribute/config/prettier/.prettierrc');
 
 ```json
 {
-  "prettier": "@antribute/configs/prettier/.prettierrc.js"
+  "prettier": "@antribute/config/prettier/.prettierrc.js"
 }
 ```
 
