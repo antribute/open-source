@@ -9,4 +9,4 @@
 'Dependency':
   - 'pnpm-lock.yaml'
 'Package: Config':
-  - './packages/config/**'
+  - 'packages/config/**'
