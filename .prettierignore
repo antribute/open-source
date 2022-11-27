@@ -1,0 +1,9 @@
+**/.next/**
+**/.turbo/**
+**/dist/**
+**/coverage/**
+**/test-results/**
+**/node_modules/**
+
+node_modules/**
+.eslintcache
