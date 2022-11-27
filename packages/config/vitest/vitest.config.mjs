@@ -5,11 +5,16 @@ export default defineConfig({
   plugins: [react()],
   test: {
     coverage: {
+      all: true,
+      enabled: true,
+      include: ['src/**/*.ts', 'src/**/*.tsx'],
       provider: 'c8',
       reporter: ['text', 'cobertura'],
       reportsDirectory: './coverage',
     },
-    globals: true,
     environment: 'happy-dom',
+    globals: true,
+    outputFile: 'test-results/results.xml',
+    reporters: ['default', 'junit'],
   },
 });

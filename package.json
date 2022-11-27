@@ -11,7 +11,7 @@
     "reset": "pnpm run clean && turbo run reset && rm -r ./node_modules && pnpm i",
     "style:format": "prettier --ignore-unknown --write .",
     "style:lint": "prettier --ignore-unknown --check .",
-    "test": "turbo run test"
+    "test": "turbo run test -- run --reporter=junit"
   },
   "devDependencies": {
     "lint-staged": "^13.0.3",

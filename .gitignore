@@ -1,6 +1,20 @@
+# Build Output
+.next
+dist
+
 # Dependencies
 node_modules
 **/node_modules
 
-System Files
+# ESLint Cache
+.eslintcache
+
+# System Files
 .DS_Store
+
+# Test Results
+coverage
+test-results
+
+# Turbo Command Output
+.turbo

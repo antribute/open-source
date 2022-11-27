@@ -2,10 +2,11 @@
   "$schema": "https://turbo.build/schema.json",
   "pipeline": {
     "build": {
-      "dependsOn": ["build:package"],
-      "outputs": ["dist/**"]
+      "cache": true,
+      "outputs": [".next/**", "dist/**"]
     },
     "build:package": {
+      "cache": true,
       "outputs": ["dist/**"]
     },
     "dev": {
@@ -16,6 +17,7 @@
       "cache": false
     },
     "lint": {
+      "cache": true,
       "dependsOn": ["^build:package"],
       "outputs": [".eslintcache"]
     },
@@ -23,6 +25,7 @@
       "cache": false
     },
     "test": {
+      "cache": true,
       "dependsOn": ["^build:package"],
       "outputs": ["coverage/**", "test-results/**"]
     }

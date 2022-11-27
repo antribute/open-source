@@ -1,9 +1,9 @@
 import { defineConfig } from 'tsup';
 
-import baseConfig from './tsup.config.base';
+import baseConfig from './tsup.config.base.mjs';
 
 export default defineConfig({
   ...baseConfig,
-  entry: ['./src/index.ts'],
+  entry: ['./src/index.tsx'],
   external: ['react'],
 });

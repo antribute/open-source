@@ -4,6 +4,7 @@
   "description": "Common configuration files used between all Antribute projects",
   "files": [
     "eslint/**",
+    "nextjs/**",
     "postcss/**",
     "prettier/**",
     "tsconfig/**",
@@ -11,7 +12,7 @@
     "vitest/**"
   ],
   "scripts": {
-    "clean": "rm -r node_modules"
+    "reset": "rm -r node_modules"
   },
   "keywords": [
     "antribute",
@@ -46,6 +47,7 @@
     "prettier": "2.8.0",
     "tsup": "^6.5.0",
     "typescript": "^4.9.3",
+    "vite": "^3.2.4",
     "vitest": "^0.25.3"
   },
   "peerDependencies": {

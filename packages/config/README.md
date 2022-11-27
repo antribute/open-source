@@ -12,22 +12,22 @@ pnpm i @antribute/config
 
 ### ESLint
 
-```json
-{
-  "extends": ["@antribute/config/eslint/eslint-config-antribute.base.js"]
-}
+```javascript
+module.exports = require('@antribute/config/eslint/eslint-base');
 ```
 
-```json
-{
-  "extends": ["@antribute/config/eslint/eslint-config-antribute.nextjs.js"]
-}
+```javascript
+module.exports = require('@antribute/config/eslint/eslint-nextjs');
 ```
 
-```json
-{
-  "extends": ["@antribute/config/eslint/eslint-config-antribute.react.js"]
-}
+```javascript
+module.exports = require('@antribute/config/eslint/eslint-react');
+```
+
+### NextJS
+
+```javascript
+module.exports = require('@antribute/config/nextjs/next.config');
 ```
 
 ### Postcss
@@ -70,16 +70,16 @@ module.exports = require('@antribute/config/prettier/.prettierrc');
 
 ### Tsup
 
-```typescript
-export { default } from '@antribute/config/tsup/tsup.config.base';
+```javascript
+export { default } from '@antribute/config/tsup/tsup.config.base.mjs';
 ```
 
-```typescript
-export { default } from '@antribute/config/tsup/tsup.config.react';
+```javascript
+export { default } from '@antribute/config/tsup/tsup.config.react.mjs';
 ```
 
 ### Vitest
 
-```typescript
-export { default } from '@antribute/config/vitest/vitest.config';
+```javascript
+export { default } from '@antribute/config/vitest/vitest.config.mjs';
 ```
