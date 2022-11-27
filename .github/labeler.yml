@@ -1,8 +1,12 @@
-"GitHub Configuration":
-  - ".github/**"
-"Core Monorepo":
-  - ".gitignore"
-  - "nvmrc"
-  - "./package.json"
-  - "pnpm-workspace.yaml"
-  - "turbo.json"
+'GitHub Configuration':
+  - '.github/**'
+'Core Monorepo':
+  - '.gitignore'
+  - 'nvmrc'
+  - './package.json'
+  - 'pnpm-workspace.yaml'
+  - 'turbo.json'
+'Dependency':
+  - 'pnpm-lock.yaml'
+'Package: Config':
+  - 'packages/config/**'

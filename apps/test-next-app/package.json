@@ -1,0 +1,27 @@
+{
+  "name": "@antribute/test-next-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "clean": "rm -r ./.next",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "reset": "rm -r ./node_modules"
+  },
+  "dependencies": {
+    "next": "13.0.5",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@antribute/config": "workspace:*",
+    "@types/node": "18.11.9",
+    "@types/react": "18.0.25",
+    "@types/react-dom": "18.0.9",
+    "eslint": "^8.28.0",
+    "prettier": "2.8.0",
+    "typescript": "^4.9.3"
+  }
+}

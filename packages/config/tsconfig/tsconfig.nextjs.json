@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "./tsconfig.react.json",
+  "compilerOptions": {
+    "jsx": "preserve"
+  },
+  "display": "Next.js"
+}
