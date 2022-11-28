@@ -1,0 +1,20 @@
+name: Lint
+on:
+  push:
+    branches:
+      - '**'
+    tags-ignore:
+      - '**'
+jobs:
+  lint:
+    name: Lint All Apps, Packages, and Servers
+    runs-on: ubuntu-latest
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+      TURBO_REMOTE_ONLY: true
+    steps:
+      - name: Setup
+        uses: antribute/actions/setup@feature/cor-5-create-a-complete-set-of-ci-workflows
+      - name: Run Lint
+        run: pnpm run build
