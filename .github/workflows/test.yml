@@ -1,0 +1,27 @@
+name: Test
+on:
+  push:
+    branches:
+      - '**'
+    tags-ignore:
+      - '**'
+jobs:
+  Test:
+    name: Test All Apps, Packages, and Servers
+    runs-on: ubuntu-latest
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+      TURBO_REMOTE_ONLY: true
+    steps:
+      - name: Setup
+        uses: antribute/actions/setup@main
+      - name: Run Test
+        run: pnpm run test
+      # In order to enable this, we need a package that actually has coverage
+      # - name: Upload packageName Coverage to Codecov
+      #   uses: codecov/codecov-action@v3
+      #   with:
+      #     files: ./packages/packageName/coverage/cobertura-coverage.xml
+      #     flags: packageName
+      #     fail_ci_if_error: true

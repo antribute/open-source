@@ -1,0 +1,16 @@
+name: Check Formatting
+on:
+  push:
+    branches:
+      - '**'
+    tags-ignore:
+      - '**'
+jobs:
+  check-formatting:
+    name: Check Repo Formatting with Prettier
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup
+        uses: antribute/actions/setup@main
+      - name: Run Prettier Check
+        run: pnpm run style:lint

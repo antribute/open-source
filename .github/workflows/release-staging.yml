@@ -1,0 +1,18 @@
+name: Staging Release
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build-and-release:
+    name: Build and Release
+    runs-on: ubuntu-latest
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+      TURBO_REMOTE_ONLY: true
+    steps:
+      - name: Setup
+        uses: antribute/actions/setup@main
+      - name: Build All Apps, Packages, and Servers
+        run: pnpm run build
