@@ -15,7 +15,7 @@ jobs:
       TURBO_REMOTE_ONLY: true
     steps:
       - name: Setup
-        uses: antribute/actions/setup@feature/cor-5-create-a-complete-set-of-ci-workflows
+        uses: antribute/actions/setup@main
       - name: Run Test
         run: pnpm run test
       # In order to enable this, we need a package that actually has coverage
