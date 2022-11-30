@@ -2,7 +2,7 @@
   "scripts": {
     "build": "turbo run build",
     "build:apps": "turbo run build --filter=./apps/*",
-    "build:packages": "turbo run build:package",
+    "build:packages": "turbo run build --filter=./packages/*",
     "build:servers": "turbo run build --filter=./servers/*",
     "clean": "turbo run clean",
     "lint": "turbo run lint",

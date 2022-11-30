@@ -7,10 +7,11 @@ export default defineConfig({
     coverage: {
       all: true,
       enabled: true,
-      include: ['src/**/*.ts', 'src/**/*.tsx'],
+      exclude: ['index.ts', 'index.tsx', '**/*.stories.tsx'],
       provider: 'c8',
       reporter: ['text', 'cobertura'],
       reportsDirectory: './coverage',
+      src: 'src',
     },
     environment: 'happy-dom',
     globals: true,

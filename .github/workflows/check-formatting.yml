@@ -10,6 +10,8 @@ jobs:
     name: Check Repo Formatting with Prettier
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Setup
         uses: antribute/actions/setup@main
       - name: Run Prettier Check

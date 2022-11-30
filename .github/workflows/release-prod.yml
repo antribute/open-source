@@ -13,6 +13,8 @@ jobs:
       TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
       TURBO_REMOTE_ONLY: true
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Setup
         uses: antribute/actions/setup@main
       - name: Check If Version is Valid
@@ -26,4 +28,28 @@ jobs:
           access: 'public'
           dry-run: true # TODO: Remove this once we verify this script works
           package: './packages/config/package.json'
+          token: ${{ secrets.NPM_TOKEN }}
+  release-zephyr-core:
+    if: startsWith(github.ref_name, 'zephyr-core/')
+    name: Release Zephyr Core Package
+    runs-on: ubuntu-latest
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+      TURBO_REMOTE_ONLY: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup
+        uses: antribute/actions/setup@main
+      - name: Check If Version is Valid
+        uses: antribute/actions/check-tag-release@main
+        with:
+          delimiter: '/'
+          pkgPath: './packages/zephyr-core/package.json'
+      - name: Publish @antribute/config to NPM
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          access: 'public'
+          package: './packages/zephyr-core/package.json'
           token: ${{ secrets.NPM_TOKEN }}

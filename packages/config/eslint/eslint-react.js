@@ -21,5 +21,9 @@ module.exports = {
         devDependencies: ['**/*.stories.tsx', '**/*.test.ts', '**/*.test.tsx'],
       },
     ],
+    // This allows us to "export { default } from which is nice for reducing boilerplate"
+    'no-restricted-exports': 'off',
+    // We use React 18, this is no longer needed
+    'react/react-in-jsx-scope': 'off',
   },
 };

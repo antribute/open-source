@@ -10,3 +10,7 @@
   - 'pnpm-lock.yaml'
 'Package: Config':
   - 'packages/config/**'
+'Package: Zephyr Core':
+  - 'packages/zephyr-core/**'
+'Package: Zephyr React':
+  - 'packages/zephyr-react/**'

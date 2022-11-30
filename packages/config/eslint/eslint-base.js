@@ -20,5 +20,7 @@ module.exports = {
         devDependencies: ['**/*.test.ts'],
       },
     ],
+    // This allows us to "export { default } from which is nice for reducing boilerplate"
+    'no-restricted-exports': 'off',
   },
 };
