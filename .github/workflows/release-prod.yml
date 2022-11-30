@@ -13,6 +13,8 @@ jobs:
       TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
       TURBO_REMOTE_ONLY: true
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Setup
         uses: antribute/actions/setup@main
       - name: Check If Version is Valid
@@ -36,6 +38,8 @@ jobs:
       TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
       TURBO_REMOTE_ONLY: true
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Setup
         uses: antribute/actions/setup@main
       - name: Check If Version is Valid
