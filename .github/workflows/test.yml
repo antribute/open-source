@@ -24,3 +24,9 @@ jobs:
           files: ./packages/zephyr-core/coverage/cobertura-coverage.xml
           flags: zephyr-core
           fail_ci_if_error: true
+      - name: Upload Zephyr React Coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./packages/zephyr-react/coverage/cobertura-coverage.xml
+          flags: zephyr-react
+          fail_ci_if_error: true

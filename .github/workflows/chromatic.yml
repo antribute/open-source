@@ -18,8 +18,11 @@ jobs:
         uses: antribute/actions/setup@main
       - name: Run Build
         run: pnpm run build:packages
-      # TODO: We gotta actually create the package before we can publish it to Chromatic lol
-      # - name: Publish to Chromatic
-      #   uses: chromaui/action@v1
-      #   with:
-      #     projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+      - name: Publish to Chromatic
+        uses: chromaui/action@v1
+        with:
+          exitZeroOnChanges: true
+          onlyChanged: true
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          workingDir: './packages/zephyr-react'
+          zip: true

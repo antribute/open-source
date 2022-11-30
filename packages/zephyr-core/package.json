@@ -2,17 +2,20 @@
   "name": "@antribute/zephyr-core",
   "description": "Core TailwindCSS Configurations and ClassNames for Zephyr Components",
   "version": "0.1.0",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist/**",
     "./tailwind.config.js",
     "./zephyr-core.css"
   ],
   "scripts": {
-    "build": "pnpm run build:config && pnpm run build:classnames",
-    "build:config": "tsup src/tailwindConfig.ts",
+    "build": "pnpm run build:classnames && pnpm run build:config",
+    "build:config": "tsup src/tailwindConfig.ts --format cjs --dts --minify --no-config --sourcemap",
     "build:classnames": "tsup",
     "clean": "rm -r ./.next",
-    "dev": "concurrently \"pnpm run build:config --watch\" \"pnpm run build:classnames --watch\"",
+    "dev": "concurrently \"pnpm run build:classnames --watch\" \"pnpm run build:config --watch\"",
     "lint": "eslint --cache src/**",
     "test": "vitest"
   },
