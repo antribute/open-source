@@ -7,7 +7,7 @@ export default defineConfig({
     coverage: {
       all: true,
       enabled: true,
-      exclude: ['index.ts'],
+      exclude: ['index.ts', 'index.tsx', '**/*.stories.tsx'],
       provider: 'c8',
       reporter: ['text', 'cobertura'],
       reportsDirectory: './coverage',
