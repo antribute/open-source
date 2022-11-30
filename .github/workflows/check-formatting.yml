@@ -10,13 +10,7 @@ jobs:
     name: Check Repo Formatting with Prettier
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
       - name: Setup
         uses: antribute/actions/setup@main
-        with:
-          skipCheckout: true
       - name: Run Prettier Check
         run: pnpm run style:lint
