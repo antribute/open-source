@@ -3,22 +3,19 @@
   "pipeline": {
     "build": {
       "cache": true,
+      "dependsOn": ["^build"],
       "outputs": [".next/**", "dist/**"]
-    },
-    "build:package": {
-      "cache": true,
-      "outputs": ["dist/**"]
     },
     "dev": {
       "cache": false,
-      "dependsOn": ["^build:package"]
+      "dependsOn": ["^build"]
     },
     "format": {
       "cache": false
     },
     "lint": {
       "cache": true,
-      "dependsOn": ["^build:package"],
+      "dependsOn": ["^build"],
       "outputs": [".eslintcache"]
     },
     "reset": {
@@ -26,7 +23,7 @@
     },
     "test": {
       "cache": true,
-      "dependsOn": ["^build:package"],
+      "dependsOn": ["^build"],
       "outputs": ["coverage/**", "test-results/**"]
     }
   }
