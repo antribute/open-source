@@ -11,10 +11,12 @@ pnpm i graphql @antribute/graphql-nextjs
 ## Usage
 
 ```typescript
-import { apiHandlerConfig, createHandler } from '@antribute/graphqlNextjs';
+import { apiHandlerConfig, createHandler } from '@antribute/graphql-nextjs';
 
 export const config = apiHandlerConfig;
 
-const handler = createHandler();
-export default createHandler();
+const handler = createHandler({
+  /* TODO: Put your graphql-yoga params here */
+});
+export default handler;
 ```
