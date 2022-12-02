@@ -160,6 +160,7 @@ importers:
       '@types/react-dom': 18.0.9
       '@vitest/coverage-c8': ^0.25.3
       autoprefixer: ^10.4.13
+      clsx: ^1.2.1
       eslint: ^8.28.0
       happy-dom: ^7.7.0
       postcss: ^8.4.19
@@ -172,6 +173,8 @@ importers:
       vite: ^3.2.4
       vite-tsconfig-paths: ^3.6.0
       vitest: ^0.25.3
+    dependencies:
+      clsx: 1.2.1
     devDependencies:
       '@antribute/config': link:../config
       '@antribute/zephyr-core': link:../zephyr-core
@@ -1896,7 +1899,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.20.1
       '@types/react': 18.0.25
-      clsx: 1.1.0
+      clsx: 1.2.1
       focus-lock: 0.8.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -2602,7 +2605,7 @@ packages:
       '@storybook/components': 7.0.0-alpha.54_biqbaboplfbrettd7655fr4n2y
       '@storybook/csf-plugin': 7.0.0-alpha.54
       '@storybook/csf-tools': 7.0.0-alpha.54
-      '@storybook/mdx2-csf': 0.1.0-next.6
+      '@storybook/mdx2-csf': 0.1.0-next.7
       '@storybook/node-logger': 7.0.0-alpha.54
       '@storybook/postinstall': 7.0.0-alpha.54
       '@storybook/preview-api': 7.0.0-alpha.54
@@ -2968,7 +2971,7 @@ packages:
       '@storybook/client-api': 7.0.0-alpha.52_biqbaboplfbrettd7655fr4n2y
       '@storybook/client-logger': 7.0.0-alpha.52
       '@storybook/core-common': 7.0.0-alpha.52_lb6du3saekb5anf2gjv3wxj3oq
-      '@storybook/mdx2-csf': 0.1.0-next.6
+      '@storybook/mdx2-csf': 0.1.0-next.7
       '@storybook/node-logger': 7.0.0-alpha.52
       '@storybook/preview-web': 7.0.0-alpha.52_biqbaboplfbrettd7655fr4n2y
       '@storybook/source-loader': 7.0.0-alpha.52_biqbaboplfbrettd7655fr4n2y
@@ -3537,10 +3540,10 @@ packages:
       }
     dev: true
 
-  /@storybook/mdx2-csf/0.1.0-next.6:
+  /@storybook/mdx2-csf/0.1.0-next.7:
     resolution:
       {
-        integrity: sha512-FDBPTDHG9BcI27Zp5kwkqjsv2A3s8aUahtKeHOsmTicOBS8uWqUZ3jmL7vg6N7SpiUUBAft9/vTQfttNLeHO7w==,
+        integrity: sha512-ahwV2A4aS/D79WWum8fmrFhhbC28/f4XlEKtNG1s0EkCVwCSU17bthEBRY5/Y3IBR5jfeN/oApizNQMLh7mqAA==,
       }
     dependencies:
       loader-utils: 2.0.4
@@ -5739,6 +5742,13 @@ packages:
       }
     engines: { node: '>=6' }
     dev: true
+
+  /clsx/1.2.1:
+    resolution:
+      {
+        integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==,
+      }
+    engines: { node: '>=6' }
 
   /collection-visit/1.0.0:
     resolution:
