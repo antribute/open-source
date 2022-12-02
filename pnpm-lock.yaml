@@ -50,31 +50,6 @@ importers:
       tailwindcss: 3.2.4_postcss@8.4.19
       typescript: 4.9.3
 
-  apps/test-next-app:
-    specifiers:
-      '@antribute/config': workspace:*
-      '@types/node': 18.11.9
-      '@types/react': 18.0.25
-      '@types/react-dom': 18.0.9
-      eslint: ^8.28.0
-      next: 13.0.5
-      prettier: 2.8.0
-      react: 18.2.0
-      react-dom: 18.2.0
-      typescript: ^4.9.3
-    dependencies:
-      next: 13.0.5_biqbaboplfbrettd7655fr4n2y
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-    devDependencies:
-      '@antribute/config': link:../../packages/config
-      '@types/node': 18.11.9
-      '@types/react': 18.0.25
-      '@types/react-dom': 18.0.9
-      eslint: 8.28.0
-      prettier: 2.8.0
-      typescript: 4.9.3
-
   packages/config:
     specifiers:
       '@next/eslint-plugin-next': ^13.0.5
@@ -95,7 +70,6 @@ importers:
       happy-dom: ^7.7.0
       next: 13.0.5
       prettier: 2.8.0
-      prettier-plugin-tailwindcss: ^0.2.0
       react: 18.2.0
       react-dom: 18.2.0
       tsup: ^6.5.0
@@ -118,7 +92,6 @@ importers:
       eslint-plugin-react-hooks: 4.6.0_eslint@8.28.0
       eslint-plugin-tailwindcss: 3.7.0
       happy-dom: 7.7.0
-      prettier-plugin-tailwindcss: 0.2.0_prettier@2.8.0
     devDependencies:
       eslint: 8.28.0
       next: 13.0.5_biqbaboplfbrettd7655fr4n2y
@@ -171,40 +144,15 @@ importers:
       typescript: 4.9.3
       vitest: 0.25.3_happy-dom@7.7.0
 
-  packages/test-library:
-    specifiers:
-      '@antribute/config': workspace:*
-      '@types/node': 18.11.9
-      '@types/react': 18.0.25
-      '@types/react-dom': 18.0.9
-      eslint: ^8.28.0
-      prettier: 2.8.0
-      react: 18.2.0
-      react-dom: 18.2.0
-      tsup: ^6.5.0
-      typescript: ^4.9.3
-      vitest: ^0.25.3
-    dependencies:
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-    devDependencies:
-      '@antribute/config': link:../config
-      '@types/node': 18.11.9
-      '@types/react': 18.0.25
-      '@types/react-dom': 18.0.9
-      eslint: 8.28.0
-      prettier: 2.8.0
-      tsup: 6.5.0_typescript@4.9.3
-      typescript: 4.9.3
-      vitest: 0.25.3
-
   packages/zephyr-core:
     specifiers:
       '@antribute/config': workspace:*
       '@vitest/coverage-c8': ^0.25.3
+      autoprefixer: ^10.4.13
       concurrently: ^7.6.0
       eslint: ^8.28.0
       happy-dom: ^7.7.0
+      postcss: ^8.4.19
       prettier: 2.8.0
       tailwindcss: ^3.2.4
       tsup: ^6.5.0
@@ -213,12 +161,14 @@ importers:
     devDependencies:
       '@antribute/config': link:../config
       '@vitest/coverage-c8': 0.25.3_happy-dom@7.7.0
+      autoprefixer: 10.4.13_postcss@8.4.19
       concurrently: 7.6.0
       eslint: 8.28.0
       happy-dom: 7.7.0
+      postcss: 8.4.19
       prettier: 2.8.0
-      tailwindcss: 3.2.4
-      tsup: 6.5.0_typescript@4.9.3
+      tailwindcss: 3.2.4_postcss@8.4.19
+      tsup: 6.5.0_idbjo54bpfgfu5hzy4ncsoa6f4
       typescript: 4.9.3
       vitest: 0.25.3_happy-dom@7.7.0
 
@@ -7783,7 +7733,7 @@ packages:
     dependencies:
       fast-glob: 3.2.12
       postcss: 8.4.19
-      tailwindcss: 3.2.4
+      tailwindcss: 3.2.4_postcss@8.4.19
     transitivePeerDependencies:
       - ts-node
     dev: false
@@ -8959,6 +8909,7 @@ packages:
       whatwg-mimetype: 3.0.0
     transitivePeerDependencies:
       - encoding
+    dev: true
 
   /has-bigints/1.0.2:
     resolution:
@@ -11712,18 +11663,6 @@ packages:
       }
     engines: { node: '>= 0.8.0' }
 
-  /prettier-plugin-tailwindcss/0.2.0_prettier@2.8.0:
-    resolution:
-      {
-        integrity: sha512-Ruqig/mdWCSpqdq9WK44nrmqM4BFWTzBPhPGwC5NK3coV9eZntEQPB84MGZbjAg0XQU02jVRHXNRPREBzxvM+A==,
-      }
-    engines: { node: '>=12.17.0' }
-    peerDependencies:
-      prettier: '>=2.2.0'
-    dependencies:
-      prettier: 2.8.0
-    dev: false
-
   /prettier/2.7.1:
     resolution:
       {
@@ -11740,6 +11679,7 @@ packages:
       }
     engines: { node: '>=10.13.0' }
     hasBin: true
+    dev: true
 
   /pretty-format/27.5.1:
     resolution:
@@ -13333,40 +13273,6 @@ packages:
       }
     dev: true
 
-  /tailwindcss/3.2.4:
-    resolution:
-      {
-        integrity: sha512-AhwtHCKMtR71JgeYDaswmZXhPcW9iuI9Sp2LvZPo9upDZ7231ZJ7eA9RaURbhpXGVlrjX4cFNlB4ieTetEb7hQ==,
-      }
-    engines: { node: '>=12.13.0' }
-    hasBin: true
-    dependencies:
-      arg: 5.0.2
-      chokidar: 3.5.3
-      color-name: 1.1.4
-      detective: 5.2.1
-      didyoumean: 1.2.2
-      dlv: 1.1.3
-      fast-glob: 3.2.12
-      glob-parent: 6.0.2
-      is-glob: 4.0.3
-      lilconfig: 2.0.6
-      micromatch: 4.0.5
-      normalize-path: 3.0.0
-      object-hash: 3.0.0
-      picocolors: 1.0.0
-      postcss: 8.4.19
-      postcss-import: 14.1.0_postcss@8.4.19
-      postcss-js: 4.0.0_postcss@8.4.19
-      postcss-load-config: 3.1.4_postcss@8.4.19
-      postcss-nested: 6.0.0_postcss@8.4.19
-      postcss-selector-parser: 6.0.11
-      postcss-value-parser: 4.2.0
-      quick-lru: 5.1.1
-      resolve: 1.22.1
-    transitivePeerDependencies:
-      - ts-node
-
   /tailwindcss/3.2.4_postcss@8.4.19:
     resolution:
       {
@@ -13402,7 +13308,6 @@ packages:
       resolve: 1.22.1
     transitivePeerDependencies:
       - ts-node
-    dev: true
 
   /tar/6.1.12:
     resolution:
@@ -14346,54 +14251,6 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
 
-  /vitest/0.25.3:
-    resolution:
-      {
-        integrity: sha512-/UzHfXIKsELZhL7OaM2xFlRF8HRZgAHtPctacvNK8H4vOcbJJAMEgbWNGSAK7Y9b1NBe5SeM7VTuz2RsTHFJJA==,
-      }
-    engines: { node: '>=v14.16.0' }
-    hasBin: true
-    peerDependencies:
-      '@edge-runtime/vm': '*'
-      '@vitest/browser': '*'
-      '@vitest/ui': '*'
-      happy-dom: '*'
-      jsdom: '*'
-    peerDependenciesMeta:
-      '@edge-runtime/vm':
-        optional: true
-      '@vitest/browser':
-        optional: true
-      '@vitest/ui':
-        optional: true
-      happy-dom:
-        optional: true
-      jsdom:
-        optional: true
-    dependencies:
-      '@types/chai': 4.3.4
-      '@types/chai-subset': 1.3.3
-      '@types/node': 18.11.9
-      acorn: 8.8.1
-      acorn-walk: 8.2.0
-      chai: 4.3.7
-      debug: 4.3.4
-      local-pkg: 0.4.2
-      source-map: 0.6.1
-      strip-literal: 0.4.2
-      tinybench: 2.3.1
-      tinypool: 0.3.0
-      tinyspy: 1.0.2
-      vite: 3.2.4_@types+node@18.11.9
-    transitivePeerDependencies:
-      - less
-      - sass
-      - stylus
-      - sugarss
-      - supports-color
-      - terser
-    dev: true
-
   /vitest/0.25.3_happy-dom@7.7.0:
     resolution:
       {
@@ -14426,7 +14283,7 @@ packages:
       acorn-walk: 8.2.0
       chai: 4.3.7
       debug: 4.3.4
-      happy-dom: 7.7.0_encoding@0.1.13
+      happy-dom: 7.7.0
       local-pkg: 0.4.2
       source-map: 0.6.1
       strip-literal: 0.4.2
