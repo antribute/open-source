@@ -26,4 +26,11 @@ module.exports = {
     // We use React 18, this is no longer needed
     'react/react-in-jsx-scope': 'off',
   },
+  settings: {
+    tailwindcss: {
+      callees: ['clsx', 'twsx'],
+      config: './node_modules/@antribute/zephyr-core/tailwind.config.js',
+      removeDuplicates: true,
+    },
+  },
 };
