@@ -20,8 +20,6 @@ jobs:
           fetch-depth: 0
       - name: Setup
         uses: antribute/actions/setup@main
-        with:
-          skipCheckout: 'true'
       - name: Run Build
         run: pnpm run build:packages
       - name: Publish to Chromatic
