@@ -1,8 +1,8 @@
 import { createSchema } from 'graphql-yoga';
 import { describe, expect, it } from 'vitest';
-import server from './server';
+import createHandler from './createHandler';
 
-describe('server', () => {
+describe('createHandler', () => {
   it('should create a GraphQL server', async () => {
     const MOCK_RESPONSE = 'world';
     interface QueryResponse {
@@ -23,7 +23,7 @@ describe('server', () => {
       },
     });
 
-    const localServer = server({ schema });
+    const localServer = createHandler({ schema });
     const res = await localServer.fetch('http://localhost:4000/graphql', {
       method: 'POST',
       headers: {

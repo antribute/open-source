@@ -20,11 +20,11 @@ jobs:
         uses: antribute/actions/setup@main
       - name: Run Test
         run: pnpm run test
-      - name: Upload Zephyr Core Coverage to Codecov
+      - name: Upload GraphQL NextJS Coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
-          files: ./packages/zephyr-core/coverage/cobertura-coverage.xml
-          flags: zephyr-core
+          files: ./packages/graphql-nextjs/coverage/cobertura-coverage.xml
+          flags: graphql-nextjs
           fail_ci_if_error: true
       - name: Upload Zephyr React Coverage to Codecov
         uses: codecov/codecov-action@v3

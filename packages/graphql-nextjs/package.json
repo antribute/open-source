@@ -1,5 +1,5 @@
 {
-  "name": "@antribute/next-graphql",
+  "name": "@antribute/graphql-nextjs",
   "description": "A simple NextJS wrapper around GraphQL Yoga",
   "version": "0.1.0",
   "main": "./dist/index.js",
