@@ -2,7 +2,7 @@
 import type { Config } from 'tailwindcss';
 import defaultTailwindTheme from 'tailwindcss/defaultTheme';
 
-const create8PtGrid = (max = 512) => {
+export const create8PtGrid = (max = 512) => {
   const finalGrid: Record<string, string> = {
     auto: 'auto',
     0: '0px',
