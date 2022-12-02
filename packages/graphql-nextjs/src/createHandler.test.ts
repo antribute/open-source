@@ -24,7 +24,7 @@ describe('createHandler', () => {
     });
 
     const localServer = createHandler({ schema });
-    const res = await localServer.fetch('http://localhost:4000/graphql', {
+    const res = await localServer.fetch('http://localhost:4000/api/graphql', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
