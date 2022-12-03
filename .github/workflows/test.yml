@@ -16,15 +16,23 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Setup
         uses: antribute/actions/setup@main
       - name: Run Test
         run: pnpm run test
-      - name: Upload Zephyr Core Coverage to Codecov
+      - name: Upload Antribute Landing Page Coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
-          files: ./packages/zephyr-core/coverage/cobertura-coverage.xml
-          flags: zephyr-core
+          files: ./apps/landing-page/coverage/cobertura-coverage.xml
+          flags: antribute-landing-page
+          fail_ci_if_error: true
+      - name: Upload GraphQL NextJS Coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./packages/graphql-nextjs/coverage/cobertura-coverage.xml
+          flags: graphql-nextjs
           fail_ci_if_error: true
       - name: Upload Zephyr React Coverage to Codecov
         uses: codecov/codecov-action@v3

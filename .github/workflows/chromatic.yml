@@ -5,6 +5,9 @@ on:
       - '**'
     tags-ignore:
       - '**'
+    paths:
+      - 'packages/zephyr-core/**'
+      - 'packages/zephyr-react/**'
 jobs:
   chromatic:
     name: Build Packages and Push Storybook to Chromatic
@@ -20,8 +23,8 @@ jobs:
           fetch-depth: 0
       - name: Setup
         uses: antribute/actions/setup@main
-      - name: Run Build
-        run: pnpm run build:packages
+      - name: Build Zephyr
+        run: pnpm exec turbo run build --filter=@antribute/zephyr-react
       - name: Publish to Chromatic
         uses: chromaui/action@v1
         with:
