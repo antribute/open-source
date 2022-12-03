@@ -21,4 +21,4 @@ jobs:
       - name: Setup
         uses: antribute/actions/setup@main
       - name: Run Build
-        run: pnpm exec turbo run build --filter=[HEAD^1]
+        run: pnpm run build

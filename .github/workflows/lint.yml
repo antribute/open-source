@@ -21,4 +21,4 @@ jobs:
       - name: Setup
         uses: antribute/actions/setup@main
       - name: Run Lint
-        run: pnpm exec turbo run lint --filter=[HEAD^1]
+        run: pnpm run lint

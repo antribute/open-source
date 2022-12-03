@@ -21,7 +21,7 @@ jobs:
       - name: Setup
         uses: antribute/actions/setup@main
       - name: Run Test
-        run: pnpm exec turbo run test --filter=[HEAD^1]
+        run: pnpm run test
       - name: Upload Antribute Landing Page Coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
