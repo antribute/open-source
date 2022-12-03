@@ -1,3 +1,5 @@
+const withRoutes = require('nextjs-routes/config')();
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ['api.ts', 'page.tsx'],
@@ -5,4 +7,4 @@ const nextConfig = {
   swcMinify: true,
 };
 
-module.exports = nextConfig;
+module.exports = withRoutes(nextConfig);

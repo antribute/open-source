@@ -1,6 +1,6 @@
 {
   "extends": "@antribute/config/tsconfig/tsconfig.nextjs.json",
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "next-routes.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"],
   "compilerOptions": {
     "incremental": true

@@ -39,7 +39,8 @@
     "eslint-plugin-react": "^7.31.11",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-tailwindcss": "^3.7.0",
-    "happy-dom": "^7.7.0"
+    "happy-dom": "^7.7.0",
+    "nextjs-routes": "^1.0.4"
   },
   "devDependencies": {
     "eslint": "^8.28.0",
