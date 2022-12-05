@@ -12,12 +12,12 @@ function Home() {
         support the even better ideas"
         />
       </Head>
-      <div className="container mx-auto flex h-full min-h-screen flex-col items-center justify-center text-center text-light-gray-type dark:text-dark-gray-type">
-        <div className="mb-16 flex">
+      <div className="container mx-auto flex h-full min-h-screen flex-col items-center justify-center px-24 text-light-gray-type dark:text-dark-gray-type">
+        <div className="mb-16 flex items-center">
           <Image alt="" height="80" width="80" src="/icon.png" />
-          <h1 className="ml-16 text-h1 font-heading">Hello, World!</h1>
+          <h1 className="ml-16 text-h2 font-heading sm:text-h1">Hello, World!</h1>
         </div>
-        <p className="mb-32 max-w-512 text-lg font-body leading-lg">
+        <p className="mb-32 max-w-512 text-lg font-body leading-lg sm:text-center">
           We&apos;re Antribute, a team of world-class engineers with one goal: create the best tech
           to support the even better ideas.
         </p>
