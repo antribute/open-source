@@ -136,6 +136,7 @@ importers:
       happy-dom: ^7.7.0
       jsonwebtoken: ^8.5.1
       jwks-rsa: ^3.0.0
+      nock: ^13.2.9
       prettier: 2.8.0
       superagent: ^8.0.6
       superagent-proxy: ^3.0.0
@@ -147,6 +148,7 @@ importers:
       encoding: 0.1.13
       jsonwebtoken: 8.5.1
       jwks-rsa: 3.0.0
+      nock: 13.2.9
       superagent: 8.0.6
       superagent-proxy: 3.0.0_superagent@8.0.6
     devDependencies:
@@ -10428,6 +10430,13 @@ packages:
         integrity: sha512-Bdboy+l7tA3OGW6FjyFHWkP5LuByj1Tk33Ljyq0axyzdk9//JSi2u3fP1QSmd1KNwq6VOKYGlAu87CisVir6Pw==,
       }
 
+  /json-stringify-safe/5.0.1:
+    resolution:
+      {
+        integrity: sha512-ZClg6AaYvamvYEE82d3Iyd3vSSIjQ+odgjaTzRuO3s7toCdFKczob2i0zCh7JE8kWn17yvAWhUVxvqGwUalsRA==,
+      }
+    dev: false
+
   /json5/1.0.1:
     resolution:
       {
@@ -10897,7 +10906,6 @@ packages:
       {
         integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==,
       }
-    dev: true
 
   /log-update/4.0.0:
     resolution:
@@ -11492,6 +11500,21 @@ packages:
     dependencies:
       chokidar: 3.5.3
       next: 13.0.5_biqbaboplfbrettd7655fr4n2y
+    dev: false
+
+  /nock/13.2.9:
+    resolution:
+      {
+        integrity: sha512-1+XfJNYF1cjGB+TKMWi29eZ0b82QOvQs2YoLNzbpWGqFMtRQHTa57osqdGj4FrFPgkO4D4AZinzUJR9VvW3QUA==,
+      }
+    engines: { node: '>= 10.13' }
+    dependencies:
+      debug: 4.3.4
+      json-stringify-safe: 5.0.1
+      lodash: 4.17.21
+      propagate: 2.0.1
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /node-dir/0.1.17:
@@ -12428,6 +12451,14 @@ packages:
       loose-envify: 1.4.0
       object-assign: 4.1.1
       react-is: 16.13.1
+
+  /propagate/2.0.1:
+    resolution:
+      {
+        integrity: sha512-vGrhOavPSTz4QVNuBNdcNXePNdNMaO1xj9yBeH1ScQPjk/rhg9sSlCXPhMkFuaNNW/syTvYqsnbIJxMBfRbbag==,
+      }
+    engines: { node: '>= 8' }
+    dev: false
 
   /proto-list/1.2.4:
     resolution:
