@@ -1,7 +1,7 @@
 import { GraphQLError } from 'graphql';
 
 const forbiddenErr = (code = 'FORBIDDEN') =>
-  new GraphQLError('You do not have permission to access this object', {
+  new GraphQLError('You do not have permission to access this', {
     extensions: {
       code,
       http: {

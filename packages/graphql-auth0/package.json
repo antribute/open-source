@@ -1,6 +1,6 @@
 {
-  "name": "@antribute/graphql-nextjs",
-  "description": "A simple NextJS wrapper around GraphQL Yoga",
+  "name": "@antribute/graphql-auth0",
+  "description": "A graphql-yoga context creator for Auth0",
   "version": "0.1.0",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -17,34 +17,32 @@
   },
   "keywords": [
     "antribute",
-    "graphql",
-    "nextjs"
+    "auth0",
+    "graphql"
   ],
   "author": "Antribute, Inc. (https://www.antribute.com)",
   "license": "MIT",
   "devDependencies": {
     "@antribute/config": "workspace:*",
+    "@types/auth0": "^2.35.8",
+    "@types/jsonwebtoken": "^8.5.9",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.9",
     "@vitest/coverage-c8": "^0.25.3",
     "eslint": "^8.28.0",
-    "graphql": "^16.6.0",
     "happy-dom": "^7.7.0",
-    "next": "13.0.5",
     "prettier": "2.8.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
     "tsup": "^6.5.0",
     "typescript": "^4.9.3",
     "vitest": "^0.25.3"
   },
   "dependencies": {
+    "auth0": "^2.44.1",
     "encoding": "^0.1.13",
-    "graphql-yoga": "^3.1.1"
-  },
-  "peerDependencies": {
-    "graphql": ">= 16.0.0 < 17",
-    "next": ">= 13.0.0 < 14"
+    "jsonwebtoken": "^8.5.1",
+    "jwks-rsa": "^3.0.0",
+    "superagent": "^8.0.6",
+    "superagent-proxy": "^3.0.0"
   }
 }
