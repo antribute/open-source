@@ -37,6 +37,7 @@ const handler = createHandler({
     auth0ClientId: process.env.AUTH0_CLIENT_ID ?? '',
     auth0ClientSecret: process.env.AUTH0_CLIENT_SECRET ?? '',
     auth0Domain: process.env.AUTH0_DOMAIN ?? '',
+    jwksKeyId: process.env.JWKS_KEY_ID,
   }),
   schema,
 });

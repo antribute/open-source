@@ -3,11 +3,11 @@ import { verify } from 'jsonwebtoken';
 import type { JwtPayload } from 'jsonwebtoken';
 import jwksRsa from 'jwks-rsa';
 
-export const getPublicKey = async (auth0Domain: string) => {
+export const getPublicKey = async (auth0Domain: string, keyId?: string) => {
   const rsaResponse = jwksRsa({
     jwksUri: `https://${auth0Domain}/.well-known/jwks.json`,
   });
-  const signingKey = await rsaResponse.getSigningKey('K_ToVGV177arfdgzA8DOv');
+  const signingKey = await rsaResponse.getSigningKey(keyId);
   const publicKey = signingKey.getPublicKey();
   return publicKey;
 };

@@ -5,6 +5,7 @@ export interface CreateAuthContextParams {
   auth0ClientId: string;
   auth0ClientSecret: string;
   auth0Domain: string;
+  jwksKeyId?: string | undefined;
 }
 
 // As a rule of thumb, we don't allow "any" to be used at Antribute, however we're going to make an
@@ -14,6 +15,7 @@ function createAuthContext<ServerContext extends Record<string, any>>({
   auth0ClientId,
   auth0ClientSecret,
   auth0Domain,
+  jwksKeyId,
 }: CreateAuthContextParams) {
   const LOGGED_OUT = { loggedIn: false, permissions: [] };
   return async ({ req }: ServerContext): Promise<UserContext> => {
@@ -30,7 +32,7 @@ function createAuthContext<ServerContext extends Record<string, any>>({
       return LOGGED_OUT;
     }
 
-    const publicKey = await getPublicKey(auth0Domain);
+    const publicKey = await getPublicKey(auth0Domain, jwksKeyId);
 
     const unverifiedUser = await verifyJwt(authToken, publicKey);
     if (unverifiedUser === undefined || typeof unverifiedUser === 'string') {
