@@ -17,18 +17,30 @@ export const scopeAuthOptions = {
 
 const buildAuthScopes =
   <Scopes extends readonly string[]>(models: Scopes) =>
-  (context: UserContext): AuthScopes<Scopes> =>
+  ({ loggedIn, permissions }: UserContext): AuthScopes<Scopes> =>
     models.reduce((allPerms, model) => {
-      const perm = {
-        [`${model}:create`]: context.permissions.includes(`${model}:create`),
-        [`${model}:deleteAny`]: context.permissions.includes(`${model}:deleteAny`),
-        [`${model}:deleteOwned`]: context.permissions.includes(`${model}:deleteOwned`),
-        [`${model}:readAny`]: context.permissions.includes(`${model}:readAny`),
-        [`${model}:readOwned`]: context.permissions.includes(`${model}:readOwned`),
-        [`${model}:updateAny`]: context.permissions.includes(`${model}:updateAny`),
-        [`${model}:updateOwned`]: context.permissions.includes(`${model}:updateOwned`),
+      if (!loggedIn) {
+        return {
+          ...allPerms,
+          [`${model}:create`]: false,
+          [`${model}:deleteAny`]: false,
+          [`${model}:deleteOwned`]: false,
+          [`${model}:readAny`]: false,
+          [`${model}:readOwned`]: false,
+          [`${model}:updateAny`]: false,
+          [`${model}:updateOwned`]: false,
+        };
+      }
+      return {
+        ...allPerms,
+        [`${model}:create`]: permissions.includes(`${model}:create`),
+        [`${model}:deleteAny`]: permissions.includes(`${model}:deleteAny`),
+        [`${model}:deleteOwned`]: permissions.includes(`${model}:deleteOwned`),
+        [`${model}:readAny`]: permissions.includes(`${model}:readAny`),
+        [`${model}:readOwned`]: permissions.includes(`${model}:readOwned`),
+        [`${model}:updateAny`]: permissions.includes(`${model}:updateAny`),
+        [`${model}:updateOwned`]: permissions.includes(`${model}:updateOwned`),
       };
-      return { ...allPerms, ...perm };
       // Annoyingly this has to be casted here rather than things automatically working
       // eslint-disable-next-line @typescript-eslint/prefer-reduce-type-parameter
     }, {} as AuthScopes<Scopes>);
