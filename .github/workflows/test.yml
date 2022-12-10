@@ -28,6 +28,12 @@ jobs:
           files: ./apps/landing-page/coverage/cobertura-coverage.xml
           flags: antribute-landing-page
           fail_ci_if_error: true
+      - name: Upload GraphQL Auth0 Coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./packages/graphql-auth0/coverage/cobertura-coverage.xml
+          flags: graphql-auth0
+          fail_ci_if_error: true
       - name: Upload GraphQL NextJS Coverage to Codecov
         uses: codecov/codecov-action@v3
         with:

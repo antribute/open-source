@@ -12,10 +12,12 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@antribute/graphql-auth0": "workspace:^0.1.0",
     "@antribute/graphql-nextjs": "workspace:*",
     "@antribute/zephyr-core": "workspace:*",
     "@antribute/zephyr-react": "workspace:*",
     "@pothos/core": "^3.23.0",
+    "@pothos/plugin-scope-auth": "^3.16.0",
     "graphql": "^16.6.0",
     "next": "13.0.5",
     "react": "18.2.0",
