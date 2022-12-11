@@ -86,7 +86,9 @@ describe('createLoggerFunc', () => {
   });
 
   it('should gracefully handle failures in Axiom', () => {
-    mockIngestEvents.mockRejectedValue(new Error('This is an error'));
+    mockIngestEvents.mockImplementation(() => {
+      throw new Error('This is an error');
+    });
     const LoggerFunc = createLoggerFunc(mockAxiom, MOCK_DATASET, LoggerTypes.debug);
     LoggerFunc({ message: 'bar' });
     // We're making sure console.debug still runs here to ensure this isn't a false positive
