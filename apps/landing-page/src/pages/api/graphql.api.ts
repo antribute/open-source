@@ -1,5 +1,6 @@
 import { createAuthContext, createAuthScopes } from '@antribute/graphql-auth0';
 import type { AuthScopes, UserContext } from '@antribute/graphql-auth0';
+import createLogger from '@antribute/graphql-logger-axiom';
 import { apiHandlerConfig, createHandler } from '@antribute/graphql-nextjs';
 import SchemaBuilder from '@pothos/core';
 import ScopeAuthPlugin from '@pothos/plugin-scope-auth';
@@ -8,7 +9,7 @@ import ScopeAuthPlugin from '@pothos/plugin-scope-auth';
 const MODELS = ['hello'] as const;
 
 const builder = new SchemaBuilder<{ AuthScopes: AuthScopes<typeof MODELS>; Context: UserContext }>({
-  authScopes: createAuthScopes<typeof MODELS>(MODELS),
+  authScopes: createAuthScopes(MODELS),
   plugins: [ScopeAuthPlugin],
 });
 
@@ -38,6 +39,11 @@ const handler = createHandler({
     auth0ClientSecret: process.env.AUTH0_CLIENT_SECRET ?? '',
     auth0Domain: process.env.AUTH0_DOMAIN ?? '',
     jwksKeyId: process.env.JWKS_KEY_ID,
+  }),
+  logging: createLogger({
+    axiomOrgId: process.env.AXIOM_ORG_ID ?? '',
+    axiomToken: process.env.AXIOM_TOKEN ?? '',
+    dataset: process.env.AXIOM_DATASET ?? '',
   }),
   schema,
 });
