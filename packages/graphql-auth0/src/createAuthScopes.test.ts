@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import createAuthScopes from './createAuthScopes';
+import createAuthScopes, { scopeAuthOptions } from './createAuthScopes';
 
 describe('createAuthScopes', () => {
   it('should transform an array of strings into a valid map of auth scopes', () => {
@@ -63,5 +63,11 @@ describe('createAuthScopes', () => {
     expect(authScopes['bar:readOwned']).toEqual(false);
     expect(authScopes['bar:updateAny']).toEqual(false);
     expect(authScopes['bar:updateOwned']).toEqual(false);
+  });
+});
+
+describe('scopeAuthOptions', () => {
+  it('should always set treatErrorsAsUnauthorized to true', () => {
+    expect(scopeAuthOptions.treatErrorsAsUnauthorized).toEqual(true);
   });
 });

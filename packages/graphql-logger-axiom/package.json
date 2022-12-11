@@ -1,6 +1,6 @@
 {
-  "name": "@antribute/graphql-auth0",
-  "description": "A graphql-yoga context creator for Auth0",
+  "name": "@antribute/graphql-logger-axiom",
+  "description": "A package that sends GraphQL logs from @antribute/graphql-nextjs to Axiom",
   "version": "0.1.0",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -17,18 +17,15 @@
   },
   "keywords": [
     "antribute",
-    "auth0",
+    "axiom",
     "graphql"
   ],
   "author": "Antribute, Inc. (https://www.antribute.com)",
   "license": "MIT",
   "devDependencies": {
     "@antribute/config": "workspace:*",
-    "@types/auth0": "^2.35.8",
-    "@types/jsonwebtoken": "^8.5.9",
+    "@types/cli-color": "^2.0.2",
     "@types/node": "18.11.9",
-    "@types/react": "18.0.25",
-    "@types/react-dom": "18.0.9",
     "@vitest/coverage-c8": "^0.25.3",
     "eslint": "^8.28.0",
     "happy-dom": "^7.7.0",
@@ -38,10 +35,7 @@
     "vitest": "^0.25.3"
   },
   "dependencies": {
-    "auth0": "^2.44.1",
-    "encoding": "^0.1.13",
-    "jsonwebtoken": "^8.5.1",
-    "jwks-rsa": "^3.0.0",
-    "nock": "^13.2.9"
+    "@axiomhq/axiom-node": "^0.10.0",
+    "cli-color": "^2.0.3"
   }
 }

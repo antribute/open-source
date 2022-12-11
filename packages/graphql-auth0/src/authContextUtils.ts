@@ -1,5 +1,5 @@
-import { ManagementClient } from 'auth0';
-import { verify } from 'jsonwebtoken';
+import auth0 from 'auth0';
+import jwt from 'jsonwebtoken';
 import type { JwtPayload } from 'jsonwebtoken';
 import jwksRsa from 'jwks-rsa';
 
@@ -24,7 +24,7 @@ export const getUserPerms = async (
     auth0ClientSecret: string;
   }
 ) => {
-  const auth0 = new ManagementClient({
+  const mgmt = new auth0.ManagementClient({
     domain: auth0Domain,
     clientId: auth0ClientId,
     clientSecret: auth0ClientSecret,
@@ -32,7 +32,7 @@ export const getUserPerms = async (
 
   // TODO: Should we consider some sort of redis cache here for quicker user load times? It's
   // probably safer to load it every time, but this could cause slowness
-  const permissions = (await auth0.getUserPermissions({ id: userId }))
+  const permissions = (await mgmt.getUserPermissions({ id: userId }))
     .filter((perm) => !!perm.permission_name?.length)
     .map((perm) => perm.permission_name ?? '');
 
@@ -44,7 +44,7 @@ export const verifyJwt = async (
   rsaKey: string
 ): Promise<string | JwtPayload | undefined> =>
   new Promise((resolve, reject) => {
-    verify(token, rsaKey, { algorithms: ['RS256'] }, (err, decoded) => {
+    jwt.verify(token, rsaKey, { algorithms: ['RS256'] }, (err, decoded) => {
       if (err) {
         reject(err);
       } else {
