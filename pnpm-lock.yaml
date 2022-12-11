@@ -232,6 +232,38 @@ importers:
       typescript: 4.9.3
       vitest: 0.25.3_happy-dom@7.7.0
 
+  packages/utils-react:
+    specifiers:
+      '@antribute/config': workspace:*
+      '@testing-library/react': ^13.4.0
+      '@types/react': 18.0.25
+      '@vitest/coverage-c8': ^0.25.3
+      eslint: ^8.28.0
+      happy-dom: ^7.7.0
+      prettier: 2.8.0
+      react: 18.2.0
+      react-dom: 18.2.0
+      tsup: ^6.5.0
+      typescript: ^4.9.3
+      vite: ^3.2.4
+      vite-tsconfig-paths: ^3.6.0
+      vitest: ^0.25.3
+    devDependencies:
+      '@antribute/config': link:../config
+      '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
+      '@types/react': 18.0.25
+      '@vitest/coverage-c8': 0.25.3_happy-dom@7.7.0
+      eslint: 8.28.0
+      happy-dom: 7.7.0
+      prettier: 2.8.0
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      tsup: 6.5.0_typescript@4.9.3
+      typescript: 4.9.3
+      vite: 3.2.4
+      vite-tsconfig-paths: 3.6.0_vite@3.2.4
+      vitest: 0.25.3_happy-dom@7.7.0
+
   packages/zephyr-core:
     specifiers:
       '@antribute/config': workspace:*
@@ -5557,7 +5589,7 @@ packages:
         integrity: sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==,
       }
     dependencies:
-      follow-redirects: 1.15.2
+      follow-redirects: 1.15.2_debug@4.3.4
       form-data: 4.0.0
     transitivePeerDependencies:
       - debug
@@ -8709,19 +8741,6 @@ packages:
     dependencies:
       tslib: 1.14.1
     dev: true
-
-  /follow-redirects/1.15.2:
-    resolution:
-      {
-        integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==,
-      }
-    engines: { node: '>=4.0' }
-    peerDependencies:
-      debug: '*'
-    peerDependenciesMeta:
-      debug:
-        optional: true
-    dev: false
 
   /follow-redirects/1.15.2_debug@4.3.4:
     resolution:
