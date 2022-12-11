@@ -1,4 +1,5 @@
 import Axiom from '@axiomhq/axiom-node';
+import clc from 'cli-color';
 
 export type LoggerFunc = (log: Record<string, unknown>) => void;
 export enum LoggerTypes {
@@ -17,34 +18,41 @@ export interface CreateLoggerParams {
 const createLoggerFunc =
   (axiom: Axiom, dataSet: string, level: LoggerTypes): LoggerFunc =>
   (args) => {
+    let logPrefix: string;
     let logFunc: (...fnargs: unknown[]) => void;
     switch (level) {
       // Disabling no-console for all of these because we very clearly want our logger to log
       case LoggerTypes.debug:
         // eslint-disable-next-line no-console
         logFunc = console.debug;
+        logPrefix = '[Debug]: ';
         break;
       case LoggerTypes.info:
         // eslint-disable-next-line no-console
         logFunc = console.info;
+        logPrefix = clc.cyan('[Info]: ');
         break;
       case LoggerTypes.warn:
         // eslint-disable-next-line no-console
         logFunc = console.warn;
+        logPrefix = clc.yellow('[Warn]:');
         break;
       case LoggerTypes.error:
         // eslint-disable-next-line no-console
+        console.log('@@@@@@@@@@');
         logFunc = console.error;
+        logPrefix = clc.red('[Error]: ');
         break;
       default:
         // eslint-disable-next-line no-console
         logFunc = console.log;
+        logPrefix = '[Log]: ';
     }
 
     if (args.message) {
-      logFunc(args.message, args);
+      logFunc(logPrefix, args.message, args);
     } else {
-      logFunc(args);
+      logFunc(logPrefix, args);
     }
 
     let finalizedArgs = args;
