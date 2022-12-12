@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react';
 
-function createCtx<ContextType extends Record<string, unknown>>() {
+function createCtx<ContextType>() {
   const globalContext = createContext<ContextType | undefined>(undefined);
   const SafeContextProvider = globalContext.Provider;
   const useSafeContext = () => {

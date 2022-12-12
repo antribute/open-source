@@ -1,7 +1,13 @@
+import { useTracking } from '@antribute/tracking';
 import Head from 'next/head';
 import Image from 'next/image';
+import { useEffect } from 'react';
 
 function Home() {
+  const track = useTracking();
+  useEffect(() => {
+    track('index-view');
+  }, []);
   return (
     <>
       <Head>
@@ -25,6 +31,7 @@ function Home() {
           <a
             className="text-md font-body text-primary hover:text-primary-light"
             href="https://linkedin.com/company/antribute"
+            onClick={() => track('index-linkedin-click')}
             rel="noopener noreferrer"
             target="_blank"
           >
@@ -34,6 +41,7 @@ function Home() {
           <a
             className="text-md font-body text-primary hover:text-primary-light"
             href="https://twitter.com/antribute"
+            onClick={() => track('index-twitter-click')}
             rel="noopener noreferrer"
             target="_blank"
           >
