@@ -13,7 +13,7 @@
   "scripts": {
     "build": "pnpm run build:classnames && pnpm run build:config",
     "build:config": "tsup src/tailwindConfig.ts --format cjs --dts --minify --no-config --sourcemap",
-    "build:classnames": "tsup ./src/index.ts",
+    "build:classnames": "tsup",
     "clean": "rm -r ./.next",
     "dev": "concurrently \"pnpm run build:classnames --watch\" \"pnpm run build:config --watch\"",
     "lint": "eslint --cache src/**",
