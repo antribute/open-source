@@ -12,9 +12,10 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@antribute/graphql-auth0": "workspace:^0.1.0",
-    "@antribute/graphql-logger-axiom": "workspace:^0.1.0",
+    "@antribute/graphql-auth0": "workspace:*",
+    "@antribute/graphql-logger-axiom": "workspace:*",
     "@antribute/graphql-nextjs": "workspace:*",
+    "@antribute/tracking": "workspace:*",
     "@antribute/zephyr-core": "workspace:*",
     "@antribute/zephyr-react": "workspace:*",
     "@pothos/core": "^3.23.0",

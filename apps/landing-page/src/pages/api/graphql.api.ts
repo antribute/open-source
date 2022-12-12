@@ -2,6 +2,7 @@ import { createAuthContext, createAuthScopes } from '@antribute/graphql-auth0';
 import type { AuthScopes, UserContext } from '@antribute/graphql-auth0';
 import createLogger from '@antribute/graphql-logger-axiom';
 import { apiHandlerConfig, createHandler } from '@antribute/graphql-nextjs';
+import { track } from '@antribute/tracking/server';
 import SchemaBuilder from '@pothos/core';
 import ScopeAuthPlugin from '@pothos/plugin-scope-auth';
 
@@ -19,10 +20,10 @@ builder.queryType({
       args: {
         name: t.arg.string(),
       },
-      authScopes: {
-        'hello:readOwned': true,
+      resolve: (_parent, { name }) => {
+        track({ event: 'hello-query', token: process.env.MIXPANEL_TOKEN }, { name });
+        return `Hello, ${name ?? 'World'}`;
       },
-      resolve: (_parent, { name }) => `Hello, ${name ?? 'World'}`,
     }),
   }),
 });

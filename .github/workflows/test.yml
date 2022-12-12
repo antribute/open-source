@@ -46,6 +46,18 @@ jobs:
           files: ./packages/graphql-nextjs/coverage/cobertura-coverage.xml
           flags: graphql-nextjs
           fail_ci_if_error: true
+      - name: Upload Tracking Coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./packages/tracking/coverage/cobertura-coverage.xml
+          flags: tracking
+          fail_ci_if_error: true
+      - name: Upload React Utils Coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./packages/utils-react/coverage/cobertura-coverage.xml
+          flags: utils-react
+          fail_ci_if_error: true
       - name: Upload Zephyr React Coverage to Codecov
         uses: codecov/codecov-action@v3
         with:

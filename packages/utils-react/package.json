@@ -1,0 +1,44 @@
+{
+  "name": "@antribute/utils-react",
+  "description": "Shared React utilities for Antribute projects",
+  "version": "0.1.0",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "clean": "rm -r ./.next",
+    "dev": "pnpm run build:watch",
+    "lint": "eslint --cache src/**",
+    "test": "vitest"
+  },
+  "keywords": [
+    "antribute",
+    "react",
+    "typescript"
+  ],
+  "author": "Antribute, Inc. (https://www.antribute.com)",
+  "license": "MIT",
+  "devDependencies": {
+    "@antribute/config": "workspace:*",
+    "@testing-library/react": "^13.4.0",
+    "@types/react": "18.0.25",
+    "@vitest/coverage-c8": "^0.25.3",
+    "eslint": "^8.28.0",
+    "happy-dom": "^7.7.0",
+    "prettier": "2.8.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "tsup": "^6.5.0",
+    "typescript": "^4.9.3",
+    "vite": "^3.2.4",
+    "vite-tsconfig-paths": "^3.6.0",
+    "vitest": "^0.25.3"
+  },
+  "peerDependencies": {
+    "react": ">= 18.0.0 < 19"
+  }
+}
