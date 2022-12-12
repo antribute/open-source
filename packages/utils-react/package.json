@@ -9,7 +9,7 @@
     "dist/**"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "tsup ./src/index.ts",
     "clean": "rm -r ./.next",
     "dev": "pnpm run build:watch",
     "lint": "eslint --cache src/**",

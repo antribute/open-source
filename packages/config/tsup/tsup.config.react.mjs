@@ -4,7 +4,6 @@ import { rawBaseConfig } from './tsup.config.base.mjs';
 
 export const rawReactConfig = {
   ...rawBaseConfig,
-  entry: ['./src/index.tsx'],
   external: ['react'],
 };
 
