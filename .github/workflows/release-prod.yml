@@ -4,6 +4,44 @@ on:
     tags:
       - '**'
 jobs:
+  release-landing-page:
+    if: startsWith(github.ref_name, 'landing-page/')
+    name: Release Antribute Landing Page
+    runs-on: ubuntu-latest
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+      TURBO_REMOTE_ONLY: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup
+        uses: antribute/actions/setup@main
+      - name: Check If Version is Valid
+        uses: antribute/actions/check-tag-release@main
+        with:
+          delimiter: '/'
+          pkgPath: './packages/config/package.json'
+      - name: Deploy Antribute Landing to Vercel Staging
+        uses: BetaHuhn/deploy-to-vercel-action@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_STAGING }}
+          PRODUCTION: true
+      - name: Run E:E Tests
+        run: pnpm exec cypress run
+        working-directory: ./apps/landing-page
+      - name: Deploy Antribute Landing to Vercel Production
+        uses: BetaHuhn/deploy-to-vercel-action@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_PROD }}
+          PRODUCTION: true
+
   release-configs:
     if: startsWith(github.ref_name, 'config/')
     name: Release Configs Package
