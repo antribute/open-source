@@ -31,9 +31,16 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_STAGING }}
           PRODUCTION: true
       - name: Run E:E Tests
-        uses: cypress-io/github-action@v4
+        run: pnpm exec cypress run
+        working-directory: ./apps/landing-page
+      - name: Deploy Antribute Landing to Vercel Production
+        uses: BetaHuhn/deploy-to-vercel-action@v1
         with:
-          working-directory: ./apps/landing-page
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_PROD }}
+          PRODUCTION: true
 
   release-configs:
     if: startsWith(github.ref_name, 'config/')
