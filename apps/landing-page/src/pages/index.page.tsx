@@ -25,7 +25,7 @@ function Home() {
         </div>
         <p className="mb-32 max-w-512 text-lg font-body leading-lg sm:text-center">
           We&apos;re Antribute, a team of world-class engineers with one goal: create the best tech
-          to support the even better ideas. TODO: Remove Me
+          to support the even better ideas.
         </p>
         <div className="flex">
           <a
