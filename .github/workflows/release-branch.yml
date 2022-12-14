@@ -21,4 +21,5 @@ jobs:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-          PR_PREVIEW_DOMAIN: 'antribute-landing-{PR}.vercel.app'
+          # TODO: remove below before merging
+          ALIAS_DOMAINS: 'dev.antribute.com'
