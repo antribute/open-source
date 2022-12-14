@@ -15,10 +15,8 @@ jobs:
       - name: Setup
         uses: antribute/actions/setup@main
       - name: Run E:E Tests
-        uses: cypress-io/github-action@v4
-        with:
-          install: false
-          working-directory: ./apps/landing-page
+        run: pnpm exec cypress run
+        working-directory: ./apps/landing-page
       - name: Deploy Antribute Landing to Vercel
         uses: BetaHuhn/deploy-to-vercel-action@v1
         with:
