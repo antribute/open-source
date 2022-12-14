@@ -30,8 +30,10 @@ jobs:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_STAGING }}
           PRODUCTION: true
+      - name: Globally Install Cypress
+        run: pnpm i -g cypress
       - name: Run E:E Tests
-        run: pnpm exec cypress run
+        run: cypress run
         working-directory: ./apps/landing-page
       - name: Deploy Antribute Landing to Vercel Production
         uses: BetaHuhn/deploy-to-vercel-action@v1
