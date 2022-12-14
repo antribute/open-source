@@ -21,7 +21,7 @@ jobs:
         uses: antribute/actions/check-tag-release@main
         with:
           delimiter: '/'
-          pkgPath: './packages/config/package.json'
+          pkgPath: './apps/landing-page/package.json'
       - name: Deploy Antribute Landing to Vercel Staging
         uses: BetaHuhn/deploy-to-vercel-action@v1
         with:
