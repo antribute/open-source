@@ -30,6 +30,7 @@ jobs:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_STAGING }}
           PRODUCTION: true
+          GITHUB_DEPLOYMENT: false
       - name: Globally Install Cypress
         run: pnpm i -g cypress
       - name: Run E:E Tests
@@ -43,6 +44,7 @@ jobs:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_PROD }}
           PRODUCTION: true
+          GITHUB_DEPLOYMENT: false
 
   release-configs:
     if: startsWith(github.ref_name, 'config/')
