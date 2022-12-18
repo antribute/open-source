@@ -1,9 +1,9 @@
 .next
 node_modules
-.eslintrc.js
+.eslintrc.cjs
 cypress
 cypress.config.ts
 next.config.js
-postcss.config.js
-tailwind.config.js
-vitest.config.mjs
+postcss.config.cjs
+tailwind.config.cjs
+vitest.config.js

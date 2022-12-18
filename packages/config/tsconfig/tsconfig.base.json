@@ -12,7 +12,7 @@
     "isolatedModules": true,
     "lib": ["ESNext"],
     "module": "ESNext",
-    "moduleResolution": "nodenext",
+    "moduleResolution": "Node",
     "noEmit": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,

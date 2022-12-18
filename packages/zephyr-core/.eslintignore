@@ -1,6 +1,6 @@
 dist
 node_modules
-.eslintrc.js
-tailwind.config.js
-tsup.config.mjs
-vitest.config.mjs
+.eslintrc.cjs
+tailwind.config.cjs
+tsup.config.js
+vitest.config.js

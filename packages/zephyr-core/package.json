@@ -2,12 +2,20 @@
   "name": "@antribute/zephyr-core",
   "description": "Core TailwindCSS Configurations and ClassNames for Zephyr Components",
   "version": "0.1.0",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
+    },
+    "./tailwindConfig": "./tailwind.config.cjs",
+    "./zephyr-core.css": "./zephyr-core.css"
+  },
   "types": "./dist/index.d.ts",
   "files": [
     "dist/**",
-    "./tailwind.config.js",
+    "./tailwind.config.cjs",
     "./zephyr-core.css"
   ],
   "scripts": {

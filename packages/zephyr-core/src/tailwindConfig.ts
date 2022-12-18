@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import type { Config } from 'tailwindcss';
+// eslint-disable-next-line import/extensions
 import defaultTailwindTheme from 'tailwindcss/defaultTheme';
 
 export const create8PtGrid = (max = 512) => {
