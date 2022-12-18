@@ -1,4 +1,4 @@
-import Axiom from '@axiomhq/axiom-node';
+import axios from 'axios';
 import clc from 'cli-color';
 
 export type LoggerFunc = (log: Record<string, unknown> | string) => void;
@@ -16,7 +16,7 @@ export interface CreateLoggerParams {
 }
 
 export const createLoggerFunc =
-  (axiom: Axiom, dataSet: string, level: LoggerTypes): LoggerFunc =>
+  (params: CreateLoggerParams, level: LoggerTypes): LoggerFunc =>
   async (args) => {
     let logPrefix: string;
     let logFunc: (...fnargs: unknown[]) => void;
@@ -60,10 +60,21 @@ export const createLoggerFunc =
     }
 
     try {
-      await axiom.datasets.ingestEvents(dataSet, {
-        ...(finalizedArgs as Record<string, unknown>),
-        level,
-      });
+      await axios.post(
+        `https://cloud.axiom.co/api/v1/datasets/${params.dataset}/ingest`,
+        [
+          {
+            ...(finalizedArgs as Record<string, unknown>),
+            level,
+          },
+        ],
+        {
+          headers: {
+            Authorization: `Bearer ${params.axiomToken}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
     } catch (err) {
       // Obviously we want this log to run, we need to know if there's something up with Axiom
       // eslint-disable-next-line no-console
@@ -74,22 +85,11 @@ export const createLoggerFunc =
     }
   };
 
-const createLogger = ({
-  axiomOrgId,
-  axiomToken,
-  dataset,
-}: CreateLoggerParams): Record<LoggerTypes, LoggerFunc> => {
-  const axiom = new Axiom({
-    orgId: axiomOrgId,
-    token: axiomToken,
-  });
-
-  return {
-    debug: createLoggerFunc(axiom, dataset, LoggerTypes.debug),
-    info: createLoggerFunc(axiom, dataset, LoggerTypes.info),
-    warn: createLoggerFunc(axiom, dataset, LoggerTypes.warn),
-    error: createLoggerFunc(axiom, dataset, LoggerTypes.error),
-  };
-};
+const createLogger = (params: CreateLoggerParams): Record<LoggerTypes, LoggerFunc> => ({
+  debug: createLoggerFunc(params, LoggerTypes.debug),
+  info: createLoggerFunc(params, LoggerTypes.info),
+  warn: createLoggerFunc(params, LoggerTypes.warn),
+  error: createLoggerFunc(params, LoggerTypes.error),
+});
 
 export default createLogger;

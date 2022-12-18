@@ -1,5 +1,5 @@
 dist
 node_modules
-.eslintrc.js
-tsup.config.mjs
-vitest.config.mjs
+.eslintrc.cjs
+tsup.config.js
+vitest.config.js

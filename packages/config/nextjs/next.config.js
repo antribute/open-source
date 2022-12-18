@@ -1,8 +1,9 @@
-const withRoutes = require('nextjs-routes/config')();
+import withRoutes from 'nextjs-routes/config';
+withRoutes();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  pageExtensions: ['api.ts', 'page.tsx'],
+  pageExtensions: ['api.ts', 'page.tsx', 'api.js', 'page.js'],
   reactStrictMode: true,
   swcMinify: true,
   webpack: (config) => {
@@ -13,4 +14,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withRoutes(nextConfig);
+export default nextConfig;

@@ -2,8 +2,14 @@
   "name": "@antribute/graphql-logger-axiom",
   "description": "A package that sends GraphQL logs from @antribute/graphql-nextjs to Axiom",
   "version": "0.1.0",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
+    }
+  },
   "types": "./dist/index.d.ts",
   "files": [
     "dist/**"
@@ -35,7 +41,7 @@
     "vitest": "^0.25.3"
   },
   "dependencies": {
-    "@axiomhq/axiom-node": "^0.10.0",
+    "axios": "^1.2.1",
     "cli-color": "^2.0.3"
   }
 }

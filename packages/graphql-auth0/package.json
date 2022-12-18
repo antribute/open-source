@@ -2,8 +2,14 @@
   "name": "@antribute/graphql-auth0",
   "description": "A graphql-yoga context creator for Auth0",
   "version": "0.1.0",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
+    }
+  },
   "types": "./dist/index.d.ts",
   "files": [
     "dist/**"

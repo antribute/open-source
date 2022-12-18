@@ -44,7 +44,7 @@ module.exports = require('@antribute/config/prettier/.prettierrc');
 
 ```json
 {
-  "prettier": "@antribute/config/prettier/.prettierrc.js"
+  "prettier": "@antribute/config/prettier/.prettierrc.cjs"
 }
 ```
 

@@ -2,14 +2,21 @@
   "name": "@antribute/tracking",
   "description": "An Antribute abstraction over Mixpanel",
   "version": "0.1.0",
-  "main": "./dist/client.js",
-  "module": "./dist/client.mjs",
+  "type": "module",
+  "main": "./dist/client.cjs",
+  "exports": {
+    ".": {
+      "require": "./dist/client.cjs",
+      "import": "./dist/client.js"
+    },
+    "./server": {
+      "require": "./dist/server.cjs",
+      "import": "./dist/server.js"
+    }
+  },
   "types": "./dist/client.d.ts",
   "files": [
-    "dist/**",
-    "server.d.ts",
-    "server.js",
-    "server.mjs"
+    "dist/**"
   ],
   "scripts": {
     "build": "tsup",

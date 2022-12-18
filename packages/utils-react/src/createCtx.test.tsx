@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import createCtx from './createCtx';
+import createCtx from './createCtx.js';
 
 describe('createCtx', () => {
   it('should throw an error when a component uses the context without the provider', () => {
