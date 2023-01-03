@@ -25,6 +25,9 @@
       "cache": true,
       "dependsOn": ["^build"],
       "outputs": ["coverage/**", "test-results/**"]
+    },
+    "clean": {
+      "cache": false
     }
   }
 }

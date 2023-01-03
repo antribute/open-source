@@ -17,7 +17,7 @@
   "scripts": {
     "build": "tsup",
     "build-storybook": "storybook build",
-    "clean": "rm -r ./.next",
+    "clean": "rimraf .turbo && rimraf .next && rimraf node_modules && rimraf build",
     "dev": "pnpm run build:watch",
     "lint": "eslint --cache src/**",
     "start": "storybook dev -p 6006",

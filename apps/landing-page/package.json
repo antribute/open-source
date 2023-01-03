@@ -5,11 +5,11 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "clean": "rm -r ./.next",
+    "clean": "rimraf .turbo && rimraf .next && rimraf node_modules && rimraf build",
     "cypress:open": "cypress open",
     "dev": "next dev",
     "lint": "next lint",
-    "reset": "rm -r ./node_modules",
+    "reset": "rimraf node_modules",
     "start": "next start",
     "test": "vitest"
   },

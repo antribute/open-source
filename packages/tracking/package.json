@@ -20,7 +20,7 @@
   ],
   "scripts": {
     "build": "tsup",
-    "clean": "rm -r ./.next",
+    "clean": "rimraf .turbo && rimraf .next && rimraf node_modules && rimraf build",
     "dev": "pnpm run build:watch",
     "lint": "eslint --cache src/**",
     "test": "vitest"

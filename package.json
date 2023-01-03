@@ -4,6 +4,7 @@
     "build:apps": "turbo run build --filter=./apps/*",
     "build:packages": "turbo run build --filter=./packages/*",
     "build:servers": "turbo run build --filter=./servers/*",
+    "storybook": "pnpm --filter=@antribute/zephyr-react run start",
     "clean": "turbo run clean",
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint -- --fix",
@@ -14,8 +15,10 @@
     "test": "turbo run test -- run"
   },
   "devDependencies": {
+    "@manypkg/cli": "^0.19.2",
     "lint-staged": "^13.0.3",
     "prettier": "2.7.1",
+    "rimraf": "^3.0.2",
     "simple-git-hooks": "^2.8.1",
     "turbo": "latest"
   },
