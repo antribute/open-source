@@ -1,7 +1,8 @@
-const { mergeConfig } = require('vite');
-const { default: tsconfigPaths } = require('vite-tsconfig-paths');
+import { StorybookConfig } from '@storybook/react-vite';
+import { mergeConfig } from 'vite';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
-module.exports = {
+export default <StorybookConfig>{
   stories: ['../src/**/*.stories.mdx'],
   addons: [
     '@storybook/addon-links',

@@ -20,7 +20,7 @@
     "clean": "rimraf .turbo && rimraf .next && rimraf node_modules && rimraf build",
     "dev": "pnpm run build:watch",
     "lint": "eslint --cache src/**",
-    "start": "storybook dev -p 6006",
+    "storybook": "storybook dev -p 6006",
     "test": "vitest"
   },
   "keywords": [

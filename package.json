@@ -4,7 +4,7 @@
     "build:apps": "turbo run build --filter=./apps/*",
     "build:packages": "turbo run build --filter=./packages/*",
     "build:servers": "turbo run build --filter=./servers/*",
-    "storybook": "pnpm --filter=@antribute/zephyr-react run start",
+    "storybook-react": "turbo run storybook --filter=@antribute/zephyr-react...",
     "clean": "turbo run clean",
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint -- --fix",
