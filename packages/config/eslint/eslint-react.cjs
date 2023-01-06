@@ -1,19 +1,15 @@
 module.exports = {
-  extends: [
-    'airbnb',
-    'airbnb-typescript',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:@typescript-eslint/recommended-requiring-type-checking',
-    'plugin:@typescript-eslint/strict',
-    'plugin:tailwindcss/recommended',
-    'prettier',
-  ],
+  extends: ['./eslint-base.cjs', 'plugin:tailwindcss/recommended'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: './tsconfig.json',
   },
   plugins: ['@typescript-eslint', 'tailwindcss'],
   rules: {
+    'react/function-component-definition': 'off',
+    'react/require-default-props': 'off',
+    'react/jsx-props-no-spreading': 'off',
+
     // This allows us to import devdeps in tests
     'import/no-extraneous-dependencies': [
       'error',

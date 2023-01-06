@@ -2,6 +2,7 @@
 import type { Config } from 'tailwindcss';
 // eslint-disable-next-line import/extensions
 import defaultTailwindTheme from 'tailwindcss/defaultTheme';
+import { colors as colorPalette } from './colors';
 
 export const create8PtGrid = (max = 512) => {
   const finalGrid: Record<string, string> = {
@@ -78,61 +79,8 @@ const config: Config = {
       inherit: colors.inherit,
       current: colors.current,
       transparent: colors.transparent,
-      primary: {
-        DEFAULT: '#219EBC',
-        dark: '#1F91AD',
-        light: '#25AED0',
-        type: '#FFFFFF',
-      },
-      secondary: {
-        DEFAULT: '#F2AE87',
-        dark: '#F1A87E',
-        light: '#F5C1A3',
-        type: '272834',
-      },
-      'light-gray': {
-        DEFAULT: '#F3F4F6',
-        dark: '#EAF0F5',
-        light: '#FFFFFF',
-        type: '#272834',
-      },
-      'dark-gray': {
-        DEFAULT: '#1E2028',
-        dark: '#18191F',
-        light: '#272834',
-        type: '#FFFFFF',
-      },
-      positive: {
-        DEFAULT: '#4DA167',
-        dark: '#499762',
-        light: '#272834',
-        type: '#FFFFFF',
-      },
-      caution: {
-        DEFAULT: '#FFBF00',
-        dark: '#F5B800',
-        light: '#FFC71F',
-        type: '#272834',
-      },
-      danger: {
-        DEFAULT: '#F22837',
-        dark: '#D40C1A',
-        light: '#F5515C',
-        type: '#FFFFFF',
-      },
-      distinct: {
-        '1': '#19196B',
-        '2': '#296218',
-        '3': '#EB5528',
-        '4': '#F9D849',
-        '5': '#74FB4C',
-        '7': '#EB33F8',
-        '8': '#F4B9C2',
-        '9': '#000000',
-        '10': '#EF8733',
-        '11': '#75140C',
-        '12': '#808080',
-      },
+      white: colors.white,
+      ...colorPalette,
     }),
     divideColor: ({ theme }) => theme('borderColor'),
     divideOpacity: ({ theme }) => theme('borderOpacity'),
