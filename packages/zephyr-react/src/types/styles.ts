@@ -1,4 +1,4 @@
-export type SizeProp = 'sm' | 'md' | 'lg';
+export type SizeProp = 'xs' | 'sm' | 'md' | 'lg';
 
 export type ColorProp = 'primary' | 'secondary' | 'positive' | 'danger' | 'caution';
 

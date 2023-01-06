@@ -8,7 +8,7 @@ export type ButtonVariant = 'contained' | 'soft' | 'text' | 'outlined' | 'outlin
 
 export const ButtonElement = classed(
   'button',
-  'cursor-pointer inline-flex items-center select-none',
+  'cursor-pointer inline-flex items-center select-none align-middle',
   'disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-default disabled:border-gray-200 relative',
   {
     variants: {
@@ -32,7 +32,7 @@ export const ButtonElement = classed(
       } satisfies Record<ButtonVariant, string>,
       rounded: {
         sm: clsx('rounded'),
-        default: clsx('rounded-lg'),
+        default: clsx('rounded-md'),
         full: clsx('rounded-full'),
       },
       color: {

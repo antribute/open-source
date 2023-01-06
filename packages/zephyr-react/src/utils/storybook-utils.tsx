@@ -1,4 +1,5 @@
 import { VariantProps, classed } from '@tw-classed/react';
+import { capitalCase } from 'change-case';
 import { ColorProp, SizeProp } from 'types/styles';
 
 type RenderVariantElementProps = Partial<VariantProps<typeof RenderVariantElement>>;
@@ -8,6 +9,7 @@ interface RenderVariantBaseProps<T extends React.ComponentType> extends RenderVa
   Component: T;
   render?: (children: React.ReactNode) => React.ReactNode;
   props?: React.ComponentProps<T>;
+  getProps?: (prop: string) => React.ComponentProps<T>;
   showVariantLabel?: boolean;
   variantPropName?: string;
 }
@@ -15,7 +17,7 @@ interface RenderVariantBaseProps<T extends React.ComponentType> extends RenderVa
 const RenderVariantElement = classed('div', {
   variants: {
     orientation: {
-      vertical: 'flex-col gap-y-24',
+      vertical: 'flex-col space-y-24',
       horizontal: 'flex gap-24 items-center',
     },
   },
@@ -30,18 +32,20 @@ interface RenderSizeVariantProps<T extends React.ComponentType> extends RenderVa
 
 export const RenderSizeVariants = <T extends React.ComponentType>({
   variantPropName = 'size',
-  sizes = ['sm', 'md', 'lg'],
+  sizes = ['xs', 'sm', 'md', 'lg'],
   Component,
   render = (children) => children,
   props,
+  getProps,
   orientation = 'horizontal',
 }: RenderSizeVariantProps<T>) => {
   const Element = Component as React.ComponentType<any>;
   return (
     <RenderVariantElement orientation={orientation}>
-      {sizes.map((size) => (
-        <div>{render(<Element {...props} {...{ [variantPropName]: size }} />)}</div>
-      ))}
+      {sizes.map((size) => {
+        const elementProps = getProps?.(size) ?? props;
+        return <div>{render(<Element {...elementProps} {...{ [variantPropName]: size }} />)}</div>;
+      })}
     </RenderVariantElement>
   );
 };
@@ -55,18 +59,29 @@ export const RenderColorVariants = <T extends React.ComponentType>({
   Component,
   render = (children) => children,
   props,
+  getProps,
   className,
   orientation = 'horizontal',
   variantPropName = 'color',
 }: ColorSizeVariantProps<T>) => {
   const Element = Component as React.ComponentType<any>;
+
   return (
     <RenderVariantElement className={className} orientation={orientation}>
-      {colors.map((color) => (
-        <div>
-          <div>{}</div> {render(<Element {...props} {...{ [variantPropName]: color }} />)}
-        </div>
-      ))}
+      {colors.map((color) => {
+        const elementProps = getProps?.(color) ?? props;
+        return (
+          <div>
+            {render(
+              <Element
+                children={capitalCase(color)}
+                {...elementProps}
+                {...{ [variantPropName]: color }}
+              />
+            )}
+          </div>
+        );
+      })}
     </RenderVariantElement>
   );
 };

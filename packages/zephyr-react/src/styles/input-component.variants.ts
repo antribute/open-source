@@ -5,24 +5,28 @@ import { Classed, classedVariantMap, mergeVariants } from 'utils/classed';
 export const inputComponentVariants = classedVariantMap({
   size: {
     textSize: {
+      xs: 'text-sm',
       sm: 'text-sm',
       md: 'text-md',
       lg: 'text-lg',
     },
     lineHeight: {
+      xs: 'leading-xs',
       sm: 'leading-sm',
       md: 'leading-md',
       lg: 'leading-lg',
     },
-    paddingX: {
-      sm: 'px-8',
-      md: 'px-16',
-      lg: 'px-24',
-    },
     paddingY: {
-      sm: 'py-8',
-      md: 'py-16',
-      lg: 'py-24',
+      xs: 'py-xs',
+      sm: 'py-sm',
+      md: 'py-md',
+      lg: 'py-lg',
+    },
+    paddingX: {
+      xs: 'px-sm',
+      sm: 'px-md',
+      md: 'px-lg',
+      lg: 'px-xl',
     },
   },
 

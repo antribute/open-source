@@ -59,6 +59,7 @@
     "prettier": "2.8.0",
     "storybook": "7.0.0-alpha.54",
     "tsup": "^6.5.0",
+    "type-fest": "^3.5.1",
     "typescript": "^4.9.3",
     "vite": "^4.0.4",
     "vite-tsconfig-paths": "^3.6.0",
@@ -69,6 +70,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^2.9.10",
+    "@radix-ui/react-toggle-group": "^1.0.1",
     "@ts-react/form": "^1.0.8",
     "@tw-classed/react": "1.3.2",
     "change-case": "^4.1.2",

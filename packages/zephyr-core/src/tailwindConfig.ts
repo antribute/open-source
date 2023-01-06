@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
+import tailwindCssRadixPlugin from 'tailwindcss-radix';
 import type { Config } from 'tailwindcss';
 // eslint-disable-next-line import/extensions
 import defaultTailwindTheme from 'tailwindcss/defaultTheme';
@@ -168,9 +169,10 @@ const config: Config = {
       h4: ['23px', { lineHeight: '32px' }],
       h5: ['21px', { lineHeight: '24px' }],
       h6: ['16px', { lineHeight: '24px' }],
-      sm: ['12px', { lineHeight: '16px' }],
-      md: ['16px', { lineHeight: '24px' }],
       lg: ['21px', { lineHeight: '32px' }],
+      md: ['16px', { lineHeight: '24px' }],
+      sm: ['12px', { lineHeight: '16px' }],
+      xs: ['10px', { lineHeight: '12px' }],
     },
     fontWeight: {
       body: '400',
@@ -221,9 +223,10 @@ const config: Config = {
       h4: '32px',
       h5: '24px',
       h6: '24px',
-      sm: '16px',
-      md: '24px',
       lg: '32px',
+      md: '24px',
+      sm: '16px',
+      xs: '12px',
     },
     margin: ({ theme }) => ({
       auto: 'auto',
@@ -270,6 +273,11 @@ const config: Config = {
     }),
     spacing: {
       px: '1px',
+      xs: '6px',
+      sm: '6.5px',
+      md: '7.5px',
+      lg: '8px',
+      xl: '8.5px',
       ...create8PtGrid(),
     },
     stroke: ({ theme }) => ({
@@ -328,7 +336,7 @@ const config: Config = {
       fit: 'fit-content',
     }),
   },
-  plugins: [],
+  plugins: [tailwindCssRadixPlugin],
 };
 
 export default config;

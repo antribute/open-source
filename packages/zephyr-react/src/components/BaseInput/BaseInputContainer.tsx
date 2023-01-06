@@ -25,9 +25,9 @@ export type BaseInputContainerProps = InputComponentProps & {
 } & BaseInputIconSlotElementVariantProps &
   InputAddonSlotProps;
 
-function getTotalWidth(widthMap: Record<number, number>, { size }: { size?: SizeProp }) {
+function getTotalWidth(widthMap: Record<number, number>, { size }: { size: SizeProp }) {
   const values = Object.values(widthMap);
-  return sum(values) + getIconGap({ size: size! }) * (values.length - 1);
+  return sum(values) + getIconGap({ size: size! }) * (values.length - 1) + getIconPadding({ size });
 }
 
 type InputContainerWidthImmerHook = ImmerHook<{
@@ -44,6 +44,7 @@ const { useContext: useBaseInputContainerContext, Provider: BaseInputContainerPr
 
 const getIconGap = ({ size = 'md' }: { size?: SizeProp }) => {
   const gapMap: Record<SizeProp, number> = {
+    xs: 2,
     sm: 4,
     md: 6,
     lg: 8,
@@ -54,9 +55,10 @@ const getIconGap = ({ size = 'md' }: { size?: SizeProp }) => {
 
 const getIconPadding = ({ size = 'md' }: { size?: SizeProp }) => {
   const paddingMap: Record<SizeProp, number> = {
-    sm: 8,
-    md: 16,
-    lg: 24,
+    xs: 6.5,
+    sm: 6.5,
+    md: 8.5,
+    lg: 9.5,
   };
 
   return paddingMap[size];
@@ -178,10 +180,8 @@ export const BaseInputContainer = ({
     <BaseInputContainerProvider value={{ inputContainderWidthImmerHook }}>
       <Container width={width} className={className}>
         {children({
-          leadingIconWidth: (delta = 0) =>
-            hasLeading ? leadingWidth + getIconPadding({ size }) + delta : undefined,
-          trailingIconWidth: (delta = 0) =>
-            hasTrailing ? trailingWidth + getIconPadding({ size }) + delta : undefined,
+          leadingIconWidth: (delta = 0) => (hasLeading ? leadingWidth + delta : undefined),
+          trailingIconWidth: (delta = 0) => (hasTrailing ? trailingWidth + delta : undefined),
         })}
 
         {leading.map(({ content, pointerEvents }, i) => (
