@@ -8,15 +8,9 @@ Shared React utilities for Antribute projects
 pnpm i @antribute/utils-react
 ```
 
-## Running Storybook for Local Development
-
-```bash
-pnpm run storybook:start
-```
-
 ## Usage
 
-This package exports many components, each with their own seperate usage docs
+This package exports many utils, each with their own seperate usage docs
 
 ### `createCtx`
 

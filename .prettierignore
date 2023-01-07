@@ -2,6 +2,7 @@
 **/.turbo/**
 **/dist/**
 **/coverage/**
+**/generated/**
 **/test-results/**
 **/node_modules/**
 
