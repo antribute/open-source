@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import tailwindCssRadixPlugin from 'tailwindcss-radix';
+import tailwindCssFormsPlugin from '@tailwindcss/forms';
+
 import type { Config } from 'tailwindcss';
 // eslint-disable-next-line import/extensions
 import defaultTailwindTheme from 'tailwindcss/defaultTheme';
@@ -336,7 +338,7 @@ const config: Config = {
       fit: 'fit-content',
     }),
   },
-  plugins: [tailwindCssRadixPlugin],
+  plugins: [tailwindCssRadixPlugin, tailwindCssFormsPlugin],
 };
 
 export default config;

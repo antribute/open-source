@@ -7,15 +7,22 @@ export type InputLabelElementProps = React.ComponentProps<typeof InputLabelEleme
 
 const InputLabelElement = classed(
   'label',
-  'block text-sm font-medium select-none text-gray-900 leading-xs w-full mb-sm ml-px font-bold',
+  ' text-sm inline-block  font-medium select-none text-gray-900 leading-xs  font-bold',
   {
     variants: {
       hidden: {
         true: 'sr-only',
       },
+      labelOrientation: {
+        vertical: 'block mb-sm w-full',
+        horizontal: 'text-md inline-block mr-sm align-middle',
+        horizontalReverse: 'order-1 text-md inline-block mr-sm align-middle',
+      },
     },
+
     defaultVariants: {
       hidden: false,
+      labelOrientation: 'vertical',
     },
   }
 );
@@ -31,6 +38,7 @@ const InputLabel = ({
   optionalLabel,
   htmlFor,
   hidden = false,
+  labelOrientation = 'vertical',
   ...props
 }: InputLabelProps) => {
   const optionalLabelText = typeof optionalLabel === 'string' ? optionalLabel : 'Optional';
@@ -38,7 +46,12 @@ const InputLabel = ({
   const hasOptionalLabel = !required && optionalLabel;
 
   return (
-    <InputLabelElement {...props} htmlFor={htmlFor} hidden={hidden}>
+    <InputLabelElement
+      {...props}
+      htmlFor={htmlFor}
+      hidden={hidden}
+      labelOrientation={labelOrientation}
+    >
       {hasOptionalLabel && <OptionalLabelElement>{optionalLabelText}</OptionalLabelElement>}
       {children}
       {required && <span className="ml-0.5 text-danger">*</span>}

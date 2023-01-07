@@ -1,6 +1,7 @@
 import InputLabel, { InputLabelProps } from 'components/Input/InputLabel';
 import InputMessage from 'components/Input/InputMessage';
 import { InvisibleCharacter } from 'components/InvisibleCharacter';
+import { twMerge } from 'tailwind-merge';
 import { InputComponentStateMessagePair } from 'types/input-component.types';
 
 export type InputContainerProps = {
@@ -8,10 +9,9 @@ export type InputContainerProps = {
   hideLabel?: boolean;
   hideMessage?: boolean;
   children: React.ReactNode;
-  required?: boolean;
   message?: string;
 } & InputComponentStateMessagePair &
-  Pick<InputLabelProps, 'htmlFor' | 'optionalLabel'>;
+  Pick<InputLabelProps, 'htmlFor' | 'optionalLabel' | 'required' | 'labelOrientation'>;
 
 export const InputContainer = (props: InputContainerProps) => {
   const {
@@ -24,6 +24,7 @@ export const InputContainer = (props: InputContainerProps) => {
     required = false,
     optionalLabel,
     children,
+    labelOrientation = 'vertical',
   } = props;
 
   return (
@@ -33,6 +34,7 @@ export const InputContainer = (props: InputContainerProps) => {
         hidden={hideLabel!}
         optionalLabel={optionalLabel!}
         required={required}
+        labelOrientation={labelOrientation}
       >
         {label}
       </InputLabel>

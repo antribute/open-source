@@ -12,6 +12,7 @@ interface RenderVariantBaseProps<T extends React.ComponentType> extends RenderVa
   getProps?: (prop: string) => React.ComponentProps<T>;
   showVariantLabel?: boolean;
   variantPropName?: string;
+  noChildren?: boolean;
 }
 
 const RenderVariantElement = classed('div', {
@@ -57,6 +58,7 @@ interface ColorSizeVariantProps<T extends React.ComponentType> extends RenderVar
 export const RenderColorVariants = <T extends React.ComponentType>({
   colors = ['primary', 'secondary', 'caution', 'danger', 'positive'],
   Component,
+  noChildren,
   render = (children) => children,
   props,
   getProps,
@@ -74,7 +76,7 @@ export const RenderColorVariants = <T extends React.ComponentType>({
           <div>
             {render(
               <Element
-                children={capitalCase(color)}
+                children={noChildren ? undefined : capitalCase(color)}
                 {...elementProps}
                 {...{ [variantPropName]: color }}
               />
