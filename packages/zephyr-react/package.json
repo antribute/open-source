@@ -69,6 +69,7 @@
     "@antribute/zephyr-react": "^0.1.0"
   },
   "dependencies": {
+    "@heroicons/react": "^2.0.13",
     "@hookform/resolvers": "^2.9.10",
     "@radix-ui/react-toggle-group": "^1.0.1",
     "@ts-react/form": "^1.0.8",

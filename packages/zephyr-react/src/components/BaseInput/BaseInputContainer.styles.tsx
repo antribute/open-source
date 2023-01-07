@@ -22,19 +22,14 @@ export const BaseInputIconSlotElement = classed(
   {
     variants: {
       size: inputComponentVariants.size.textSize,
-      filled: {
-        false: 'bg-transparent bg-none border-none',
-        true: 'bg-storm-50 px-2',
-        primary: 'bg-storm-50 px-2',
-      },
       pointerEvents: {
         true: 'pointer-events-auto',
         false: 'pointer-events-none',
       },
     },
     defaultVariants: {
-      filled: false,
       pointerEvents: false,
+      size: 'md',
     },
   }
 );

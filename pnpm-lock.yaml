@@ -365,6 +365,7 @@ importers:
       '@antribute/config': workspace:*
       '@antribute/zephyr-core': workspace:*
       '@babel/core': ^7.20.5
+      '@heroicons/react': ^2.0.13
       '@hookform/resolvers': ^2.9.10
       '@mdx-js/react': ^2.1.5
       '@radix-ui/react-toggle-group': ^1.0.1
@@ -403,7 +404,6 @@ importers:
       react-hook-form: ^7.41.5
       storybook: 7.0.0-alpha.54
       tailwind-merge: ^1.8.1
-      tailwindcss-radix: ^2.6.2
       tsup: ^6.5.0
       type-fest: ^3.5.1
       typescript: ^4.9.3
@@ -412,6 +412,7 @@ importers:
       vite-tsconfig-paths: ^3.6.0
       vitest: ^0.25.3
     dependencies:
+      '@heroicons/react': 2.0.13_react@18.2.0
       '@hookform/resolvers': 2.9.10_react-hook-form@7.41.5
       '@radix-ui/react-toggle-group': 1.0.1_biqbaboplfbrettd7655fr4n2y
       '@ts-react/form': 1.0.8_atpnpvash4oizvwpfknowot2j4
@@ -455,7 +456,6 @@ importers:
       postcss: 8.4.19
       prettier: 2.8.0
       storybook: 7.0.0-alpha.54_lb6du3saekb5anf2gjv3wxj3oq
-      tailwindcss-radix: 2.6.2
       tsup: 6.5.0_idbjo54bpfgfu5hzy4ncsoa6f4
       type-fest: 3.5.1
       typescript: 4.9.3
@@ -2306,6 +2306,14 @@ packages:
     dependencies:
       '@repeaterjs/repeater': 3.0.4
       tslib: 2.4.1
+    dev: false
+
+  /@heroicons/react/2.0.13_react@18.2.0:
+    resolution: {integrity: sha512-iSN5XwmagrnirWlYEWNPdCDj9aRYVD/lnK3JlsC9/+fqGF80k8C7rl+1HCvBX0dBoagKqOFBs6fMhJJ1hOg1EQ==}
+    peerDependencies:
+      react: '>= 16'
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /@hookform/resolvers/2.9.10_react-hook-form@7.41.5:

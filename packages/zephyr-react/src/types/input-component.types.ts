@@ -9,6 +9,25 @@ export type InlineInputAddonSlotProps = {
   inlineTrailingAddonSlot?: InlineInputAddonType[];
 };
 
+export type InputComponentMessageProps = {
+  infoMessage?: string;
+  errorMessage?: string;
+  successMessage?: string;
+};
+
+export type InputComponentState = 'error' | 'success';
+
+export type InputComponentStateMessagePair = {
+  message?: string;
+  error?: boolean;
+  success?: boolean;
+  inputState?: InputComponentState;
+};
+
+export type HtmlInputComponentProps = Omit<
+  React.HTMLProps<HTMLInputElement>,
+  'width' | 'size' | 'as'
+>;
 export type InputComponentProps = {
   size?: SizeProp;
   width?: WidthProp;

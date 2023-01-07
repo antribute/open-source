@@ -1,23 +1,40 @@
 import React, { useId } from 'react';
-import { BaseInputElement } from './BaseInput.styles';
+import { BaseInputElement, BaseInputElementVariantProps } from './BaseInput.styles';
 import { BaseInputContainer } from 'components/BaseInput/BaseInputContainer';
 import { getInputComponentFieldTypeProps } from 'constants/input-component-field-type-map';
-import { InputAddonSlotProps, InputComponentProps } from 'types/input-component.types';
+import {
+  HtmlInputComponentProps,
+  InputAddonSlotProps,
+  InputComponentProps,
+  InputComponentStateMessagePair,
+} from 'types/input-component.types';
 
-type BaseInputProps = InputComponentProps & InputAddonSlotProps;
+export type BaseInputProps = {
+  id?: string;
+  name?: string;
+  inputProps?: HtmlInputComponentProps;
+} & InputComponentProps &
+  InputAddonSlotProps &
+  BaseInputElementVariantProps &
+  Omit<InputComponentStateMessagePair, 'message'>;
 
 export const BaseInput = React.forwardRef<HTMLInputElement, BaseInputProps>((props, ref) => {
   const {
+    name,
+    type,
+    id: idProp,
     size = 'md',
     width = 'fixed',
-    type,
     leadingIcon: leadingIconProp,
     trailingIcon: trailingIconProp,
     inlineLeadingAddonSlot,
     inlineTrailingAddonSlot,
+    inputProps,
   } = props;
 
-  const id = useId();
+  const generatedId = useId();
+
+  const id = idProp ?? generatedId;
 
   const { leadingIcon, trailingIcon, htmlInputComponentProps } =
     getInputComponentFieldTypeProps({
@@ -32,16 +49,20 @@ export const BaseInput = React.forwardRef<HTMLInputElement, BaseInputProps>((pro
       width={width}
       leadingIcon={leadingIcon}
       trailingIcon={trailingIcon}
+      inputState={props.inputState!}
       inlineLeadingAddonSlot={inlineLeadingAddonSlot!}
       inlineTrailingAddonSlot={inlineTrailingAddonSlot!}
     >
       {({ leadingIconWidth: startIconWidth, trailingIconWidth: endIconWidth }) => (
         <BaseInputElement
+          name={name}
           id={id}
+          size={size}
           autoComplete="off"
           formNoValidate
           {...props}
           {...htmlInputComponentProps}
+          {...inputProps}
           ref={ref}
           style={{
             paddingLeft: startIconWidth(5),

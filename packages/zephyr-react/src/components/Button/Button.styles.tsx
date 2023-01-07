@@ -6,6 +6,10 @@ import { Classed, classed, mergeVariants } from 'utils/classed';
 
 export type ButtonVariant = 'contained' | 'soft' | 'text' | 'outlined' | 'outlined-filled';
 
+export type ButtonElementVariants = Classed.VariantProps<typeof ButtonElement>;
+
+export type ButtonElementProps = React.ComponentProps<typeof ButtonElement>;
+
 export const ButtonElement = classed(
   'button',
   'cursor-pointer inline-flex items-center select-none align-middle',
@@ -221,7 +225,3 @@ export const ButtonElement = classed(
     ],
   }
 );
-
-export type ButtonElementVariants = Classed.VariantProps<typeof ButtonElement>;
-
-export type ButtonElementProps = React.ComponentProps<typeof ButtonElement>; //

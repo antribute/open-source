@@ -11,12 +11,14 @@ export const Icon = () => {
   return (
     <div className="space-y-40">
       <RenderSizeVariants
+        orientation="vertical"
         Component={BaseInput}
         props={{ placeholder: 'Enter value', leadingIcon: '🎉' }}
       />
       <RenderSizeVariants
+        orientation="vertical"
         Component={BaseInput}
-        props={{ placeholder: 'Enter value', leadingIcon: '🎉' }}
+        props={{ placeholder: 'Enter value', trailingIcon: '🎉' }}
       />
     </div>
   );
@@ -26,6 +28,20 @@ export const InlineAddons = () => {
   return (
     <div className="space-y-40">
       <RenderSizeVariants
+        orientation="vertical"
+        Component={BaseInput}
+        props={{
+          placeholder: 'Enter value',
+          trailingIcon: '🎉',
+          inlineTrailingAddonSlot: [
+            { content: '✨', pointerEvents: false },
+            { content: '✨', pointerEvents: false },
+          ],
+        }}
+      />
+
+      <RenderSizeVariants
+        orientation="vertical"
         Component={BaseInput}
         getProps={(size) => {
           const relativeSize = getRelativeSizeProp(-1, {
@@ -69,17 +85,6 @@ export const InlineAddons = () => {
               },
             ],
           };
-        }}
-      />
-      <RenderSizeVariants
-        Component={BaseInput}
-        props={{
-          placeholder: 'Enter value',
-          trailingIcon: '🎉',
-          inlineTrailingAddonSlot: [
-            { content: '✨', pointerEvents: false },
-            { content: '✨', pointerEvents: false },
-          ],
         }}
       />
     </div>

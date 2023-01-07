@@ -9,12 +9,16 @@ import {
   InlineInputAddonType,
   InputAddonSlotProps,
   InputComponentProps,
+  InputComponentState,
+  InputComponentStateMessagePair,
 } from 'types/input-component.types';
 import { atom, useAtom } from 'jotai';
 import { filter, sortBy, sum, sumBy } from 'lodash-es';
 import { SizeProp } from 'types/styles';
 import { createCtx } from 'utils/createContext';
 import { useImmer, ImmerHook } from 'use-immer';
+import ExclamationCircleIcon from '@heroicons/react/20/solid/ExclamationCircleIcon';
+import CheckCircleIcon from '@heroicons/react/20/solid/CheckCircleIcon';
 
 export type BaseInputContainerProps = InputComponentProps & {
   fragment?: boolean;
@@ -23,7 +27,8 @@ export type BaseInputContainerProps = InputComponentProps & {
     trailingIconWidth: (delta?: number) => number | undefined;
   }) => React.ReactNode;
 } & BaseInputIconSlotElementVariantProps &
-  InputAddonSlotProps;
+  InputAddonSlotProps &
+  Pick<InputComponentStateMessagePair, 'inputState'>;
 
 function getTotalWidth(widthMap: Record<number, number>, { size }: { size: SizeProp }) {
   const values = Object.values(widthMap);
@@ -129,6 +134,46 @@ const BaseInputIconSlot = (
   );
 };
 
+const getAddonList = (
+  ...props: Array<InlineInputAddonType | InlineInputAddonType[]>
+): {
+  addonList: InlineInputAddonType[];
+  hasAddons: boolean;
+} => {
+  const addonList = props.flat().filter((e) => e.content);
+  return {
+    addonList,
+    hasAddons: addonList.length > 0,
+  };
+};
+
+const InputStateAddon = ({
+  inputState,
+  hide,
+}: {
+  inputState?: InputComponentState;
+  hide?: boolean;
+}) => {
+  const props = {
+    height: 20,
+    width: 20,
+  };
+
+  if (hide) {
+    return null;
+  }
+
+  if (inputState === 'error') {
+    return <ExclamationCircleIcon className="text-danger" {...props} />;
+  }
+
+  if (inputState === 'success') {
+    return <CheckCircleIcon className="text-positive" {...props} />;
+  }
+
+  return null;
+};
+
 export const BaseInputContainer = ({
   size = 'md',
   width = 'fixed',
@@ -139,20 +184,20 @@ export const BaseInputContainer = ({
   inlineLeadingAddonSlot = [],
   inlineTrailingAddonSlot = [],
   fragment,
+  inputState,
 }: BaseInputContainerProps) => {
-  const leading: InlineInputAddonType[] = [
-    ...inlineLeadingAddonSlot,
-    { content: leadingIcon },
-  ].filter((e) => e.content);
-
-  const trailing: InlineInputAddonType[] = [
-    { content: trailingIcon },
-    ...inlineTrailingAddonSlot,
-  ].filter((e) => e.content);
-
-  const hasLeading = leading.length > 0;
-
-  const hasTrailing = trailing.length > 0;
+  const { addonList: leading, hasAddons: hasLeading } = getAddonList(inlineLeadingAddonSlot, {
+    content: leadingIcon,
+  });
+  const { addonList: trailing, hasAddons: hasTrailing } = getAddonList(
+    {
+      content: <InputStateAddon inputState={inputState!} />,
+    },
+    {
+      content: trailingIcon,
+    },
+    inlineLeadingAddonSlot
+  );
 
   const hasIcon = Boolean(hasLeading || hasTrailing);
 
