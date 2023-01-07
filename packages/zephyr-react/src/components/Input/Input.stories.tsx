@@ -11,6 +11,7 @@ export const ErrorMessage = () => {
       label="Username"
       placeholder="Enter username"
       errorMessage="This field is required"
+      defaultValue="daishi"
     />
   );
 };
@@ -22,6 +23,7 @@ export const SuccessMessage = () => {
       label="Username"
       placeholder="Enter username"
       successMessage="This username is available!"
+      defaultValue="daishi"
     />
   );
 };

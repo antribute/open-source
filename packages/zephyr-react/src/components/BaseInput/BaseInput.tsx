@@ -9,11 +9,8 @@ import {
   InputComponentStateMessagePair,
 } from 'types/input-component.types';
 
-export type BaseInputProps = {
-  id?: string;
-  name?: string;
-  inputProps?: HtmlInputComponentProps;
-} & InputComponentProps &
+export type BaseInputProps = HtmlInputComponentProps &
+  InputComponentProps &
   InputAddonSlotProps &
   BaseInputElementVariantProps &
   Omit<InputComponentStateMessagePair, 'message'>;
@@ -29,7 +26,6 @@ export const BaseInput = React.forwardRef<HTMLInputElement, BaseInputProps>((pro
     trailingIcon: trailingIconProp,
     inlineLeadingAddonSlot,
     inlineTrailingAddonSlot,
-    inputProps,
   } = props;
 
   const generatedId = useId();
@@ -62,7 +58,6 @@ export const BaseInput = React.forwardRef<HTMLInputElement, BaseInputProps>((pro
           formNoValidate
           {...props}
           {...htmlInputComponentProps}
-          {...inputProps}
           ref={ref}
           style={{
             paddingLeft: startIconWidth(5),
