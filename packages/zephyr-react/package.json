@@ -56,7 +56,7 @@
     "eslint": "^8.28.0",
     "happy-dom": "^7.7.0",
     "postcss": "^8.4.19",
-    "prettier": "2.8.0",
+    "prettier": "2.8.2",
     "storybook": "7.0.0-alpha.54",
     "tsup": "^6.5.0",
     "type-fest": "^3.5.1",

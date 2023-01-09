@@ -17,7 +17,7 @@
   "devDependencies": {
     "@manypkg/cli": "^0.19.2",
     "lint-staged": "^13.0.3",
-    "prettier": "2.7.1",
+    "prettier": "2.8.2",
     "rimraf": "^3.0.2",
     "simple-git-hooks": "^2.8.1",
     "turbo": "latest"
