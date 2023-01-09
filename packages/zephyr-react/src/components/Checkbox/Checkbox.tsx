@@ -1,14 +1,8 @@
 import { CheckboxElement, CheckboxElementProps } from './Checkbox.styles';
-import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
-import CheckIcon from '@heroicons/react/20/solid/CheckIcon';
-import { InputContainer, InputContainerProps } from 'components/Input/InputContainer';
+import { InputContainerProps } from 'components/Input/InputContainer';
 import { useInputProps } from 'components/Input/useInputProps';
-import InputLabel from 'components/Input/InputLabel';
 import { classed } from 'utils/classed';
-import { BaseInput } from 'components/BaseInput/BaseInput';
-import { BaseInputContainer } from 'components/BaseInput/BaseInputContainer';
 import { BaseInputElement } from 'components/BaseInput/BaseInput.styles';
-import { InvisibleCharacter } from 'components/InvisibleCharacter';
 
 type CheckboxProps = CheckboxElementProps & Omit<InputContainerProps, 'children'>;
 
