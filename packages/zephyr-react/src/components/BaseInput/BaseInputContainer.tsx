@@ -234,7 +234,7 @@ export const BaseInputContainer = ({
             index={i}
             key={i}
             position="leading"
-            pointerEvents={pointerEvents!}
+            pointerEvents={pointerEvents}
             size={size}
           >
             {content}
@@ -246,7 +246,7 @@ export const BaseInputContainer = ({
             index={i}
             key={i}
             position="trailing"
-            pointerEvents={pointerEvents!}
+            pointerEvents={pointerEvents}
             size={size}
           >
             {content}

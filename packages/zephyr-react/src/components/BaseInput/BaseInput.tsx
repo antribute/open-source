@@ -45,9 +45,9 @@ export const BaseInput = React.forwardRef<HTMLInputElement, BaseInputProps>((pro
       width={width}
       leadingIcon={leadingIcon}
       trailingIcon={trailingIcon}
-      inputState={props.inputState!}
-      inlineLeadingAddonSlot={inlineLeadingAddonSlot!}
-      inlineTrailingAddonSlot={inlineTrailingAddonSlot!}
+      inputState={props.inputState}
+      inlineLeadingAddonSlot={inlineLeadingAddonSlot}
+      inlineTrailingAddonSlot={inlineTrailingAddonSlot}
     >
       {({ leadingIconWidth: startIconWidth, trailingIconWidth: endIconWidth }) => (
         <BaseInputElement

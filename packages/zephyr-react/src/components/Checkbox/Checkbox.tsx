@@ -23,11 +23,10 @@ export const Checkbox = ({ label, size, ...props }: CheckboxProps) => {
 
   const { htmlFor } = inputContainerProps;
   return (
-    <CheckboxInputElement width="fixed" size={'md'} htmlFor={htmlFor} size={size}>
+    <CheckboxInputElement width="fixed" htmlFor={htmlFor} size={size}>
       <CheckboxElement type="checkbox" {...inputComponentProps} size={size} />
       {label && (
         <span
-          labelOrientation="horizontalReverse"
           className="font-bold text-type-soft peer-checked:text-dark-gray select-none"
           // className="text-dark-gray pointer-events-none font-bold"
         >

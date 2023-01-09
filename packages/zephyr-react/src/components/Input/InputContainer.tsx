@@ -30,9 +30,9 @@ export const InputContainer = (props: InputContainerProps) => {
   return (
     <>
       <InputLabel
-        htmlFor={htmlFor!}
-        hidden={hideLabel!}
-        optionalLabel={optionalLabel!}
+        htmlFor={htmlFor}
+        hidden={hideLabel}
+        optionalLabel={optionalLabel}
         required={required}
         labelOrientation={labelOrientation}
       >
@@ -40,7 +40,7 @@ export const InputContainer = (props: InputContainerProps) => {
       </InputLabel>
       {children}
       {!hideMessage && (
-        <InputMessage inputState={inputState!}>
+        <InputMessage inputState={inputState}>
           {message}
           <InvisibleCharacter />
         </InputMessage>

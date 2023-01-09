@@ -11,9 +11,9 @@ export const useInputProps = (props: UseInputPropsHookOptions) => {
   const id = [props.name, generatedId].filter(Boolean).join('-');
 
   const inputMessageStatePair = getInputMessageStatePair({
-    errorMessage: props.errorMessage!,
-    successMessage: props.successMessage!,
-    infoMessage: props.infoMessage!,
+    errorMessage: props.errorMessage,
+    successMessage: props.successMessage,
+    infoMessage: props.infoMessage,
   });
 
   return {

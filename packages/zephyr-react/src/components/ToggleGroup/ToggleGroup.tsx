@@ -83,8 +83,8 @@ export function ToggleGroup(props: ToggleGroupProps) {
       type="single"
       value={selectedValue}
       onValueChange={handleValueChange}
-      disabled={disabled!}
-      fullWidth={fullWidth!}
+      disabled={disabled}
+      fullWidth={fullWidth}
       className={clsx(className)}
     >
       {items.map((item, index) => {
