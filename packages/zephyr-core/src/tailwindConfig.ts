@@ -13,10 +13,16 @@ export const create8PtGrid = (max = 512) => {
     0: '0px',
   };
 
-  let currentGridStep = 8;
+  let currentGridStep = 2;
+
   while (currentGridStep <= max) {
     finalGrid[currentGridStep.toString()] = `${currentGridStep}px`;
-    currentGridStep += 8;
+
+    if (currentGridStep < 32) {
+      currentGridStep += 2;
+    } else {
+      currentGridStep += 8;
+    }
   }
 
   return finalGrid;
@@ -275,11 +281,6 @@ const config: Config = {
     }),
     spacing: {
       px: '1px',
-      xs: '6px',
-      sm: '6.5px',
-      md: '7.5px',
-      lg: '8px',
-      xl: '8.5px',
       ...create8PtGrid(),
     },
     stroke: ({ theme }) => ({
