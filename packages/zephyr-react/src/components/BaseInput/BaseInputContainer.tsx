@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import useDimensions from 'react-cool-dimensions';
 import {
   BaseInputContainerElement,
@@ -12,8 +12,7 @@ import {
   InputComponentState,
   InputComponentStateMessagePair,
 } from 'types/input-component.types';
-import { atom, useAtom } from 'jotai';
-import { filter, sortBy, sum, sumBy } from 'lodash-es';
+import { sortBy, sum, sumBy } from 'lodash-es';
 import { SizeProp } from 'types/styles';
 import { createCtx } from 'utils/createContext';
 import { useImmer, ImmerHook } from 'use-immer';

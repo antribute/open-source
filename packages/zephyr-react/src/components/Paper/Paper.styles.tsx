@@ -1,5 +1,3 @@
-import clsx from 'clsx';
-import { SizeProp } from 'types/styles';
 import { Classed, classTheme, classed } from 'utils/classed';
 
 export type PaperElementVariantProps = Classed.VariantProps<typeof PaperElement>;

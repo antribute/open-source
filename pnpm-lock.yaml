@@ -436,7 +436,7 @@ importers:
       '@radix-ui/react-checkbox': 1.0.1_biqbaboplfbrettd7655fr4n2y
       '@radix-ui/react-toggle-group': 1.0.1_biqbaboplfbrettd7655fr4n2y
       '@ts-react/form': 1.0.10_jlien4vu7myxdssaos24l2dlmq
-      '@tw-classed/react': 1.3.2_react@18.2.0
+      '@tw-classed/react': 1.3.2_2qq7a2kajzstsximtb2jg2ouky_react@18.2.0
       change-case: 4.1.2
       clsx: 1.2.1
       immer: 9.0.17
@@ -5183,7 +5183,7 @@ packages:
       }
     dev: false
 
-  /@tw-classed/react/1.3.2_react@18.2.0:
+  /@tw-classed/react/1.3.2_2qq7a2kajzstsximtb2jg2ouky_react@18.2.0:
     resolution:
       {
         integrity: sha512-KdIsDFkA7+cg49zikVSU8NJf81gtYnVwSnj8LFluxp/Luia95B9QPdNPftr3r6gd1dZz/5Pcz6TKvLmbM03GaQ==,
@@ -5194,6 +5194,7 @@ packages:
       '@tw-classed/core': 1.3.2
       react: 18.2.0
     dev: false
+    patched: true
 
   /@types/aria-query/5.0.1:
     resolution:

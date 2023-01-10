@@ -1,4 +1,4 @@
-import { CheckboxElement, CheckboxElementProps, CheckboxElementVariants } from './Checkbox.styles';
+import { CheckboxElement, CheckboxElementProps } from './Checkbox.styles';
 import { InputContainerProps } from 'components/Input/InputContainer';
 import { useInputProps } from 'components/Input/useInputProps';
 import { classed } from 'utils/classed';

@@ -1,9 +1,5 @@
-import clsx from 'clsx';
-import { ButtonElement } from 'components/Button/Button.styles';
 import { colorVariants } from 'styles/colors.variants';
 import { inputComponentVariants } from 'styles/input-component.variants';
-import { fontWeightMap } from 'styles/text.variants';
-import { ColorProp } from 'types/styles';
 import { Classed, classed, mergeVariants } from 'utils/classed';
 
 export type StatusBadgeElementVariants = Classed.VariantProps<typeof StatusBadgeElement>;

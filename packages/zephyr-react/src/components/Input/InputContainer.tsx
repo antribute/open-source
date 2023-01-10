@@ -1,7 +1,6 @@
 import InputLabel, { InputLabelProps } from 'components/Input/InputLabel';
 import InputMessage from 'components/Input/InputMessage';
 import { InvisibleCharacter } from 'components/InvisibleCharacter';
-import { twMerge } from 'tailwind-merge';
 import { InputComponentStateMessagePair } from 'types/input-component.types';
 
 export type InputContainerProps = {

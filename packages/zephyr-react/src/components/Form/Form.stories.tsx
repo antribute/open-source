@@ -1,6 +1,8 @@
-import { Form } from 'components/Form/Form';
-import { fieldSchema } from 'components/Form/components/fields';
+import { createTsForm } from '@ts-react/form';
+import { fieldSchema, formMapping } from 'components/Form/components/fields';
 import { z } from 'zod';
+
+const Form = createTsForm(formMapping);
 
 const SignUpSchema = z.object({
   email: fieldSchema.email, // renders TextField
