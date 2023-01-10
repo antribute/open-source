@@ -1,5 +1,5 @@
 import {
-  InputComponentMessageProps,
+  InputComponentStateMessageProps,
   InputComponentStateMessagePair,
 } from 'types/input-component.types';
 
@@ -7,8 +7,9 @@ export function getInputMessageStatePair({
   errorMessage,
   successMessage,
   infoMessage,
-}: InputComponentMessageProps): InputComponentStateMessagePair {
-  if (errorMessage) {
+  error,
+}: InputComponentStateMessageProps): InputComponentStateMessagePair {
+  if (error || errorMessage) {
     return {
       error: true,
       inputState: 'error',
@@ -22,7 +23,6 @@ export function getInputMessageStatePair({
       message: successMessage!,
     };
   }
-
   if (infoMessage) {
     return {
       message: infoMessage,

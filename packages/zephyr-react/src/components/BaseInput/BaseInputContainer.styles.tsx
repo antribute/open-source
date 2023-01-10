@@ -19,6 +19,7 @@ export type BaseInputIconSlotElementVariantProps = Classed.VariantProps<
 export const BaseInputIconSlotElement = classed(
   'div',
   'absolute inset-y-0 inline-flex items-center jusitfy-center flex-nowrap gap-8  select-none peer-placeholder-shown:text-gray-400',
+  'peer-placeholder-shown:text-light-gray-dark text-type-soft',
   {
     variants: {
       size: inputComponentVariants.size.textSize,

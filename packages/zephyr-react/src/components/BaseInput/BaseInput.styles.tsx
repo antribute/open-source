@@ -10,7 +10,7 @@ export type BaseInputElementProps = React.ComponentProps<typeof BaseInputElement
 
 export const BaseInputElement = classed(
   'input',
-  'relative bg-white border border-solid peer border-light-gray-dark',
+  'relative bg-surface-nested dark:bg-surface-inverse-nested border border-solid peer border-light-gray-dark',
   'placeholder:select-none placeholder:font-body',
   'text-gray-900 placeholder-type-soft',
   'focus:ring-primary focus:border-primary focus:ring-1 outline-none',

@@ -1,32 +1,32 @@
-import { CheckboxElement, CheckboxElementProps } from './Checkbox.styles';
+import { CheckboxElement, CheckboxElementProps, CheckboxElementVariants } from './Checkbox.styles';
 import { InputContainerProps } from 'components/Input/InputContainer';
 import { useInputProps } from 'components/Input/useInputProps';
 import { classed } from 'utils/classed';
 import { BaseInputElement } from 'components/BaseInput/BaseInput.styles';
 
-type CheckboxProps = CheckboxElementProps & Omit<InputContainerProps, 'children'>;
+type CheckboxProps = Omit<CheckboxElementProps, 'type'> & Omit<InputContainerProps, 'children'>;
 
 const CheckboxInputElement = classed(
   'label',
   BaseInputElement,
-  'inline-flex items-center gap-8 cursor-pointer'
+  'inline-flex items-center gap-8 cursor-pointer focus-within:ring-2'
 );
 
-export const Checkbox = ({ label, size, ...props }: CheckboxProps) => {
+export const Checkbox = ({ label, ...props }: CheckboxProps) => {
   const { inputContainerProps, inputComponentProps } = useInputProps(props);
 
-  const { htmlFor } = inputContainerProps;
-  return (
-    <CheckboxInputElement width="fixed" htmlFor={htmlFor} size={size}>
-      <CheckboxElement type="checkbox" {...inputComponentProps} size={size} />
-      {label && (
-        <span
-          className="font-bold text-type-soft peer-checked:text-dark-gray select-none"
-          // className="text-dark-gray pointer-events-none font-bold"
-        >
-          {label}
-        </span>
-      )}
-    </CheckboxInputElement>
-  );
+  if (label) {
+    return (
+      <CheckboxInputElement width="fixed" {...inputContainerProps}>
+        <CheckboxElement type="checkbox" {...inputComponentProps} focusRing={false} />
+        {label && (
+          <span className="font-bold text-type-soft peer-checked:text-dark-gray select-none">
+            {label}
+          </span>
+        )}
+      </CheckboxInputElement>
+    );
+  }
+
+  return <CheckboxElement type="checkbox" {...inputComponentProps} />;
 };

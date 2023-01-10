@@ -1,9 +1,10 @@
 import { BaseInputProps } from 'components/BaseInput/BaseInput';
 import { getInputMessageStatePair } from 'components/Input/Input.helpers';
 import { useId } from 'react';
-import { InputComponentMessageProps } from 'types/input-component.types';
+import { InputComponentStateMessageProps } from 'types/input-component.types';
 
-type UseInputPropsHookOptions = InputComponentMessageProps & Pick<BaseInputProps, 'name'>;
+type UseInputPropsHookOptions = InputComponentStateMessageProps &
+  Pick<BaseInputProps, 'name' | 'error'>;
 
 export const useInputProps = (props: UseInputPropsHookOptions) => {
   const generatedId = useId();
@@ -14,6 +15,7 @@ export const useInputProps = (props: UseInputPropsHookOptions) => {
     errorMessage: props.errorMessage,
     successMessage: props.successMessage,
     infoMessage: props.infoMessage,
+    error: props.error,
   });
 
   return {

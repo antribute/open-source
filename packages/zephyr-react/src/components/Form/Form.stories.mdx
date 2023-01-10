@@ -1,0 +1,28 @@
+import { ArgsTable, Canvas, Description, Meta, Story } from '@storybook/addon-docs';
+import { Form } from './Form';
+import * as stories from './Form.stories.tsx';
+
+<Meta
+  title="Form/Form"
+  component={Form}
+  decorators={[
+    (Story) => (
+      <div className="Form items-center justify-center">
+        <Story />
+      </div>
+    ),
+  ]}
+/>
+
+# Form
+
+<Description component={Form} />
+<ArgsTable of={Form} />
+
+## Default
+
+Default `Form` component
+
+<Canvas withToolbar>
+  <Story name="Default" story={stories.Default} />
+</Canvas>

@@ -8,6 +8,7 @@ export default <StorybookConfig>{
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
+    'storybook-tailwind-dark-mode',
   ],
   framework: {
     name: '@storybook/react-vite',

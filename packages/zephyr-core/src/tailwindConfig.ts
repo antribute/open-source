@@ -18,7 +18,7 @@ export const create8PtGrid = (max = 512) => {
   while (currentGridStep <= max) {
     finalGrid[currentGridStep.toString()] = `${currentGridStep}px`;
 
-    if (currentGridStep < 32) {
+    if (currentGridStep < 40) {
       currentGridStep += 2;
     } else {
       currentGridStep += 8;
@@ -36,7 +36,7 @@ const config: Config = {
     './node_modules/@antribute/zephyr-core/dist/index.js',
   ],
   presets: [],
-  darkMode: 'media',
+  darkMode: 'class',
   theme: {
     ...defaultTailwindTheme,
     accentColor: ({ theme }) => ({

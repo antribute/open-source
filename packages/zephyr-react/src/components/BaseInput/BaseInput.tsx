@@ -1,15 +1,19 @@
 import React, { useId } from 'react';
-import { BaseInputElement, BaseInputElementVariantProps } from './BaseInput.styles';
+import {
+  BaseInputElement,
+  BaseInputElementProps,
+  BaseInputElementVariantProps,
+} from './BaseInput.styles';
 import { BaseInputContainer } from 'components/BaseInput/BaseInputContainer';
 import { getInputComponentFieldTypeProps } from 'constants/input-component-field-type-map';
 import {
-  HtmlInputComponentProps,
   InputAddonSlotProps,
   InputComponentProps,
   InputComponentStateMessagePair,
+  OmitHtmlInputComponentProps,
 } from 'types/input-component.types';
 
-export type BaseInputProps = HtmlInputComponentProps &
+export type BaseInputProps = OmitHtmlInputComponentProps<BaseInputElementProps> &
   InputComponentProps &
   InputAddonSlotProps &
   BaseInputElementVariantProps &

@@ -6,6 +6,21 @@ export type WidthProp = 'full' | 'fixed' | 'auto';
 
 export type RoundedProp = 'default' | 'full';
 
+export type FlexAlignItemsProp = 'center' | 'start' | 'end' | 'baseline' | 'stretch';
+
+export type FlexJustifyItemsProp = 'center' | 'start' | 'end' | 'between' | 'evenly' | 'around';
+
+export type PositionProp =
+  | 'top-center'
+  | 'top-left'
+  | 'top-right'
+  | 'middle-center'
+  | 'middle-left'
+  | 'middle-right'
+  | 'bottom-center'
+  | 'bottom-left'
+  | 'bottom-right';
+
 export type FontWeightProp =
   | 'thin'
   | 'extralight'

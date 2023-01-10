@@ -1,30 +1,28 @@
-import clsx from 'clsx';
-import { inputComponentVariants } from 'styles/input-component.variants';
-import { fontWeightMap } from 'styles/tailwind-token-maps';
-import { ColorProp } from 'types/styles';
-import { Classed, classed, mergeVariants } from 'utils/classed';
-import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
+import { Classed, classed } from 'utils/classed';
 export type CheckboxElementVariants = Classed.VariantProps<typeof CheckboxElement>;
 
 export type CheckboxElementProps = React.ComponentProps<typeof CheckboxElement>;
 
 export const CheckboxElement = classed(
   'input',
-  'flex items-center justify-center rounded cursor-pointer ',
-  ' border-light-gray-dark bg-light-gray-light  h-full border flex-grow  accent-primary peer ',
-  'focus:ring-0 ring-0 checked:focus:ring-0 checked:focus:outline-none',
-
+  'form-checkbox cursor-pointer border-light-gray-dark accent-primary checked:text-primary peer rounded-sm',
+  'focus:ring-offset-0 focus:ring-2 focus:ring-primary-dark',
   {
     variants: {
+      focusRing: {
+        false: 'focus:ring-0',
+        true: 'focus:ring-2 focus:ring-primary-soft',
+      },
       size: {
-        xs: 'p-sm',
-        sm: 'p-md',
-        md: 'p-lg',
-        lg: 'p-xl',
+        xs: 'h-16 w-16',
+        sm: 'h-20 w-20',
+        md: 'h-24 w-24',
+        lg: 'h-28 w-28',
       },
     },
     defaultVariants: {
       size: 'md',
+      focusRing: true,
     },
   }
 );

@@ -17,13 +17,13 @@ export const inputComponentVariants = classedVariantMap({
       lg: 'leading-lg',
     },
     paddingY: {
-      xs: 'py-2',
-      sm: 'py-4',
-      md: 'py-6',
+      xs: 'py-6',
+      sm: 'py-8',
+      md: 'py-8',
       lg: 'py-8',
     },
     paddingX: {
-      xs: 'px-4',
+      xs: 'px-6',
       sm: 'px-6',
       md: 'px-8',
       lg: 'px-10',

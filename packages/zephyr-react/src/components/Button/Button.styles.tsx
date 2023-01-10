@@ -1,6 +1,7 @@
 import clsx from 'clsx';
+import { colorVariants } from 'styles/colors.variants';
 import { inputComponentVariants } from 'styles/input-component.variants';
-import { fontWeightMap } from 'styles/tailwind-token-maps';
+import { fontWeightMap } from 'styles/text.variants';
 import { ColorProp } from 'types/styles';
 import { Classed, classed, mergeVariants } from 'utils/classed';
 
@@ -39,13 +40,12 @@ export const ButtonElement = classed(
         default: clsx('rounded-md'),
         full: clsx('rounded-full'),
       },
-      color: {
-        primary: clsx('border-primary bg-primary text-primary  hover:bg-primary-dark'),
-        secondary: clsx('border-secondary bg-secondary text-secondary hover:bg-secondary-dark'),
-        positive: clsx('border-positive bg-positive text-positive hover:bg-positive-dark'),
-        danger: clsx('border-danger bg-danger text-danger hover:bg-danger-dark'),
-        caution: clsx('border-caution bg-caution text-caution hover:bg-caution-dark'),
-      } satisfies Record<ColorProp, string>,
+      color: mergeVariants([
+        colorVariants.bg,
+        colorVariants.text,
+        colorVariants.border,
+        colorVariants.hoverDark,
+      ]),
     },
 
     defaultVariants: {

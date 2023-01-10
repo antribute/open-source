@@ -1,5 +1,11 @@
 import { InputComponentFieldType, InputComponentProps } from 'types/input-component.types';
 import { get, merge } from 'lodash-es';
+import EmailIcon from '@heroicons/react/24/solid/EnvelopeIcon';
+import UrlIcon from '@heroicons/react/24/solid/LinkIcon';
+import PhoneIcon from '@heroicons/react/24/solid/PhoneIcon';
+import PasswordIcon from '@heroicons/react/24/solid/LockClosedIcon';
+
+type HeroIconType = typeof EmailIcon;
 
 type InputComponentFieldTypeOptions = Pick<
   InputComponentProps,
@@ -14,16 +20,23 @@ type InputComponentFieldTypeMap = Partial<
   Record<InputComponentFieldType, InputComponentFieldTypeProps>
 >;
 
+const InputIcon = ({
+  Icon,
+  ...props
+}: { Icon: string | HeroIconType } & Parameters<HeroIconType>[0]) =>
+  typeof Icon === 'string' ? <>{Icon}</> : <Icon height="20" width="20" {...props} />;
+
 const inputComponentFieldTypeMap: InputComponentFieldTypeMap = {
   currency: {
-    leadingIcon: '$',
+    leadingIcon: <InputIcon Icon="$" />,
     htmlInputComponentProps: { type: 'number' },
   },
   percent: {
-    trailingIcon: '%',
+    trailingIcon: <InputIcon Icon="%" />,
     htmlInputComponentProps: { type: 'number' },
   },
   url: {
+    leadingIcon: <InputIcon Icon={UrlIcon} />,
     htmlInputComponentProps: { type: 'url' },
   },
   float: {
@@ -33,6 +46,11 @@ const inputComponentFieldTypeMap: InputComponentFieldTypeMap = {
     htmlInputComponentProps: { type: 'date' },
   },
   phoneNumber: {
+    leadingIcon: <InputIcon Icon={PhoneIcon} />,
+    htmlInputComponentProps: { type: 'tel' },
+  },
+  tel: {
+    leadingIcon: <InputIcon Icon={PhoneIcon} />,
     htmlInputComponentProps: { type: 'tel' },
   },
   number: {
@@ -48,10 +66,15 @@ const inputComponentFieldTypeMap: InputComponentFieldTypeMap = {
     htmlInputComponentProps: { type: 'number', step: '1' },
   },
   email: {
+    leadingIcon: <InputIcon Icon={EmailIcon} />,
     htmlInputComponentProps: { type: 'email' },
   },
   singlelineText: {
     htmlInputComponentProps: { type: 'text' },
+  },
+  password: {
+    leadingIcon: <InputIcon Icon={PasswordIcon} />,
+    htmlInputComponentProps: { type: 'password' },
   },
 };
 

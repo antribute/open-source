@@ -1,0 +1,27 @@
+import { ArgsTable, Canvas, Description, Meta, Story } from '@storybook/addon-docs';
+
+import { StatusBadge } from './StatusBadge';
+import * as stories from './StatusBadge.stories.tsx';
+
+<Meta title="Input/StatusBadge" component={StatusBadge} />
+
+# StatusBadge
+
+<Description component={StatusBadge} />
+<ArgsTable of={StatusBadge} />
+
+## Default
+
+Default `StatusBadge` component
+
+<Canvas withToolbar>
+  <Story name="Default" story={stories.Default} />
+</Canvas>
+
+## Sizes
+
+`StatusBadge` sizes
+
+<Canvas withToolbar>
+  <Story name="Sizes" story={stories.Sizes} />
+</Canvas>

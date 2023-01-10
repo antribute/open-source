@@ -196,7 +196,7 @@ export const BaseInputContainer = ({
     {
       content: trailingIcon,
     },
-    inlineLeadingAddonSlot
+    inlineTrailingAddonSlot
   );
 
   const hasIcon = Boolean(hasLeading || hasTrailing);
@@ -229,26 +229,14 @@ export const BaseInputContainer = ({
           trailingIconWidth: (delta = 0) => (hasTrailing ? trailingWidth + delta : undefined),
         })}
 
-        {leading.map(({ content, pointerEvents }, i) => (
-          <BaseInputIconSlot
-            index={i}
-            key={i}
-            position="leading"
-            pointerEvents={pointerEvents}
-            size={size}
-          >
+        {leading.map(({ content, ...props }, i) => (
+          <BaseInputIconSlot index={i} key={i} position="leading" {...props} size={size}>
             {content}
           </BaseInputIconSlot>
         ))}
 
-        {trailing.map(({ content, pointerEvents }, i) => (
-          <BaseInputIconSlot
-            index={i}
-            key={i}
-            position="trailing"
-            pointerEvents={pointerEvents}
-            size={size}
-          >
+        {trailing.map(({ content, ...props }, i) => (
+          <BaseInputIconSlot index={i} key={i} position="trailing" {...props} size={size}>
             {content}
           </BaseInputIconSlot>
         ))}

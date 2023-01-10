@@ -17,6 +17,8 @@ module.exports = {
     'arrow-body-style': 'off',
     '@typescript-eslint/no-unsafe-call': 'off',
     '@typescript-eslint/no-unnecessary-type-assertion': 'off',
+    '@typescript-eslint/no-unsafe-return': 'off',
+    '@typescript-eslint/no-use-before-define': 'off',
     // This allows us to import devdeps in tests
     'import/no-extraneous-dependencies': [
       'error',

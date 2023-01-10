@@ -2,17 +2,22 @@ import { SizeProp, WidthProp } from 'types/styles';
 
 export type InputComponentFieldType = 'currency' | 'percent' | React.HTMLInputTypeAttribute;
 
-export type InlineInputAddonType = { pointerEvents?: boolean; content: React.ReactNode };
+export type InlineInputAddonType = {
+  pointerEvents?: boolean;
+  className?: string;
+  content: React.ReactNode;
+};
 
 export type InlineInputAddonSlotProps = {
   inlineLeadingAddonSlot?: InlineInputAddonType[];
   inlineTrailingAddonSlot?: InlineInputAddonType[];
 };
 
-export type InputComponentMessageProps = {
+export type InputComponentStateMessageProps = {
   infoMessage?: string;
   errorMessage?: string;
   successMessage?: string;
+  error?: boolean;
 };
 
 export type InputComponentState = 'error' | 'success';
@@ -24,10 +29,8 @@ export type InputComponentStateMessagePair = {
   inputState?: InputComponentState;
 };
 
-export type HtmlInputComponentProps = Omit<
-  React.HTMLProps<HTMLInputElement>,
-  'width' | 'size' | 'as'
->;
+export type OmitHtmlInputComponentProps<T> = Omit<T, 'width' | 'size' | 'as' | 'type'>;
+
 export type InputComponentProps = {
   size?: SizeProp;
   width?: WidthProp;
