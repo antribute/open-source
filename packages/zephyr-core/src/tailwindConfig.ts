@@ -36,7 +36,7 @@ const config: Config = {
     './node_modules/@antribute/zephyr-core/dist/index.js',
   ],
   presets: [],
-  darkMode: 'class',
+  darkMode: ['class', '[data-mode="dark"]'],
   theme: {
     ...defaultTailwindTheme,
     accentColor: ({ theme }) => ({

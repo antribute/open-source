@@ -4,6 +4,7 @@ import { mergeWith } from 'lodash-es';
 
 import { createClassed } from '@tw-classed/react';
 import type * as Classed from '@tw-classed/react';
+import clsx, { ClassValue } from 'clsx';
 
 const { classed } = createClassed({ merger: twMerge });
 
@@ -23,3 +24,7 @@ export function mergeVariants<T extends Record<string, string> = Record<string, 
 
   return mergedVariants;
 }
+
+export const classTheme = (props: { class?: ClassValue; light: ClassValue; dark: ClassValue }) => {
+  return clsx(props.class, props.light, props.dark);
+};

@@ -15,17 +15,39 @@ type ColorProps<
 } & TRecord;
 
 export const colors = {
+  body: 'white',
+  'body-inverted': '#0D0E11',
   primary: generateColorGroup({
-    '50': '#f2fbf9',
-    '100': '#d4f3ec',
-    '200': '#a9e6da',
-    '300': '#6bcfc0',
-    '400': '#49b8ab',
-    '500': '#309c91',
-    '600': '#247d76',
-    '700': '#20655f',
-    '800': '#1e514e',
-    '900': '#1d4441',
+    // '50': '#f2fbf9',
+    // '100': '#d4f3ec',
+    // '200': '#a9e6da',
+    // '300': '#6bcfc0',
+    // '400': '#49b8ab',
+    // '500': '#309c91',
+    // '600': '#247d76',
+    // '700': '#20655f',
+    // '800': '#1e514e',
+    // '900': '#1d4441',
+    // '50': '#f3fbf2',
+    // '100': '#e3f7e1',
+    // '200': '#c6efc3',
+    // '300': '#99e094',
+    // '400': '#65c95f',
+    // '500': '#40ae39',
+    // '600': '#308f2a',
+    // '700': '#287124',
+    // '800': '#235a21',
+    // '900': '#1e4a1d',
+    '50': '#f8f8f8',
+    '100': '#f0f0f0',
+    '200': '#e4e4e4',
+    '300': '#d1d0d0',
+    '400': '#b5b4b4',
+    '500': '#a1a0a0',
+    '600': '#828080',
+    '700': '#6b6a6a',
+    '800': '#5a5a5a',
+    '900': '#4e4e4e',
   })({ DEFAULT: '300', dark: '400', light: '200', soft: '50' }),
 
   secondary: generateColorGroup({
@@ -39,7 +61,7 @@ export const colors = {
     '700': '#b2321c',
     '800': '#8e2a1e',
     '900': '#73241b',
-  })({ DEFAULT: '500', dark: '600', light: '400', soft: '100' }),
+  })({ DEFAULT: '500', dark: '600', light: '300', soft: '100' }),
 
   caution: generateColorGroup({
     '50': '#ffffea',
@@ -52,7 +74,7 @@ export const colors = {
     '700': '#bb6802',
     '800': '#985008',
     '900': '#7c420b',
-  })({ DEFAULT: '500', dark: '600', light: '400', soft: '100' }),
+  })({ DEFAULT: '500', dark: '600', light: '300', soft: '100' }),
 
   danger: generateColorGroup({
     '50': '#fff1f2',
@@ -65,7 +87,7 @@ export const colors = {
     '700': '#cb0a18',
     '800': '#a70d18',
     '900': '#8a121b',
-  })({ DEFAULT: '500', dark: '600', light: '400', soft: '100' }),
+  })({ DEFAULT: '500', dark: '600', light: '300', soft: '100' }),
 
   positive: generateColorGroup({
     '50': '#f0f9f2',
@@ -78,20 +100,21 @@ export const colors = {
     '700': '#1e5e37',
     '800': '#1a4b2d',
     '900': '#163e26',
-  })({ DEFAULT: '500', dark: '600', light: '400', soft: '100' }),
+  })({ DEFAULT: '500', dark: '600', light: '300', soft: '100' }),
 
   gray: generateColorGroup({
-    '50': '#f6f8f8',
-    '100': '#edf0f2',
-    '200': '#d6dce1',
-    '300': '#b1bfc8',
-    '400': '#8a9da8',
-    '500': '#697f8c',
-    '600': '#536774',
-    '700': '#44545f',
-    '800': '#3b464e',
-    '900': '#363e44',
-  })({ DEFAULT: '500', dark: '600', light: '400', soft: '100' }),
+    DEFAULT: '#EAF0F5',
+    '50': '#F2F8FC',
+    '100': '#EAF0F5',
+    '200': '#C7D5E0',
+    '300': '#A3B9CC',
+    '400': '#859DB1',
+    '500': '#688196',
+    '600': '#4F6577',
+    '700': '#384957',
+    '800': '#202C36',
+    '900': '#181F26',
+  })({ DEFAULT: '300', dark: '400', light: '200', soft: '100' }),
 
   light: generateColorGroup({
     '50': '#FBFBFB',
@@ -104,7 +127,7 @@ export const colors = {
     '700': '#5E5E5E',
     '800': '#3F3F3F',
     '900': '#353535',
-  })({ DEFAULT: '500', dark: '600', light: '400', soft: '100' }),
+  })({ DEFAULT: '500', dark: '600', light: '300', soft: '100' }),
 
   dark: generateColorGroup({
     '50': '#E3E4E6',
@@ -117,7 +140,7 @@ export const colors = {
     '700': '#313337',
     '800': '#232529',
     '900': '#1B1D21',
-  })({ DEFAULT: '500', dark: '600', light: '400', soft: '100' }),
+  })({ DEFAULT: '500', dark: '600', light: '300', soft: '100' }),
 
   'black-alpha': generateColorGroup({
     '50': 'rgba(21, 24, 30, 0.04)',
@@ -143,20 +166,20 @@ export const colors = {
     '700': 'rgba(227, 229, 232, 0.52)',
     '800': 'rgba(227, 229, 232, 0.72)',
     '900': 'rgba(227, 229, 232, 0.92)',
-  })({ DEFAULT: '500', dark: '600', light: '400', soft: '100' }),
+  })({ DEFAULT: '500', dark: '600', light: '300', soft: '100' }),
 
   content: {
+    DEFAULT: '#15181ef5',
+    weak: '#15181ea3',
+    moderate: '#15181ed6',
+    strong: '#15181E',
+  },
+
+  'content-inverse': {
     DEFAULT: '#d2d4d7',
     weak: '#e3e5e885',
     moderate: '#e3e5e8b8',
     strong: '#ffffff',
-  },
-
-  'content-inverse': {
-    DEFAULT: '#15181ef5',
-    strong: '#15181E',
-    moderate: '#15181ed6',
-    weak: '#15181ea3',
     positive: '#7BCC7E',
     negative: '#E08787',
   },
@@ -175,19 +198,45 @@ export const colors = {
     strong: '#535965',
   },
 
-  surface: {
-    DEFAULT: '#FFFFFF',
-    nested: '#EEEFF1',
-    raised: '#E3E5E8',
-    elevated: '#D3D5D9',
-  },
+  // surface: {
+  //   // DEFAULT: '#FFFFFF',
+  //   // primary: '#FFFFFF',
+  //   // secondary: '#D3D5D9',
+  //   // tertiary: '#EEEFF1',
+  //   // highlight: '#E3E5E8',
 
-  'surface-inverse': {
-    DEFAULT: '#15181E',
-    nested: '#111318',
-    raised: '#1A1D23',
-    elevated: '#22262F',
-  },
+  //   DEFAULT: '#FFFFFF',
+  //   primary: '#FFFFFF',
+  //   secondary: '#e4e5e7',
+  //   subtle: '#f7f8f8',
+  //   highlight: '#E3E5E8',
+  // },
+
+  surface: generateColorGroup({
+    '50': '#FFFFFF',
+    '100': '#FCFCFD',
+    '200': '#F9FAFA',
+    '300': '#F7F7F8',
+    '400': '#F4F5F6',
+    '500': '#F1F2F4',
+    '600': '#E9EAED',
+    '700': '#DEE0E4',
+    '800': '#D2D6DA',
+    '900': '#CACED4',
+  })({ DEFAULT: '50', dark: '700', light: '400', soft: '300' }),
+
+  'surface-inverse': generateColorGroup({
+    '50': '#384252',
+    '100': '#2E3542',
+    '200': '#262B36',
+    '300': '#22262F',
+    '400': '#1A1D23',
+    '500': '#15181E',
+    '600': '#13161B',
+    '700': '#111318',
+    '800': '#0D0E12',
+    '900': '#0B0C0F',
+  })({ DEFAULT: '500', dark: '700', light: '300', soft: '400' }),
 
   distinct: {
     '1': '#19196B',
@@ -202,7 +251,7 @@ export const colors = {
     '11': '#75140C',
     '12': '#808080',
   },
-} satisfies Record<string, Record<string, string>>;
+} satisfies Record<string, string | Record<string, string>>;
 
 function generateColorGroup<T extends ColorScale>(colorGroup: T) {
   return (props: ColorProps<keyof T>) => {

@@ -5,7 +5,10 @@ export type CheckboxElementProps = React.ComponentProps<typeof CheckboxElement>;
 
 export const CheckboxElement = classed(
   'input',
-  'form-checkbox cursor-pointer border-light-gray-dark accent-primary checked:text-primary peer rounded-sm',
+  'border-gray-light',
+  'dark:bg-surface-inverse-elevated dark:border-white-alpha-soft dark:checked:bg-primary',
+  'checked:bg-primary',
+  'form-checkbox cursor-pointer  accent-primary checked:text-primary peer rounded-sm',
   'focus:ring-offset-0 focus:ring-2 focus:ring-primary-dark',
   {
     variants: {
