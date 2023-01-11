@@ -5,13 +5,13 @@ export function createCtx<ContextType>() {
   function useContext() {
     const context = React.useContext(ctx);
 
-    const noContext = !Boolean(context);
+    const noContext = !context;
 
     if (noContext) {
       throw new Error('useContext hook does not have a Provider.');
     }
 
-    return context!;
+    return context;
   }
   return { useContext, Provider: ctx.Provider } as const;
 }

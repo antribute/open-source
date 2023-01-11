@@ -1,9 +1,4 @@
 import React, { useId } from 'react';
-import {
-  BaseInputElement,
-  BaseInputElementProps,
-  BaseInputElementVariantProps,
-} from './BaseInput.styles';
 import { BaseInputContainer } from 'components/BaseInput/BaseInputContainer';
 import { getInputComponentFieldTypeProps } from 'constants/input-component-field-type-map';
 import {
@@ -12,6 +7,11 @@ import {
   InputComponentStateMessagePair,
   OmitHtmlInputComponentProps,
 } from 'types/input-component.types';
+import {
+  BaseInputElement,
+  BaseInputElementProps,
+  BaseInputElementVariantProps,
+} from './BaseInput.styles';
 
 export type BaseInputProps = OmitHtmlInputComponentProps<BaseInputElementProps> &
   InputComponentProps &
@@ -36,12 +36,11 @@ export const BaseInput = React.forwardRef<HTMLInputElement, BaseInputProps>((pro
 
   const id = idProp ?? generatedId;
 
-  const { leadingIcon, trailingIcon, htmlInputComponentProps } =
-    getInputComponentFieldTypeProps({
-      type,
-      leadingIcon: leadingIconProp,
-      trailingIcon: trailingIconProp,
-    }) ?? {};
+  const { leadingIcon, trailingIcon, htmlInputComponentProps } = getInputComponentFieldTypeProps({
+    type,
+    leadingIcon: leadingIconProp,
+    trailingIcon: trailingIconProp,
+  });
 
   return (
     <BaseInputContainer
@@ -67,7 +66,7 @@ export const BaseInput = React.forwardRef<HTMLInputElement, BaseInputProps>((pro
             paddingLeft: startIconWidth(5),
             paddingRight: endIconWidth(5),
           }}
-          onWheel={(e: any) => {
+          onWheel={(e) => {
             // Disables value changing when scrolling over input
             e.currentTarget.blur();
           }}

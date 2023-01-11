@@ -84,7 +84,7 @@ export const getInputComponentFieldTypeProps = ({
 }: {
   type: InputComponentFieldType | undefined;
 } & Pick<InputComponentProps, 'leadingIcon' | 'trailingIcon'>) => {
-  const inputComponentFieldTypeProps = get(inputComponentFieldTypeMap, type || '');
+  const inputComponentFieldTypeProps = get(inputComponentFieldTypeMap, type ?? '');
 
   const { htmlInputComponentProps, ...rest } = inputComponentFieldTypeProps ?? {};
 

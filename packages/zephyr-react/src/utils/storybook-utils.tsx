@@ -40,6 +40,7 @@ export const RenderSizeVariants = <T extends React.ComponentType>({
   getProps,
   orientation = 'horizontal',
 }: RenderSizeVariantProps<T>) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const Element = Component as React.ComponentType<any>;
   return (
     <RenderVariantElement orientation={orientation}>
@@ -66,6 +67,7 @@ export const RenderColorVariants = <T extends React.ComponentType>({
   orientation = 'horizontal',
   variantPropName = 'color',
 }: ColorSizeVariantProps<T>) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const Element = Component as React.ComponentType<any>;
 
   return (

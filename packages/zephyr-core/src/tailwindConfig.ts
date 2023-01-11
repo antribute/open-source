@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import tailwindCssRadixPlugin from 'tailwindcss-radix';
 import tailwindCssFormsPlugin from '@tailwindcss/forms';
@@ -225,6 +226,7 @@ const config: Config = {
       full: '100%',
     }),
     lineHeight: {
+      none: '0px',
       h1: '80px',
       h2: '56px',
       h3: '48px',

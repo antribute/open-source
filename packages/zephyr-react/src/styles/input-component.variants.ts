@@ -1,6 +1,5 @@
-import { VariantProps, classed } from '@tw-classed/react';
-import clsx from 'clsx';
-import { Classed, classedVariantMap, mergeVariants } from 'utils/classed';
+import { classed } from '@tw-classed/react';
+import { classedVariantMap, mergeVariants } from 'utils/classed';
 
 export const inputComponentVariants = classedVariantMap({
   size: {

@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import { TrackingProvider } from '@antribute/tracking';
 import type { AppProps } from 'next/app';
 

@@ -13,7 +13,7 @@ const SignUpSchema = z.object({
 });
 
 export const Default = () => {
-  function onSubmit(data: z.infer<typeof SignUpSchema>) {
+  function onSubmit() {
     // gets typesafe data when form is submitted
   }
 

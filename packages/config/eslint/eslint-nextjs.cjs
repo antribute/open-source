@@ -1,6 +1,8 @@
+const base = require('./eslint-base.cjs');
+
 module.exports = {
   extends: [
-    './eslint-base.cjs',
+    ...base.extends,
     'plugin:tailwindcss/recommended',
     'plugin:@next/next/recommended',
     'plugin:@next/next/core-web-vitals',
@@ -11,6 +13,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', '@next/next', 'tailwindcss'],
   rules: {
+    ...base.rules,
     // This allows us to import devdeps in tests
     'import/no-extraneous-dependencies': [
       'error',

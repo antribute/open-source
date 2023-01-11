@@ -1,4 +1,5 @@
 import { Classed, classed } from 'utils/classed';
+
 export type CheckboxElementVariants = Classed.VariantProps<typeof CheckboxElement>;
 
 export type CheckboxElementProps = React.ComponentProps<typeof CheckboxElement>;

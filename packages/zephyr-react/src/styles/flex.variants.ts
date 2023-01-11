@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import { FlexAlignItemsProp, FlexJustifyItemsProp } from 'types/styles';
 
 export const flexAlignItemsVariants = {

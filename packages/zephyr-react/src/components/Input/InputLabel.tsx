@@ -55,7 +55,7 @@ const InputLabel = ({
     >
       {hasOptionalLabel && <OptionalLabelElement>{optionalLabelText}</OptionalLabelElement>}
       {children}
-      {required && <span className="ml-0.5 text-danger">*</span>}
+      {required && <span className="ml-px text-danger">*</span>}
       <InvisibleCharacter />
     </InputLabelElement>
   );

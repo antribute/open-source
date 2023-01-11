@@ -2,32 +2,32 @@ import { SizeProp, WidthProp } from 'types/styles';
 
 export type InputComponentFieldType = 'currency' | 'percent' | React.HTMLInputTypeAttribute;
 
-export type InlineInputAddonType = {
+export interface InlineInputAddonType {
   pointerEvents?: boolean;
   className?: string;
   content: React.ReactNode;
-};
+}
 
-export type InlineInputAddonSlotProps = {
+export interface InlineInputAddonSlotProps {
   inlineLeadingAddonSlot?: InlineInputAddonType[];
   inlineTrailingAddonSlot?: InlineInputAddonType[];
-};
+}
 
-export type InputComponentStateMessageProps = {
+export interface InputComponentStateMessageProps {
   infoMessage?: string;
   errorMessage?: string;
   successMessage?: string;
   error?: boolean;
-};
+}
 
 export type InputComponentState = 'error' | 'success';
 
-export type InputComponentStateMessagePair = {
+export interface InputComponentStateMessagePair {
   message?: string;
   error?: boolean;
   success?: boolean;
   inputState?: InputComponentState;
-};
+}
 
 export type OmitHtmlInputComponentProps<T> = Omit<T, 'width' | 'size' | 'as' | 'type'>;
 
@@ -42,13 +42,13 @@ export type InputComponentProps = {
   className?: string;
 } & InlineInputAddonSlotProps;
 
-export type InputAddonSlotElement = {
+export interface InputAddonSlotElement {
   type?: 'div' | 'button';
   filled?: boolean;
   className?: string;
-};
+}
 
-export type InputAddonSlotProps = {
+export interface InputAddonSlotProps {
   leadingAddonSlot?: InputAddonSlotElement;
   trailingAddonSlot?: InputAddonSlotElement;
-};
+}

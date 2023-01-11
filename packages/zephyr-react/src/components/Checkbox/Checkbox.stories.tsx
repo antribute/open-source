@@ -1,4 +1,4 @@
-import { RenderColorVariants, RenderSizeVariants } from 'utils/storybook-utils';
+import { RenderSizeVariants } from 'utils/storybook-utils';
 import { Checkbox } from './Checkbox';
 
 export const Default = () => {

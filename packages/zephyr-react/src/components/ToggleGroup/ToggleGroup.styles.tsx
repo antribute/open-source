@@ -1,10 +1,9 @@
-import { ElementPositonData } from './ToggleGroup.helpers';
-
 import { classed } from '@tw-classed/react';
 import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
 import { inputComponentVariants } from 'styles/input-component.variants';
 import { Classed, mergeVariants } from 'utils/classed';
 import { ColorProp, FontWeightProp } from 'types/styles';
+import { ElementPositonData } from './ToggleGroup.helpers';
 
 export type ToggleGroupItemElementVariantProps = Classed.VariantProps<
   typeof ToggleGroupItemElement
@@ -92,5 +91,5 @@ export const getToggleItemBorderWidth = ({
   if (isMiddle) {
     return 'border-r';
   }
-  return;
+  return '';
 };

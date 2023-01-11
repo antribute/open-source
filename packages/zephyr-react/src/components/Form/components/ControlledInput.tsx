@@ -16,7 +16,7 @@ export const ControlledInput = (props: ControlledInputProps) => {
   return (
     <Input
       name={name}
-      value={value ? value : ''} // conditional to prevent "uncontrolled to controlled" react warning
+      value={value ?? ''} // conditional to prevent "uncontrolled to controlled" react warning
       onChange={(e) => {
         onChange(e.target.value);
       }}

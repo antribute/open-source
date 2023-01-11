@@ -4,8 +4,9 @@ import { mergeWith } from 'lodash-es';
 
 import { createClassed } from '@tw-classed/react';
 import type * as Classed from '@tw-classed/react';
-export type { ClassedFunctionProxy, ClassedProxyFunctionType } from '@tw-classed/react';
 import clsx, { ClassValue } from 'clsx';
+
+export type { ClassedFunctionProxy, ClassedProxyFunctionType } from '@tw-classed/react';
 
 const { classed } = createClassed({ merger: twMerge });
 

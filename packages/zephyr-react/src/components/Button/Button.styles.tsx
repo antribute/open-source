@@ -96,27 +96,27 @@ export const ButtonElement = classed(
       {
         variant: 'text',
         color: 'primary',
-        class: clsx('hover:bg-opacity-10  text-primary'),
+        class: clsx('hover:bg-current/10  text-primary'),
       },
       {
         variant: 'text',
         color: 'secondary',
-        class: clsx('hover:bg-opacity-10  text-primary'),
+        class: clsx('hover:bg-current/10  text-primary'),
       },
       {
         variant: 'text',
         color: 'positive',
-        class: clsx('hover:bg-opacity-10  text-positive'),
+        class: clsx('hover:bg-current/10  text-positive'),
       },
       {
         variant: 'text',
         color: 'danger',
-        class: clsx('hover:bg-opacity-10  text-danger'),
+        class: clsx('hover:bg-current/10  text-danger'),
       },
       {
         variant: 'text',
         color: 'caution',
-        class: clsx('hover:bg-opacity-10  text-caution'),
+        class: clsx('hover:bg-current/10  text-caution'),
       },
 
       // Outlined Variant
@@ -132,27 +132,27 @@ export const ButtonElement = classed(
       {
         variant: 'outlined',
         color: 'primary',
-        class: clsx('hover:bg-opacity-10 text-primary'),
+        class: clsx('hover:bg-current/10 text-primary'),
       },
       {
         variant: 'outlined',
         color: 'secondary',
-        class: clsx('hover:bg-opacity-10 text-primary'),
+        class: clsx('hover:bg-current/10 text-primary'),
       },
       {
         variant: 'outlined',
         color: 'positive',
-        class: clsx('hover:bg-opacity-10 text-positive'),
+        class: clsx('hover:bg-current/10 text-positive'),
       },
       {
         variant: 'outlined',
         color: 'danger',
-        class: clsx('hover:bg-opacity-10 text-danger'),
+        class: clsx('hover:bg-current/10 text-danger'),
       },
       {
         variant: 'outlined',
         color: 'caution',
-        class: clsx('hover:bg-opacity-10 text-caution'),
+        class: clsx('hover:bg-current/10 text-caution'),
       },
 
       // Outlined-Filled Variant
@@ -164,58 +164,58 @@ export const ButtonElement = classed(
       {
         variant: 'outlined-filled',
         color: 'primary',
-        class: clsx('bg-opacity-10 hover:bg-opacity-10  text-primary'),
+        class: clsx('bg-current/10 hover:bg-current/10  text-primary'),
       },
       {
         variant: 'outlined-filled',
         color: 'secondary',
-        class: clsx('bg-opacity-10 hover:bg-opacity-10  text-primary'),
+        class: clsx('bg-current/10 hover:bg-current/10  text-primary'),
       },
       {
         variant: 'outlined-filled',
         color: 'positive',
-        class: clsx('bg-opacity-10 hover:bg-opacity-10  text-positive'),
+        class: clsx('bg-current/10 hover:bg-current/10  text-positive'),
       },
       {
         variant: 'outlined-filled',
         color: 'danger',
-        class: clsx('bg-opacity-10 hover:bg-opacity-10  text-danger'),
+        class: clsx('bg-current/10 hover:bg-current/10  text-danger'),
       },
       {
         variant: 'outlined-filled',
         color: 'caution',
-        class: clsx('bg-opacity-10 hover:bg-opacity-10  text-caution'),
+        class: clsx('bg-current/10 hover:bg-current/10  text-caution'),
       },
       // soft Variant
       {
         variant: 'soft',
-        class: clsx('hover border-transparent'),
+        class: clsx('border-transparent'),
       },
       // --- Colors ---
       {
         variant: 'soft',
         color: 'primary',
-        class: clsx('bg-opacity-10 hover:bg-opacity-10  text-primary'),
+        class: clsx('bg-current/10 hover:bg-current/10  text-primary'),
       },
       {
         variant: 'soft',
         color: 'secondary',
-        class: clsx('bg-opacity-10 hover:bg-opacity-10  text-primary'),
+        class: clsx('bg-current/10 hover:bg-current/10  text-primary'),
       },
       {
         variant: 'soft',
         color: 'positive',
-        class: clsx('bg-opacity-10 hover:bg-opacity-10  text-positive'),
+        class: clsx('bg-current/10 hover:bg-current/10  text-positive'),
       },
       {
         variant: 'soft',
         color: 'danger',
-        class: clsx('bg-opacity-10 hover:bg-opacity-10  text-danger'),
+        class: clsx('bg-current/10 hover:bg-current/10  text-danger'),
       },
       {
         variant: 'soft',
         color: 'caution',
-        class: clsx('bg-opacity-10 hover:bg-opacity-10  text-caution'),
+        class: clsx('bg-current/10 hover:bg-current/10  text-caution'),
       },
     ],
   }

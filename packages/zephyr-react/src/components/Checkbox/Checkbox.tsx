@@ -1,8 +1,8 @@
-import { CheckboxElement, CheckboxElementProps } from './Checkbox.styles';
 import { InputContainerProps } from 'components/Input/InputContainer';
 import { useInputProps } from 'components/Input/useInputProps';
-import { classed } from 'utils/classed';
+import { classTheme, classed } from 'utils/classed';
 import { BaseInputElement } from 'components/BaseInput/BaseInput.styles';
+import { CheckboxElement, CheckboxElementProps } from './Checkbox.styles';
 
 type CheckboxProps = Omit<CheckboxElementProps, 'type'> & Omit<InputContainerProps, 'children'>;
 
@@ -20,7 +20,13 @@ export const Checkbox = ({ label, ...props }: CheckboxProps) => {
       <CheckboxInputElement width="fixed" {...inputContainerProps}>
         <CheckboxElement type="checkbox" {...inputComponentProps} focusRing={false} />
         {label && (
-          <span className="font-bold text-type-soft peer-checked:text-dark-gray select-none">
+          <span
+            className={classTheme({
+              class: 'font-bold select-none',
+              light: 'text-content-strong peer-checked:text-content-weak',
+              dark: 'dark:text-content-inverse-strong  dark:peer-checked:text-content-inverse-weak',
+            })}
+          >
             {label}
           </span>
         )}

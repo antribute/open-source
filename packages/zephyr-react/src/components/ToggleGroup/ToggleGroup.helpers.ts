@@ -1,4 +1,4 @@
-export type ElementPositonData = {
+export interface ElementPositonData {
   isFirst: boolean;
   isLast: boolean;
   isMiddle: boolean;
@@ -11,7 +11,7 @@ export type ElementPositonData = {
   isLastAndSelected: boolean;
   isSecond: boolean;
   isSecondLast: boolean;
-};
+}
 
 interface GetIndexDataOptions {
   index: number;

@@ -1,11 +1,15 @@
+const base = require('./eslint-base.cjs');
+
 module.exports = {
-  extends: ['./eslint-base.cjs', 'plugin:tailwindcss/recommended'],
+  extends: [...base.extends, 'plugin:tailwindcss/recommended'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: './tsconfig.json',
   },
+
   plugins: ['@typescript-eslint', 'tailwindcss'],
   rules: {
+    ...base.rules,
     'react/function-component-definition': 'off',
     'react/require-default-props': 'off',
     'react/jsx-props-no-spreading': 'off',

@@ -31,7 +31,7 @@ export type BaseInputContainerProps = InputComponentProps & {
 
 function getTotalWidth(widthMap: Record<number, number>, { size }: { size: SizeProp }) {
   const values = Object.values(widthMap);
-  return sum(values) + getIconGap({ size: size! }) * (values.length - 1) + getIconPadding({ size });
+  return sum(values) + getIconGap({ size }) * (values.length - 1) + getIconPadding({ size });
 }
 
 type InputContainerWidthImmerHook = ImmerHook<{
@@ -39,9 +39,9 @@ type InputContainerWidthImmerHook = ImmerHook<{
   trailingWidthMap: Record<string, number>;
 }>;
 
-type BaseInputContainerContext = {
+interface BaseInputContainerContext {
   inputContainderWidthImmerHook: InputContainerWidthImmerHook;
-};
+}
 
 const { useContext: useBaseInputContainerContext, Provider: BaseInputContainerProvider } =
   createCtx<BaseInputContainerContext>();
@@ -91,7 +91,7 @@ const BaseInputIconSlot = (
   const leadingWidthEntries = sortBy(Object.entries(containerWidth), ([key]) => key);
 
   const leadingWidthList = leadingWidthEntries.map(([key, width]) => {
-    const idx = parseInt(key);
+    const idx = parseInt(key, 10);
 
     return {
       idx,
@@ -134,7 +134,7 @@ const BaseInputIconSlot = (
 };
 
 const getAddonList = (
-  ...props: Array<InlineInputAddonType | InlineInputAddonType[]>
+  ...props: (InlineInputAddonType | InlineInputAddonType[])[]
 ): {
   addonList: InlineInputAddonType[];
   hasAddons: boolean;
@@ -190,7 +190,7 @@ export const BaseInputContainer = ({
   });
   const { addonList: trailing, hasAddons: hasTrailing } = getAddonList(
     {
-      content: <InputStateAddon inputState={inputState!} />,
+      content: <InputStateAddon inputState={inputState} />,
     },
     {
       content: trailingIcon,
@@ -200,11 +200,13 @@ export const BaseInputContainer = ({
 
   const hasIcon = Boolean(hasLeading || hasTrailing);
 
-  const Container = fragment
-    ? React.Fragment
-    : hasIcon
-    ? BaseInputContainerElement
-    : React.Fragment;
+  const getContainer = () => {
+    if (fragment) return React.Fragment;
+    if (hasIcon) return BaseInputContainerElement;
+    return React.Fragment;
+  };
+
+  const Container = getContainer();
 
   const inputContainderWidthImmerHook = useImmer<{
     leadingWidthMap: Record<string, number>;
@@ -217,8 +219,6 @@ export const BaseInputContainer = ({
     leadingWidth: getTotalWidth(inputContainerWidth.leadingWidthMap, { size }),
     trailingWidth: getTotalWidth(inputContainerWidth.trailingWidthMap, { size }),
   };
-
-  console.log({ inputContainerWidth });
 
   return (
     <BaseInputContainerProvider value={{ inputContainderWidthImmerHook }}>

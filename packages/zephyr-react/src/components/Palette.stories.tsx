@@ -8,7 +8,7 @@ export const Colors = () => {
       {colorList.map(({ colorName, colorList }) => (
         <ColorGroupContainer title={colorName}>
           {colorList.map(({ color, colorName }) => (
-            <ColorBlock key={color} label={colorName} color={color} />
+            <ColorBlock key={color as string} label={colorName} color={color as string} />
           ))}
         </ColorGroupContainer>
       ))}
@@ -19,12 +19,12 @@ export const Colors = () => {
 const ColorBlock = ({ label, color }: { label: string; color: string }) => {
   return (
     <div>
-      <div className="text-md  text-dark-gray-light  pb-8 ">
+      <div className="pb-8 text-md  text-content-weak  dark:text-content-inverse-weak ">
         <span className="mr-8"> {label}:</span>
         <span className="text-center text-sm">{color}</span>
       </div>
       <div
-        className="h-104 w-104  relative flex jusitfy-center items-center rounded-md shrink-0 text-white shadow-sm "
+        className="relative flex  h-104 w-104 shrink-0 items-center justify-center rounded-md text-white shadow-sm "
         style={{ background: color }}
       />
     </div>
@@ -34,7 +34,6 @@ const ColorBlock = ({ label, color }: { label: string; color: string }) => {
 const ColorGroupContainer = ({
   title,
   children,
-  defaultColor,
 }: {
   title?: string;
   defaultColor?: string | undefined;
@@ -43,7 +42,7 @@ const ColorGroupContainer = ({
   return (
     <div className="pb-24">
       {title && (
-        <div className="font-medium pb-16 text-dark-gray select-none underline underline-offset-4 decoration-dark-gray-light">
+        <div className="select-none pb-16 font-body text-gray underline decoration-gray underline-offset-4">
           {capitalCase(title)}
         </div>
       )}
@@ -54,10 +53,10 @@ const ColorGroupContainer = ({
 
 function getColorGroupArray() {
   return Object.entries(colors).map(([colorName, colorMap]) => {
-    const colorList = Object.entries(colorMap).map(([colorName, color]) => {
+    const colorList = Object.entries(colorMap as object).map(([colorName, color]) => {
       return {
         colorName,
-        color,
+        color: color as string,
       };
     });
     return {

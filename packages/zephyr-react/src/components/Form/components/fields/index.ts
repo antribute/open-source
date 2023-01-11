@@ -25,13 +25,13 @@ export const fieldSchema = {
   number: StringFieldSchema,
   email: EmailFieldSchema,
   boolean: BooleanFieldSchema,
-} as const satisfies Record<FieldId, any>;
+} as const satisfies Record<FieldId, unknown>;
 
 const formMappingMap = {
   string: StringFieldFormMapping,
   number: NumberFieldFormMapping,
   email: EmailFieldFormMapping,
   boolean: BooleanFieldFormMapping,
-} as const satisfies Record<FieldId, any>;
+} as const satisfies Record<FieldId, unknown>;
 
 export const formMapping = Object.values(formMappingMap);

@@ -1,20 +1,20 @@
 import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
 import clsx from 'clsx';
-import { getElementPositionData } from './ToggleGroup.helpers';
 import { twMerge } from 'tailwind-merge';
+import { ColorProp } from 'types/styles';
+import { Classed, classed } from 'utils/classed';
 import {
   getToggleItemBorderWidth,
   ToggleGroupItemElement,
   ToggleGroupItemElementVariantProps,
 } from './ToggleGroup.styles';
-import { ColorProp } from 'types/styles';
-import { Classed, classed } from 'utils/classed';
+import { getElementPositionData } from './ToggleGroup.helpers';
 
-export type ToggleGroupItem<T extends string | number = string> = {
+export interface ToggleGroupItem<T extends string | number = string> {
   value: T;
   label: React.ReactNode;
-};
+}
 
 const defaultColor: ColorProp = 'primary';
 
@@ -54,19 +54,19 @@ export function ToggleGroup(props: ToggleGroupProps) {
     value,
   } = props;
 
-  const defaultValue = defaultValueProp ?? items?.[0]?.value;
+  const defaultValue = defaultValueProp ?? items[0]?.value;
 
-  const [selectedValue, setSelectedValue] = useState<string>(defaultValue!);
+  const [selectedValue, setSelectedValue] = useState<string | undefined>(defaultValue);
 
   const selectedIndex = useMemo(() => {
     return items.findIndex((e) => e.value === selectedValue);
   }, [selectedValue]);
 
   const handleValueChange = useCallback(
-    (val: any) => {
+    (val: unknown) => {
       if (val) {
-        setSelectedValue(val);
-        onValueChange && onValueChange(val);
+        setSelectedValue(val as string);
+        onValueChange?.(val as string);
       }
     },
     [setSelectedValue, onValueChange]

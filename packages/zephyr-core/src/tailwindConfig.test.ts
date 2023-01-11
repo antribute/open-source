@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import tailwindConfig, { create8PtGrid } from './tailwindConfig';
+import tailwindConfig from './tailwindConfig';
 
 // TODO: These should probably eventually be integration tests to make sure the compiler is doing
 // what we expect it to, but this is a good enough start

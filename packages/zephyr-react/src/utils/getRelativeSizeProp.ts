@@ -20,7 +20,7 @@ export const getRelativeSizeProp = (
     maxSize?: SizeProp;
   }
 ): SizeProp => {
-  const { relativeSize = 'md', minSize = 'xs', maxSize = 'lg' } = options || {};
+  const { relativeSize = 'md', minSize = 'xs', maxSize = 'lg' } = options;
 
   const sizeArr: SizeProp[] = ['xs', 'sm', 'md', 'lg'];
 

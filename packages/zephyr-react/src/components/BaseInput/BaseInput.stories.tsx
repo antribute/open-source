@@ -1,7 +1,8 @@
-import { RenderColorVariants, RenderSizeVariants } from 'utils/storybook-utils';
-import { BaseInput } from './BaseInput';
+import { RenderSizeVariants } from 'utils/storybook-utils';
 import { Button } from 'components/Button/Button';
 import { getRelativeSizeProp } from 'utils/getRelativeSizeProp';
+import { SizeProp } from 'types/styles';
+import { BaseInput } from './BaseInput';
 
 export const Default = () => {
   return <RenderSizeVariants Component={BaseInput} props={{ placeholder: 'Enter value' }} />;
@@ -45,7 +46,7 @@ export const InlineAddons = () => {
         Component={BaseInput}
         getProps={(size) => {
           const relativeSize = getRelativeSizeProp(-1, {
-            relativeSize: size as any,
+            relativeSize: size as SizeProp,
             maxSize: 'md',
           });
 
