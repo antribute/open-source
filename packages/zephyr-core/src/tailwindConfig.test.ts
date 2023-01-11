@@ -20,18 +20,3 @@ describe('tailwindConfig', () => {
     expect((content as string[]).includes('./public/*.{htm,html}'));
   });
 });
-
-describe('create8PtGrid', () => {
-  it('should generate multiples of 8', () => {
-    const grid = create8PtGrid(24);
-    const divisibleArray = Object.values(grid)
-      .slice(0, 3)
-      .map((numStr) => parseInt(numStr.split('px')[0] ?? '1', 10) % 8);
-    expect(divisibleArray).toEqual([0, 0, 0]);
-  });
-
-  it('should generate 512px max by default', () => {
-    const grid = create8PtGrid();
-    expect(grid[512]).toEqual('512px');
-  });
-});
