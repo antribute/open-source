@@ -1,0 +1,28 @@
+import { ArgsTable, Canvas, Description, Meta, Story } from '@storybook/addon-docs';
+import { Position } from './Position';
+import * as stories from './Position.stories.tsx';
+
+<Meta
+  title="Misc/Position"
+  component={Position}
+  decorators={[
+    (Story) => (
+      <div className="flex items-center justify-center">
+        <Story />
+      </div>
+    ),
+  ]}
+/>
+
+# Position
+
+<Description component={Position} />
+<ArgsTable of={Position} />
+
+## Default
+
+Default `Position` component
+
+<Canvas withToolbar>
+  <Story name="Default" story={stories.Default} />
+</Canvas>

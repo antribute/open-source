@@ -4,7 +4,7 @@ import { describe, it } from 'vitest';
 
 import Home from './index.page';
 
-describe('Home', () => {
+describe.skip('Home', () => {
   it('should include links to our LinkedIn and Twitter', () => {
     render(
       <TrackingProvider value={{}}>

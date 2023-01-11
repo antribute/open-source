@@ -1,14 +1,11 @@
+const base = require('./eslint-base.cjs');
+
 module.exports = {
   extends: [
-    'airbnb',
-    'airbnb-typescript',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:@typescript-eslint/recommended-requiring-type-checking',
-    'plugin:@typescript-eslint/strict',
+    ...base.extends,
     'plugin:tailwindcss/recommended',
     'plugin:@next/next/recommended',
     'plugin:@next/next/core-web-vitals',
-    'prettier',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -16,6 +13,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', '@next/next', 'tailwindcss'],
   rules: {
+    ...base.rules,
     // This allows us to import devdeps in tests
     'import/no-extraneous-dependencies': [
       'error',

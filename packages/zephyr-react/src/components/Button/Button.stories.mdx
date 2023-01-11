@@ -1,0 +1,59 @@
+import { ArgsTable, Canvas, Description, Meta, Story } from '@storybook/addon-docs';
+
+import { Button } from './Button';
+import * as stories from './Button.stories.tsx';
+
+<Meta title="Input/Button" component={Button} />
+
+# Button
+
+<Description component={Button} />
+<ArgsTable of={Button} />
+
+## Default
+
+Default `Button` component
+
+<Canvas withToolbar>
+  <Story name="Default" story={stories.Default} />
+</Canvas>
+
+## Contained
+
+`contained` variant
+
+<Canvas withToolbar>
+  <Story name="Contained Variant" story={stories.Contained} />
+</Canvas>
+
+## Soft
+
+`soft` variant
+
+<Canvas withToolbar>
+  <Story name="Soft Variant" story={stories.Soft} />
+</Canvas>
+
+## Outlined
+
+`outlined` variant
+
+<Canvas withToolbar>
+  <Story name="Outlined Variant" story={stories.Outlined} />
+</Canvas>
+
+## Outlined Filled
+
+`outlined-filled` variant
+
+<Canvas withToolbar>
+  <Story name="Outlined Filled Variant" story={stories.OutlinedFilled} />
+</Canvas>
+
+## Text
+
+`text` variant
+
+<Canvas withToolbar>
+  <Story name="Text Variant" story={stories.Text} />
+</Canvas>

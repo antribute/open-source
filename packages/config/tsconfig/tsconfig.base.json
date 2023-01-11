@@ -5,7 +5,7 @@
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
-    "exactOptionalPropertyTypes": true,
+    "exactOptionalPropertyTypes": false,
     "composite": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,

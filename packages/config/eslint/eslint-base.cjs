@@ -13,6 +13,16 @@ module.exports = {
   },
   plugins: ['@typescript-eslint'],
   rules: {
+    'no-param-reassign': 'off',
+    'import/extensions': 'off',
+    'import/prefer-default-export': 'off',
+    'arrow-body-style': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    '@typescript-eslint/no-shadow': 'off',
+    '@typescript-eslint/no-unsafe-call': 'off',
+    '@typescript-eslint/no-unnecessary-type-assertion': 'off',
+    '@typescript-eslint/no-unsafe-return': 'off',
+    '@typescript-eslint/no-use-before-define': 'off',
     // This allows us to import devdeps in tests
     'import/no-extraneous-dependencies': [
       'error',

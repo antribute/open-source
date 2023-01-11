@@ -6,3 +6,5 @@ export interface ClassName {
 export const testClassName: ClassName = {
   root: 'bg-primary',
 };
+
+export * from './colors';

@@ -1,0 +1,20 @@
+diff --git a/dist/index.d.ts b/dist/index.d.ts
+index fb5f7cee7a1e6ba1aafdec35b04c64295e5d887a..bcc464eda71053019d56078c24145f4dbb45c47f 100644
+--- a/dist/index.d.ts
++++ b/dist/index.d.ts
+@@ -136,4 +136,14 @@ interface CreateClassedType {
+ }
+ declare const createClassed: CreateClassedType;
+ 
+-export { ClassedComponentType, ClassedConfig, DerivedComponentType, VariantProps, classedProxy as classed, createClassed };
++export {
++  ClassedComponentType,
++  ClassedConfig,
++  DerivedComponentType,
++  VariantProps,
++  ClassedFunctionProxy,
++  ClassedFunctionType, 
++  ClassedProxyFunctionType,
++  classedProxy as classed,
++  createClassed,
++};

@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "build": "tsup",
-    "clean": "rm -r ./.next",
+    "clean": "rimraf .turbo && rimraf .next && rimraf node_modules && rimraf build",
     "dev": "pnpm run build --watch",
     "lint": "eslint --cache src/**",
     "test": "vitest"
@@ -38,7 +38,7 @@
     "graphql": "^16.6.0",
     "happy-dom": "^7.7.0",
     "next": "13.0.5",
-    "prettier": "2.8.0",
+    "prettier": "2.8.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "tsup": "^6.5.0",

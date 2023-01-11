@@ -18,7 +18,7 @@ function Home() {
         support the even better ideas"
         />
       </Head>
-      <div className="container mx-auto flex h-full min-h-screen flex-col items-center justify-center px-24 text-light-gray-type dark:text-dark-gray-type">
+      <div className="container mx-auto flex h-full min-h-screen flex-col items-center justify-center px-24 text-content-moderate dark:text-content-inverse-moderate">
         <div className="mb-16 flex items-center">
           <Image alt="" height="80" width="80" src="/icon.png" />
           <h1 className="ml-16 text-h2 font-heading sm:text-h1">Hello, World!</h1>
