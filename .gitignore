@@ -15,6 +15,9 @@ node_modules
 # ESLint Cache
 .eslintcache
 
+# Generated Code
+**/generated
+
 # System Files
 .DS_Store
 

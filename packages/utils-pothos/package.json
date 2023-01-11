@@ -1,0 +1,55 @@
+{
+  "name": "@antribute/utils-pothos",
+  "description": "Common Pothos utilities for pagination, filters, and sorting",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "clean": "rimraf .turbo && rimraf .next && rimraf node_modules && rimraf build",
+    "dev": "pnpm run build:watch",
+    "lint": "eslint --cache src/**",
+    "test": "vitest"
+  },
+  "keywords": [
+    "antribute",
+    "pothos",
+    "prisma"
+  ],
+  "author": "Antribute, Inc. (https://www.antribute.com)",
+  "license": "MIT",
+  "devDependencies": {
+    "@antribute/config": "workspace:*",
+    "@pothos/core": "^3.23.0",
+    "@pothos/plugin-prisma": "0.0.0-preview-20230107003824",
+    "@pothos/plugin-prisma-utils": "0.0.0-preview-20230107003824",
+    "@prisma/client": "^4.8.1",
+    "@vitest/coverage-c8": "^0.25.3",
+    "eslint": "^8.28.0",
+    "graphql": "^16.6.0",
+    "happy-dom": "^7.7.0",
+    "prettier": "2.8.0",
+    "tsup": "^6.5.0",
+    "typescript": "^4.9.3",
+    "vite": "^3.2.4",
+    "vite-tsconfig-paths": "^3.6.0",
+    "vitest": "^0.25.3"
+  },
+  "peerDependencies": {
+    "@pothos/core": ">= 3.0.0 < 4",
+    "@pothos/plugin-prisma": "0.0.0-preview-20230107003824",
+    "@pothos/plugin-prisma-utils": "0.0.0-preview-20230107003824",
+    "@prisma/client": ">= 4.0.0 < 5",
+    "graphql": ">= 16.0.0 < 17"
+  }
+}
