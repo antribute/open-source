@@ -1,6 +1,6 @@
 {
-  "name": "@antribute/graphql-auth0",
-  "description": "A graphql-yoga context creator for Auth0",
+  "name": "@antribute/graphql-auth",
+  "description": "A graphql-yoga context creator for NextJS Auth and Scoped Permissions",
   "version": "0.1.0",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -23,31 +23,24 @@
   },
   "keywords": [
     "antribute",
-    "auth0",
+    "nextauth",
     "graphql"
   ],
   "author": "Antribute, Inc. (https://www.antribute.com)",
   "license": "MIT",
   "devDependencies": {
     "@antribute/config": "workspace:*",
-    "@types/auth0": "^2.35.8",
-    "@types/jsonwebtoken": "^8.5.9",
     "@types/node": "18.11.9",
-    "@types/react": "18.0.25",
-    "@types/react-dom": "18.0.9",
     "@vitest/coverage-c8": "^0.25.3",
     "eslint": "^8.28.0",
     "happy-dom": "^7.7.0",
+    "next-auth": "^4.18.8",
     "prettier": "2.8.0",
     "tsup": "^6.5.0",
     "typescript": "^4.9.3",
     "vitest": "^0.25.3"
   },
-  "dependencies": {
-    "auth0": "^2.44.1",
-    "encoding": "^0.1.13",
-    "jsonwebtoken": "^8.5.1",
-    "jwks-rsa": "^3.0.0",
-    "nock": "^13.2.9"
+  "peerDependencies": {
+    "next-auth": ">= 4.0.0 < 5"
   }
 }

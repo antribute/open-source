@@ -1,10 +1,12 @@
-import { createAuthContext, createAuthScopes } from '@antribute/graphql-auth0';
-import type { AuthScopes, UserContext } from '@antribute/graphql-auth0';
+import { createNextAuthContext, createAuthScopes } from '@antribute/graphql-auth';
+import type { AuthScopes, UserContext } from '@antribute/graphql-auth';
 import createLogger from '@antribute/graphql-logger-axiom';
 import { apiHandlerConfig, createHandler } from '@antribute/graphql-nextjs';
 import { track } from '@antribute/tracking/server';
 import SchemaBuilder from '@pothos/core';
 import ScopeAuthPlugin from '@pothos/plugin-scope-auth';
+
+import authProviders from 'authProviders';
 
 // This is just a test schema to make sure the server works, this definitely will be removed
 const MODELS = ['hello'] as const;
@@ -35,11 +37,9 @@ const config = apiHandlerConfig;
 export { config };
 
 const handler = createHandler({
-  context: createAuthContext({
-    auth0ClientId: process.env.AUTH0_CLIENT_ID ?? '',
-    auth0ClientSecret: process.env.AUTH0_CLIENT_SECRET ?? '',
-    auth0Domain: process.env.AUTH0_DOMAIN ?? '',
-    jwksKeyId: process.env.JWKS_KEY_ID,
+  context: createNextAuthContext({
+    authOptions: { providers: authProviders },
+    getUserPerms: () => [],
   }),
   logging: createLogger({
     axiomOrgId: process.env.AXIOM_ORG_ID ?? '',

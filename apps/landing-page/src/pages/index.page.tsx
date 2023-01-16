@@ -1,13 +1,17 @@
 import { useTracking } from '@antribute/tracking';
 import Head from 'next/head';
 import Image from 'next/image';
+import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 
 function Home() {
+  const { data: session, status } = useSession();
   const track = useTracking();
   useEffect(() => {
-    track('index-view');
-  }, []);
+    if (status !== 'loading') {
+      track('index-view', { loggedIn: !!session?.user });
+    }
+  }, [session, status, track]);
   return (
     <>
       <Head>
