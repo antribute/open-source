@@ -19,12 +19,12 @@ export const Colors = () => {
 const ColorBlock = ({ label, color }: { label: string; color: string }) => {
   return (
     <div>
-      <div className="pb-8 text-md  text-content-weak  dark:text-content-inverse-weak ">
+      <div className="text-content-weak dark:text-content-inverse-weak  pb-8  text-md ">
         <span className="mr-8"> {label}:</span>
         <span className="text-center text-sm">{color}</span>
       </div>
       <div
-        className="relative flex  h-104 w-104 shrink-0 items-center justify-center rounded-md text-white shadow-sm "
+        className="text-white relative  flex h-104 w-104 shrink-0 items-center justify-center rounded-md shadow-sm "
         style={{ background: color }}
       />
     </div>
@@ -36,13 +36,12 @@ const ColorGroupContainer = ({
   children,
 }: {
   title?: string;
-  defaultColor?: string | undefined;
   children: React.ReactNode;
 }) => {
   return (
     <div className="pb-24">
       {title && (
-        <div className="select-none pb-16 font-body text-gray underline decoration-gray underline-offset-4">
+        <div className="text-gray decoration-gray select-none pb-16 font-body underline underline-offset-4">
           {capitalCase(title)}
         </div>
       )}

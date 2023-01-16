@@ -24,6 +24,7 @@ const InputIcon = ({
   Icon,
   ...props
 }: { Icon: string | HeroIconType } & Parameters<HeroIconType>[0]) =>
+  // eslint-disable-next-line react/jsx-no-useless-fragment
   typeof Icon === 'string' ? <>{Icon}</> : <Icon height="20" width="20" {...props} />;
 
 const inputComponentFieldTypeMap: InputComponentFieldTypeMap = {
