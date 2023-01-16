@@ -1,7 +1,12 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
+import tailwindCssRadixPlugin from 'tailwindcss-radix';
+import tailwindCssFormsPlugin from '@tailwindcss/forms';
+
 import type { Config } from 'tailwindcss';
 // eslint-disable-next-line import/extensions
 import defaultTailwindTheme from 'tailwindcss/defaultTheme';
+import { colors as colorPalette } from './colors';
 
 export const create8PtGrid = (max = 512) => {
   const finalGrid: Record<string, string> = {
@@ -9,10 +14,16 @@ export const create8PtGrid = (max = 512) => {
     0: '0px',
   };
 
-  let currentGridStep = 8;
+  let currentGridStep = 2;
+
   while (currentGridStep <= max) {
     finalGrid[currentGridStep.toString()] = `${currentGridStep}px`;
-    currentGridStep += 8;
+
+    if (currentGridStep < 40) {
+      currentGridStep += 2;
+    } else {
+      currentGridStep += 8;
+    }
   }
 
   return finalGrid;
@@ -26,7 +37,7 @@ const config: Config = {
     './node_modules/@antribute/zephyr-core/dist/index.js',
   ],
   presets: [],
-  darkMode: 'media',
+  darkMode: ['class', '[data-mode="dark"]'],
   theme: {
     ...defaultTailwindTheme,
     accentColor: ({ theme }) => ({
@@ -78,61 +89,8 @@ const config: Config = {
       inherit: colors.inherit,
       current: colors.current,
       transparent: colors.transparent,
-      primary: {
-        DEFAULT: '#219EBC',
-        dark: '#1F91AD',
-        light: '#25AED0',
-        type: '#FFFFFF',
-      },
-      secondary: {
-        DEFAULT: '#F2AE87',
-        dark: '#F1A87E',
-        light: '#F5C1A3',
-        type: '272834',
-      },
-      'light-gray': {
-        DEFAULT: '#F3F4F6',
-        dark: '#EAF0F5',
-        light: '#FFFFFF',
-        type: '#272834',
-      },
-      'dark-gray': {
-        DEFAULT: '#1E2028',
-        dark: '#18191F',
-        light: '#272834',
-        type: '#FFFFFF',
-      },
-      positive: {
-        DEFAULT: '#4DA167',
-        dark: '#499762',
-        light: '#272834',
-        type: '#FFFFFF',
-      },
-      caution: {
-        DEFAULT: '#FFBF00',
-        dark: '#F5B800',
-        light: '#FFC71F',
-        type: '#272834',
-      },
-      danger: {
-        DEFAULT: '#F22837',
-        dark: '#D40C1A',
-        light: '#F5515C',
-        type: '#FFFFFF',
-      },
-      distinct: {
-        '1': '#19196B',
-        '2': '#296218',
-        '3': '#EB5528',
-        '4': '#F9D849',
-        '5': '#74FB4C',
-        '7': '#EB33F8',
-        '8': '#F4B9C2',
-        '9': '#000000',
-        '10': '#EF8733',
-        '11': '#75140C',
-        '12': '#808080',
-      },
+      white: colors.white,
+      ...colorPalette,
     }),
     divideColor: ({ theme }) => theme('borderColor'),
     divideOpacity: ({ theme }) => theme('borderOpacity'),
@@ -220,9 +178,10 @@ const config: Config = {
       h4: ['23px', { lineHeight: '32px' }],
       h5: ['21px', { lineHeight: '24px' }],
       h6: ['16px', { lineHeight: '24px' }],
-      sm: ['12px', { lineHeight: '16px' }],
-      md: ['16px', { lineHeight: '24px' }],
       lg: ['21px', { lineHeight: '32px' }],
+      md: ['16px', { lineHeight: '24px' }],
+      sm: ['12px', { lineHeight: '16px' }],
+      xs: ['10px', { lineHeight: '12px' }],
     },
     fontWeight: {
       body: '400',
@@ -267,15 +226,17 @@ const config: Config = {
       full: '100%',
     }),
     lineHeight: {
+      none: '0px',
       h1: '80px',
       h2: '56px',
       h3: '48px',
       h4: '32px',
       h5: '24px',
       h6: '24px',
-      sm: '16px',
-      md: '24px',
       lg: '32px',
+      md: '24px',
+      sm: '16px',
+      xs: '12px',
     },
     margin: ({ theme }) => ({
       auto: 'auto',
@@ -380,7 +341,7 @@ const config: Config = {
       fit: 'fit-content',
     }),
   },
-  plugins: [],
+  plugins: [tailwindCssRadixPlugin, tailwindCssFormsPlugin],
 };
 
 export default config;

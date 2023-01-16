@@ -25,6 +25,13 @@
       "cache": true,
       "dependsOn": ["^build"],
       "outputs": ["coverage/**", "test-results/**"]
+    },
+    "clean": {
+      "cache": false
+    },
+    "storybook": {
+      "cache": false,
+      "dependsOn": ["^build"]
     }
   }
 }

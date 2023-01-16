@@ -1,0 +1,27 @@
+import { ArgsTable, Canvas, Description, Meta, Story } from '@storybook/addon-docs';
+
+import { Checkbox } from './Checkbox';
+import * as stories from './Checkbox.stories.tsx';
+
+<Meta title="Input/Checkbox" component={Checkbox} />
+
+# Checkbox
+
+<Description component={Checkbox} />
+<ArgsTable of={Checkbox} />
+
+## Default
+
+Default `Checkbox` component
+
+<Canvas withToolbar>
+  <Story name="Default" story={stories.Default} />
+</Canvas>
+
+## Label
+
+Checkbox Label
+
+<Canvas withToolbar>
+  <Story name="Label" story={stories.Label} />
+</Canvas>

@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "build": "tsup",
-    "clean": "rm -r ./.next",
+    "clean": "rimraf .turbo && rimraf node_modules && rimraf build",
     "dev": "pnpm run build --watch",
     "lint": "eslint --cache src/**",
     "test": "vitest"
@@ -35,7 +35,7 @@
     "@vitest/coverage-c8": "^0.25.3",
     "eslint": "^8.28.0",
     "happy-dom": "^7.7.0",
-    "prettier": "2.8.0",
+    "prettier": "2.8.2",
     "tsup": "^6.5.0",
     "typescript": "^4.9.3",
     "vitest": "^0.25.3"
