@@ -38,6 +38,7 @@ export { config };
 
 const handler = createHandler({
   context: createNextAuthContext({
+    additionalContext: () => ({}),
     authOptions: { providers: authProviders },
     getUserPerms: () => [],
   }),
