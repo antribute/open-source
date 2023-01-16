@@ -10,6 +10,16 @@
   - 'pnpm-lock.yaml'
 'Package: Config':
   - 'packages/config/**'
+'Package: GraphQL Auth':
+  - 'packages/graphql-auth/**'
+'Package: GraphQL Axiom Logger':
+  - 'packages/graphql-logger-axiom/**'
+'Package: GraphQL NextJS':
+  - 'packages/graphql-nextjs/**'
+'Package: Pothos Utils':
+  - 'packages/utils-pothos/**'
+'Package: React Utils':
+  - 'packages/utils-react/**'
 'Package: Zephyr Core':
   - 'packages/zephyr-core/**'
 'Package: Zephyr React':

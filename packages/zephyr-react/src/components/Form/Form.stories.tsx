@@ -13,9 +13,9 @@ const SignUpSchema = z.object({
 });
 
 export const Default = () => {
-  function onSubmit() {
+  const onSubmit = () => {
     // gets typesafe data when form is submitted
-  }
+  };
 
   return (
     <Form

@@ -117,7 +117,7 @@ const BaseInputIconSlot = (
         draft.trailingWidthMap[index] = width;
       });
     }
-  }, [width]);
+  }, [index, position, setInputContainerWidth, width]);
 
   return (
     <BaseInputIconSlotElement
@@ -229,13 +229,25 @@ export const BaseInputContainer = ({
         })}
 
         {leading.map(({ content, ...props }, i) => (
-          <BaseInputIconSlot index={i} key={i} position="leading" {...props} size={size}>
+          <BaseInputIconSlot
+            index={i}
+            key={content?.toString()}
+            position="leading"
+            {...props}
+            size={size}
+          >
             {content}
           </BaseInputIconSlot>
         ))}
 
         {trailing.map(({ content, ...props }, i) => (
-          <BaseInputIconSlot index={i} key={i} position="trailing" {...props} size={size}>
+          <BaseInputIconSlot
+            index={i}
+            key={content?.toString()}
+            position="trailing"
+            {...props}
+            size={size}
+          >
             {content}
           </BaseInputIconSlot>
         ))}

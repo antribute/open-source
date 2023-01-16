@@ -1,13 +1,17 @@
 import { useTracking } from '@antribute/tracking';
 import Head from 'next/head';
 import Image from 'next/image';
+import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 
 function Home() {
+  const { data: session, status } = useSession();
   const track = useTracking();
   useEffect(() => {
-    track('index-view');
-  }, []);
+    if (status !== 'loading') {
+      track('index-view', { loggedIn: !!session?.user });
+    }
+  }, [session, status, track]);
   return (
     <>
       <Head>
@@ -18,7 +22,7 @@ function Home() {
         support the even better ideas"
         />
       </Head>
-      <div className="container mx-auto flex h-full min-h-screen flex-col items-center justify-center px-24 text-content-moderate dark:text-content-inverse-moderate">
+      <div className="text-content-moderate dark:text-content-inverse-moderate container mx-auto flex h-full min-h-screen flex-col items-center justify-center px-24">
         <div className="mb-16 flex items-center">
           <Image alt="" height="80" width="80" src="/icon.png" />
           <h1 className="ml-16 text-h2 font-heading sm:text-h1">Hello, World!</h1>

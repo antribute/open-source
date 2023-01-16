@@ -60,7 +60,7 @@ export function ToggleGroup(props: ToggleGroupProps) {
 
   const selectedIndex = useMemo(() => {
     return items.findIndex((e) => e.value === selectedValue);
-  }, [selectedValue]);
+  }, [items, selectedValue]);
 
   const handleValueChange = useCallback(
     (val: unknown) => {
@@ -89,7 +89,13 @@ export function ToggleGroup(props: ToggleGroupProps) {
     >
       {items.map((item, index) => {
         return (
-          <Item key={index} index={index} item={item} selectedIndex={selectedIndex} {...props} />
+          <Item
+            key={item.value}
+            index={index}
+            item={item}
+            selectedIndex={selectedIndex}
+            {...props}
+          />
         );
       })}
     </ToggleGroupElement>

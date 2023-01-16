@@ -2,10 +2,16 @@ const base = require('./eslint-base.cjs');
 
 module.exports = {
   extends: [
-    ...base.extends,
+    'airbnb',
+    'airbnb/hooks',
+    'airbnb-typescript',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
+    'plugin:@typescript-eslint/strict',
     'plugin:tailwindcss/recommended',
     'plugin:@next/next/recommended',
     'plugin:@next/next/core-web-vitals',
+    'prettier',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {

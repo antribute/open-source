@@ -1,12 +1,43 @@
+##############
+# Misc Files #
+##############
+
 # Core Monorepo Files
-.gitignore @jrkienle @tyler-mitchell
-.nvmrc @jrkienle @tyler-mitchell
+./.gitignore @jrkienle @tyler-mitchell
+./.nvmrc @jrkienle @tyler-mitchell
 ./package.json @jrkienle @tyler-mitchell
-pnpm-workspace.yaml @jrkienle @tyler-mitchell
-turbo.json @jrkienle @tyler-mitchell
+./pnpm-workspace.yaml @jrkienle @tyler-mitchell
+./turbo.json @jrkienle @tyler-mitchell
 
 # GitHub Actions Configurations
 .github/* @jrkienle
 
-# Configuration Change
-packages/config/* @jrkienle @tyler-mitchell
+############
+# Packages #
+############
+
+# Config
+./packages/config/* @jrkienle @tyler-mitchell
+
+# GraphQL
+./packages/graphql-auth/* @jrkienle
+./packages/graphql-logger-axiom/* @jrkienle
+./packages/graphql-nextjs/* @jrkienle
+
+# Tracking
+./packages/tracking/* @jrkienle
+
+# Utils
+./packages/utils-pothos/* @jrkienle
+./packages/utils-react @jrkienle @tyler-mitchell
+
+# Zephyr
+./packages/zephyr-core @tyler-mitchell
+./packages/zephyr-react @typer-mitchell
+
+########
+# Apps #
+########
+
+# Landing Page
+./apps/landing-page/* @jrkienle @tyler-mitchell

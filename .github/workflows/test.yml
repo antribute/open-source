@@ -31,8 +31,8 @@ jobs:
       - name: Upload GraphQL Auth0 Coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
-          files: ./packages/graphql-auth0/coverage/cobertura-coverage.xml
-          flags: graphql-auth0
+          files: ./packages/graphql-auth/coverage/cobertura-coverage.xml
+          flags: graphql-auth
           fail_ci_if_error: true
       - name: Upload GraphQL Logger Axiom to Codecov
         uses: codecov/codecov-action@v3

@@ -14,7 +14,7 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@antribute/graphql-auth0": "workspace:*",
+    "@antribute/graphql-auth": "workspace:*",
     "@antribute/graphql-logger-axiom": "workspace:*",
     "@antribute/graphql-nextjs": "workspace:*",
     "@antribute/tracking": "workspace:*",
@@ -24,6 +24,7 @@
     "@pothos/plugin-scope-auth": "^3.16.0",
     "graphql": "^16.6.0",
     "next": "13.0.5",
+    "next-auth": "^4.18.8",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },

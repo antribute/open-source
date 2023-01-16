@@ -78,6 +78,7 @@ export const RenderColorVariants = <T extends React.ComponentType>({
           <div>
             {render(
               <Element
+                // eslint-disable-next-line react/no-children-prop
                 children={noChildren ? undefined : capitalCase(color)}
                 {...elementProps}
                 {...{ [variantPropName]: color }}
