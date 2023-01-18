@@ -1,5 +1,5 @@
-import { createCtx } from '@antribute/utils-react';
 import mixpanel from 'mixpanel-browser';
+import { createContext, useContext } from 'react';
 
 import { buildLoggingPrefix } from './common';
 
@@ -8,10 +8,11 @@ export interface TrackingContext {
   token?: string | undefined;
 }
 
-const [useTrackingContext, TrackingContextProvider] = createCtx<TrackingContext>();
+const trackingContext = createContext<TrackingContext>({});
+const TrackingProvider = trackingContext.Provider;
 
 export const useTracking = () => {
-  const { globalParams, token } = useTrackingContext();
+  const { globalParams, token } = useContext(trackingContext);
   if (token) {
     mixpanel.init(token);
   }
@@ -26,4 +27,4 @@ export const useTracking = () => {
     });
   };
 };
-export { TrackingContextProvider as TrackingProvider };
+export { TrackingProvider };

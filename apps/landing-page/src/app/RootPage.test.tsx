@@ -2,13 +2,13 @@ import { TrackingProvider } from '@antribute/tracking';
 import { render, screen } from '@testing-library/react';
 import { describe, it } from 'vitest';
 
-import Home from './index.page';
+import RootPage from './RootPage';
 
-describe.skip('Home', () => {
+describe.skip('RootPage', () => {
   it('should include links to our LinkedIn and Twitter', () => {
     render(
       <TrackingProvider value={{}}>
-        <Home />
+        <RootPage />
       </TrackingProvider>
     );
     screen.getByText('LinkedIn');

@@ -1,10 +1,21 @@
 {
   "extends": "@antribute/config/tsconfig/tsconfig.nextjs.json",
-  "include": ["next-env.d.ts", "next-routes.d.ts", "src/**/*.ts", "src/**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "next-routes.d.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
   "exclude": ["node_modules"],
   "compilerOptions": {
     "baseUrl": "src",
     "incremental": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   }
 }
