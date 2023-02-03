@@ -1,0 +1,19 @@
+import { ArgsTable, Canvas, Description, Meta, Story } from '@storybook/addon-docs';
+
+import { Dialog } from '.';
+import * as stories from './Dialog.stories.tsx';
+
+<Meta title="Navigation/Dialog" component={Dialog} />
+
+# Dialog
+
+<Description component={Dialog} />
+<ArgsTable of={Dialog} />
+
+## Default
+
+Default `Dialog` component
+
+<Canvas withToolbar>
+  <Story name="Default" story={stories.Default} />
+</Canvas>
