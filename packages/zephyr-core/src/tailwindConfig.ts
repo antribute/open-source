@@ -185,6 +185,7 @@ const config: Config = {
     },
     fontWeight: {
       body: '400',
+      medium: '500',
       bold: '600',
       heading: '700',
     },
