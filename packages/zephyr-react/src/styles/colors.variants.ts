@@ -7,6 +7,9 @@ export const colorVariants = {
     positive: clsx('text-positive'),
     danger: clsx('text-danger'),
     caution: clsx('text-caution'),
+    weak: clsx('text-content dark:text-content-inverse'),
+    moderate: clsx('text-content-weak dark:text-content-inverse-weak'),
+    strong: clsx('text-content-strong dark:text-content-inverse-strong'),
   },
   bg: {
     primary: clsx('bg-primary'),
