@@ -8,7 +8,7 @@ export type InputLabelElementProps = React.ComponentProps<typeof InputLabelEleme
 const InputLabelElement = classed(
   'label',
   'text-content-strong dark:text-content-inverse-moderate',
-  'pb-4 text-sm inline-block  font-medium select-none text-gray-900 leading-xs  font-bold',
+  'pb-4 mb-2 text-sm inline-block  font-medium select-none text-gray-900 leading-xs',
   {
     variants: {
       hidden: {
@@ -63,7 +63,7 @@ const InputLabel = ({
 
 const OptionalLabelElement = classed(
   'span',
-  '"ml-4 float-right px-1 py-px font-medium bg-storm-50 bg-opacity-20 rounded  inline-block text-xs text-storm-200"'
+  'ml-4 float-right px-1 py-px font-medium bg-storm-50 bg-opacity-20 rounded  inline-block text-xs text-storm-200'
 );
 
 export default InputLabel;

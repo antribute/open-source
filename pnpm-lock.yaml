@@ -1,10 +1,5 @@
 lockfileVersion: 5.4
 
-patchedDependencies:
-  '@tw-classed/react@1.3.2':
-    hash: 2qq7a2kajzstsximtb2jg2ouky
-    path: patches/@tw-classed__react@1.3.2.patch
-
 importers:
   .:
     specifiers:
@@ -20,7 +15,7 @@ importers:
       prettier: 2.8.2
       rimraf: 3.0.2
       simple-git-hooks: 2.8.1
-      turbo: 1.7.2
+      turbo: 1.7.4
 
   apps/landing-page:
     specifiers:
@@ -399,7 +394,9 @@ importers:
       '@hookform/resolvers': ^2.9.10
       '@mdx-js/react': ^2.1.5
       '@radix-ui/react-checkbox': ^1.0.1
+      '@radix-ui/react-collapsible': ^1.0.1
       '@radix-ui/react-dialog': ^1.0.2
+      '@radix-ui/react-navigation-menu': ^1.1.1
       '@radix-ui/react-tabs': ^1.0.2
       '@radix-ui/react-toggle-group': ^1.0.1
       '@storybook/addon-actions': 7.0.0-beta.21
@@ -421,7 +418,7 @@ importers:
       '@storybook/types': 7.0.0-beta.21
       '@testing-library/react': ^13.4.0
       '@ts-react/form': ^1.0.8
-      '@tw-classed/react': 1.3.2
+      '@tw-classed/react': 1.4.2
       '@types/lodash-es': ^4.17.6
       '@types/react': 18.0.25
       '@types/react-dom': 18.0.9
@@ -455,11 +452,13 @@ importers:
       '@heroicons/react': 2.0.13_react@18.2.0
       '@hookform/resolvers': 2.9.10_react-hook-form@7.41.5
       '@radix-ui/react-checkbox': 1.0.1_biqbaboplfbrettd7655fr4n2y
+      '@radix-ui/react-collapsible': 1.0.1_biqbaboplfbrettd7655fr4n2y
       '@radix-ui/react-dialog': 1.0.2_2zx2umvpluuhvlq44va5bta2da
+      '@radix-ui/react-navigation-menu': 1.1.1_biqbaboplfbrettd7655fr4n2y
       '@radix-ui/react-tabs': 1.0.2_biqbaboplfbrettd7655fr4n2y
       '@radix-ui/react-toggle-group': 1.0.1_biqbaboplfbrettd7655fr4n2y
       '@ts-react/form': 1.0.10_jlien4vu7myxdssaos24l2dlmq
-      '@tw-classed/react': 1.3.2_2qq7a2kajzstsximtb2jg2ouky_react@18.2.0
+      '@tw-classed/react': 1.4.2_react@18.2.0
       change-case: 4.1.2
       clsx: 1.2.1
       immer: 9.0.17
@@ -471,6 +470,7 @@ importers:
       react-dom: 18.2.0_react@18.2.0
       react-hook-form: 7.41.5_react@18.2.0
       tailwind-merge: 1.8.1
+      type-fest: 3.5.1
       use-immer: 0.8.1_immer@9.0.17+react@18.2.0
       zod: 3.20.2
     devDependencies:
@@ -507,7 +507,6 @@ importers:
       prettier: 2.8.2
       storybook: 7.0.0-alpha.54_o4scbtliisanygemawej7x2d6i
       tsup: 6.5.0_k22f457wtryv7dv7ltdlwpdpdm
-      type-fest: 3.5.1
       typescript: 4.9.4
       vite: 4.0.4
       vite-tsconfig-paths: 3.6.0_vite@4.0.4
@@ -3449,6 +3448,28 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
+  /@radix-ui/react-collapsible/1.0.1_biqbaboplfbrettd7655fr4n2y:
+    resolution:
+      {
+        integrity: sha512-0maX4q91iYa4gjt3PsNf7dq/yqSR+HGAE8I5p54dQ6gnveS+ETWlMoijxrhmgV1k8svxpm34mQAtqIrJt4XZmA==,
+      }
+    peerDependencies:
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    dependencies:
+      '@babel/runtime': 7.20.7
+      '@radix-ui/primitive': 1.0.0
+      '@radix-ui/react-compose-refs': 1.0.0_react@18.2.0
+      '@radix-ui/react-context': 1.0.0_react@18.2.0
+      '@radix-ui/react-id': 1.0.0_react@18.2.0
+      '@radix-ui/react-presence': 1.0.0_biqbaboplfbrettd7655fr4n2y
+      '@radix-ui/react-primitive': 1.0.1_biqbaboplfbrettd7655fr4n2y
+      '@radix-ui/react-use-controllable-state': 1.0.0_react@18.2.0
+      '@radix-ui/react-use-layout-effect': 1.0.0_react@18.2.0
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
   /@radix-ui/react-collection/1.0.1_biqbaboplfbrettd7655fr4n2y:
     resolution:
       {
@@ -3592,6 +3613,34 @@ packages:
       '@babel/runtime': 7.20.7
       '@radix-ui/react-use-layout-effect': 1.0.0_react@18.2.0
       react: 18.2.0
+    dev: false
+
+  /@radix-ui/react-navigation-menu/1.1.1_biqbaboplfbrettd7655fr4n2y:
+    resolution:
+      {
+        integrity: sha512-Khgf+LwqYfUpbFAHcFPDMj6ZrWxnwCgC96liLYwE48x9YJbXGlutOWzZaSzrgl82xS+PwoPLQunfDe/i4ZITRA==,
+      }
+    peerDependencies:
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    dependencies:
+      '@babel/runtime': 7.20.7
+      '@radix-ui/primitive': 1.0.0
+      '@radix-ui/react-collection': 1.0.1_biqbaboplfbrettd7655fr4n2y
+      '@radix-ui/react-compose-refs': 1.0.0_react@18.2.0
+      '@radix-ui/react-context': 1.0.0_react@18.2.0
+      '@radix-ui/react-direction': 1.0.0_react@18.2.0
+      '@radix-ui/react-dismissable-layer': 1.0.2_biqbaboplfbrettd7655fr4n2y
+      '@radix-ui/react-id': 1.0.0_react@18.2.0
+      '@radix-ui/react-presence': 1.0.0_biqbaboplfbrettd7655fr4n2y
+      '@radix-ui/react-primitive': 1.0.1_biqbaboplfbrettd7655fr4n2y
+      '@radix-ui/react-use-callback-ref': 1.0.0_react@18.2.0
+      '@radix-ui/react-use-controllable-state': 1.0.0_react@18.2.0
+      '@radix-ui/react-use-layout-effect': 1.0.0_react@18.2.0
+      '@radix-ui/react-use-previous': 1.0.0_react@18.2.0
+      '@radix-ui/react-visually-hidden': 1.0.1_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /@radix-ui/react-portal/1.0.1_biqbaboplfbrettd7655fr4n2y:
@@ -3832,6 +3881,21 @@ packages:
       '@babel/runtime': 7.20.7
       '@radix-ui/react-use-layout-effect': 1.0.0_react@18.2.0
       react: 18.2.0
+    dev: false
+
+  /@radix-ui/react-visually-hidden/1.0.1_biqbaboplfbrettd7655fr4n2y:
+    resolution:
+      {
+        integrity: sha512-K1hJcCMfWfiYUibRqf3V8r5Drpyf7rh44jnrwAbdvI5iCCijilBBeyQv9SKidYNZIopMdCyR9FnIjkHxHN0FcQ==,
+      }
+    peerDependencies:
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    dependencies:
+      '@babel/runtime': 7.20.7
+      '@radix-ui/react-primitive': 1.0.1_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /@repeaterjs/repeater/3.0.4:
@@ -5438,25 +5502,24 @@ packages:
       zod: 3.20.2
     dev: false
 
-  /@tw-classed/core/1.3.2:
+  /@tw-classed/core/1.4.0:
     resolution:
       {
-        integrity: sha512-/Xx6X1xfHXhJY4IkZrudukDASJbW0zkArsgIFYHYO2PDpGbfpEpeQQrP/fqCWYKDPJXzalDjgDaCxTFu/01kkA==,
+        integrity: sha512-0D4+EREaHEZ5wfxoWNwe5tzpaUbac6xHYiuJGVgwuhCPzWP4H0IwxhW/3bU/SzvLZcwJsuQjZx72lxDnJUn1rw==,
       }
     dev: false
 
-  /@tw-classed/react/1.3.2_2qq7a2kajzstsximtb2jg2ouky_react@18.2.0:
+  /@tw-classed/react/1.4.2_react@18.2.0:
     resolution:
       {
-        integrity: sha512-KdIsDFkA7+cg49zikVSU8NJf81gtYnVwSnj8LFluxp/Luia95B9QPdNPftr3r6gd1dZz/5Pcz6TKvLmbM03GaQ==,
+        integrity: sha512-xzeY/lXvn4diIyt5S7jn7jcUnSqgHo3Gtcmy+iyaXLEY0c9/9r5+VJunZKmcaldDwX0DEFFOSc2xUY62MWaeQw==,
       }
     peerDependencies:
       react: '>=16.8.0'
     dependencies:
-      '@tw-classed/core': 1.3.2
+      '@tw-classed/core': 1.4.0
       react: 18.2.0
     dev: false
-    patched: true
 
   /@types/aria-query/5.0.1:
     resolution:
@@ -16697,10 +16760,10 @@ packages:
       safe-buffer: 5.2.1
     dev: true
 
-  /turbo-darwin-64/1.7.2:
+  /turbo-darwin-64/1.7.4:
     resolution:
       {
-        integrity: sha512-Sml3WR8MSu80W+gS8SnoKNImcDOlIX7zlvezzds65mW11yGniIFfZ18aKWGOm92Nj2SvXCQ2+UmyGghbFaHNmQ==,
+        integrity: sha512-ZyYrQlUl8K/mYN1e6R7bEhPPYjMakz0DYMaexkyD7TAijQtWmTSd4a+I7VknOYNEssnUZ/v41GU3gPV1JAzxxQ==,
       }
     cpu: [x64]
     os: [darwin]
@@ -16708,10 +16771,10 @@ packages:
     dev: true
     optional: true
 
-  /turbo-darwin-arm64/1.7.2:
+  /turbo-darwin-arm64/1.7.4:
     resolution:
       {
-        integrity: sha512-JnlgGLScboUJGJxvmSsF+5xkImEDTMPg2FHzX4n8AMB9az9ZlPQAMtc+xu4p6Xp9eaykKiV2RG81YS3H0fxDLA==,
+        integrity: sha512-CKIXg9uqp1a+Yeq/c4U0alPOqvwLUq5SBZf1PGYhGqJsfG0fRBtJfkUjHuBsuJIOGXg8rCmcGSWGIsIF6fqYuw==,
       }
     cpu: [arm64]
     os: [darwin]
@@ -16719,10 +16782,10 @@ packages:
     dev: true
     optional: true
 
-  /turbo-linux-64/1.7.2:
+  /turbo-linux-64/1.7.4:
     resolution:
       {
-        integrity: sha512-vbLJw6ovG+lpiPqxniscBjljKJ2jbsHuKp8uK4j/wqgp68wAVKeAZW77GGDAUgDb88XH6Kvhh2hcizL+iWduww==,
+        integrity: sha512-RIUl4RUFFyzD2T024vL7509Ygwcw+SEa8NOwPfaN6TtJHK7RZV/SBP3fLNVOptG9WRLnOWX3OvsLMbiOqDLLyA==,
       }
     cpu: [x64]
     os: [linux]
@@ -16730,10 +16793,10 @@ packages:
     dev: true
     optional: true
 
-  /turbo-linux-arm64/1.7.2:
+  /turbo-linux-arm64/1.7.4:
     resolution:
       {
-        integrity: sha512-zLnuS8WdHonKL74KqOopOH/leBOWumlVGF8/8hldbDPq0mwY+6myRR5/5LdveB51rkG4UJh/sQ94xV67tjBoyw==,
+        integrity: sha512-Bg65F0AjYYYxqE6RPf2H5TIGuA/EyWMeGOATHVSZOWAbYcnG3Ly03GZii8AHnUi7ntWBdjwvXf/QbOS1ayNB6A==,
       }
     cpu: [arm64]
     os: [linux]
@@ -16741,10 +16804,10 @@ packages:
     dev: true
     optional: true
 
-  /turbo-windows-64/1.7.2:
+  /turbo-windows-64/1.7.4:
     resolution:
       {
-        integrity: sha512-oE5PMoXjmR09okvVzteFb6FjA6yo+nMsacsgKH2yLNq4sOrVo9tG98JkRurOv5+L6ZQ3yGXPxWHiqeH7hLkAVQ==,
+        integrity: sha512-rTaV50XZ2BRxRHOHqt1UsWfeDmYLbn8UKE6g2D2ED+uW+kmnTvR9s01nmlGWd2sAuWcRYQyQ2V+O09VfKPKcQw==,
       }
     cpu: [x64]
     os: [win32]
@@ -16752,10 +16815,10 @@ packages:
     dev: true
     optional: true
 
-  /turbo-windows-arm64/1.7.2:
+  /turbo-windows-arm64/1.7.4:
     resolution:
       {
-        integrity: sha512-mdTUJk23acRv5qxA/yEstYhM1VFenVE3FDrssxGRFq7S80smtCGK1xUd4BEDDzDlVXOqBohmM5jRh9516rcjPQ==,
+        integrity: sha512-h8sxdKPvHTnWUPtwnYszFMmSO0P/iUUwmYY9n7iYThA71zSao28UeZ0H0Gw75cY3MPjvkjn2C4EBAUGPjuZJLw==,
       }
     cpu: [arm64]
     os: [win32]
@@ -16763,20 +16826,20 @@ packages:
     dev: true
     optional: true
 
-  /turbo/1.7.2:
+  /turbo/1.7.4:
     resolution:
       {
-        integrity: sha512-YR/x3GZEx0C1RV6Yvuw/HB1Ixx3upM6ZTTa4WqKz9WtLWN8u2g+u2h5KpG5YtjCS3wl/8zVXgHf2WiMK6KIghg==,
+        integrity: sha512-8RLedDoUL0kkVKWEZ/RMM70BvKLyDFen06QuKKhYC2XNOfNKqFDqzIdcY/vGick869bNIWalChoy4O07k0HLsA==,
       }
     hasBin: true
     requiresBuild: true
     optionalDependencies:
-      turbo-darwin-64: 1.7.2
-      turbo-darwin-arm64: 1.7.2
-      turbo-linux-64: 1.7.2
-      turbo-linux-arm64: 1.7.2
-      turbo-windows-64: 1.7.2
-      turbo-windows-arm64: 1.7.2
+      turbo-darwin-64: 1.7.4
+      turbo-darwin-arm64: 1.7.4
+      turbo-linux-64: 1.7.4
+      turbo-linux-arm64: 1.7.4
+      turbo-windows-64: 1.7.4
+      turbo-windows-arm64: 1.7.4
     dev: true
 
   /tweetnacl/0.14.5:
@@ -16865,7 +16928,7 @@ packages:
         integrity: sha512-70T99cpILFk2fzwuljwWxmazSphFrdOe3gRHbp6bqs71pxFBbJwFqnmkLO2lQL6aLHxHmYAnP/sL+AJWpT70jA==,
       }
     engines: { node: '>=14.16' }
-    dev: true
+    dev: false
 
   /type-is/1.6.18:
     resolution:

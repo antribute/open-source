@@ -8,7 +8,7 @@ export type StatusBadgeElementProps = React.ComponentProps<typeof StatusBadgeEle
 
 export const StatusBadgeElement = classed(
   'div',
-  'group inline-flex items-center gap-8 font-medium border border-storm-50 bg-white rounded-full select-none ',
+  'group inline-flex items-center gap-6 font-medium border border-white/10 bg-gradient-to-r from-white/5 via-white/5 to-transparent text-white rounded-full select-none ',
   {
     variants: {
       size: mergeVariants([
@@ -17,7 +17,7 @@ export const StatusBadgeElement = classed(
         inputComponentVariants.size.textSize,
       ]),
 
-      color: mergeVariants([colorVariants.border, colorVariants.text]),
+      color: mergeVariants([colorVariants.bg]),
 
       variant: {
         text: 'px-0 py-0 border-none bg-transparent',
@@ -33,23 +33,27 @@ export const StatusBadgeElement = classed(
   }
 );
 
-export const StatusBadgeDot = classed('div', 'rounded-full inline-block bg-red-500', {
-  variants: {
-    dotPosition: {
-      left: 'order-first',
-      right: 'order-last',
+export const StatusBadgeDot = classed(
+  'div',
+  'rounded-full inline-block border filter brightness-125 border-white border-opacity-10',
+  {
+    variants: {
+      dotPosition: {
+        left: 'order-first',
+        right: 'order-last',
+      },
+      size: {
+        xs: 'w-8 h-8',
+        sm: 'w-8 h-8',
+        md: 'w-10 h-10',
+        lg: 'w-10 h-10',
+        xl: 'w-14 h-14',
+      },
+      color: mergeVariants([colorVariants.bg, colorVariants.text]),
     },
-    size: {
-      xs: 'w-8 h-8',
-      sm: 'w-8 h-8',
-      md: 'w-10 h-10',
-      lg: 'w-10 h-10',
-      xl: 'w-14 h-14',
+    defaultVariants: {
+      dotPosition: 'left',
+      size: 'md',
     },
-    color: mergeVariants([colorVariants.bg, colorVariants.text]),
-  },
-  defaultVariants: {
-    dotPosition: 'left',
-    size: 'md',
-  },
-});
+  }
+);

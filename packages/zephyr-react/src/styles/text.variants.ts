@@ -1,13 +1,16 @@
-import { FontWeightProp } from 'types/styles';
+import clsx from 'clsx';
 
-export const fontWeightMap: Record<FontWeightProp, string> = {
-  extralight: 'font-extralight',
-  light: 'font-light',
-  thin: 'font-thin',
-  normal: 'font-normal',
-  medium: 'font-medium',
-  semibold: 'font-semibold',
-  bold: 'font-bold',
-  extrabold: 'font-extrabold',
-  black: 'font-black',
+export const textVariants = {
+  fontWeight: {
+    body: clsx('font-body'),
+    medium: clsx('font-medium'),
+    bold: clsx('font-bold'),
+    heading: clsx('font-heading'),
+  },
+  size: {
+    xs: clsx('text-xs'),
+    sm: clsx('text-sm'),
+    md: clsx('text-md'),
+    lg: clsx('text-lg'),
+  },
 };

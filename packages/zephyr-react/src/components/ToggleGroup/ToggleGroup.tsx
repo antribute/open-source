@@ -22,7 +22,7 @@ type ToggleGroupElementVariantProps = Classed.VariantProps<typeof ToggleGroupEle
 
 const ToggleGroupElement = classed(
   ToggleGroupPrimitive.ToggleGroup,
-  'inline-flex shadow-sm rounded-md overflow-hidden',
+  'inline-flex shadow-sm rounded-md',
   {
     variants: {
       fullWidth: {
@@ -86,6 +86,7 @@ export function ToggleGroup(props: ToggleGroupProps) {
       disabled={disabled}
       fullWidth={fullWidth}
       className={clsx(className)}
+      rovingFocus
     >
       {items.map((item, index) => {
         return (

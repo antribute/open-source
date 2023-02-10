@@ -13,6 +13,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint'],
   rules: {
+    'no-extra-boolean-cast': 'off',
     'no-param-reassign': 'off',
     'import/extensions': 'off',
     'import/prefer-default-export': 'off',

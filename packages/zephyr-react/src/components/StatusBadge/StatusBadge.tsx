@@ -8,7 +8,7 @@ export const StatusBadge = ({
 }: StatusBadgeElementProps) => {
   return (
     <StatusBadgeElement size={size} color={color} {...props}>
-      <StatusBadgeDot size={size} color={color} />
+      {/* <StatusBadgeDot size={size} color={color}  /> */}
       {children}
     </StatusBadgeElement>
   );

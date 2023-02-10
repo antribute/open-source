@@ -4,7 +4,7 @@ import { classedVariantMap, mergeVariants } from 'utils/classed';
 export const inputComponentVariants = classedVariantMap({
   size: {
     textSize: {
-      xs: 'text-sm',
+      xs: 'text-xs',
       sm: 'text-sm',
       md: 'text-md',
       lg: 'text-lg',

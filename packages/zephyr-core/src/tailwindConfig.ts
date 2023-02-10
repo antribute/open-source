@@ -7,6 +7,8 @@ import type { Config } from 'tailwindcss';
 // eslint-disable-next-line import/extensions
 import defaultTailwindTheme from 'tailwindcss/defaultTheme';
 import { colors as colorPalette } from './colors';
+import { keyframes } from './keyframes';
+import { animation } from './animation';
 
 export const create8PtGrid = (max = 512) => {
   const finalGrid: Record<string, string> = {
@@ -40,6 +42,8 @@ const config: Config = {
   darkMode: ['class', '[data-mode="dark"]'],
   theme: {
     ...defaultTailwindTheme,
+    keyframes,
+    animation,
     accentColor: ({ theme }) => ({
       ...theme('colors'),
       auto: 'auto',
@@ -89,7 +93,6 @@ const config: Config = {
       inherit: colors.inherit,
       current: colors.current,
       transparent: colors.transparent,
-      white: colors.white,
       ...colorPalette,
     }),
     divideColor: ({ theme }) => theme('borderColor'),
@@ -180,8 +183,8 @@ const config: Config = {
       h6: ['16px', { lineHeight: '24px' }],
       lg: ['21px', { lineHeight: '32px' }],
       md: ['16px', { lineHeight: '24px' }],
-      sm: ['12px', { lineHeight: '16px' }],
-      xs: ['10px', { lineHeight: '12px' }],
+      sm: ['14px', { lineHeight: '18px' }],
+      xs: ['12px', { lineHeight: '16px' }],
     },
     fontWeight: {
       body: '400',
@@ -259,6 +262,7 @@ const config: Config = {
       max: 'max-content',
       fit: 'fit-content',
       prose: '65ch',
+
       ...theme('spacing'),
       ...breakpoints(theme('screens')),
     }),

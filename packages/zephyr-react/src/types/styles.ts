@@ -1,6 +1,14 @@
 export type SizeProp = 'xs' | 'sm' | 'md' | 'lg';
 
-export type ColorProp = 'primary' | 'secondary' | 'positive' | 'danger' | 'caution';
+export type ColorProp =
+  | 'weak'
+  | 'moderate'
+  | 'strong'
+  | 'primary'
+  | 'secondary'
+  | 'positive'
+  | 'danger'
+  | 'caution';
 
 export type WidthProp = 'full' | 'fixed' | 'auto';
 

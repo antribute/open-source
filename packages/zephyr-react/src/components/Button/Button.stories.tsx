@@ -2,7 +2,25 @@ import { RenderColorVariants, RenderSizeVariants } from 'utils/storybook-utils';
 import { Button } from './Button';
 
 export const Default = () => {
-  return <RenderColorVariants Component={Button} props={{ children: 'Default' }} />;
+  return (
+    <RenderColorVariants
+      colors={[
+        'surface',
+        'surface-soft',
+        'surface-light',
+        'surface-dark',
+        'inverse',
+        'primary',
+        'secondary',
+        'positive',
+        'caution',
+        'danger',
+      ]}
+      showVariantLabel
+      Component={Button}
+      props={{ children: 'Default' }}
+    />
+  );
 };
 
 export const Contained = () => {

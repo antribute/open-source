@@ -1,6 +1,6 @@
 import { PaperElement, PaperElementVariantProps } from 'components/Paper/Paper.styles';
 
-type PaperProps = PaperElementVariantProps & {
+export type PaperProps = PaperElementVariantProps & {
   children?: React.ReactNode;
   className?: string;
   onClick?: () => void;

@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import { colorVariants } from 'styles/colors.variants';
 import { inputComponentVariants } from 'styles/input-component.variants';
-import { fontWeightMap } from 'styles/text.variants';
-import { Classed, classed, mergeVariants } from 'utils/classed';
+import { textVariants } from 'styles/text.variants';
+import { Classed, classTheme, classed, mergeVariants } from 'utils/classed';
 
 export type ButtonVariant = 'contained' | 'soft' | 'text' | 'outlined' | 'outlined-filled';
 
@@ -20,7 +20,7 @@ export const ButtonElement = classed(
         true: 'cursor-default',
       },
       size: mergeVariants(inputComponentVariants.size),
-      fontWeight: fontWeightMap,
+      fontWeight: textVariants.fontWeight,
       noWrap: {
         true: 'whitespace-nowrap',
       },
@@ -39,12 +39,14 @@ export const ButtonElement = classed(
         default: clsx('rounded-md'),
         full: clsx('rounded-full'),
       },
-      color: mergeVariants([
-        colorVariants.bg,
-        colorVariants.text,
-        colorVariants.border,
-        colorVariants.hoverDark,
-      ]),
+      color: {
+        ...mergeVariants([
+          colorVariants.bg,
+          colorVariants.text,
+          colorVariants.border,
+          colorVariants.hoverDark,
+        ]),
+      },
     },
 
     defaultVariants: {
@@ -57,10 +59,98 @@ export const ButtonElement = classed(
     },
 
     compoundVariants: [
-      // Contained Variant
-
       { variant: 'contained', class: 'text-white' },
       // --- Colors ---
+      {
+        variant: 'contained',
+        color: 'surface',
+        class: classTheme({
+          light: [
+            'bg-surface',
+            'hover:border-surface-moderate',
+            'hover:bg-surface-light',
+            'text-surface-inverse',
+          ],
+          dark: [
+            'dark:bg-surface-inverse',
+            'dark:hover:border-surface-inverse',
+            'dark:hover:bg-inverse',
+            'dark:text-surface',
+          ],
+        }),
+      },
+      {
+        variant: 'contained',
+        color: 'surface-soft',
+        class: classTheme({
+          light: [
+            'bg-surface-600',
+            'hover:border-surface-moderate',
+            'hover:bg-surface-light',
+            'text-surface-inverse-soft',
+          ],
+          dark: [
+            'dark:bg-surface-inverse-soft',
+            'dark:hover:border-surface-inverse-soft',
+            'dark:hover:bg-inverse-soft',
+            'dark:text-surface-soft',
+          ],
+        }),
+      },
+      {
+        variant: 'contained',
+        color: 'surface-light',
+        class: classTheme({
+          light: [
+            'bg-gray-100',
+            'hover:border-surface-moderate',
+            'hover:bg-surface-light',
+            'text-surface-inverse-light',
+          ],
+          dark: [
+            'dark:bg-surface-inverse-light',
+            'dark:hover:border-surface-inverse-light',
+            'dark:hover:bg-inverse-light',
+            'dark:text-surface-light',
+          ],
+        }),
+      },
+      {
+        variant: 'contained',
+        color: 'surface-dark',
+        class: classTheme({
+          light: [
+            'bg-surface-dark',
+            'hover:border-surface-moderate',
+            'hover:bg-surface-dark',
+            'text-surface-inverse-dark',
+          ],
+          dark: [
+            'dark:bg-surface-inverse-dark',
+            'dark:hover:bg-inverse-dark',
+            'dark:text-surface-dark',
+            'dark:border-surface-inverse-dark',
+          ],
+        }),
+      },
+      {
+        variant: 'contained',
+        color: 'inverse',
+        class: classTheme({
+          light: [
+            'bg-content-strong',
+            'hover:border-content-moderate',
+            'hover:bg-content-moderate',
+            'text-content-inverse-strong',
+          ],
+          dark: [
+            'dark:bg-content-inverse-strong',
+            'dark:hover:border-content-inverse-strong',
+            'dark:hover:bg-gray-soft',
+            'dark:text-content-strong',
+          ],
+        }),
+      },
       {
         variant: 'contained',
         color: 'primary',
@@ -84,7 +174,7 @@ export const ButtonElement = classed(
       {
         variant: 'contained',
         color: 'caution',
-        class: clsx('bg-caution hover:border-caution hover:bg-caution-dark'),
+        class: clsx('bg-caution hover:border-caution-dark hover:bg-caution-dark'),
       },
 
       // Text Variant

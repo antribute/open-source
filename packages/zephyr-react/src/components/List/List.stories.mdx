@@ -1,0 +1,16 @@
+import { ArgsTable, Canvas, Description, Meta, Story } from '@storybook/addon-docs';
+import { List } from '.';
+import * as stories from './List.stories.tsx';
+
+<Meta title="Surface/List" component={List} />
+
+# List
+
+<Description component={List} />
+<ArgsTable of={List} />
+
+## Default
+
+<Canvas withToolbar>
+  <Story name="Default" story={stories.Default} />
+</Canvas>

@@ -1,6 +1,8 @@
+import { LiteralUnion } from 'type-fest';
 import { VariantProps, classed } from '@tw-classed/react';
 import { capitalCase } from 'change-case';
 import { ColorProp, SizeProp } from 'types/styles';
+import { Text } from 'components/Text';
 
 type RenderVariantElementProps = Partial<VariantProps<typeof RenderVariantElement>>;
 
@@ -53,11 +55,11 @@ export const RenderSizeVariants = <T extends React.ComponentType>({
 };
 
 interface ColorSizeVariantProps<T extends React.ComponentType> extends RenderVariantBaseProps<T> {
-  colors?: ColorProp[];
+  colors?: LiteralUnion<ColorProp, string>[];
 }
 
 export const RenderColorVariants = <T extends React.ComponentType>({
-  colors = ['primary', 'secondary', 'caution', 'danger', 'positive'],
+  colors = ['weak', 'moderate', 'strong', 'primary', 'secondary', 'caution', 'danger', 'positive'],
   Component,
   noChildren,
   render = (children) => children,
@@ -76,6 +78,9 @@ export const RenderColorVariants = <T extends React.ComponentType>({
         const elementProps = getProps?.(color) ?? props;
         return (
           <div>
+            <Text className="my-8 block select-none" fontWeight="bold" color="weak" size="xs">
+              {capitalCase(color)}
+            </Text>
             {render(
               <Element
                 // eslint-disable-next-line react/no-children-prop
@@ -89,4 +94,12 @@ export const RenderColorVariants = <T extends React.ComponentType>({
       })}
     </RenderVariantElement>
   );
+};
+
+export const getStoryUrl = () => {
+  const searchParams = new URLSearchParams(window.location.search);
+
+  const id = searchParams.get('id') ?? '';
+
+  return `${window.location.protocol}//${window.location.host}/?path=/story/${id}`;
 };

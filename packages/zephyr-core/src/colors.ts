@@ -1,3 +1,4 @@
+import tailwindColors from 'tailwindcss/colors';
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 type ColorScaleKey = '50' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900';
@@ -12,23 +13,30 @@ type ColorProps<
   soft: TColorProp;
   dark: TColorProp;
   light: TColorProp;
+  primary?: TColorProp;
 } & TRecord;
 
+const body = '#F6F6F6' as const;
+
+const slate = generateColorGroup(tailwindColors.slate)({
+  DEFAULT: '500',
+  dark: '600',
+  light: '300',
+  soft: '100',
+});
+
 export const colors = {
-  body: 'white',
+  body,
+  black: '#000000',
+  white: '#FAFAFA',
   'body-inverted': '#0D0E11',
-  primary: generateColorGroup({
-    '50': '#f2fbf9',
-    '100': '#d4f3ec',
-    '200': '#a9e6da',
-    '300': '#6bcfc0',
-    '400': '#49b8ab',
-    '500': '#309c91',
-    '600': '#247d76',
-    '700': '#20655f',
-    '800': '#1e514e',
-    '900': '#1d4441',
-  })({ DEFAULT: '300', dark: '400', light: '200', soft: '50' }),
+
+  primary: generateColorGroup(tailwindColors.cyan)({
+    DEFAULT: '500',
+    dark: '600',
+    light: '300',
+    soft: '100',
+  }),
 
   secondary: generateColorGroup({
     '50': '#fdf5ef',
@@ -69,32 +77,21 @@ export const colors = {
     '900': '#8a121b',
   })({ DEFAULT: '500', dark: '600', light: '300', soft: '100' }),
 
-  positive: generateColorGroup({
-    '50': '#f0f9f2',
-    '100': '#daf1de',
-    '200': '#b8e2c1',
-    '300': '#89cc9b',
-    '400': '#4da167',
-    '500': '#369356',
-    '600': '#267543',
-    '700': '#1e5e37',
-    '800': '#1a4b2d',
-    '900': '#163e26',
-  })({ DEFAULT: '500', dark: '600', light: '300', soft: '100' }),
+  positive: generateColorGroup(tailwindColors.emerald)({
+    DEFAULT: '500',
+    dark: '600',
+    light: '300',
+    soft: '100',
+  }),
 
-  gray: generateColorGroup({
-    DEFAULT: '#EAF0F5',
-    '50': '#F2F8FC',
-    '100': '#EAF0F5',
-    '200': '#C7D5E0',
-    '300': '#A3B9CC',
-    '400': '#859DB1',
-    '500': '#688196',
-    '600': '#4F6577',
-    '700': '#384957',
-    '800': '#202C36',
-    '900': '#181F26',
-  })({ DEFAULT: '300', dark: '400', light: '200', soft: '100' }),
+  gray: generateColorGroup(tailwindColors.gray)({
+    DEFAULT: '500',
+    dark: '600',
+    light: '300',
+    soft: '100',
+  }),
+
+  slate,
 
   light: generateColorGroup({
     '50': '#FBFBFB',
@@ -122,37 +119,12 @@ export const colors = {
     '900': '#1B1D21',
   })({ DEFAULT: '500', dark: '600', light: '300', soft: '100' }),
 
-  'black-alpha': generateColorGroup({
-    '50': 'rgba(21, 24, 30, 0.04)',
-    '100': 'rgba(21, 24, 30, 0.06)',
-    '200': 'rgba(21, 24, 30, 0.08)',
-    '300': 'rgba(21, 24, 30, 0.16)',
-    '400': 'rgba(21, 24, 30, 0.24)',
-    '500': 'rgba(21, 24, 30, 0.36)',
-    '600': 'rgba(21, 24, 30, 0.48)',
-    '700': 'rgba(21, 24, 30, 0.64)',
-    '800': 'rgba(21, 24, 30, 0.84)',
-    '900': 'rgba(21, 24, 30, 0.96)',
-  })({ DEFAULT: '500', dark: '600', light: '400', soft: '100' }),
-
-  'white-alpha': generateColorGroup({
-    '50': 'rgba(227, 229, 232, 0.04)',
-    '100': 'rgba(227, 229, 232, 0.06)',
-    '200': 'rgba(227, 229, 232, 0.08)',
-    '300': 'rgba(227, 229, 232, 0.16)',
-    '400': 'rgba(227, 229, 232, 0.24)',
-    '500': 'rgba(227, 229, 232, 0.36)',
-    '600': 'rgba(227, 229, 232, 0.48)',
-    '700': 'rgba(227, 229, 232, 0.52)',
-    '800': 'rgba(227, 229, 232, 0.72)',
-    '900': 'rgba(227, 229, 232, 0.92)',
-  })({ DEFAULT: '500', dark: '600', light: '300', soft: '100' }),
-
   content: {
     DEFAULT: '#15181ef5',
     weak: '#15181ea3',
     moderate: '#15181ed6',
     strong: '#15181E',
+    muted: slate['300'],
   },
 
   'content-inverse': {
@@ -160,8 +132,8 @@ export const colors = {
     weak: '#e3e5e885',
     moderate: '#e3e5e8b8',
     strong: '#ffffff',
-    positive: '#7BCC7E',
-    negative: '#E08787',
+    // positive: '#7BCC7E',
+    // negative: '#E08787',
   },
 
   divider: {
@@ -178,22 +150,9 @@ export const colors = {
     strong: '#535965',
   },
 
-  // surface: {
-  //   // DEFAULT: '#FFFFFF',
-  //   // primary: '#FFFFFF',
-  //   // secondary: '#D3D5D9',
-  //   // tertiary: '#EEEFF1',
-  //   // highlight: '#E3E5E8',
-
-  //   DEFAULT: '#FFFFFF',
-  //   primary: '#FFFFFF',
-  //   secondary: '#e4e5e7',
-  //   subtle: '#f7f8f8',
-  //   highlight: '#E3E5E8',
-  // },
-
   surface: generateColorGroup({
-    '50': '#FFFFFF',
+    DEFAULT: '#FFFFFF',
+    '50': '#F3F3F3',
     '100': '#FCFCFD',
     '200': '#F9FAFA',
     '300': '#F7F7F8',
@@ -203,7 +162,7 @@ export const colors = {
     '700': '#DEE0E4',
     '800': '#D2D6DA',
     '900': '#CACED4',
-  })({ DEFAULT: '50', dark: '700', light: '400', soft: '300' }),
+  })({ DEFAULT: 'DEFAULT', dark: '700', light: '400', soft: '300' }),
 
   'surface-inverse': generateColorGroup({
     '50': '#384252',
@@ -216,7 +175,7 @@ export const colors = {
     '700': '#111318',
     '800': '#0D0E12',
     '900': '#0B0C0F',
-  })({ DEFAULT: '500', dark: '700', light: '300', soft: '400' }),
+  })({ DEFAULT: '400', dark: '500', light: '300', soft: '700' }),
 
   distinct: {
     '1': '#19196B',
@@ -234,14 +193,14 @@ export const colors = {
 } satisfies Record<string, string | Record<string, string>>;
 
 function generateColorGroup<T extends ColorScale>(colorGroup: T) {
-  return (props: ColorProps<keyof T>) => {
+  return <TProps extends ColorProps<keyof T>>(props: TProps) => {
     const resolvedColorEntries = Object.entries(props).map(([k, v]) => {
       const val = colorGroup[v as keyof typeof colorGroup];
       return [k, val];
     });
 
     return {
-      ...Object.fromEntries(resolvedColorEntries),
+      ...(Object.fromEntries(resolvedColorEntries) as Record<keyof TProps, string>),
       ...colorGroup,
     };
   };

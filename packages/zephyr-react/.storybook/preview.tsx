@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import '@antribute/zephyr-core/zephyr-core.css';
-import { GlobalTypes } from '@storybook/types';
-import type { Decorator, Parameters } from '@storybook/react';
+import { API_Layout, GlobalTypes } from '@storybook/types';
+import type { Decorator } from '@storybook/react';
 import { colors } from '@antribute/zephyr-core';
 
 const LIGHT_MODE = 'light';
@@ -24,10 +24,16 @@ export const globalTypes: GlobalTypes = {
   },
 };
 
+type Parameters = Record<string, any> & {
+  options: Partial<API_Layout>;
+};
+
 export const parameters: Parameters = {
   layout: 'fullScreen',
   actions: { argTypesRegex: '^on[A-Z].*' },
-
+  options: {
+    showPanel: false,
+  },
   controls: {
     matchers: {
       color: /(background|color)$/i,

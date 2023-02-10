@@ -8,7 +8,7 @@ export const PaperElement = classed(
   'div',
 
   classTheme({
-    class: 'bg-surface inline-block rounded-md hover:bg-surface-elevated text-left',
+    class: 'group bg-surface inline-block rounded-md hover:bg-surface-elevated text-left ',
     light: 'text-content-moderate',
     dark: 'dark:text-content-inverse-moderate',
   }),
@@ -39,24 +39,42 @@ export const PaperElement = classed(
         }),
       },
       color: {
-        default: classTheme({
-          light: 'bg-surface border-black-alpha-200',
-          dark: 'dark:bg-surface-inverse dark:border-white-alpha-soft',
+        surface: classTheme({
+          light: 'bg-surface border-black/25 hover:bg-surface-soft',
+          dark: 'dark:bg-surface-inverse dark:border-white/5',
         }),
-        secondary: classTheme({
-          light: 'bg-surface-700 border-black-alpha-50',
-          dark: 'dark:bg-surface-inverse-light dark:border-white-alpha-soft',
+        'surface-light': classTheme({
+          light: 'bg-surface-700 border-black/25 hover:bg-surface-soft',
+          dark: 'dark:bg-surface-inverse-light dark:border-white/5',
         }),
-        tertiary: classTheme({
-          light: 'bg-surface-light border-black-alpha-soft',
-          dark: 'dark:bg-surface-inverse-dark dark:border-white-alpha-soft',
+        'surface-dark': classTheme({
+          light: 'bg-surface-light border-black/25',
+          dark: 'dark:bg-surface-inverse-dark dark:border-white/5',
         }),
       },
     },
     defaultVariants: {
       padding: 'md',
-      color: 'default',
-      border: true,
+      color: 'surface',
+      border: false,
     },
+
+    compoundVariants: [
+      {
+        color: 'surface',
+        hoverHighlight: true,
+        class: 'hover:bg-surface-soft dark:hover:bg-surface-inverse-600',
+      },
+      {
+        color: 'surface-light',
+        hoverHighlight: true,
+        class: 'hover:bg-surface-soft dark:hover:bg-surface-inverse-500',
+      },
+      {
+        color: 'surface-dark',
+        hoverHighlight: true,
+        class: 'hover:bg-surface-light dark:hover:bg-surface-inverse-700',
+      },
+    ],
   }
 );

@@ -22,6 +22,8 @@ module.exports = {
     'react/function-component-definition': 'off',
     'react/require-default-props': 'off',
     'react/jsx-props-no-spreading': 'off',
+    // This makes typings for `@tw-classed/react` work
+    '@typescript-eslint/no-unsafe-assignment': 'off',
 
     // This allows us to import devdeps in tests
     'import/no-extraneous-dependencies': [

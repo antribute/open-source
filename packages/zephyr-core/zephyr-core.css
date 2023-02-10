@@ -7,3 +7,7 @@
 body {
   @apply text-content dark:text-content-inverse;
 }
+
+*:focus {
+  @apply outline-none ring-2 ring-content-strong dark:ring-content-inverse-weak;
+}

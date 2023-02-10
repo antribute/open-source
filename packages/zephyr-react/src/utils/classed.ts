@@ -1,16 +1,21 @@
 import { ClassedVariantMap } from 'types/styles';
 import { twMerge } from 'tailwind-merge';
 import { mergeWith } from 'lodash-es';
-
-import { createClassed } from '@tw-classed/react';
+import { createClassed, deriveClassed } from '@tw-classed/react';
 import type * as Classed from '@tw-classed/react';
 import clsx, { ClassValue } from 'clsx';
 
 export type { ClassedFunctionProxy, ClassedProxyFunctionType } from '@tw-classed/react';
 
+type ElementType = any extends Classed.ClassedComponentType<infer G> ? G : never;
+
+export type ClassedComponentTypeProps<
+  TElementType extends ElementType,
+  TProps extends object = object
+> = Classed.ComponentProps<Classed.ClassedComponentType<TElementType, TProps>>;
 const { classed } = createClassed({ merger: twMerge });
 
-export { classed, Classed };
+export { classed, deriveClassed, Classed };
 
 export const classedVariantMap = <T extends ClassedVariantMap>(variantMap: T) => variantMap;
 
