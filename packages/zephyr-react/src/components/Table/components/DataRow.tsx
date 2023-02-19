@@ -1,6 +1,7 @@
 import { useTableContext } from 'components/Table/Table.context';
 import { getTableMeta } from 'components/Table/helpers';
 import { classed } from 'utils/classed';
+import React from 'react';
 import { Row } from '../Table.types';
 
 const DataRowElement = classed('tr', {
@@ -15,7 +16,7 @@ type DataRowProps = {
   row: Row;
 } & React.ComponentProps<typeof DataRowElement>;
 
-export const DataRow = ({ row, ...props }: DataRowProps) => {
+export const DataRow = React.memo(({ row, ...props }: DataRowProps) => {
   const { table } = useTableContext();
   const { onRowClick } = getTableMeta(table) ?? {};
 
@@ -34,4 +35,4 @@ export const DataRow = ({ row, ...props }: DataRowProps) => {
       {...props}
     />
   );
-};
+});

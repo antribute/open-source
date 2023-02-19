@@ -16,8 +16,8 @@ export const TableContainer = forwardRef<HTMLDivElement, TableContainerElementPr
 
     console.log('HEIGHT', height);
     return (
-      <div className="h-full w-full" ref={observe}>
-        <TableContainerElement {...props} ref={forwardedRef} style={{ height }} />
+      <div className="h-full w-full py-16" ref={observe}>
+        <TableContainerElement {...props} ref={forwardedRef} className="h-400" />
       </div>
     );
   }

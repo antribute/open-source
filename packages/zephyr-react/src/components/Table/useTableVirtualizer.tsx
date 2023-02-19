@@ -19,7 +19,9 @@ export function useTableVirtualizer({ rows, virtualizerProps }: UseTableVirtuali
     count: rows.length,
     getScrollElement: () => tableContainerRef.current,
     overscan: 10,
-    estimateSize: () => 50,
+    // Note: Without this, an infinite re-render at cetain parts occurs while at certain
+    scrollPaddingEnd: 2,
+    estimateSize: () => 64,
   });
 
   const { getVirtualItems, getTotalSize } = rowVirtualizer;

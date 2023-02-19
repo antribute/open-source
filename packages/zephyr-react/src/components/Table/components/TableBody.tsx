@@ -17,13 +17,13 @@ export const TableBody = ({ tablePadding, children, ...props }: TableBodyProps) 
     <TableBodyElement {...props}>
       {paddingTop > 0 && (
         <tr>
-          <td style={{ height: `${paddingTop + 10}px` }} />
+          <td style={{ height: `${paddingTop}px` }} />
         </tr>
       )}
       {children}
       {paddingBottom > 0 && (
         <tr>
-          <td style={{ height: `${paddingBottom + 10}px` }} />
+          <td style={{ height: `${paddingBottom}px` }} />
         </tr>
       )}
     </TableBodyElement>

@@ -63,7 +63,7 @@ export const Table = <T,>({ ...props }: TableProps<T>) => {
 
   return (
     <TableProvider value={ctx}>
-      <TableContainer ref={tableContainerRef}>
+      <div className="h-400 overflow-auto" ref={tableContainerRef}>
         <TableElement>
           <THeaderElement>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -94,7 +94,7 @@ export const Table = <T,>({ ...props }: TableProps<T>) => {
             })}
           </TableBody>
         </TableElement>
-      </TableContainer>
+      </div>
     </TableProvider>
   );
 };
