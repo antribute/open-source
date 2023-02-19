@@ -1,21 +1,21 @@
 import { RenderColorVariants, RenderSizeVariants } from 'utils/storybook-utils';
 import { Button } from './Button';
 
+const colors = [
+  'neutral',
+  'surface',
+  'inverse',
+  'primary',
+  'secondary',
+  'positive',
+  'caution',
+  'danger',
+];
+
 export const Default = () => {
   return (
     <RenderColorVariants
-      colors={[
-        'surface',
-        'surface-soft',
-        'surface-light',
-        'surface-dark',
-        'inverse',
-        'primary',
-        'secondary',
-        'positive',
-        'caution',
-        'danger',
-      ]}
+      colors={colors}
       showVariantLabel
       Component={Button}
       props={{ children: 'Default' }}
@@ -33,24 +33,41 @@ export const Contained = () => {
 };
 
 export const Soft = () => {
-  return <RenderSizeVariants Component={Button} props={{ children: 'Soft', variant: 'soft' }} />;
+  return (
+    <RenderColorVariants
+      colors={colors}
+      Component={Button}
+      props={{ children: 'Contained', variant: 'soft' }}
+    />
+  );
 };
 
 export const Outlined = () => {
   return (
-    <RenderSizeVariants Component={Button} props={{ children: 'Outlined', variant: 'outlined' }} />
+    <RenderColorVariants
+      colors={colors}
+      Component={Button}
+      props={{ children: 'Outlined', variant: 'outlined' }}
+    />
   );
 };
 
 export const OutlinedFilled = () => {
   return (
-    <RenderSizeVariants
+    <RenderColorVariants
+      colors={colors}
       Component={Button}
-      props={{ children: 'Outlined Filled', variant: 'outlined-filled' }}
+      props={{ children: 'Outlined', variant: 'outlined-filled' }}
     />
   );
 };
 
 export const Text = () => {
-  return <RenderSizeVariants Component={Button} props={{ children: 'Text', variant: 'text' }} />;
+  return (
+    <RenderColorVariants
+      colors={colors}
+      Component={Button}
+      props={{ children: 'Text', variant: 'text' }}
+    />
+  );
 };

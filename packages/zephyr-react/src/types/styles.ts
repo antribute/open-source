@@ -1,6 +1,7 @@
 export type SizeProp = 'xs' | 'sm' | 'md' | 'lg';
 
 export type ColorProp =
+  | 'neutral'
   | 'weak'
   | 'moderate'
   | 'strong'

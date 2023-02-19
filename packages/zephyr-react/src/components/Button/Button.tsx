@@ -1,7 +1,11 @@
-import { ButtonElement, ButtonElementProps } from 'components/Button/Button.styles';
+import { deriveClassed } from '@tw-classed/react';
+import { ButtonElement, ButtonElementVariantProps } from 'components/Button/Button.styles';
+import React from 'react';
 
-export type ButtonProps = ButtonElementProps;
+export type ButtonProps = React.ComponentProps<typeof Button>;
 
-export const Button = ({ variant = 'contained', ...props }: ButtonProps) => {
-  return <ButtonElement variant={variant} {...props} />;
-};
+export const Button = deriveClassed<typeof ButtonElement, ButtonElementVariantProps>(
+  ({ variant = 'contained', ...props }, ref) => {
+    return <ButtonElement variant={variant} {...props} ref={ref} />;
+  }
+);

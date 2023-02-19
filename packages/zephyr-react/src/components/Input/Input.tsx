@@ -1,6 +1,11 @@
 import { forwardRef } from 'react';
 import { InputContainer, InputContainerProps } from 'components/Input/InputContainer';
-import { BaseInput, BaseInputProps } from 'components/BaseInput/BaseInput';
+import {
+  BaseInput,
+  BaseInputProps,
+  BaseInputSelect,
+  BaseInputSelectProps,
+} from 'components/BaseInput';
 import { InputComponentStateMessageProps } from 'types/input-component.types';
 import { useInputProps } from 'components/Input/useInputProps';
 
@@ -11,8 +16,21 @@ export type InputProps = InputComponentStateMessageProps &
 export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const { inputContainerProps, inputComponentProps } = useInputProps(props);
   return (
-    <InputContainer {...props} {...inputContainerProps}>
+    <InputContainer {...inputContainerProps}>
       <BaseInput {...props} ref={ref} {...inputComponentProps} />
     </InputContainer>
   );
 });
+
+export type InputSelectProps = BaseInputSelectProps;
+
+export const InputSelect = forwardRef<HTMLButtonElement, BaseInputSelectProps>(
+  ({ ...props }, ref) => {
+    const { inputContainerProps, inputComponentProps } = useInputProps(props);
+    return (
+      <InputContainer {...inputContainerProps}>
+        <BaseInputSelect {...props} ref={ref} {...inputComponentProps} width="fixed" />
+      </InputContainer>
+    );
+  }
+);

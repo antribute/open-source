@@ -1,77 +1,33 @@
-import React, { useId } from 'react';
+import React from 'react';
 import { BaseInputContainer } from 'components/BaseInput/BaseInputContainer';
-import { getInputComponentFieldTypeProps } from 'constants/input-component-field-type-map';
+import { classed } from 'utils/classed';
 import {
   InputAddonSlotProps,
   InputComponentProps,
   InputComponentStateMessagePair,
-  OmitHtmlInputComponentProps,
 } from 'types/input-component.types';
-import {
-  BaseInputElement,
-  BaseInputElementProps,
-  BaseInputElementVariantProps,
-} from './BaseInput.styles';
 
-export type BaseInputProps = OmitHtmlInputComponentProps<BaseInputElementProps> &
-  InputComponentProps &
+import { useBaseInputProps } from 'components/BaseInput/useBaseInputProps';
+import { PrimitiveBaseInput } from 'components/BaseInput/PrimitiveBaseInput';
+import { BaseInputElementVariantProps } from './BaseInput.styles';
+
+export type BaseInputBaseProps = { focusElementOnClick?: boolean } & InputComponentProps &
   InputAddonSlotProps &
-  BaseInputElementVariantProps &
-  Omit<InputComponentStateMessagePair, 'message'>;
+  Omit<InputComponentStateMessagePair, 'message'> &
+  BaseInputElementVariantProps;
 
-export const BaseInput = React.forwardRef<HTMLInputElement, BaseInputProps>((props, ref) => {
-  const {
-    name,
-    type,
-    id: idProp,
-    size = 'md',
-    width = 'fixed',
-    leadingIcon: leadingIconProp,
-    trailingIcon: trailingIconProp,
-    inlineLeadingAddonSlot,
-    inlineTrailingAddonSlot,
-  } = props;
+export type BaseInputProps = React.ComponentProps<typeof BaseInput>;
 
-  const generatedId = useId();
-
-  const id = idProp ?? generatedId;
-
-  const { leadingIcon, trailingIcon, htmlInputComponentProps } = getInputComponentFieldTypeProps({
-    type,
-    leadingIcon: leadingIconProp,
-    trailingIcon: trailingIconProp,
-  });
+export const BaseInput = React.forwardRef<HTMLInputElement, BaseInputBaseProps>((props, ref) => {
+  const { inputContainerProps, baseInputElementProps } = useBaseInputProps(props);
 
   return (
     <BaseInputContainer
-      size={size}
-      width={width}
-      leadingIcon={leadingIcon}
-      trailingIcon={trailingIcon}
-      inputState={props.inputState}
-      inlineLeadingAddonSlot={inlineLeadingAddonSlot}
-      inlineTrailingAddonSlot={inlineTrailingAddonSlot}
+      {...inputContainerProps}
+      width={baseInputElementProps.width === 'full' ? 'full' : 'auto'}
+      ref={ref}
     >
-      {({ leadingIconWidth: startIconWidth, trailingIconWidth: endIconWidth }) => (
-        <BaseInputElement
-          name={name}
-          id={id}
-          size={size}
-          autoComplete="off"
-          formNoValidate
-          {...props}
-          {...htmlInputComponentProps}
-          ref={ref}
-          style={{
-            paddingLeft: startIconWidth(5),
-            paddingRight: endIconWidth(5),
-          }}
-          onWheel={(e) => {
-            // Disables value changing when scrolling over input
-            e.currentTarget.blur();
-          }}
-        />
-      )}
+      {({ ref }) => <PrimitiveBaseInput {...baseInputElementProps} ref={ref} />}
     </BaseInputContainer>
   );
 });

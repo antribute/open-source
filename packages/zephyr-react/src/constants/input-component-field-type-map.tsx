@@ -79,6 +79,10 @@ const inputComponentFieldTypeMap: InputComponentFieldTypeMap = {
   },
 };
 
+export type GetInputComponentFieldTypePropsOptions = {
+  type: InputComponentFieldType | undefined;
+} & Pick<InputComponentProps, 'leadingIcon' | 'trailingIcon'>;
+
 export const getInputComponentFieldTypeProps = ({
   type,
   ...props

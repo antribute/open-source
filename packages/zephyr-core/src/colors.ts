@@ -1,20 +1,27 @@
 import tailwindColors from 'tailwindcss/colors';
+import type { LiteralUnion, FixedLengthArray } from 'type-fest';
+
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-type ColorScaleKey = '50' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900';
 
-type ColorScale = Record<ColorScaleKey, string>;
+const colorScaleKeys = [
+  '50',
+  '100',
+  '200',
+  '300',
+  '400',
+  '500',
+  '600',
+  '700',
+  '800',
+  '900',
+] as const;
 
-type ColorProps<
-  TColorProp,
-  TRecord extends Record<string, TColorProp> = Record<string, TColorProp>
-> = {
-  DEFAULT: TColorProp;
-  soft: TColorProp;
-  dark: TColorProp;
-  light: TColorProp;
-  primary?: TColorProp;
-} & TRecord;
+type ColorScaleKey = (typeof colorScaleKeys)[number];
+
+type ColorGroup = Record<LiteralUnion<ColorScaleKey, 'string'>, string>;
+
+type ColorPropKey = 'DEFAULT' | 'soft' | 'dark' | 'light';
 
 const body = '#F6F6F6' as const;
 
@@ -31,10 +38,21 @@ export const colors = {
   white: '#FAFAFA',
   'body-inverted': '#0D0E11',
 
-  primary: generateColorGroup(tailwindColors.cyan)({
-    DEFAULT: '500',
-    dark: '600',
+  primary: generateColorGroup({
+    '50': '#f6f7f9',
+    '100': '#eceef2',
+    '200': '#d4dae3',
+    '300': '#afbaca',
+    '400': '#8495ac',
+    '500': '#657892',
+    '600': '#506079',
+    '700': '#414e63',
+    '800': '#384252',
+    '900': '#333b47',
+  })({
     light: '300',
+    DEFAULT: '800',
+    dark: '900',
     soft: '100',
   }),
 
@@ -150,50 +168,70 @@ export const colors = {
     strong: '#535965',
   },
 
-  surface: generateColorGroup({
-    DEFAULT: '#FFFFFF',
-    '50': '#F3F3F3',
-    '100': '#FCFCFD',
-    '200': '#F9FAFA',
-    '300': '#F7F7F8',
-    '400': '#F4F5F6',
-    '500': '#F1F2F4',
-    '600': '#E9EAED',
-    '700': '#DEE0E4',
-    '800': '#D2D6DA',
-    '900': '#CACED4',
-  })({ DEFAULT: 'DEFAULT', dark: '700', light: '400', soft: '300' }),
+  surface: generateColorGroup(
+    arrayToColorGroup([
+      '#ffffff',
+      '#f5f7f9',
+      '#eceff3',
+      '#e3e7ed',
+      '#dae0e8',
+      '#d3dae4',
+      '#ccd5e0',
+      '#c5d0de',
+      '#bfccdb',
+      '#b9c8d9',
+    ])
+  )({ DEFAULT: '50', dark: '600', light: '400', soft: '200' }),
 
-  'surface-inverse': generateColorGroup({
-    '50': '#384252',
-    '100': '#2E3542',
-    '200': '#262B36',
-    '300': '#22262F',
-    '400': '#1A1D23',
-    '500': '#15181E',
-    '600': '#13161B',
-    '700': '#111318',
-    '800': '#0D0E12',
-    '900': '#0B0C0F',
-  })({ DEFAULT: '400', dark: '500', light: '300', soft: '700' }),
+  'surface-neutral': generateColorGroup({
+    DEFAULT: '#384252',
+    ...arrayToColorGroup([
+      '#506079',
+      '#4b5970',
+      '#455267',
+      '#404c5f',
+      '#3b4556',
+      '#374151',
+      '#36404e',
+      '#353e4c',
+      '#343d49',
+      '#333b47',
+    ]),
+  })({ DEFAULT: 'DEFAULT', dark: '700', light: '300', soft: '100' }),
+
+  'surface-inverse': generateColorGroup(
+    arrayToColorGroup([
+      '#2d3542',
+      '#282f3a',
+      '#232832',
+      '#1e222a',
+      '#1a1d23',
+      '#181b21',
+      '#171a20',
+      '#16181e',
+      '#14171d',
+      '#13151b',
+    ])
+  )({ DEFAULT: '400', dark: '700', light: '300', soft: '900' }),
 
   distinct: {
-    '1': '#19196B',
-    '2': '#296218',
-    '3': '#EB5528',
-    '4': '#F9D849',
-    '5': '#74FB4C',
-    '7': '#EB33F8',
-    '8': '#F4B9C2',
-    '9': '#000000',
-    '10': '#EF8733',
-    '11': '#75140C',
-    '12': '#808080',
+    '1': tailwindColors.blue['500'],
+    '2': tailwindColors.emerald['500'],
+    '3': tailwindColors.orange['500'],
+    '4': tailwindColors.fuchsia['500'],
+    '5': tailwindColors.cyan['500'],
+    '6': tailwindColors.red['500'],
+    '7': tailwindColors.yellow['500'],
+    '8': tailwindColors.pink['500'],
+    '9': tailwindColors.violet['500'],
+    '10': tailwindColors.rose['500'],
+    '11': tailwindColors.zinc['500'],
+    '12': tailwindColors.slate['500'],
   },
 } satisfies Record<string, string | Record<string, string>>;
 
-function generateColorGroup<T extends ColorScale>(colorGroup: T) {
-  return <TProps extends ColorProps<keyof T>>(props: TProps) => {
+function generateColorGroup<TColorGroup extends ColorGroup>(colorGroup: TColorGroup) {
+  return <TProps extends Record<ColorPropKey, keyof TColorGroup>>(props: TProps) => {
     const resolvedColorEntries = Object.entries(props).map(([k, v]) => {
       const val = colorGroup[v as keyof typeof colorGroup];
       return [k, val];
@@ -204,4 +242,14 @@ function generateColorGroup<T extends ColorScale>(colorGroup: T) {
       ...colorGroup,
     };
   };
+}
+
+type ColorGroupArray = FixedLengthArray<string, 10>;
+
+function arrayToColorGroup(colorArr: ColorGroupArray): ColorGroup {
+  const entries = colorArr.map(
+    (color, index) => [colorScaleKeys[index]!, color] as [ColorScaleKey, string]
+  );
+
+  return Object.fromEntries(entries) as Record<ColorScaleKey, string>;
 }

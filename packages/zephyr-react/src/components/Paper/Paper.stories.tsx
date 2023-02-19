@@ -30,10 +30,28 @@ const PaperRow = ({ className, color, ...props }: PaperProps) => {
 
 export const Default = () => {
   return (
-    <div className="grid w-full grid-cols-12 gap-16">
-      <PaperRow color="surface" />
-      <PaperRow color="surface-light" />
-      <PaperRow color="surface-dark" />
+    <div className="w-full">
+      <Paper className="mb-38 flex h-200 w-200 flex-col gap-8">
+        <div> Title</div>
+        <Paper color="surface-soft" className="h-full grow">
+          Data item
+        </Paper>
+      </Paper>
+      <Paper color="surface-neutral" className="mb-38 flex h-200 w-200 flex-col gap-8">
+        <div> Title</div>
+        <Paper color="surface-neutral-light" className="h-full grow">
+          Data item
+        </Paper>
+      </Paper>
+      <div className="grid w-full grid-cols-12 gap-16">
+        <PaperRow color="surface" />
+        <PaperRow color="surface-soft" />
+        <PaperRow color="surface-light" />
+
+        <PaperRow color="surface-dark" />
+        <PaperRow color="surface-neutral" />
+        <PaperRow color="surface-neutral-light" />
+      </div>
     </div>
   );
 };

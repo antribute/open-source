@@ -3,14 +3,14 @@ import { SizeProp, WidthProp } from 'types/styles';
 export type InputComponentFieldType = 'currency' | 'percent' | React.HTMLInputTypeAttribute;
 
 export interface InlineInputAddonType {
-  pointerEvents?: boolean;
+  focusInputOnClick?: boolean;
   className?: string;
   content: React.ReactNode;
 }
 
 export interface InlineInputAddonSlotProps {
-  inlineLeadingAddonSlot?: InlineInputAddonType[];
-  inlineTrailingAddonSlot?: InlineInputAddonType[];
+  inlineLeadingAddonSlot?: (InlineInputAddonType | React.ReactNode)[];
+  inlineTrailingAddonSlot?: (InlineInputAddonType | React.ReactNode)[];
 }
 
 export interface InputComponentStateMessageProps {
@@ -32,13 +32,15 @@ export interface InputComponentStateMessagePair {
 export type OmitHtmlInputComponentProps<T> = Omit<T, 'width' | 'size' | 'as' | 'type'>;
 
 export type InputComponentProps = {
+  id?: string;
+  name?: string;
   size?: SizeProp;
   width?: WidthProp;
   leadingIcon?: React.ReactNode;
   trailingIcon?: React.ReactNode;
   type?: InputComponentFieldType;
   placeholder?: string;
-  label?: string;
+  label?: React.ReactNode;
   className?: string;
 } & InlineInputAddonSlotProps;
 

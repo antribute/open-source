@@ -1,5 +1,10 @@
 import { classed } from '@tw-classed/react';
-import { InputSizeVariant, inputComponentVariants } from 'styles/input-component.variants';
+import { BaseInputElement, PlaceholderElement } from 'components/BaseInput/BaseInput.styles';
+import {
+  InputComponentWidthVariant,
+  InputSizeVariant,
+  inputComponentVariants,
+} from 'styles/input-component.variants';
 import { Classed } from 'utils/classed';
 
 export type BaseInputContainerElementVariantProps = Classed.VariantProps<
@@ -8,8 +13,14 @@ export type BaseInputContainerElementVariantProps = Classed.VariantProps<
 
 export const BaseInputContainerElement = classed(
   'div',
-  'relative inline-flex items-center',
-  InputSizeVariant
+  'flex justify-between items-center',
+  InputComponentWidthVariant,
+  BaseInputElement,
+  {
+    defaultVariants: {
+      width: 'auto',
+    },
+  }
 );
 
 export type BaseInputIconSlotElementVariantProps = Classed.VariantProps<
@@ -18,7 +29,7 @@ export type BaseInputIconSlotElementVariantProps = Classed.VariantProps<
 
 export const BaseInputIconSlotElement = classed(
   'div',
-  'absolute inset-y-0 inline-flex items-center jusitfy-center flex-nowrap gap-8  select-none peer-placeholder-shown:text-gray-400',
+  'inline-flex items-center jusitfy-center flex-nowrap gap-8  select-none peer-placeholder-shown:text-gray-400',
   'peer-placeholder-shown:text-light-gray-dark text-type-soft',
   {
     variants: {

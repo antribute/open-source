@@ -21,7 +21,7 @@ const RenderVariantElement = classed('div', {
   variants: {
     orientation: {
       vertical: 'flex-col space-y-24',
-      horizontal: 'flex gap-24 items-center',
+      horizontal: 'flex gap-24 items-center flex-wrap',
     },
   },
   defaultVariants: {
@@ -59,7 +59,17 @@ interface ColorSizeVariantProps<T extends React.ComponentType> extends RenderVar
 }
 
 export const RenderColorVariants = <T extends React.ComponentType>({
-  colors = ['weak', 'moderate', 'strong', 'primary', 'secondary', 'caution', 'danger', 'positive'],
+  colors = [
+    'neutral',
+    'weak',
+    'moderate',
+    'strong',
+    'primary',
+    'secondary',
+    'caution',
+    'danger',
+    'positive',
+  ],
   Component,
   noChildren,
   render = (children) => children,

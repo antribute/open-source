@@ -1,15 +1,20 @@
-import { BaseInputProps } from 'components/BaseInput/BaseInput';
+import { BaseInputBaseProps, BaseInputProps } from 'components/BaseInput/BaseInput';
 import { getInputMessageStatePair } from 'components/Input/Input.helpers';
 import { useId } from 'react';
 import { InputComponentStateMessageProps } from 'types/input-component.types';
 
 type UseInputPropsHookOptions = InputComponentStateMessageProps &
-  Pick<BaseInputProps, 'name' | 'error'>;
+  Pick<BaseInputBaseProps, 'name' | 'error' | 'width' | 'size' | 'id' | 'label'>;
 
-export const useInputProps = (props: UseInputPropsHookOptions) => {
+export const useInputProps = ({
+  size = 'md',
+  width = 'fixed',
+  id: idProp,
+  ...props
+}: UseInputPropsHookOptions) => {
   const generatedId = useId();
 
-  const id = [props.name, generatedId].filter(Boolean).join('-');
+  const id = [idProp, props.name, generatedId].filter(Boolean).join('-');
 
   const inputMessageStatePair = getInputMessageStatePair({
     errorMessage: props.errorMessage,
@@ -19,7 +24,7 @@ export const useInputProps = (props: UseInputPropsHookOptions) => {
   });
 
   return {
-    inputContainerProps: { ...props, htmlFor: id, ...inputMessageStatePair },
-    inputComponentProps: { ...props, ...inputMessageStatePair, id },
+    inputContainerProps: { ...props, size, width, htmlFor: id, ...inputMessageStatePair },
+    inputComponentProps: { ...props, size, width, ...inputMessageStatePair, id },
   };
 };

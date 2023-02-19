@@ -1,4 +1,8 @@
-export const animation = {
+import { ThemeConfig } from 'tailwindcss/types/config';
+
+type AnimationConfig = ThemeConfig['animation'];
+
+export const animation: AnimationConfig = {
   // Dropdown menu
   'scale-in': 'scale-in 0.2s ease-in-out',
   'slide-down': 'slide-down 0.6s cubic-bezier(0.16, 1, 0.3, 1)',

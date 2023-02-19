@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { RefObject, useEffect, useImperativeHandle, useMemo, useRef } from 'react';
 import useDimensions from 'react-cool-dimensions';
 import {
   BaseInputContainerElement,
@@ -12,246 +12,185 @@ import {
   InputComponentState,
   InputComponentStateMessagePair,
 } from 'types/input-component.types';
-import { sortBy, sum, sumBy } from 'lodash-es';
+import { flatMapDeep, flattenDeep, isPlainObject, sortBy, sum, sumBy } from 'lodash-es';
 import { SizeProp } from 'types/styles';
-import { createCtx } from 'utils/createContext';
 import { useImmer, ImmerHook } from 'use-immer';
 import ExclamationCircleIcon from '@heroicons/react/20/solid/ExclamationCircleIcon';
 import CheckCircleIcon from '@heroicons/react/20/solid/CheckCircleIcon';
+import { mergeRefs } from 'react-merge-refs';
+import { deriveClassed } from '@tw-classed/react';
+import { Slot } from '@radix-ui/react-slot';
+import { isElement } from 'react-is';
+import { isReactNode } from 'utils/component-is-utils';
+import { notEmpty } from 'utils/notEmpty';
+import { PlaceholderElement } from 'components/BaseInput/BaseInput.styles';
+import { twMerge } from 'tailwind-merge';
+import clsx from 'clsx';
 
-export type BaseInputContainerProps = InputComponentProps & {
-  fragment?: boolean;
-  children: (props: {
-    leadingIconWidth: (delta?: number) => number | undefined;
-    trailingIconWidth: (delta?: number) => number | undefined;
-  }) => React.ReactNode;
-} & BaseInputIconSlotElementVariantProps &
-  InputAddonSlotProps &
-  Pick<InputComponentStateMessagePair, 'inputState'>;
-
-function getTotalWidth(widthMap: Record<number, number>, { size }: { size: SizeProp }) {
-  const values = Object.values(widthMap);
-  return sum(values) + getIconGap({ size }) * (values.length - 1) + getIconPadding({ size });
+function isAddonType(e: unknown): e is InlineInputAddonType {
+  return Boolean(e && typeof e === 'object' && 'content' in e);
 }
-
-type InputContainerWidthImmerHook = ImmerHook<{
-  leadingWidthMap: Record<string, number>;
-  trailingWidthMap: Record<string, number>;
-}>;
-
-interface BaseInputContainerContext {
-  inputContainderWidthImmerHook: InputContainerWidthImmerHook;
-}
-
-const { useContext: useBaseInputContainerContext, Provider: BaseInputContainerProvider } =
-  createCtx<BaseInputContainerContext>();
-
-const getIconGap = ({ size = 'md' }: { size?: SizeProp }) => {
-  const gapMap: Record<SizeProp, number> = {
-    xs: 2,
-    sm: 4,
-    md: 6,
-    lg: 8,
-  };
-
-  return gapMap[size];
-};
-
-const getIconPadding = ({ size = 'md' }: { size?: SizeProp }) => {
-  const paddingMap: Record<SizeProp, number> = {
-    xs: 6.5,
-    sm: 6.5,
-    md: 8.5,
-    lg: 9.5,
-  };
-
-  return paddingMap[size];
-};
-
-const BaseInputIconSlot = (
-  props: {
-    children?: React.ReactNode;
-    index: number;
-    gap?: number;
-    position: 'leading' | 'trailing';
-  } & BaseInputIconSlotElementVariantProps
-) => {
-  const { children, position = 'leading', index, size = 'md', gap: gapProp } = props;
-
-  const [inputContianerWidth, setInputContainerWidth] =
-    useBaseInputContainerContext().inputContainderWidthImmerHook;
-
-  const containerWidth =
-    position === 'leading'
-      ? inputContianerWidth.leadingWidthMap
-      : inputContianerWidth.trailingWidthMap;
-
-  const gap = gapProp ?? getIconGap({ size });
-
-  const leadingWidthEntries = sortBy(Object.entries(containerWidth), ([key]) => key);
-
-  const leadingWidthList = leadingWidthEntries.map(([key, width]) => {
-    const idx = parseInt(key, 10);
-
-    return {
-      idx,
-      width,
-    };
-  });
-
-  const offset = sumBy(
-    leadingWidthList.filter(({ idx }) => idx < index),
-    (e) => e.width
-  );
-
-  const { width, observe } = useDimensions({});
-
-  useEffect(() => {
-    if (position === 'leading') {
-      setInputContainerWidth((draft) => {
-        draft.leadingWidthMap[index] = width;
-      });
-    }
-    if (position === 'trailing') {
-      setInputContainerWidth((draft) => {
-        draft.trailingWidthMap[index] = width;
-      });
-    }
-  }, [index, position, setInputContainerWidth, width]);
-
-  return (
-    <BaseInputIconSlotElement
-      {...props}
-      ref={observe}
-      style={{
-        [position === 'trailing' ? 'right' : 'left']:
-          offset + (gap * index + getIconPadding({ size })),
-      }}
-    >
-      {children}
-    </BaseInputIconSlotElement>
-  );
-};
-
 const getAddonList = (
-  ...props: (InlineInputAddonType | InlineInputAddonType[])[]
+  ...props: (React.ReactNode | InlineInputAddonType | (InlineInputAddonType | React.ReactNode)[])[]
 ): {
   addonList: InlineInputAddonType[];
   hasAddons: boolean;
 } => {
-  const addonList = props.flat().filter((e) => e.content);
+  const addonList = flattenDeep(props)
+    .map((e) => {
+      return toAddonType(e);
+    })
+    .filter(notEmpty);
+
   return {
     addonList,
     hasAddons: addonList.length > 0,
   };
 };
 
-const InputStateAddon = ({
+const getInputStateIcon = ({
   inputState,
   hide,
 }: {
   inputState?: InputComponentState;
   hide?: boolean;
 }) => {
-  const props = {
+  const common = {
     height: 20,
     width: 20,
   };
 
   if (hide) {
-    return null;
+    return undefined;
   }
 
   if (inputState === 'error') {
-    return <ExclamationCircleIcon className="text-danger" {...props} />;
+    return <ExclamationCircleIcon className="text-danger" {...common} />;
   }
 
   if (inputState === 'success') {
-    return <CheckCircleIcon className="text-positive" {...props} />;
+    return <CheckCircleIcon className="text-positive" {...common} />;
   }
 
-  return null;
+  return undefined;
 };
 
-export const BaseInputContainer = ({
-  size = 'md',
-  width = 'fixed',
-  children,
-  leadingIcon,
-  trailingIcon,
-  className,
-  inlineLeadingAddonSlot = [],
-  inlineTrailingAddonSlot = [],
-  fragment,
-  inputState,
-}: BaseInputContainerProps) => {
-  const { addonList: leading, hasAddons: hasLeading } = getAddonList(inlineLeadingAddonSlot, {
-    content: leadingIcon,
-  });
-  const { addonList: trailing, hasAddons: hasTrailing } = getAddonList(
-    {
-      content: <InputStateAddon inputState={inputState} />,
-    },
-    {
-      content: trailingIcon,
-    },
-    inlineTrailingAddonSlot
-  );
+type BaseInputIconProps = React.ComponentProps<typeof BaseInputIconSlotElement> &
+  InlineInputAddonType;
 
-  const hasIcon = Boolean(hasLeading || hasTrailing);
-
-  const getContainer = () => {
-    if (fragment) return React.Fragment;
-    if (hasIcon) return BaseInputContainerElement;
-    return React.Fragment;
-  };
-
-  const Container = getContainer();
-
-  const inputContainderWidthImmerHook = useImmer<{
-    leadingWidthMap: Record<string, number>;
-    trailingWidthMap: Record<string, number>;
-  }>({ leadingWidthMap: {}, trailingWidthMap: {} });
-
-  const [inputContainerWidth] = inputContainderWidthImmerHook;
-
-  const { leadingWidth, trailingWidth } = {
-    leadingWidth: getTotalWidth(inputContainerWidth.leadingWidthMap, { size }),
-    trailingWidth: getTotalWidth(inputContainerWidth.trailingWidthMap, { size }),
-  };
-
-  return (
-    <BaseInputContainerProvider value={{ inputContainderWidthImmerHook }}>
-      <Container width={width} className={className}>
-        {children({
-          leadingIconWidth: (delta = 0) => (hasLeading ? leadingWidth + delta : undefined),
-          trailingIconWidth: (delta = 0) => (hasTrailing ? trailingWidth + delta : undefined),
-        })}
-
-        {leading.map(({ content, ...props }, i) => (
-          <BaseInputIconSlot
-            index={i}
-            key={content?.toString()}
-            position="leading"
+const BaseInputIcon = deriveClassed<typeof BaseInputIconSlotElement, BaseInputIconProps>(
+  ({ content, tabIndex, ...props }, ref) => {
+    return (
+      <PlaceholderElement className="text- flex h-20 w-20 items-center justify-center dark:text-content-inverse-weak">
+        {typeof content !== 'object' ? (
+          <> {content}</>
+        ) : (
+          <Slot
+            tabIndex={tabIndex}
             {...props}
-            size={size}
+            ref={ref}
+            onClick={(e) => !props.focusInputOnClick && e.stopPropagation()}
           >
             {content}
-          </BaseInputIconSlot>
-        ))}
+          </Slot>
+        )}
+      </PlaceholderElement>
+    );
+  }
+);
 
-        {trailing.map(({ content, ...props }, i) => (
-          <BaseInputIconSlot
-            index={i}
-            key={content?.toString()}
-            position="trailing"
-            {...props}
-            size={size}
-          >
-            {content}
-          </BaseInputIconSlot>
-        ))}
-      </Container>
-    </BaseInputContainerProvider>
-  );
+export type BaseInputContainerProps = {
+  focusElementOnClick?: boolean;
+  children:
+    | React.ReactNode
+    | ((props: {
+        // leadingIconWidth: (delta?: number) => number | undefined;
+        // trailingIconWidth: (delta?: number) => number | undefined;
+        ref: React.ForwardedRef<HTMLInputElement>;
+      }) => React.ReactNode);
+} & InputComponentProps &
+  BaseInputIconSlotElementVariantProps &
+  InputAddonSlotProps &
+  Pick<InputComponentStateMessagePair, 'inputState'>;
+
+const toAddonType = (e?: unknown): InlineInputAddonType | undefined => {
+  if (!e) return undefined;
+
+  if (isAddonType(e)) return e;
+
+  if (isReactNode(e)) {
+    return {
+      focusInputOnClick: true,
+      content: e,
+    };
+  }
+
+  return undefined;
 };
+
+export const BaseInputContainer = deriveClassed<
+  typeof BaseInputContainerElement,
+  BaseInputContainerProps
+>(
+  (
+    {
+      size,
+      width,
+      children,
+      leadingIcon,
+      trailingIcon,
+      className,
+      inlineLeadingAddonSlot = [],
+      inlineTrailingAddonSlot = [],
+      focusElementOnClick = true,
+      inputState,
+      ...props
+    },
+    forwardedRef
+  ) => {
+    const inputRef = useRef<HTMLInputElement>();
+
+    const ref = mergeRefs([inputRef, forwardedRef]);
+
+    const { leading, trailing } = React.useMemo(() => {
+      const { addonList: leading } = getAddonList(inlineLeadingAddonSlot, leadingIcon);
+
+      const { addonList: trailing } = getAddonList(
+        getInputStateIcon({ inputState }),
+        trailingIcon,
+        inlineTrailingAddonSlot
+      );
+
+      return { leading, trailing };
+    }, [inlineLeadingAddonSlot, inlineTrailingAddonSlot, inputState, leadingIcon, trailingIcon]);
+
+    return (
+      <BaseInputContainerElement
+        className={className}
+        inputState={inputState}
+        ref={forwardedRef}
+        width={width}
+        size={size}
+        onClick={() => {
+          if (focusElementOnClick && inputRef.current) {
+            inputRef.current.focus();
+          }
+        }}
+        {...props}
+      >
+        {leading.map((props, index) => (
+          <BaseInputIcon {...props} key={index} />
+        ))}
+
+        {typeof children === 'function'
+          ? children({
+              ref,
+            })
+          : children}
+        {trailing.map((props, index) => (
+          <BaseInputIcon {...props} key={index} />
+        ))}
+      </BaseInputContainerElement>
+    );
+  }
+);

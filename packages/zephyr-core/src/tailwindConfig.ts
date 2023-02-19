@@ -14,6 +14,7 @@ export const create8PtGrid = (max = 512) => {
   const finalGrid: Record<string, string> = {
     auto: 'auto',
     0: '0px',
+    1: '1px',
   };
 
   let currentGridStep = 2;
@@ -85,6 +86,7 @@ const config: Config = {
       '2xl': '0 25px 50px -12px rgb(0 0 0 / 0.25)',
       inner: 'inset 0 2px 4px 0 rgb(0 0 0 / 0.05)',
       none: 'none',
+      hover: '0px 2px 5px 0px rgb(64 68 82 / 0.08), 0px 3px 9px 0px rgb(64 68 82 / 0.08)',
     },
     boxShadowColor: ({ theme }) => theme('colors'),
 
@@ -100,13 +102,13 @@ const config: Config = {
     divideWidth: ({ theme }) => theme('borderWidth'),
     dropShadow: {
       sm: '0 1px 1px rgb(0 0 0 / 0.05)',
-      // @ts-expect-error: Tailwind fucked up their typings
+
       DEFAULT: ['0 1px 2px rgb(0 0 0 / 0.1)', '0 1px 1px rgb(0 0 0 / 0.06)'],
-      // @ts-expect-error: Tailwind fucked up their typings
+
       md: ['0 4px 3px rgb(0 0 0 / 0.07)', '0 2px 2px rgb(0 0 0 / 0.06)'],
-      // @ts-expect-error: Tailwind fucked up their typings
+
       lg: ['0 10px 8px rgb(0 0 0 / 0.04)', '0 4px 3px rgb(0 0 0 / 0.1)'],
-      // @ts-expect-error: Tailwind fucked up their typings
+
       xl: ['0 20px 13px rgb(0 0 0 / 0.03)', '0 8px 5px rgb(0 0 0 / 0.08)'],
       '2xl': '0 25px 25px rgb(0 0 0 / 0.15)',
       none: '0 0 #0000',

@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { InputSizeVariant } from 'styles/input-component.variants';
+import { InputComponentWidthVariant, InputSizeVariant } from 'styles/input-component.variants';
 import { Classed, classTheme, classed } from 'utils/classed';
 
 export type ButtonVariant = 'contained' | 'soft' | 'text' | 'outlined' | 'outlined-filled';
@@ -8,60 +8,85 @@ export type BaseInputElementVariantProps = Classed.VariantProps<typeof BaseInput
 
 export type BaseInputElementProps = React.ComponentProps<typeof BaseInputElement>; //
 
+export const placeholderClassName = clsx(
+  'placeholder:select-none  placeholder:font-body',
+  'focus:placeholder:text-content-moderate/40',
+  'font-medium text-content-moderate placeholder:text-content-moderate/30 dark:text-content-inverse-moderate dark:placeholder:text-content-inverse-weak/40 dark:focus:placeholder:text-content-inverse-weak/50'
+);
+
+export const PlaceholderElement = classed(
+  'span',
+  'select-none font-body focus-within:text-content-moderate/40 text-content-moderate/30 dark:text-content-inverse-weak'
+);
+
 export const BaseInputElement = classed(
   'input',
-  'relative border-[1.5px] border-solid peer',
-  'font-medium  placeholder:select-none placeholder:font-body',
-  'ring-0 outline-none focus:ring-1 focus:border-content-strong',
-  'rounded-md',
-  'transition-all',
+  InputSizeVariant,
+
+  placeholderClassName,
 
   classTheme({
+    class: [
+      'font-medium',
+      'rounded-md',
+      'transition-all',
+      'relative border-[1.5px] border-solid peer',
+      'ring-0 outline-none focus-within:ring-1',
+      'flex items-center gap-8 p-8 select-none',
+    ],
+
     light: [
       'bg-white',
       'text-content-moderate',
       'border-slate/20',
-      'placeholder-content-moderate/30 focus:placeholder-content-moderate/40',
+      '',
       'shadow-gray-light/20',
-      'focus:border-content-strong focus:ring-content-strong',
+      'focus-within:border-content-strong focus-within:ring-content-strong',
     ],
     dark: [
       'dark:bg-surface-inverse',
       'dark:text-content-inverse-moderate',
       'dark:border-slate/10',
-      'dark:placeholder-content-inverse-weak',
       'dark:shadow-surface-inverse/50',
       'dark:ring-surface-inverse',
-      'dark:focus:ring-surface-inverse',
-      'dark:focus:ring-opacity-20',
-      'dark:focus:border-content-inverse-weak dark:focus:ring-content-inverse-weak',
+      'dark:focus-within:ring-surface-inverse',
+      'dark:focus-within:ring-opacity-20',
+      'dark:focus-within:border-content-inverse-weak dark:focus-within:ring-content-inverse-weak',
     ],
   }),
 
-  InputSizeVariant,
   {
     variants: {
       shadow: {
         true: 'shadow-md',
         false: 'shadow-none',
       },
+
       inputState: {
         success: clsx(
           classTheme({
-            class: 'focus:ring-[3px] focus:ring-opacity-20',
-            light: ['border-positive', 'focus:ring-positive', 'focus:border-positive'],
+            class: 'focus-within:ring-[3px] focus-within:ring-opacity-20',
+            light: [
+              'border-positive',
+              'focus-within:ring-positive',
+              'focus-within:border-positive',
+            ],
             dark: [
               'dark:border-positive',
-              'focus:dark:ring-positive',
-              'focus:dark:border-positive',
+              'focus-within:dark:ring-positive',
+              'focus-within:dark:border-positive',
             ],
           })
         ),
         error: clsx(
           classTheme({
-            class: 'focus:ring-[3px] focus:ring-opacity-20',
-            light: ['border-danger', 'focus:ring-danger', 'focus:border-danger'],
-            dark: ['dark:border-danger', 'focus:dark:ring-danger', 'focus:dark:border-danger'],
+            class: 'focus-within:ring-[3px] focus-within:ring-opacity-20 !border-danger',
+            light: ['border-danger', 'focus-within:ring-danger', 'focus-within:border-danger'],
+            dark: [
+              'dark:border-danger',
+              'focus-within:dark:ring-danger',
+              'focus-within:dark:border-danger',
+            ],
           })
         ),
       },

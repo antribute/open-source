@@ -1,0 +1,22 @@
+import { ArgsTable, Canvas, Description, Meta, Story } from '@storybook/addon-docs';
+import { Combobox } from './Combobox';
+import * as stories from './Combobox.stories.tsx';
+
+<Meta title="Input/Combobox" component={Combobox} />
+
+# Combobox
+
+<Description component={Combobox} />
+<ArgsTable of={Combobox} />
+
+## Default
+
+<Canvas withToolbar>
+  <Story name="Default" story={stories.Default} />
+</Canvas>
+
+## MultiSelect Combobox
+
+<Canvas withToolbar>
+  <Story name="MultiSelect Combobox" story={stories.MultiSelectCombobox} />
+</Canvas>

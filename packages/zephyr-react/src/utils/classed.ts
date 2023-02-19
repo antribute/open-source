@@ -1,9 +1,11 @@
 import { ClassedVariantMap } from 'types/styles';
 import { twMerge } from 'tailwind-merge';
-import { mergeWith } from 'lodash-es';
+import { mergeWith, pick } from 'lodash-es';
 import { createClassed, deriveClassed } from '@tw-classed/react';
+import { createClassed as createClassedCore } from '@tw-classed/core';
 import type * as Classed from '@tw-classed/react';
 import clsx, { ClassValue } from 'clsx';
+import { LiteralUnion } from 'type-fest';
 
 export type { ClassedFunctionProxy, ClassedProxyFunctionType } from '@tw-classed/react';
 
@@ -14,13 +16,15 @@ export type ClassedComponentTypeProps<
   TProps extends object = object
 > = Classed.ComponentProps<Classed.ClassedComponentType<TElementType, TProps>>;
 const { classed } = createClassed({ merger: twMerge });
+const { classed: classedCore } = createClassedCore({ merger: twMerge });
 
-export { classed, deriveClassed, Classed };
+export { classed, classedCore, deriveClassed, Classed };
 
 export const classedVariantMap = <T extends ClassedVariantMap>(variantMap: T) => variantMap;
 
 export function mergeVariants<T extends Record<string, string> = Record<string, string>>(
-  variants: T[] | Record<string, T>
+  variants: T[] | Record<string, T>,
+  options?: { pick?: LiteralUnion<keyof T, string>[] }
 ) {
   const variantArray = Array.isArray(variants) ? variants : Object.values(variants);
 
@@ -29,7 +33,7 @@ export function mergeVariants<T extends Record<string, string> = Record<string, 
 
   const mergedVariants = mergeWith({}, ...variantArray, mergerFn) as T;
 
-  return mergedVariants;
+  return options?.pick ? pick(mergedVariants, options.pick) : mergedVariants;
 }
 
 export const classTheme = (props: { class?: ClassValue; light: ClassValue; dark: ClassValue }) => {

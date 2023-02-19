@@ -3,6 +3,14 @@
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/index.test.ts1"],
   "exclude": ["node_modules"],
   "compilerOptions": {
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "typeRoots": ["./types"],
+    "noEmit": true,
+    "noEmitOnError": true
+  },
+
+  "typeAcquisition": {
+    "enable": true,
+    "include": ["react", "@tw-classed/react", "@tw-classed/core"]
   }
 }

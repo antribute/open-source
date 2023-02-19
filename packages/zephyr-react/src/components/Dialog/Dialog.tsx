@@ -14,7 +14,7 @@ import {
   DialogTitleElement,
   DialogTitleElementProps,
 } from 'components/Dialog/Dialog.styles';
-import XMarkIcon from '@heroicons/react//20/solid/XMarkIcon';
+import XMarkIcon from '@heroicons/react/24/solid/XMarkIcon';
 
 type DialogRootProps = DialogPrimitive.DialogProps;
 
