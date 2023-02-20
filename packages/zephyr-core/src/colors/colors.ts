@@ -5,6 +5,10 @@ import {
   generateHexAlphaColorGroup,
 } from './colors.helpers';
 
+const black = '#000000';
+
+const white = '#FFFFFF';
+
 const slate = generateColorGroup(tailwindColors.slate)({
   DEFAULT: '500',
   dark: '600',
@@ -60,9 +64,9 @@ const oxfordBlue = generateColorGroup({
   soft: '100',
 });
 
-const black = '#000000';
-
-const white = '#FFFFFF';
+const contentInverse = generateHexAlphaColorGroup('#e3e5e8', {
+  overrides: { strong: white, DEFAULT: '#d2d4d7' },
+});
 
 const base = {
   DEFAULT: '#F6F6F6',
@@ -130,16 +134,14 @@ export const colors = {
 
   slate,
   content: generateHexAlphaColorGroup('#15181E', { overrides: { DEFAULT: 'high' } }),
-  'content-inverse': generateHexAlphaColorGroup('#e3e5e8', {
-    overrides: { strong: white, DEFAULT: '#d2d4d7' },
-  }),
+  'content-inverse': contentInverse,
 
   boundary: {
     intense: base.inverse,
     ...generateHexAlphaColorGroup(oxfordBlue[300], { overrides: { DEFAULT: 'subtle' } }),
   },
   'boundary-inverse': {
-    intense: oxfordBlue[400],
+    intense: contentInverse.weak,
     ...generateHexAlphaColorGroup(oxfordBlue.DEFAULT, {
       overrides: { DEFAULT: 'subtle' },
     }),

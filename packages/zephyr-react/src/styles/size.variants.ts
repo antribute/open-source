@@ -4,11 +4,16 @@ import { SizeProp } from 'types/styles';
 export const sizeVariants = {
   width: {
     xs: clsx('w-28'),
-    sm: clsx('w-36'),
+    sm: clsx('w-34'),
     md: clsx('w-40'),
-    lg: clsx('w-56'),
+    lg: clsx('w-48'),
   },
-  height: { xs: clsx('h-28'), sm: clsx('h-36'), md: clsx('h-40'), lg: clsx('h-56') },
+  height: {
+    xs: clsx('h-28'),
+    sm: clsx('h-34'),
+    md: clsx('h-40'),
+    lg: clsx('h-48'),
+  },
   textSize: {
     xs: 'text-xs',
     sm: 'text-sm',

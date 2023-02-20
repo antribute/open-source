@@ -93,6 +93,10 @@ const DialogCloseButton = (props: DialogButtonProps) => {
   );
 };
 
+const DialogTrigger = (props: DialogPrimitive.DialogTriggerProps) => {
+  return <DialogPrimitive.Trigger asChild {...props} />;
+};
+
 const Root = DialogRoot;
 
 const Content = DialogContent;
@@ -113,4 +117,18 @@ const Close = DialogCloseButton;
 
 const CloseIcon = DialogCloseButtonIcon;
 
-export { Root, Content, Title, Description, Body, Footer, TriggerButton, Close, CloseIcon, Button };
+const Trigger = DialogTrigger;
+
+export {
+  Root,
+  Content,
+  Title,
+  Description,
+  Body,
+  Footer,
+  Trigger,
+  TriggerButton,
+  Close,
+  CloseIcon,
+  Button,
+};

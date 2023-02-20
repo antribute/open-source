@@ -9,5 +9,5 @@ body {
 }
 
 *:focus {
-  @apply outline-none ring-2 ring-content-strong dark:ring-content-inverse-weak;
+  @apply outline-none ring-2 ring-boundary-intense dark:ring-boundary-inverse-intense;
 }

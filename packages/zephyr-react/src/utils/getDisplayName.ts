@@ -6,8 +6,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/ban-types */
 
+import { get } from 'lodash-es';
 import * as React from 'react';
-import { ForwardRef, Memo } from 'react-is';
+import { ForwardRef, Memo, isElement } from 'react-is';
+import { isReactComponent, isReactNode } from 'utils/component-is-utils';
 
 const fnNameMatchRegex = /^\s*function(?:\s|\s*\/\*.*\*\/\s*)+([^(\s/]*)\s*/;
 export function getFunctionName(fn: Function): string {
@@ -43,8 +45,14 @@ export default function getDisplayName(component: unknown): string | undefined {
     return component;
   }
 
+  const displayName = get(component, 'type.displayName');
+
+  if (displayName) {
+    return displayName;
+  }
+
   if (typeof component === 'function') {
-    return getFunctionComponentName(component, 'Component');
+    return getFunctionComponentName(component as never, 'Component');
   }
 
   // TypeScript can't have components as objects but they exist in the form of `memo` or `Suspense`

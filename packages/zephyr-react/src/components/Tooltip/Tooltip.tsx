@@ -13,7 +13,7 @@ const TooltipContentElement = classed(
   'radix-side-left:animate-slide-right-fade',
   'inline-flex items-center rounded py-8 px-10',
   'text-sm font-body',
-  ' bg-surface-neutral text-content-inverse-strong shadow-hover',
+  ' bg-primary-900 text-content-inverse-strong shadow-hover',
 
   {
     variants: {

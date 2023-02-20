@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import * as AvatarPrimitive from '@radix-ui/react-avatar';
-import { classed, mergeVariants } from 'utils/classed';
+import { Classed, classed, mergeVariants } from 'utils/classed';
 import { Wrap } from 'components/Wrap';
 import { Tooltip, TooltipProps } from 'components/Tooltip';
 import { getTruncatedName } from 'utils/getTruncatedName';
@@ -8,13 +8,20 @@ import { sizeVariants } from 'styles/size.variants';
 import { twMerge } from 'tailwind-merge';
 import { stringToDistinctColorClass } from 'utils/stringToDistinctColorClass';
 import clsx from 'clsx';
+import { AvatarElementName } from './Avatar.types';
 
+clsx('group-data-[avatar-group=true]:mix-blend-exclusion');
+
+console.log(
+  'MERGED',
+  mergeVariants([sizeVariants.textSize, sizeVariants.width, sizeVariants.height])
+);
 const AvatarElement = classed(
-  AvatarPrimitive.Root,
-  'rounded-md select-none flex items-center overflow-hidden relative bg-surface-neutral text-white shrink-0',
+  'span',
+  'rounded-md select-none border-base dark:border-base-inverse flex items-center justify-center overflow-hidden relative bg-surface-neutral text-white shrink-0 isolate',
   {
     variants: {
-      size: mergeVariants([sizeVariants.width, sizeVariants.height, sizeVariants.textSize]),
+      size: mergeVariants([sizeVariants.textSize, sizeVariants.width, sizeVariants.height]),
       border: {
         true: 'border-2',
       },
@@ -27,6 +34,13 @@ const AvatarElement = classed(
       cursorPointer: {
         true: 'cursor-pointer',
       },
+      clickable: {
+        true: clsx('hover:border-boundary-subtle dark:hover:border-boundary-inverse-subtle'),
+      },
+      color: {
+        default: 'bg-surface-neutral',
+        alternate: 'bg-surface-neutral-light dark:bg-surface-neutral-light',
+      },
     },
     defaultVariants: {
       size: 'md',
@@ -35,14 +49,18 @@ const AvatarElement = classed(
   }
 );
 
-interface AvatarProps {
+type AvatarElementVariants = Classed.VariantProps<typeof AvatarElement>;
+
+export interface AvatarProps
+  extends Pick<AvatarElementVariants, 'rounded' | 'size' | 'border' | 'color'> {
   label: string;
   enableTooltip?: boolean;
   src?: string;
-  border?: boolean;
   className?: string;
   tooltip?: React.ReactNode;
   tooltipProps?: Omit<TooltipProps, 'tooltip'>;
+  truncateLabel?: boolean;
+  onClick?: () => void;
 }
 
 const AvatarImageElement = classed(
@@ -56,8 +74,12 @@ export const Avatar = ({
   enableTooltip,
   border,
   tooltip: tooltipProp,
+  size = 'md',
   className,
   tooltipProps,
+  color = 'default',
+  truncateLabel = true,
+  onClick,
 }: AvatarProps) => {
   const tooltip = tooltipProp ?? label;
   const isTooltipEnabled = enableTooltip ?? Boolean(tooltip);
@@ -68,8 +90,14 @@ export const Avatar = ({
 
   const colorClass = stringToDistinctColorClass(label, {
     classTokens: ['bg'],
-    defaultClassTokens: { bg: clsx('bg-surface dark:bg-surface-neutral-50') },
-    forceDefaultClass: Boolean(src),
+    defaultClassTokens: {
+      bg: clsx({
+        'bg-surface dark:bg-surface-neutral-50': color === 'default',
+        'bg-primary-400 border-primary-200 dark:bg-primary-600 dark:border-primary-800':
+          color === 'alternate',
+      }),
+    },
+    forceDefaultClass: color !== 'default' || Boolean(src),
   });
 
   return (
@@ -83,30 +111,48 @@ export const Avatar = ({
         );
       }}
     >
-      <AvatarElement
-        border={border}
-        cursorPointer={isTooltipEnabled}
-        className={twMerge(colorClass, className)}
-      >
-        {src && (
-          <>
-            <ImageLoadingOverlayElement loading={loading} />
-            <AvatarImageElement
-              src={src}
-              alt="Avatar"
-              loading="eager"
-              onLoadingStatusChange={(status) => {
-                setLoadingStatus(status);
-              }}
-            />
-          </>
-        )}
+      <AvatarPrimitive.Root asChild>
+        <AvatarElement
+          border={border}
+          cursorPointer={isTooltipEnabled}
+          className={twMerge(colorClass, className)}
+          as={onClick ? 'button' : 'span'}
+          clickable={Boolean(onClick)}
+          onClick={() => {
+            onClick?.();
+          }}
+          size={size}
+        >
+          {src && (
+            <>
+              <ImageLoadingOverlayElement loading={loading} />
+              <AvatarImageElement
+                src={src}
+                alt="Avatar"
+                loading="eager"
+                onLoadingStatusChange={(status) => {
+                  setLoadingStatus(status);
+                }}
+              />
+            </>
+          )}
 
-        <AvatarContent label={label} className={colorClass} loading={loading} />
-      </AvatarElement>
+          {(!src || loading) && (
+            <AvatarContent
+              label={label}
+              className={colorClass}
+              loading={loading}
+              size={size}
+              truncateLabel={truncateLabel}
+            />
+          )}
+        </AvatarElement>
+      </AvatarPrimitive.Root>
     </Wrap>
   );
 };
+
+Avatar.displayName = AvatarElementName.Avatar;
 
 // Avatar Content
 
@@ -126,10 +172,25 @@ const AvatarContentElement = classed(
 );
 
 type AvatarContentProps = React.ComponentProps<typeof AvatarContentElement> &
-  Pick<AvatarProps, 'border' | 'label' | 'src'>;
+  Pick<AvatarProps, 'border' | 'label' | 'src' | 'truncateLabel'>;
 
-function AvatarContent({ src, className, label, loading }: AvatarContentProps) {
-  const truncatedContent = getTruncatedName(label, { truncatedStyle: 'FL' });
+function AvatarContent({
+  src,
+  className,
+  label,
+  loading,
+  truncateLabel = true,
+  size,
+}: AvatarContentProps) {
+  function getContent() {
+    if (!truncateLabel) {
+      return label;
+    }
+    return getTruncatedName(label, { truncatedStyle: 'FL' });
+  }
+
+  const content = getContent();
+
   return (
     <Wrap
       if={Boolean(src)}
@@ -139,8 +200,8 @@ function AvatarContent({ src, className, label, loading }: AvatarContentProps) {
         </AvatarPrimitive.Fallback>
       )}
     >
-      <AvatarContentElement className={className} loading={loading}>
-        {truncatedContent}
+      <AvatarContentElement className={className} loading={loading} size={size}>
+        {content}
       </AvatarContentElement>
     </Wrap>
   );

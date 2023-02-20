@@ -33,6 +33,10 @@ interface RenderSizeVariantProps<T extends React.ComponentType> extends RenderVa
   sizes?: SizeProp[];
 }
 
+export const sizeKeys = () => {
+  return ['xs', 'sm', 'md', 'lg'] as const;
+};
+
 export const RenderSizeVariants = <T extends React.ComponentType>({
   variantPropName = 'size',
   sizes = ['xs', 'sm', 'md', 'lg'],

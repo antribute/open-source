@@ -29,7 +29,7 @@ export function mergeVariants<T extends Record<string, string> = Record<string, 
   const variantArray = Array.isArray(variants) ? variants : Object.values(variants);
 
   const mergerFn = (objectValue: string, sourceValue: string) =>
-    twMerge(`${objectValue}`, `${sourceValue}`);
+    twMerge(`${objectValue || ''}`, `${sourceValue}`);
 
   const mergedVariants = mergeWith({}, ...variantArray, mergerFn) as T;
 

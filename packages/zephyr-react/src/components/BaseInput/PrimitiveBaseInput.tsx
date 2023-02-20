@@ -1,5 +1,3 @@
-import { deriveClassed } from '@tw-classed/react';
-import { BaseInput } from 'components/BaseInput/BaseInput';
 import { placeholderClassName } from 'components/BaseInput/BaseInput.styles';
 import React from 'react';
 import { InputComponentWidthVariant } from 'styles/input-component.variants';
@@ -9,7 +7,11 @@ const PrimitiveBaseInputElement = classed(
   'input',
   InputComponentWidthVariant,
   placeholderClassName,
-  'bg-transparent focus:outline-none focus:ring-0 border-none ring-0 outline-none focus:outline-none p-0'
+  'p-0',
+  'bg-transparent',
+  'border-none',
+  'focus:ring-0 ring-0',
+  'focus:outline-none outline-none'
 );
 
 type PrimitiveBaseInputBaseProps = React.ComponentProps<typeof PrimitiveBaseInputElement>;

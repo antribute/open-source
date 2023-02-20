@@ -8,15 +8,22 @@ export type BaseInputElementVariantProps = Classed.VariantProps<typeof BaseInput
 
 export type BaseInputElementProps = React.ComponentProps<typeof BaseInputElement>; //
 
-export const placeholderClassName = clsx(
-  'placeholder:select-none  placeholder:font-body',
-  'focus:placeholder:text-content-moderate/40',
-  'font-medium text-content-moderate placeholder:text-content-moderate/30 dark:text-content-inverse-moderate dark:placeholder:text-content-inverse-weak/40 dark:focus:placeholder:text-content-inverse-weak/50'
-);
+export const placeholderClassName = classTheme({
+  class: ['font-medium', 'placeholder:select-none placeholder:font-body'],
+  light: [
+    'text-content-strong',
+    'placeholder:text-content-moderate/30 focus:placeholder:text-content-moderate/40',
+  ],
+  dark: [
+    'dark:text-content-inverse-high',
+    'dark:placeholder:text-content-inverse-subtle dark:focus:placeholder:text-content-inverse-weak',
+  ],
+});
 
 export const PlaceholderElement = classed(
   'span',
-  'select-none font-body focus-within:text-content-moderate/40 text-content-moderate/30 dark:text-content-inverse-weak'
+  placeholderClassName
+  // 'select-none font-body focus-within:text-content-moderate/40 text-content-moderate/30 dark:text-content-inverse-weak'
 );
 
 export const BaseInputElement = classed(
@@ -36,22 +43,24 @@ export const BaseInputElement = classed(
     ],
 
     light: [
-      'bg-white',
-      'text-content-moderate',
-      'border-slate/20',
-      '',
-      'shadow-gray-light/20',
-      'focus-within:border-content-strong focus-within:ring-content-strong',
+      'bg-surface', // bg
+      'text-content-moderate focus-withen:', // text
+      'border-boundary-subtle focus-within:border-content-strong', // border
+      'shadow-gray-light/20', // shadow
+      '', /// ring
+      ' focus-within:ring-content-strong', // focus
     ],
     dark: [
-      'dark:bg-surface-inverse',
-      'dark:text-content-inverse-moderate',
-      'dark:border-boundary-inverse-subtle',
-      'dark:shadow-surface-inverse/50',
-      'dark:ring-surface-inverse',
-      'dark:focus-within:ring-surface-inverse',
-      'dark:focus-within:ring-opacity-20',
-      'dark:focus-within:border-content-inverse-weak dark:focus-within:ring-content-inverse-weak',
+      'dark:bg-surface-inverse', // bg
+      'dark:text-content-inverse-moderate', // text
+      'dark:border-boundary-inverse-subtle dark:focus-within:border-boundary-inverse-intense', // border
+      'dark:shadow-surface-inverse/50', // shadow
+      'dark:focus-within:ring-boundary-inverse-strong', // ring
+      // 'dark:ring-surface-inverse', // ring
+      // 'dark:focus-within:ring-surface-inverse',
+      '',
+      // 'dark:focus-within:ring-opacity-20',
+      // 'dark:focus-within:border-content-inverse-weak dark:focus-within:ring-content-inverse-weak',
     ],
   }),
 

@@ -11,7 +11,7 @@ export type ButtonElementVariantProps = Classed.VariantProps<typeof ButtonElemen
 export type ButtonElementProps = React.ComponentProps<typeof ButtonElement>;
 
 export const ButtonElement = classed.button(
-  'cursor-pointer inline-flex items-center select-none align-middle',
+  'cursor-pointer inline-flex items-center justify-center select-none align-middle',
   'disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-default disabled:border-gray-200 relative',
   {
     variants: {
@@ -27,6 +27,11 @@ export const ButtonElement = classed.button(
       fontWeight: textVariants.fontWeight,
       noWrap: {
         true: 'whitespace-nowrap',
+      },
+      justify: {
+        center: 'justify-center',
+        start: 'justify-start',
+        end: 'justify-end',
       },
       fullWidth: {
         true: 'w-full',
@@ -81,6 +86,7 @@ export const ButtonElement = classed.button(
       noWrap: true,
       fontWeight: 'medium',
       color: 'neutral',
+      justify: 'center',
       variant: 'contained',
     },
 
