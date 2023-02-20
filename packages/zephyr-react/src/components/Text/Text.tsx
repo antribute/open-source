@@ -1,4 +1,3 @@
-import React from 'react';
 import { textVariants } from 'styles/text.variants';
 import { classed } from 'utils/classed';
 

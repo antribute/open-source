@@ -1,6 +1,5 @@
 import React from 'react';
 import { BaseInputContainer } from 'components/BaseInput/BaseInputContainer';
-import { classed } from 'utils/classed';
 import {
   InputAddonSlotProps,
   InputComponentProps,

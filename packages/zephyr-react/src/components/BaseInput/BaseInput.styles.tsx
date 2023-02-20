@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { InputComponentWidthVariant, InputSizeVariant } from 'styles/input-component.variants';
+import { InputSizeVariant } from 'styles/input-component.variants';
 import { Classed, classTheme, classed } from 'utils/classed';
 
 export type ButtonVariant = 'contained' | 'soft' | 'text' | 'outlined' | 'outlined-filled';
@@ -46,7 +46,7 @@ export const BaseInputElement = classed(
     dark: [
       'dark:bg-surface-inverse',
       'dark:text-content-inverse-moderate',
-      'dark:border-slate/10',
+      'dark:border-boundary-inverse-subtle',
       'dark:shadow-surface-inverse/50',
       'dark:ring-surface-inverse',
       'dark:focus-within:ring-surface-inverse',

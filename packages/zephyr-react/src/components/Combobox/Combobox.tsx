@@ -15,7 +15,6 @@ import { ListItemContainer } from 'components/List/ListItem/ListItemContainer';
 import { Checkbox } from 'components/Checkbox';
 import clsx from 'clsx';
 import { Text } from 'components/Text';
-import { Paper } from 'components/Paper';
 
 interface ComboboxBaseProps<TOptionType>
   extends Omit<InputSelectProps, 'state' | 'value' | 'defaultValue' | 'as' | 'ref'> {
@@ -75,7 +74,6 @@ const ComboboxItem = classed(ComboboxListItem, BaseListItem);
 const ComboboxList = ({
   combobox,
   optionMap,
-  select,
   optionValueMap,
   isMultiSelect,
 }: ComboboxListProps) => {

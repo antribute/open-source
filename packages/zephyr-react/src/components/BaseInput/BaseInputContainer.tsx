@@ -1,5 +1,4 @@
-import React, { RefObject, useEffect, useImperativeHandle, useMemo, useRef } from 'react';
-import useDimensions from 'react-cool-dimensions';
+import React, { useRef } from 'react';
 import {
   BaseInputContainerElement,
   BaseInputIconSlotElement,
@@ -12,20 +11,15 @@ import {
   InputComponentState,
   InputComponentStateMessagePair,
 } from 'types/input-component.types';
-import { flatMapDeep, flattenDeep, isPlainObject, sortBy, sum, sumBy } from 'lodash-es';
-import { SizeProp } from 'types/styles';
-import { useImmer, ImmerHook } from 'use-immer';
+import { flattenDeep } from 'lodash-es';
 import ExclamationCircleIcon from '@heroicons/react/20/solid/ExclamationCircleIcon';
 import CheckCircleIcon from '@heroicons/react/20/solid/CheckCircleIcon';
 import { mergeRefs } from 'react-merge-refs';
 import { deriveClassed } from '@tw-classed/react';
 import { Slot } from '@radix-ui/react-slot';
-import { isElement } from 'react-is';
 import { isReactNode } from 'utils/component-is-utils';
 import { notEmpty } from 'utils/notEmpty';
 import { PlaceholderElement } from 'components/BaseInput/BaseInput.styles';
-import { twMerge } from 'tailwind-merge';
-import clsx from 'clsx';
 
 function isAddonType(e: unknown): e is InlineInputAddonType {
   return Boolean(e && typeof e === 'object' && 'content' in e);
@@ -81,7 +75,7 @@ type BaseInputIconProps = React.ComponentProps<typeof BaseInputIconSlotElement> 
 const BaseInputIcon = deriveClassed<typeof BaseInputIconSlotElement, BaseInputIconProps>(
   ({ content, tabIndex, ...props }, ref) => {
     return (
-      <PlaceholderElement className="text- flex h-20 w-20 items-center justify-center dark:text-content-inverse-weak">
+      <PlaceholderElement className="flex h-20 w-20 items-center justify-center dark:text-content-inverse-weak">
         {typeof content !== 'object' ? (
           <> {content}</>
         ) : (

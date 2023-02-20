@@ -1,7 +1,6 @@
 import { classed, Classed } from 'utils/classed';
 import { Text } from 'components/Text';
 import { BaseInputProps } from 'components/BaseInput';
-import { inputComponentVariants } from 'styles/input-component.variants';
 
 export type InputLabelVariantProps = Classed.VariantProps<typeof InputLabelElement>;
 
@@ -50,7 +49,6 @@ const InputLabel = ({
   hidden = false,
   labelOrientation = 'vertical',
   labelDescription,
-  width,
   ...props
 }: InputLabelProps) => {
   const optionalLabelText = typeof optionalLabel === 'string' ? optionalLabel : 'Optional';
@@ -63,7 +61,6 @@ const InputLabel = ({
       htmlFor={htmlFor}
       hidden={hidden}
       labelOrientation={labelOrientation}
-      width={width}
     >
       <span className="align-middle">
         {children}

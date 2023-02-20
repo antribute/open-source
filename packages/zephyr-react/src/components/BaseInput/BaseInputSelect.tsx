@@ -4,7 +4,7 @@ import { Select, SelectArrow, SelectOptions } from 'ariakit';
 import { useBaseInputProps } from 'components/BaseInput/useBaseInputProps';
 import { OmitHtmlInputComponentProps } from 'types/input-component.types';
 import { PlaceholderElement } from './BaseInput.styles';
-import { BaseInput, BaseInputBaseProps } from './BaseInput';
+import { BaseInputBaseProps } from './BaseInput';
 
 export type BaseInputSelectProps = {
   state: SelectOptions['state'];

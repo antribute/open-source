@@ -5,7 +5,6 @@ import { TableBody } from 'components/Table/components/TableBody';
 import { DataRow } from 'components/Table/components/DataRow';
 import { DataCell } from 'components/Table/components/DataCell';
 import { HeaderCell } from 'components/Table/components/HeaderCell';
-import { TableContainer } from 'components/Table/components/TableContainer';
 import { THeaderElement } from 'components/Table/components/THeaderElement';
 import { TableElement } from 'components/Table/components/TableElement';
 import type { RowData } from '@tanstack/react-table';

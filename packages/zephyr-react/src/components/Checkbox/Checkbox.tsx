@@ -17,7 +17,7 @@ export const Checkbox = ({ label, ...props }: CheckboxProps) => {
 
   if (label) {
     return (
-      <CheckboxInputElement width="fixed" {...inputContainerProps}>
+      <CheckboxInputElement {...inputContainerProps}>
         <CheckboxElement type="checkbox" {...inputComponentProps} focusRing={false} />
         {label && (
           <span

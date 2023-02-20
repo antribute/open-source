@@ -43,8 +43,8 @@ export const parameters: Parameters = {
   backgrounds: {
     disable: true,
     values: [
-      { name: 'light', value: colors.body },
-      { name: 'dark', value: colors['body-inverted'] },
+      { name: 'light', value: colors.base.DEFAULT },
+      { name: 'dark', value: colors.base.inverse },
     ],
   },
 };
@@ -68,7 +68,7 @@ const withThemeProvider: Decorator = (Story, context) => {
         height: '100%',
         minHeight: '100vh',
         padding: '10px',
-        background: isDarkMode ? colors['body-inverted'] : colors.body,
+        background: isDarkMode ? colors.base.inverse : colors.base.DEFAULT,
       }}
     >
       <Story {...context} />

@@ -1,8 +1,10 @@
 import { colors } from '@antribute/zephyr-core';
+import { color } from '@storybook/theming';
 import { capitalCase } from 'change-case';
 
 export const Colors = () => {
   const colorList = getColorGroupArray();
+  console.log('COLOR LIST', colorList);
   return (
     <div>
       {colorList.map(({ colorName, colorList }) => (
@@ -19,12 +21,12 @@ export const Colors = () => {
 const ColorBlock = ({ label, color }: { label: string; color: string }) => {
   return (
     <div>
-      <div className="text-content-weak dark:text-content-inverse-weak  pb-8  text-md ">
+      <div className="pb-8 text-md  text-content-weak  dark:text-content-inverse-weak ">
         <span className="mr-8"> {label}:</span>
         <span className="text-center text-sm">{color}</span>
       </div>
       <div
-        className="text-white relative  flex h-104 w-104 shrink-0 items-center justify-center rounded-md shadow-sm "
+        className="relative flex  h-104 w-104 shrink-0 items-center justify-center rounded-md text-white shadow-sm "
         style={{ background: color }}
       />
     </div>
@@ -41,7 +43,7 @@ const ColorGroupContainer = ({
   return (
     <div className="pb-24">
       {title && (
-        <div className="text-gray decoration-gray select-none pb-16 font-body underline underline-offset-4">
+        <div className="select-none pb-16 font-body text-gray underline decoration-gray underline-offset-4">
           {capitalCase(title)}
         </div>
       )}
@@ -51,8 +53,14 @@ const ColorGroupContainer = ({
 };
 
 function getColorGroupArray() {
-  return Object.entries(colors).map(([colorName, colorMap]) => {
-    const colorList = Object.entries(colorMap as object).map(([colorName, color]) => {
+  return Object.entries(colors).map(([colorName, colorValue]) => {
+    if (typeof colorValue === 'string') {
+      return {
+        colorList: [{ colorName, color: colorValue }],
+      };
+    }
+
+    const colorList = Object.entries(colorValue as object).map(([colorName, color]) => {
       return {
         colorName,
         color: color as string,

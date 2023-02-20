@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable prefer-destructuring */
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
-import { twMerge } from 'tailwind-merge';
 import clsx from 'clsx';
 import React from 'react';
 import { NavigationMenuContentLink } from 'components/NavigationMenu/NavigationMenu.ContentLink';
@@ -9,7 +8,6 @@ import {
   NavigationMenuListElement,
   NavigationMenuListElementProps,
   NavigationMenuTriggerElement,
-  NavigationMenuTriggerElementProps,
   NavigationMenuContentElement,
   NavigationMenuLinkElement,
   NavigationMenuIndicatorElement,

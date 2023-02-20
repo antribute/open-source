@@ -12,7 +12,7 @@ type ListContainerElementProps = React.ComponentProps<typeof ListContainerElemen
 const ListContainerElement = classed(
   'ul',
   'group',
-  'border-divider-weak/50 dark:border-divider-inverse-weak/50',
+  'border-boundary dark:border-boundary-inverse',
   {
     variants: {
       border: {

@@ -10,7 +10,7 @@ export type PaperElementProps = React.ComponentProps<typeof PaperElement>;
 export const PaperElementBackground = classed('div', {
   variants: {
     border: {
-      true: 'border border-solid border-gray/10 dark:border-white/5',
+      true: 'border border-solid border-boundary-subtle dark:border-boundary-inverse-subtle',
     },
     hoverHighlight: {
       true: classTheme({
@@ -35,10 +35,12 @@ export const PaperElementBackground = classed('div', {
         light: 'bg-surface-800',
         dark: 'dark:bg-surface-inverse-600',
       }),
-      'surface-neutral': clsx('border-black/10 bg-surface-neutral text-content-inverse-strong'),
-      'surface-neutral-light': clsx(
-        'border-black/10 bg-surface-neutral-light text-content-inverse-strong'
+      'surface-neutral': clsx(
+        'bg-surface-neutral text-content-inverse-strong',
+        'border-boundary-intense',
+        'dark:border-boundary-inverse-intense'
       ),
+      'surface-neutral-light': clsx('bg-surface-neutral-light text-content-inverse-strong'),
     },
   },
   compoundVariants: [

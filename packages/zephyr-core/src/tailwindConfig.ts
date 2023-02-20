@@ -6,7 +6,7 @@ import tailwindCssFormsPlugin from '@tailwindcss/forms';
 import type { Config } from 'tailwindcss';
 // eslint-disable-next-line import/extensions
 import defaultTailwindTheme from 'tailwindcss/defaultTheme';
-import { colors as colorPalette } from './colors';
+import { colors as colorPalette } from './colors/colors';
 import { keyframes } from './keyframes';
 import { animation } from './animation';
 

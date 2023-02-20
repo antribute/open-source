@@ -1,4 +1,4 @@
-import { Classed, classed } from 'utils/classed';
+import { classed } from 'utils/classed';
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
 
 // List

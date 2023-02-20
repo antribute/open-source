@@ -1,8 +1,7 @@
 import { classed } from '@tw-classed/react';
-import { BaseInputElement, PlaceholderElement } from 'components/BaseInput/BaseInput.styles';
+import { BaseInputElement } from 'components/BaseInput/BaseInput.styles';
 import {
   InputComponentWidthVariant,
-  InputSizeVariant,
   inputComponentVariants,
 } from 'styles/input-component.variants';
 import { Classed } from 'utils/classed';
