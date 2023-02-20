@@ -54,7 +54,7 @@ export type DialogHeadingElementProps = React.ComponentProps<typeof DialogHeadin
 
 export const DialogHeadingElement = classed(
   DialogPrimitive.Title,
-  'text-md font-heading text-content-strong dark:text-content-inverse-strong',
+  'text-md font-heading text-content-intense dark:text-content-inverse-intense',
   {
     variants: {},
   }
@@ -84,7 +84,7 @@ export const DialogTitleElement = classed(
   DialogPrimitive.Title,
   DialogHeadingElement,
   'flex relative w-full',
-  'border-b border-boundary-faint dark:border-boundary-inverse pb-8 text-content dark:text-content-inverse-strong',
+  'border-b border-boundary-faint dark:border-boundary-inverse pb-8 text-content dark:text-content-inverse-intense',
   {
     variants: {},
   }

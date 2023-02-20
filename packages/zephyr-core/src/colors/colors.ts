@@ -136,16 +136,18 @@ export const colors = {
   content: generateHexAlphaColorGroup('#15181E', { overrides: { DEFAULT: 'high' } }),
   'content-inverse': contentInverse,
 
-  boundary: {
-    intense: base.inverse,
-    ...generateHexAlphaColorGroup(oxfordBlue[300], { overrides: { DEFAULT: 'subtle' } }),
-  },
-  'boundary-inverse': {
-    intense: contentInverse.weak,
-    ...generateHexAlphaColorGroup(oxfordBlue.DEFAULT, {
-      overrides: { DEFAULT: 'subtle' },
-    }),
-  },
+  boundary: generateHexAlphaColorGroup(oxfordBlue[300], {
+    overrides: {
+      intense: base.inverse,
+      DEFAULT: 'subtle',
+    },
+  }),
+  'boundary-inverse': generateHexAlphaColorGroup(oxfordBlue.DEFAULT, {
+    overrides: {
+      intense: contentInverse.weak,
+      DEFAULT: 'subtle',
+    },
+  }),
   divider: generateHexAlphaColorGroup('#BDC0C7'),
   'divider-inverse': generateHexAlphaColorGroup('#3F4550'),
 

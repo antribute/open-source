@@ -36,11 +36,11 @@ export const PaperElementBackground = classed('div', {
         dark: 'dark:bg-surface-inverse-600',
       }),
       'surface-neutral': clsx(
-        'bg-surface-neutral text-content-inverse-strong',
+        'text-content-inverse-intense bg-surface-neutral',
         'border-boundary-intense',
         'dark:border-boundary-inverse-intense'
       ),
-      'surface-neutral-light': clsx('bg-surface-neutral-light text-content-inverse-strong'),
+      'surface-neutral-light': clsx('text-content-inverse-intense bg-surface-neutral-light'),
     },
   },
   compoundVariants: [

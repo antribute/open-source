@@ -47,5 +47,6 @@ export const hexAlphaPresets = {
   weak: '50',
   moderate: '70',
   high: '90',
-  strong: '100',
+  strong: '95',
+  intense: '100',
 } satisfies Record<string, HexAlphaCode>;

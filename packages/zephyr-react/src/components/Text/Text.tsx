@@ -9,7 +9,7 @@ export const Text = classed('span', 'text-content dark:text-content-inverse', {
       weak: 'text-content-weak dark:text-content-inverse-weak',
       moderate: 'text-content-moderate dark:text-content-inverse-moderate',
       high: 'text-content-high dark:text-content-inverse-high',
-      strong: 'text-content-strong dark:text-content-inverse-strong',
+      strong: 'text-content-intense dark:text-content-inverse-intense',
     },
   },
 

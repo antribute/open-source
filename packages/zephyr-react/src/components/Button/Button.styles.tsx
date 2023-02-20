@@ -100,7 +100,7 @@ export const ButtonElement = classed.button(
           '!bg-surface-neutral',
           'hover:border-surface-neutral',
           'hover:bg-surface-neutral-dark',
-          'dark:text-content-inverse-strong/80',
+          'dark:text-content-inverse-intense/80',
           'focus:ring-black/30 dark:focus:ring-white/30'
         ),
       },
@@ -110,16 +110,16 @@ export const ButtonElement = classed.button(
         color: 'inverse',
         class: classTheme({
           light: [
-            'bg-content-strong',
-            'text-content-inverse-strong',
+            'bg-content-intense',
+            'text-content-inverse-intense',
             'hover:border-content-moderate',
             'hover:bg-content-moderate',
             'focus:ring-black/30',
           ],
           dark: [
-            'dark:bg-content-inverse-strong',
+            'dark:bg-content-inverse-intense',
             'dark:text-surface-neutral-soft',
-            'dark:hover:border-content-inverse-strong',
+            'dark:hover:border-content-inverse-intense',
             'dark:hover:bg-gray-soft',
             'dark:focus:ring-white/50',
           ],
@@ -133,7 +133,7 @@ export const ButtonElement = classed.button(
             'bg-surface hover:bg-surface-100 border',
             'text-content-moderate',
             'border-black/10 hover:border-black/10',
-            'focus:ring-content-strong',
+            'focus:ring-content-intense',
           ],
           dark: [
             'dark:bg-surface-inverse dark:hover:bg-surface-inverse-light',

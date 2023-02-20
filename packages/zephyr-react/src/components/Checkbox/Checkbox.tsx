@@ -23,8 +23,8 @@ export const Checkbox = ({ label, ...props }: CheckboxProps) => {
           <span
             className={classTheme({
               class: 'font-bold select-none',
-              light: 'text-content-strong peer-checked:text-content-weak',
-              dark: 'dark:text-content-inverse-strong  dark:peer-checked:text-content-inverse-weak',
+              light: 'text-content-intense peer-checked:text-content-weak',
+              dark: 'dark:text-content-inverse-intense  dark:peer-checked:text-content-inverse-weak',
             })}
           >
             {label}

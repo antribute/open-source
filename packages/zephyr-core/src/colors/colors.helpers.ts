@@ -1,3 +1,5 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { LiteralUnion } from 'type-fest';
 import {
   ColorScaleKey,
   HexAlphaPreset,
@@ -35,9 +37,13 @@ export function generateHexAlpha(hex: string, transparency: HexAlphaPreset) {
   return `${hex}${hexAlphaCode}`;
 }
 
+type HexAlphaOverrideValue = LiteralUnion<HexAlphaPreset, string>;
+
+type HexAlphaOverrides = Partial<Record<HexAlphaPreset | 'DEFAULT', HexAlphaOverrideValue>>;
+
 export function generateHexAlphaColorGroup(
   hex: string,
-  options?: { overrides?: Partial<Record<HexAlphaPreset | 'DEFAULT', HexValue | HexAlphaPreset>> }
+  options?: { overrides?: HexAlphaOverrides }
 ): Record<HexAlphaPreset | 'DEFAULT', string> {
   const colorGroup = {
     faint: generateHexAlpha(hex, 'faint'),
@@ -45,7 +51,9 @@ export function generateHexAlphaColorGroup(
     weak: generateHexAlpha(hex, 'weak'),
     moderate: generateHexAlpha(hex, 'moderate'),
     high: generateHexAlpha(hex, 'high'),
-    strong: hex,
+    strong: generateHexAlpha(hex, 'high'),
+
+    intense: hex,
     DEFAULT: hex,
   };
 

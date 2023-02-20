@@ -2,12 +2,12 @@ import clsx from 'clsx';
 
 export const colorVariants = {
   text: {
-    primary: clsx('text-content-strong dark:text-content-inverse-strong'),
+    primary: clsx('text-content-intense dark:text-content-inverse-intense'),
     secondary: clsx('text-secondary'),
     positive: clsx('text-positive'),
     danger: clsx('text-danger'),
     caution: clsx('text-caution'),
-    neutral: clsx('dark:text-surface-inverse-strong text-content-inverse-moderate'),
+    neutral: clsx('dark:text-surface-inverse-intense text-content-inverse-moderate'),
     surface: clsx('text-content-moderate dark:text-content-inverse-moderate'),
   },
   bg: {

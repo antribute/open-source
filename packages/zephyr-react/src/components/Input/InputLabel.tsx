@@ -8,7 +8,7 @@ export type InputLabelElementProps = React.ComponentProps<typeof InputLabelEleme
 
 const InputLabelElement = classed(
   'label',
-  'text-content-strong dark:text-content-inverse-moderate text-left',
+  'text-content-intense dark:text-content-inverse-moderate text-left',
   'mb-6 text-sm inline-block  font-medium select-none text-gray-900 leading-xs',
   {
     variants: {

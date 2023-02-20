@@ -15,7 +15,7 @@ export const BaseListItem = classed.span(
       highlight: {
         true: clsx(
           'bg-surface-soft dark:bg-surface-inverse-light/80',
-          'text-content-strong dark:text-content-inverse-strong'
+          'text-content-intense dark:text-content-inverse-intense'
         ),
         false: 'bg-transparent',
       },
@@ -23,7 +23,7 @@ export const BaseListItem = classed.span(
       hoverable: {
         true: clsx(
           'cursor-pointer hover:bg-surface-soft dark:hover:bg-surface-inverse-light/80',
-          'hover:text-content-strong dark:hover:text-content-inverse-strong'
+          'hover:text-content-intense dark:hover:text-content-inverse-intense'
         ),
       },
       gap: {

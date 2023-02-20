@@ -11,7 +11,7 @@ export type BaseInputElementProps = React.ComponentProps<typeof BaseInputElement
 export const placeholderClassName = classTheme({
   class: ['font-medium', 'placeholder:select-none placeholder:font-body'],
   light: [
-    'text-content-strong',
+    'text-content-intense',
     'placeholder:text-content-moderate/30 focus:placeholder:text-content-moderate/40',
   ],
   dark: [
@@ -45,17 +45,17 @@ export const BaseInputElement = classed(
     light: [
       'bg-surface', // bg
       'text-content-moderate focus-withen:', // text
-      'border-boundary-subtle focus-within:border-content-strong', // border
+      'border-boundary-subtle focus-within:border-content-intense', // border
       'shadow-gray-light/20', // shadow
       '', /// ring
-      ' focus-within:ring-content-strong', // focus
+      ' focus-within:ring-content-intense', // focus
     ],
     dark: [
       'dark:bg-surface-inverse', // bg
       'dark:text-content-inverse-moderate', // text
       'dark:border-boundary-inverse-subtle dark:focus-within:border-boundary-inverse-intense', // border
       'dark:shadow-surface-inverse/50', // shadow
-      'dark:focus-within:ring-boundary-inverse-strong', // ring
+      'dark:focus-within:ring-boundary-inverse-intense', // ring
       // 'dark:ring-surface-inverse', // ring
       // 'dark:focus-within:ring-surface-inverse',
       '',
