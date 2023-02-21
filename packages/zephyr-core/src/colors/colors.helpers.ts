@@ -37,7 +37,9 @@ export function generateHexAlpha(hex: string, transparency: HexAlphaPreset) {
   return `${hex}${hexAlphaCode}`;
 }
 
-type HexAlphaOverrideValue = LiteralUnion<HexAlphaPreset, string>;
+type HexAlphaOverrideValue =
+  | LiteralUnion<HexAlphaPreset, string>
+  | { transparency: HexAlphaPreset; hex: string };
 
 type HexAlphaOverrides = Partial<Record<HexAlphaPreset | 'DEFAULT', HexAlphaOverrideValue>>;
 
@@ -46,19 +48,23 @@ export function generateHexAlphaColorGroup(
   options?: { overrides?: HexAlphaOverrides }
 ): Record<HexAlphaPreset | 'DEFAULT', string> {
   const colorGroup = {
-    faint: generateHexAlpha(hex, 'faint'),
+    tint: generateHexAlpha(hex, 'tint'),
+    ghost: generateHexAlpha(hex, 'ghost'),
     subtle: generateHexAlpha(hex, 'subtle'),
     weak: generateHexAlpha(hex, 'weak'),
     moderate: generateHexAlpha(hex, 'moderate'),
     high: generateHexAlpha(hex, 'high'),
-    strong: generateHexAlpha(hex, 'high'),
-
+    strong: generateHexAlpha(hex, 'strong'),
     intense: hex,
     DEFAULT: hex,
   };
 
   const overrides = Object.fromEntries(
     Object.entries(options?.overrides ?? {}).map(([key, value]) => {
+      if (typeof value === 'object') {
+        return [key, generateHexAlpha(value.hex, value.transparency)];
+      }
+
       if (value in hexAlphaPresets) {
         return [key, generateHexAlpha(hex, value as HexAlphaPreset)];
       }

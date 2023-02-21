@@ -111,7 +111,7 @@ export const StackedAvatarGroup = () => {
           ))}
         </AvatarGroup.Root>
       </Paper>
-      <Paper color="surface-neutral" border>
+      <Paper color="neutral" border>
         <AvatarGroup.Root stacked border={false}>
           {users.map(({ name }) => (
             <AvatarGroup.Avatar label={name} />

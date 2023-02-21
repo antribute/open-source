@@ -18,7 +18,7 @@ console.log(
 );
 const AvatarElement = classed(
   'span',
-  'rounded-md select-none border-base dark:border-base-inverse flex items-center justify-center overflow-hidden relative bg-surface-neutral text-white shrink-0 isolate',
+  'rounded-md select-none border-base dark:border-base-inverse flex items-center justify-center overflow-hidden relative bg-neutral text-white shrink-0 isolate',
   {
     variants: {
       size: mergeVariants([sizeVariants.textSize, sizeVariants.width, sizeVariants.height]),
@@ -38,8 +38,8 @@ const AvatarElement = classed(
         true: clsx('hover:border-boundary-subtle dark:hover:border-boundary-inverse-subtle'),
       },
       color: {
-        default: 'bg-surface-neutral',
-        alternate: 'bg-surface-neutral-light dark:bg-surface-neutral-light',
+        default: 'bg-neutral',
+        alternate: 'bg-neutral-light dark:bg-neutral-light',
       },
     },
     defaultVariants: {
@@ -88,17 +88,19 @@ export const Avatar = ({
 
   const loading = loadingStatus === 'loading';
 
-  const colorClass = stringToDistinctColorClass(label, {
-    classTokens: ['bg'],
-    defaultClassTokens: {
+  const colorClass = stringToDistinctColorClass(
+    label,
+    {
       bg: clsx({
-        'bg-surface dark:bg-surface-neutral-50': color === 'default',
-        'bg-primary-400 border-primary-200 dark:bg-primary-600 dark:border-primary-800':
+        'bg-surface dark:bg-neutral-50': color === 'default',
+        'bg-neutral-400 border-neutral-200 dark:bg-neutral-600 dark:border-neutral-800':
           color === 'alternate',
       }),
     },
-    forceDefaultClass: color !== 'default' || Boolean(src),
-  });
+    {
+      forceDefaultClass: color !== 'default' || Boolean(src),
+    }
+  );
 
   return (
     <Wrap
@@ -213,7 +215,7 @@ const ImageLoadingOverlayElement = classed(
   'div',
   'absolute top-0 z-10',
   'h-full w-full',
-  'bg-surface-soft dark:bg-surface-neutral-50',
+  'bg-surface-soft dark:bg-neutral-50',
   'transition-opacity delay-150  ease-in-out duration-1000',
   'opacity-0',
   {

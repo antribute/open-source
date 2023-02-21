@@ -37,9 +37,9 @@ export const Default = () => {
           Data item
         </Paper>
       </Paper>
-      <Paper color="surface-neutral" className="mb-38 flex h-200 w-200 flex-col gap-8">
+      <Paper color="neutral" className="mb-38 flex h-200 w-200 flex-col gap-8">
         <div> Title</div>
-        <Paper color="surface-neutral-light" className="h-full grow">
+        <Paper color="neutral-light" className="h-full grow">
           Data item
         </Paper>
       </Paper>
@@ -49,8 +49,8 @@ export const Default = () => {
         <PaperRow color="surface-light" />
 
         <PaperRow color="surface-dark" />
-        <PaperRow color="surface-neutral" />
-        <PaperRow color="surface-neutral-light" />
+        <PaperRow color="neutral" />
+        <PaperRow color="neutral-light" />
       </div>
     </div>
   );

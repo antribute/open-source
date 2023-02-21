@@ -11,7 +11,12 @@ const PrimitiveBaseInputElement = classed(
   'bg-transparent',
   'border-none',
   'focus:ring-0 ring-0',
-  'focus:outline-none outline-none'
+  'focus:outline-none outline-none',
+  {
+    defaultVariants: {
+      placeholderSelector: true,
+    },
+  }
 );
 
 type PrimitiveBaseInputBaseProps = React.ComponentProps<typeof PrimitiveBaseInputElement>;

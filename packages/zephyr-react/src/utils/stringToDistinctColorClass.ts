@@ -1,40 +1,42 @@
 import clsx from 'clsx';
+import { pick } from 'lodash-es';
 import { twMerge } from 'tailwind-merge';
 import { stringToArrayElement } from 'utils/hash';
+import { notEmpty } from 'utils/notEmpty';
 
 const distinctColors = {
   bg: {
-    fallback: 'bg-surface-neutral',
+    fallback: 'bg-neutral-500',
     colors: [
-      'bg-distinct-1',
-      'bg-distinct-2',
-      'bg-distinct-3',
-      'bg-distinct-4',
-      'bg-distinct-5',
-      'bg-distinct-6',
-      'bg-distinct-7',
-      'bg-distinct-8',
-      'bg-distinct-9',
-      'bg-distinct-10',
-      'bg-distinct-11',
-      'bg-distinct-12',
+      'bg-various-blue',
+      'bg-various-emerald',
+      'bg-various-orange',
+      'bg-various-fuchsia',
+      'bg-various-yellow',
+      'bg-various-rose',
+      'bg-various-cyan',
+      'bg-various-violet',
+      'bg-various-teal',
+      'bg-various-pink',
+      'bg-various-lime',
+      'bg-various-gray',
     ],
   },
   text: {
-    fallback: 'text-surface-neutral',
+    fallback: 'text-neutral-500',
     colors: [
-      'text-distinct-1',
-      'text-distinct-2',
-      'text-distinct-3',
-      'text-distinct-4',
-      'text-distinct-5',
-      'text-distinct-6',
-      'text-distinct-7',
-      'text-distinct-8',
-      'text-distinct-9',
-      'text-distinct-10',
-      'text-distinct-11',
-      'text-distinct-12',
+      'text-various-blue',
+      'text-various-emerald',
+      'text-various-orange',
+      'text-various-fuchsia',
+      'text-various-yellow',
+      'text-various-rose',
+      'text-various-cyan',
+      'text-various-violet',
+      'text-various-teal',
+      'text-various-pink',
+      'text-various-lime',
+      'text-various-gray',
     ],
   },
 } satisfies Record<
@@ -53,20 +55,32 @@ type DistinctColorTokenKey = keyof typeof distinctColors;
  * @param str - The input string to hash.
  * @returns A `distinct-{color}` Tailwind CSS color class that is unique for the input string.
  */
-export function stringToDistinctColorClass<TColorTokenKeys extends DistinctColorTokenKey[]>(
+export function stringToDistinctColorClass<
+  TPickColorToken extends Partial<Record<DistinctColorTokenKey, boolean | string>>
+>(
   str: string | undefined,
-  options: {
-    classTokens: TColorTokenKeys;
-    defaultClassTokens?: { [K in DistinctColorTokenKey]?: string };
+  classTokensMap: TPickColorToken,
+  options?: {
     forceDefaultClass?: boolean;
   }
 ) {
-  const { classTokens, defaultClassTokens, forceDefaultClass } = options;
+  const { forceDefaultClass } = options ?? {};
 
-  const classArr = classTokens.map((key) => {
+  const classTokenKeys = Object.entries(classTokensMap)
+    .map(([key, value]) => {
+      return value ? (key as DistinctColorTokenKey) : undefined;
+    })
+    .filter(notEmpty);
+
+  const classArr = classTokenKeys.map((key) => {
     const { colors, fallback: defaultFallback } = distinctColors[key];
 
-    const fallback = defaultClassTokens?.[key] ?? defaultFallback;
+    const defaultClassTokenValue = classTokensMap[key];
+
+    const defaultClassToken =
+      typeof defaultClassTokenValue === 'string' ? defaultClassTokenValue : undefined;
+
+    const fallback = defaultClassToken ?? defaultFallback;
 
     if (forceDefaultClass) {
       return fallback;
@@ -74,7 +88,6 @@ export function stringToDistinctColorClass<TColorTokenKeys extends DistinctColor
 
     const element = stringToArrayElement(str, colors, fallback);
 
-    console.log({ element });
     return element;
   });
 

@@ -1,12 +1,15 @@
 import { colors } from '@antribute/zephyr-core';
 import { color } from '@storybook/theming';
 import { capitalCase } from 'change-case';
+import { Paper } from 'components/Paper';
+import { StatusBadge } from 'components/StatusBadge';
+import { Text } from 'components/Text';
 
 export const Colors = () => {
   const colorList = getColorGroupArray();
   console.log('COLOR LIST', colorList);
   return (
-    <div>
+    <div className="space-y-16 p-8">
       {colorList.map(({ colorName, colorList }) => (
         <ColorGroupContainer title={colorName}>
           {colorList.map(({ color, colorName }) => (
@@ -41,14 +44,17 @@ const ColorGroupContainer = ({
   children: React.ReactNode;
 }) => {
   return (
-    <div className="pb-24">
+    <Paper border className="w-full pb-24">
       {title && (
-        <div className="select-none pb-16 font-body text-gray underline decoration-gray underline-offset-4">
-          {capitalCase(title)}
+        <div className="flex  select-none gap-16 pb-16 font-body font-bold text-content-intense dark:text-content-inverse-intense">
+          <div> {capitalCase(title)} </div>
+          <StatusBadge size="xs" color="surface">
+            {title}
+          </StatusBadge>
         </div>
       )}
       <div className="flex flex-wrap gap-24">{children}</div>
-    </div>
+    </Paper>
   );
 };
 

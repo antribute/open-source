@@ -4,17 +4,11 @@ import {
   generateColorGroup,
   generateHexAlphaColorGroup,
 } from './colors.helpers';
+import { variousColors } from './variousColors';
 
 const black = '#000000';
 
 const white = '#FFFFFF';
-
-const slate = generateColorGroup(tailwindColors.slate)({
-  DEFAULT: '500',
-  dark: '600',
-  light: '300',
-  soft: '100',
-});
 
 const surface = generateColorGroup(
   arrayToColorGroup([
@@ -46,7 +40,7 @@ const surfaceInverse = generateColorGroup(
   ])
 )({ DEFAULT: '400', dark: '700', light: '300', soft: '900' });
 
-const oxfordBlue = generateColorGroup({
+const neutral = generateColorGroup({
   '50': '#f6f7f9',
   '100': '#eceef2',
   '200': '#d4dae3',
@@ -65,7 +59,7 @@ const oxfordBlue = generateColorGroup({
 });
 
 const contentInverse = generateHexAlphaColorGroup('#e3e5e8', {
-  overrides: { strong: white, DEFAULT: '#d2d4d7' },
+  overrides: { intense: white, DEFAULT: '#d2d4d7' },
 });
 
 const base = {
@@ -77,20 +71,15 @@ export const colors = {
   white,
   black,
   base,
-  primary: oxfordBlue,
+  neutral,
+  primary: neutral,
 
-  secondary: generateColorGroup({
-    '50': '#fdf5ef',
-    '100': '#fbe7d9',
-    '200': '#f7ccb1',
-    '300': '#f1a87e',
-    '400': '#eb7d4c',
-    '500': '#e55c2a',
-    '600': '#d7431f',
-    '700': '#b2321c',
-    '800': '#8e2a1e',
-    '900': '#73241b',
-  })({ DEFAULT: '500', dark: '600', light: '300', soft: '100' }),
+  info: generateColorGroup(tailwindColors.cyan)({
+    DEFAULT: '500',
+    dark: '600',
+    light: '300',
+    soft: '100',
+  }),
 
   caution: generateColorGroup({
     '50': '#ffffea',
@@ -132,40 +121,35 @@ export const colors = {
     soft: '100',
   }),
 
-  slate,
-  content: generateHexAlphaColorGroup('#15181E', { overrides: { DEFAULT: 'high' } }),
+  content: generateHexAlphaColorGroup('#15181E', {
+    overrides: {
+      DEFAULT: 'high',
+      ghost: { hex: neutral['500'], transparency: 'ghost' },
+    },
+  }),
+
   'content-inverse': contentInverse,
 
-  boundary: generateHexAlphaColorGroup(oxfordBlue[300], {
-    overrides: {
-      intense: base.inverse,
-      DEFAULT: 'subtle',
-    },
-  }),
-  'boundary-inverse': generateHexAlphaColorGroup(oxfordBlue.DEFAULT, {
-    overrides: {
-      intense: contentInverse.weak,
-      DEFAULT: 'subtle',
-    },
-  }),
-  divider: generateHexAlphaColorGroup('#BDC0C7'),
-  'divider-inverse': generateHexAlphaColorGroup('#3F4550'),
-
-  border: {
-    DEFAULT: '#BDC0C7',
-    weak: '#D3D5D9',
-    moderate: '#BDC0C7',
-    strong: '#A7ABB4',
+  boundary: {
+    focus: base.inverse,
+    ...generateHexAlphaColorGroup(neutral[300], {
+      overrides: {
+        DEFAULT: 'subtle',
+      },
+    }),
   },
 
-  'border-inverse': {
-    DEFAULT: '#3F4550',
-    weak: '#2B303B',
-    moderate: '#464c57',
-    strong: '#535965',
+  'boundary-inverse': {
+    focus: contentInverse.weak,
+    ...generateHexAlphaColorGroup(neutral.DEFAULT, {
+      overrides: {
+        DEFAULT: 'subtle',
+      },
+    }),
   },
 
   surface,
+
   'surface-inverse': surfaceInverse,
 
   'surface-neutral': generateColorGroup({
@@ -185,17 +169,19 @@ export const colors = {
   })({ DEFAULT: 'DEFAULT', dark: '700', light: '300', soft: '100' }),
 
   distinct: {
-    '1': tailwindColors.blue['500'],
-    '2': tailwindColors.emerald['500'],
-    '3': tailwindColors.orange['500'],
-    '4': tailwindColors.fuchsia['500'],
-    '5': tailwindColors.yellow['500'],
-    '6': tailwindColors.rose['500'],
-    '7': tailwindColors.cyan['500'],
-    '8': tailwindColors.violet['500'],
-    '9': tailwindColors.teal['500'],
-    '10': tailwindColors.pink['500'],
-    '11': tailwindColors.lime['500'],
-    '12': tailwindColors.gray['500'],
+    '1': variousColors['various-blue'].DEFAULT,
+    '2': variousColors['various-emerald'].DEFAULT,
+    '3': variousColors['various-orange'].DEFAULT,
+    '4': variousColors['various-fuchsia'].DEFAULT,
+    '5': variousColors['various-yellow'].DEFAULT,
+    '6': variousColors['various-rose'].DEFAULT,
+    '7': variousColors['various-cyan'].DEFAULT,
+    '8': variousColors['various-violet'].DEFAULT,
+    '9': variousColors['various-teal'].DEFAULT,
+    '10': variousColors['various-pink'].DEFAULT,
+    '11': variousColors['various-lime'].DEFAULT,
+    '12': variousColors['various-gray'].DEFAULT,
   },
+
+  ...variousColors,
 } satisfies Record<string, string | Record<string, string>>;

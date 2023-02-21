@@ -22,7 +22,7 @@ function RootPage() {
       </p>
       <div className="flex">
         <a
-          className="text-md font-body text-primary hover:text-primary-light"
+          className="text-md font-body text-neutral hover:text-neutral-light"
           href="https://linkedin.com/company/antribute"
           onClick={() => track('index-linkedin-click')}
           rel="noopener noreferrer"
@@ -32,7 +32,7 @@ function RootPage() {
         </a>
         <div className="w-16" />
         <a
-          className="text-md font-body text-primary hover:text-primary-light"
+          className="text-md font-body text-neutral hover:text-neutral-light"
           href="https://twitter.com/antribute"
           onClick={() => track('index-twitter-click')}
           rel="noopener noreferrer"

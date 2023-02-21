@@ -84,7 +84,7 @@ export type NavigationMenuViewPortElementProps = React.ComponentProps<
 export const NavigationMenuViewPortElement = classed(
   NavigationMenuPrimitive.Viewport,
   'relative mt-16  overflow-hidden rounded-lg bg-surface-50 shadow-2xl shadow-surface-light/30 dark:shadow-surface-inverse-light/30 dark:bg-surface-inverse-soft',
-  'border border-divider-weak/25 dark:border-divider-inverse-moderate/25',
+  'border border-boundary-weak/25 dark:border-boundary-inverse-moderate/25',
   // 'max-w-screen-xl',
   // 'min-w-[30vw]',
   'w-full',

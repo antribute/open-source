@@ -1,11 +1,10 @@
 import React, { useState, useMemo, useCallback, useEffect } from 'react';
-import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
 import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { ColorProp } from 'types/styles';
-import { Classed, classed } from 'utils/classed';
 import {
   getToggleItemBorderWidth,
+  ToggleGroupElement,
+  ToggleGroupElementVariantProps,
   ToggleGroupItemElement,
   ToggleGroupItemElementVariantProps,
 } from './ToggleGroup.styles';
@@ -15,22 +14,6 @@ export interface ToggleGroupItem<T extends string | number = string> {
   value: T;
   label: React.ReactNode;
 }
-
-const defaultColor: ColorProp = 'primary';
-
-type ToggleGroupElementVariantProps = Classed.VariantProps<typeof ToggleGroupElement>;
-
-const ToggleGroupElement = classed(
-  ToggleGroupPrimitive.ToggleGroup,
-  'inline-flex shadow-sm rounded-md',
-  {
-    variants: {
-      fullWidth: {
-        true: 'flex w-full',
-      },
-    },
-  }
-);
 
 export interface ToggleGroupProps<T extends string = string>
   extends ToggleGroupItemElementVariantProps,
@@ -81,6 +64,7 @@ export function ToggleGroup(props: ToggleGroupProps) {
   return (
     <ToggleGroupElement
       type="single"
+      id="toggle-group"
       value={selectedValue}
       onValueChange={handleValueChange}
       disabled={disabled}
@@ -115,7 +99,7 @@ const Item = ({
   index: number;
   selectedIndex: number;
 } & Pick<ToggleGroupProps, 'color' | 'fontWeight' | 'size' | 'disabled' | 'items'>) => {
-  const { color = defaultColor, disabled, size = 'md' } = props;
+  const { color = 'neutral', disabled, size = 'md' } = props;
   const { value, label } = item;
 
   const elementPositonData = getElementPositionData({

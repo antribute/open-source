@@ -25,22 +25,22 @@ export const PaperElementBackground = classed('div', {
       }),
       'surface-soft': classTheme({
         light: 'bg-surface-100',
-        dark: 'dark:bg-surface-inverse-soft text-surface-neutral-dark',
+        dark: 'dark:bg-surface-inverse-soft text-neutral-dark',
       }),
       'surface-light': classTheme({
-        light: 'bg-surface-light text-surface-neutral-dark',
+        light: 'bg-surface-light text-neutral-dark',
         dark: 'dark:bg-surface-inverse-light',
       }),
       'surface-dark': classTheme({
         light: 'bg-surface-800',
         dark: 'dark:bg-surface-inverse-600',
       }),
-      'surface-neutral': clsx(
-        'text-content-inverse-intense bg-surface-neutral',
+      neutral: clsx(
+        'bg-neutral text-content-inverse-intense',
         'border-boundary-intense',
         'dark:border-boundary-inverse-intense'
       ),
-      'surface-neutral-light': clsx('text-content-inverse-intense bg-surface-neutral-light'),
+      'neutral-light': clsx('bg-neutral-light text-content-inverse-intense'),
     },
   },
   compoundVariants: [
@@ -65,9 +65,9 @@ export const PaperElementBackground = classed('div', {
       class: 'hover:bg-surface-light dark:hover:bg-surface-inverse-700',
     },
     {
-      color: 'surface-neutral',
+      color: 'neutral',
       hoverHighlight: true,
-      class: 'dark:hover:bg-surface-neutral-dark',
+      class: 'dark:hover:bg-neutral-dark',
     },
   ],
   defaultVariants: {

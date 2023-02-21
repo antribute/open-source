@@ -70,7 +70,7 @@ export const ButtonElement = classed.button(
               'surface',
               'inverse',
               'primary',
-              'secondary',
+              'info',
               'positive',
               'danger',
               'caution',
@@ -93,17 +93,17 @@ export const ButtonElement = classed.button(
     compoundVariants: [
       // Contained
       { variant: 'contained', class: 'text-white' },
-      {
-        variant: 'contained',
-        color: 'neutral',
-        class: clsx(
-          '!bg-surface-neutral',
-          'hover:border-surface-neutral',
-          'hover:bg-surface-neutral-dark',
-          'dark:text-content-inverse-intense/80',
-          'focus:ring-black/30 dark:focus:ring-white/30'
-        ),
-      },
+      // {
+      //   variant: 'contained',
+      //   color: 'neutral',
+      //   class: clsx(
+      //     '!bg-neutral',
+      //     'hover:border-neutral',
+      //     'hover:bg-neutral-dark',
+      //     'dark:text-content-inverse-intense/80',
+      //     'focus:ring-black/30 dark:focus:ring-white/30'
+      //   ),
+      // },
 
       {
         variant: 'contained',
@@ -118,7 +118,7 @@ export const ButtonElement = classed.button(
           ],
           dark: [
             'dark:bg-content-inverse-intense',
-            'dark:text-surface-neutral-soft',
+            'dark:text-content-high',
             'dark:hover:border-content-inverse-intense',
             'dark:hover:bg-gray-soft',
             'dark:focus:ring-white/50',
@@ -145,16 +145,23 @@ export const ButtonElement = classed.button(
       },
       {
         variant: 'contained',
-        color: 'primary',
+        color: 'neutral',
         class: clsx(
-          'bg-primary text-primary-50 hover:border-primary-dark hover:bg-primary-dark focus:ring-primary-light'
+          'bg-neutral text-neutral-50 hover:border-neutral-dark hover:bg-neutral-dark focus:ring-neutral-light'
         ),
       },
       {
         variant: 'contained',
-        color: 'secondary',
+        color: 'primary',
         class: clsx(
-          'bg-secondary text-secondary-50 hover:border-secondary-dark hover:bg-secondary-dark focus:ring-secondary-light'
+          'bg-neutral text-neutral-50 hover:border-neutral-dark hover:bg-neutral-dark focus:ring-neutral-light'
+        ),
+      },
+      {
+        variant: 'contained',
+        color: 'info',
+        class: clsx(
+          'bg-info text-info-50 hover:border-info-dark hover:bg-info-dark focus:ring-info-light'
         ),
       },
       {
@@ -184,7 +191,7 @@ export const ButtonElement = classed.button(
       {
         variant: 'soft',
         color: 'surface',
-        class: clsx('dark:bg-surface-neutral/30'),
+        class: clsx('dark:bg-neutral/30'),
       },
 
       // Outlined-Filled Variant
@@ -197,7 +204,7 @@ export const ButtonElement = classed.button(
       {
         variant: 'soft',
         color: 'neutral',
-        class: clsx('bg-surface-neutral/20 hover:bg-surface-neutral/40'),
+        class: clsx('bg-neutral/20 hover:bg-neutral/40'),
       },
       {
         variant: 'soft',

@@ -22,7 +22,7 @@ export const Default = () => {
       {positions.map((position) => {
         return (
           <Position
-            className="rounded-full bg-primary-soft p-px px-2 text-center text-xs font-body leading-none text-primary"
+            className="rounded-full bg-neutral-soft p-px px-2 text-center text-xs font-body leading-none text-neutral"
             position={position}
           >
             {position}

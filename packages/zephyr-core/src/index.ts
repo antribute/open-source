@@ -4,7 +4,7 @@ export interface ClassName {
 }
 
 export const testClassName: ClassName = {
-  root: 'bg-primary',
+  root: 'bg-neutral',
 };
 
 export * from './colors/colors';

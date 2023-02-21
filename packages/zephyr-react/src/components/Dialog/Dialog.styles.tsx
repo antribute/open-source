@@ -15,9 +15,9 @@ export const DialogContentElement = classed(
   'w-[95vw] rounded-lg p-4 md:w-full',
   'top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]',
   'bg-white dark:bg-gray-800',
-  'border-boundary dark:border-boundary-inverse',
+  'border-boundary-subtle dark:border-boundary-inverse-subtle',
   'shadow-2xl dark:shadow-white/5',
-  'focus:ring-boundary dark:focus:ring-boundary-inverse',
+  'focus:ring-boundary-subtle dark:focus:ring-boundary-inverse-subtle',
   {
     variants: {
       maxWidth: {
@@ -84,7 +84,7 @@ export const DialogTitleElement = classed(
   DialogPrimitive.Title,
   DialogHeadingElement,
   'flex relative w-full',
-  'border-b border-boundary-faint dark:border-boundary-inverse pb-8 text-content dark:text-content-inverse-intense',
+  'border-b border-boundary-ghost dark:border-boundary-inverse pb-8 text-content dark:text-content-inverse-intense',
   {
     variants: {},
   }
@@ -106,7 +106,7 @@ export type DialogFooterElementProps = React.ComponentProps<typeof DialogFooterE
 
 export const DialogFooterElement = classed(
   DialogPrimitive.Description,
-  'flex justify-end items-center gap-x-8 pt-8 px-4 border-t border-boundary-faint dark:border-boundary-inverse-faint',
+  'flex justify-end items-center gap-x-8 pt-8 px-4 border-t border-boundary-ghost dark:border-boundary-inverse-ghost',
   {
     variants: {},
   }

@@ -1,5 +1,7 @@
 import { RenderColorVariants, RenderSizeVariants } from 'utils/storybook-utils';
 import { StoryFn } from '@storybook/react';
+import { generateMockOrganizationList } from 'mock/mock-data';
+import { Paper } from 'components/Paper';
 import { ToggleGroupItem, ToggleGroup } from './ToggleGroup';
 
 function generateItems({ count = 3 }: { count: number }): ToggleGroupItem[] {
@@ -13,14 +15,31 @@ function generateItems({ count = 3 }: { count: number }): ToggleGroupItem[] {
 
 export const Basic: StoryFn = () => {
   return (
-    <RenderColorVariants
+    <RenderSizeVariants
       orientation="vertical"
       // @ts-expect-error - fix this
       Component={ToggleGroup}
       props={{
-        items: generateItems({ count: 3 }),
+        items: [
+          { label: 'One', value: 'one' },
+          { label: 'Two', value: 'two' },
+          { label: 'Three', value: 'three' },
+        ],
+        color: 'neutral',
       }}
     />
+  );
+};
+
+export const FullWidth: StoryFn = () => {
+  const organizations = generateMockOrganizationList({ size: 4 });
+  return (
+    <Paper className="w-full max-w-screen-sm">
+      <ToggleGroup
+        fullWidth
+        items={organizations.map(({ name, id }) => ({ label: name, value: `${id}` }))}
+      />
+    </Paper>
   );
 };
 
@@ -32,7 +51,7 @@ export const Sizes: StoryFn = () => {
       Component={ToggleGroup}
       props={{
         items: generateItems({ count: 3 }),
-        color: 'primary',
+        color: 'neutral',
       }}
     />
   );
@@ -49,7 +68,7 @@ export const TwoItems: StoryFn = () => {
           { label: 'Min', value: 'min' },
           { label: 'Max', value: 'max' },
         ],
-        color: 'primary',
+        color: 'neutral',
       }}
     />
   );
@@ -63,7 +82,7 @@ export const ManyItems: StoryFn = () => {
       Component={ToggleGroup}
       props={{
         items: generateItems({ count: 9 }),
-        color: 'primary',
+        color: 'neutral',
       }}
     />
   );

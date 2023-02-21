@@ -6,7 +6,7 @@ const colors = [
   'surface',
   'inverse',
   'primary',
-  'secondary',
+  'info',
   'positive',
   'caution',
   'danger',

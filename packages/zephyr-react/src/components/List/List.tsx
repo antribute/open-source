@@ -22,7 +22,7 @@ const ListContainerElement = classed(
       divide: {
         // true: '',
 
-        true: 'divide-y divide-solid divide-divider-weak/50 dark:divide-divider-inverse-weak/50',
+        true: 'divide-y divide-solid divide-boundary-weak/50 dark:divide-boundary-inverse-weak/50',
       },
     },
     defaultVariants: {

@@ -13,7 +13,7 @@ const TooltipContentElement = classed(
   'radix-side-left:animate-slide-right-fade',
   'inline-flex items-center rounded py-8 px-10',
   'text-sm font-body',
-  ' bg-primary-900 text-content-inverse-intense shadow-hover',
+  ' bg-neutral-900 text-content-inverse-intense shadow-hover',
 
   {
     variants: {
@@ -76,34 +76,3 @@ export const Tooltip = ({
     </TooltipPrimitive.Provider>
   );
 };
-
-type InformationTooltipIconProps = React.ComponentProps<typeof InfoIconElement>;
-const InfoIconElement = classed(
-  InformationCircleIcon,
-  'w-20 h-20 rounded-full text-surface-neutral-50'
-);
-
-export const InfoTooltipIcon = deriveClassed<
-  typeof InfoIconElement,
-  InformationTooltipIconProps & {
-    tooltip: TooltipProps['tooltip'];
-    tooltipProps?: Omit<TooltipProps, 'children'>;
-    hideWhenTooltipIsEmpty?: boolean;
-  }
->(({ tooltipProps, tooltip, hideWhenTooltipIsEmpty = true, ...props }) => {
-  if (hideWhenTooltipIsEmpty && !tooltip) return null;
-
-  return (
-    <Tooltip tooltip={tooltip} {...tooltipProps}>
-      <button
-        type="button"
-        className="rounded-full focus:ring-black/10"
-        onClick={(e) => {
-          e.stopPropagation();
-        }}
-      >
-        <InfoIconElement {...props} />
-      </button>
-    </Tooltip>
-  );
-});

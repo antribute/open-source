@@ -5,6 +5,23 @@ import { Classed, classTheme, mergeVariants } from 'utils/classed';
 import { ColorProp, FontWeightProp } from 'types/styles';
 import { ElementPositonData } from './ToggleGroup.helpers';
 
+export type ToggleGroupElementVariantProps = Classed.VariantProps<typeof ToggleGroupElement>;
+
+export const ToggleGroupElement = classed(
+  ToggleGroupPrimitive.ToggleGroup,
+  'group inline-flex shadow-sm rounded-md focus-within:ring-2 focus-within:ring-boundary-focus dark:focus-within:ring-boundary-inverse-focus',
+  {
+    variants: {
+      fullWidth: {
+        true: 'flex w-full',
+      },
+    },
+    defaultVariants: {
+      fullWidth: false,
+    },
+  }
+);
+
 export type ToggleGroupItemElementVariantProps = Classed.VariantProps<
   typeof ToggleGroupItemElement
 >;
@@ -15,24 +32,32 @@ export const ToggleGroupItemElement = classed(
   ToggleGroupPrimitive.Item,
   'whitespace-nowrap flex-grow border-y relative',
   'first:rounded-l-md last:rounded-r-md',
-  '  focus:ring-2  focus:z-10',
-  'hover:text-white',
+  // '  focus:ring-2  focus:z-30 focus:group-hover:ring-0',
+  'focus:ring-0',
+  'radix-state-off:focus-visible:bg-primary-soft dark:radix-state-off:focus-visible:bg-primary-900/80',
+  'radix-state-on:text-white hover:text-neutral-100',
   'bg-surface dark:bg-surface-inverse-light',
-  'border-gray-light/50 border-light-gray dark:border-white/5',
-  'radix-state-on:text-white radix-state-off:text-content-muted radix-state-off:dark:text-content-inverse-weak',
+  'border-boundary-subtle border-light-gray dark:border-white/5',
+  'hover:radix-state-off:hover:text-primary-100 radix-state-off:hover:text-content-ghost',
+  'radix-state-off:text-content-subtle dark:radix-state-off:text-content-inverse-ghost',
+  'ring-inset',
+  'shrink flex-1',
 
   {
     variants: {
       color: {
-        primary: classTheme({
-          light:
-            'radix-state-on:bg-primary radix-state-on:border-primary hover:border-primary-dark hover:bg-primary-dark',
-          dark: 'dark:radix-state-on:bg-primary dark:radix-state-on:border-primary dark:hover:border-primary-dark dark:hover:bg-primary-dark',
+        neutral: classTheme({
+          light: [
+            'radix-state-on:bg-neutral',
+            'radix-state-on:border-neutral radix-state-on:focus:border-neutral/90',
+            'hover:border-neutral-dark hover:bg-neutral-dark',
+          ],
+          dark: 'dark:radix-state-on:bg-neutral dark:radix-state-on:border-neutral dark:hover:border-neutral-dark dark:hover:bg-neutral-dark',
         }),
-        secondary: classTheme({
+        info: classTheme({
           light:
-            'radix-state-on:bg-secondary radix-state-on:border-secondary hover:border-secondary-dark hover:bg-secondary-dark',
-          dark: 'dark:radix-state-on:bg-secondary dark:radix-state-on:border-secondary dark:hover:border-secondary-dark dark:hover:bg-secondary-dark',
+            'radix-state-on:bg-info radix-state-on:border-info hover:border-info-dark hover:bg-info-dark',
+          dark: 'dark:radix-state-on:bg-info dark:radix-state-on:border-info dark:hover:border-info-dark dark:hover:bg-info-dark',
         }),
         caution: classTheme({
           light:
@@ -65,6 +90,7 @@ export const ToggleGroupItemElement = classed(
 
     defaultVariants: {
       fontWeight: 'medium',
+      color: 'neutral',
     },
   }
 );

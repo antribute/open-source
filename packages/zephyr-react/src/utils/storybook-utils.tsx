@@ -63,17 +63,7 @@ interface ColorSizeVariantProps<T extends React.ComponentType> extends RenderVar
 }
 
 export const RenderColorVariants = <T extends React.ComponentType>({
-  colors = [
-    'neutral',
-    'weak',
-    'moderate',
-    'strong',
-    'primary',
-    'secondary',
-    'caution',
-    'danger',
-    'positive',
-  ],
+  colors = ['neutral', 'surface', 'primary', 'info', 'caution', 'danger', 'positive'],
   Component,
   noChildren,
   render = (children) => children,

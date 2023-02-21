@@ -8,7 +8,7 @@ export type TabsListElementProps = React.ComponentProps<typeof TabsListElement>;
 
 export const TabsListElement = classed(
   TabsPrimitive.List,
-  'flex space-x-2  border-divider-weak dark:border-divider-inverse-weak',
+  'flex space-x-2  border-boundary-weak dark:border-boundary-inverse-weak',
   {
     variants: {
       orientation: {
@@ -40,7 +40,7 @@ export const TabsListItemElement = classed(
     variants: {
       activeColor: {
         primary:
-          'radix-state-active:border-primary-500 radix-state-active:text-primary-500 hover:text-primary-700',
+          'radix-state-active:border-neutral-500 radix-state-active:text-neutral-500 hover:text-neutral-700',
       },
     },
     defaultVariants: {

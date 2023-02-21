@@ -14,16 +14,23 @@ export const BaseListItem = classed.span(
     variants: {
       highlight: {
         true: clsx(
-          'bg-surface-soft dark:bg-surface-inverse-light/80',
-          'text-content-intense dark:text-content-inverse-intense'
+          'bg-neutral dark:bg-neutral-900',
+          'text-content-inverse-intense dark:!text-content-inverse-intense'
         ),
-        false: 'bg-transparent',
+        // false: 'bg-transparent',
+      },
+      active: {
+        true: clsx(
+          'bg-surface-soft dark:bg-neutral/30',
+          'text-content-strong dark:text-content-inverse-strong'
+        ),
+        // false: 'bg-transparent',
       },
 
       hoverable: {
         true: clsx(
-          'cursor-pointer hover:bg-surface-soft dark:hover:bg-surface-inverse-light/80',
-          'hover:text-content-intense dark:hover:text-content-inverse-intense'
+          'cursor-pointer hover:bg-surface-soft dark:hover:bg-surface-inverse-light/80'
+          // 'hover:text-content-strong dark:hover:text-content-inverse-strong'
         ),
       },
       gap: {

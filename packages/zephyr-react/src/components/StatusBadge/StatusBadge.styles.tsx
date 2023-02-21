@@ -1,14 +1,24 @@
+import clsx from 'clsx';
 import { colorVariants } from 'styles/colors.variants';
 import { inputComponentVariants } from 'styles/input-component.variants';
-import { Classed, classed, mergeVariants } from 'utils/classed';
+import { sizeVariants } from 'styles/size.variants';
+import { Classed, classTheme, classed, mergeVariants } from 'utils/classed';
 
 export type StatusBadgeElementVariants = Classed.VariantProps<typeof StatusBadgeElement>;
 
-export type StatusBadgeElementProps = React.ComponentProps<typeof StatusBadgeElement>;
+export type StatusBadgeElementProps = Classed.ComponentProps<typeof StatusBadgeElement>;
+
+const disabledClass = classTheme({
+  light: 'disabled:bg-boundary-ghost disabled:border-boundary-ghost disabled:text-content-subtle',
+  dark: 'dark:disabled:bg-boundary-inverse-ghost dark:disabled:border-boundary-inverse-ghost dark:disabled:text-content-inverse-subtle',
+});
 
 export const StatusBadgeElement = classed(
-  'div',
-  'group inline-flex items-center gap-6 font-medium border border-white/10 bg-gradient-to-r from-white/5 via-white/5 to-transparent text-white rounded-full select-none ',
+  'button',
+  'group inline-flex items-center gap-6 font-medium border  text-white rounded-full select-none transition-all ring-0 focus:ring-0 ring-transparent',
+  'border-boundary-ghost dark:border-boundary-inverse-ghost  outline-none border-none',
+  disabledClass,
+
   {
     variants: {
       size: mergeVariants([
@@ -17,19 +27,58 @@ export const StatusBadgeElement = classed(
         inputComponentVariants.size.textSize,
       ]),
 
-      color: mergeVariants([colorVariants.bg]),
+      color: mergeVariants([
+        colorVariants.bg,
+        colorVariants.border,
+        colorVariants.hoverDark,
+        colorVariants.text,
+      ]),
 
       variant: {
         text: 'px-0 py-0 border-none bg-transparent',
-        pill: '',
+        outlined: 'bg-opacity-10',
+        contained: clsx('text-white', 'bg-gradient-to-r from-white/5 via-white/5 to-transparent'),
         dropdown: 'cursor-pointer',
+      },
+      // disabled: {
+      //   true: clsx(
+      //     'cursor-default bg-boundary-ghost text-content-ghost hover:!bg-boundary-ghost focus:ring-0 dark:text-content-subtle'
+      //   ),
+      // },
+      clickable: {
+        true: 'cursor-pointer',
+        false: 'cursor-default focus:ring-0',
       },
     },
     defaultVariants: {
       size: 'md',
-      variant: 'pill',
-      color: 'primary',
+      variant: 'contained',
+      clickable: false,
+      // color: 'primary',
     },
+
+    compoundVariants: [
+      // { disabled: true, class: clsx('cursor-default hover:bg-current') },
+      {
+        color: 'surface',
+        class: clsx(
+          'bg-surface dark:bg-surface-inverse',
+          'text-content-intense dark:text-content-inverse-intense',
+          'border-boundary-weak dark:border-boundary-inverse-weak',
+          'from-transparent via-transparent to-transparent '
+        ),
+      },
+      {
+        color: 'surface',
+        class: 'bg-neutral/5',
+        // class: clsx(
+        //   'bg-surface dark:bg-surface-inverse',
+        //   'text-content-intense dark:text-content-inverse-intense',
+        //   'border-boundary-weak dark:border-boundary-inverse-weak',
+        //   'from-transparent via-transparent to-transparent '
+        // ),
+      },
+    ],
   }
 );
 
