@@ -8,7 +8,7 @@ type UseInputPropsHookOptions = InputComponentStateMessageProps &
 
 export const useInputProps = ({
   size = 'md',
-  width = 'fixed',
+  width,
   id: idProp,
   ...props
 }: UseInputPropsHookOptions) => {

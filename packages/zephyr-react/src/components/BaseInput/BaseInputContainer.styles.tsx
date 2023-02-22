@@ -1,4 +1,5 @@
 import { classed } from '@tw-classed/react';
+import clsx from 'clsx';
 import { BaseInputElement } from 'components/BaseInput/BaseInput.styles';
 import {
   InputComponentWidthVariant,
@@ -12,7 +13,10 @@ export type BaseInputContainerElementVariantProps = Classed.VariantProps<
 
 export const BaseInputContainerElement = classed(
   'div',
-  'flex justify-between items-center',
+  'flex justify-between items-center :!opacity-0',
+  // Tailwind Arbitrary Group (https://tailwindcss.com/docs/hover-focus-and-other-states#arbitrary-groups)
+  // eslint-disable-next-line tailwindcss/no-custom-classname
+  clsx('group-[.is-contained]/input:w-full', 'group/base-input is-contained'),
   InputComponentWidthVariant,
   BaseInputElement,
   {

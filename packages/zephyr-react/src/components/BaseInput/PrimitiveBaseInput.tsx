@@ -1,7 +1,12 @@
+import clsx from 'clsx';
 import { placeholderClassName } from 'components/BaseInput/BaseInput.styles';
 import React from 'react';
-import { InputComponentWidthVariant } from 'styles/input-component.variants';
-import { classed } from 'utils/classed';
+import {
+  InputComponentWidthVariant,
+  inputComponentVariants,
+  inputSizeVariants,
+} from 'styles/input-component.variants';
+import { classed, mergeVariants } from 'utils/classed';
 
 const PrimitiveBaseInputElement = classed(
   'input',
@@ -12,6 +17,17 @@ const PrimitiveBaseInputElement = classed(
   'border-none',
   'focus:ring-0 ring-0',
   'focus:outline-none outline-none',
+  // Tailwind Arbitrary Group (https://tailwindcss.com/docs/hover-focus-and-other-states#arbitrary-groups)
+  // eslint-disable-next-line tailwindcss/no-custom-classname
+  clsx('group-[.is-contained]/base-input:!w-full'),
+  {
+    variants: {
+      size: mergeVariants([
+        inputComponentVariants.size.textSize,
+        inputComponentVariants.size.lineHeight,
+      ]),
+    },
+  },
   {
     defaultVariants: {
       placeholderSelector: true,

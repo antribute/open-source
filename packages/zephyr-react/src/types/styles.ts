@@ -1,5 +1,7 @@
 export type SizeProp = 'xs' | 'sm' | 'md' | 'lg';
 
+export type OrientationProp = 'vertical' | 'horizontal';
+
 export type ColorProp =
   | 'neutral'
   | 'weak'

@@ -1,14 +1,28 @@
-import { RenderSizeVariants } from 'utils/storybook-utils';
+import { RenderSizeVariants, sizeKeys } from 'utils/storybook-utils';
 import { Button } from 'components/Button/Button';
 import { getRelativeSizeProp } from 'utils/getRelativeSizeProp';
 import { SizeProp } from 'types/styles';
 import ChevronDownIcon from '@heroicons/react/24/outline/ChevronDownIcon';
 import CurrencyDollarIcon from '@heroicons/react/24/outline/CurrencyDollarIcon';
 import { InfoTooltipIcon } from 'components/Tooltip';
+import { PrimitiveBaseInput } from 'components/BaseInput/PrimitiveBaseInput';
+import { Paper } from 'components/Paper';
 import { BaseInput } from './BaseInput';
 
 export const Default = () => {
   return <RenderSizeVariants Component={BaseInput} props={{ placeholder: 'Enter value' }} />;
+};
+
+export const PrimitiveBaseInputComponent = () => {
+  return (
+    <div className="flex items-center gap-8">
+      {sizeKeys().map((size) => (
+        <div className="flex bg-highlight">
+          <PrimitiveBaseInput size={size} placeholder="Enter value" />
+        </div>
+      ))}
+    </div>
+  );
 };
 
 export const Icon = () => {
@@ -31,19 +45,6 @@ export const Icon = () => {
 export const InlineAddons = () => {
   return (
     <div className="space-y-40">
-      {/* <RenderSizeVariants
-        orientation="vertical"
-        Component={BaseInput}
-        props={{
-          placeholder: 'Enter value',
-          trailingIcon: '🎉',
-          inlineTrailingAddonSlot: [
-            { content: '✨', pointerEvents: false },
-            { content: '✨', pointerEvents: false },
-          ],
-        }}
-      /> */}
-
       <RenderSizeVariants
         orientation="vertical"
         sizes={['md']}
@@ -61,19 +62,7 @@ export const InlineAddons = () => {
 
           return {
             placeholder: 'Enter value',
-            inlineLeadingAddonSlot: [
-              // {
-              //   content: (
-              //     <Button {...props} color="primary">
-              //       A
-              //     </Button>
-              //   ),
-              //   pointerEvents: true,
-              // },
-              // {
-              //   content: <ChevronDownIcon height={24} width={24} className="h-24 w-24" />,
-              // },
-            ],
+
             inlineTrailingAddonSlot: [
               {
                 focusInputOnClick: false,

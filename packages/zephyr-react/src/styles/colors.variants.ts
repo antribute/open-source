@@ -94,8 +94,8 @@ export const colorVariants = {
     'various-gray': clsx('border-various-gray'),
   },
   focusBorder: {
-    primary: clsx('focus:border-neutral-light'),
-    neutral: clsx('focus:border-neutral-light'),
+    // primary: clsx('focus:border-neutral-light'),
+    // neutral: clsx('focus:border-neutral-light'),
     info: clsx('focus:border-info-light'),
     positive: clsx('focus:border-positive-light'),
     danger: clsx('focus:border-danger-light'),
@@ -115,8 +115,8 @@ export const colorVariants = {
     'various-gray': clsx('focus:border-various-gray'),
   },
   focusRing: {
-    primary: clsx('focus:ring-neutral-light'),
-    neutral: clsx('focus:ring-neutral-light'),
+    primary: clsx(''),
+    neutral: clsx(''),
     info: clsx('focus:ring-info-light'),
     positive: clsx('focus:ring-positive-light'),
     danger: clsx('focus:ring-danger-light'),

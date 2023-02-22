@@ -1,6 +1,7 @@
 import { classed } from '@tw-classed/react';
 import clsx from 'clsx';
 import { sizeVariants } from 'styles/size.variants';
+import { OrientationProp } from 'types/styles';
 import { classedCore, classedVariantMap, mergeVariants } from 'utils/classed';
 
 export const inputComponentVariants = classedVariantMap({
@@ -9,6 +10,15 @@ export const inputComponentVariants = classedVariantMap({
     roundedLeft: 'rounded-r-0 rounded-l-md',
     roundedRight: 'rounded-l-0 rounded-r-md',
     rounded: 'rounded-md',
+  },
+});
+
+export const InputComponentOrientationVariant = classed('div', {
+  variants: {
+    orientation: {
+      horizontal: 'inline-flex flex-row items-center ',
+      vertical: 'flex flex-col justify-center',
+    } satisfies Record<OrientationProp, string>,
   },
 });
 
@@ -38,13 +48,15 @@ export const InputComponentWidthVariant = classed('div', {
   ],
 });
 
-export const InputSizeVariant = classed('input', 'inline-flex', {
+export const inputSizeVariants = mergeVariants([
+  inputComponentVariants.size.lineHeight,
+  inputComponentVariants.size.paddingX,
+  inputComponentVariants.size.paddingY,
+  inputComponentVariants.size.textSize,
+]);
+
+export const InputSizeVariant = classed('div', 'inline-flex', {
   variants: {
-    size: mergeVariants([
-      inputComponentVariants.size.lineHeight,
-      inputComponentVariants.size.paddingX,
-      inputComponentVariants.size.paddingY,
-      inputComponentVariants.size.textSize,
-    ]),
+    size: inputSizeVariants,
   },
 });

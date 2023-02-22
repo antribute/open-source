@@ -35,10 +35,7 @@ export const CollapsibleListItem = ({
       <ListItemContainer>
         <CollapsiblePrimitive.Trigger asChild>
           <ListItemButton
-            className={twMerge(
-              'radix-state-open:focus:ring-content-weak/5 dark:radix-state-open:focus:ring-content-inverse-weak/5 ',
-              className
-            )}
+            className={twMerge(className)}
             label={label}
             containerProps={{ fragment: true }}
             startIcon={startIcon}

@@ -273,7 +273,7 @@ const config: Config = {
     placeholderColor: ({ theme }) => theme('colors'),
     placeholderOpacity: ({ theme }) => theme('opacity'),
     ringColor: ({ theme }) => ({
-      DEFAULT: theme('colors.primary.light', '#25AED0') as string,
+      DEFAULT: theme('colors.primary.light', colorPalette.boundary.focus) as string,
       ...theme('colors'),
     }),
     ringOffsetColor: ({ theme }) => theme('colors'),

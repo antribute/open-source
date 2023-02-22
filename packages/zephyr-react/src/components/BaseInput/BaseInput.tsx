@@ -23,7 +23,8 @@ export const BaseInput = React.forwardRef<HTMLInputElement, BaseInputBaseProps>(
   return (
     <BaseInputContainer
       {...inputContainerProps}
-      width={baseInputElementProps.width === 'full' ? 'full' : 'auto'}
+      // width={baseInputElementProps.width === 'full' ? 'full' : 'auto'}
+      width={baseInputElementProps.width}
       ref={ref}
     >
       {({ ref }) => <PrimitiveBaseInput {...baseInputElementProps} ref={ref} />}

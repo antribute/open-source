@@ -75,7 +75,7 @@ type BaseInputIconProps = React.ComponentProps<typeof BaseInputIconSlotElement> 
 const BaseInputIcon = deriveClassed<typeof BaseInputIconSlotElement, BaseInputIconProps>(
   ({ content, tabIndex, ...props }, ref) => {
     return (
-      <PlaceholderElement className="flex h-20 w-20 items-center justify-center dark:text-content-inverse-weak">
+      <PlaceholderElement className="flex h-20 w-20 shrink-0 items-center justify-center dark:text-content-inverse-weak">
         {typeof content !== 'object' ? (
           <> {content}</>
         ) : (

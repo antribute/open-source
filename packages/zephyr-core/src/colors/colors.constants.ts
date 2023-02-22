@@ -13,7 +13,7 @@ export const colorScaleKeys = [
   '900',
 ] as const;
 
-export type HexAlphaCode = keyof typeof hexAlphaCodes;
+export type HexAlphaTransparency = keyof typeof hexAlphaCodes;
 
 /**
  * Hexadecimal color code for transparency
@@ -40,14 +40,23 @@ export const hexAlphaCodes = {
   '23': '3B',
   '20': '33',
   '15': '26',
+  '12': '1F',
   '10': '1A',
+  '9': '17',
+  '8': '14',
+  '7': '12',
+  '6': '0F',
   '5': '0D',
+  '4': '0A',
+  '3': '08',
+  '2': '05',
+  '1': '03',
   '0': '00',
 };
 
-export type HexAlphaPreset = keyof typeof hexAlphaPresets;
+export type HexAlphaPreset = keyof typeof hexTransparencyPresetMap;
 
-export const hexAlphaPresets = {
+export const hexTransparencyPresetMap = {
   // Tint - a color that has been lightened by adding white, creating a pastel or pale appearance.
   // Usage: Suitable for subtle backgrounds, highlighting important elements, or creating a gentle contrast against a darker color.
   tint: '10',
@@ -79,4 +88,4 @@ export const hexAlphaPresets = {
   // Intense - a color that is very strong and saturated, with the highest possible level of visual impact.
   // Usage: Suitable for the most prominent and attention-grabbing elements, such as error messages or urgent call-to-action elements. Should be used sparingly.
   intense: '100',
-} satisfies Record<string, HexAlphaCode>;
+} satisfies Record<string, HexAlphaTransparency>;

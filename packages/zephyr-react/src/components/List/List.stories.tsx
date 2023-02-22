@@ -24,7 +24,6 @@ export const Default = () => {
           aria-controls="dropdown-sales"
           data-collapse-toggle="dropdown-sales"
           containerProps={{ id: 'dropdown-sales' }}
-          className="focus:outline-none focus:ring"
           type="button"
         >
           <List.LinkItem href={href} label="Jacob B." />

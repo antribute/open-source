@@ -7,7 +7,7 @@ type UseBaseInputPropsOptions = BaseInputBaseProps;
 export function useBaseInputProps(props: UseBaseInputPropsOptions) {
   const {
     size = 'md',
-    width = 'fixed',
+    width,
     inputState,
     inlineLeadingAddonSlot,
     inlineTrailingAddonSlot,

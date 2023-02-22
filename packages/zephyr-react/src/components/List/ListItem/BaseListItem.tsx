@@ -9,19 +9,19 @@ export const BaseListItem = classed.span(
   'relative w-full py-12 flex flex-col gap-y-4',
   'group-data-[rounded-items=true]:rounded-md',
   'group-data-[no-gutters=true]:px-0 group-data-[no-gutters=false]:px-16',
-  'text-content-weak',
+  'text-content-weak dark:text-content-inverse',
   {
     variants: {
       highlight: {
         true: clsx(
-          'bg-neutral dark:bg-neutral-900',
-          'text-content-inverse-intense dark:!text-content-inverse-intense'
+          'bg-highlight-moderate',
+          'text-content-strong dark:!text-content-inverse-intense'
         ),
         // false: 'bg-transparent',
       },
       active: {
         true: clsx(
-          'bg-surface-soft dark:bg-neutral/30',
+          // 'bg-surface-soft dark:bg-neutral/30',
           'text-content-strong dark:text-content-inverse-strong'
         ),
         // false: 'bg-transparent',
@@ -29,7 +29,7 @@ export const BaseListItem = classed.span(
 
       hoverable: {
         true: clsx(
-          'cursor-pointer hover:bg-surface-soft dark:hover:bg-surface-inverse-light/80'
+          'cursor-pointer'
           // 'hover:text-content-strong dark:hover:text-content-inverse-strong'
         ),
       },
@@ -45,6 +45,9 @@ export const BaseListItem = classed.span(
       gap: 'sm',
     },
 
-    compoundVariants: [{ hoverable: true, class: 'select-none' }],
+    compoundVariants: [
+      { hoverable: true, class: 'select-none' },
+      { hoverable: true, highlight: false, class: 'hover:bg-highlight-weak' },
+    ],
   }
 );

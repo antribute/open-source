@@ -47,28 +47,22 @@ export const BaseInputElement = classed(
       'transition-all',
       'relative border-[1.5px] border-solid peer',
       'ring-0 outline-none focus-within:ring-1',
-      'flex items-center gap-8 p-8 select-none',
+      'flex items-center gap-8 p-8 select-none focus:outline-none',
     ],
 
     light: [
-      'bg-surface', // bg
-      'text-content-strong', // text
-      'border-boundary-subtle focus-within:border-boundary-focus', // border
-      'shadow-gray-light/20', // shadow
-      '', /// ring
-      ' focus-within:ring-boundary-focus', // focus
+      'bg-surface',
+      'text-content-strong',
+      'border-boundary-subtle focus-within:border-boundary-focus',
+      'shadow-gray-light/20',
+      'focus-within:ring-boundary-focus',
     ],
     dark: [
-      'dark:bg-surface-inverse', // bg
-      'dark:text-content-inverse-moderate', // text
-      'dark:border-boundary-inverse-subtle dark:focus-within:border-boundary-inverse-focus', // border
-      'dark:shadow-surface-inverse/50', // shadow
-      'dark:focus-within:ring-boundary-inverse-focus', // ring
-      // 'dark:ring-surface-inverse', // ring
-      // 'dark:focus-within:ring-surface-inverse',
-      '',
-      // 'dark:focus-within:ring-opacity-20',
-      // 'dark:focus-within:border-content-inverse-weak dark:focus-within:ring-content-inverse-weak',
+      'dark:bg-surface-inverse',
+      'dark:text-content-inverse-moderate',
+      'dark:border-boundary-inverse-subtle dark:focus-within:border-boundary-inverse-focus',
+      'dark:shadow-surface-inverse/50',
+      'dark:focus-within:ring-boundary-inverse-focus',
     ],
   }),
 

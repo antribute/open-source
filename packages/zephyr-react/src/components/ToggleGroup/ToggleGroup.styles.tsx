@@ -39,9 +39,9 @@ export const ToggleGroupItemElement = classed(
   'bg-surface dark:bg-surface-inverse-light',
   'border-boundary-subtle border-light-gray dark:border-white/5',
   'hover:radix-state-off:hover:text-primary-100 radix-state-off:hover:text-content-ghost',
-  'radix-state-off:text-content-subtle dark:radix-state-off:text-content-inverse-ghost',
+  'radix-state-off:text-content-subtle dark:radix-state-off:text-content-inverse-subtle',
   'ring-inset',
-  'shrink flex-1',
+  'shrink flex-1 ',
 
   {
     variants: {

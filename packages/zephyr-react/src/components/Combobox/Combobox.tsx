@@ -161,8 +161,9 @@ const ComboboxList = ({
                           isMultiSelect && (
                             <Checkbox
                               size="xs"
+                              tabIndex={-1}
                               checked={isSelected}
-                              className={clsx({ '-ml-12': isMultiSelect })}
+                              // className={clsx({ '-ml-12': isMultiSelect })}
                             />
                           )
                         }

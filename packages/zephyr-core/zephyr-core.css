@@ -8,10 +8,6 @@ body {
   @apply text-content dark:text-content-inverse;
 }
 
-* {
-  outline: none;
-}
-
 *:focus {
-  @apply outline-none ring-2 ring-boundary-focus dark:ring-boundary-inverse-focus;
+  @apply outline-boundary-focus  dark:outline-boundary-inverse-focus ring-boundary-focus dark:ring-boundary-inverse-focus;
 }

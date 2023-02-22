@@ -1,10 +1,8 @@
 import tailwindColors from 'tailwindcss/colors';
-import {
-  arrayToColorGroup,
-  generateColorGroup,
-  generateHexAlphaColorGroup,
-} from './colors.helpers';
 import { variousColors } from './variousColors';
+import { generateColorGroup } from './helpers/generateColorGroup';
+import { arrayToColorGroup } from './helpers/arrayToColorGroup';
+import { generateHexAlphaColorGroup } from './helpers/generateHexAlphaColorGroup';
 
 const black = '#000000';
 
@@ -59,7 +57,8 @@ const neutral = generateColorGroup({
 });
 
 const contentInverse = generateHexAlphaColorGroup('#e3e5e8', {
-  overrides: { intense: white, DEFAULT: '#d2d4d7' },
+  intense: white,
+  DEFAULT: '#d2d4d7',
 });
 
 const base = {
@@ -68,6 +67,18 @@ const base = {
 };
 
 export const colors = {
+  highlight: generateHexAlphaColorGroup(neutral[500], {
+    DEFAULT: '7',
+    tint: '2',
+    ghost: undefined,
+    subtle: '4',
+    weak: '5',
+    moderate: '8',
+    high: '10',
+    strong: undefined,
+    intense: undefined,
+  }),
+
   white,
   black,
   base,
@@ -122,10 +133,8 @@ export const colors = {
   }),
 
   content: generateHexAlphaColorGroup('#15181E', {
-    overrides: {
-      DEFAULT: 'high',
-      ghost: { hex: neutral['500'], transparency: 'ghost' },
-    },
+    DEFAULT: 'high',
+    ghost: { hexColor: neutral['500'], transparencyPreset: 'ghost' },
   }),
 
   'content-inverse': contentInverse,
@@ -133,19 +142,13 @@ export const colors = {
   boundary: {
     focus: base.inverse,
     ...generateHexAlphaColorGroup(neutral[300], {
-      overrides: {
-        DEFAULT: 'subtle',
-      },
+      DEFAULT: 'subtle',
     }),
   },
 
   'boundary-inverse': {
     focus: contentInverse.weak,
-    ...generateHexAlphaColorGroup(neutral.DEFAULT, {
-      overrides: {
-        DEFAULT: 'subtle',
-      },
-    }),
+    ...generateHexAlphaColorGroup(neutral.DEFAULT, { DEFAULT: 'subtle' }),
   },
 
   surface,
@@ -185,3 +188,20 @@ export const colors = {
 
   ...variousColors,
 } satisfies Record<string, string | Record<string, string>>;
+
+function test() {
+  const highlight = generateHexAlphaColorGroup(base.inverse, {
+    DEFAULT: 'subtle',
+    tint: '5',
+    ghost: '10',
+    subtle: '15',
+    weak: '20',
+    moderate: '25',
+    high: '30',
+    strong: undefined,
+    intense: undefined,
+  });
+  console.log(highlight);
+}
+
+test();

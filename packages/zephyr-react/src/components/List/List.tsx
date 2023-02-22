@@ -12,7 +12,7 @@ type ListContainerElementProps = React.ComponentProps<typeof ListContainerElemen
 const ListContainerElement = classed(
   'ul',
   'group',
-  'border-boundary dark:border-boundary-inverse',
+  'border-boundary dark:border-boundary-inverse flex flex-col gap-4',
   {
     variants: {
       border: {
@@ -20,9 +20,8 @@ const ListContainerElement = classed(
       },
 
       divide: {
-        // true: '',
-
-        true: 'divide-y divide-solid divide-boundary-weak/50 dark:divide-boundary-inverse-weak/50',
+        false: '',
+        true: 'gap-0 divide-y divide-solid divide-boundary-weak/50 dark:divide-boundary-inverse-weak/50',
       },
     },
     defaultVariants: {
@@ -37,11 +36,13 @@ type ListContainerProps = {
   zebraItems?: boolean;
   removeItemGutters?: boolean;
   roundedItems?: boolean;
+  divide?: boolean;
 } & ListContainerElementProps;
 
 const ListContainer = ({
   title,
   children,
+  divide = false,
   zebraItems = false,
   removeItemGutters = false,
   roundedItems = false,
@@ -54,6 +55,7 @@ const ListContainer = ({
         data-zebra={zebraItems}
         data-no-gutters={removeItemGutters}
         data-rounded-items={roundedItems}
+        divide={divide}
         {...props}
       >
         {children}
@@ -66,7 +68,7 @@ const ListContainer = ({
 
 const ListSectionTitle = classed(
   'div',
-  'font-bold px-16 text-content-weak/50 dark:text-content-inverse-weak select-none mb-8'
+  'font-medium px-16 text-content-weak dark:text-content-inverse-weak select-none mb-8'
 );
 
 // Spacing

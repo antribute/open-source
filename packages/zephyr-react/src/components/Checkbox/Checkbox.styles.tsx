@@ -9,13 +9,13 @@ export const CheckboxElement = classed(
   'border-gray-light',
   'dark:bg-surface-inverse-elevated dark:border-white-alpha-soft dark:checked:bg-neutral-light',
   'checked:bg-neutral',
-  'form-checkbox cursor-pointer  accent-neutral checked:text-neutral peer rounded-sm',
-  'focus:ring-offset-0 focus:ring-2 focus:ring-neutral-dark',
+  'form-checkbox cursor-pointer  accent-neutral checked:text-neutral peer rounded-sm ring-0',
+  // 'focus:ring-offset-0 focus:ring-0 focus:ring-neutral-dark',
   {
     variants: {
       focusRing: {
         false: 'focus:ring-0',
-        true: 'focus:ring-2 focus:ring-neutral-soft',
+        // true: 'focus:ring-2',
       },
       size: {
         xs: 'h-16 w-16',

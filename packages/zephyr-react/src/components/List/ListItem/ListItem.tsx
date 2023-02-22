@@ -1,5 +1,3 @@
-// List Item
-
 import { deriveClassed } from '@tw-classed/react';
 import { Classed } from 'utils/classed';
 import { BaseListItem } from './BaseListItem';

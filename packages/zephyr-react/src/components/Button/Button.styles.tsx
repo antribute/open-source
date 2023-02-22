@@ -45,7 +45,7 @@ export const ButtonElement = classed.button(
         'outlined-filled': clsx('border bg-transparent'),
         // eslint-disable-next-line tailwindcss/migration-from-tailwind-2
         text: clsx(
-          'inline py-0 px-2 underline-offset-4  ring-inset focus:ring-2 focus:ring-black/10 dark:focus:ring-white/20',
+          'inline py-0 px-2 underline-offset-4  ring-inset focus:ring-2',
           'border !border-transparent hover:bg-opacity-30',
           '!bg-transparent '
         ),
@@ -114,14 +114,12 @@ export const ButtonElement = classed.button(
             'text-content-inverse-intense',
             'hover:border-content-moderate',
             'hover:bg-content-moderate',
-            'focus:ring-black/30',
           ],
           dark: [
             'dark:bg-content-inverse-intense',
             'dark:text-content-high',
             'dark:hover:border-content-inverse-intense',
             'dark:hover:bg-gray-soft',
-            'dark:focus:ring-white/50',
           ],
         }),
       },
@@ -133,29 +131,23 @@ export const ButtonElement = classed.button(
             'bg-surface hover:bg-surface-100 border',
             'text-content-moderate',
             'border-black/10 hover:border-black/10',
-            'focus:ring-content-intense',
           ],
           dark: [
             'dark:bg-surface-inverse dark:hover:bg-surface-inverse-light',
             'dark:text-content-inverse',
             'dark:border-white/5',
-            'dark:focus:ring-content-inverse-weak',
           ],
         }),
       },
       {
         variant: 'contained',
         color: 'neutral',
-        class: clsx(
-          'bg-neutral text-neutral-50 hover:border-neutral-dark hover:bg-neutral-dark focus:ring-neutral-light'
-        ),
+        class: clsx('bg-neutral text-neutral-50 hover:border-neutral-dark hover:bg-neutral-dark'),
       },
       {
         variant: 'contained',
         color: 'primary',
-        class: clsx(
-          'bg-neutral text-neutral-50 hover:border-neutral-dark hover:bg-neutral-dark focus:ring-neutral-light'
-        ),
+        class: clsx('bg-neutral text-neutral-50 hover:border-neutral-dark hover:bg-neutral-dark'),
       },
       {
         variant: 'contained',

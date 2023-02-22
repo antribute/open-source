@@ -1,15 +1,9 @@
 import { Tabs } from '.';
 
 const tabs = [
-  { label: 'One', value: 'A' },
-  { label: 'Two', value: 'B' },
-  { label: 'Three', value: 'C' },
-];
-
-const tabViews = [
-  { label: 'One', value: 'A' },
-  { label: 'Two', value: 'B' },
-  { label: 'Three', value: 'C' },
+  { label: 'Account', value: 'A' },
+  { label: 'Password', value: 'B' },
+  // { label: 'Three', value: 'C' },
 ];
 
 export const Default = () => {

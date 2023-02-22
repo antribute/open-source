@@ -1,5 +1,5 @@
 import tailwindColors from 'tailwindcss/colors';
-import { generateColorGroup } from './colors.helpers';
+import { generateColorGroup } from './helpers/generateColorGroup';
 
 export const variousColors = {
   'various-blue': generateColorGroup(tailwindColors.blue)({

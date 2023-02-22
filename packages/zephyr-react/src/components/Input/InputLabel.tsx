@@ -1,6 +1,8 @@
 import { classed, Classed } from 'utils/classed';
 import { Text } from 'components/Text';
 import { BaseInputProps } from 'components/BaseInput';
+import { sizeVariants } from 'styles/size.variants';
+import { InvisibleCharacter } from 'components/InvisibleCharacter';
 
 export type InputLabelVariantProps = Classed.VariantProps<typeof InputLabelElement>;
 
@@ -10,15 +12,17 @@ const InputLabelElement = classed(
   'label',
   'text-content-intense dark:text-content-inverse-moderate text-left',
   'mb-6 text-sm inline-block  font-medium select-none text-gray-900 leading-xs',
+
   {
     variants: {
+      labelSize: sizeVariants.textSize,
       hidden: {
         true: 'sr-only',
       },
       labelOrientation: {
-        vertical: 'block ',
+        vertical: 'inline-block',
         horizontal: 'text-md inline-block align-middle',
-        horizontalReverse: 'order-1 text-md inline-block align-middle',
+        false: '',
       },
       // width: inputComponentVariants.width,
     },
@@ -26,6 +30,7 @@ const InputLabelElement = classed(
     defaultVariants: {
       hidden: false,
       labelOrientation: 'vertical',
+      labelSize: 'sm',
       // width: 'fixed',
     },
   }
@@ -63,7 +68,7 @@ const InputLabel = ({
       labelOrientation={labelOrientation}
     >
       <span className="align-middle">
-        {children}
+        {children ?? (hidden ? null : <InvisibleCharacter />)}
         {hasOptionalLabel && <OptionalLabelElement>{optionalLabelText}</OptionalLabelElement>}
         {required && <span className="ml-px text-danger">*</span>}
       </span>

@@ -95,6 +95,7 @@
     "ariakit": "2.0.0-next.43",
     "change-case": "^4.1.2",
     "clsx": "^1.2.1",
+    "dot-path-value": "^0.0.6",
     "exhaustive": "^1.1.1",
     "focus-layers": "^0.6.1",
     "immer": "^9.0.17",
