@@ -9,7 +9,7 @@ export type ToggleGroupElementVariantProps = Classed.VariantProps<typeof ToggleG
 
 export const ToggleGroupElement = classed(
   ToggleGroupPrimitive.ToggleGroup,
-  'group inline-flex shadow-sm rounded-md focus-within:ring-2 focus-within:ring-boundary-focus dark:focus-within:ring-boundary-inverse-focus',
+  'group inline-flex shadow-sm rounded-md ',
   {
     variants: {
       fullWidth: {
@@ -41,7 +41,8 @@ export const ToggleGroupItemElement = classed(
   'hover:radix-state-off:hover:text-primary-100 radix-state-off:hover:text-content-ghost',
   'radix-state-off:text-content-subtle dark:radix-state-off:text-content-inverse-subtle',
   'ring-inset',
-  'shrink flex-1 ',
+  'shrink flex-1',
+  'select-none',
 
   {
     variants: {
@@ -52,7 +53,10 @@ export const ToggleGroupItemElement = classed(
             'radix-state-on:border-neutral radix-state-on:focus:border-neutral/90',
             'hover:border-neutral-dark hover:bg-neutral-dark',
           ],
-          dark: 'dark:radix-state-on:bg-neutral dark:radix-state-on:border-neutral dark:hover:border-neutral-dark dark:hover:bg-neutral-dark',
+          dark: [
+            'dark:radix-state-on:bg-neutral dark:radix-state-on:border-neutral',
+            'dark:hover:border-neutral-dark dark:hover:bg-neutral-dark',
+          ],
         }),
         info: classTheme({
           light:

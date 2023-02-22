@@ -15,6 +15,7 @@ import { ListItemContainer } from 'components/List/ListItem/ListItemContainer';
 import { Checkbox } from 'components/Checkbox';
 import clsx from 'clsx';
 import { Text } from 'components/Text';
+import { BasicCheckbox, CheckboxElement } from 'components/Checkbox/Checkbox.styles';
 
 interface ComboboxBaseProps<TOptionType>
   extends Omit<InputSelectProps, 'state' | 'value' | 'defaultValue' | 'as' | 'ref'> {
@@ -159,10 +160,11 @@ const ComboboxList = ({
                         className="truncate"
                         startIcon={
                           isMultiSelect && (
-                            <Checkbox
-                              size="xs"
+                            <BasicCheckbox
+                              size="sm"
                               tabIndex={-1}
                               checked={isSelected}
+                              className="mr-4"
                               // className={clsx({ '-ml-12': isMultiSelect })}
                             />
                           )

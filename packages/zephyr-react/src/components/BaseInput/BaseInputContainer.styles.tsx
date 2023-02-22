@@ -16,7 +16,7 @@ export const BaseInputContainerElement = classed(
   'flex justify-between items-center :!opacity-0',
   // Tailwind Arbitrary Group (https://tailwindcss.com/docs/hover-focus-and-other-states#arbitrary-groups)
   // eslint-disable-next-line tailwindcss/no-custom-classname
-  clsx('group-[.is-contained]/input:w-full', 'group/base-input is-contained'),
+  // clsx('group-[.is-contained]/input:w-full', 'group/base-input is-contained'),
   InputComponentWidthVariant,
   BaseInputElement,
   {

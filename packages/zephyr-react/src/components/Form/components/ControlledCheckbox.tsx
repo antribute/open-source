@@ -13,9 +13,6 @@ export const ControlledCheckbox = (props: ControlledCheckboxProps) => {
     <Checkbox
       name={name}
       checked={value} // conditional to prevent "uncontrolled to controlled" react warning
-      onChange={(e) => {
-        onChange(e.target.checked);
-      }}
       onBlur={onBlur}
       ref={ref}
       error={Boolean(error)}

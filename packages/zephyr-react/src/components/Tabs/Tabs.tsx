@@ -5,6 +5,8 @@ import {
   TabsListItemElement,
   TabsListItemElementProps,
 } from 'components/Tabs/Tabs.styles';
+import { twMerge } from 'tailwind-merge';
+import { getRelativeSizeProp } from 'utils/getRelativeSizeProp';
 
 type TabsRootProps = TabsPrimitive.TabsProps;
 
@@ -20,9 +22,13 @@ const TabsListItem = (props: TabsListItemProps) => {
 
 type TabsListProps = TabsListElementProps;
 
-const TabsList = (props: TabsListProps) => {
-  return <TabsListElement {...props} />;
-};
+const TabsList = ({ className, size = 'md', ...props }: TabsListProps) => (
+  <TabsListElement
+    size={size}
+    className={twMerge(className, getRelativeSizeProp(-1, { relativeSize: size }))}
+    {...props}
+  />
+);
 
 type TabsViewProps = TabsPrimitive.TabsContentProps;
 

@@ -4,8 +4,8 @@ import { classTheme, classed } from 'utils/classed';
 import { BaseInputElement } from 'components/BaseInput/BaseInput.styles';
 import { BaseInputContainerElement } from 'components/BaseInput/BaseInputContainer.styles';
 import { InputSizeVariant, inputSizeVariants } from 'styles/input-component.variants';
-import InputLabel from 'components/Input/InputLabel';
-import { CheckboxElement, CheckboxElementProps } from './Checkbox.styles';
+import InputLabel, { InputLabelElement } from 'components/Input/InputLabel';
+import { BasicCheckbox, CheckboxElement, CheckboxElementProps } from './Checkbox.styles';
 
 type CheckboxProps = Omit<CheckboxElementProps, 'type'> & Omit<InputContainerProps, 'children'>;
 
@@ -18,7 +18,7 @@ const CheckboxInputElement = classed(
 const CheckboxContainerElement = classed(
   'div',
   'flex gap-8',
-  'border-2 border-transparent gap-8',
+  'border-2 items-center border-transparent gap-8',
   {
     variants: { size: inputSizeVariants },
   },
@@ -37,18 +37,23 @@ export const Checkbox = ({ label, ...props }: CheckboxProps) => {
       <InputContainer
         hideLabel
         labelSize={props.size}
-        orientation="horizontal"
         {...inputContainerProps}
         width="auto"
         asLabel
       >
         <CheckboxContainerElement size={props.size}>
-          <CheckboxElement type="checkbox" {...inputComponentProps} focusRing={false} />
-          <span>{label}</span>
+          <BasicCheckbox
+            id={inputComponentProps.id}
+            size={inputComponentProps.size}
+            focusRing={false}
+          />
+          <InputLabelElement as="div" labelSize={props.size} labelOrientation="horizontal">
+            {label}
+          </InputLabelElement>
         </CheckboxContainerElement>
       </InputContainer>
     );
   }
 
-  return <CheckboxElement type="checkbox" {...inputComponentProps} />;
+  return <CheckboxElement {...inputComponentProps} />;
 };

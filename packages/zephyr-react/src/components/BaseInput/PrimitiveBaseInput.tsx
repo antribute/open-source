@@ -4,7 +4,6 @@ import React from 'react';
 import {
   InputComponentWidthVariant,
   inputComponentVariants,
-  inputSizeVariants,
 } from 'styles/input-component.variants';
 import { classed, mergeVariants } from 'utils/classed';
 

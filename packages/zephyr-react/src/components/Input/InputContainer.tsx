@@ -35,28 +35,11 @@ const InputContainerElement = classed(
   // Tailwind Arbitrary Group (https://tailwindcss.com/docs/hover-focus-and-other-states#arbitrary-groups)
   // eslint-disable-next-line tailwindcss/no-custom-classname
   clsx('group/input is-contained'),
-  {
-    variants: {
-      orientation: {
-        // eslint-disable-next-line tailwindcss/no-custom-classname
-        horizontal: clsx(
-          'inline-flex flex-row items-center',
-          // Tailwind Arbitrary Group
-          'group/input is-horizontal'
-        ),
-        // eslint-disable-next-line tailwindcss/no-custom-classname
-        vertical: clsx(
-          'inline-flex flex-col justify-center',
-          // Tailwind Arbitrary Group
-          'group/input is-vertical'
-        ),
-      },
-    },
-  },
+
   {
     defaultVariants: {
       width: 'fixed',
-      // orientation: 'vertical',
+
       size: 'md',
     },
   }
@@ -76,7 +59,7 @@ export const InputContainer = (props: InputContainerProps) => {
     labelDescription,
     width,
     labelSize,
-    orientation,
+
     className,
     asLabel,
     size,
@@ -96,7 +79,6 @@ export const InputContainer = (props: InputContainerProps) => {
         labelDescription={labelDescription}
         labelSize={labelSize}
         required={required}
-        labelOrientation={orientation}
         width={width}
       >
         {label}

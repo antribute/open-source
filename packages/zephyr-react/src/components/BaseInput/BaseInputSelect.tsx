@@ -32,6 +32,7 @@ export const BaseInputSelect = React.forwardRef<HTMLButtonElement, BaseInputSele
         as={Select}
         ref={ref}
         id={props.id}
+        width={props.width ?? 'fixed'}
       >
         {Array.isArray(value) ? (
           <MultiSelectValue {...selectValueCommonProps} value={value} />
