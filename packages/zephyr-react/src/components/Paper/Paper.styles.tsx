@@ -10,7 +10,8 @@ export type PaperElementProps = React.ComponentProps<typeof PaperElement>;
 export const PaperElementBackground = classed('div', {
   variants: {
     border: {
-      true: 'border border-solid border-boundary-subtle dark:border-boundary-inverse-subtle',
+      // true: 'border border-solid border-boundary-subtle dark:border-boundary-inverse-subtle',
+      true: 'border-2 border-boundary-inverse-tint dark:border-boundary-tint',
     },
     hoverHighlight: {
       true: classTheme({
@@ -28,19 +29,19 @@ export const PaperElementBackground = classed('div', {
         dark: 'dark:bg-surface-inverse-soft text-neutral-dark',
       }),
       'surface-light': classTheme({
-        light: 'bg-surface-light text-neutral-dark',
+        light: 'bg-surface-200',
         dark: 'dark:bg-surface-inverse-light',
       }),
       'surface-dark': classTheme({
-        light: 'bg-surface-800',
+        light: 'bg-surface-300',
         dark: 'dark:bg-surface-inverse-600',
       }),
       neutral: clsx(
         'bg-neutral text-content-inverse-intense',
-        'border-boundary-intense',
-        'dark:border-boundary-inverse-intense'
+
+        ' dark:border-boundary-inverse-intense'
       ),
-      'neutral-light': clsx('bg-neutral-light text-content-inverse-intense'),
+      'neutral-light': clsx('bg-neutral-light text-content-inverse-intense', 'dark:bg-neutral-600'),
     },
   },
   compoundVariants: [
@@ -52,7 +53,7 @@ export const PaperElementBackground = classed('div', {
     {
       color: 'surface-soft',
       hoverHighlight: true,
-      class: 'hover:bg-surface-200 dark:hover:bg-surface-inverse-soft',
+      class: 'hover:bg-surface-light dark:hover:bg-surface-inverse-dark',
     },
     {
       color: 'surface-light',
@@ -68,6 +69,16 @@ export const PaperElementBackground = classed('div', {
       color: 'neutral',
       hoverHighlight: true,
       class: 'dark:hover:bg-neutral-dark',
+    },
+    {
+      color: 'neutral',
+      border: true,
+      class: 'border-boundary-weak dark:border-boundary',
+    },
+    {
+      color: 'neutral-light',
+      border: true,
+      class: 'border-boundary-inverse dark:border-boundary',
     },
   ],
   defaultVariants: {

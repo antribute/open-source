@@ -14,7 +14,7 @@ export const BaseListItem = classed.span(
     variants: {
       highlight: {
         true: clsx(
-          'bg-highlight-moderate',
+          'bg-highlight-moderate ',
           'text-content-strong dark:!text-content-inverse-intense'
         ),
         // false: 'bg-transparent',
@@ -22,6 +22,7 @@ export const BaseListItem = classed.span(
       active: {
         true: clsx(
           // 'bg-surface-soft dark:bg-neutral/30',
+          // 'bg-highlight-weak',
           'text-content-strong dark:text-content-inverse-strong'
         ),
         // false: 'bg-transparent',
@@ -29,7 +30,7 @@ export const BaseListItem = classed.span(
 
       hoverable: {
         true: clsx(
-          'cursor-pointer'
+          'cursor-pointer select-none'
           // 'hover:text-content-strong dark:hover:text-content-inverse-strong'
         ),
       },
@@ -47,7 +48,7 @@ export const BaseListItem = classed.span(
 
     compoundVariants: [
       { hoverable: true, class: 'select-none' },
-      { hoverable: true, highlight: false, class: 'hover:bg-highlight-weak' },
+      { hoverable: true, highlight: false, class: 'hover:bg-highlight-moderate' },
     ],
   }
 );

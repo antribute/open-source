@@ -13,14 +13,14 @@ export const placeholderClassName = classedCore({
     placeholderSelector: {
       true: clsx(
         'placeholder:font-body',
-        'placeholder:text-content-ghost focus:placeholder:text-content-subtle',
+        'placeholder:text-content-subtle/30 focus:placeholder:text-content-subtle',
         'dark:placeholder:text-content-inverse-ghost dark:focus:placeholder:text-content-inverse-subtle'
       ),
     },
     placeholderContainer: {
       true: clsx(
         'font-body',
-        'text-content-ghost focus:text-content-subtle',
+        'text-content-subtle/30 focus:text-content-subtle',
         'dark:text-content-inverse-ghost dark:focus:text-content-inverse-subtle'
       ),
     },
@@ -83,8 +83,8 @@ export const BaseInputElement = classed(
               'focus-within:border-positive',
             ],
             dark: [
-              'dark:border-positive',
-              'focus-within:dark:ring-positive',
+              // 'dark:border-positive',
+              'focus-within:dark:ring-positive/20',
               'focus-within:dark:border-positive',
             ],
           })
@@ -95,7 +95,7 @@ export const BaseInputElement = classed(
             light: ['border-danger', 'focus-within:ring-danger', 'focus-within:border-danger'],
             dark: [
               'dark:border-danger',
-              'focus-within:dark:ring-danger',
+              'focus-within:dark:ring-danger/20',
               'focus-within:dark:border-danger',
             ],
           })

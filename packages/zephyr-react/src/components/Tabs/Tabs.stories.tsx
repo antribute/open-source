@@ -41,7 +41,7 @@ export const Default = () => {
 
 export const Many = () => {
   return (
-    <Paper border color="surface">
+    <Paper border color="surface-dark">
       <Tabs.Root defaultValue={tabs6[0]?.value}>
         <Tabs.List className="mb-8">
           {tabs6.map((e) => (

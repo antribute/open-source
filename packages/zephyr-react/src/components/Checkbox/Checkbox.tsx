@@ -17,8 +17,8 @@ const CheckboxInputElement = classed(
 
 const CheckboxContainerElement = classed(
   'div',
-  'flex gap-8',
-  'border-2 items-center border-transparent gap-8',
+  'inline-flex gap-8',
+  'border-2 items-center border-transparent gap-8 bg-highlight-tint rounded',
   {
     variants: { size: inputSizeVariants },
   },
@@ -40,6 +40,7 @@ export const Checkbox = ({ label, ...props }: CheckboxProps) => {
         {...inputContainerProps}
         width="auto"
         asLabel
+        className="!inline-flex cursor-pointer"
       >
         <CheckboxContainerElement size={props.size}>
           <BasicCheckbox
