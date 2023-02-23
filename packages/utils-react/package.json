@@ -39,7 +39,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "tsup": "^6.5.0",
-    "typescript": "^4.9.3",
+    "typescript": "^5.0.0-beta",
     "vite": "^4.0.4",
     "vite-tsconfig-paths": "^3.6.0",
     "vitest": "^0.25.3"
