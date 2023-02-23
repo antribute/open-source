@@ -1,30 +1,33 @@
 import { createTsForm } from '@ts-react/form';
 import { Button } from 'components/Button';
-import { fieldSchema, formMapping } from 'components/Form/components/fields';
 import { z } from 'zod';
+import { EmailField } from 'components/Form/components/fields/EmailField';
+import { StringField } from 'components/Form/components/fields/StringField';
+import { CheckboxField } from 'components/Form/components/fields/CheckboxField';
+import { createFormSchema } from 'components/Form/createFormSchema';
 
-const Form = createTsForm(formMapping);
+const { mappings, schemas } = createFormSchema([EmailField, CheckboxField, StringField]);
+
+const Form = createTsForm(mappings);
 
 const SignUpSchema = z.object({
-  email: fieldSchema.email, // renders TextField
-  password: z.string().describe('Password'),
-  address: z.string().describe('Address'),
-  // favoriteColor: z.enum(['blue', 'red', 'purple']), // renders DropDownSelect and passed the enum values
-  isOver18: fieldSchema.boolean.describe('Is Over 18'), // renders CheckBoxField
+  email: schemas.email,
+  name: schemas.stringfield.describe('User name // Enter username'),
+  checked: schemas.CheckboxField,
 });
 
 export const Default = () => {
-  const onSubmit = () => {
-    // gets typesafe data when form is submitted
-  };
-
   return (
     <Form
-      formProps={{ className: 'grid grid-cols-5' }}
+      formProps={{ className: 'flex items-center gap-16' }}
       schema={SignUpSchema}
-      onSubmit={onSubmit}
+      onSubmit={(d) => {
+        console.log('SUBMIT');
+      }}
       props={{
-        address: { beforeElement: <div>Beofre</div>, afterElement: <div>After</div> },
+        email: {},
+        name: {},
+        checked: { hideLabel: false, hideMessage: false, className: 'inline-block' },
       }}
       renderAfter={() => (
         <div className="col-span-full row-end-auto">
