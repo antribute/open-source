@@ -4,7 +4,7 @@ import { inputComponentVariants } from 'styles/input-component.variants';
 import { textVariants } from 'styles/text.variants';
 import { Classed, classTheme, classed, mergeVariants } from 'utils/classed';
 
-export type ButtonVariant = 'contained' | 'soft' | 'text' | 'outlined' | 'outlined-filled';
+export type ButtonVariant = 'contained' | 'soft' | 'text' | 'outlined';
 
 export type ButtonElementVariantProps = Classed.VariantProps<typeof ButtonElement>;
 
@@ -41,8 +41,9 @@ export const ButtonElement = classed.button(
         // eslint-disable-next-line tailwindcss/migration-from-tailwind-2
         soft: clsx('border !border-transparent !bg-opacity-10 hover:!bg-opacity-20'),
         // eslint-disable-next-line tailwindcss/migration-from-tailwind-2
-        outlined: clsx('border !bg-transparent hover:bg-opacity-10 focus:ring-opacity-50'),
-        'outlined-filled': clsx('border bg-transparent'),
+        outlined: clsx(
+          'border bg-opacity-5 ring-1 ring-inset ring-current backdrop-contrast-[1.05] hover:bg-opacity-10 hover:backdrop-contrast-[0.95] focus:!ring-1 focus:ring-inset focus:!ring-current'
+        ),
         // eslint-disable-next-line tailwindcss/migration-from-tailwind-2
         text: clsx(
           'inline py-0 px-2 underline-offset-4  ring-inset focus:ring-2',
@@ -110,16 +111,16 @@ export const ButtonElement = classed.button(
         color: 'inverse',
         class: classTheme({
           light: [
-            'bg-content-intense',
-            'text-content-inverse-intense',
-            'hover:border-content-moderate',
-            'hover:bg-content-moderate',
+            'bg-surface-inverse-dark',
+            'text-neutral-50/95 ',
+            'border-highlight',
+            'hover:bg-surface-inverse-light',
           ],
           dark: [
-            'dark:bg-content-inverse-intense',
-            'dark:text-content-high',
-            'dark:hover:border-content-inverse-intense',
-            'dark:hover:bg-gray-soft',
+            'dark:bg-neutral-50',
+            'dark:hover:bg-surface-light',
+            'dark:text-content-intense/75',
+            'dark:border-boundary-weak',
           ],
         }),
       },
@@ -127,15 +128,17 @@ export const ButtonElement = classed.button(
         variant: 'contained',
         color: 'surface',
         class: classTheme({
+          class: 'ring-inset !ring-1 focus:ring-inset focus:!ring-1',
           light: [
             'bg-surface hover:bg-surface-100 border',
-            'text-content-moderate',
-            'border-black/10 hover:border-black/10',
+            'text-neutral-500/70',
+            'border-boundary-weak ',
+            'ring-boundary-weak',
           ],
           dark: [
             'dark:bg-surface-inverse dark:hover:bg-surface-inverse-light',
             'dark:text-content-inverse',
-            'dark:border-white/5',
+            'dark:ring-boundary-subtle',
           ],
         }),
       },
@@ -144,10 +147,11 @@ export const ButtonElement = classed.button(
         color: 'neutral',
         class: clsx('bg-neutral text-neutral-50 hover:border-neutral-dark hover:bg-neutral-dark'),
       },
+
       {
         variant: 'contained',
         color: 'primary',
-        class: clsx('bg-neutral text-neutral-50 hover:border-neutral-dark hover:bg-neutral-dark'),
+        class: clsx('bg-primary text-primary-50 hover:border-primary-dark hover:bg-primary-dark'),
       },
       {
         variant: 'contained',
@@ -174,39 +178,65 @@ export const ButtonElement = classed.button(
         variant: 'contained',
         color: 'caution',
         class: clsx(
-          'bg-caution text-caution-50 hover:border-caution-dark hover:bg-caution-dark focus:ring-caution-400'
+          'bg-caution text-caution-50 hover:border-caution-dark hover:bg-caution-dark focus:ring-caution-light'
         ),
       },
 
       // Outlined Variant
-
+      {
+        variant: 'outlined',
+        color: 'neutral',
+        class: clsx('border-neutral-400 text-neutral-500 ring-neutral-400 focus:ring-neutral-400'),
+      },
+      {
+        variant: 'outlined',
+        color: 'surface',
+        class: clsx(
+          'bg-surface-inverse',
+          'text-content-neutral boder-boundary-intense text-content-weak ring-neutral-300 focus:!ring-boundary-intense',
+          'dark:text-neutral-200',
+          ' dark:border-surface-inverse-50 ',
+          'dark:ring-surface-inverse-50 dark:focus:!ring-surface-inverse-50'
+        ),
+      },
+      {
+        variant: 'outlined',
+        color: 'inverse',
+        class: clsx(
+          'border-black dark:bg-surface/10',
+          'dark:border-boundary-weak',
+          'dark:!ring-boundary-weak'
+        ),
+      },
+      // Soft Variant
       {
         variant: 'soft',
         color: 'surface',
         class: clsx('dark:bg-neutral/30'),
       },
-
-      // Outlined-Filled Variant
-      {
-        variant: 'outlined-filled',
-        class: clsx('border text-white'),
-      },
-
-      // Soft Variant
       {
         variant: 'soft',
         color: 'neutral',
-        class: clsx('bg-neutral/20 hover:bg-neutral/40'),
+        class: clsx(
+          'bg-neutral-300/40 text-neutral-500 hover:bg-neutral-300/40 hover:backdrop-contrast-[0.9]'
+        ),
       },
       {
         variant: 'soft',
         color: 'surface',
-        class: clsx('!bg-surface-dark/5 hover:!bg-surface-dark/10'),
+        class: clsx(
+          'bg-surface-dark backdrop-contrast-[0.95] hover:backdrop-contrast-[0.82] dark:backdrop-contrast-[.95]'
+        ),
       },
       {
         variant: 'soft',
         color: 'inverse',
-        class: clsx('hover:bg-white'),
+        class: clsx('hover:backdrop-contrast-[2]'),
+      },
+      {
+        variant: 'soft',
+        color: 'primary',
+        // class: clsx(' backdrop-contrast-[0.97]'),
       },
     ],
   }

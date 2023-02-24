@@ -6,12 +6,16 @@ import { Text } from 'components/Text';
 
 type RenderVariantElementProps = Partial<VariantProps<typeof RenderVariantElement>>;
 
-interface RenderVariantBaseProps<T extends React.ComponentType> extends RenderVariantElementProps {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type ReactComponent = keyof JSX.IntrinsicElements | React.JSXElementConstructor<any>;
+
+interface RenderVariantBaseProps<T extends ReactComponent, TProp extends string = string>
+  extends RenderVariantElementProps {
   className?: string;
   Component: T;
   render?: (children: React.ReactNode) => React.ReactNode;
   props?: React.ComponentProps<T>;
-  getProps?: (prop: string) => React.ComponentProps<T>;
+  getProps?: (prop: TProp) => React.ComponentProps<T>;
   showVariantLabel?: boolean;
   variantPropName?: string;
   noChildren?: boolean;
@@ -29,12 +33,30 @@ const RenderVariantElement = classed('div', {
   },
 });
 
-interface RenderSizeVariantProps<T extends React.ComponentType> extends RenderVariantBaseProps<T> {
+interface RenderSizeVariantProps<T extends React.ComponentType>
+  extends RenderVariantBaseProps<T, LiteralUnion<'size', string>> {
   sizes?: SizeProp[];
 }
 
-export const sizeKeys = () => {
-  return ['xs', 'sm', 'md', 'lg'] as const;
+const keys = {
+  colors: [
+    'neutral',
+    'surface',
+    'primary',
+    'info',
+    'caution',
+    'danger',
+    'positive',
+  ] satisfies LiteralUnion<ColorProp, string>[],
+  sizes: ['xs', 'sm', 'md', 'lg'] as LiteralUnion<SizeProp, string>[],
+} satisfies Record<string, LiteralUnion<string, string>[]>;
+
+export const getSizeKeys = () => {
+  return keys.sizes;
+};
+
+export const getColorKeys = () => {
+  return keys.colors;
 };
 
 export const RenderSizeVariants = <T extends React.ComponentType>({
@@ -58,12 +80,13 @@ export const RenderSizeVariants = <T extends React.ComponentType>({
   );
 };
 
-interface ColorSizeVariantProps<T extends React.ComponentType> extends RenderVariantBaseProps<T> {
+interface ColorSizeVariantProps<T extends React.ComponentType>
+  extends RenderVariantBaseProps<T, LiteralUnion<'color', string>> {
   colors?: LiteralUnion<ColorProp, string>[];
 }
 
 export const RenderColorVariants = <T extends React.ComponentType>({
-  colors = ['neutral', 'surface', 'primary', 'info', 'caution', 'danger', 'positive'],
+  colors = keys.colors,
   Component,
   noChildren,
   render = (children) => children,

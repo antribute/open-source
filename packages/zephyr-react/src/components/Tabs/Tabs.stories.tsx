@@ -1,49 +1,52 @@
 import { Paper } from 'components/Paper';
+import { generateMockVehicleList } from 'mock/mock-data';
+import { Text } from 'components/Text';
+import { capitalCase } from 'change-case';
 import { Tabs } from '.';
 
-const tabs = [
+const tabs2 = [
   { label: 'Account', value: 'account' },
   { label: 'Password', value: 'password' },
 ];
+const tabs3 = [...tabs2, { label: 'Home', value: 'home' }];
+
+const tabs4 = [...tabs3, { label: 'Projects', value: 'projects' }];
 
 const tabs6 = [
-  { label: 'Home', value: 'home' },
-  { label: 'Account', value: 'account' },
+  ...tabs4,
   { label: 'Password', value: 'passowrd' },
-  { label: 'Details', value: 'details' },
   { label: 'Billing', value: 'billing' },
-  { label: 'Projects', value: 'projects' },
 ];
 
 export const Default = () => {
   return (
     <Paper border>
-      <Tabs.Root defaultValue={tabs[0]?.value}>
-        <Tabs.List className="mb-8">
-          {tabs.map((e) => (
+      <Tabs.Root defaultValue={tabs2[0]?.value}>
+        <Tabs.List>
+          {tabs2.map((e) => (
             <Tabs.Tab key={e.value} value={e.value}>
               {e.label}
             </Tabs.Tab>
           ))}
         </Tabs.List>
 
-        <div>
-          {tabs.map((tab) => (
+        <Tabs.ViewContainer>
+          {tabs2.map((tab) => (
             <Tabs.View value={tab.value}>
               Tab View: <b>{tab.label}</b>
             </Tabs.View>
           ))}
-        </div>
+        </Tabs.ViewContainer>
       </Tabs.Root>
     </Paper>
   );
 };
 
-export const Many = () => {
+export const SixTabs = () => {
   return (
     <Paper border color="surface-dark">
       <Tabs.Root defaultValue={tabs6[0]?.value}>
-        <Tabs.List className="mb-8">
+        <Tabs.List>
           {tabs6.map((e) => (
             <Tabs.Tab key={e.value} value={e.value}>
               {e.label}
@@ -55,23 +58,86 @@ export const Many = () => {
   );
 };
 
-// TODO
+export const DisabledTab = () => {
+  return (
+    <Paper border color="surface-dark">
+      <Tabs.Root defaultValue={tabs6[0]?.value}>
+        <Tabs.List>
+          {tabs4.map((e, index, arr) => (
+            <Tabs.Tab key={e.value} value={e.value} disabled={index === arr.length - 1}>
+              {e.label}
+            </Tabs.Tab>
+          ))}
+        </Tabs.List>
+      </Tabs.Root>
+    </Paper>
+  );
+};
+
 export const Vertical = () => {
   return (
-    <Tabs.Root className="flex">
-      TODO 🚧
-      <Tabs.List className="mr-8">
-        {tabs.map((e) => (
+    <Tabs.Root orientation="vertical">
+      <Tabs.List>
+        {tabs2.map((e) => (
           <Tabs.Tab key={e.value} value={e.value}>
             {e.label}
           </Tabs.Tab>
         ))}
       </Tabs.List>
-      {tabs.map((tab) => (
-        <Tabs.View value={tab.value}>
-          Tab View: <b>{tab.label}</b>
-        </Tabs.View>
-      ))}
+      <Tabs.ViewContainer>
+        {tabs2.map((tab) => (
+          <Tabs.View key={tab.value} value={tab.value}>
+            Tab View: <b>{tab.label}</b>
+          </Tabs.View>
+        ))}
+      </Tabs.ViewContainer>
     </Tabs.Root>
+  );
+};
+
+const vehicles = generateMockVehicleList({ size: 20, uniqueBy: 'type' });
+
+export const Overflow = () => {
+  return (
+    <Paper border>
+      <Tabs.Root defaultValue={tabs6[0]?.value}>
+        <Tabs.List>
+          {vehicles.map(({ type }) => (
+            <Tabs.Tab key={type} value={type}>
+              {type}
+            </Tabs.Tab>
+          ))}
+        </Tabs.List>
+      </Tabs.Root>
+    </Paper>
+  );
+};
+
+export const Contrast = () => {
+  return (
+    <div className="flex gap-16">
+      {(['surface', 'surface-dark', 'surface-light', 'neutral', 'neutral-light'] as const).map(
+        (surfaceColor) => {
+          return (
+            <div className="space-y-8">
+              <Text block fontWeight="medium" color="weak">
+                {capitalCase(surfaceColor)}
+              </Text>
+              <Paper border color={surfaceColor}>
+                <Tabs.Root defaultValue={tabs6[0]?.value}>
+                  <Tabs.List>
+                    {tabs3.map((e) => (
+                      <Tabs.Tab key={e.value} value={e.value}>
+                        {e.label}
+                      </Tabs.Tab>
+                    ))}
+                  </Tabs.List>
+                </Tabs.Root>
+              </Paper>
+            </div>
+          );
+        }
+      )}
+    </div>
   );
 };

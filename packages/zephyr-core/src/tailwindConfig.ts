@@ -41,6 +41,7 @@ const config: Config = {
   ],
   presets: [],
   darkMode: ['class', '[data-mode="dark"]'],
+
   theme: {
     ...defaultTailwindTheme,
     keyframes,
@@ -220,6 +221,7 @@ const config: Config = {
       max: 'max-content',
       fit: 'fit-content',
     }),
+
     inset: ({ theme }) => ({
       auto: 'auto',
       ...theme('spacing'),
@@ -273,7 +275,7 @@ const config: Config = {
     placeholderColor: ({ theme }) => theme('colors'),
     placeholderOpacity: ({ theme }) => theme('opacity'),
     ringColor: ({ theme }) => ({
-      DEFAULT: theme('colors.primary.light', colorPalette.boundary.focus) as string,
+      DEFAULT: theme('colors.highlight.moderate', colorPalette.highlight.moderate) as string,
       ...theme('colors'),
     }),
     ringOffsetColor: ({ theme }) => theme('colors'),
@@ -348,6 +350,7 @@ const config: Config = {
       fit: 'fit-content',
     }),
   },
+
   plugins: [tailwindCssRadixPlugin, tailwindCssFormsPlugin],
 };
 

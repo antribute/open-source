@@ -2,8 +2,6 @@ import clsx from 'clsx';
 import { InputSizeVariant } from 'styles/input-component.variants';
 import { Classed, classTheme, classed, classedCore } from 'utils/classed';
 
-export type ButtonVariant = 'contained' | 'soft' | 'text' | 'outlined' | 'outlined-filled';
-
 export type BaseInputElementVariantProps = Classed.VariantProps<typeof BaseInputElement>;
 
 export type BaseInputElementProps = React.ComponentProps<typeof BaseInputElement>; //

@@ -1,18 +1,18 @@
 import { ArgsTable, Canvas, Description, Meta, Story } from '@storybook/addon-docs';
 
-import { Button } from './Button';
-import * as stories from './Button.stories.tsx';
+import { IconButton } from './IconButton';
+import * as stories from './IconButton.stories.tsx';
 
-<Meta title="Input/Button" component={Button} />
+<Meta title="Input/IconButton" component={IconButton} />
 
-# Button
+# IconButton
 
-<Description component={Button} />
-<ArgsTable of={Button} />
+<Description component={IconButton} />
+<ArgsTable of={IconButton} />
 
 ## Default
 
-Default `Button` component
+Default `IconButton` component
 
 <Canvas withToolbar>
   <Story name="Default" story={stories.Default} />
@@ -20,7 +20,7 @@ Default `Button` component
 
 ## Size
 
-Button `size`
+`contained` variant
 
 <Canvas withToolbar>
   <Story name="Size" story={stories.SizeVariant} />

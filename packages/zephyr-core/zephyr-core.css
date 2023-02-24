@@ -4,10 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply text-content dark:text-content-inverse;
-}
+@layer base {
+  body {
+    @apply text-content dark:text-content-inverse;
+  }
 
-*:focus {
-  @apply outline-boundary-focus  dark:outline-boundary-inverse-focus ring-boundary-focus dark:ring-boundary-inverse-focus;
+  *:focus {
+    @apply outline-boundary-focus  dark:outline-boundary-inverse-focus ring-boundary-focus dark:ring-boundary-inverse-focus;
+  }
 }

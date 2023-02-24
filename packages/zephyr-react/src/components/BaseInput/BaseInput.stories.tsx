@@ -1,4 +1,4 @@
-import { RenderSizeVariants, sizeKeys } from 'utils/storybook-utils';
+import { RenderSizeVariants, getSizeKeys } from 'utils/storybook-utils';
 import { Button } from 'components/Button/Button';
 import { getRelativeSizeProp } from 'utils/getRelativeSizeProp';
 import { SizeProp } from 'types/styles';
@@ -16,7 +16,7 @@ export const Default = () => {
 export const PrimitiveBaseInputComponent = () => {
   return (
     <div className="flex items-center gap-8">
-      {sizeKeys().map((size) => (
+      {getSizeKeys().map((size) => (
         <div className="flex bg-highlight">
           <PrimitiveBaseInput size={size} placeholder="Enter value" />
         </div>
@@ -52,7 +52,7 @@ export const InlineAddons = () => {
         getProps={(size) => {
           const relativeSize = getRelativeSizeProp(-1, {
             relativeSize: size as SizeProp,
-            maxSize: 'md',
+            maxElement: 'md',
           });
 
           const props = {

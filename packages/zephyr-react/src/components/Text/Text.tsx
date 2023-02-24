@@ -11,6 +11,9 @@ export const Text = classed('span', 'text-content dark:text-content-inverse', {
       high: 'text-content-high dark:text-content-inverse-high',
       strong: 'text-content-intense dark:text-content-inverse-intense',
     },
+    block: {
+      true: 'block',
+    },
   },
 
   defaultVariants: {

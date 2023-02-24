@@ -40,11 +40,7 @@ export const StatusBadgeElement = classed(
         contained: clsx('text-white', 'bg-gradient-to-r from-white/5 via-white/5 to-transparent'),
         dropdown: 'cursor-pointer',
       },
-      // disabled: {
-      //   true: clsx(
-      //     'cursor-default bg-boundary-ghost text-content-ghost hover:!bg-boundary-ghost focus:ring-0 dark:text-content-subtle'
-      //   ),
-      // },
+
       clickable: {
         true: 'cursor-pointer',
         false: 'cursor-default focus:ring-0',
@@ -54,7 +50,6 @@ export const StatusBadgeElement = classed(
       size: 'md',
       variant: 'contained',
       clickable: false,
-      // color: 'primary',
     },
 
     compoundVariants: [

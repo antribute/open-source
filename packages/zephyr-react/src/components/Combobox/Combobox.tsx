@@ -143,16 +143,9 @@ const ComboboxList = ({
                   focusOnHover
                   hoverable
                   highlight={isSelected}
+                  inactive={!isActive}
                   active={isActive}
-                  className={clsx(
-                    'absolute top-0 left-0 w-full',
-                    ' text-content-weak dark:text-content-inverse-weak',
-                    {
-                      // This style is for showing a caret to indicate the active item
-                      "before:content-[''] before:absolute before:left-0 before:h-full before:top-0 before:rounded-sm before:w-2 before:bg-black/10 dark:before:bg-boundary-inverse-high":
-                        isActive,
-                    }
-                  )}
+                  className={clsx('absolute top-0 left-0 w-full')}
                 >
                   {(props) => (
                     <SelectPrimitive.SelectItem {...props} value={option.label}>

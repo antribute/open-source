@@ -83,7 +83,24 @@ export const colors = {
   black,
   base,
   neutral,
-  primary: neutral,
+
+  primary: generateColorGroup({
+    '50': '#fff0fa',
+    '100': '#ffe4f7',
+    '200': '#ffc9f0',
+    '300': '#ff9ce2',
+    '400': '#ff5fcc',
+    '500': '#ff30b4',
+    '600': '#f50d93',
+    '700': '#e6007e',
+    '800': '#b00460',
+    '900': '#920952',
+  })({
+    DEFAULT: '700',
+    dark: '800',
+    light: '500',
+    soft: '100',
+  }),
 
   info: generateColorGroup(tailwindColors.cyan)({
     DEFAULT: '500',

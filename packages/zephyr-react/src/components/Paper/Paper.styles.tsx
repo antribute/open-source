@@ -1,3 +1,4 @@
+/* eslint-disable tailwindcss/no-custom-classname */
 import clsx from 'clsx';
 import { Classed, classTheme, classed } from 'utils/classed';
 
@@ -21,22 +22,32 @@ export const PaperElementBackground = classed('div', {
     },
     color: {
       surface: classTheme({
+        // Tailwind Arbitrary Group
+        class: clsx('is-surface group'),
         light: 'bg-surface',
         dark: 'dark:bg-surface-inverse',
       }),
       'surface-soft': classTheme({
+        // Tailwind Arbitrary Group
+        class: clsx('is-surface-soft group'),
         light: 'bg-surface-100',
         dark: 'dark:bg-surface-inverse-soft text-neutral-dark',
       }),
       'surface-light': classTheme({
+        // Tailwind Arbitrary Group
+        class: clsx('is-surface-light group'),
         light: 'bg-surface-200',
         dark: 'dark:bg-surface-inverse-light',
       }),
       'surface-dark': classTheme({
+        // Tailwind Arbitrary Group
+        class: clsx('is-surface-dark group'),
         light: 'bg-surface-300',
         dark: 'dark:bg-surface-inverse-600',
       }),
       neutral: clsx(
+        // Tailwind Arbitrary Group
+        'is-surface-neutral group',
         'bg-neutral text-content-inverse-intense',
 
         ' dark:border-boundary-inverse-intense'

@@ -1,9 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { last } from 'lodash-es';
-
-interface GenerateMockOptions {
-  seed?: number;
-}
+import { uniqBy } from 'lodash-es';
 
 const fakerSeed = (seed?: number) => {
   if (seed !== undefined) {
@@ -43,6 +39,9 @@ export const generateMockUser: MockDataGeneratorFn<UserMockData> = ({ id, seed }
     avatarUrl: `https://api.dicebear.com/5.x/identicon/svg?seed=${username}`,
     role: faker.name.jobTitle(),
     sexType,
+    vehicle: {
+      vehicleType: faker.vehicle.type(),
+    },
   };
 };
 
@@ -67,14 +66,14 @@ export const generateMockOrganization: MockDataGeneratorFn<Organization> = ({ id
 
 export const generateMockOrganizationList = makeListFactory(generateMockOrganization);
 
-interface Project {
+interface ProjectMockData {
   id: number;
   name: string;
   description: string;
   startDate: string;
   endDate: string;
 }
-export const generateMockProject: MockDataGeneratorFn<Project> = ({ id, seed }) => {
+export const generateMockProject: MockDataGeneratorFn<ProjectMockData> = ({ id, seed }) => {
   fakerSeed(seed);
   return {
     id,
@@ -87,19 +86,49 @@ export const generateMockProject: MockDataGeneratorFn<Project> = ({ id, seed }) 
 
 export const generateMockProjectList = makeListFactory(generateMockProject);
 
-interface MakeListFnOptions {
-  size?: number;
-  seed?: number;
+export interface VehicleMockData {
+  id: number;
+  type: string;
+  color: string;
+  model: string;
+  vin: string;
+  manufacturer: string;
 }
 
-function makeListFactory<TGenerator extends MockDataGeneratorFn<unknown>>(generator: TGenerator) {
-  return (options?: MakeListFnOptions) => {
-    const { size = 10, seed: seedProp = 0 } = options ?? {};
-    return new Array(size).fill(0).map((_e, i) => {
+export const generateMockVehicle: MockDataGeneratorFn<VehicleMockData> = ({ id, seed }) => {
+  fakerSeed(seed);
+
+  return {
+    id,
+    model: faker.vehicle.model(),
+    color: faker.vehicle.color(),
+    vin: faker.vehicle.vin(),
+    type: faker.vehicle.type(),
+    manufacturer: faker.vehicle.manufacturer(),
+  };
+};
+
+export const generateMockVehicleList = makeListFactory(generateMockVehicle);
+
+interface MakeListFnOptions<T> {
+  size?: number;
+  seed?: number;
+  uniqueBy?: keyof T;
+}
+function makeListFactory<T extends MockDataGeneratorFn<unknown>, TReturnType extends ReturnType<T>>(
+  generator: T
+) {
+  return (options?: MakeListFnOptions<TReturnType>) => {
+    const { size = 10, seed: seedProp = 0, uniqueBy } = options ?? {};
+
+    const result = new Array(size).fill(0).map((_e, i) => {
       const seed = 100 + (seedProp + i);
       faker.seed(seed + i);
-
-      return generator({ id: i }) as ReturnType<TGenerator>;
+      return generator({ id: i }) as TReturnType;
     });
+
+    const uniqByResult = uniqueBy ? uniqBy(result, uniqueBy) : result;
+
+    return uniqByResult;
   };
 }

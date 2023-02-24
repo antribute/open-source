@@ -4,7 +4,7 @@ import { Paper } from 'components/Paper';
 import { Dialog } from 'components/Dialog';
 import { Avatar } from 'components/Avatar/Avatar';
 import { Text } from 'components/Text';
-import { RenderSizeVariants, sizeKeys } from 'utils/storybook-utils';
+import { RenderSizeVariants, getSizeKeys } from 'utils/storybook-utils';
 import { AvatarGroup } from '.';
 
 const users = generateMockUserList({ size: 30 });
@@ -29,7 +29,7 @@ export const Sizes = () => {
     //   </AvatarGroup.Root>)}
     // </div>
     <div className="space-y-32">
-      {sizeKeys().map((size) => (
+      {getSizeKeys().map((size) => (
         <div className="space-y-8">
           <Text color="moderate" size="sm">
             {size}

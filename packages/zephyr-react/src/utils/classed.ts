@@ -1,11 +1,12 @@
-import { ClassedVariantMap } from 'types/styles';
+import { ClassedVariantMap, SizeProp } from 'types/styles';
 import { twMerge } from 'tailwind-merge';
-import { mergeWith, pick } from 'lodash-es';
+import { mapValues, mergeWith, pick } from 'lodash-es';
 import { createClassed, deriveClassed } from '@tw-classed/react';
 import { createClassed as createClassedCore } from '@tw-classed/core';
 import type * as Classed from '@tw-classed/react';
 import clsx, { ClassValue } from 'clsx';
 import { LiteralUnion } from 'type-fest';
+import { getRelativeSizePropData } from 'utils/getRelativeSizeProp';
 
 export type { ClassedFunctionProxy, ClassedProxyFunctionType } from '@tw-classed/react';
 
@@ -39,3 +40,21 @@ export function mergeVariants<T extends Record<string, string> = Record<string, 
 export const classTheme = (props: { class?: ClassValue; light: ClassValue; dark: ClassValue }) => {
   return clsx(props.class, props.light, props.dark);
 };
+
+export function relativeSizeVariants<T extends Record<SizeProp, string>>(options: {
+  delta: number;
+  variants: T;
+  overrides?: T;
+}) {
+  const { delta, variants, overrides } = options;
+
+  const relativeSizeVariants = mapValues(variants, (_, size) => {
+    const { sizeProp: decreasedSize } = getRelativeSizePropData(delta, {
+      relativeSize: size as SizeProp,
+    });
+
+    return variants[decreasedSize];
+  });
+
+  return { ...relativeSizeVariants, ...overrides } as T;
+}
