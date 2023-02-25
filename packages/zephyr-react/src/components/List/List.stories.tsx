@@ -9,40 +9,52 @@ import MessagesIcon from '@heroicons/react/24/outline/ChatBubbleLeftIcon';
 import DownloadIcon from '@heroicons/react/24/outline/FolderArrowDownIcon';
 import { getStoryUrl } from 'utils/storybook-utils';
 import { Paper } from 'components/Paper';
+import { capitalCase } from 'change-case';
 import { List } from '.';
 
-export const Default = () => {
+const Sidebar = ({ color }: { color: string }) => {
   const href = getStoryUrl();
-
   return (
-    <Paper className="fixed left-0 top-0 h-full w-400">
-      <List.Container roundedItems>
-        <List.LinkItem href={href} label="Dashboard" startIcon={<DashboardIcon />} highlight />
-        <List.CollapsibleItem
-          label="Users"
-          startIcon={<ProfileIcon />}
-          aria-controls="dropdown-sales"
-          data-collapse-toggle="dropdown-sales"
-          containerProps={{ id: 'dropdown-sales' }}
-          type="button"
-        >
-          <List.LinkItem href={href} label="Jacob B." />
-          <List.LinkItem href={href} label="Ryan C." />
-          <List.LinkItem href={href} label="Kara H." />
-        </List.CollapsibleItem>
-        <List.CollapsibleItem label="Projects" startIcon={<ProjectsIcon />}>
-          <List.LinkItem href={href} label="Project 1" />
-          <List.LinkItem href={href} label="Project 2" />
-          <List.LinkItem href={href} label="Project 3" />
-        </List.CollapsibleItem>
-        <List.LinkItem href={href} label="Calendar" startIcon={<CalendarIcon />} />
-        <List.Spacing />
-        <List.SectionTitle>Settings</List.SectionTitle>
-        <List.LinkItem href={href} label="Account Settings" startIcon={<SettingsIcon />} />
-        <List.LinkItem href={href} label="Billing" startIcon={<BillingIcon />} />
-        <List.LinkItem href={href} label="Appearance" startIcon={<AppearanceIcon />} />
-      </List.Container>
-    </Paper>
+    <List.Container roundedItems>
+      <List.LinkItem href={href} label="Dashboard" startIcon={<DashboardIcon />} highlight />
+      <List.CollapsibleItem
+        label="Users"
+        startIcon={<ProfileIcon />}
+        aria-controls="dropdown-sales"
+        data-collapse-toggle="dropdown-sales"
+        containerProps={{ id: 'dropdown-sales' }}
+        type="button"
+      >
+        <List.LinkItem href={href} label="Jacob B." />
+        <List.LinkItem href={href} label="Ryan C." />
+        <List.LinkItem href={href} label="Kara H." />
+      </List.CollapsibleItem>
+      <List.CollapsibleItem label="Projects" startIcon={<ProjectsIcon />}>
+        <List.LinkItem href={href} label="Project 1" />
+        <List.LinkItem href={href} label="Project 2" />
+        <List.LinkItem href={href} label="Project 3" />
+      </List.CollapsibleItem>
+      <List.LinkItem href={href} label="Calendar" startIcon={<CalendarIcon />} />
+      <List.Spacing />
+      <List.SectionTitle>Settings</List.SectionTitle>
+      <List.LinkItem href={href} label="Account Settings" startIcon={<SettingsIcon />} />
+      <List.LinkItem href={href} label="Billing" startIcon={<BillingIcon />} />
+      <List.LinkItem href={href} label={`Appearance (${color})`} startIcon={<AppearanceIcon />} />
+    </List.Container>
+  );
+};
+
+export const Default = () => {
+  return (
+    <div className="fixed flex h-5/6 gap-x-8 ">
+      {(['surface', 'surface-light', 'surface-dark', 'neutral', 'neutral-light'] as const).map(
+        (color) => (
+          <Paper color={color} className="top-0 h-full w-400">
+            <Sidebar color={capitalCase(color)} />
+          </Paper>
+        )
+      )}
+    </div>
   );
 };
 
@@ -96,25 +108,21 @@ export const ListGroupAlignDescriptionWithLabel = () => {
         <List.LinkItem
           label="Profile"
           startIcon={<ProfileIcon />}
-          startIconMarker
           description="Voluptate sunt sit eu occaecat non id magna ipsum ad in qui."
         />
         <List.LinkItem
           label="Settings"
           startIcon={<SettingsIcon />}
-          startIconMarker
           description="Deserunt laborum sit nulla qui proident culpa tempor reprehenderit duis cillum exercitation ex exercitation exercitation."
         />
         <List.LinkItem
           label="Messages"
           startIcon={<MessagesIcon />}
-          startIconMarker
           description="Reprehenderit mollit et elit ea ex laborum officia tempor consequat voluptate adipisicing cupidatat magna."
         />
         <List.LinkItem
           label="Download"
           startIcon={<DownloadIcon />}
-          startIconMarker
           description="Anim consectetur fugiat enim occaecat ipsum cupidatat Lorem officia esse ut."
         />
       </List.Container>

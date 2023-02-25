@@ -21,7 +21,7 @@ const ListContainerElement = classed(
 
       divide: {
         false: '',
-        true: 'gap-0 divide-y divide-solid divide-boundary-weak/50 dark:divide-boundary-inverse-weak/50',
+        true: 'gap-0 divide-y divide-solid divide-highlight dark:divide-highlight',
       },
     },
     defaultVariants: {

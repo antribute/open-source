@@ -42,17 +42,20 @@ export const PaperElementBackground = classed('div', {
       'surface-dark': classTheme({
         // Tailwind Arbitrary Group
         class: clsx('is-surface-dark group'),
-        light: 'bg-surface-300',
+        light: 'bg-surface-400',
         dark: 'dark:bg-surface-inverse-600',
       }),
       neutral: clsx(
         // Tailwind Arbitrary Group
         'is-surface-neutral group',
-        'bg-neutral text-content-inverse-intense',
-
-        ' dark:border-boundary-inverse-intense'
+        'bg-neutral text-content-inverse-intense'
       ),
-      'neutral-light': clsx('bg-neutral-light text-content-inverse-intense', 'dark:bg-neutral-600'),
+      'neutral-light': clsx(
+        // Tailwind Arbitrary Group
+        'is-surface-neutral-light group',
+        'text-content-inverse-intense',
+        'bg-neutral-600'
+      ),
     },
   },
   compoundVariants: [
@@ -64,32 +67,37 @@ export const PaperElementBackground = classed('div', {
     {
       color: 'surface-soft',
       hoverHighlight: true,
-      class: 'hover:bg-surface-light dark:hover:bg-surface-inverse-dark',
+      class: 'hover:bg-surface-200 dark:hover:bg-surface-inverse-dark',
     },
     {
       color: 'surface-light',
       hoverHighlight: true,
-      class: 'hover:bg-surface-soft dark:hover:bg-surface-inverse-500',
+      class: 'hover:bg-surface-300 dark:hover:bg-surface-inverse-500',
     },
     {
       color: 'surface-dark',
       hoverHighlight: true,
-      class: 'hover:bg-surface-light dark:hover:bg-surface-inverse-700',
+      class: 'hover:bg-surface-dark dark:hover:bg-surface-inverse-700',
     },
     {
       color: 'neutral',
       hoverHighlight: true,
-      class: 'dark:hover:bg-neutral-dark',
+      class: 'hover:!bg-neutral-900',
+    },
+    {
+      color: 'neutral-light',
+      hoverHighlight: true,
+      class: 'hover:!bg-neutral-700',
     },
     {
       color: 'neutral',
       border: true,
-      class: 'border-boundary-weak dark:border-boundary',
+      class: 'border-boundary',
     },
     {
       color: 'neutral-light',
       border: true,
-      class: 'border-boundary-inverse dark:border-boundary',
+      class: 'border-boundary',
     },
   ],
   defaultVariants: {

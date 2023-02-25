@@ -1,7 +1,7 @@
 import { Classed, classed, mergeVariants } from 'utils/classed';
 import * as TabsPrimitive from '@radix-ui/react-tabs';
 import { inputComponentVariants } from 'styles/input-component.variants';
-import clsx from 'clsx';
+import { highlightBackdropContrastClass } from 'styles/highlightContrast';
 
 export type TabsContainerElementVariants = Classed.VariantProps<typeof TabsContainerElement>;
 
@@ -10,9 +10,6 @@ export type TabsContainerElementProps = React.ComponentProps<typeof TabsContaine
 export const TabsContainerElement = classed(
   TabsPrimitive.Root,
   'flex relative',
-  'light:!opacity-0 ',
-  'mylight:!opacity-0 ',
-  'light-mode:opacity-0 ',
   'radix-orientation-horizontal:flex-col radix-orientation-horizontal: gap-x-8',
   'radix-orientation-vertical:flex-row gap-y-8'
 );
@@ -22,7 +19,6 @@ export type TabsListElementProps = React.ComponentProps<typeof TabsListElement>;
 export const TabsListElement = classed(
   TabsPrimitive.List,
   '',
-  'light:!opacity-0 ',
   'border-boundary-weak dark:border-boundary-inverse-weak ',
   // 'bg-surface-soft dark:bg-surface-inverse-light',
   'bg-neutral-100/50 dark:bg-neutral-900/50',
@@ -38,11 +34,7 @@ export const TabsListElement = classed(
         inputComponentVariants.size.height,
       ]),
       contrast: {
-        true: clsx(
-          'group-[.is-surface]:backdrop-contrast-100',
-          'group-[.is-surface-dark]:backdrop-contrast-75 dark:group-[.is-surface-dark]:backdrop-contrast-100',
-          'group-[.is-surface-neutral]:backdrop-contrast-150'
-        ),
+        true: highlightBackdropContrastClass,
       },
     },
     defaultVariants: {

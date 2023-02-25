@@ -9,8 +9,8 @@ const ListItemContainerElement = classed(
   'group/li list-inside',
   classTheme({
     class: ['group-data-[zebra=true]:even::bg-transparent'],
-    light: ['group-data-[zebra=true]:odd:bg-surface-light'],
-    dark: ['dark:group-data-[zebra=true]:odd:bg-surface-inverse-light/50'],
+    light: ['group-data-[zebra=true]:odd:bg-highlight-subtle'],
+    dark: ['dark:group-data-[zebra=true]:odd:bg-highlight-subtle'],
   }),
   {
     variants: {

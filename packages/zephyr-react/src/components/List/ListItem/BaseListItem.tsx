@@ -1,5 +1,3 @@
-// List Item Element (Base)
-
 import clsx from 'clsx';
 import { Classed, classed } from 'utils/classed';
 
@@ -9,22 +7,36 @@ export const BaseListItem = classed.span(
   'relative w-full py-12 flex flex-col gap-y-4',
   'group-data-[rounded-items=true]:rounded-md',
   'group-data-[no-gutters=true]:px-0 group-data-[no-gutters=false]:px-16',
+  'group-[.is-surface-neutral]:text-content-inverse-moderate',
+  'group-[.is-surface-neutral-light]:text-content-inverse-moderate',
+
   {
     variants: {
       highlight: {
         true: clsx(
           '!bg-highlight-moderate hover:!bg-highlight-moderate',
+          'text-content-intense dark:!text-content-inverse-intense',
+          'group-[.is-surface-neutral-light]:text-content-inverse-intense',
           'backdrop-contrast-100 hover:backdrop-contrast-[0.94] dark:backdrop-contrast-[0.94]',
-          'text-content-intense dark:!text-content-inverse-intense'
+          // Neutral
+          'group-[.is-surface-neutral]:text-content-inverse-intense',
+          // Neutral Light
+          'group-[.is-surface-neutral-light]:backdrop-contrast-[0.85]'
         ),
       },
       hoverable: {
         true: clsx(
           'cursor-pointer select-none',
           'hover:text-content-high dark:hover:text-content-inverse-high',
-          'hover:bg-highlight-weak dark:hover:bg-highlight'
+          'hover:bg-highlight-weak dark:hover:bg-highlight',
+          // Neutral
+          'hover:group-[.is-surface-neutral]:text-content-inverse-high',
+          // Neutral Light
+          'hover:group-[.is-surface-neutral-light]:text-content-inverse-high',
+          'hover:group-[.is-surface-neutral-light]:backdrop-contrast-[0.94]'
         ),
       },
+
       active: {
         true: clsx(
           'bg-highlight-moderate',
