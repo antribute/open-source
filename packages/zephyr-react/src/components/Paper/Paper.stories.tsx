@@ -8,7 +8,12 @@ const PaperRow = ({ className, color, ...props }: PaperProps) => {
   const paperRowProps: PaperProps[] = [
     // { children: colorLabel },
     { children: `${colorLabel} - Hover Highlight`, hoverHighlight: true },
-    { children: `${colorLabel} - Bordered - Hover Highlight`, border: true, hoverHighlight: true },
+    {
+      children: `${colorLabel} - Bordered - Hover Highlight - onClick`,
+      border: true,
+      hoverHighlight: true,
+      onClick: () => {},
+    },
     { children: `${colorLabel} - Loading`, loading: true },
   ];
 

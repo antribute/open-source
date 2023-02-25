@@ -27,11 +27,7 @@ const Label = ({ label, startIcon, endIcon, className }: ListItemLabelSpanProps)
     <span className={twMerge('flex w-full items-center gap-14 font-medium', className)}>
       <StartIconContainer icon={startIcon} />
       {label}
-      {endIcon && (
-        <div className="absolute right-16 flex h-16 w-16 items-center text-content-weak dark:text-content-inverse-weak">
-          {endIcon}
-        </div>
-      )}
+      {endIcon && <div className="absolute right-16 flex h-16 w-16 items-center">{endIcon}</div>}
     </span>
   );
 };

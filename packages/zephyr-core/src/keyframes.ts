@@ -1,4 +1,5 @@
 import { ThemeConfig } from 'tailwindcss/types/config';
+import { keyframes as tailwindKeyframes } from 'tailwindcss/defaultTheme';
 
 type KeyframesConfig = ThemeConfig['keyframes'];
 
@@ -91,4 +92,5 @@ export const keyframes: KeyframesConfig = {
       transform: `translateY(calc(100% + 1rem))`,
     },
   },
+  ...tailwindKeyframes,
 };

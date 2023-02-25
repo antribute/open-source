@@ -40,7 +40,7 @@ export const CollapsibleListItem = ({
             containerProps={{ fragment: true }}
             startIcon={startIcon}
             endIcon={
-              <ChevronDownIcon className="group-radix-state-open:rotate-180 group-radix-state-open:opacity-0 " />
+              <ChevronDownIcon className="fill-current stroke-current stroke-1 opacity-20" />
             }
             {...props}
           />

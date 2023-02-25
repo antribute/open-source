@@ -1,4 +1,5 @@
 import { ThemeConfig } from 'tailwindcss/types/config';
+import { animation as tailwindAnimation } from 'tailwindcss/defaultTheme';
 
 type AnimationConfig = ThemeConfig['animation'];
 
@@ -21,4 +22,5 @@ export const animation: AnimationConfig = {
   'scale-out-content': 'scale-out-content 0.2s ease',
   'fade-in': 'fade-in 0.2s ease',
   'fade-out': 'fade-out 0.2s ease',
+  ...tailwindAnimation,
 };

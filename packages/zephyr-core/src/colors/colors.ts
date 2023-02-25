@@ -50,10 +50,10 @@ const neutral = generateColorGroup({
   '800': '#384252',
   '900': '#333b47',
 })({
-  light: '300',
+  light: '600',
   DEFAULT: '800',
   dark: '900',
-  soft: '100',
+  soft: '400',
 });
 
 const contentInverse = generateHexAlphaColorGroup('#e3e5e8', {

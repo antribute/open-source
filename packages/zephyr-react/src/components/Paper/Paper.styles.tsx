@@ -54,7 +54,7 @@ export const PaperElementBackground = classed('div', {
         // Tailwind Arbitrary Group
         'is-surface-neutral-light group',
         'text-content-inverse-intense',
-        'bg-neutral-600'
+        'bg-neutral-light'
       ),
     },
   },
@@ -130,11 +130,7 @@ export const PaperElement = classed(
       },
 
       loading: {
-        true: classTheme({
-          class: 'animate-pulse',
-          light: 'text-content-weak',
-          dark: 'dark:text-content-inverse-weak',
-        }),
+        true: clsx('animate animate-pulse'),
       },
     },
 

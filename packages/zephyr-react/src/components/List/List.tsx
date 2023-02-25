@@ -66,10 +66,7 @@ const ListContainer = ({
 
 // SectionTitle
 
-const ListSectionTitle = classed(
-  'div',
-  'font-medium px-16 text-content-weak dark:text-content-inverse-weak select-none mb-8'
-);
+const ListSectionTitle = classed('div', 'font-medium px-16 opacity-40 select-none mb-8');
 
 // Spacing
 
