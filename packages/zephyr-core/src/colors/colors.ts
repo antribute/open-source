@@ -8,52 +8,57 @@ const black = '#000000';
 
 const white = '#FFFFFF';
 
-const surface = generateColorGroup(
+const neutral = generateColorGroup(
   arrayToColorGroup([
-    '#ffffff',
-    '#f5f7f9',
-    '#eceff3',
-    '#e3e7ed',
-    '#dae0e8',
-    '#d3dae4',
-    '#ccd5e0',
-    '#c5d0de',
-    '#bfccdb',
-    '#b9c8d9',
+    // '#f6f7f9',
+    // '#e9ecf0',
+    // '#cdd4de',
+    // '#9eabbe',
+    // '#637389',
+    // '#3e4c60',
+    // '#374455',
+    // '#2f3a4a',
+    // '#262f3e',
+    // '#1c2532',
+    //
+    // '#f6f7f9',
+    // '#e9ecf0',
+    // '#cdd4de',
+    // '#9eabbe',
+    // '#637389',
+    // '#3d4c62',
+    // '#344359',
+    // '#2c3b51',
+    // '#253448',
+    // '#1f2d40',
+    //
+    // '#f6f7f9',
+    // '#e9ecf0',
+    // '#ccd3de',
+    // '#9daabd',
+    // '#3f4e64',
+    // '#39485d',
+    // '#334157',
+    // '#2c3b51',
+    // '#253448',
+    // '#1f2d40',
+    //
+    '#f6f7f9',
+    '#5e7495',
+    '#425571',
+    '#46556b',
+    '#3d4c62',
+    '#324156',
+    '#2b374a',
+    '#262f3e',
+    '#212a38',
+    '#1c2532',
   ])
-)({ DEFAULT: '50', dark: '600', light: '400', soft: '200' });
-
-const surfaceInverse = generateColorGroup(
-  arrayToColorGroup([
-    '#2d3542',
-    '#282f3a',
-    '#232832',
-    '#1e222a',
-    '#1a1d23',
-    '#181b21',
-    '#171a20',
-    '#16181e',
-    '#14171d',
-    '#13151b',
-  ])
-)({ DEFAULT: '400', dark: '700', light: '300', soft: '900' });
-
-const neutral = generateColorGroup({
-  '50': '#f6f7f9',
-  '100': '#eceef2',
-  '200': '#d4dae3',
-  '300': '#afbaca',
-  '400': '#8495ac',
-  '500': '#657892',
-  '600': '#506079',
-  '700': '#414e63',
-  '800': '#384252',
-  '900': '#333b47',
-})({
-  light: '600',
-  DEFAULT: '800',
-  dark: '900',
-  soft: '400',
+)({
+  light: '400',
+  DEFAULT: '600',
+  dark: '800',
+  soft: '100',
 });
 
 const contentInverse = generateHexAlphaColorGroup('#e3e5e8', {
@@ -70,13 +75,13 @@ export const colors = {
   highlight: generateHexAlphaColorGroup(neutral[500], {
     DEFAULT: '7',
     tint: '2',
-    ghost: undefined,
-    subtle: '4',
-    weak: '5',
-    moderate: '8',
-    high: '10',
-    strong: undefined,
-    intense: undefined,
+    ghost: '4',
+    subtle: '7',
+    weak: '10',
+    moderate: '12',
+    high: '15',
+    strong: '25',
+    intense: '30',
   }),
 
   white,
@@ -84,7 +89,7 @@ export const colors = {
   base,
   neutral,
 
-  primary: generateColorGroup({
+  'brand-pink': generateColorGroup({
     '50': '#fff0fa',
     '100': '#ffe4f7',
     '200': '#ffc9f0',
@@ -98,7 +103,7 @@ export const colors = {
   })({
     DEFAULT: '700',
     dark: '800',
-    light: '500',
+    light: '400',
     soft: '100',
   }),
 
@@ -168,25 +173,35 @@ export const colors = {
     ...generateHexAlphaColorGroup(neutral.DEFAULT, { DEFAULT: 'subtle' }),
   },
 
-  surface,
+  surface: generateColorGroup(
+    arrayToColorGroup([
+      '#ffffff',
+      '#f5f7f9',
+      '#eceff3',
+      '#e3e7ed',
+      '#dae0e8',
+      '#d3dae4',
+      '#ccd5e0',
+      '#c5d0de',
+      '#bfccdb',
+      '#b9c8d9',
+    ])
+  )({ DEFAULT: '50', dark: '400', light: '200', soft: '100' }),
 
-  'surface-inverse': surfaceInverse,
-
-  'surface-neutral': generateColorGroup({
-    DEFAULT: '#384252',
-    ...arrayToColorGroup([
-      '#506079',
-      '#4b5970',
-      '#455267',
-      '#404c5f',
-      '#3b4556',
-      '#374151',
-      '#36404e',
-      '#353e4c',
-      '#343d49',
-      '#333b47',
-    ]),
-  })({ DEFAULT: 'DEFAULT', dark: '700', light: '300', soft: '100' }),
+  'surface-inverse': generateColorGroup(
+    arrayToColorGroup([
+      '#2d3542',
+      '#282f3a',
+      '#232832',
+      '#1e222a',
+      '#1a1d23',
+      '#181b21',
+      '#171a20',
+      '#16181e',
+      '#14171d',
+      '#13151b',
+    ])
+  )({ DEFAULT: '400', dark: '700', light: '200', soft: '500' }),
 
   distinct: {
     '1': variousColors['various-blue'].DEFAULT,
@@ -202,23 +217,8 @@ export const colors = {
     '11': variousColors['various-lime'].DEFAULT,
     '12': variousColors['various-gray'].DEFAULT,
   },
-
   ...variousColors,
+  inherit: tailwindColors.inherit,
+  current: tailwindColors.current,
+  transparent: tailwindColors.transparent,
 } satisfies Record<string, string | Record<string, string>>;
-
-function test() {
-  const highlight = generateHexAlphaColorGroup(base.inverse, {
-    DEFAULT: 'subtle',
-    tint: '5',
-    ghost: '10',
-    subtle: '15',
-    weak: '20',
-    moderate: '25',
-    high: '30',
-    strong: undefined,
-    intense: undefined,
-  });
-  console.log(highlight);
-}
-
-test();

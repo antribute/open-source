@@ -1,3 +1,6 @@
+export type { ColorSchemeName } from './colors/color-schemes';
+
+export { colorSchemeNames } from './colors/color-schemes';
 export interface ClassName {
   root: string;
   [componentName: string]: string;

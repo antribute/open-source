@@ -26,6 +26,22 @@ Default `IconButton` component
   <Story name="Size" story={stories.SizeVariant} />
 </Canvas>
 
+## Rounded
+
+`rounded`
+
+<Canvas withToolbar>
+  <Story name="Rounded" story={stories.RoundedVariant} />
+</Canvas>
+
+## Rounded Size
+
+`rounded`
+
+<Canvas withToolbar>
+  <Story name="Rounded Size" story={stories.RoundedSize} />
+</Canvas>
+
 ## Contained
 
 `contained` variant
@@ -44,10 +60,16 @@ Default `IconButton` component
 
 ## Outlined
 
-`outlined` variant
+<Canvas withToolbar>
+  <Story name="Outlined Rounded Variant" story={stories.OutlinedVariant} />
+</Canvas>
+
+## Outlined Rounded
+
+`variant="outlined"` `rounded` variant
 
 <Canvas withToolbar>
-  <Story name="Outlined Variant" story={stories.OutlinedVariant} />
+  <Story name="Outlined Rounded Variant" story={stories.OutlinedRoundedVariant} />
 </Canvas>
 
 ## Text
@@ -56,4 +78,12 @@ Default `IconButton` component
 
 <Canvas withToolbar>
   <Story name="Text Variant" story={stories.TextVariant} />
+</Canvas>
+
+## Contained
+
+`contained` variant
+
+<Canvas withToolbar>
+  <Story name="Contained Gradient" story={stories.ContainedGradientVariant} />
 </Canvas>

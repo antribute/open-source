@@ -1,5 +1,6 @@
 // List Item Container
 
+import { surfaceGroupTextVariants } from 'styles/surface-colors.variants';
 import { classTheme, classed, deriveClassed } from 'utils/classed';
 
 type ListItemContainerElementProps = React.ComponentProps<typeof ListItemContainerElement>;
@@ -7,8 +8,6 @@ type ListItemContainerElementProps = React.ComponentProps<typeof ListItemContain
 const ListItemContainerElement = classed(
   'li',
   'group/li list-inside',
-  'group-[.is-surface-neutral]:text-content-inverse-moderate',
-  'group-[.is-surface-neutral-light]:text-content-inverse-moderate',
   classTheme({
     class: ['group-data-[zebra=true]:even::bg-transparent'],
     light: ['group-data-[zebra=true]:odd:bg-highlight-subtle'],

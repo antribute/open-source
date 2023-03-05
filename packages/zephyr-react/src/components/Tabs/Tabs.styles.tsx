@@ -48,7 +48,7 @@ export type TabsListItemElementProps = React.ComponentProps<typeof TabsListItemE
 
 export const TabsListItemElement = classed(
   TabsPrimitive.Trigger,
-  'min-w-[104px] p-4 ',
+  'min-w-[104px] p-4 px-16',
   'inline-flex items-center justify-center',
   'rounded-[0.185rem] font-medium select-none',
   'transition-all duration-75',

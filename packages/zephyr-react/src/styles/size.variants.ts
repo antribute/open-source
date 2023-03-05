@@ -33,9 +33,15 @@ export const sizeVariants = {
     lg: 'py-8',
   },
   paddingX: {
-    xs: 'px-6',
-    sm: 'px-6',
-    md: 'px-8',
-    lg: 'px-10',
+    xs: clsx('px-6'),
+    sm: clsx('px-8'),
+    md: clsx('px-8'),
+    lg: clsx('px-10'),
+  },
+  extraPaddingX: {
+    xs: clsx('px-14'),
+    sm: clsx('px-16'),
+    md: clsx('px-18'),
+    lg: clsx('px-20'),
   },
 } satisfies Record<string, Record<SizeProp, string>>;

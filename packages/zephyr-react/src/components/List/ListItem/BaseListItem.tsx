@@ -1,5 +1,7 @@
+/* eslint-disable tailwindcss/no-custom-classname */
 import clsx from 'clsx';
-import { Classed, classed } from 'utils/classed';
+import { surfaceGroupTextVariants } from 'styles/surface-colors.variants';
+import { Classed, classed, expandVariant } from 'utils/classed';
 
 export type BaseListItemElementProps = Classed.ComponentProps<typeof BaseListItem>;
 
@@ -12,34 +14,34 @@ export const BaseListItem = classed.span(
     variants: {
       highlight: {
         true: clsx(
-          '!bg-highlight-moderate hover:!bg-highlight-moderate',
-          'text-content-intense dark:!text-content-inverse-intense',
-
-          'backdrop-contrast-100 hover:backdrop-contrast-[0.94] dark:backdrop-contrast-[0.94]',
-          // Neutral
-          'group-[.is-surface-neutral]:!text-content-inverse-intense',
-          // Neutral Light
-          'group-[.is-surface-neutral-light]:!text-content-inverse-intense',
-          'group-[.is-surface-neutral-light]:backdrop-contrast-[0.88]'
+          '!bg-highlight hover:!bg-highlight',
+          'backdrop-contrast-100 hover:backdrop-contrast-[0.94] dark:backdrop-contrast-[0.94]'
+          // surfaceGroupTextVariants.intense
+          // // Neutral
+          // 'group-[.is-surface-neutral]:!text-content-inverse-intense',
+          // // Neutral Light
+          // 'group-[.is-surface-neutral-light]:!text-content-inverse-intense',
+          // 'group-[.is-surface-neutral-light]:backdrop-contrast-[0.89]'
         ),
       },
       hoverable: {
         true: clsx(
           'cursor-pointer select-none',
-          'hover:text-content-high dark:hover:text-content-inverse-high',
-          'hover:bg-highlight-weak dark:hover:bg-highlight',
-          // Neutral
-          'hover:group-[.is-surface-neutral]:text-content-inverse-high',
-          // Neutral Light
-          'hover:group-[.is-surface-neutral-light]:text-content-inverse-high',
-          'hover:group-[.is-surface-neutral-light]:backdrop-contrast-[0.93]'
+          // 'hover:text-content-high dark:hover:text-content-inverse-high',
+          'hover:bg-highlight-weak dark:hover:bg-highlight'
+          // surfaceGroupTextVariants.weak
+          // // Neutral
+          // 'hover:group-[.is-surface-neutral]:text-content-inverse-high',
+          // 'hover:group-[.is-surface-neutral]:backdrop-contrast-[0.97]',
+          // // Neutral Light
+          // 'hover:group-[.is-surface-neutral-light]:text-content-inverse-high',
+          // 'hover:group-[.is-surface-neutral-light]:backdrop-contrast-[0.93]'
         ),
       },
 
       active: {
         true: clsx(
-          'bg-highlight-moderate',
-          'text-neutral-400 dark:text-content-inverse-strong',
+          'bg-highlight',
           // This style is for showing a caret to indicate the active item
           [
             "before:content-['']",
@@ -52,7 +54,7 @@ export const BaseListItem = classed.span(
         ),
       },
       inactive: {
-        true: 'text-content-weak dark:text-content-inverse-weak hover:text-neutral-400',
+        // true: 'text-content-weak dark:text-content-inverse-weak hover:text-neutral-400',
       },
 
       gap: {
@@ -62,10 +64,28 @@ export const BaseListItem = classed.span(
     },
 
     compoundVariants: [
+      // {
+      //   inactive: true,
+      //   highlight: true,
+      //   class: '!text-neutral-500',
+      // },
       {
-        inactive: true,
         highlight: true,
-        class: '!text-neutral-500',
+        class: expandVariant(
+          clsx(
+            'group-surface-neutral:(text-content-inverse-intense,backdrop-contrast-[0.94])',
+            'group-surface-neutral-light:(backdrop-contrast-[0.84])'
+          )
+        ),
+      },
+      {
+        highlight: false,
+        class: expandVariant(
+          clsx(
+            'group-surface-neutral:(text-content-inverse-high,hover:backdrop-contrast-[0.90])',
+            'group-surface-neutral-light:(hover:backdrop-contrast-[0.91])'
+          )
+        ),
       },
     ],
 

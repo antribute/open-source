@@ -6,6 +6,6 @@ export type ButtonProps = React.ComponentProps<typeof Button>;
 
 export const Button = deriveClassed<typeof ButtonElement, ButtonElementVariantProps>(
   ({ variant = 'contained', ...props }, ref) => {
-    return <ButtonElement variant={variant} {...props} ref={ref} />;
+    return <ButtonElement variant={variant} extraRoundedPadding {...props} ref={ref} />;
   }
 );

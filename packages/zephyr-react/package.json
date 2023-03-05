@@ -34,7 +34,6 @@
   "devDependencies": {
     "@antribute/config": "workspace:*",
     "@antribute/utils-react": "workspace:*",
-    "@antribute/zephyr-core": "workspace:*",
     "@babel/core": "^7.20.5",
     "@mdx-js/react": "^2.1.5",
     "@storybook/addon-actions": "7.0.0-beta.21",
@@ -75,6 +74,7 @@
     "@antribute/zephyr-react": "^0.1.0"
   },
   "dependencies": {
+    "@antribute/zephyr-core": "workspace:*",
     "@faker-js/faker": "^7.6.0",
     "@heroicons/react": "^2.0.13",
     "@hookform/resolvers": "^2.9.10",
@@ -108,6 +108,7 @@
     "react-hook-form": "^7.41.5",
     "react-is": "^18.2.0",
     "react-merge-refs": "^2.0.1",
+    "tailwind-group-variant": "^1.0.0",
     "tailwind-merge": "^1.8.1",
     "ts-toolbelt": "^9.6.0",
     "type-fest": "^3.5.1",

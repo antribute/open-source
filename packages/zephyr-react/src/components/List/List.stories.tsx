@@ -7,7 +7,7 @@ import BillingIcon from '@heroicons/react/24/outline/CreditCardIcon';
 import AppearanceIcon from '@heroicons/react/24/outline/EyeIcon';
 import MessagesIcon from '@heroicons/react/24/outline/ChatBubbleLeftIcon';
 import DownloadIcon from '@heroicons/react/24/outline/FolderArrowDownIcon';
-import { getStoryUrl } from 'utils/storybook-utils';
+import { RenderPaperContainers, getStoryUrl } from 'utils/storybook-utils';
 import { Paper } from 'components/Paper';
 import { capitalCase } from 'change-case';
 import { List } from '.';
@@ -46,14 +46,10 @@ const Sidebar = ({ color }: { color: string }) => {
 
 export const Default = () => {
   return (
-    <div className="fixed flex h-5/6 gap-x-8 ">
-      {(['surface', 'surface-light', 'surface-dark', 'neutral', 'neutral-light'] as const).map(
-        (color) => (
-          <Paper color={color} className="top-0 h-full w-400">
-            <Sidebar color={capitalCase(color)} />
-          </Paper>
-        )
-      )}
+    <div className="fixed flex h-5/6 w-screen gap-x-8 overflow-x-auto">
+      <RenderPaperContainers className="top-0 h-full w-400">
+        {({ colorScheme: color }) => <Sidebar color={capitalCase(color ?? '')} />}
+      </RenderPaperContainers>
     </div>
   );
 };

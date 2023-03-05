@@ -4,6 +4,7 @@ import { CollapsibleListItem } from 'components/List/ListItem/CollapsibleListIte
 import { ListItemGroup } from 'components/List/ListItem/ListItem';
 import { ListItemLink } from 'components/List/ListItem/ListItemLink';
 import { ListItemButton } from 'components/List/ListItem/ListItemButton';
+import { surfaceColorVariants, surfaceGroupTextVariants } from 'styles/surface-colors.variants';
 
 // Container
 
@@ -13,6 +14,7 @@ const ListContainerElement = classed(
   'ul',
   'group',
   'border-boundary dark:border-boundary-inverse flex flex-col gap-4',
+  // surfaceGroupTextVariants.intense,
   {
     variants: {
       border: {

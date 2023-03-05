@@ -16,11 +16,11 @@ export const Default = () => {
           </Dialog.Description>
         </Dialog.Body>
         <Dialog.Footer>
-          <Dialog.Close color="danger" variant="outlined">
+          <Dialog.Close color="inverse" variant="soft">
             Cancel
           </Dialog.Close>
 
-          <Dialog.Button>Submit</Dialog.Button>
+          <Dialog.Button>Confirm</Dialog.Button>
         </Dialog.Footer>
       </Dialog.Content>
     </Dialog.Root>

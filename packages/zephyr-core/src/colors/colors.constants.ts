@@ -54,6 +54,8 @@ export const hexAlphaCodes = {
   '0': '00',
 };
 
+export type ColorAlphaVariant = HexAlphaPreset;
+
 export type HexAlphaPreset = keyof typeof hexTransparencyPresetMap;
 
 export const hexTransparencyPresetMap = {

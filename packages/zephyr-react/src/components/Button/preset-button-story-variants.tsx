@@ -13,17 +13,6 @@ export const PresetButtonStoryVariants = <
 ) => {
   const { noDefaultChildren, props: generalProps } = options ?? {};
 
-  const colors = [
-    'neutral',
-    'surface',
-    'inverse',
-    'primary',
-    'info',
-    'positive',
-    'caution',
-    'danger',
-  ];
-
   function getProps(props: any, defaults: object) {
     const defaultProps = omit(
       defaults,
@@ -36,8 +25,8 @@ export const PresetButtonStoryVariants = <
   return {
     Default: (props: TProps) => (
       <RenderColorVariants
-        colors={colors}
         showVariantLabel
+        renderPaperContainers
         Component={Button}
         noChildren={noDefaultChildren}
         props={getProps(props, { children: 'Default' })}
@@ -51,17 +40,57 @@ export const PresetButtonStoryVariants = <
         props={getProps(props, { children: 'Default' })}
       />
     ),
+    RoundedVariant: (props: TProps) => (
+      <RenderColorVariants
+        showVariantLabel
+        renderPaperContainers
+        Component={Button}
+        noChildren={noDefaultChildren}
+        props={getProps(props, { children: 'Default', rounded: true })}
+      />
+    ),
+    OutlinedRoundedVariant: (props: TProps) => (
+      <RenderColorVariants
+        showVariantLabel
+        Component={Button}
+        noChildren={noDefaultChildren}
+        props={getProps(props, { children: 'Get Started', rounded: true, variant: 'outlined' })}
+      />
+    ),
+    RoundedSize: (props: TProps) => (
+      <RenderSizeVariants
+        showVariantLabel
+        Component={Button}
+        noChildren={noDefaultChildren}
+        props={getProps(props, { children: 'Get Started', rounded: true })}
+      />
+    ),
     ContainedVariant: (props: TProps) => (
       <RenderColorVariants
-        colors={colors}
+        showVariantLabel
         Component={Button}
         noChildren={noDefaultChildren}
         props={getProps(props, { children: 'Contained', variant: 'contained' })}
       />
     ),
+    ContainedGradientVariant: (props: TProps) => (
+      <RenderColorVariants
+        showVariantLabel
+        Component={Button}
+        noChildren={noDefaultChildren}
+        props={getProps(props, {
+          children: 'Contained',
+          variant: 'contained',
+          gradient: true,
+          coloredShadow: true,
+          rounded: true,
+        })}
+      />
+    ),
     SoftVariant: (props: TProps) => (
       <RenderColorVariants
-        colors={colors}
+        showVariantLabel
+        renderPaperContainers
         Component={Button}
         noChildren={noDefaultChildren}
         props={getProps(props, { children: 'Contained', variant: 'soft' })}
@@ -69,7 +98,8 @@ export const PresetButtonStoryVariants = <
     ),
     OutlinedVariant: (props: TProps) => (
       <RenderColorVariants
-        colors={colors}
+        showVariantLabel
+        renderPaperContainers
         Component={Button}
         noChildren={noDefaultChildren}
         props={getProps(props, { children: 'Outlined', variant: 'outlined' })}
@@ -77,7 +107,7 @@ export const PresetButtonStoryVariants = <
     ),
     TextVariant: (props: TProps) => (
       <RenderColorVariants
-        colors={colors}
+        showVariantLabel
         Component={Button}
         noChildren={noDefaultChildren}
         props={getProps(props, { children: 'Text', variant: 'text' })}

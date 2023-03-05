@@ -2,13 +2,20 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import tailwindCssRadixPlugin from 'tailwindcss-radix';
 import tailwindCssFormsPlugin from '@tailwindcss/forms';
+import tailwindCssTypographyPlugin from '@tailwindcss/typography';
+import createVariantGroupTransformer from 'tailwind-group-variant';
 
 import type { Config } from 'tailwindcss';
 // eslint-disable-next-line import/extensions
 import defaultTailwindTheme from 'tailwindcss/defaultTheme';
+
+import plugin from 'tailwindcss/plugin';
+import { PluginAPI } from 'tailwindcss/types/config';
 import { colors as colorPalette } from './colors/colors';
 import { keyframes } from './keyframes';
 import { animation } from './animation';
+import { multiThemePlugin } from './plugins/multi-theme-plugin';
+import { colorSchemeTokens } from './colors/color-schemes';
 
 export const create8PtGrid = (max = 512) => {
   const finalGrid: Record<string, string> = {
@@ -32,35 +39,57 @@ export const create8PtGrid = (max = 512) => {
   return finalGrid;
 };
 
-const config: Config = {
-  content: [
-    './*.{htm,html}',
-    './public/*.{htm,html}',
-    './src/**/*.{ts,tsx}',
-    './node_modules/@antribute/zephyr-core/dist/index.js',
+const config = {
+  plugins: [
+    tailwindCssRadixPlugin,
+    tailwindCssFormsPlugin,
+    tailwindCssTypographyPlugin,
+    buttonPlugin(),
+    multiThemePlugin(),
   ],
+  content: {
+    files: [
+      './*.{htm,html}',
+      './public/*.{htm,html}',
+      './src/**/*.{ts,tsx}',
+      './node_modules/@antribute/zephyr-core/dist/index.js',
+    ],
+    transform: createVariantGroupTransformer(),
+  },
   presets: [],
   darkMode: ['class', '[data-mode="dark"]'],
 
   theme: {
     ...defaultTailwindTheme,
+
+    typography: (theme: PluginAPI['theme']) => ({
+      DEFAULT: {
+        css: {
+          color: '#fafa',
+          a: {
+            color: theme('colors.content-inverse'),
+          },
+        },
+      },
+    }),
+
     keyframes,
     animation,
     accentColor: ({ theme }) => ({
       ...theme('colors'),
       auto: 'auto',
     }),
-    backdropBlur: ({ theme }) => theme('blur'),
-    backdropBrightness: ({ theme }) => theme('brightness'),
-    backdropContrast: ({ theme }) => theme('contrast'),
-    backdropGrayscale: ({ theme }) => theme('grayscale'),
-    backdropHueRotate: ({ theme }) => theme('hueRotate'),
-    backdropInvert: ({ theme }) => theme('invert'),
-    backdropOpacity: ({ theme }) => theme('opacity'),
-    backdropSaturate: ({ theme }) => theme('saturate'),
-    backdropSepia: ({ theme }) => theme('sepia'),
-    backgroundColor: ({ theme }) => theme('colors'),
-    backgroundOpacity: ({ theme }) => theme('opacity'),
+    // backdropBlur: ({ theme }) => theme('blur'),
+    // backdropBrightness: ({ theme }) => theme('brightness'),
+    // backdropContrast: ({ theme }) => theme('contrast'),
+    // backdropGrayscale: ({ theme }) => theme('grayscale'),
+    // backdropHueRotate: ({ theme }) => theme('hueRotate'),
+    // backdropInvert: ({ theme }) => theme('invert'),
+    // backdropOpacity: ({ theme }) => theme('opacity'),
+    // backdropSaturate: ({ theme }) => theme('saturate'),
+    // backdropSepia: ({ theme }) => theme('sepia'),
+    // backgroundColor: ({ theme }) => theme('colors'),
+    // backgroundOpacity: ({ theme }) => theme('opacity'),
 
     borderColor: ({ theme }) => theme('colors'),
     borderOpacity: ({ theme }) => theme('opacity'),
@@ -90,14 +119,9 @@ const config: Config = {
       hover: '0px 2px 5px 0px rgb(64 68 82 / 0.08), 0px 3px 9px 0px rgb(64 68 82 / 0.08)',
     },
     boxShadowColor: ({ theme }) => theme('colors'),
-
     caretColor: ({ theme }) => theme('colors'),
-    colors: ({ colors }) => ({
-      inherit: colors.inherit,
-      current: colors.current,
-      transparent: colors.transparent,
-      ...colorPalette,
-    }),
+    colors: { ...colorPalette, ...colorSchemeTokens },
+
     divideColor: ({ theme }) => theme('borderColor'),
     divideOpacity: ({ theme }) => theme('borderOpacity'),
     divideWidth: ({ theme }) => theme('borderWidth'),
@@ -191,6 +215,7 @@ const config: Config = {
     },
     fontWeight: {
       body: '400',
+      regular: '400',
       medium: '500',
       bold: '600',
       heading: '700',
@@ -270,6 +295,7 @@ const config: Config = {
       ...theme('spacing'),
       ...breakpoints(theme('screens')),
     }),
+
     outlineColor: ({ theme }) => theme('colors'),
     padding: ({ theme }) => theme('spacing'),
     placeholderColor: ({ theme }) => theme('colors'),
@@ -350,8 +376,224 @@ const config: Config = {
       fit: 'fit-content',
     }),
   },
+} satisfies Config;
 
-  plugins: [tailwindCssRadixPlugin, tailwindCssFormsPlugin],
-};
+type TailwindConfiguration = typeof config;
+
+// const t = (path: Path<TailwindConfiguration['theme']>): string => {
+//   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
+//   const v = getByPath(config.theme, path) as any;
+
+//   return typeof v === 'object' ? getByPath(v, 'DEFAULT') : v;
+// };
 
 export default config;
+
+function buttonPlugin() {
+  return plugin(({ addComponents, addVariant }) => {
+    type ColorName = keyof TailwindConfiguration['theme']['colors'];
+    // type Variant = 'contained' | 'outlined' | 'soft';
+
+    type VariantClassName<
+      TClassName extends `.${string}`,
+      TExtraColorNames extends string = string,
+      TColorName extends TExtraColorNames | ColorName = TExtraColorNames | ColorName
+    > = `${TClassName}-${TColorName}`;
+
+    type CustomClass<T extends `.${string}`, TExtraColorNames extends string = string> = Partial<
+      Record<VariantClassName<T, TExtraColorNames>, Record<string, Record<string, string>>>
+    >;
+
+    type CustomClasses<
+      TClassName extends string,
+      TVariantName extends string,
+      TExtraColorNames extends string = string
+    > = CustomClass<`.${TClassName}-${TVariantName}`, TExtraColorNames>;
+
+    type Color =
+      | 'inverse'
+      | 'neutral-light'
+      | 'neutral-dark'
+      | 'surface-light'
+      | 'surface-dark'
+      | ColorName;
+
+    // Used for tailwind intellisense
+    const classed = <T extends Record<string, unknown>>(o: T) => {
+      return o;
+    };
+
+    // type SurfaceColor = (typeof surfaceColors)[number];
+
+    // function getSurfaceGroupClass<TColor extends SurfaceColor>(
+    //   colorName: TColor,
+    //   className: string
+    // ) {
+    //   const surfaceGroupVariant = getSurfaceColorName(colorName);
+
+    //   const classname = className.trim().split(' ');
+
+    //   return classname.map((className) => `${surfaceGroupVariant}:${className}`).join(' ');
+    // }
+
+    // function createSurfaceGroupClassNameMap(surfaceColorMap: Record<SurfaceColor, string>) {
+    //   return Object.fromEntries(
+    //     Object.entries(surfaceColorMap).map(([key, value]) => [
+    //       key,
+    //       getSurfaceGroupClass(key as SurfaceColor, value),
+    //     ])
+    //   ) as Record<SurfaceColor, string>;
+    // }
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // const surfaceSoftTextColorMap = createSurfaceGroupClassNameMap({
+    //   neutral: 'text-content-inverse-intense',
+    //   surface: 'text-content-inverse-intense',
+    //   'neutral-light': 'text-content-inverse-intense',
+    //   'neutral-dark': 'text-content-inverse-intense',
+    //   'surface-light': 'text-content-inverse-intense',
+    //   'surface-dark': 'text-content-inverse-intense',
+    // });
+
+    function addGroupVariant(name: string) {
+      addVariant(`group-${name}`, `:merge(.group).${name} &`); // custom CSS
+    }
+
+    function getSurfaceColors() {
+      const surfaceColors = ['neutral', 'surface'] as const;
+
+      return surfaceColors.flatMap((color) => {
+        const surfaceName = color.startsWith('surface') ? color : `surface-${color}`;
+
+        const root = surfaceName;
+        const base = `${surfaceName}-base`;
+        const light = `${surfaceName}-light`;
+        const dark = `${surfaceName}-dark`;
+
+        return [root, base, light, dark];
+      });
+    }
+
+    const surfaceColors = getSurfaceColors();
+
+    surfaceColors.forEach((color) => {
+      addGroupVariant(color);
+    });
+
+    const boxVariants = classed({
+      // Contained
+      '.box-contained-neutral': {
+        [`@apply bg-neutral-600 text-content-inverse-intense hover:bg-neutral-700`]: {},
+      },
+      '.box-contained-neutral-light': {
+        '@apply bg-neutral-400 text-content-inverse-intense hover:bg-neutral-500': {},
+      },
+      '.box-contained-neutral-dark': {
+        '@apply bg-neutral-800 hover:bg-neutral-900 text-content-inverse-intense': {},
+      },
+      // '.box-contained-primary': {
+      //   '@apply bg-primary text-content-inverse-intense': {},
+      // },
+      '.box-contained-info': {
+        '@apply bg-neutral text-content-inverse-intense': {},
+      },
+      '.box-contained-positive': {
+        '@apply bg-positive text-content-inverse-intense': {},
+      },
+      '.box-contained-caution': {
+        '@apply bg-caution-500 text-content-inverse-intense': {},
+      },
+      '.box-contained-danger': {
+        '@apply bg-danger text-content-inverse-intense': {},
+      },
+      '.box-contained-surface': {
+        '@apply bg-surface text-content-intense dark:bg-surface-inverse dark:text-content-inverse-intense':
+          {},
+      },
+      '.box-contained-surface-light': {
+        '@apply bg-surface-light text-content-intense dark:bg-surface-inverse-light dark:text-content-inverse-intense':
+          {},
+      },
+      '.box-contained-surface-dark': {
+        '@apply bg-surface-dark text-content-intense dark:bg-surface-inverse-dark dark:text-content-inverse-intense':
+          {},
+      },
+      '.box-contained-inverse': {
+        '@apply bg-surface-inverse text-content-inverse-intense dark:bg-surface dark:text-content-intense':
+          {},
+      },
+
+      // Glass
+      '.box-soft-neutral': {
+        [`@apply bg-neutral-600/10 text-neutral-dark dark:text-content-inverse-intense hover:bg-neutral-700/10`]:
+          {},
+      },
+      '.box-soft-neutral-light': {
+        [`@apply bg-neutral-400/10 text-neutral-dark dark:text-content-inverse-intense hover:bg-neutral-500/10`]:
+          {},
+      },
+      '.box-soft-neutral-dark': {
+        [`@apply bg-neutral-800/10 text-neutral-dark dark:text-content-inverse-intense hover:bg-neutral-900/10`]:
+          {},
+      },
+      // '.box-soft-primary': {
+      //   '@apply bg-primary/10 text-primary': {},
+      // },
+      '.box-soft-positive': {
+        '@apply bg-positive/10 text-positive': {},
+      },
+      '.box-soft-caution': {
+        '@apply bg-caution/10 text-caution': {},
+      },
+      '.box-soft-danger': {
+        '@apply bg-danger/10 text-danger': {},
+      },
+      '.box-soft-surface': {
+        '@apply bg-surface/10 text-content-intense dark:bg-surface-inverse/10 dark:text-content-inverse-intense':
+          {},
+      },
+      '.box-soft-surface-light': {
+        '@apply bg-surface-light/10 text-content-intense dark:bg-surface-inverse-light/10 dark:text-content-inverse-intense':
+          {},
+      },
+      '.box-soft-surface-dark': {
+        '@apply bg-surface-dark/10 text-content-intense dark:bg-surface-inverse-dark/10 dark:text-content-inverse-intense':
+          {},
+      },
+      '.box-soft-inverse': {
+        '@apply bg-surface-inverse/10 text-content-intense dark:bg-content-inverse/10 dark:text-content-inverse-intense contrast-125':
+          {},
+      },
+    } satisfies CustomClasses<'box', 'contained' | 'outlined' | 'soft', Color>);
+
+    addComponents(boxVariants);
+  });
+}
+
+// function surfaceGroupSafelist() {
+//   const selectors = ['', 'hover:', 'active:'];
+
+//   const prefixes = ['text-', 'bg-', 'ring-', 'focus-'];
+
+//   const safelist = [
+//     'surface',
+//     'surface-light',
+//     'surface-dark',
+//     'surface-inverse',
+//     'surface-neutral',
+//     'surface-neutral-light',
+//     'surface-neutral-dark',
+//     'surface-transparent',
+//   ].flatMap((color) => {
+//     const group = `group-[.is-${color}]`;
+
+//     return [`${group}`, `${group}:hover`].flatMap((selector) => [
+//       `${selector}:text-{textColor}`,
+//       `${selector}:bg-{backgroundColor}`,
+//     ]);
+//   });
+
+//   console.log('Surface group safelist', safelist);
+
+//   return safelist;
+// }

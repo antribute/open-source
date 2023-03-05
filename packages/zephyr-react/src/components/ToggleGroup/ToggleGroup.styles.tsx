@@ -33,13 +33,14 @@ export const ToggleGroupItemElement = classed(
   'whitespace-nowrap flex-grow border-y relative',
   'first:rounded-l-md last:rounded-r-md',
   // '  focus:ring-2  focus:z-30 focus:group-hover:ring-0',
-  'focus:ring-0',
+  'focus:ring-0 focus:z-10',
   'radix-state-off:focus-visible:bg-neutral-soft dark:radix-state-off:focus-visible:bg-neutral-900/80',
   'radix-state-on:text-white hover:text-neutral-100',
   'bg-surface dark:bg-surface-inverse-light',
   'border-boundary-subtle border-light-gray dark:border-white/5',
   'hover:radix-state-off:hover:text-neutral-100 radix-state-off:hover:text-content-ghost',
   'radix-state-off:text-content-subtle dark:radix-state-off:text-content-inverse-subtle',
+
   'ring-inset',
   'shrink flex-1',
   'select-none',
@@ -49,19 +50,14 @@ export const ToggleGroupItemElement = classed(
       color: {
         neutral: classTheme({
           light: [
-            'radix-state-on:bg-neutral',
+            'radix-state-on:bg-neutral-light',
             'radix-state-on:border-neutral radix-state-on:focus:border-neutral/90',
-            'hover:border-neutral-dark hover:bg-neutral-dark',
+            'hover:border-neutral-dark hover:bg-neutral-600',
           ],
           dark: [
-            'dark:radix-state-on:bg-neutral dark:radix-state-on:border-neutral',
+            'dark:radix-state-on:bg-neutral-dark dark:radix-state-on:border-neutral',
             'dark:hover:border-neutral-dark dark:hover:bg-neutral-dark',
           ],
-        }),
-        info: classTheme({
-          light:
-            'radix-state-on:bg-info radix-state-on:border-info hover:border-info-dark hover:bg-info-dark',
-          dark: 'dark:radix-state-on:bg-info dark:radix-state-on:border-info dark:hover:border-info-dark dark:hover:bg-info-dark',
         }),
         caution: classTheme({
           light:

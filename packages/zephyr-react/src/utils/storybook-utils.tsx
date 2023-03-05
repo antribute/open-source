@@ -2,7 +2,12 @@ import { LiteralUnion } from 'type-fest';
 import { VariantProps, classed } from '@tw-classed/react';
 import { capitalCase } from 'change-case';
 import { ColorProp, SizeProp } from 'types/styles';
-import { Text } from 'components/Text';
+import { Paper, PaperProps } from 'components/Paper';
+import { Wrap } from 'components/Wrap';
+import { twMerge } from 'tailwind-merge';
+import clsx from 'clsx';
+import { Tooltip } from 'components/Tooltip';
+import { ColorSchemeName, colorSchemeNames } from '@antribute/zephyr-core';
 
 type RenderVariantElementProps = Partial<VariantProps<typeof RenderVariantElement>>;
 
@@ -19,6 +24,12 @@ interface RenderVariantBaseProps<T extends ReactComponent, TProp extends string 
   showVariantLabel?: boolean;
   variantPropName?: string;
   noChildren?: boolean;
+  renderPaperContainers?: boolean;
+  renderPaperContainersProps?: Omit<RenderPaperContainersProps, 'children'>;
+  variantLabelProps?: {
+    labelCase?: 'capital' | 'uppercased' | 'none';
+    variantLabelAsTooltip?: boolean;
+  };
 }
 
 const RenderVariantElement = classed('div', {
@@ -41,7 +52,13 @@ interface RenderSizeVariantProps<T extends React.ComponentType>
 const keys = {
   colors: [
     'neutral',
-    'surface',
+    'neutral-light',
+    'neutral-dark',
+    'surface-primary',
+    'surface-secondary',
+    'surface-tertiary',
+    'surface-soft',
+    'inverse',
     'primary',
     'info',
     'caution',
@@ -59,69 +76,128 @@ export const getColorKeys = () => {
   return keys.colors;
 };
 
+export const RenderVariants = <
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  T extends React.ComponentType<any>,
+  TElements extends undefined | string[]
+>({
+  variantPropName,
+  elements = [],
+  Component,
+  render = (children) => children,
+  props,
+  getProps,
+  orientation: orientationProp,
+  renderPaperContainers,
+  renderPaperContainersProps,
+  showVariantLabel,
+  variantLabelProps,
+  noChildren = true,
+}: { elements: TElements; variantPropName: string } & RenderVariantBaseProps<T>) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const Element = Component as React.ComponentType<any>;
+
+  const renderText = (e: string) => {
+    const { labelCase = 'capital' } = variantLabelProps ?? {};
+
+    if (labelCase === 'capital') return capitalCase(e || '');
+
+    if (labelCase === 'uppercased') return e.toUpperCase();
+
+    return e;
+  };
+
+  const orientation = orientationProp ?? 'horizontal';
+
+  const { variantLabelAsTooltip } = variantLabelProps ?? {};
+
+  return (
+    <Wrap
+      if={renderPaperContainers}
+      wrap={(c) => (
+        <RenderPaperContainers renderTransparentPaper {...renderPaperContainersProps}>
+          {c}
+        </RenderPaperContainers>
+      )}
+    >
+      <RenderVariantElement orientation={orientation}>
+        {elements.map((e) => {
+          const elementProps = getProps?.(e) ?? props;
+          return (
+            <Wrap
+              if={{ variantLabelAsTooltip, showVariantLabel }}
+              wrap={{
+                variantLabelAsTooltip: (c) => <Tooltip tooltip={renderText(e)}>{c}</Tooltip>,
+                showVariantLabel: (c) => {
+                  return (
+                    <div className="flex flex-col items-center">
+                      <div className="mb-8 block select-none text-center text-xs font-medium opacity-50">
+                        {renderText(e)}
+                      </div>
+                      {c}
+                    </div>
+                  );
+                },
+              }}
+            >
+              {render(
+                <Element
+                  // eslint-disable-next-line react/no-children-prop
+                  children={noChildren ? undefined : renderText(e)}
+                  {...elementProps}
+                  {...{ [variantPropName]: e }}
+                />
+              )}
+            </Wrap>
+          );
+        })}
+      </RenderVariantElement>
+    </Wrap>
+  );
+};
+
 export const RenderSizeVariants = <T extends React.ComponentType>({
   variantPropName = 'size',
   sizes = ['xs', 'sm', 'md', 'lg'],
-  Component,
-  render = (children) => children,
-  props,
-  getProps,
-  orientation = 'horizontal',
+  variantLabelProps,
+  ...props
 }: RenderSizeVariantProps<T>) => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const Element = Component as React.ComponentType<any>;
   return (
-    <RenderVariantElement orientation={orientation}>
-      {sizes.map((size) => {
-        const elementProps = getProps?.(size) ?? props;
-        return <div>{render(<Element {...elementProps} {...{ [variantPropName]: size }} />)}</div>;
-      })}
-    </RenderVariantElement>
+    <RenderVariants
+      elements={sizes}
+      variantPropName={variantPropName}
+      variantLabelProps={{
+        labelCase: 'uppercased',
+        ...variantLabelProps,
+      }}
+      {...props}
+    />
   );
 };
 
-interface ColorSizeVariantProps<T extends React.ComponentType>
+export const RenderColorVariants = <T extends React.ComponentType>({
+  variantPropName = 'color',
+  colors = keys.colors,
+  variantLabelProps,
+  ...props
+}: RenderColorVariantProps<T>) => {
+  return (
+    <RenderVariants
+      elements={colors}
+      variantPropName={variantPropName}
+      variantLabelProps={{
+        labelCase: 'capital',
+        ...variantLabelProps,
+      }}
+      {...props}
+    />
+  );
+};
+
+interface RenderColorVariantProps<T extends React.ComponentType>
   extends RenderVariantBaseProps<T, LiteralUnion<'color', string>> {
   colors?: LiteralUnion<ColorProp, string>[];
 }
-
-export const RenderColorVariants = <T extends React.ComponentType>({
-  colors = keys.colors,
-  Component,
-  noChildren,
-  render = (children) => children,
-  props,
-  getProps,
-  className,
-  orientation = 'horizontal',
-  variantPropName = 'color',
-}: ColorSizeVariantProps<T>) => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const Element = Component as React.ComponentType<any>;
-
-  return (
-    <RenderVariantElement className={className} orientation={orientation}>
-      {colors.map((color) => {
-        const elementProps = getProps?.(color) ?? props;
-        return (
-          <div>
-            <Text className="my-8 block select-none" fontWeight="bold" color="weak" size="xs">
-              {capitalCase(color)}
-            </Text>
-            {render(
-              <Element
-                // eslint-disable-next-line react/no-children-prop
-                children={noChildren ? undefined : capitalCase(color)}
-                {...elementProps}
-                {...{ [variantPropName]: color }}
-              />
-            )}
-          </div>
-        );
-      })}
-    </RenderVariantElement>
-  );
-};
 
 export const getStoryUrl = () => {
   const searchParams = new URLSearchParams(window.location.search);
@@ -129,4 +205,62 @@ export const getStoryUrl = () => {
   const id = searchParams.get('id') ?? '';
 
   return `${window.location.protocol}//${window.location.host}/?path=/story/${id}`;
+};
+
+interface RenderPaperContainersProps extends Omit<PaperProps, 'color' | 'children'> {
+  renderTransparentPaper?: boolean;
+  orientation?: 'vertical' | 'horizontal';
+  children:
+    | React.ReactNode
+    | (({ colorScheme }: { colorScheme?: ColorSchemeName }) => React.ReactNode);
+}
+
+export const RenderPaperContainers = ({
+  children,
+  renderTransparentPaper,
+  className,
+  orientation = 'vertical',
+  ...props
+}: RenderPaperContainersProps) => {
+  const paperProps = {
+    className: twMerge('flex flex-col gap-16 rounded-md', className),
+    ...props,
+  };
+
+  const colors = (['transparent', ...colorSchemeNames] as const).filter((color) => {
+    if (color === 'transparent') {
+      return renderTransparentPaper;
+    }
+    return true;
+  });
+
+  return (
+    <Wrap
+      if={!className}
+      wrap={(c) => (
+        <div
+          className={clsx('inline-flex gap-16', {
+            'flex-row': orientation === 'horizontal',
+            'flex-col': orientation === 'vertical',
+          })}
+        >
+          {c}
+        </div>
+      )}
+    >
+      {colors.map((color) => {
+        const colorScheme = color === 'transparent' ? undefined : color;
+        return (
+          <Paper
+            key={colorScheme}
+            transparent={color === 'transparent'}
+            colorScheme={colorScheme}
+            {...paperProps}
+          >
+            {typeof children === 'function' ? children({ colorScheme }) : children}
+          </Paper>
+        );
+      })}
+    </Wrap>
+  );
 };

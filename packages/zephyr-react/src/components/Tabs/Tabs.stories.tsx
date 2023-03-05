@@ -2,6 +2,7 @@ import { Paper } from 'components/Paper';
 import { generateMockVehicleList } from 'mock/mock-data';
 import { Text } from 'components/Text';
 import { capitalCase } from 'change-case';
+import { RenderPaperContainers } from 'utils/storybook-utils';
 import { Tabs } from '.';
 
 const tabs2 = [
@@ -115,29 +116,18 @@ export const Overflow = () => {
 
 export const Contrast = () => {
   return (
-    <div className="flex gap-16">
-      {(['surface', 'surface-dark', 'surface-light', 'neutral', 'neutral-light'] as const).map(
-        (surfaceColor) => {
-          return (
-            <div className="space-y-8">
-              <Text block fontWeight="medium" color="weak">
-                {capitalCase(surfaceColor)}
-              </Text>
-              <Paper border color={surfaceColor}>
-                <Tabs.Root defaultValue={tabs6[0]?.value}>
-                  <Tabs.List>
-                    {tabs3.map((e) => (
-                      <Tabs.Tab key={e.value} value={e.value}>
-                        {e.label}
-                      </Tabs.Tab>
-                    ))}
-                  </Tabs.List>
-                </Tabs.Root>
-              </Paper>
-            </div>
-          );
-        }
-      )}
+    <div className="flex">
+      <RenderPaperContainers>
+        <Tabs.Root defaultValue={tabs6[0]?.value}>
+          <Tabs.List>
+            {tabs3.map((e) => (
+              <Tabs.Tab key={e.value} value={e.value}>
+                {e.label}
+              </Tabs.Tab>
+            ))}
+          </Tabs.List>
+        </Tabs.Root>
+      </RenderPaperContainers>
     </div>
   );
 };

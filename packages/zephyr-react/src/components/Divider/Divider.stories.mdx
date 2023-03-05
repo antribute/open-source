@@ -1,0 +1,18 @@
+import { ArgsTable, Canvas, Description, Meta, Story } from '@storybook/addon-docs';
+import { Divider } from '.';
+import * as stories from './Divider.stories.tsx';
+
+<Meta title="Input/Divider" component={Divider} />
+
+# Divider
+
+<Description component={Divider} />
+<ArgsTable of={Divider} />
+
+## Default
+
+Default `Divider` component
+
+<Canvas withToolbar>
+  <Story name="Default" story={stories.Default} />
+</Canvas>

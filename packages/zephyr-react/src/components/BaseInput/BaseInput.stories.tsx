@@ -48,18 +48,9 @@ export const InlineAddons = () => {
       <RenderSizeVariants
         orientation="vertical"
         sizes={['md']}
+        noChildren
         Component={BaseInput}
         getProps={(size) => {
-          const relativeSize = getRelativeSizeProp(-1, {
-            relativeSize: size as SizeProp,
-            maxElement: 'md',
-          });
-
-          const props = {
-            size: relativeSize,
-            className: 'h-3/4',
-          };
-
           return {
             placeholder: 'Enter value',
 

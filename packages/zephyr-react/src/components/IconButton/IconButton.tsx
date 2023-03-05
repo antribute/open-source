@@ -2,7 +2,7 @@ import { ButtonElement } from 'components/Button/Button.styles';
 import { sizeVariants } from 'styles/size.variants';
 import { classed, mergeVariants } from 'utils/classed';
 
-const IconButtonElement = classed('button', ButtonElement, 'p-4', {
+const IconButtonElement = classed('button', ButtonElement, 'p-8', {
   variants: {
     size: mergeVariants([sizeVariants.width, sizeVariants.height]),
   },

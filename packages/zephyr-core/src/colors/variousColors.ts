@@ -74,4 +74,28 @@ export const variousColors = {
     light: '300',
     soft: '100',
   }),
+  'various-neutral': generateColorGroup(tailwindColors.neutral)({
+    DEFAULT: '500',
+    dark: '600',
+    light: '300',
+    soft: '100',
+  }),
+  'various-stone': generateColorGroup(tailwindColors.stone)({
+    DEFAULT: '500',
+    dark: '600',
+    light: '300',
+    soft: '100',
+  }),
+  'various-zinc': generateColorGroup(tailwindColors.zinc)({
+    DEFAULT: '500',
+    dark: '600',
+    light: '300',
+    soft: '100',
+  }),
+  'various-slate': generateColorGroup(tailwindColors.slate)({
+    DEFAULT: '500',
+    dark: '600',
+    light: '300',
+    soft: '100',
+  }),
 } satisfies Record<string, Record<string, string>>;

@@ -1,5 +1,6 @@
 import { classed, deriveClassed } from 'utils/classed';
 
+// Container
 type SimpleListContainerElementProps = React.ComponentProps<typeof SimpleListContainerElement>;
 
 const SimpleListContainerElement = classed('div', 'list-inside space-y-4', {
@@ -27,6 +28,7 @@ const SimpleListContainer = deriveClassed<
   return <SimpleListContainerElement as={as} variant={variant} {...props} />;
 });
 
+// List Item
 const SimpleListItem = classed('li');
 
 const Root = SimpleListContainer;

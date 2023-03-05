@@ -1,10 +1,14 @@
 import { Classed, classed } from 'utils/classed';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { PaperElement } from 'components/Paper/Paper.styles';
+import {
+  CardBodyElement,
+  CardFooterElement,
+  CardHeadingElement,
+  CardTitleAreaElement,
+} from 'components/Card/Card.styles';
 
 // Content
-
-export type DialogContentElementVariants = Classed.VariantProps<typeof DialogContentElement>;
 
 export type DialogContentElementProps = React.ComponentProps<typeof DialogContentElement>;
 
@@ -12,7 +16,7 @@ export const DialogContentElement = classed(
   DialogPrimitive.Content,
   PaperElement,
   'fixed z-50',
-  'w-[95vw] rounded-lg p-4 md:w-full',
+  'w-[95vw] rounded-lg md:w-full',
   'top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]',
   'bg-white dark:bg-gray-800',
   'border-boundary-subtle dark:border-boundary-inverse-subtle',
@@ -35,7 +39,6 @@ export const DialogContentElement = classed(
 );
 
 // Overlay
-export type DialogOverlayElementVariants = Classed.VariantProps<typeof DialogOverlayElement>;
 
 export type DialogOverlayElementProps = React.ComponentProps<typeof DialogOverlayElement>;
 
@@ -48,22 +51,10 @@ export const DialogOverlayElement = classed(
 );
 
 // Heading
-export type DialogHeadingElementVariants = Classed.VariantProps<typeof DialogHeadingElement>;
 
 export type DialogHeadingElementProps = React.ComponentProps<typeof DialogHeadingElement>;
 
-export const DialogHeadingElement = classed(
-  DialogPrimitive.Title,
-  'text-md font-heading text-content-intense dark:text-content-inverse-intense',
-  {
-    variants: {},
-  }
-);
-
-// Description
-export type DialogDescriptionElementVariants = Classed.VariantProps<
-  typeof DialogDescriptionElement
->;
+export const DialogHeadingElement = classed(CardHeadingElement);
 
 export type DialogDescriptionElementProps = React.ComponentProps<typeof DialogDescriptionElement>;
 
@@ -76,41 +67,22 @@ export const DialogDescriptionElement = classed(
 );
 
 // Title
-export type DialogTitleElementVariants = Classed.VariantProps<typeof DialogTitleElement>;
 
 export type DialogTitleElementProps = React.ComponentProps<typeof DialogTitleElement>;
 
-export const DialogTitleElement = classed(
-  DialogPrimitive.Title,
-  DialogHeadingElement,
-  'flex relative w-full',
-  'border-b border-boundary-ghost dark:border-boundary-inverse pb-8 text-content dark:text-content-inverse-intense',
-  {
-    variants: {},
-  }
-);
+export const DialogTitleElement = classed(DialogPrimitive.Title, CardTitleAreaElement);
 
 // Body
-export type DialogBodyElementVariants = Classed.VariantProps<typeof DialogBodyElement>;
 
 export type DialogBodyElementProps = React.ComponentProps<typeof DialogBodyElement>;
 
-export const DialogBodyElement = classed('div', 'w-full my-8', {
-  variants: {},
-});
+export const DialogBodyElement = classed('div', CardBodyElement);
 
 // Footer
-export type DialogFooterElementVariants = Classed.VariantProps<typeof DialogFooterElement>;
 
 export type DialogFooterElementProps = React.ComponentProps<typeof DialogFooterElement>;
 
-export const DialogFooterElement = classed(
-  DialogPrimitive.Description,
-  'flex justify-end items-center gap-x-8 pt-8 px-4 border-t border-boundary-ghost dark:border-boundary-inverse-ghost',
-  {
-    variants: {},
-  }
-);
+export const DialogFooterElement = classed(DialogPrimitive.Description, CardFooterElement);
 
 // Close Icon
 

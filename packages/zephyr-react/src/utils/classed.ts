@@ -1,12 +1,25 @@
 import { ClassedVariantMap, SizeProp } from 'types/styles';
 import { twMerge } from 'tailwind-merge';
-import { mapValues, mergeWith, pick } from 'lodash-es';
+import {
+  filter,
+  map,
+  mapValues,
+  merge,
+  mergeWith,
+  pick,
+  pickBy,
+  transform,
+  union,
+} from 'lodash-es';
 import { createClassed, deriveClassed } from '@tw-classed/react';
 import { createClassed as createClassedCore } from '@tw-classed/core';
 import type * as Classed from '@tw-classed/react';
 import clsx, { ClassValue } from 'clsx';
 import { LiteralUnion } from 'type-fest';
 import { getRelativeSizePropData } from 'utils/getRelativeSizeProp';
+import createVariatGroupTransfomer from 'tailwind-group-variant';
+
+export const expandVariant = createVariatGroupTransfomer();
 
 export type { ClassedFunctionProxy, ClassedProxyFunctionType } from '@tw-classed/react';
 
@@ -57,4 +70,46 @@ export function relativeSizeVariants<T extends Record<SizeProp, string>>(options
   });
 
   return { ...relativeSizeVariants, ...overrides } as T;
+}
+
+export function generateCompoundVariants<
+  TCompountVariantPropMap extends Partial<{
+    [x: string]: string | boolean | Record<string, string>;
+    className: string;
+  }>
+>(compoundVariantPropMap: TCompountVariantPropMap) {
+  const { commonVariantProps, compoundVariantMapLists } = transform(
+    compoundVariantPropMap,
+    (result, value, key) => {
+      if (typeof value === 'boolean' || typeof value === 'string') {
+        result.commonVariantProps[key] = value;
+        return result;
+      }
+
+      const compoundVariantMapList = map(value, (className, variantMapKey) => ({
+        [key]: variantMapKey,
+        class: className,
+      }));
+
+      result.compoundVariantMapLists.push(compoundVariantMapList);
+
+      return result;
+    },
+
+    {
+      commonVariantProps: {} as Record<string, boolean | string>,
+      compoundVariantMapLists: [] as {
+        [x: string]: string;
+        class: string;
+      }[][],
+    }
+  );
+
+  return compoundVariantMapLists.flat().map(({ class: cls, ...props }) => {
+    return {
+      ...commonVariantProps,
+      class: twMerge(cls, compoundVariantPropMap.className),
+      ...props,
+    };
+  });
 }

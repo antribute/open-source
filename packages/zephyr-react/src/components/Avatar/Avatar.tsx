@@ -10,12 +10,6 @@ import { stringToDistinctColorClass } from 'utils/stringToDistinctColorClass';
 import clsx from 'clsx';
 import { AvatarElementName } from './Avatar.types';
 
-clsx('group-data-[avatar-group=true]:mix-blend-exclusion');
-
-console.log(
-  'MERGED',
-  mergeVariants([sizeVariants.textSize, sizeVariants.width, sizeVariants.height])
-);
 const AvatarElement = classed(
   'span',
   'rounded-md select-none border-base dark:border-base-inverse flex items-center justify-center overflow-hidden relative bg-neutral text-white shrink-0 isolate',

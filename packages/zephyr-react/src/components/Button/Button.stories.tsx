@@ -1,4 +1,3 @@
-import { RenderColorVariants, RenderSizeVariants } from 'utils/storybook-utils';
 import { PresetButtonStoryVariants } from 'components/Button/preset-button-story-variants';
 import { Button, ButtonProps } from './Button';
 
@@ -7,7 +6,9 @@ export const {
   SizeVariant,
   ContainedVariant,
   OutlinedVariant,
-  OutlinedFilledVariant,
   SoftVariant,
   TextVariant,
+  RoundedVariant,
+  RoundedSize,
+  ContainedGradientVariant,
 } = PresetButtonStoryVariants<ButtonProps>(Button);
