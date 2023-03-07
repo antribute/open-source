@@ -12,4 +12,5 @@ export const {
   RoundedVariant,
   RoundedSize,
   ContainedGradientVariant,
+  GhostVariant,
 } = PresetButtonStoryVariants<ButtonProps>(Button);

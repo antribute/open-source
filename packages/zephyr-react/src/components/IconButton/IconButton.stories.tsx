@@ -13,6 +13,7 @@ export const {
   RoundedVariant,
   ContainedGradientVariant,
   RoundedSize,
+  GhostVariant,
 } = PresetButtonStoryVariants<IconButtonProps>(IconButton, {
   props: { children: <BoltIcon className="text-current" /> },
   noDefaultChildren: true,

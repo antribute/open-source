@@ -218,6 +218,17 @@ export const ButtonElement = classed.button(
         positive: '',
         danger: '',
         caution: '',
+        heart: '',
+      },
+      hoverBackgroundColor: {
+        primary: '',
+        secondary: '',
+        inverse: '',
+        info: '',
+        positive: '',
+        danger: '',
+        caution: '',
+        heart: '',
       },
     },
 
@@ -238,6 +249,7 @@ export const ButtonElement = classed.button(
           primary: 'filled-accent-primary filled-hover-accent-primary',
           secondary: 'filled-accent-secondary filled-hover-accent-secondary',
           inverse: 'filled-accent-inverse filled-hover-accent-inverse',
+          heart: 'filled-accent-heart filled-hover-accent-heart',
           info: 'filled-accent-info filled-hover-accent-info',
           positive: 'filled-accent-positive filled-hover-accent-positive',
           danger: 'filled-accent-danger filled-hover-accent-danger',
@@ -245,25 +257,70 @@ export const ButtonElement = classed.button(
         },
       }),
       ...generateCompoundVariants({
+        variant: 'filled',
+        hoverBackgroundColor: {
+          primary: 'hover:bg-primary',
+          secondary: 'hover:bg-secondary',
+          inverse: 'hover:bg-inverse',
+          heart: 'hover:bg-heart',
+          info: 'hover:bg-info',
+          positive: 'hover:bg-positive',
+          danger: 'hover:bg-danger',
+          caution: 'hover:bg-caution',
+        },
+      }),
+      ...generateCompoundVariants({
+        variant: 'glass',
+        hoverBackgroundColor: {
+          primary: 'hover:glass-accent-primary',
+          secondary: 'hover:glass-accent-secondary',
+          inverse: 'hover:glass-accent-inverse',
+          heart: 'hover:glass-accent-heart',
+          info: 'hover:glass-accent-info',
+          positive: 'hover:glass-accent-positive',
+          danger: 'hover:glass-accent-danger',
+          caution: 'hover:glass-accent-caution',
+        },
+      }),
+
+      ...generateCompoundVariants({
         variant: 'glass',
         className: 'overflow-hidden relative z-0 ',
         color: {
           primary: 'glass-accent-primary',
           secondary: 'glass-accent-secondary',
           inverse: 'glass-accent-inverse',
+          heart: 'glass-accent-heart',
           info: 'glass-accent-info',
           positive: 'glass-accent-positive',
           danger: 'glass-accent-danger',
           caution: 'glass-accent-caution',
         },
       }),
+
+      ...generateCompoundVariants({
+        variant: 'ghost',
+        className: 'overflow-hidden bg-transparent relative z-0 ',
+        color: {
+          primary: 'glass-accent-primary text-primary',
+          secondary: 'glass-accent-secondary text-secondary',
+          inverse: 'glass-accent-inverse text-inverse',
+          heart: 'glass-accent-heart',
+          info: 'glass-accent-info',
+          positive: 'glass-accent-positive',
+          danger: 'glass-accent-danger',
+          caution: 'glass-accent-caution',
+        },
+      }),
+
       ...generateCompoundVariants({
         variant: 'outlined',
-        className: 'overflow-hidden relative z-0 ',
+        className: 'overflow-hidden relative z-0',
         color: {
           primary: 'outlined-accent-primary',
           secondary: 'outlined-accent-secondary',
           inverse: 'outlined-accent-inverse',
+          heart: 'outlined-accent-heart',
           info: 'outlined-accent-info',
           positive: 'outlined-accent-positive',
           danger: 'outlined-accent-danger',
@@ -281,9 +338,18 @@ export const ButtonElement = classed.button(
       // Gradient
       ...generateCompoundVariants({
         gradient: true,
-        variant: 'contained',
-        className: clsx('border-none bg-gradient-to-br transition-all  hover:brightness-[1.15]'),
-        color: mergeVariants([colorVariants.gradient, colorVariants.ring]),
+        variant: 'filled',
+        className: clsx('border-none bg-gradient-to-tr transition-all  hover:brightness-[1.05]'),
+        color: {
+          primary: 'gradient-primary',
+          secondary: 'gradient-secondary',
+          inverse: 'gradient-inverse',
+          heart: 'gradient-heart',
+          info: 'gradient-info',
+          positive: 'gradient-positive',
+          danger: 'gradient-danger',
+          caution: 'gradient-caution',
+        },
       }),
 
       // Extra Padding X

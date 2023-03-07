@@ -59,7 +59,7 @@ export const colors = {
   base,
   neutral,
 
-  'brand-pink': generateColorGroup({
+  heart: generateColorGroup({
     '50': '#fff0fa',
     '100': '#ffe4f7',
     '200': '#ffc9f0',

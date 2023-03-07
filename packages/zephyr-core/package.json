@@ -64,6 +64,8 @@
     "tailwindcss": ">= 3.0.0 < 4"
   },
   "dependencies": {
+    "@egoist/tailwindcss-icons": "^1.0.7",
+    "@iconify-json/heroicons": "^1.1.10",
     "clsx": "^1.2.1",
     "dot-path-value": "^0.0.6",
     "hex-rgb": "^5.0.0",

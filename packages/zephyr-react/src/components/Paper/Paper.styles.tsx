@@ -19,7 +19,7 @@ export const PaperElementBackground = classed('div', {
   variants: {
     border: {
       // true: 'border border-solid border-boundary-subtle dark:border-boundary-inverse-subtle',
-      true: 'border-2 border-boundary-inverse-tint dark:border-boundary-tint',
+      true: 'border-2 border-boundary-ghost',
     },
     hoverHighlight: {
       true: 'hover:bg-surface-dark',

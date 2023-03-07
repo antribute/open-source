@@ -1,3 +1,4 @@
+import { ColorSchemeName } from '@antribute/zephyr-core';
 import {
   CardBodyElement,
   CardContainerElement,
@@ -13,7 +14,7 @@ import { Classed, classed, deriveClassed } from 'utils/classed';
 
 export type CardContainerVariantProps = Classed.ComponentProps<typeof CardContainerElement>;
 
-export type CardContainerProps = PaperProps;
+export type CardContainerProps = PaperProps & { colorScheme?: ColorSchemeName };
 
 const CardContainer = (props: CardContainerProps) => {
   const isButton = 'onClick' in props;

@@ -39,6 +39,7 @@ type ColorSchemeToken =
   | TokenVariant<'secondary'>
   | TokenVariant<'inverse'>
   | TokenShadeVariant<'surface'>
+  | TokenShadeVariant<'heart'>
   | TokenShadeVariant<'info'>
   | TokenShadeVariant<'positive'>
   | TokenShadeVariant<'caution'>
@@ -91,6 +92,11 @@ interface GenericColorSchemeConfig {
 
 const commonSchemeTokens = {
   all: {
+    heart: colorPalette['palette-heart'].DEFAULT,
+    'heart-light': colorPalette['palette-heart'].light,
+    'heart-dark': colorPalette['palette-heart'].dark,
+    'heart-soft': colorPalette['palette-heart'].soft,
+
     info: colorPalette['palette-info'].DEFAULT,
     'info-light': colorPalette['palette-info'].light,
     'info-dark': colorPalette['palette-info'].dark,
@@ -217,7 +223,7 @@ const lightDefault = {
   'surface-soft': colorPalette['palette-surface'][50],
 
   primary: colorPalette['palette-neutral']['500'],
-  'primary-light': colorPalette['palette-neutral']['400'],
+  'primary-light': colorPalette['palette-neutral']['300'],
   'primary-dark': colorPalette['palette-neutral']['600'],
   'primary-soft': colorPalette['palette-various-slate']['200'],
 
@@ -242,7 +248,7 @@ const colorSchemeConfig = {
     'surface-soft': colorPalette['palette-surface-inverse'].soft,
 
     primary: colorPalette['palette-neutral']['500'],
-    'primary-light': colorPalette['palette-neutral']['400'],
+    'primary-light': colorPalette['palette-neutral']['300'],
     'primary-dark': colorPalette['palette-neutral']['600'],
     'primary-soft': colorPalette['palette-various-slate']['200'],
 
@@ -364,15 +370,15 @@ const colorSchemeConfig = {
     'surface-dark': colorPalette['palette-neutral'].dark,
     'surface-soft': colorPalette['palette-neutral'][500],
 
-    primary: colorPalette['palette-various-slate']['500'],
-    'primary-light': colorPalette['palette-various-slate']['400'],
-    'primary-dark': colorPalette['palette-various-slate']['600'],
-    'primary-soft': colorPalette['palette-various-slate']['200'],
+    primary: colorPalette['palette-various-slate']['400'],
+    'primary-light': colorPalette['palette-various-slate']['300'],
+    'primary-dark': colorPalette['palette-various-slate']['500'],
+    'primary-soft': colorPalette['palette-various-slate']['100'],
 
-    secondary: colorPalette['palette-various-slate']['600'],
-    'secondary-light': colorPalette['palette-various-slate']['500'],
-    'secondary-dark': colorPalette['palette-various-slate']['700'],
-    'secondary-soft': colorPalette['palette-various-slate']['300'],
+    secondary: colorPalette['palette-various-slate']['500'],
+    'secondary-light': colorPalette['palette-various-slate']['400'],
+    'secondary-dark': colorPalette['palette-various-slate']['600'],
+    'secondary-soft': colorPalette['palette-various-slate']['400'],
   },
 
   'neutral-light': {
@@ -404,15 +410,15 @@ const colorSchemeConfig = {
     'surface-dark': colorPalette['palette-neutral']['900'],
     'surface-soft': colorPalette['palette-neutral'][700],
 
-    primary: colorPalette['palette-various-slate']['500'],
-    'primary-light': colorPalette['palette-various-slate']['400'],
-    'primary-dark': colorPalette['palette-various-slate']['600'],
-    'primary-soft': colorPalette['palette-various-slate']['200'],
+    primary: colorPalette['palette-various-slate']['400'],
+    'primary-light': colorPalette['palette-various-slate']['300'],
+    'primary-dark': colorPalette['palette-various-slate']['500'],
+    'primary-soft': colorPalette['palette-various-slate']['100'],
 
-    secondary: colorPalette['palette-various-slate']['600'],
-    'secondary-light': colorPalette['palette-various-slate']['500'],
-    'secondary-dark': colorPalette['palette-various-slate']['700'],
-    'secondary-soft': colorPalette['palette-various-slate']['300'],
+    secondary: colorPalette['palette-various-slate']['500'],
+    'secondary-light': colorPalette['palette-various-slate']['400'],
+    'secondary-dark': colorPalette['palette-various-slate']['600'],
+    'secondary-soft': colorPalette['palette-various-slate']['200'],
   },
 
   // Inverse
@@ -425,14 +431,14 @@ const colorSchemeConfig = {
     'surface-dark': colorPalette['palette-surface-inverse'].dark,
     'surface-soft': colorPalette['palette-surface-inverse'][300],
 
-    primary: colorPalette['palette-various-slate']['500'],
-    'primary-light': colorPalette['palette-various-slate']['400'],
-    'primary-dark': colorPalette['palette-various-slate']['600'],
+    primary: colorPalette['palette-various-slate']['400'],
+    'primary-light': colorPalette['palette-various-slate']['300'],
+    'primary-dark': colorPalette['palette-various-slate']['500'],
     'primary-soft': colorPalette['palette-various-slate']['200'],
 
-    secondary: colorPalette['palette-various-slate']['700'],
-    'secondary-light': colorPalette['palette-various-slate']['600'],
-    'secondary-dark': colorPalette['palette-various-slate']['800'],
+    secondary: colorPalette['palette-various-slate']['500'],
+    'secondary-light': colorPalette['palette-various-slate']['400'],
+    'secondary-dark': colorPalette['palette-various-slate']['600'],
     'secondary-soft': colorPalette['palette-various-slate']['300'],
   },
 

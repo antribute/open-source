@@ -4,7 +4,7 @@ import { Paper } from 'components/Paper';
 import { Dialog } from 'components/Dialog';
 import { Avatar } from 'components/Avatar/Avatar';
 import { Text } from 'components/Text';
-import { RenderSizeVariants, getSizeKeys } from 'utils/storybook-utils';
+import { RenderPaperContainers, RenderSizeVariants, getSizeKeys } from 'utils/storybook-utils';
 import { AvatarGroup } from '.';
 
 const users = generateMockUserList({ size: 30 });
@@ -75,7 +75,7 @@ export const AdditionalAvatarsDialog = () => {
 
       <Dialog.Content>
         <Dialog.Title>Members</Dialog.Title>
-        <Dialog.Body className="grid grid-cols-3 gap-y-18 gap-x-24">
+        <Dialog.Body className="gap-y-18 grid grid-cols-3 gap-x-24">
           {users.map(({ name, email }) => (
             <div className="flex shrink-0 items-center gap-8">
               <Avatar label={name} enableTooltip={false} />
@@ -98,13 +98,21 @@ export const AdditionalAvatarsDialog = () => {
 export const StackedAvatarGroup = () => {
   return (
     <div className="flex flex-wrap items-center gap-16">
-      <AvatarGroup.Root stacked>
+      {/* <AvatarGroup.Root stacked>
         {users.map(({ name }) => (
           <AvatarGroup.Avatar label={name} />
         ))}
-      </AvatarGroup.Root>
+      </AvatarGroup.Root> */}
 
-      <Paper border>
+      <RenderPaperContainers className="flex items-center" renderTransparentPaper>
+        <AvatarGroup.Root stacked>
+          {users.map(({ name }) => (
+            <AvatarGroup.Avatar label={name} />
+          ))}
+        </AvatarGroup.Root>
+      </RenderPaperContainers>
+
+      {/* <Paper border>
         <AvatarGroup.Root stacked>
           {users.map(({ name, avatarUrl }) => (
             <AvatarGroup.Avatar src={avatarUrl} label={name} />
@@ -117,7 +125,7 @@ export const StackedAvatarGroup = () => {
             <AvatarGroup.Avatar label={name} />
           ))}
         </AvatarGroup.Root>
-      </Paper>
+      </Paper> */}
     </div>
   );
 };

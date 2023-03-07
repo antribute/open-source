@@ -12,7 +12,7 @@ import { AvatarElementName } from './Avatar.types';
 
 const AvatarElement = classed(
   'span',
-  'rounded-md select-none border-base dark:border-base-inverse flex items-center justify-center overflow-hidden relative bg-neutral text-white shrink-0 isolate',
+  'rounded-md select-none border-surface flex items-center justify-center overflow-hidden relative bg-surface text-palette-white shrink-0 isolate',
   {
     variants: {
       size: mergeVariants([sizeVariants.textSize, sizeVariants.width, sizeVariants.height]),
@@ -32,8 +32,8 @@ const AvatarElement = classed(
         true: clsx('hover:border-boundary-subtle dark:hover:border-boundary-inverse-subtle'),
       },
       color: {
-        default: 'bg-neutral',
-        alternate: 'bg-neutral-light dark:bg-neutral-light',
+        default: 'bg-surface',
+        alternate: 'bg-surface-light',
       },
     },
     defaultVariants: {
@@ -86,8 +86,8 @@ export const Avatar = ({
     label,
     {
       bg: clsx({
-        'bg-surface dark:bg-neutral-50': color === 'default',
-        'bg-neutral-400 border-neutral-200 dark:bg-neutral-600 dark:border-neutral-800':
+        'border-surface bg-surface': color === 'default',
+        'bg-surface-dark border-surface-light text-content-moderate font-medium':
           color === 'alternate',
       }),
     },

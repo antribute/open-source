@@ -2,6 +2,9 @@ import { CardContainerProps } from 'components/Card/Card';
 import { twMerge } from 'tailwind-merge';
 import { capitalCase } from 'change-case';
 import { Button } from 'components/Button';
+import { IconButton } from 'components/IconButton/IconButton';
+import { HeartIcon } from '@heroicons/react/24/solid';
+import { Input } from 'components/Input';
 import { Card } from '.';
 
 const CardGrid = ({
@@ -25,30 +28,59 @@ const CardGrid = ({
         >
           <Card.Title>
             <Card.TitleHeading>{capitalCase(colorScheme ?? 'Surface')}</Card.TitleHeading>
+
+            <div className="flex gap-8">
+              <Button color="secondary" size="xs" variant="glass" className="group">
+                <span className="i-heroicons-chat-bubble-bottom-center-solid" />
+              </Button>
+              <IconButton
+                color="secondary"
+                size="xs"
+                variant="glass"
+                hoverBackgroundColor="heart"
+                className="group"
+              >
+                <span className="i-heroicons-heart-solid " />
+              </IconButton>
+            </div>
           </Card.Title>
           <Card.Body>
             <Card.Description>
               Lorem labore magna eiusmod id eiusmod cillum ex dolore amet ullamco ex. Anim ullamco
               ex sit elit ut.
             </Card.Description>
+
             <div className="pt-12" />
+            <Input
+              label="Name"
+              placeholder="Enter name"
+              width="full"
+              message="
+              Lorem labore magna eiusmod id eiusmod cillum ex dolore amet ullamco ex.
+            "
+            />
             {childCard}
           </Card.Body>
           <Card.Footer className="flex-wrap">
             <div className="flex grow gap-8">
-              <Button color="secondary" variant="glass" size="xs" className="">
-                Back
+              <Button
+                color="secondary"
+                hoverBackgroundColor="danger"
+                variant="glass"
+                size="xs"
+                className=""
+              >
+                Clear
               </Button>
-              <Button color="secondary" variant="glass" size="xs" className="">
-                Next
+              <Button variant="filled" size="xs" className="">
+                Skip
               </Button>
             </div>
-
-            <Button color="secondary" variant="glass" size="xs">
-              Note
+            <Button color="primary" variant="outlined" size="xs" className="">
+              Prev
             </Button>
-            <Button color="primary" size="xs">
-              Read
+            <Button color="inverse" variant="outlined" size="xs" className="">
+              Next
             </Button>
           </Card.Footer>
         </Card.Container>
@@ -66,6 +98,7 @@ export const Default = () => {
       <CardGrid colorScheme="neutral" />
       <CardGrid colorScheme="neutral-light" />
       <CardGrid colorScheme="neutral-dark" />
+      <CardGrid colorScheme="inverse" />
       {/* ---- Nested ----  */}
       <CardGrid
         colorScheme="surface"
@@ -109,6 +142,14 @@ export const Default = () => {
       />
       <CardGrid
         colorScheme="neutral-dark"
+        childCard={
+          <Card.Container colorScheme="neutral">
+            <Card.Body>Lorem labore magna eiusmod id eiusmod cillum.</Card.Body>
+          </Card.Container>
+        }
+      />
+      <CardGrid
+        colorScheme="inverse"
         childCard={
           <Card.Container colorScheme="neutral">
             <Card.Body>Lorem labore magna eiusmod id eiusmod cillum.</Card.Body>

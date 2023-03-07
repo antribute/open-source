@@ -13,7 +13,7 @@ const TooltipContentElement = classed(
   'radix-side-left:animate-slide-right-fade',
   'inline-flex items-center rounded py-8 px-10',
   'text-sm font-body',
-  ' bg-neutral-900 text-content-inverse-intense shadow-hover',
+  'bg-surface text-content-intense shadow-hover',
 
   {
     variants: {
@@ -58,6 +58,7 @@ export const Tooltip = ({
 
         <TooltipPrimitive.Portal>
           <TooltipContentElement
+            // data-color-scheme="neutral-dark"
             sideOffset={4}
             collisionPadding={30}
             {...contentProps}

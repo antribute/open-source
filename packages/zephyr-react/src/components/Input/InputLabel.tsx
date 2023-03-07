@@ -10,8 +10,8 @@ export type InputLabelElementProps = React.ComponentProps<typeof InputLabelEleme
 
 export const InputLabelElement = classed(
   'label',
-  'text-content-intense dark:text-content-inverse-moderate text-left',
-  'text-sm inline-block  font-medium select-none text-gray-900 ',
+  'text-content-intense text-left',
+  'text-sm inline-block  font-medium select-none',
 
   {
     variants: {
@@ -67,10 +67,10 @@ const InputLabel = ({
       <span className="align-middle">
         {children ?? (hidden ? null : <InvisibleCharacter />)}
         {hasOptionalLabel && <OptionalLabelElement>{optionalLabelText}</OptionalLabelElement>}
-        {required && <span className="ml-px text-danger">*</span>}
+        {required && <span className="text-danger ml-px">*</span>}
       </span>
       {labelDescription && (
-        <Text as="p" size="xs" className="mt-1 leading-sm" color="weak">
+        <Text as="p" size="xs" className="leading-sm mt-1" color="weak">
           {labelDescription}
         </Text>
       )}

@@ -8,7 +8,7 @@ export interface InputMessageProps
   message?: string | ReactNode;
 }
 
-const InputMessage = classed('p', 'text-sm mt-4 select-none', {
+const InputMessage = classed('p', 'text-sm mt-4 ml-2 select-none', {
   variants: {
     inputState: {
       success: clsx('text-positive'),

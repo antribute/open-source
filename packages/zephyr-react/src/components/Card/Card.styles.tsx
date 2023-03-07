@@ -21,7 +21,7 @@ export type CardHeadingElementProps = React.ComponentProps<typeof CardHeadingEle
 export const CardHeadingElement = classed(
   'h6',
   'text-md font-heading !font-bold !text-content-intense',
-  '',
+  'flex-grow',
 
   {
     variants: {},
@@ -36,7 +36,7 @@ export const CardTitleAreaElement = classed(
   'div',
   CardHeadingElement,
   'flex relative w-full justify-between items-center',
-  'border-b border-highlight pb-8 text-content-strong',
+  'border-b border-boundary-tint/5 pb-8 text-content-strong',
   'text-content-high',
 
   {

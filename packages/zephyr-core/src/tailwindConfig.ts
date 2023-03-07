@@ -10,6 +10,7 @@ import tailwindCssRadixPlugin from 'tailwindcss-radix';
 import tailwindCssFormsPlugin from '@tailwindcss/forms';
 import tailwindCssTypographyPlugin from '@tailwindcss/typography';
 import createVariantGroupTransformer from 'tailwind-group-variant';
+import { iconsPlugin, getIconCollections } from '@egoist/tailwindcss-icons';
 import { multiThemePlugin } from './plugins/multi-theme-plugin';
 
 // eslint-disable-next-line import/extensions
@@ -26,6 +27,10 @@ const config = {
     tailwindCssRadixPlugin,
     tailwindCssFormsPlugin,
     tailwindCssTypographyPlugin,
+    iconsPlugin({
+      collections: getIconCollections(['heroicons']),
+    }),
+
     multiThemePlugin(),
   ],
   content: {

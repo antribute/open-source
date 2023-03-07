@@ -38,31 +38,40 @@ export const BaseInputElement = classed(
   'input',
   InputSizeVariant,
   placeholderClassName,
-  classTheme({
-    class: [
-      'font-medium',
-      'rounded-md',
-      'transition-all',
-      'relative border-[1.5px] border-solid peer',
-      'ring-0 outline-none focus-within:ring-1',
-      'flex items-center gap-8 p-8 select-none focus:outline-none',
-    ],
+  'peer',
+  'bg-surface-soft',
+  'font-medium rounded-md',
+  'transition-all',
+  'border-[1.5px] border-boundary-ghost',
+  'select-none',
+  'flex items-center gap-8',
+  'shadow-surface-dark/20',
+  'text-content-intense',
+  // classTheme({
+  //   class: [
+  //     'font-medium',
+  //     'rounded-md',
+  //     'transition-all',
+  //     'relative border-[1.5px] border-solid peer',
+  //     'ring-0 outline-none focus-within:ring-1',
+  //     'flex items-center gap-8 p-8 select-none focus:outline-none',
+  //   ],
 
-    light: [
-      'bg-surface',
-      'text-content-strong',
-      'border-boundary-subtle focus-within:border-boundary-focus',
-      'shadow-gray-light/20',
-      'focus-within:ring-boundary-focus',
-    ],
-    dark: [
-      'dark:bg-surface-inverse',
-      'dark:text-content-inverse-moderate',
-      'dark:border-boundary-inverse-subtle dark:focus-within:border-boundary-inverse-focus',
-      'dark:shadow-surface-inverse/50',
-      'dark:focus-within:ring-boundary-inverse-focus',
-    ],
-  }),
+  //   light: [
+  //     'bg-surface',
+  //     'text-content-strong',
+  //     'border-boundary-subtle focus-within:border-boundary-focus',
+  //     'shadow-gray-light/20',
+  //     'focus-within:ring-boundary-focus',
+  //   ],
+  //   dark: [
+  //     'dark:bg-surface-inverse',
+  //     'dark:text-content-inverse-moderate',
+  //     'dark:border-boundary-inverse-subtle dark:focus-within:border-boundary-inverse-focus',
+  //     'dark:shadow-surface-inverse/50',
+  //     'dark:focus-within:ring-boundary-inverse-focus',
+  //   ],
+  // }),
 
   {
     variants: {

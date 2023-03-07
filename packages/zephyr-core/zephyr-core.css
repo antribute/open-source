@@ -14,6 +14,9 @@
   .filled-accent-inverse {
     @apply bg-inverse text-inverse-content-max-contrast;
   }
+  .filled-accent-heart {
+    @apply bg-heart text-palette-white;
+  }
   .filled-accent-info {
     @apply bg-info text-palette-white;
   }
@@ -27,6 +30,31 @@
     @apply bg-danger text-palette-white;
   }
 
+  .gradient-primary {
+    @apply bg-gradient-to-r from-primary-dark to-primary-light text-primary-content;
+  }
+  .gradient-secondary {
+    @apply bg-gradient-to-r from-secondary-dark to-secondary-light text-secondary-content;
+  }
+  .gradient-inverse {
+    @apply bg-gradient-to-r from-inverse-dark to-inverse-light text-inverse-content-max-contrast;
+  }
+  .gradient-heart {
+    @apply bg-gradient-to-r from-heart-dark to-heart-light text-palette-white;
+  }
+  .gradient-info {
+    @apply bg-gradient-to-r from-info-dark to-info-light text-palette-white;
+  }
+  .gradient-positive {
+    @apply bg-gradient-to-r from-positive-dark to-positive-light text-palette-white;
+  }
+  .gradient-caution {
+    @apply bg-gradient-to-r from-caution-dark to-caution-light text-palette-white;
+  }
+  .gradient-danger {
+    @apply bg-gradient-to-r from-danger-dark to-danger-light text-palette-white;
+  }
+
   .filled-hover-accent-primary {
     @apply hover:bg-primary-dark;
   }
@@ -35,6 +63,9 @@
   }
   .filled-hover-accent-inverse {
     @apply hover:bg-inverse-light;
+  }
+  .filled-hover-accent-heart {
+    @apply hover:bg-heart-dark;
   }
   .filled-hover-accent-info {
     @apply hover:bg-info-dark;
@@ -50,13 +81,16 @@
   }
 
   .outlined-accent-primary {
-    @apply bg-surface-soft hover:bg-surface-dark/30 text-primary-content-min-contrast ring-boundary-ghost;
+    @apply bg-surface-soft hover:bg-surface-dark/30 text-primary-content-min-contrast ring-boundary-weak;
   }
   .outlined-accent-secondary {
-    @apply bg-surface-soft hover:bg-surface-dark/30 text-secondary-content-min-contrast ring-boundary;
+    @apply bg-surface-soft hover:bg-surface-dark/30 text-secondary-content-min-contrast ring-boundary-ghost;
   }
   .outlined-accent-inverse {
     @apply bg-surface-soft hover:bg-surface text-inverse ring-inverse/80;
+  }
+  .outlined-accent-heart {
+    @apply bg-surface-soft hover:bg-surface text-heart ring-heart hover:ring-heart-dark;
   }
   .outlined-accent-info {
     @apply bg-surface-soft hover:bg-surface text-info ring-info hover:ring-info-dark;
@@ -79,6 +113,9 @@
   }
   .glass-accent-inverse {
     @apply bg-inverse/30 text-palette-white hover:bg-inverse/40;
+  }
+  .glass-accent-heart {
+    @apply bg-heart/10 hover:bg-heart/20 text-heart;
   }
   .glass-accent-info {
     @apply bg-info/10 hover:bg-info/20 text-info;

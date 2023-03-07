@@ -114,5 +114,14 @@ export const PresetButtonStoryVariants = <
         props={getProps(props, { children: 'Text', variant: 'text' })}
       />
     ),
+    GhostVariant: (props: TProps) => (
+      <RenderColorVariants
+        showVariantLabel
+        renderPaperContainers
+        Component={Button}
+        noChildren={noDefaultChildren}
+        props={getProps(props, { children: 'Text', variant: 'ghost' })}
+      />
+    ),
   };
 };

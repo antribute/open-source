@@ -54,6 +54,7 @@ const keys = {
     'primary',
     'secondary',
     'inverse',
+    'heart',
     'info',
     'caution',
     'danger',
