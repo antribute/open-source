@@ -1,5 +1,5 @@
 import { ColorShadeVariant } from './colors.types';
-import { colors } from './colors';
+import { colorPalette } from './colors';
 import { objectMap } from './helpers/objectMap';
 import {
   CssAlphaVariable,
@@ -27,13 +27,46 @@ export const colorSchemeNames = [
   'inverse',
 ] as const;
 
+export const colorSchemeDataAttributes = Object.fromEntries(
+  colorSchemeNames.map((schemeName) => {
+    return [`${schemeName}-color-scheme`, `color-scheme=${schemeName}`];
+  })
+);
+
 type ColorSchemeToken =
   | 'base'
-  | TokenShadeVariant<'secondary'>
-  | TokenShadeVariant<'primary'>
+  | TokenVariant<'primary'>
+  | TokenVariant<'secondary'>
+  | TokenVariant<'inverse'>
   | TokenShadeVariant<'surface'>
+  | TokenShadeVariant<'info'>
+  | TokenShadeVariant<'positive'>
+  | TokenShadeVariant<'caution'>
+  | TokenShadeVariant<'danger'>
   | TokenStrengthVariant<'highlight', 'weak' | 'moderate' | 'high' | 'strong' | 'DEFAULT'>
-  | TokenStrengthVariant<'content', 'weak' | 'moderate' | 'high' | 'strong' | 'DEFAULT'>;
+  | TokenStrengthVariant<
+      'boundary',
+      'tint' | 'ghost' | 'subtle' | 'weak' | 'moderate' | 'high' | 'strong' | 'DEFAULT'
+    >
+  | ContentTokenVariant<'content'>;
+
+type TokenVariant<T extends string> =
+  | TokenShadeVariant<T>
+  | MinMaxContentContrastTokenVariant<T>
+  | `${T}-content`;
+
+type ContentTokenName<T extends string> = T extends 'content' ? 'content' : `${T}-content`;
+
+type MinMaxContentContrastTokenVariant<T extends string> =
+  | `${ContentTokenName<T>}-min-contrast`
+  | `${ContentTokenName<T>}-max-contrast`;
+
+type ContentTokenVariant<T extends string> =
+  | TokenStrengthVariant<
+      ContentTokenName<T>,
+      'weak' | 'moderate' | 'high' | 'strong' | 'intense' | 'DEFAULT'
+    >
+  | MinMaxContentContrastTokenVariant<T>;
 
 type TokenShadeVariant<T extends string> = T | `${T}-${ColorShadeVariant}`;
 
@@ -50,406 +83,380 @@ interface GenericColorSchemeConfig {
   [k: string]: ColorScheme;
 }
 
-const colorSchemeConfig = {
-  'light/default': {
-    base: colors.base.DEFAULT,
+// Surface
+// ({ DEFAULT: '50', dark: '400', light: '200', soft: '100' }),
 
-    content: colors.content.DEFAULT,
-    'content-moderate': colors.content.moderate,
-    'content-weak': colors.content.weak,
-    'content-high': colors.content.high,
-    'content-strong': colors.content.strong,
+// Surface inverse
+// ({ DEFAULT: '400', dark: '700', light: '200', soft: '500' }),
 
-    highlight: colors.highlight.DEFAULT,
-    'highlight-weak': colors.highlight.weak,
-    'highlight-moderate': colors.highlight.moderate,
-    'highlight-high': colors.highlight.strong,
-    'highlight-strong': colors.highlight.strong,
+const commonSchemeTokens = {
+  all: {
+    info: colorPalette['palette-info'].DEFAULT,
+    'info-light': colorPalette['palette-info'].light,
+    'info-dark': colorPalette['palette-info'].dark,
+    'info-soft': colorPalette['palette-info'].soft,
 
-    surface: colors.neutral[600],
-    'surface-light': colors.neutral.light,
-    'surface-dark': colors.neutral.dark,
-    'surface-soft': colors.neutral[100],
+    positive: colorPalette['palette-positive'].DEFAULT,
+    'positive-light': colorPalette['palette-positive'].light,
+    'positive-dark': colorPalette['palette-positive'].dark,
+    'positive-soft': colorPalette['palette-positive'].soft,
 
-    primary: colors['various-slate']['500'],
-    'primary-light': colors['various-slate']['400'],
-    'primary-dark': colors['various-slate']['600'],
-    'primary-soft': colors['various-slate']['200'],
+    danger: colorPalette['palette-danger'].DEFAULT,
+    'danger-light': colorPalette['palette-danger'].light,
+    'danger-dark': colorPalette['palette-danger'].dark,
+    'danger-soft': colorPalette['palette-danger'].soft,
 
-    secondary: colors['various-slate']['600'],
-    'secondary-light': colors['various-slate']['500'],
-    'secondary-dark': colors['various-slate']['700'],
-    'secondary-soft': colors['various-slate']['300'],
+    caution: colorPalette['palette-caution'].DEFAULT,
+    'caution-light': colorPalette['palette-caution'].light,
+    'caution-dark': colorPalette['palette-caution'].dark,
+    'caution-soft': colorPalette['palette-caution'].soft,
+
+    highlight: colorPalette['palette-highlight'].DEFAULT,
+    'highlight-weak': colorPalette['palette-highlight'].weak,
+    'highlight-moderate': colorPalette['palette-highlight'].moderate,
+    'highlight-high': colorPalette['palette-highlight'].high,
+    'highlight-strong': colorPalette['palette-highlight'].strong,
+
+    'primary-content': colorPalette['palette-content-inverse'].intense,
+    'secondary-content': colorPalette['palette-content-inverse'].intense,
   },
+
+  lightBgContrast: {
+    base: colorPalette['palette-base'].DEFAULT,
+
+    boundary: colorPalette['palette-boundary'].DEFAULT,
+    'boundary-tint': colorPalette['palette-boundary'].tint,
+    'boundary-ghost': colorPalette['palette-boundary'].ghost,
+    'boundary-subtle': colorPalette['palette-boundary'].subtle,
+    'boundary-weak': colorPalette['palette-boundary'].weak,
+    'boundary-moderate': colorPalette['palette-boundary'].moderate,
+    'boundary-strong': colorPalette['palette-boundary'].strong,
+    'boundary-high': colorPalette['palette-boundary'].high,
+
+    content: colorPalette['palette-content'].DEFAULT,
+    'content-weak': colorPalette['palette-content'].weak,
+    'content-moderate': colorPalette['palette-content'].moderate,
+    'content-high': colorPalette['palette-content'].high,
+    'content-strong': colorPalette['palette-content'].strong,
+    'content-intense': colorPalette['palette-content'].intense,
+
+    'content-min-contrast': colorPalette['palette-neutral'].light,
+    'content-max-contrast': colorPalette['palette-content'].intense,
+
+    'inverse-content-max-contrast': colorPalette['palette-content-inverse'].intense,
+    'inverse-content-min-contrast': colorPalette['palette-neutral'].light,
+
+    inverse: colorPalette['palette-surface-inverse'].DEFAULT,
+    'inverse-light': colorPalette['palette-surface-inverse'].light,
+    'inverse-dark': colorPalette['palette-surface-inverse'].dark,
+    'inverse-soft': colorPalette['palette-surface-inverse'].soft,
+
+    'primary-content-max-contrast': colorPalette['palette-content'].intense,
+    'primary-content-min-contrast': colorPalette['palette-neutral'].light,
+
+    'secondary-content-max-contrast': colorPalette['palette-content'].high,
+    'secondary-content-min-contrast': colorPalette['palette-neutral'][300],
+
+    'inverse-content': colorPalette['palette-content'].intense,
+  },
+
+  darkBgContrast: {
+    base: colorPalette['palette-base'].inverse,
+
+    boundary: colorPalette['palette-boundary-inverse'].DEFAULT,
+    'boundary-tint': colorPalette['palette-boundary-inverse'].tint,
+    'boundary-ghost': colorPalette['palette-boundary-inverse'].ghost,
+    'boundary-subtle': colorPalette['palette-boundary-inverse'].subtle,
+    'boundary-weak': colorPalette['palette-boundary-inverse'].weak,
+    'boundary-moderate': colorPalette['palette-boundary-inverse'].moderate,
+    'boundary-strong': colorPalette['palette-boundary-inverse'].strong,
+    'boundary-high': colorPalette['palette-boundary-inverse'].high,
+
+    content: colorPalette['palette-content-inverse'].DEFAULT,
+    'content-weak': colorPalette['palette-content-inverse'].weak,
+    'content-moderate': colorPalette['palette-content-inverse'].moderate,
+    'content-high': colorPalette['palette-content-inverse'].high,
+    'content-strong': colorPalette['palette-content-inverse'].strong,
+    'content-intense': colorPalette['palette-content-inverse'].intense,
+
+    'content-min-contrast': colorPalette['palette-neutral'][50],
+    'content-max-contrast': colorPalette['palette-content-inverse'].intense,
+
+    'inverse-content-max-contrast': colorPalette['palette-content'].intense,
+    'inverse-content-min-contrast': colorPalette['palette-neutral'].DEFAULT,
+
+    inverse: colorPalette['palette-surface'].DEFAULT,
+    'inverse-light': colorPalette['palette-surface'].light,
+    'inverse-dark': colorPalette['palette-surface'].dark,
+    'inverse-soft': colorPalette['palette-surface'].soft,
+
+    'primary-content-max-contrast': colorPalette['palette-content-inverse'].intense,
+    'primary-content-min-contrast': colorPalette['palette-various-slate']['300'],
+
+    'secondary-content-max-contrast': colorPalette['palette-content-inverse'].high,
+    'secondary-content-min-contrast': colorPalette['palette-various-slate']['300'],
+
+    'inverse-content': colorPalette['palette-content-inverse'].intense,
+  },
+} satisfies Record<string, Partial<ColorScheme>>;
+
+const lightDefault = {
+  ...commonSchemeTokens.all,
+
+  ...commonSchemeTokens.lightBgContrast,
+
+  highlight: colorPalette['palette-highlight'].DEFAULT,
+  'highlight-weak': colorPalette['palette-highlight'].weak,
+  'highlight-moderate': colorPalette['palette-highlight'].moderate,
+  'highlight-high': colorPalette['palette-highlight'].high,
+  'highlight-strong': colorPalette['palette-highlight'].strong,
+
+  surface: colorPalette['palette-surface'].DEFAULT,
+  'surface-light': colorPalette['palette-surface'][50],
+  'surface-dark': colorPalette['palette-surface'].dark,
+  'surface-soft': colorPalette['palette-surface'][50],
+
+  primary: colorPalette['palette-neutral']['500'],
+  'primary-light': colorPalette['palette-neutral']['400'],
+  'primary-dark': colorPalette['palette-neutral']['600'],
+  'primary-soft': colorPalette['palette-various-slate']['200'],
+
+  secondary: colorPalette['palette-various-slate']['400'],
+  'secondary-light': colorPalette['palette-various-slate']['300'],
+  'secondary-dark': colorPalette['palette-various-slate']['500'],
+  'secondary-soft': colorPalette['palette-various-slate']['100'],
+} satisfies ColorScheme;
+
+const colorSchemeConfig = {
+  // Default
+
+  'light/default': lightDefault,
 
   'dark/default': {
-    base: colors.base.inverse,
+    ...commonSchemeTokens.all,
+    ...commonSchemeTokens.darkBgContrast,
 
-    content: colors['content-inverse'].DEFAULT,
-    'content-weak': colors['content-inverse'].weak,
-    'content-moderate': colors['content-inverse'].moderate,
-    'content-high': colors['content-inverse'].high,
-    'content-strong': colors['content-inverse'].strong,
+    surface: colorPalette['palette-surface-inverse'].DEFAULT,
+    'surface-light': colorPalette['palette-surface-inverse'].light,
+    'surface-dark': colorPalette['palette-surface-inverse'].dark,
+    'surface-soft': colorPalette['palette-surface-inverse'].soft,
 
-    highlight: colors.highlight.DEFAULT,
-    'highlight-weak': colors.highlight.weak,
-    'highlight-moderate': colors.highlight.moderate,
-    'highlight-high': colors.highlight.high,
-    'highlight-strong': colors.highlight.strong,
+    primary: colorPalette['palette-neutral']['500'],
+    'primary-light': colorPalette['palette-neutral']['400'],
+    'primary-dark': colorPalette['palette-neutral']['600'],
+    'primary-soft': colorPalette['palette-various-slate']['200'],
 
-    surface: colors['surface-inverse'].DEFAULT,
-    'surface-light': colors['surface-inverse'].light,
-    'surface-dark': colors['surface-inverse'].dark,
-    'surface-soft': colors['surface-inverse'].soft,
-
-    primary: colors['various-slate']['500'],
-    'primary-light': colors['various-slate']['400'],
-    'primary-dark': colors['various-slate']['600'],
-    'primary-soft': colors['various-slate']['200'],
-
-    secondary: colors['various-slate']['600'],
-    'secondary-light': colors['various-slate']['500'],
-    'secondary-dark': colors['various-slate']['500'],
-    'secondary-soft': colors['various-slate']['300'],
+    secondary: colorPalette['palette-neutral']['800'],
+    'secondary-light': colorPalette['palette-neutral']['700'],
+    'secondary-dark': colorPalette['palette-neutral']['900'],
+    'secondary-soft': colorPalette['palette-neutral']['500'],
   },
 
-  surface: {
-    base: colors.base.inverse,
-
-    content: colors.content.DEFAULT,
-    'content-weak': colors.content.weak,
-    'content-moderate': colors.content.moderate,
-    'content-high': colors.content.high,
-    'content-strong': colors.content.strong,
-
-    highlight: colors.highlight.DEFAULT,
-    'highlight-weak': colors.highlight.weak,
-    'highlight-moderate': colors.highlight.moderate,
-    'highlight-high': colors.highlight.high,
-    'highlight-strong': colors.highlight.strong,
-
-    surface: colors.surface.DEFAULT,
-    'surface-light': colors.neutral.light,
-    'surface-dark': colors.neutral.dark,
-    'surface-soft': colors.neutral[100],
-
-    primary: colors['various-slate']['500'],
-    'primary-light': colors['various-slate']['400'],
-    'primary-dark': colors['various-slate']['600'],
-    'primary-soft': colors['various-slate']['200'],
-
-    secondary: colors['various-slate']['600'],
-    'secondary-light': colors['various-slate']['500'],
-    'secondary-dark': colors['various-slate']['500'],
-    'secondary-soft': colors['various-slate']['300'],
-  },
+  // Surface
+  surface: lightDefault,
   'surface-light': {
-    base: colors.base.inverse,
+    ...commonSchemeTokens.all,
+    ...commonSchemeTokens.lightBgContrast,
 
-    content: colors.content.DEFAULT,
-    'content-weak': colors.content.weak,
-    'content-moderate': colors.content.moderate,
-    'content-high': colors.content.high,
-    'content-strong': colors.content.strong,
+    surface: colorPalette['palette-surface'].light,
+    'surface-light': colorPalette['palette-surface'][100],
+    'surface-dark': colorPalette['palette-surface'].dark,
+    'surface-soft': colorPalette['palette-surface'][50],
 
-    highlight: colors.highlight.DEFAULT,
-    'highlight-weak': colors.highlight.weak,
-    'highlight-moderate': colors.highlight.moderate,
-    'highlight-high': colors.highlight.high,
-    'highlight-strong': colors.highlight.strong,
+    primary: colorPalette['palette-neutral']['500'],
+    'primary-light': colorPalette['palette-neutral']['400'],
+    'primary-dark': colorPalette['palette-neutral']['600'],
+    'primary-soft': colorPalette['palette-various-slate']['200'],
 
-    surface: colors.surface.light,
-    'surface-light': colors.neutral.light,
-    'surface-dark': colors.neutral.dark,
-    'surface-soft': colors.neutral[100],
-
-    primary: colors['various-slate']['500'],
-    'primary-light': colors['various-slate']['400'],
-    'primary-dark': colors['various-slate']['600'],
-    'primary-soft': colors['various-slate']['200'],
-
-    secondary: colors['various-slate']['600'],
-    'secondary-light': colors['various-slate']['500'],
-    'secondary-dark': colors['various-slate']['500'],
-    'secondary-soft': colors['various-slate']['300'],
+    secondary: colorPalette['palette-various-slate']['400'],
+    'secondary-light': colorPalette['palette-various-slate']['300'],
+    'secondary-dark': colorPalette['palette-various-slate']['500'],
+    'secondary-soft': colorPalette['palette-various-slate']['100'],
   },
 
   'surface-dark': {
-    base: colors.base.inverse,
+    ...commonSchemeTokens.all,
+    ...commonSchemeTokens.lightBgContrast,
 
-    content: colors.content.DEFAULT,
-    'content-weak': colors.content.weak,
-    'content-moderate': colors.content.moderate,
-    'content-high': colors.content.high,
-    'content-strong': colors.content.strong,
+    surface: colorPalette['palette-surface'].dark,
+    'surface-light': colorPalette['palette-surface'][50],
+    'surface-dark': colorPalette['palette-surface']['800'],
+    'surface-soft': colorPalette['palette-surface'][100],
 
-    highlight: colors.highlight.DEFAULT,
-    'highlight-weak': colors.highlight.weak,
-    'highlight-moderate': colors.highlight.moderate,
-    'highlight-high': colors.highlight.high,
-    'highlight-strong': colors.highlight.strong,
+    primary: colorPalette['palette-neutral']['500'],
+    'primary-light': colorPalette['palette-neutral']['400'],
+    'primary-dark': colorPalette['palette-neutral']['600'],
+    'primary-soft': colorPalette['palette-various-slate']['200'],
 
-    surface: colors.surface.dark,
-    'surface-light': colors.neutral.light,
-    'surface-dark': colors.neutral.dark,
-    'surface-soft': colors.neutral[100],
-
-    primary: colors['various-slate']['500'],
-    'primary-light': colors['various-slate']['400'],
-    'primary-dark': colors['various-slate']['600'],
-    'primary-soft': colors['various-slate']['200'],
-
-    secondary: colors['various-slate']['600'],
-    'secondary-light': colors['various-slate']['500'],
-    'secondary-dark': colors['various-slate']['500'],
-    'secondary-soft': colors['various-slate']['300'],
+    secondary: colorPalette['palette-various-slate']['400'],
+    'secondary-light': colorPalette['palette-various-slate']['300'],
+    'secondary-dark': colorPalette['palette-various-slate']['500'],
+    'secondary-soft': colorPalette['palette-various-slate']['100'],
   },
 
   'dark/surface': {
-    base: colors.base.inverse,
+    ...commonSchemeTokens.all,
+    ...commonSchemeTokens.darkBgContrast,
 
-    content: colors['content-inverse'].DEFAULT,
-    'content-weak': colors['content-inverse'].weak,
-    'content-moderate': colors['content-inverse'].moderate,
-    'content-high': colors['content-inverse'].high,
-    'content-strong': colors['content-inverse'].strong,
+    surface: colorPalette['palette-surface-inverse'].DEFAULT,
+    'surface-light': colorPalette['palette-surface-inverse'][300],
+    'surface-dark': colorPalette['palette-surface-inverse'][500],
+    'surface-soft': colorPalette['palette-surface-inverse'][200],
 
-    highlight: colors.highlight.DEFAULT,
-    'highlight-weak': colors.highlight.weak,
-    'highlight-moderate': colors.highlight.moderate,
-    'highlight-high': colors.highlight.high,
-    'highlight-strong': colors.highlight.strong,
+    primary: colorPalette['palette-various-slate']['500'],
+    'primary-light': colorPalette['palette-various-slate']['400'],
+    'primary-dark': colorPalette['palette-various-slate']['600'],
+    'primary-soft': colorPalette['palette-various-slate']['200'],
 
-    surface: colors['surface-inverse'].DEFAULT,
-    'surface-light': colors.neutral.light,
-    'surface-dark': colors.neutral.dark,
-    'surface-soft': colors.neutral[100],
-
-    primary: colors['various-slate']['500'],
-    'primary-light': colors['various-slate']['400'],
-    'primary-dark': colors['various-slate']['600'],
-    'primary-soft': colors['various-slate']['200'],
-
-    secondary: colors['various-slate']['600'],
-    'secondary-light': colors['various-slate']['500'],
-    'secondary-dark': colors['various-slate']['500'],
-    'secondary-soft': colors['various-slate']['300'],
+    secondary: colorPalette['palette-various-slate']['600'],
+    'secondary-light': colorPalette['palette-various-slate']['500'],
+    'secondary-dark': colorPalette['palette-various-slate']['500'],
+    'secondary-soft': colorPalette['palette-various-slate']['300'],
   },
 
   'dark/surface-light': {
-    base: colors.base.inverse,
+    ...commonSchemeTokens.all,
+    ...commonSchemeTokens.darkBgContrast,
 
-    content: colors['content-inverse'].DEFAULT,
-    'content-weak': colors['content-inverse'].weak,
-    'content-moderate': colors['content-inverse'].moderate,
-    'content-high': colors['content-inverse'].high,
-    'content-strong': colors['content-inverse'].strong,
+    surface: colorPalette['palette-surface-inverse'].light,
+    'surface-light': colorPalette['palette-surface-inverse'][100],
+    'surface-dark': colorPalette['palette-surface-inverse'][300],
+    'surface-soft': colorPalette['palette-surface-inverse'][50],
 
-    highlight: colors.highlight.DEFAULT,
-    'highlight-weak': colors.highlight.weak,
-    'highlight-moderate': colors.highlight.moderate,
-    'highlight-high': colors.highlight.high,
-    'highlight-strong': colors.highlight.strong,
+    primary: colorPalette['palette-various-slate']['500'],
+    'primary-light': colorPalette['palette-various-slate']['400'],
+    'primary-dark': colorPalette['palette-various-slate']['600'],
+    'primary-soft': colorPalette['palette-various-slate']['200'],
 
-    surface: colors['surface-inverse'].light,
-    'surface-light': colors.neutral.light,
-    'surface-dark': colors.neutral.dark,
-    'surface-soft': colors.neutral[100],
-
-    primary: colors['various-slate']['500'],
-    'primary-light': colors['various-slate']['400'],
-    'primary-dark': colors['various-slate']['600'],
-    'primary-soft': colors['various-slate']['200'],
-
-    secondary: colors['various-slate']['600'],
-    'secondary-light': colors['various-slate']['500'],
-    'secondary-dark': colors['various-slate']['500'],
-    'secondary-soft': colors['various-slate']['300'],
+    secondary: colorPalette['palette-various-slate']['600'],
+    'secondary-light': colorPalette['palette-various-slate']['500'],
+    'secondary-dark': colorPalette['palette-various-slate']['500'],
+    'secondary-soft': colorPalette['palette-various-slate']['300'],
   },
+
   'dark/surface-dark': {
-    base: colors.base.inverse,
+    ...commonSchemeTokens.all,
+    ...commonSchemeTokens.darkBgContrast,
 
-    content: colors['content-inverse'].DEFAULT,
-    'content-weak': colors['content-inverse'].weak,
-    'content-moderate': colors['content-inverse'].moderate,
-    'content-high': colors['content-inverse'].high,
-    'content-strong': colors['content-inverse'].strong,
+    surface: colorPalette['palette-surface-inverse'].dark,
+    'surface-light': colorPalette['palette-surface-inverse'][600],
+    'surface-dark': colorPalette['palette-surface-inverse'][800],
+    'surface-soft': colorPalette['palette-surface-inverse'][600],
 
-    highlight: colors.highlight.DEFAULT,
-    'highlight-weak': colors.highlight.weak,
-    'highlight-moderate': colors.highlight.moderate,
-    'highlight-high': colors.highlight.high,
-    'highlight-strong': colors.highlight.strong,
+    primary: colorPalette['palette-various-slate']['500'],
+    'primary-light': colorPalette['palette-various-slate']['400'],
+    'primary-dark': colorPalette['palette-various-slate']['600'],
+    'primary-soft': colorPalette['palette-various-slate']['200'],
 
-    surface: colors['surface-inverse'].dark,
-    'surface-light': colors.neutral.light,
-    'surface-dark': colors.neutral.dark,
-    'surface-soft': colors.neutral[100],
-
-    primary: colors['various-slate']['500'],
-    'primary-light': colors['various-slate']['400'],
-    'primary-dark': colors['various-slate']['600'],
-    'primary-soft': colors['various-slate']['200'],
-
-    secondary: colors['various-slate']['600'],
-    'secondary-light': colors['various-slate']['500'],
-    'secondary-dark': colors['various-slate']['500'],
-    'secondary-soft': colors['various-slate']['300'],
+    secondary: colorPalette['palette-various-slate']['600'],
+    'secondary-light': colorPalette['palette-various-slate']['500'],
+    'secondary-dark': colorPalette['palette-various-slate']['500'],
+    'secondary-soft': colorPalette['palette-various-slate']['300'],
   },
 
+  // Neutral
   neutral: {
-    base: colors.base.inverse,
+    ...commonSchemeTokens.all,
+    ...commonSchemeTokens.darkBgContrast,
 
-    content: colors['content-inverse'].DEFAULT,
-    'content-weak': colors['content-inverse'].weak,
-    'content-moderate': colors['content-inverse'].moderate,
-    'content-high': colors['content-inverse'].high,
-    'content-strong': colors['content-inverse'].strong,
+    surface: colorPalette['palette-neutral'][600],
+    'surface-light': colorPalette['palette-neutral'].light,
+    'surface-dark': colorPalette['palette-neutral'].dark,
+    'surface-soft': colorPalette['palette-neutral'][500],
 
-    highlight: colors.highlight.DEFAULT,
-    'highlight-weak': colors.highlight.weak,
-    'highlight-moderate': colors.highlight.moderate,
-    'highlight-high': colors.highlight.high,
-    'highlight-strong': colors.highlight.strong,
+    primary: colorPalette['palette-various-slate']['500'],
+    'primary-light': colorPalette['palette-various-slate']['400'],
+    'primary-dark': colorPalette['palette-various-slate']['600'],
+    'primary-soft': colorPalette['palette-various-slate']['200'],
 
-    surface: colors.neutral[600],
-    'surface-light': colors.neutral.light,
-    'surface-dark': colors.neutral.dark,
-    'surface-soft': colors.neutral[100],
-
-    primary: colors['various-slate']['500'],
-    'primary-light': colors['various-slate']['400'],
-    'primary-dark': colors['various-slate']['600'],
-    'primary-soft': colors['various-slate']['200'],
-
-    secondary: colors['various-slate']['600'],
-    'secondary-light': colors['various-slate']['500'],
-    'secondary-dark': colors['various-slate']['500'],
-    'secondary-soft': colors['various-slate']['300'],
-  },
-
-  inverse: {
-    base: colors.base.inverse,
-
-    content: colors['content-inverse'].DEFAULT,
-    'content-weak': colors['content-inverse'].weak,
-    'content-moderate': colors['content-inverse'].moderate,
-    'content-high': colors['content-inverse'].high,
-    'content-strong': colors['content-inverse'].strong,
-
-    highlight: colors.highlight.DEFAULT,
-    'highlight-weak': colors.highlight.weak,
-    'highlight-moderate': colors.highlight.moderate,
-    'highlight-high': colors.highlight.high,
-    'highlight-strong': colors.highlight.strong,
-
-    surface: colors.content.DEFAULT,
-    'surface-light': colors.neutral.light,
-    'surface-dark': colors.neutral.dark,
-    'surface-soft': colors.neutral[100],
-
-    primary: colors['various-slate']['500'],
-    'primary-light': colors['various-slate']['400'],
-    'primary-dark': colors['various-slate']['600'],
-    'primary-soft': colors['various-slate']['200'],
-
-    secondary: colors['various-slate']['600'],
-    'secondary-light': colors['various-slate']['500'],
-    'secondary-dark': colors['various-slate']['500'],
-    'secondary-soft': colors['various-slate']['300'],
-  },
-  'dark/inverse': {
-    base: colors.base.inverse,
-
-    content: colors['content-inverse'].DEFAULT,
-    'content-weak': colors['content-inverse'].weak,
-    'content-moderate': colors['content-inverse'].moderate,
-    'content-high': colors['content-inverse'].high,
-    'content-strong': colors['content-inverse'].strong,
-
-    highlight: colors.highlight.DEFAULT,
-    'highlight-weak': colors.highlight.weak,
-    'highlight-moderate': colors.highlight.moderate,
-    'highlight-high': colors.highlight.high,
-    'highlight-strong': colors.highlight.strong,
-
-    surface: colors['content-inverse'].DEFAULT,
-    'surface-light': colors.surface.light,
-    'surface-dark': colors.content.intense,
-    'surface-soft': colors.neutral[100],
-
-    primary: colors['various-slate']['500'],
-    'primary-light': colors['various-slate']['400'],
-    'primary-dark': colors['various-slate']['600'],
-    'primary-soft': colors['various-slate']['200'],
-
-    secondary: colors['various-slate']['600'],
-    'secondary-light': colors['various-slate']['500'],
-    'secondary-dark': colors['various-slate']['500'],
-    'secondary-soft': colors['various-slate']['300'],
+    secondary: colorPalette['palette-various-slate']['600'],
+    'secondary-light': colorPalette['palette-various-slate']['500'],
+    'secondary-dark': colorPalette['palette-various-slate']['700'],
+    'secondary-soft': colorPalette['palette-various-slate']['300'],
   },
 
   'neutral-light': {
-    base: colors.base.inverse,
+    ...commonSchemeTokens.all,
+    ...commonSchemeTokens.darkBgContrast,
 
-    content: colors['content-inverse'].DEFAULT,
-    'content-weak': colors['content-inverse'].weak,
-    'content-moderate': colors['content-inverse'].moderate,
-    'content-high': colors['content-inverse'].high,
-    'content-strong': colors['content-inverse'].strong,
+    surface: colorPalette['palette-neutral'][400],
+    'surface-light': colorPalette['palette-neutral'][200],
+    'surface-dark': colorPalette['palette-neutral'].dark,
+    'surface-soft': colorPalette['palette-neutral'][300],
 
-    highlight: colors.highlight.DEFAULT,
-    'highlight-weak': colors.highlight.weak,
-    'highlight-moderate': colors.highlight.moderate,
-    'highlight-high': colors.highlight.high,
-    'highlight-strong': colors.highlight.strong,
+    primary: colorPalette['palette-various-slate']['400'],
+    'primary-light': colorPalette['palette-various-slate']['300'],
+    'primary-dark': colorPalette['palette-various-slate']['500'],
+    'primary-soft': colorPalette['palette-various-slate']['100'],
 
-    surface: colors.neutral[400],
-    'surface-light': colors.neutral.light,
-    'surface-dark': colors.neutral.dark,
-    'surface-soft': colors.neutral[100],
-
-    primary: colors['various-slate']['400'],
-    'primary-light': colors['various-slate']['300'],
-    'primary-dark': colors['various-slate']['500'],
-    'primary-soft': colors['various-slate']['100'],
-
-    secondary: colors['various-slate']['600'],
-    'secondary-light': colors['various-slate']['500'],
-    'secondary-dark': colors['various-slate']['700'],
-    'secondary-soft': colors['various-slate']['300'],
+    secondary: colorPalette['palette-various-slate']['500'],
+    'secondary-light': colorPalette['palette-various-slate']['400'],
+    'secondary-dark': colorPalette['palette-various-slate']['600'],
+    'secondary-soft': colorPalette['palette-various-slate']['400'],
   },
 
   'neutral-dark': {
-    base: colors.base.inverse,
+    ...commonSchemeTokens.all,
+    ...commonSchemeTokens.darkBgContrast,
 
-    content: colors['content-inverse'].DEFAULT,
-    'content-weak': colors['content-inverse'].weak,
-    'content-moderate': colors['content-inverse'].moderate,
-    'content-high': colors['content-inverse'].high,
-    'content-strong': colors['content-inverse'].strong,
+    surface: colorPalette['palette-neutral'][800],
+    'surface-light': colorPalette['palette-neutral']['600'],
+    'surface-dark': colorPalette['palette-neutral']['900'],
+    'surface-soft': colorPalette['palette-neutral'][700],
 
-    highlight: colors.highlight.DEFAULT,
-    'highlight-weak': colors.highlight.weak,
-    'highlight-moderate': colors.highlight.moderate,
-    'highlight-high': colors.highlight.high,
-    'highlight-strong': colors.highlight.strong,
+    primary: colorPalette['palette-various-slate']['500'],
+    'primary-light': colorPalette['palette-various-slate']['400'],
+    'primary-dark': colorPalette['palette-various-slate']['600'],
+    'primary-soft': colorPalette['palette-various-slate']['200'],
 
-    surface: colors.neutral[800],
-    'surface-light': colors.neutral['700'],
-    'surface-dark': colors.neutral['900'],
-    'surface-soft': colors.neutral['600'],
-
-    primary: colors['various-slate']['500'],
-    'primary-light': colors['various-slate']['400'],
-    'primary-dark': colors['various-slate']['600'],
-    'primary-soft': colors['various-slate']['200'],
-
-    secondary: colors['various-slate']['600'],
-    'secondary-light': colors['various-slate']['500'],
-    'secondary-dark': colors['various-slate']['500'],
-    'secondary-soft': colors['various-slate']['300'],
+    secondary: colorPalette['palette-various-slate']['600'],
+    'secondary-light': colorPalette['palette-various-slate']['500'],
+    'secondary-dark': colorPalette['palette-various-slate']['700'],
+    'secondary-soft': colorPalette['palette-various-slate']['300'],
   },
+
+  // Inverse
+  inverse: {
+    ...commonSchemeTokens.all,
+    ...commonSchemeTokens.darkBgContrast,
+
+    surface: colorPalette['palette-content'].DEFAULT,
+    'surface-light': colorPalette['palette-surface-inverse'].light,
+    'surface-dark': colorPalette['palette-surface-inverse'].dark,
+    'surface-soft': colorPalette['palette-surface-inverse'][300],
+
+    primary: colorPalette['palette-various-slate']['500'],
+    'primary-light': colorPalette['palette-various-slate']['400'],
+    'primary-dark': colorPalette['palette-various-slate']['600'],
+    'primary-soft': colorPalette['palette-various-slate']['200'],
+
+    secondary: colorPalette['palette-various-slate']['700'],
+    'secondary-light': colorPalette['palette-various-slate']['600'],
+    'secondary-dark': colorPalette['palette-various-slate']['800'],
+    'secondary-soft': colorPalette['palette-various-slate']['300'],
+  },
+
+  // 'dark/inverse': {
+  //   ...commonSchemeTokens.all,
+  //   ...commonSchemeTokens.lightBgContrast,
+
+  //   surface: colorPalette['palette-surface'].DEFAULT,
+  //   'surface-light': colorPalette['palette-surface'].DEFAULT,
+  //   'surface-dark': colorPalette['palette-surface'].dark,
+  //   'surface-soft': colorPalette['palette-surface'].DEFAULT,
+
+  //   primary: colorPalette['palette-neutral']['500'],
+  //   'primary-light': colorPalette['palette-neutral']['400'],
+  //   'primary-dark': colorPalette['palette-neutral']['600'],
+  //   'primary-soft': colorPalette['palette-various-slate']['200'],
+
+  //   secondary: colorPalette['palette-various-slate']['400'],
+  //   'secondary-light': colorPalette['palette-various-slate']['300'],
+  //   'secondary-dark': colorPalette['palette-various-slate']['500'],
+  //   'secondary-soft': colorPalette['palette-various-slate']['100'],
+  // },
+
+  'dark/inverse': lightDefault,
 } satisfies GenericColorSchemeConfig;
 
 export const { colorSchemeTokens, colorSchemeCssVariableClasses, colorSchemes } =
@@ -457,10 +464,12 @@ export const { colorSchemeTokens, colorSchemeCssVariableClasses, colorSchemes } 
 
 function defineColorSchemes<T extends GenericColorSchemeConfig>(colorSchemes: T) {
   const colorSchemeCssVariableClasses = getColorSchemesCssVariableClasses(colorSchemes);
+
+  const lightDefault = colorSchemes['light/default'];
   const colorSchemeTokens = getColorSchemeTokens(
-    colorSchemes['light/default'],
+    lightDefault,
     colorSchemeCssVariableClasses[':root']!
-  );
+  ) as Record<keyof typeof lightDefault, string>;
 
   // eslint-disable-next-line no-console
   console.log({ colorSchemeTokens, colorSchemes, colorSchemeCssVariableClasses });
@@ -476,16 +485,9 @@ function getColorSchemeTokens<T extends Record<string, string>>(scheme: T, varia
     const cssVariable = getCssColorVariable(token);
     const alphaVariable = getCssAlphaVariable(token);
 
-    // eslint-disable-next-line no-console
-    console.log('SCHEME', scheme, 'Alpha variable', alphaVariable, 'variables', variableMap);
-
     return [
-      token,
-      getCssVariableValue(
-        cssVariable,
-        // alphaVariable in scheme ? scheme[alphaVariable as keyof typeof scheme] : undefined
-        alphaVariable in variableMap ? alphaVariable : undefined
-      ),
+      `${token}`,
+      getCssVariableValue(cssVariable, alphaVariable in variableMap ? alphaVariable : undefined),
     ];
   });
 }
@@ -516,40 +518,27 @@ function getColorSchemesCssVariableClasses<T extends GenericColorSchemeConfig>(c
     })
   );
 }
-// function getColorSchemesCssVariableClasses<T extends GenericColorSchemeConfig>(colorSchemes: T) {
-//   return Object.fromEntries(
-//     Object.entries(colorSchemes).flatMap(([schemeKey, value]) => {
-//       const cssThemeVariablesMap = objectMap(value, (themeToken, hex) => {
-//         return [getCssVariable(themeToken), getCssVariableRgb(hex)];
-//       });
-
-//       return getColorSchemeCssVariableNames(schemeKey).map((cssVariableName) => {
-//         return [cssVariableName, { color: value.content, ...cssThemeVariablesMap }];
-//       });
-//     })
-//   );
-// }
 
 function getColorSchemeCssVariableNames(schemeKey: string) {
   const [mode, ...rest] = schemeKey.split('/');
 
   const baseSchemeKey = rest.join('/');
 
-  const schemeKeyClass = `[data-color-scheme="${schemeKey}"]`;
+  const dataColorSchemeClass = `[data-color-scheme="${schemeKey}"]`;
 
   const isDarkMode = mode === 'dark';
 
   if (schemeKey === 'light/default') {
-    return [':root', schemeKeyClass];
+    return [':root', dataColorSchemeClass];
   }
 
   if (schemeKey === 'dark/default') {
-    return ['[data-mode="dark"]', schemeKeyClass];
+    return ['[data-mode="dark"]', dataColorSchemeClass];
   }
 
   if (isDarkMode) {
     return [`[data-mode="dark"] [data-color-scheme="${baseSchemeKey!}"]`];
   }
 
-  return [schemeKeyClass];
+  return [dataColorSchemeClass];
 }

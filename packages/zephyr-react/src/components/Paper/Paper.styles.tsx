@@ -30,7 +30,8 @@ export const PaperElementBackground = classed('div', {
 export const PaperElement = classed(
   'div',
   PaperElementBackground,
-  'relative text-left bg-surface', // classTheme({
+  'relative text-left bg-surface text-content',
+  // classTheme({
   //   class: 'group relative  inline-block rounded-md text-left ',
   //   light: 'text-content-moderate',
   //   dark: 'dark:text-content-inverse-moderate',

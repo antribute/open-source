@@ -18,7 +18,7 @@ export const DialogContentElement = classed(
   'fixed z-50',
   'w-[95vw] rounded-lg md:w-full',
   'top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]',
-  'bg-white dark:bg-gray-800',
+  'bg-surface',
   'border-boundary-subtle dark:border-boundary-inverse-subtle',
   'shadow-2xl dark:shadow-white/5',
   'focus:ring-boundary-subtle dark:focus:ring-boundary-inverse-subtle',
@@ -60,7 +60,7 @@ export type DialogDescriptionElementProps = React.ComponentProps<typeof DialogDe
 
 export const DialogDescriptionElement = classed(
   DialogPrimitive.Description,
-  'text-md font-body text-content-moderate dark:text-content-inverse-moderate',
+  'text-md font-body text-content-moderate',
   {
     variants: {},
   }
@@ -88,7 +88,7 @@ export const DialogFooterElement = classed(DialogPrimitive.Description, CardFoot
 
 export const DialogCloseButtonIconElement = classed(
   'button',
-  'inline-flex absolute right-0 h-20 w-20 shrink-0 items-center justify-center rounded-full text-sm text-content-weak transition-all ring-0  focus:outline-none focus:ring-0 dark:text-content-inverse-weak',
+  'inline-flex absolute right-0 h-20 w-20 shrink-0 items-center justify-center rounded-full text-sm transition-all ring-0  focus:outline-none focus:ring-0 text-content-weak',
   {
     variants: {},
   }

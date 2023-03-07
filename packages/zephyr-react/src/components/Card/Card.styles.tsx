@@ -20,8 +20,8 @@ export type CardHeadingElementProps = React.ComponentProps<typeof CardHeadingEle
 
 export const CardHeadingElement = classed(
   'h6',
-  'text-md font-heading !font-bold text-content-intense dark:text-content-inverse-intense',
-  'group-surface-neutral:text-content-inverse-intense',
+  'text-md font-heading !font-bold !text-content-intense',
+  '',
 
   {
     variants: {},
@@ -36,8 +36,8 @@ export const CardTitleAreaElement = classed(
   'div',
   CardHeadingElement,
   'flex relative w-full justify-between items-center',
-  'border-b pb-8 text-content dark:text-content-inverse-intense group-surface-neutral:text-content-inverse-intense',
-  'border-content/5 dark:border-content-inverse/5 group-surface-neutral:border-content-inverse/5',
+  'border-b border-highlight pb-8 text-content-strong',
+  'text-content-high',
 
   {
     variants: {},
@@ -57,8 +57,8 @@ export const CardBodyElement = classed(
   'div',
   'w-full my-8',
   'font-body',
-  'text-content-moderate dark:text-content-inverse-moderate',
-  'group-surface-neutral:text-content-inverse-moderate',
+  'text-content-moderate',
+
   {
     variants: {},
   }
@@ -71,7 +71,7 @@ export type CardFooterElementProps = React.ComponentProps<typeof CardFooterEleme
 
 export const CardFooterElement = classed(
   'p',
-  'flex justify-end items-center gap-x-8 pt-8 px-4 border-t border-highlight',
+  'flex justify-end items-center gap-8 gap-y-6 pt-8 px-4 border-t border-highlight flex-wrap',
   {
     variants: {},
   }

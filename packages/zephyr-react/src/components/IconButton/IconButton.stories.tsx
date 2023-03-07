@@ -7,7 +7,7 @@ export const {
   ContainedVariant,
   OutlinedVariant,
   OutlinedRoundedVariant,
-  SoftVariant,
+  GlassVariant,
   TextVariant,
   SizeVariant,
   RoundedVariant,

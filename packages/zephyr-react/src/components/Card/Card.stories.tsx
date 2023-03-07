@@ -7,7 +7,7 @@ import { Card } from '.';
 const CardGrid = ({
   className,
   count = 6,
-  color,
+  colorScheme,
   childCard,
   ...props
 }: CardContainerProps & { count?: number; childCard?: React.ReactNode }) => {
@@ -17,13 +17,15 @@ const CardGrid = ({
     <>
       {cards.map((key) => (
         <Card.Container
-          color={color}
+          colorScheme={colorScheme}
           key={key}
           border
           className={twMerge('col-span-2 shadow-lg', className)}
-          {...(props as any)}
+          {...props}
         >
-          <Card.Title>{capitalCase(color ?? 'Surface')}</Card.Title>
+          <Card.Title>
+            <Card.TitleHeading>{capitalCase(colorScheme ?? 'Surface')}</Card.TitleHeading>
+          </Card.Title>
           <Card.Body>
             <Card.Description>
               Lorem labore magna eiusmod id eiusmod cillum ex dolore amet ullamco ex. Anim ullamco
@@ -32,20 +34,20 @@ const CardGrid = ({
             <div className="pt-12" />
             {childCard}
           </Card.Body>
-          <Card.Footer>
+          <Card.Footer className="flex-wrap">
             <div className="flex grow gap-8">
-              <Button color="surface-tertiary" variant="soft" size="xs" className="">
+              <Button color="secondary" variant="glass" size="xs" className="">
                 Back
               </Button>
-              <Button color="surface-secondary" variant="soft" size="xs" className="">
+              <Button color="secondary" variant="glass" size="xs" className="">
                 Next
               </Button>
             </div>
 
-            <Button color="surface-primary" variant="soft" size="xs">
+            <Button color="secondary" variant="glass" size="xs">
               Note
             </Button>
-            <Button color="surface-primary" size="xs">
+            <Button color="primary" size="xs">
               Read
             </Button>
           </Card.Footer>
@@ -58,60 +60,58 @@ const CardGrid = ({
 export const Default = () => {
   return (
     <div className="grid grid-cols-12 gap-16">
-      <CardGrid color="surface" />
-      <CardGrid color="surface-light" />
-      <CardGrid color="surface-dark" />
-      <CardGrid color="surface-neutral" />
-      <CardGrid color="surface-neutral-light" />
-      <CardGrid color="surface-neutral-dark" />
+      <CardGrid colorScheme="surface" />
+      <CardGrid colorScheme="surface-light" />
+      <CardGrid colorScheme="surface-dark" />
+      <CardGrid colorScheme="neutral" />
+      <CardGrid colorScheme="neutral-light" />
+      <CardGrid colorScheme="neutral-dark" />
       {/* ---- Nested ----  */}
       <CardGrid
-        color="surface"
+        colorScheme="surface"
         childCard={
-          <Card.Container color="surface-light">
-            <Card.Body className="text-md" color="">
-              Lorem labore magna eiusmod id eiusmod cillum.
-            </Card.Body>
+          <Card.Container colorScheme="surface-light">
+            <Card.Body className="text-md">Lorem labore magna eiusmod id eiusmod cillum.</Card.Body>
           </Card.Container>
         }
       />
       <CardGrid
-        color="surface-light"
+        colorScheme="surface-light"
         childCard={
-          <Card.Container color="surface">
-            <Card.Body color="">Lorem labore magna eiusmod id eiusmod cillum.</Card.Body>
+          <Card.Container colorScheme="surface">
+            <Card.Body>Lorem labore magna eiusmod id eiusmod cillum.</Card.Body>
           </Card.Container>
         }
       />
       <CardGrid
-        color="surface-dark"
+        colorScheme="surface-dark"
         childCard={
-          <Card.Container color="surface-light">
-            <Card.Body color="">Lorem labore magna eiusmod id eiusmod cillum.</Card.Body>
+          <Card.Container colorScheme="surface-light">
+            <Card.Body>Lorem labore magna eiusmod id eiusmod cillum.</Card.Body>
           </Card.Container>
         }
       />
       <CardGrid
-        color="surface-neutral"
+        colorScheme="neutral"
         childCard={
-          <Card.Container color="surface-neutral-dark">
-            <Card.Body color="">Lorem labore magna eiusmod id eiusmod cillum.</Card.Body>
+          <Card.Container colorScheme="neutral-dark">
+            <Card.Body>Lorem labore magna eiusmod id eiusmod cillum.</Card.Body>
           </Card.Container>
         }
       />
       <CardGrid
-        color="surface-neutral-light"
+        colorScheme="neutral-light"
         childCard={
-          <Card.Container color="surface-neutral">
-            <Card.Body color="">Lorem labore magna eiusmod id eiusmod cillum.</Card.Body>
+          <Card.Container colorScheme="neutral">
+            <Card.Body>Lorem labore magna eiusmod id eiusmod cillum.</Card.Body>
           </Card.Container>
         }
       />
       <CardGrid
-        color="surface-neutral-dark"
+        colorScheme="neutral-dark"
         childCard={
-          <Card.Container color="surface-neutral">
-            <Card.Body color="">Lorem labore magna eiusmod id eiusmod cillum.</Card.Body>
+          <Card.Container colorScheme="neutral">
+            <Card.Body>Lorem labore magna eiusmod id eiusmod cillum.</Card.Body>
           </Card.Container>
         }
       />

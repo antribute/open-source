@@ -52,8 +52,8 @@ const SelectPopoverElement = classed(
   SelectPrimitive.SelectPopover,
   PaperElementBackground,
   ' p-0',
-  'border-black/10 dark:border-white/5',
-  'bg-white',
+  'border-highlight',
+  'bg-surface',
   'shadow-lg',
   'z-50 flex flex-col rounded border border-solid pb-0.5 transform relative'
 );
@@ -93,7 +93,7 @@ const ComboboxList = ({
 
   return (
     <div
-      className="relative max-h-400 w-full divide-gray-100 overflow-y-auto overflow-x-hidden  px-0 py-2"
+      className="relative max-h-400 w-full divide-highlight-high overflow-y-auto overflow-x-hidden  px-0 py-2"
       ref={listRef}
     >
       {noMatches ? (

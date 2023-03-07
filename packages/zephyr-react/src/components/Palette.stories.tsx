@@ -1,13 +1,10 @@
-import { colors } from '@antribute/zephyr-core';
-import { color } from '@storybook/theming';
+import { colorPalette } from '@antribute/zephyr-core';
 import { capitalCase } from 'change-case';
 import { Paper } from 'components/Paper';
 import { StatusBadge } from 'components/StatusBadge';
-import { Text } from 'components/Text';
 
 export const Colors = () => {
   const colorList = getColorGroupArray();
-  console.log('COLOR LIST', colorList);
   return (
     <div className="space-y-16 p-8">
       {colorList.map(({ colorName, colorList }) => (
@@ -24,12 +21,12 @@ export const Colors = () => {
 const ColorBlock = ({ label, color }: { label: string; color: string }) => {
   return (
     <div>
-      <div className="pb-8 text-md  text-content-weak  dark:text-content-inverse-weak ">
+      <div className="dark:text-content-inverse-weak pb-8  text-md  text-content-weak ">
         <span className="mr-8"> {label}:</span>
         <span className="text-center text-sm">{color}</span>
       </div>
       <div
-        className="relative flex  h-104 w-104 shrink-0 items-center justify-center rounded-md text-white shadow-sm "
+        className="text-white relative  flex h-104 w-104 shrink-0 items-center justify-center rounded-md shadow-sm "
         style={{ background: color }}
       />
     </div>
@@ -46,7 +43,7 @@ const ColorGroupContainer = ({
   return (
     <Paper border className="w-full pb-24">
       {title && (
-        <div className="flex  select-none gap-16 pb-16 font-body font-bold text-content-intense dark:text-content-inverse-intense">
+        <div className="dark:text-content-inverse-intense  flex select-none gap-16 pb-16 font-body font-bold text-content-intense">
           <div> {capitalCase(title)} </div>
           <StatusBadge size="xs" color="surface">
             {title}
@@ -59,7 +56,7 @@ const ColorGroupContainer = ({
 };
 
 function getColorGroupArray() {
-  return Object.entries(colors).map(([colorName, colorValue]) => {
+  return Object.entries(colorPalette).map(([colorName, colorValue]) => {
     if (typeof colorValue === 'string') {
       return {
         colorList: [{ colorName, color: colorValue }],

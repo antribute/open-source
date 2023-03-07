@@ -3,6 +3,7 @@ import { variousColors } from './variousColors';
 import { generateColorGroup } from './helpers/generateColorGroup';
 import { arrayToColorGroup } from './helpers/arrayToColorGroup';
 import { generateHexAlphaColorGroup } from './helpers/generateHexAlphaColorGroup';
+import { objectMap } from './helpers/objectMap';
 
 const black = '#000000';
 
@@ -10,39 +11,6 @@ const white = '#FFFFFF';
 
 const neutral = generateColorGroup(
   arrayToColorGroup([
-    // '#f6f7f9',
-    // '#e9ecf0',
-    // '#cdd4de',
-    // '#9eabbe',
-    // '#637389',
-    // '#3e4c60',
-    // '#374455',
-    // '#2f3a4a',
-    // '#262f3e',
-    // '#1c2532',
-    //
-    // '#f6f7f9',
-    // '#e9ecf0',
-    // '#cdd4de',
-    // '#9eabbe',
-    // '#637389',
-    // '#3d4c62',
-    // '#344359',
-    // '#2c3b51',
-    // '#253448',
-    // '#1f2d40',
-    //
-    // '#f6f7f9',
-    // '#e9ecf0',
-    // '#ccd3de',
-    // '#9daabd',
-    // '#3f4e64',
-    // '#39485d',
-    // '#334157',
-    // '#2c3b51',
-    // '#253448',
-    // '#1f2d40',
-    //
     '#f6f7f9',
     '#5e7495',
     '#425571',
@@ -70,6 +38,8 @@ const base = {
   DEFAULT: '#F6F6F6',
   inverse: '#0D0E11',
 };
+
+type Colors = typeof colors;
 
 export const colors = {
   highlight: generateHexAlphaColorGroup(neutral[500], {
@@ -138,7 +108,7 @@ export const colors = {
     '700': '#cb0a18',
     '800': '#a70d18',
     '900': '#8a121b',
-  })({ DEFAULT: '500', dark: '600', light: '300', soft: '100' }),
+  })({ DEFAULT: '500', dark: '700', light: '300', soft: '100' }),
 
   positive: generateColorGroup(tailwindColors.emerald)({
     DEFAULT: '500',
@@ -170,7 +140,7 @@ export const colors = {
 
   'boundary-inverse': {
     focus: contentInverse.weak,
-    ...generateHexAlphaColorGroup(neutral.DEFAULT, { DEFAULT: 'subtle' }),
+    ...generateHexAlphaColorGroup(base.DEFAULT, { DEFAULT: 'subtle' }),
   },
 
   surface: generateColorGroup(
@@ -218,7 +188,15 @@ export const colors = {
     '12': variousColors['various-gray'].DEFAULT,
   },
   ...variousColors,
+} satisfies Record<string, string | Record<string, string>>;
+
+export type ColorPalette = { [P in keyof Colors & string as `palette-${P}`]: Colors[P] };
+
+export const colorPalette = {
   inherit: tailwindColors.inherit,
   current: tailwindColors.current,
   transparent: tailwindColors.transparent,
-} satisfies Record<string, string | Record<string, string>>;
+  ...(objectMap<string, unknown>(colors, (key, value) => {
+    return [`palette-${key!}`, value];
+  }) as ColorPalette),
+};

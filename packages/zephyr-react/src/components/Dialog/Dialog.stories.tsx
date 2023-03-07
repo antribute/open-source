@@ -5,6 +5,7 @@ export const Default = () => {
   return (
     <Dialog.Root>
       <Dialog.TriggerButton>Open</Dialog.TriggerButton>
+
       <Dialog.Content>
         <Dialog.Title>Dialog Title</Dialog.Title>
         <Dialog.Body>
@@ -16,10 +17,7 @@ export const Default = () => {
           </Dialog.Description>
         </Dialog.Body>
         <Dialog.Footer>
-          <Dialog.Close color="inverse" variant="soft">
-            Cancel
-          </Dialog.Close>
-
+          <Dialog.CloseButton>Cancel</Dialog.CloseButton>
           <Dialog.Button>Confirm</Dialog.Button>
         </Dialog.Footer>
       </Dialog.Content>

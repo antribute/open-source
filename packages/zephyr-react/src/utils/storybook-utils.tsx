@@ -51,15 +51,9 @@ interface RenderSizeVariantProps<T extends React.ComponentType>
 
 const keys = {
   colors: [
-    'neutral',
-    'neutral-light',
-    'neutral-dark',
-    'surface-primary',
-    'surface-secondary',
-    'surface-tertiary',
-    'surface-soft',
-    'inverse',
     'primary',
+    'secondary',
+    'inverse',
     'info',
     'caution',
     'danger',
@@ -231,7 +225,8 @@ export const RenderPaperContainers = ({
     if (color === 'transparent') {
       return renderTransparentPaper;
     }
-    return true;
+
+    return color !== 'default';
   });
 
   return (

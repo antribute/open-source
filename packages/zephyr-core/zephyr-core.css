@@ -3,3 +3,97 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  .filled-accent-primary {
+    @apply bg-primary text-primary-content;
+  }
+  .filled-accent-secondary {
+    @apply bg-secondary text-secondary-content;
+  }
+  .filled-accent-inverse {
+    @apply bg-inverse text-inverse-content-max-contrast;
+  }
+  .filled-accent-info {
+    @apply bg-info text-palette-white;
+  }
+  .filled-accent-positive {
+    @apply bg-positive text-palette-white;
+  }
+  .filled-accent-caution {
+    @apply bg-caution text-palette-white;
+  }
+  .filled-accent-danger {
+    @apply bg-danger text-palette-white;
+  }
+
+  .filled-hover-accent-primary {
+    @apply hover:bg-primary-dark;
+  }
+  .filled-hover-accent-secondary {
+    @apply hover:bg-secondary-dark;
+  }
+  .filled-hover-accent-inverse {
+    @apply hover:bg-inverse-light;
+  }
+  .filled-hover-accent-info {
+    @apply hover:bg-info-dark;
+  }
+  .filled-hover-accent-positive {
+    @apply hover:bg-positive-dark;
+  }
+  .filled-hover-accent-caution {
+    @apply hover:bg-caution-dark;
+  }
+  .filled-hover-accent-danger {
+    @apply hover:bg-danger-dark;
+  }
+
+  .outlined-accent-primary {
+    @apply bg-surface-soft hover:bg-surface-dark/30 text-primary-content-min-contrast ring-boundary-ghost;
+  }
+  .outlined-accent-secondary {
+    @apply bg-surface-soft hover:bg-surface-dark/30 text-secondary-content-min-contrast ring-boundary;
+  }
+  .outlined-accent-inverse {
+    @apply bg-surface-soft hover:bg-surface text-inverse ring-inverse/80;
+  }
+  .outlined-accent-info {
+    @apply bg-surface-soft hover:bg-surface text-info ring-info hover:ring-info-dark;
+  }
+  .outlined-accent-positive {
+    @apply bg-surface-soft hover:bg-surface text-positive ring-positive hover:ring-positive-dark;
+  }
+  .outlined-accent-caution {
+    @apply bg-surface-soft hover:bg-surface text-caution ring-caution hover:ring-caution-dark;
+  }
+  .outlined-accent-danger {
+    @apply bg-surface-soft hover:bg-surface text-danger ring-danger hover:ring-danger-dark;
+  }
+
+  .glass-accent-primary {
+    @apply bg-primary/20  text-content-max-contrast hover:bg-primary/30;
+  }
+  .glass-accent-secondary {
+    @apply bg-secondary/20 text-content-max-contrast hover:bg-secondary/30;
+  }
+  .glass-accent-inverse {
+    @apply bg-inverse/30 text-palette-white hover:bg-inverse/40;
+  }
+  .glass-accent-info {
+    @apply bg-info/10 hover:bg-info/20 text-info;
+  }
+  .glass-accent-positive {
+    @apply bg-positive/10 hover:bg-positive/20 text-positive;
+  }
+  .glass-accent-caution {
+    @apply bg-caution/10 hover:bg-caution/20 text-caution contrast-[.85];
+  }
+  .glass-accent-danger {
+    @apply bg-danger/10 hover:bg-danger/20 text-danger;
+  }
+
+  .noisy-surface-texture {
+    @apply before:content-['']  before:bg-[url('https://liveblocks.io/images/noise.png')] before:bg-repeat before:opacity-[0.02] before:absolute before:inset-0 before:h-full before:w-full before:bg-[length:120px];
+  }
+}

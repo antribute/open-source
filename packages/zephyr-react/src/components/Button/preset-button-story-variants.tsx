@@ -53,6 +53,7 @@ export const PresetButtonStoryVariants = <
       <RenderColorVariants
         showVariantLabel
         Component={Button}
+        renderPaperContainers
         noChildren={noDefaultChildren}
         props={getProps(props, { children: 'Get Started', rounded: true, variant: 'outlined' })}
       />
@@ -70,7 +71,7 @@ export const PresetButtonStoryVariants = <
         showVariantLabel
         Component={Button}
         noChildren={noDefaultChildren}
-        props={getProps(props, { children: 'Contained', variant: 'contained' })}
+        props={getProps(props, { children: 'Filled', variant: 'filled' })}
       />
     ),
     ContainedGradientVariant: (props: TProps) => (
@@ -80,20 +81,20 @@ export const PresetButtonStoryVariants = <
         noChildren={noDefaultChildren}
         props={getProps(props, {
           children: 'Contained',
-          variant: 'contained',
+          variant: 'filled',
           gradient: true,
           coloredShadow: true,
           rounded: true,
         })}
       />
     ),
-    SoftVariant: (props: TProps) => (
+    GlassVariant: (props: TProps) => (
       <RenderColorVariants
         showVariantLabel
         renderPaperContainers
         Component={Button}
         noChildren={noDefaultChildren}
-        props={getProps(props, { children: 'Contained', variant: 'soft' })}
+        props={getProps(props, { children: 'Glass', variant: 'glass' })}
       />
     ),
     OutlinedVariant: (props: TProps) => (

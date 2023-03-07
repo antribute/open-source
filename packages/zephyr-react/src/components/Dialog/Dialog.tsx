@@ -15,11 +15,12 @@ import {
   DialogTitleElementProps,
 } from 'components/Dialog/Dialog.styles';
 import XMarkIcon from '@heroicons/react/24/solid/XMarkIcon';
+import { ColorSchemeName } from '@antribute/zephyr-core';
 
-type DialogRootProps = DialogPrimitive.DialogProps;
+type DialogRootProps = { colorScheme?: ColorSchemeName } & DialogPrimitive.DialogProps;
 
-const DialogRoot = (props: DialogRootProps) => {
-  return <DialogPrimitive.Root {...props} />;
+const DialogRoot = ({ colorScheme = 'surface', ...props }: DialogRootProps) => {
+  return <DialogPrimitive.Root data-color-scheme={colorScheme} {...props} />;
 };
 
 type DialogContentProps = DialogContentElementProps;
@@ -43,7 +44,7 @@ const DialogCloseButtonIcon = () => {
     <DialogPrimitive.Close asChild>
       <DialogCloseButtonIconElement type="button">
         <span className="sr-only">Close</span>
-        <XMarkIcon className="h-20 w-20 fill-current " />
+        <XMarkIcon className="fill-current h-20 w-20 " />
       </DialogCloseButtonIconElement>
     </DialogPrimitive.Close>
   );
@@ -74,7 +75,7 @@ const DialogFooter = (props: DialogFooterProps) => {
 type DialogButtonProps = Omit<ButtonProps, 'size'>;
 
 const DialogButton = (props: DialogButtonProps) => {
-  return <ButtonComponent {...props} size="sm" />;
+  return <ButtonComponent color="primary" {...props} size="sm" />;
 };
 
 const DialogTriggerButton = (props: DialogButtonProps) => {
@@ -85,16 +86,20 @@ const DialogTriggerButton = (props: DialogButtonProps) => {
   );
 };
 
-const DialogCloseButton = (props: DialogButtonProps) => {
+const DialogCloseButton = (props: Omit<DialogButtonProps, 'color' | 'variant'>) => {
   return (
     <DialogPrimitive.Close asChild>
-      <DialogButton {...props} />
+      <DialogButton {...props} variant="glass" />
     </DialogPrimitive.Close>
   );
 };
 
 const DialogTrigger = (props: DialogPrimitive.DialogTriggerProps) => {
   return <DialogPrimitive.Trigger asChild {...props} />;
+};
+
+const DialogClose = (props: DialogPrimitive.DialogCloseProps) => {
+  return <DialogPrimitive.Close asChild {...props} />;
 };
 
 const Root = DialogRoot;
@@ -113,7 +118,9 @@ const Description = DialogDescription;
 
 const TriggerButton = DialogTriggerButton;
 
-const Close = DialogCloseButton;
+const CloseButton = DialogCloseButton;
+
+const Close = DialogClose;
 
 const CloseIcon = DialogCloseButtonIcon;
 
@@ -128,7 +135,8 @@ export {
   Footer,
   Trigger,
   TriggerButton,
-  Close,
+  CloseButton,
   CloseIcon,
+  Close,
   Button,
 };

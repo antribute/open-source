@@ -3,31 +3,22 @@ import {
   CardContainerElement,
   CardDescriptionElement,
   CardFooterElement,
+  CardHeadingElement,
   CardTitleAreaElement,
 } from 'components/Card/Card.styles';
+import { Paper, PaperProps } from 'components/Paper';
 import { Classed, classed, deriveClassed } from 'utils/classed';
 
 // Container
 
 export type CardContainerVariantProps = Classed.ComponentProps<typeof CardContainerElement>;
 
-export type CardContainerProps = React.ComponentProps<typeof CardContainerElement>;
+export type CardContainerProps = PaperProps;
 
-const CardContainer = deriveClassed<
-  typeof CardContainerElement,
-  Classed.ComponentProps<typeof CardContainerElement>
->((props: CardContainerProps) => {
+const CardContainer = (props: CardContainerProps) => {
   const isButton = 'onClick' in props;
-  return (
-    <CardContainerElement
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      as={(isButton ? 'button' : 'div') as any}
-      hoverHighlight={isButton}
-      cursorPointer={isButton}
-      {...props}
-    />
-  );
-});
+  return <Paper hoverHighlight={isButton} cursorPointer={isButton} {...props} />;
+};
 
 // Title
 
@@ -35,6 +26,14 @@ export type CardTitleProps = React.ComponentProps<typeof CardTitleAreaElement>;
 
 const CardTitleArea = (props: CardTitleProps) => {
   return <CardTitleAreaElement {...props} />;
+};
+
+// Title
+
+export type CardTitleHeadingProps = React.ComponentProps<typeof CardHeadingElement>;
+
+const CardTitleHeading = (props: CardTitleHeadingProps) => {
+  return <CardHeadingElement {...props} />;
 };
 
 //  Body
@@ -65,5 +64,6 @@ const Container = CardContainer;
 const Title = CardTitleArea;
 const Body = CardBody;
 const Footer = CardFooter;
+const TitleHeading = CardTitleHeading;
 
-export { Container, Title, Body, Description, Footer };
+export { Container, Title, TitleHeading, Body, Description, Footer };
