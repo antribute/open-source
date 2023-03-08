@@ -25,11 +25,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 export type InputSelectProps = BaseInputSelectProps;
 
 export const InputSelect = forwardRef<HTMLButtonElement, BaseInputSelectProps>(
-  ({ ...props }, ref) => {
-    const { inputContainerProps, inputComponentProps } = useInputProps(props);
+  ({ width = 'fixed', ...props }, ref) => {
+    const { inputContainerProps, inputComponentProps } = useInputProps({ width, ...props });
     return (
       <InputContainer {...inputContainerProps}>
-        <BaseInputSelect {...props} ref={ref} {...inputComponentProps} width="fixed" />
+        <BaseInputSelect {...props} ref={ref} {...inputComponentProps} />
       </InputContainer>
     );
   }

@@ -63,10 +63,7 @@ type MinMaxContentContrastTokenVariant<T extends string> =
   | `${ContentTokenName<T>}-max-contrast`;
 
 type ContentTokenVariant<T extends string> =
-  | TokenStrengthVariant<
-      ContentTokenName<T>,
-      'weak' | 'moderate' | 'high' | 'strong' | 'intense' | 'DEFAULT'
-    >
+  | TokenStrengthVariant<ContentTokenName<T>>
   | MinMaxContentContrastTokenVariant<T>;
 
 type TokenShadeVariant<T extends string> = T | `${T}-${ColorShadeVariant}`;
@@ -117,18 +114,18 @@ const commonSchemeTokens = {
     'caution-dark': colorPalette['palette-caution'].dark,
     'caution-soft': colorPalette['palette-caution'].soft,
 
-    highlight: colorPalette['palette-highlight'].DEFAULT,
-    'highlight-weak': colorPalette['palette-highlight'].weak,
-    'highlight-moderate': colorPalette['palette-highlight'].moderate,
-    'highlight-high': colorPalette['palette-highlight'].high,
-    'highlight-strong': colorPalette['palette-highlight'].strong,
-
     'primary-content': colorPalette['palette-content-inverse'].intense,
     'secondary-content': colorPalette['palette-content-inverse'].intense,
   },
 
   lightBgContrast: {
     base: colorPalette['palette-base'].DEFAULT,
+
+    highlight: colorPalette['palette-highlight'].DEFAULT,
+    'highlight-weak': colorPalette['palette-highlight'].weak,
+    'highlight-moderate': colorPalette['palette-highlight'].moderate,
+    'highlight-high': colorPalette['palette-highlight'].high,
+    'highlight-strong': colorPalette['palette-highlight'].strong,
 
     boundary: colorPalette['palette-boundary'].DEFAULT,
     'boundary-tint': colorPalette['palette-boundary'].tint,
@@ -140,6 +137,9 @@ const commonSchemeTokens = {
     'boundary-high': colorPalette['palette-boundary'].high,
 
     content: colorPalette['palette-content'].DEFAULT,
+    'content-tint': colorPalette['palette-content'].tint,
+    'content-ghost': colorPalette['palette-content'].ghost,
+    'content-subtle': colorPalette['palette-content'].subtle,
     'content-weak': colorPalette['palette-content'].weak,
     'content-moderate': colorPalette['palette-content'].moderate,
     'content-high': colorPalette['palette-content'].high,
@@ -169,6 +169,12 @@ const commonSchemeTokens = {
   darkBgContrast: {
     base: colorPalette['palette-base'].inverse,
 
+    highlight: colorPalette['palette-highlight-inverse'].DEFAULT,
+    'highlight-weak': colorPalette['palette-highlight-inverse'].weak,
+    'highlight-moderate': colorPalette['palette-highlight-inverse'].moderate,
+    'highlight-high': colorPalette['palette-highlight-inverse'].high,
+    'highlight-strong': colorPalette['palette-highlight-inverse'].strong,
+
     boundary: colorPalette['palette-boundary-inverse'].DEFAULT,
     'boundary-tint': colorPalette['palette-boundary-inverse'].tint,
     'boundary-ghost': colorPalette['palette-boundary-inverse'].ghost,
@@ -179,6 +185,9 @@ const commonSchemeTokens = {
     'boundary-high': colorPalette['palette-boundary-inverse'].high,
 
     content: colorPalette['palette-content-inverse'].DEFAULT,
+    'content-tint': colorPalette['palette-content-inverse'].tint,
+    'content-ghost': colorPalette['palette-content-inverse'].ghost,
+    'content-subtle': colorPalette['palette-content-inverse'].subtle,
     'content-weak': colorPalette['palette-content-inverse'].weak,
     'content-moderate': colorPalette['palette-content-inverse'].moderate,
     'content-high': colorPalette['palette-content-inverse'].high,

@@ -58,6 +58,7 @@ export const CardBodyElement = classed(
   'w-full my-8',
   'font-body',
   'text-content-moderate',
+  'flex flex-col gap-16',
 
   {
     variants: {},

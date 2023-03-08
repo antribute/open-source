@@ -8,11 +8,10 @@ type ListItemContainerElementProps = React.ComponentProps<typeof ListItemContain
 const ListItemContainerElement = classed(
   'li',
   'group/li list-inside',
-  classTheme({
-    class: ['group-data-[zebra=true]:even::bg-transparent'],
-    light: ['group-data-[zebra=true]:odd:bg-highlight-subtle'],
-    dark: ['dark:group-data-[zebra=true]:odd:bg-highlight-subtle'],
-  }),
+  'group-data-[zebra=true]:even::bg-transparent',
+  'group-data-[zebra=true]:odd:bg-highlight-subtle',
+  'dark:group-data-[zebra=true]:odd:bg-highlight-subtle',
+
   {
     variants: {
       listStyle: {

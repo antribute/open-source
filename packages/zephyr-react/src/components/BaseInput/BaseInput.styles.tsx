@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { InputSizeVariant } from 'styles/input-component.variants';
-import { Classed, classTheme, classed, classedCore } from 'utils/classed';
+import { Classed, classTheme, classed, classedCore, expandVariant } from 'utils/classed';
 
 export type BaseInputElementVariantProps = Classed.VariantProps<typeof BaseInputElement>;
 
@@ -10,17 +10,11 @@ export const placeholderClassName = classedCore({
   variants: {
     placeholderSelector: {
       true: clsx(
-        'placeholder:font-body',
-        'placeholder:text-content-subtle/30 focus:placeholder:text-content-subtle',
-        'dark:placeholder:text-content-inverse-ghost dark:focus:placeholder:text-content-inverse-subtle'
+        expandVariant('placeholder:(font-body,text-content-subtle,focus:text-content-subtle)')
       ),
     },
     placeholderContainer: {
-      true: clsx(
-        'font-body',
-        'text-content-subtle/30 focus:text-content-subtle',
-        'dark:text-content-inverse-ghost dark:focus:text-content-inverse-subtle'
-      ),
+      true: clsx('font-body text-content-subtle focus:text-content-weak'),
     },
   },
   defaultVariants: {

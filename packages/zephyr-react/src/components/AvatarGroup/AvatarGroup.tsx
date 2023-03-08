@@ -4,9 +4,7 @@ import { classed } from 'utils/classed';
 import { AvatarElementName } from 'components/Avatar/Avatar.types';
 import { Avatar, AvatarProps } from 'components/Avatar';
 import { SimpleList } from 'components/SimpleList';
-import { Text } from 'components/Text';
 import { Wrap } from 'components/Wrap';
-import { getRelativeSizeProp } from 'utils/getRelativeSizeProp';
 
 export interface AvatarGroupProps extends Pick<AvatarProps, 'size' | 'border'> {
   max?: number;

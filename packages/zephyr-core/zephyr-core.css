@@ -87,7 +87,7 @@
     @apply bg-surface-soft hover:bg-surface-dark/30 text-secondary-content-min-contrast ring-boundary-ghost;
   }
   .outlined-accent-inverse {
-    @apply bg-surface-soft hover:bg-surface text-inverse ring-inverse/80;
+    @apply bg-surface-soft hover:bg-surface-dark/30 text-inverse ring-inverse/80;
   }
   .outlined-accent-heart {
     @apply bg-surface-soft hover:bg-surface text-heart ring-heart hover:ring-heart-dark;

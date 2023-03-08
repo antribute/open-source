@@ -41,19 +41,24 @@ const base = {
 
 type Colors = typeof colors;
 
-export const colors = {
-  highlight: generateHexAlphaColorGroup(neutral[500], {
-    DEFAULT: '7',
-    tint: '2',
-    ghost: '4',
-    subtle: '7',
-    weak: '10',
-    moderate: '12',
-    high: '15',
-    strong: '25',
-    intense: '30',
-  }),
+const highlightAlphaMap = {
+  DEFAULT: '7',
+  tint: '2',
+  ghost: '4',
+  subtle: '7',
+  weak: '10',
+  moderate: '12',
+  high: '15',
+  strong: '25',
+  intense: '30',
+};
 
+export const colors = {
+  highlight: generateHexAlphaColorGroup(neutral[500], highlightAlphaMap),
+  'highlight-inverse': generateHexAlphaColorGroup(
+    variousColors['various-slate'].light,
+    highlightAlphaMap
+  ),
   white,
   black,
   base,

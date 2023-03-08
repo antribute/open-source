@@ -5,6 +5,8 @@ import { Button } from 'components/Button';
 import { IconButton } from 'components/IconButton/IconButton';
 import { HeartIcon } from '@heroicons/react/24/solid';
 import { Input } from 'components/Input';
+import { Combobox } from 'components/Combobox';
+import { generateMockUserList, generateMockVehicle, generateMockVehicleList } from 'mock/mock-data';
 import { Card } from '.';
 
 const CardGrid = ({
@@ -50,14 +52,20 @@ const CardGrid = ({
               ex sit elit ut.
             </Card.Description>
 
-            <div className="pt-12" />
             <Input
-              label="Name"
-              placeholder="Enter name"
+              label="VIN"
+              placeholder="Enter VIN"
               width="full"
-              message="
-              Lorem labore magna eiusmod id eiusmod cillum ex dolore amet ullamco ex.
-            "
+              type="number"
+              message="Lorem labore magna eiusmod id eiusmod cillum ex dolore amet ullamco ex."
+            />
+            <Combobox
+              width="full"
+              label="Vehicle Type"
+              options={generateMockVehicleList({ size: 30 })}
+              getOptionLabel={({ type }) => {
+                return type;
+              }}
             />
             {childCard}
           </Card.Body>

@@ -12,10 +12,10 @@ import { List } from 'components/List';
 import { BaseListItem } from 'components/List/ListItem/BaseListItem';
 import { ListItemSpan } from 'components/List/ListItem/ListItemSpan';
 import { ListItemContainer } from 'components/List/ListItem/ListItemContainer';
-import { Checkbox } from 'components/Checkbox';
+
 import clsx from 'clsx';
 import { Text } from 'components/Text';
-import { BasicCheckbox, CheckboxElement } from 'components/Checkbox/Checkbox.styles';
+import { BasicCheckbox } from 'components/Checkbox/Checkbox.styles';
 
 interface ComboboxBaseProps<TOptionType>
   extends Omit<InputSelectProps, 'state' | 'value' | 'defaultValue' | 'as' | 'ref'> {
@@ -51,9 +51,9 @@ type SelectOptionMap = Map<string, SelectOption>;
 const SelectPopoverElement = classed(
   SelectPrimitive.SelectPopover,
   PaperElementBackground,
-  ' p-0',
+  'p-0',
   'border-highlight',
-  'bg-surface',
+  'bg-surface-soft',
   'shadow-lg',
   'z-50 flex flex-col rounded border border-solid pb-0.5 transform relative'
 );
@@ -93,7 +93,7 @@ const ComboboxList = ({
 
   return (
     <div
-      className="relative max-h-400 w-full divide-highlight-high overflow-y-auto overflow-x-hidden  px-0 py-2"
+      className="max-h-400 divide-boundary relative w-full overflow-y-auto overflow-x-hidden px-0 py-2"
       ref={listRef}
     >
       {noMatches ? (
@@ -233,6 +233,8 @@ export function Combobox<TOptionType>({
 
     defaultValue: defaultStringValue,
     virtualFocus: true,
+    flip: false,
+    fixed: true,
   });
 
   const { value: selectValue, setValue } = select;

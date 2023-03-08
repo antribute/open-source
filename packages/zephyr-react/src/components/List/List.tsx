@@ -10,28 +10,22 @@ import { surfaceColorVariants, surfaceGroupTextVariants } from 'styles/surface-c
 
 type ListContainerElementProps = React.ComponentProps<typeof ListContainerElement>;
 
-const ListContainerElement = classed(
-  'ul',
-  'group',
-  'border-boundary dark:border-boundary-inverse flex flex-col gap-4',
-  // surfaceGroupTextVariants.intense,
-  {
-    variants: {
-      border: {
-        true: 'border border-solid',
-      },
+const ListContainerElement = classed('ul', 'group', 'border-boundary flex flex-col gap-4', {
+  variants: {
+    border: {
+      true: 'border border-solid',
+    },
 
-      divide: {
-        false: '',
-        true: 'gap-0 divide-y divide-solid divide-highlight dark:divide-highlight',
-      },
+    divide: {
+      false: '',
+      true: 'gap-0 divide-y divide-solid divide-highlight dark:divide-highlight',
     },
-    defaultVariants: {
-      divide: false,
-      border: false,
-    },
-  }
-);
+  },
+  defaultVariants: {
+    divide: false,
+    border: false,
+  },
+});
 
 type ListContainerProps = {
   title?: React.ReactNode;
