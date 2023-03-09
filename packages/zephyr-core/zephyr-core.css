@@ -131,6 +131,6 @@
   }
 
   .noisy-surface-texture {
-    @apply before:content-['']  before:bg-[url('https://liveblocks.io/images/noise.png')] before:bg-repeat before:opacity-[0.02] before:absolute before:inset-0 before:h-full before:w-full before:bg-[length:120px];
+    @apply before:content-['']  before:bg-[url('https://liveblocks.io/images/noise.png')] before:bg-repeat before:opacity-[0.035] before:absolute before:inset-0 before:h-full before:w-full before:bg-[length:125px] before:mix-blend-exclusion;
   }
 }

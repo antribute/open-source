@@ -43,12 +43,30 @@ export const CardTitleAreaElement = classed(
     variants: {},
   }
 );
+
+// Description
+
 export const CardDescriptionElement = classed(
   'div',
   'group-surface-neutral:text-content-inverse',
 
   {
     variants: {},
+  }
+);
+
+// Group Spacer
+
+export const CardGroupSpacerElement = classed(
+  'div',
+  'flex items-center flex-wrap gap-8',
+
+  {
+    variants: {
+      grow: {
+        true: 'flex-grow',
+      },
+    },
   }
 );
 
@@ -72,7 +90,7 @@ export type CardFooterElementProps = React.ComponentProps<typeof CardFooterEleme
 
 export const CardFooterElement = classed(
   'p',
-  'flex justify-end items-center gap-8 gap-y-6 pt-8 px-4 border-t border-highlight flex-wrap',
+  'flex flex-wrap justify-end items-center gap-8 gap-y-6 pt-8 px-4 border-t border-highlight',
   {
     variants: {},
   }

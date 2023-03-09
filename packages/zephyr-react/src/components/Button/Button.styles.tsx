@@ -15,7 +15,7 @@ import {
   mergeVariants,
 } from 'utils/classed';
 
-export type ButtonVariant = 'filled' | 'glass' | 'text' | 'outlined';
+export type ButtonVariant = 'filled' | 'glass' | 'ghost' | 'text' | 'outlined';
 
 export type ButtonElementVariantProps = Classed.VariantProps<typeof ButtonElement>;
 
@@ -195,6 +195,7 @@ export const ButtonElement = classed.button(
         outlined: 'ring-[1.35px] ring-inset',
         glass: '',
         text: '',
+        ghost: '',
       } satisfies Record<ButtonVariant, string>,
       rounded: {
         sm: clsx('rounded '),

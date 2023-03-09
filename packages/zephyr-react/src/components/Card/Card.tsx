@@ -4,11 +4,12 @@ import {
   CardContainerElement,
   CardDescriptionElement,
   CardFooterElement,
+  CardGroupSpacerElement,
   CardHeadingElement,
   CardTitleAreaElement,
 } from 'components/Card/Card.styles';
 import { Paper, PaperProps } from 'components/Paper';
-import { Classed, classed, deriveClassed } from 'utils/classed';
+import { Classed } from 'utils/classed';
 
 // Container
 
@@ -35,6 +36,15 @@ export type CardTitleHeadingProps = React.ComponentProps<typeof CardHeadingEleme
 
 const CardTitleHeading = (props: CardTitleHeadingProps) => {
   return <CardHeadingElement {...props} />;
+};
+
+// Group Spacer
+
+export type CardGroupSpacerProps = Classed.VariantProps<typeof CardGroupSpacerElement> &
+  Pick<React.ComponentProps<typeof CardGroupSpacerElement>, 'children'>;
+
+const CardGroupSpacer = (props: CardGroupSpacerProps) => {
+  return <CardGroupSpacerElement {...props} />;
 };
 
 //  Body
@@ -66,5 +76,6 @@ const Title = CardTitleArea;
 const Body = CardBody;
 const Footer = CardFooter;
 const TitleHeading = CardTitleHeading;
+const GroupSpacer = CardGroupSpacer;
 
-export { Container, Title, TitleHeading, Body, Description, Footer };
+export { Container, Title, TitleHeading, GroupSpacer, Body, Description, Footer };

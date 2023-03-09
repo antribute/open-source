@@ -5,8 +5,8 @@ import { surfaceScheme } from './surface-scheme';
 
 export const schemes = {
   default: surfaceScheme.surface,
-  'dark/default': surfaceScheme['surface-dark'],
-  ...inverseScheme,
-  ...neutralScheme,
+  // 'dark/default': surfaceScheme['surface-dark'],
   ...surfaceScheme,
+  ...neutralScheme,
+  ...inverseScheme,
 } satisfies GenericColorSchemeConfig;

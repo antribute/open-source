@@ -35,7 +35,7 @@ interface RenderVariantBaseProps<T extends ReactComponent, TProp extends string 
 const RenderVariantElement = classed('div', {
   variants: {
     orientation: {
-      vertical: 'flex-col space-y-24',
+      vertical: 'inline-flex flex-col items-center gap-24',
       horizontal: 'flex gap-24 items-center flex-wrap',
     },
   },

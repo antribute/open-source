@@ -20,6 +20,13 @@ import { Slot } from '@radix-ui/react-slot';
 import { isReactNode } from 'utils/component-is-utils';
 import { notEmpty } from 'utils/notEmpty';
 import { PlaceholderElement } from 'components/BaseInput/BaseInput.styles';
+import { twMerge } from 'tailwind-merge';
+import { InvisibleCharacter } from 'components/InvisibleCharacter';
+import { classed, expandVariant, mergeVariants } from 'utils/classed';
+import clsx from 'clsx';
+import { Spinner } from 'components/Spinner';
+import { getRelativeSizeProp } from 'utils/getRelativeSizeProp';
+import { sizeVariants } from 'styles/size.variants';
 
 function isAddonType(e: unknown): e is InlineInputAddonType {
   return Boolean(e && typeof e === 'object' && 'content' in e);
@@ -72,36 +79,46 @@ const getInputStateIcon = ({
 type BaseInputIconProps = React.ComponentProps<typeof BaseInputIconSlotElement> &
   InlineInputAddonType;
 
+const BaseInputIconElement = classed(
+  PlaceholderElement,
+  'shrink-0 flex h-20 items-center justify-center align-middle relative z-10',
+
+  {
+    variants: {
+      size: mergeVariants([sizeVariants.inlineHeight, sizeVariants.textSize]),
+    },
+  }
+);
+
 const BaseInputIcon = deriveClassed<typeof BaseInputIconSlotElement, BaseInputIconProps>(
-  ({ content, tabIndex, ...props }, ref) => {
+  ({ content, className, ...props }, ref) => {
     return (
-      <PlaceholderElement className="flex h-20 w-20 shrink-0 items-center justify-center dark:text-content-inverse-weak">
+      <BaseInputIconElement
+        className={className}
+        onClick={(e) => {
+          if (props.focusInputOnClick === false) {
+            e.stopPropagation();
+          }
+        }}
+      >
         {typeof content !== 'object' ? (
           <> {content}</>
         ) : (
-          <Slot
-            tabIndex={tabIndex}
-            {...props}
-            ref={ref}
-            onClick={(e) => !props.focusInputOnClick && e.stopPropagation()}
-          >
+          <Slot {...props} ref={ref} className="h-full">
             {content}
           </Slot>
         )}
-      </PlaceholderElement>
+      </BaseInputIconElement>
     );
   }
 );
 
 export type BaseInputContainerProps = {
+  placeholderShown?: boolean;
   focusElementOnClick?: boolean;
   children:
     | React.ReactNode
-    | ((props: {
-        // leadingIconWidth: (delta?: number) => number | undefined;
-        // trailingIconWidth: (delta?: number) => number | undefined;
-        ref: React.ForwardedRef<HTMLInputElement>;
-      }) => React.ReactNode);
+    | ((props: { ref: React.ForwardedRef<HTMLInputElement> }) => React.ReactNode);
 } & InputComponentProps &
   BaseInputIconSlotElementVariantProps &
   InputAddonSlotProps &
@@ -138,6 +155,7 @@ export const BaseInputContainer = deriveClassed<
       inlineTrailingAddonSlot = [],
       focusElementOnClick = true,
       inputState,
+      loading,
       ...props
     },
     forwardedRef
@@ -149,18 +167,32 @@ export const BaseInputContainer = deriveClassed<
     const { leading, trailing } = React.useMemo(() => {
       const { addonList: leading } = getAddonList(inlineLeadingAddonSlot, leadingIcon);
 
+      const placeholderAddon: InlineInputAddonType = {
+        content: <InvisibleCharacter />,
+        className: 'grow',
+      };
+
       const { addonList: trailing } = getAddonList(
+        placeholderAddon,
         getInputStateIcon({ inputState }),
-        trailingIcon,
-        inlineTrailingAddonSlot
+        inlineTrailingAddonSlot,
+        loading ? { content: <Spinner size={size} /> } : trailingIcon
       );
 
       return { leading, trailing };
-    }, [inlineLeadingAddonSlot, inlineTrailingAddonSlot, inputState, leadingIcon, trailingIcon]);
+    }, [
+      inlineLeadingAddonSlot,
+      inlineTrailingAddonSlot,
+      inputState,
+      leadingIcon,
+      loading,
+      size,
+      trailingIcon,
+    ]);
 
     return (
       <BaseInputContainerElement
-        className={className}
+        className={twMerge(className)}
         inputState={inputState}
         ref={forwardedRef}
         width={width}
@@ -181,6 +213,7 @@ export const BaseInputContainer = deriveClassed<
               ref,
             })
           : children}
+
         {trailing.map((props, index) => (
           <BaseInputIcon {...props} key={index} />
         ))}

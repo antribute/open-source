@@ -4,12 +4,12 @@ import { ColorSchemeName } from './color-scheme-config.types';
 
 export const colorSchemeNames = [
   'default',
-  'neutral',
-  'neutral-light',
-  'neutral-dark',
   'surface',
   'surface-light',
   'surface-dark',
+  'neutral',
+  'neutral-light',
+  'neutral-dark',
   'inverse',
   'inverse-light',
   'inverse-dark',

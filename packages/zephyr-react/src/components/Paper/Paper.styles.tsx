@@ -31,6 +31,7 @@ export const PaperElement = classed(
   'div',
   PaperElementBackground,
   'relative text-left bg-surface text-content',
+
   // classTheme({
   //   class: 'group relative  inline-block rounded-md text-left ',
   //   light: 'text-content-moderate',
@@ -59,6 +60,10 @@ export const PaperElement = classed(
       },
       cursorPointer: {
         true: 'cursor-pointer',
+      },
+
+      texture: {
+        noise: 'noisy-surface-texture',
       },
 
       loading: {

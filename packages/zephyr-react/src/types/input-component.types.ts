@@ -42,6 +42,7 @@ export type InputComponentProps = {
   placeholder?: string;
   label?: React.ReactNode;
   className?: string;
+  loading?: boolean;
 } & InlineInputAddonSlotProps;
 
 export interface InputAddonSlotElement {

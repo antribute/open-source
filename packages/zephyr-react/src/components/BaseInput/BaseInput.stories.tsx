@@ -17,7 +17,7 @@ export const PrimitiveBaseInputComponent = () => {
   return (
     <div className="flex items-center gap-8">
       {getSizeKeys().map((size) => (
-        <div className="flex bg-highlight">
+        <div className="bg-highlight flex">
           <PrimitiveBaseInput size={size} placeholder="Enter value" />
         </div>
       ))}
@@ -29,12 +29,12 @@ export const Icon = () => {
   return (
     <div className="space-y-40">
       <RenderSizeVariants
-        orientation="vertical"
+        orientation="horizontal"
         Component={BaseInput}
         props={{ placeholder: 'Enter value', leadingIcon: <CurrencyDollarIcon /> }}
       />
       <RenderSizeVariants
-        orientation="vertical"
+        orientation="horizontal"
         Component={BaseInput}
         props={{ placeholder: 'Enter value', trailingIcon: <CurrencyDollarIcon /> }}
       />
@@ -65,6 +65,18 @@ export const InlineAddons = () => {
             ],
           };
         }}
+      />
+    </div>
+  );
+};
+
+export const Loading = () => {
+  return (
+    <div className="space-y-40">
+      <RenderSizeVariants
+        noChildren
+        Component={BaseInput}
+        props={{ loading: true, placeholder: 'Enter value' }}
       />
     </div>
   );

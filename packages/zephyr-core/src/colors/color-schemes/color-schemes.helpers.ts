@@ -82,7 +82,7 @@ function getColorSchemeCssVariableNames(schemeKey: string) {
   }
 
   if (schemeKey === 'dark/default') {
-    return ['[data-mode="dark"]', dataColorSchemeClass];
+    return ['[data-mode="dark"]', `[data-mode="dark"] [data-color-scheme="default"]`];
   }
 
   if (isDarkMode) {

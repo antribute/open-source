@@ -8,12 +8,28 @@ export const sizeVariants = {
     md: clsx('w-40'),
     lg: clsx('w-48'),
   },
+
   height: {
     xs: clsx('h-28'),
     sm: clsx('h-34'),
     md: clsx('h-40'),
     lg: clsx('h-48'),
   },
+
+  inlineWidth: {
+    xs: clsx('w-22'),
+    sm: clsx('w-24'),
+    md: clsx('w-26'),
+    lg: clsx('w-32'),
+  },
+
+  inlineHeight: {
+    xs: clsx('h-22'),
+    sm: clsx('h-24'),
+    md: clsx('h-26'),
+    lg: clsx('h-32'),
+  },
+
   textSize: {
     xs: 'text-xs',
     sm: 'text-sm',

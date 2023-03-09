@@ -12,6 +12,7 @@ export function useBaseInputProps(props: UseBaseInputPropsOptions) {
     inlineLeadingAddonSlot,
     inlineTrailingAddonSlot,
     focusElementOnClick,
+    loading,
     type,
     leadingIcon: leadingIconProp,
     trailingIcon: trailingIconProp,
@@ -43,6 +44,7 @@ export function useBaseInputProps(props: UseBaseInputPropsOptions) {
     focusElementOnClick,
     type,
     label,
+    loading,
   };
 
   return {

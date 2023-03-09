@@ -1,4 +1,6 @@
-import { generateMockUserList } from 'mock/mock-data';
+import { UserMockData, generateMockUserList, generateMockUserListHook } from 'mock/mock-data';
+import { useState } from 'react';
+import { Button } from 'components/Button';
 import { Combobox } from '.';
 
 const options = ['One', 'Two', 'Three'];
@@ -39,7 +41,7 @@ export const Default = () => {
           <Combobox
             label={`Users - ${size}`}
             options={options}
-            getOptionLabel={(e) => e.name}
+            getOptionLabel={(e) => `${e.name} ${e.name}`}
             onValueChange={(e) => e.name}
           />
         </div>
@@ -48,14 +50,27 @@ export const Default = () => {
   );
 };
 
+const useMockUserList = generateMockUserListHook({ size: 300, delay: 1000 });
+
 export const MultiSelectCombobox = () => {
+  const [offset, setOffset] = useState(0);
+  const { data, loading } = useMockUserList({ limit: 10, offset });
+
+  console.log('DATA', data);
+
   return (
-    <Combobox
-      value={[]}
-      options={xlUserOptions}
-      getOptionLabel={(e) => e.name}
-      onValueChange={(e) => e.map((e) => e.name)}
-      isMultiSelect
-    />
+    <>
+      <Combobox
+        value={[]}
+        options={data}
+        getOptionLabel={(e) => e.name}
+        onValueChange={(e) => console.log('VALUES', e)}
+        searching={loading}
+        isMultiSelect
+        onLastOptionItemScrollReached={() => {
+          setOffset(offset + 1);
+        }}
+      />
+    </>
   );
 };

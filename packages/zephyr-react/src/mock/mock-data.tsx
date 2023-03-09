@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker';
-import { uniqBy } from 'lodash-es';
+import { chunk, uniqBy } from 'lodash-es';
+import { useEffect, useState } from 'react';
 
 const fakerSeed = (seed?: number) => {
   if (seed !== undefined) {
@@ -46,6 +47,8 @@ export const generateMockUser: MockDataGeneratorFn<UserMockData> = ({ id, seed }
 };
 
 export const generateMockUserList = makeListFactory(generateMockUser);
+
+export const generateMockUserListHook = generateMockDataHook(generateMockUserList);
 
 interface Organization {
   id: number;
@@ -130,5 +133,83 @@ function makeListFactory<T extends MockDataGeneratorFn<unknown>, TReturnType ext
     const uniqByResult = uniqueBy ? uniqBy(result, uniqueBy) : result;
 
     return uniqByResult;
+  };
+}
+
+// type MakeListFactoryFnReturn = <
+//   T extends MockDataGeneratorFn<unknown> = MockDataGeneratorFn<unknown>,
+//   TReturnType extends ReturnType<T> = ReturnType<T>
+// >(
+//   generator: T
+// ) => (options?: MakeListFnOptions<TReturnType>) => TReturnType[];
+
+type ListFactoryFn<TReturnType = unknown> = (
+  options?: MakeListFnOptions<TReturnType>
+) => TReturnType[];
+
+async function fetchServerPage(
+  limit: number,
+  offset = 0
+): Promise<{ rows: string[]; nextOffset: number }> {
+  const rows = new Array(limit).fill(0).map((_, i) => `Async loaded row #${i + offset * limit}`);
+
+  // eslint-disable-next-line no-promise-executor-return
+  await new Promise((r) => setTimeout(r, 500));
+
+  return { rows, nextOffset: offset + 1 };
+}
+
+interface HookProps {
+  limit: number;
+  offset: number;
+}
+
+interface HookReturn<T> {
+  data: T[];
+  loading: boolean;
+}
+
+function generateMockDataHook<
+  TGenerator extends ListFactoryFn,
+  T extends TGenerator extends ListFactoryFn<infer G> ? G : never
+>(generator: TGenerator) {
+  return ({ size, delay = 1000 }: { size: number; delay?: number }) => {
+    const list = generator({ size });
+
+    const useHook = ({ limit = 10, offset = 0 }: HookProps): HookReturn<T> => {
+      const listChunks = chunk(list, limit);
+
+      const [data, setData] = useState<T[]>([]);
+      const [loading, setLoading] = useState<boolean>(false);
+
+      useEffect(() => {
+        if (offset <= listChunks.length - 1) {
+          setLoading(true);
+
+          const fetchData = async () => {
+            try {
+              const newList = await new Promise((resolve) => {
+                setTimeout(() => {
+                  resolve(listChunks[Math.min(offset, listChunks.length - 1)]);
+                }, delay);
+              });
+
+              setData(newList as T[]);
+            } catch (error) {
+              // eslint-disable-next-line no-console
+              console.error('ERRORRR', error);
+            }
+            setLoading(false);
+          };
+          // eslint-disable-next-line @typescript-eslint/no-floating-promises
+          fetchData();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, [offset]);
+
+      return { data, loading };
+    };
+
+    return useHook;
   };
 }

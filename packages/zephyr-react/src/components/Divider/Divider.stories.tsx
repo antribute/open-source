@@ -18,10 +18,15 @@ export const Default = () => {
             ' bg-surface'
           )}
         >
-          <button className="rounded bg-secondary p-8 hover:bg-secondary-dark ">Secondary</button>
-          <button className="rounded bg-primary p-8 hover:bg-primary-dark ">Primary</button>
+          <button className="bg-secondary hover:bg-secondary-dark rounded p-8 ">Secondary</button>
+          <button className="bg-primary hover:bg-primary-dark rounded p-8 ">Primary</button>
         </Paper>
       ))}
+
+      <div data-color-scheme="default" className="bg-surface h-40 w-40">
+        {' '}
+        <div>Hello</div>
+      </div>
     </div>
   );
 };

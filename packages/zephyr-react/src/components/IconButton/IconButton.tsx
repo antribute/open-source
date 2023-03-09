@@ -2,7 +2,7 @@ import { ButtonElement } from 'components/Button/Button.styles';
 import { sizeVariants } from 'styles/size.variants';
 import { classed, mergeVariants } from 'utils/classed';
 
-const IconButtonElement = classed('button', ButtonElement, 'p-8', {
+const IconButtonElement = classed('button', ButtonElement, 'p-8 shrink-0', {
   variants: {
     size: mergeVariants([sizeVariants.width, sizeVariants.height]),
   },
@@ -10,6 +10,10 @@ const IconButtonElement = classed('button', ButtonElement, 'p-8', {
 
 export type IconButtonProps = React.ComponentProps<typeof IconButtonElement>;
 
-export const IconButton = (props: IconButtonProps) => {
-  return <IconButtonElement {...props} />;
+export const IconButton = ({ className, children, ...props }: IconButtonProps) => {
+  return (
+    <IconButtonElement {...props} className={children ? className : undefined}>
+      {children ?? <span className={className} />}
+    </IconButtonElement>
+  );
 };

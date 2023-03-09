@@ -27,24 +27,26 @@ const CardGrid = ({
           border
           className={twMerge('col-span-2 shadow-lg', className)}
           {...props}
+          texture="noise"
         >
           <Card.Title>
             <Card.TitleHeading>{capitalCase(colorScheme ?? 'Surface')}</Card.TitleHeading>
 
-            <div className="flex gap-8">
-              <Button color="secondary" size="xs" variant="glass" className="group">
-                <span className="i-heroicons-chat-bubble-bottom-center-solid" />
-              </Button>
+            <Card.GroupSpacer>
+              <IconButton
+                color="secondary"
+                size="xs"
+                variant="glass"
+                className="i-heroicons-chat-bubble-bottom-center-solid"
+              />
               <IconButton
                 color="secondary"
                 size="xs"
                 variant="glass"
                 hoverBackgroundColor="heart"
-                className="group"
-              >
-                <span className="i-heroicons-heart-solid " />
-              </IconButton>
-            </div>
+                className="i-heroicons-heart-solid"
+              />
+            </Card.GroupSpacer>
           </Card.Title>
           <Card.Body>
             <Card.Description>
@@ -69,21 +71,15 @@ const CardGrid = ({
             />
             {childCard}
           </Card.Body>
-          <Card.Footer className="flex-wrap">
-            <div className="flex grow gap-8">
-              <Button
-                color="secondary"
-                hoverBackgroundColor="danger"
-                variant="glass"
-                size="xs"
-                className=""
-              >
+          <Card.Footer>
+            <Card.GroupSpacer grow>
+              <Button color="secondary" hoverBackgroundColor="danger" variant="glass" size="xs">
                 Clear
               </Button>
               <Button variant="filled" size="xs" className="">
                 Skip
               </Button>
-            </div>
+            </Card.GroupSpacer>
             <Button color="primary" variant="outlined" size="xs" className="">
               Prev
             </Button>
@@ -159,7 +155,7 @@ export const Default = () => {
       <CardGrid
         colorScheme="inverse"
         childCard={
-          <Card.Container colorScheme="neutral">
+          <Card.Container colorScheme="inverse-light">
             <Card.Body>Lorem labore magna eiusmod id eiusmod cillum.</Card.Body>
           </Card.Container>
         }

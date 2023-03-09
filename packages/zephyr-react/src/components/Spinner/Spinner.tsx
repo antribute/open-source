@@ -38,8 +38,11 @@ const SpinnerElement = classed(
   'w-8 h-8 mr-2 text-highlight animate-spin fill-primary-light',
   {
     variants: {
-      size: mergeVariants([sizeVariants.width, sizeVariants.height]),
+      size: mergeVariants([sizeVariants.inlineWidth, sizeVariants.inlineHeight]),
       position: positionVariants,
+      autoSize: {
+        true: 'h-auto w-auto',
+      },
       // color: colorVariants.fill,
     },
     defaultVariants: {

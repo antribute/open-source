@@ -13,7 +13,7 @@ export type BaseInputContainerElementVariantProps = Classed.VariantProps<
 
 export const BaseInputContainerElement = classed(
   'div',
-  'flex justify-between items-center :!opacity-0',
+  'flex items-center relative overflow-hidden group',
   // Tailwind Arbitrary Group (https://tailwindcss.com/docs/hover-focus-and-other-states#arbitrary-groups)
   // eslint-disable-next-line tailwindcss/no-custom-classname
   // clsx('group-[.is-contained]/input:w-full', 'group/base-input is-contained'),
