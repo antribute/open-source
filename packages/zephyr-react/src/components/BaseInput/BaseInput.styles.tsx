@@ -34,6 +34,7 @@ export const BaseInputElement = classed(
   placeholderClassName,
   'peer',
   'bg-surface-soft',
+  'hover:border-boundary-subtle',
   'font-medium rounded-md',
   'transition-all',
   'border-[1.5px] border-boundary-ghost',

@@ -1,12 +1,12 @@
 /* eslint-disable react/no-unused-prop-types */
 import * as ComboboxPrimitive from 'ariakit/combobox';
 import * as SelectPrimitive from 'ariakit/select';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState, useRef } from 'react';
 import { InputSelect, InputSelectProps } from 'components/Input';
 import { Button } from 'components/Button';
 import { notEmpty } from 'utils/notEmpty';
 import { O } from 'ts-toolbelt';
-import { useDebouncedCallback } from 'use-debounce';
+import { useDebounce, useDebouncedCallback } from 'use-debounce';
 import { ComboboxPopover } from 'components/Combobox/ComboboxPopover';
 import {
   getOptionMap,
@@ -14,7 +14,7 @@ import {
   originalValueToValueString,
   valueStringToOriginalValue,
 } from 'components/Combobox/Combobox.helpers';
-import { useDeepCompareEffectNoCheck } from 'use-deep-compare-effect';
+import useDeepCompareEffect, { useDeepCompareEffectNoCheck } from 'use-deep-compare-effect';
 import { useImmer } from 'use-immer';
 import { enableMapSet } from 'immer';
 
@@ -24,20 +24,14 @@ export interface ComboboxOptionGetters<TOptions extends unknown[]> {
   getOptionValue?: (option: TOptions[number]) => unknown;
 }
 
-type ComboboxBasePropsBase<TOptions extends unknown[]> = ComboboxOptionGetters<TOptions> & {
-  options: TOptions;
-  loadOptions: TOptions;
-  onLastOptionItemScrollReached?: () => void;
-  searching?: boolean;
-  onSearch?: (search: string) => void;
-};
-
 interface ComboboxBaseProps<TOptions extends unknown[] = unknown[]>
   extends ComboboxOptionGetters<TOptions>,
     Omit<InputSelectProps, 'state' | 'value' | 'defaultValue' | 'as' | 'ref'> {
   options: TOptions;
+  searchOptions?: TOptions;
   onLastOptionItemScrollReached?: () => void;
   searching?: boolean;
+  onSearchDebounceDelay?: number;
   onSearch?: (search: string) => void;
 }
 
@@ -62,6 +56,8 @@ export interface SelectOption {
   value: unknown;
   index: number;
   id: string;
+  isSelected?: boolean;
+  isSearchResultOption?: boolean;
 }
 
 export type SelectOptionMap = Map<string, SelectOption>;
@@ -86,26 +82,37 @@ const useComboboxProps = (props: ComboboxPrimitive.ComboboxStateProps) => {
 function useComboboxSearch({
   isSearching,
   onSearch,
+  onSearchDebounceDelay = 300,
 }: {
   isSearching?: boolean;
   onSearch: ComboboxBaseProps['onSearch'];
+  onSearchDebounceDelay?: number;
 }) {
+  const prevSearch = useRef<string | undefined>('');
   const [searchingStarted, setSearchingStarted] = useState(false);
 
-  const searching = Boolean(isSearching) || searchingStarted;
+  const [isSearchActive, setIsSearchActive] = useState<boolean | undefined>();
+
+  const searching = isSearchActive;
+
+  useEffect(() => {
+    setIsSearchActive(isSearching);
+  }, [isSearching]);
 
   const debouncedOnSearch = useDebouncedCallback((search: string) => {
     onSearch?.(search);
-    setSearchingStarted(() => false);
-  }, 300);
+    setSearchingStarted(false);
+  }, onSearchDebounceDelay);
 
   function handleSearch(search: string) {
-    if (onSearch) {
-      setSearchingStarted(() => true);
+    if (onSearch && prevSearch.current !== search) {
+      setSearchingStarted(true);
       debouncedOnSearch(search);
+      prevSearch.current = search;
     }
   }
 
+  console.log({ searching, isSearching, searchingStarted });
   return { searching, handleSearch };
 }
 
@@ -119,6 +126,7 @@ export function Combobox<TOptions extends unknown[]>({
   loading,
   onClearValue,
   searching: searchingProp,
+  onSearchDebounceDelay,
   onLastOptionItemScrollReached,
   onValueChange,
   onSearch,
@@ -126,7 +134,7 @@ export function Combobox<TOptions extends unknown[]>({
 }: ComboboxProps<TOptions>) {
   // const [optionsState, setOptionsState] = useState(options);
 
-  const [optionValueMap, updateOptionValueMap] = useImmer<SelectOptionMap>(new Map());
+  const [selectOptionMap, updateSelectOptionMap] = useImmer<SelectOptionMap>(new Map([]));
 
   useDeepCompareEffectNoCheck(() => {
     // const v = originalValueToValueString({
@@ -135,34 +143,95 @@ export function Combobox<TOptions extends unknown[]>({
     //   isMultiSelect,
     // });
 
-    const { optionMap } = getOptionMap({ data: originalValueProp, getOptionLabel, getOptionValue });
+    const optionMap = getOptionMap({ data: originalValueProp, getOptionLabel, getOptionValue });
 
-    updateOptionValueMap(optionMap);
+    updateSelectOptionMap((draft) => {
+      optionMap.forEach((value, key) => {
+        draft.set(key, { ...value, isSelected: true });
+      });
+
+      // draft.forEach(({ isSelected }, key) => {
+      //   if (!optionMap.has(key) && !isSelected) {
+      //     draft.delete(key);
+      //   }
+      // });
+    });
   }, [originalValueProp]);
 
-  const value = useMemo(() => {
-    const keys = [...optionValueMap.keys()];
-    console.log('KEYS', keys);
-    return isMultiSelect ? keys : keys[0] ?? '';
-  }, [isMultiSelect, optionValueMap]);
+  useDeepCompareEffect(() => {
+    const optionMap = getOptionMap({ data: options, getOptionLabel, getOptionValue });
 
-  useEffect(() => {}, []);
-
-  const optionsState = useMemo(() => {
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-    return (options ?? []).filter(notEmpty);
+    updateSelectOptionMap((draft) => {
+      optionMap.forEach((value, key) => {
+        const oldDraft = draft.get(key);
+        draft.set(key, { isSelected: oldDraft?.isSelected, ...value });
+      });
+    });
   }, [options]);
 
-  const { optionList, optionMap } = useMemo(() => {
-    return getOptionMap({ data: optionsState, getOptionLabel, getOptionValue });
-  }, [getOptionLabel, getOptionValue, optionsState]);
+  const { searching, handleSearch } = useComboboxSearch({
+    isSearching: searchingProp,
+    onSearch,
+    onSearchDebounceDelay,
+  });
+
+  const { selectStringValue, comboboxStringList } = useMemo(() => {
+    const entries = [...selectOptionMap.entries()];
+
+    const reduced = entries.reduce<{
+      selectStringValue: string | string[];
+      comboboxStringList: string[];
+      selectedOptions: SelectOption[];
+    }>(
+      (acc, cur) => {
+        const [key, value] = cur;
+
+        const { isSelected } = value;
+
+        if (isSelected) {
+          if (Array.isArray(acc.selectStringValue)) {
+            acc.selectStringValue.push(key);
+          } else {
+            acc.selectStringValue = key;
+          }
+          acc.selectedOptions.push(value);
+        }
+
+        if (!searching) {
+          acc.comboboxStringList.push(key);
+        }
+
+        return acc;
+      },
+      {
+        selectStringValue: isMultiSelect ? [] : '',
+        comboboxStringList: [],
+        selectedOptions: [],
+      }
+    );
+
+    console.log({ ...reduced });
+
+    return reduced;
+  }, [isMultiSelect, searching, selectOptionMap]);
+
+  useDeepCompareEffect(() => {
+    console.log({ selectOptionMap });
+  }, [selectOptionMap]);
+
+  // const optionsState = useMemo(() => {
+  //   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+  //   return (options ?? []).filter(notEmpty);
+  // }, [options]);
+
+  // const { optionList, optionMap } = useMemo(() => {
+  //   return getOptionMap({ data: optionsState, getOptionLabel, getOptionValue });
+  // }, [getOptionLabel, getOptionValue, optionsState]);
 
   const [viewAllSelected, setViewAllSelected] = useState(false);
 
-  const { searching, handleSearch } = useComboboxSearch({ isSearching: searchingProp, onSearch });
-
   const { selectProps, combobox } = useComboboxProps({
-    list: optionList,
+    list: comboboxStringList,
 
     setValue: (value) => {
       handleSearch(value);
@@ -189,50 +258,31 @@ export function Combobox<TOptions extends unknown[]>({
 
   const select = SelectPrimitive.useSelectState({
     ...selectProps,
-    defaultValue: value,
-    value,
+    defaultValue: selectStringValue,
+    value: selectStringValue,
 
     setValue: (stringValue) => {
-      // const originalValue = valueStringToOriginalValue({ value: v, optionValueMap });
-
-      // const getNewValueMap = ({
-      //   stringValue,
-      // }: {
-      //   stringValue: string | string[];
-      //   optionValueMap: OptionValueMap;
-      // }) => {
-      //   if (Array.isArray(stringValue)) {
-      //     const entries = stringValue
-      //       .map((str) => {
-      //         if (optionValueMap.has(str)) {
-      //           return [str, optionValueMap.get(str)!] as [string, SelectOption];
-      //         }
-      //         return undefined;
-      //       })
-      //       .filter(notEmpty);
-
-      //     return new Map(entries);
-      //   }
-
-      //   if (optionValueMap.has(stringValue)) {
-      //     const entry = [stringValue, optionValueMap.get(stringValue)] as [string, SelectOption];
-      //     return new Map([entry]);
-      //   }
-
-      //   return new Map([]) as OptionValueMap;
-      // };
-
       const newValue = Array.isArray(stringValue)
-        ? stringValue.map((str) => optionMap.get(str)?.value ?? optionValueMap.get(str)?.value)
-        : optionMap.get(stringValue)?.value || optionValueMap.get(stringValue)?.value;
+        ? stringValue.map((str) => selectOptionMap.get(str)?.value)
+        : selectOptionMap.get(stringValue)?.value;
 
-      const { optionMap: newOptionMap } = getOptionMap({
+      const optionMap = getOptionMap({
         data: newValue,
         getOptionLabel,
         getOptionValue,
       });
 
-      updateOptionValueMap(newOptionMap);
+      updateSelectOptionMap((draft) => {
+        optionMap.forEach((value, key) => {
+          draft.set(key, { ...value, isSelected: true });
+        });
+
+        draft.forEach((value, key) => {
+          if (!optionMap.has(key)) {
+            draft.set(key, { ...value, isSelected: false });
+          }
+        });
+      });
 
       // console.log({ stringValue, newValue, newOptionMap, optionValueMap, optionMap });
 
@@ -284,8 +334,7 @@ export function Combobox<TOptions extends unknown[]>({
       <ComboboxPopover
         combobox={combobox}
         select={select}
-        optionMap={optionMap}
-        optionValueMap={optionValueMap}
+        selectOptionMap={selectOptionMap}
         isMultiSelect={isMultiSelect}
         searching={searching}
         viewAllSelected={viewAllSelected}
@@ -294,34 +343,3 @@ export function Combobox<TOptions extends unknown[]>({
     </div>
   );
 }
-
-const AllSelectedFilterButton = ({
-  select,
-  viewAllSelected,
-  setViewAllSelected,
-}: {
-  select: SelectPrimitive.SelectState;
-  viewAllSelected?: boolean;
-  setViewAllSelected: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
-  const { value } = select;
-
-  const show = Array.isArray(value) && value.length > 0;
-  return show ? (
-    <div className="border-boundary-tint border-t p-8">
-      <Button
-        fullWidth
-        size="xs"
-        variant="glass"
-        color="secondary"
-        className="text-content-weak"
-        fontWeight="body"
-        onClick={() => {
-          setViewAllSelected((prev) => !prev);
-        }}
-      >
-        {viewAllSelected ? 'View All Results' : 'View All Selected'}
-      </Button>
-    </div>
-  ) : null;
-};

@@ -24,8 +24,7 @@ const SelectPopoverElement = classed(
 type ComboboxPopoverProps = {
   select: SelectPrimitive.SelectState;
   combobox: ComboboxPrimitive.ComboboxState;
-  optionMap: SelectOptionMap;
-  optionValueMap: OptionValueMap;
+  selectOptionMap: SelectOptionMap;
   viewAllSelected?: boolean;
   setViewAllSelected: React.Dispatch<React.SetStateAction<boolean>>;
 } & Pick<ComboboxProps<unknown[]>, 'searching' | 'isMultiSelect'>;
@@ -35,8 +34,7 @@ export function ComboboxPopover<TOptions extends unknown[]>({
   isMultiSelect,
   select,
   combobox,
-  optionMap,
-  optionValueMap,
+  selectOptionMap,
   viewAllSelected,
   setViewAllSelected,
 }: ComboboxPopoverProps) {
@@ -58,8 +56,7 @@ export function ComboboxPopover<TOptions extends unknown[]>({
         <ComboboxList
           combobox={combobox}
           select={select}
-          optionMap={optionMap}
-          optionValueMap={optionValueMap}
+          selectOptionMap={selectOptionMap}
           isMultiSelect={Boolean(isMultiSelect)}
           viewAllSelected={viewAllSelected}
           // onLastOptionItemScrollReached={onLastOptionItemScrollReached}
@@ -69,6 +66,7 @@ export function ComboboxPopover<TOptions extends unknown[]>({
 
       <AllSelectedFilterButton
         select={select}
+        combobox={combobox}
         viewAllSelected={viewAllSelected}
         setViewAllSelected={setViewAllSelected}
       />
@@ -80,14 +78,17 @@ const AllSelectedFilterButton = ({
   select,
   viewAllSelected,
   setViewAllSelected,
+  combobox,
 }: {
   select: SelectPrimitive.SelectState;
+  combobox: ComboboxPrimitive.ComboboxState;
   viewAllSelected?: boolean;
   setViewAllSelected: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const { value } = select;
 
-  const show = Array.isArray(value) && value.length > 0;
+  const show = Array.isArray(value) && value.length > 0 && !viewAllSelected;
+
   return show ? (
     <div className="border-boundary-tint border-t p-8">
       <Button
@@ -98,6 +99,7 @@ const AllSelectedFilterButton = ({
         className="text-content-weak"
         fontWeight="body"
         onClick={() => {
+          combobox.setValue('');
           setViewAllSelected((prev) => !prev);
         }}
       >

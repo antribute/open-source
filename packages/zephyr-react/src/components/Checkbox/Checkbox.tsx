@@ -56,5 +56,5 @@ export const Checkbox = ({ label, ...props }: CheckboxProps) => {
     );
   }
 
-  return <CheckboxElement {...inputComponentProps} />;
+  return <BasicCheckbox {...inputComponentProps} />;
 };

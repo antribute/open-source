@@ -118,7 +118,7 @@ interface InputSelectValueProps {
 }
 const InputSelectValue = ({ value, ...props }: InputSelectValueProps) => {
   return (
-    <div className="leading-sm relative z-0 min-w-0 shrink whitespace-nowrap">
+    <div className="font-body relative z-0 min-w-0 shrink whitespace-nowrap font-medium">
       {Array.isArray(value) ? (
         <MultiSelectValue {...props} value={value} />
       ) : (
@@ -130,7 +130,7 @@ const InputSelectValue = ({ value, ...props }: InputSelectValueProps) => {
 
 const MultiSelectValue = ({ value, placeholder }: { value: string[]; placeholder?: string }) => {
   return value.length > 0 ? (
-    <div className="truncate">{value.length} Selected</div>
+    <div className="overflow-y-visible truncate">{value.length} Selected</div>
   ) : (
     <PlaceholderElement>{placeholder}</PlaceholderElement>
   );
@@ -138,7 +138,7 @@ const MultiSelectValue = ({ value, placeholder }: { value: string[]; placeholder
 
 const SingleSelectValue = ({ value, placeholder }: { value: string; placeholder?: string }) => {
   return (
-    <div className="font-body truncate">
+    <div className="font-regular  truncate">
       {value || <PlaceholderElement>{placeholder}</PlaceholderElement>}
     </div>
   );

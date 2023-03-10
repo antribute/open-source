@@ -27,7 +27,6 @@ const CardGrid = ({
           border
           className={twMerge('col-span-2 shadow-lg', className)}
           {...props}
-          texture="noise"
         >
           <Card.Title>
             <Card.TitleHeading>{capitalCase(colorScheme ?? 'Surface')}</Card.TitleHeading>

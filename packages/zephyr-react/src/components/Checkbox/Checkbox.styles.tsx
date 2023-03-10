@@ -1,7 +1,7 @@
 import CheckIcon from '@heroicons/react/20/solid/CheckIcon';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import { sizeVariants } from 'styles/size.variants';
-import { Classed, classed, mergeVariants } from 'utils/classed';
+import { Classed, classed, expandVariant, mergeVariants } from 'utils/classed';
 
 export type CheckboxElementVariants = Classed.VariantProps<typeof CheckboxElement>;
 
@@ -10,12 +10,17 @@ export type CheckboxElementProps = React.ComponentProps<typeof CheckboxElement>;
 export const CheckboxElement = classed(
   CheckboxPrimitive.Root,
   // 'border-gray-light',
-  'bg-neutral-50  dark:bg-surface-inverse',
-  'radix-state-checked:bg-neutral dark:radix-state-checked:bg-neutral',
-  'border border-boundary dark:border-boundary-inverse rounded-[0.185rem]',
-  ' focus:ring-0 p-2',
-  'text-content dark:text-content-inverse  radix-state-checked:text-content-inverse-intense',
+  // 'bg-surface-soft',
+  'radix-state-checked:bg-surface-light',
+  'border border-boundary-tint',
+  'rounded-[0.185rem]',
+  'focus:ring-0 p-2',
+  'text-content-intense',
+  'bg-highlight',
+  expandVariant('radix-state-checked:(bg-primary,text-primary-content,border-highlight)'),
+
   'focus:ring-offset-0',
+
   // 'focus:ring-offset-0 focus:ring-0 focus:ring-neutral-dark',
   {
     variants: {

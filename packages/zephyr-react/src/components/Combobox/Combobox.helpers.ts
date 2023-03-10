@@ -7,7 +7,7 @@ interface GetOptionMapOptions extends ComboboxOptionGetters<unknown[]> {
 export function getOptionMap({ data = [], getOptionLabel, getOptionValue }: GetOptionMapOptions) {
   const arr = toArray(data);
 
-  const { optionMap, optionList } = arr.reduce<{
+  const { optionMap } = arr.reduce<{
     optionList: string[];
     optionMap: SelectOptionMap;
   }>(
@@ -28,7 +28,7 @@ export function getOptionMap({ data = [], getOptionLabel, getOptionValue }: GetO
     { optionList: [], optionMap: new Map() }
   );
 
-  return { optionMap, optionList };
+  return optionMap;
 }
 
 function toArray<TValue, TReturn extends TValue extends unknown[] ? TValue : TValue[]>(

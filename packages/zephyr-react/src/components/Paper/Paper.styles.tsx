@@ -75,7 +75,6 @@ export const PaperElement = classed(
       padding: 'md',
       overflow: 'hidden',
       rounded: true,
-      texture: 'noise',
     },
   }
 );
