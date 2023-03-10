@@ -63,7 +63,7 @@ export const PaperElement = classed(
       },
 
       texture: {
-        noise: 'noisy-surface-texture',
+        noise: 'noisy-surface-texture conic-gradient',
       },
 
       loading: {
@@ -75,6 +75,7 @@ export const PaperElement = classed(
       padding: 'md',
       overflow: 'hidden',
       rounded: true,
+      texture: 'noise',
     },
   }
 );

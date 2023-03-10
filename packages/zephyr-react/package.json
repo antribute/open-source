@@ -20,7 +20,7 @@
     "clean": "rimraf .turbo && rimraf .next && rimraf node_modules && rimraf build",
     "dev": "pnpm run build:watch",
     "lint": "eslint --cache src/**",
-    "storybook": "storybook dev -p 6006",
+    "storybook": "storybook dev -p 6006 --no-open",
     "test": "vitest"
   },
   "keywords": [
@@ -99,7 +99,7 @@
     "dot-path-value": "^0.0.6",
     "exhaustive": "^1.1.1",
     "focus-layers": "^0.6.1",
-    "immer": "^9.0.17",
+    "immer": "^9.0.19",
     "jotai": "^1.12.1",
     "jotai-immer": "^0.1.0",
     "lodash-es": "^4.17.21",
@@ -113,6 +113,8 @@
     "tailwind-merge": "^1.8.1",
     "ts-toolbelt": "^9.6.0",
     "type-fest": "^3.5.1",
+    "use-debounce": "^9.0.3",
+    "use-deep-compare-effect": "^1.8.1",
     "use-immer": "^0.8.1",
     "zod": "^3.20.2"
   }

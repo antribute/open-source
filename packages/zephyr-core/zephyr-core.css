@@ -133,4 +133,14 @@
   .noisy-surface-texture {
     @apply before:content-['']  before:bg-[url('https://liveblocks.io/images/noise.png')] before:bg-repeat before:opacity-[0.035] before:absolute before:inset-0 before:h-full before:w-full before:bg-[length:125px] before:mix-blend-exclusion;
   }
+
+  .conic-gradient {
+    background-blend-mode: luminosity;
+    background-color: var(--color-surface);
+    background-image: conic-gradient(
+      from 90deg at 50% 50%,
+      rgb(var(--color-surface-dark) / 27%) 0deg,
+      rgb(var(--color-surface-dark) / 10%) 360deg
+    );
+  }
 }
