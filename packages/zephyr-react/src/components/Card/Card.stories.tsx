@@ -34,7 +34,8 @@ const ExampleCard = ({
     <Card.Container
       colorScheme={colorScheme}
       border
-      className={twMerge('col-span-2 shadow-lg flex flex-col', className)}
+      shadow
+      className={twMerge('col-span-2 shadow-lg', className)}
       {...props}
     >
       <Card.TitleSection>
@@ -57,77 +58,76 @@ const ExampleCard = ({
         </Card.GroupSpacer>
       </Card.TitleSection>
 
-      <Card.BodySection className="h-256 grow">
+      <Card.BodySection>
         <Tabs.Root defaultValue="contact" className="w-full">
           <Tabs.List>
             <Tabs.Tab value="contact">Details</Tabs.Tab>
             <Tabs.Tab value="details">Metadata</Tabs.Tab>
           </Tabs.List>
-          <Tabs.ViewContainer>
-            <Tabs.View value="contact">
-              <Input label="Project Name" placeholder="Enter Name" width="full" />
-              <Combobox
-                width="full"
-                label="Theme"
-                value={colorScheme}
-                options={colorSchemeNames}
-                getOptionLabel={(color) => {
-                  return capitalCase(color ?? 'Surface');
-                }}
-                onValueChange={(c) => {
-                  setColorScheme(c);
-                }}
-              />
 
-              {childCard}
-            </Tabs.View>
+          <Tabs.View value="contact">
+            <Input label="Project Name" placeholder="Enter Name" width="full" />
+            <Combobox
+              width="full"
+              label="Theme"
+              value={colorScheme}
+              options={colorSchemeNames}
+              getOptionLabel={(color) => {
+                return capitalCase(color ?? 'Surface');
+              }}
+              onValueChange={(c) => {
+                setColorScheme(c);
+              }}
+            />
 
-            <Tabs.View value="details">
-              <Combobox
-                width="full"
-                label="Owner"
-                options={generateMockUserList({ size: 30 })}
-                getOptionLabel={({ name }) => {
-                  return name;
-                }}
-              />
-              <Combobox
-                width="full"
-                label="Collection"
-                options={generateMockProjectList({ size: 30 })}
-                getOptionLabel={({ name }) => {
-                  return name;
-                }}
-              />
-              <Combobox
-                width="full"
-                label="Collection"
-                options={generateMockProjectList({ size: 30 })}
-                getOptionLabel={({ name }) => {
-                  return name;
-                }}
-              />
-              <Combobox
-                width="full"
-                label="Collection"
-                options={generateMockProjectList({ size: 30 })}
-                getOptionLabel={({ name }) => {
-                  return name;
-                }}
-              />
+            {childCard}
+          </Tabs.View>
 
-              <Card.Description className="mb-8">
-                Lorem labore magna eiusmod id eiusmod cillum ex dolore amet ullamco ex. Anim ullamco
-                ex sit elit ut.
-              </Card.Description>
+          <Tabs.View value="details">
+            <Combobox
+              width="full"
+              label="Owner"
+              options={generateMockUserList({ size: 30 })}
+              getOptionLabel={({ name }) => {
+                return name;
+              }}
+            />
+            <Combobox
+              width="full"
+              label="Collection"
+              options={generateMockProjectList({ size: 30 })}
+              getOptionLabel={({ name }) => {
+                return name;
+              }}
+            />
+            <Combobox
+              width="full"
+              label="Collection"
+              options={generateMockProjectList({ size: 30 })}
+              getOptionLabel={({ name }) => {
+                return name;
+              }}
+            />
+            <Combobox
+              width="full"
+              label="Collection"
+              options={generateMockProjectList({ size: 30 })}
+              getOptionLabel={({ name }) => {
+                return name;
+              }}
+            />
 
-              {childCard}
-            </Tabs.View>
-          </Tabs.ViewContainer>
+            <Card.Description className="mb-8">
+              Lorem labore magna eiusmod id eiusmod cillum ex dolore amet ullamco ex. Anim ullamco
+              ex sit elit ut.
+            </Card.Description>
+
+            {childCard}
+          </Tabs.View>
         </Tabs.Root>
       </Card.BodySection>
 
-      <Card.FooterSection>
+      <Card.FooterSection className="shrink-0 px-8">
         <Card.GroupSpacer grow>
           <Button color="primary" variant="ghost" size="xs" className="">
             Prev

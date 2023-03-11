@@ -4,7 +4,7 @@
 
 import * as React from 'react';
 import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area';
-import { classed } from 'utils/classed';
+import { classed, expandVariant } from 'utils/classed';
 import { useImmer } from 'use-immer';
 import { useRef } from 'react';
 import { mergeRefs } from 'react-merge-refs';
@@ -13,7 +13,9 @@ import { interpolate, easeInOut } from 'framer-motion';
 type ScrollAreaRootElementProps = React.ComponentProps<typeof ScrollAreaPrimitive.Root>;
 const ScrollAreaRootElement = classed(
   ScrollAreaPrimitive.Root,
-  'relative rounded-sm transition-colors',
+  'relative transition-all',
+  'rounded-sm',
+  'px-8',
   {
     variants: {
       maskGradientTop: {
@@ -25,10 +27,10 @@ const ScrollAreaRootElement = classed(
         false: '',
       },
       offsetRim: {
-        true: 'ring-1 ring-highlight-tint',
+        true: 'ring-1 ring-highlight-tint !shadow-[rgba(0,0,0,0.07)]',
       },
       hasOffset: {
-        true: 'shadow-inner shadow-palette-black/10 ',
+        true: 'shadow-inner shadow-palette-black/5',
       },
       shadow: {
         true: '',

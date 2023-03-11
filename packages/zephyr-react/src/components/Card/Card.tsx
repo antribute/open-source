@@ -17,9 +17,8 @@ export type CardContainerVariantProps = Classed.ComponentProps<typeof CardContai
 
 export type CardContainerProps = PaperProps & { colorScheme?: ColorSchemeName };
 
-const CardContainer = (props: CardContainerProps) => {
-  const isButton = 'onClick' in props;
-  return <Paper hoverHighlight={isButton} cursorPointer={isButton} border {...props} />;
+const CardContainer = ({ padding, ...props }: CardContainerProps) => {
+  return <CardContainerElement padding={padding} border {...props} />;
 };
 
 // Title

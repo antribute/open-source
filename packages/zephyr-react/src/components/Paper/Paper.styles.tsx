@@ -24,6 +24,10 @@ export const PaperElementBackground = classed('div', {
     hoverHighlight: {
       true: 'hover:bg-surface-dark',
     },
+
+    shadow: {
+      true: 'shadow-xl',
+    },
   },
 });
 

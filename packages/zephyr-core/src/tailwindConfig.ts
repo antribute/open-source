@@ -52,6 +52,8 @@ const config = {
 
     data: {
       ...colorSchemeDataAttributes,
+      'container-padding': 'container-padding-none=true',
+      'container-padding-none': 'container-padding-none=true',
     },
 
     typography: (theme: PluginAPI['theme']) => ({

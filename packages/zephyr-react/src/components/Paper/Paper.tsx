@@ -19,6 +19,7 @@ export const Paper = ({
   children,
   hideChildrenWhileLoading,
   colorScheme = 'default',
+  padding,
   ...props
 }: PaperProps) => {
   const as = onClick ? 'button' : 'div';
@@ -26,9 +27,11 @@ export const Paper = ({
   return (
     <PaperElement
       data-color-scheme={colorScheme}
-      as={as}
+      data-container-padding-none={padding === false}
+      as={as as never}
       onClick={onClick}
       loading={loading}
+      padding={padding}
       {...props}
     >
       <Wrap
