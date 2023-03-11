@@ -54,11 +54,11 @@ const keys = {
     'primary',
     'secondary',
     'inverse',
-    'heart',
     'info',
     'caution',
     'danger',
     'positive',
+    'heart',
   ] satisfies LiteralUnion<ColorProp, string>[],
   sizes: ['xs', 'sm', 'md', 'lg'] as LiteralUnion<SizeProp, string>[],
 } satisfies Record<string, LiteralUnion<string, string>[]>;

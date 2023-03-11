@@ -130,8 +130,60 @@
     @apply bg-danger/10 hover:bg-danger/20 text-danger;
   }
 
+  .noisy-texture {
+    @apply bg-[url('https://liveblocks.io/images/noise.png')] bg-repeat bg-[length:125px] opacity-[0.035];
+  }
+
+  .before-absolute-content {
+    @apply before:content-[''] before:absolute before:w-full before:h-full before:pointer-events-none before:inset-0;
+  }
+
   .noisy-surface-texture {
-    @apply before:content-['']  before:bg-[url('https://liveblocks.io/images/noise.png')] before:bg-repeat before:opacity-[0.035] before:absolute before:inset-0 before:h-full before:w-full before:bg-[length:125px] before:mix-blend-exclusion;
+    @apply before:noisy-texture before-absolute-content;
+  }
+
+  .image-mask-gradient {
+    mask-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0.5) 20%,
+      transparent 80%
+    );
+  }
+  .shadow-mask-gradient-top {
+    mask-image: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(0, 0, 0, 1) var(--shadow-threshold-top, 15%)
+    );
+  }
+  .shadow-mask-gradient-bottom {
+    mask-image: linear-gradient(
+      to top,
+      transparent,
+      rgba(0, 0, 0, 1) var(--shadow-threshold-bottom, 15%)
+    );
+  }
+
+  .shadow-mask-gradient-top-bottom {
+    mask-image: linear-gradient(
+      transparent 0%,
+      black var(--shadow-threshold-top, 15%),
+      black calc(100% - var(--shadow-threshold-bottom, 15%)),
+      transparent 100%
+    );
+  }
+
+  .scroll-shadow {
+    @apply noisy-surface-texture absolute z-10 w-full h-16 transition-opacity duration-700 ease-in-out from-transparent to-palette-black/5;
+  }
+
+  .scroll-shadow-top {
+    @apply scroll-shadow before:image-mask-gradient z-10;
+  }
+
+  .scroll-shadow-bottom {
+    @apply scroll-shadow noisy-surface-texture before:gradient-mask-t-0;
   }
 
   .conic-gradient {

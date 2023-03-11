@@ -21,7 +21,7 @@ const tabs6 = [
 
 export const Default = () => {
   return (
-    <Paper border>
+    <RenderPaperContainers border>
       <Tabs.Root defaultValue={tabs2[0]?.value}>
         <Tabs.List>
           {tabs2.map((e) => (
@@ -39,7 +39,7 @@ export const Default = () => {
           ))}
         </Tabs.ViewContainer>
       </Tabs.Root>
-    </Paper>
+    </RenderPaperContainers>
   );
 };
 

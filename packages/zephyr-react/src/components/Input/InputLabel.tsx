@@ -80,7 +80,7 @@ const InputLabel = ({
 
 const OptionalLabelElement = classed(
   'span',
-  'ml-4 px-4 font-medium rounded  inline-block text-xs text-storm-200 bg-highlight text-content-weak  dark:text-content-inverse-weak'
+  'ml-4 px-4 font-medium rounded  inline-block text-xs text-content-weak bg-highlight'
 );
 
 export default InputLabel;

@@ -13,7 +13,7 @@ const Form = createTsForm(mappings);
 const SignUpSchema = z.object({
   email: schemas.email,
   name: schemas.stringfield.describe('User name // Enter username'),
-  checked: schemas.CheckboxField,
+  // checked: schemas.CheckboxField,
 });
 
 export const Default = () => {

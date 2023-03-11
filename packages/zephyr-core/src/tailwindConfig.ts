@@ -12,6 +12,7 @@ import tailwindCssTypographyPlugin from '@tailwindcss/typography';
 import createVariantGroupTransformer from 'tailwind-group-variant';
 import { iconsPlugin, getIconCollections } from '@egoist/tailwindcss-icons';
 import { multiThemePlugin } from './plugins/multi-theme-plugin';
+import { linearGradientMaskImagePlugin } from './plugins/linear-gradient-mask-image-plugin';
 
 // eslint-disable-next-line import/extensions
 import { create8PtGrid } from './helpers/create8PtGrid';
@@ -32,6 +33,7 @@ const config = {
     }),
 
     multiThemePlugin(),
+    linearGradientMaskImagePlugin(),
   ],
   content: {
     files: [

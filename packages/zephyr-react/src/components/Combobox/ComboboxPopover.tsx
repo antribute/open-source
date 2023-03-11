@@ -10,6 +10,7 @@ import { Button } from 'components/Button';
 
 import { ComboboxList } from 'components/Combobox/ComboboxList';
 import type { ComboboxProps, OptionValueMap, SelectOptionMap } from 'components/Combobox/Combobox';
+import { getNearestColorSchemeAttribute } from 'utils/getNearestColorSchemeAttribute';
 
 const SelectPopoverElement = classed(
   SelectPrimitive.SelectPopover,
@@ -39,7 +40,12 @@ export function ComboboxPopover<TOptions extends unknown[]>({
   setViewAllSelected,
 }: ComboboxPopoverProps) {
   return (
-    <SelectPopoverElement state={select} composite={false}>
+    <SelectPopoverElement
+      state={select}
+      composite={false}
+      data-color-scheme={getNearestColorSchemeAttribute(select.selectRef.current)}
+      portal
+    >
       <div className="border-boundary-tint space-y-8 border-b px-4 pt-6 pb-8">
         <ComboboxPrimitive.Combobox
           as={BaseInput}

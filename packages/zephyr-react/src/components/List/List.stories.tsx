@@ -12,7 +12,7 @@ import { Paper } from 'components/Paper';
 import { capitalCase } from 'change-case';
 import { List } from '.';
 
-const Sidebar = ({ color }: { color: string }) => {
+export const MockSidebar = ({ color }: { color: string }) => {
   const href = getStoryUrl();
   return (
     <List.Container roundedItems>
@@ -47,8 +47,8 @@ const Sidebar = ({ color }: { color: string }) => {
 export const Default = () => {
   return (
     <div className="fixed flex h-5/6 w-screen gap-x-8 overflow-x-auto">
-      <RenderPaperContainers className="top-0 h-full w-400">
-        {({ colorScheme: color }) => <Sidebar color={capitalCase(color ?? '')} />}
+      <RenderPaperContainers className="w-400 top-0 h-full">
+        {({ colorScheme: color }) => <MockSidebar color={capitalCase(color ?? '')} />}
       </RenderPaperContainers>
     </div>
   );

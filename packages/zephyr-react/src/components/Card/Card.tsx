@@ -1,12 +1,12 @@
 import { ColorSchemeName } from '@antribute/zephyr-core';
 import {
-  CardBodyElement,
+  CardBodySectionElement,
   CardContainerElement,
   CardDescriptionElement,
   CardFooterElement,
   CardGroupSpacerElement,
-  CardHeadingElement,
-  CardTitleAreaElement,
+  CardTitleElement,
+  CardTitleSectionElement,
 } from 'components/Card/Card.styles';
 import { Paper, PaperProps } from 'components/Paper';
 import { Classed } from 'utils/classed';
@@ -19,23 +19,23 @@ export type CardContainerProps = PaperProps & { colorScheme?: ColorSchemeName };
 
 const CardContainer = (props: CardContainerProps) => {
   const isButton = 'onClick' in props;
-  return <Paper hoverHighlight={isButton} cursorPointer={isButton} {...props} />;
+  return <Paper hoverHighlight={isButton} cursorPointer={isButton} border {...props} />;
 };
 
 // Title
 
-export type CardTitleProps = React.ComponentProps<typeof CardTitleAreaElement>;
+export type CardTitleProps = React.ComponentProps<typeof CardTitleSectionElement>;
 
 const CardTitleArea = (props: CardTitleProps) => {
-  return <CardTitleAreaElement {...props} />;
+  return <CardTitleSectionElement {...props} />;
 };
 
 // Title
 
-export type CardTitleHeadingProps = React.ComponentProps<typeof CardHeadingElement>;
+export type CardTitleHeadingProps = React.ComponentProps<typeof CardTitleElement>;
 
 const CardTitleHeading = (props: CardTitleHeadingProps) => {
-  return <CardHeadingElement {...props} />;
+  return <CardTitleElement {...props} />;
 };
 
 // Group Spacer
@@ -48,10 +48,10 @@ const CardGroupSpacer = (props: CardGroupSpacerProps) => {
 };
 
 //  Body
-export type CardBodyProps = React.ComponentProps<typeof CardBodyElement>;
+export type CardBodyProps = React.ComponentProps<typeof CardBodySectionElement>;
 
 const CardBody = (props: CardBodyProps) => {
-  return <CardBodyElement {...props} />;
+  return <CardBodySectionElement {...props} />;
 };
 
 //  Body
@@ -72,10 +72,10 @@ const CardFooter = (props: CardFooterProps) => {
 // Exports
 
 const Container = CardContainer;
-const Title = CardTitleArea;
-const Body = CardBody;
-const Footer = CardFooter;
-const TitleHeading = CardTitleHeading;
+const TitleSection = CardTitleArea;
+const BodySection = CardBody;
+const FooterSection = CardFooter;
+const Title = CardTitleHeading;
 const GroupSpacer = CardGroupSpacer;
 
-export { Container, Title, TitleHeading, GroupSpacer, Body, Description, Footer };
+export { Container, TitleSection, BodySection, FooterSection, Title, GroupSpacer, Description };

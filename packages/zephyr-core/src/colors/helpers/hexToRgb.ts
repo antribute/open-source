@@ -2,36 +2,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable no-bitwise */
-// import { hexAlphaCodes } from '../colors.constants';
-// import { objectMap } from './objectMap';
-
-// export function hexToRgba(
-//   hex: string
-// ): { red: number; green: number; blue: number; alpha?: number } | null {
-//   const match = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-
-//   if (!match) {
-//     return null;
-//   }
-
-//   const [r, g, b, a] = [...match, getHexAlpha(hex)];
-
-//   const [red, green, blue, alpha] = [r, g, b, a].map((c) => (c ? parseInt(c, 16) : undefined)) as [
-//     number,
-//     number,
-//     number,
-//     number | undefined
-//   ];
-
-//   return { red, green, blue, alpha };
-// }
-
-// function getHexAlpha(hex: string) {
-//   if (hex.length !== 9) return undefined;
-//   const hexAlphaCode = hex.slice(-2);
-//   const inverted = objectMap<string, string>(hexAlphaCodes, (k, v) => [v, k]);
-//   return inverted[hexAlphaCode as keyof typeof inverted];
-// }
 
 const hexCharacters = 'a-f\\d';
 const match3or4Hex = `#?[${hexCharacters}]{3}[${hexCharacters}]?`;

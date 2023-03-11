@@ -1,3 +1,4 @@
+import { ScrollArea } from 'components/ScrollArea/ScrollArea';
 import { PaperElement } from 'components/Paper/Paper.styles';
 import { Classed, classed } from 'utils/classed';
 
@@ -14,30 +15,28 @@ export const CardContainerElement = classed.div(
   }
 );
 
-// Heading
+// Title Section
 
-export type CardHeadingElementProps = React.ComponentProps<typeof CardHeadingElement>;
+export type CardTitleSectionElementProps = React.ComponentProps<typeof CardTitleSectionElement>;
 
-export const CardHeadingElement = classed(
-  'h6',
-  'text-md font-heading !font-bold !text-content-intense',
-  'flex-grow',
-
+export const CardTitleSectionElement = classed(
+  'div',
+  'flex relative w-full justify-between items-center',
+  'border-b border-boundary-tint/5 pb-8 text-content-strong',
+  'text-content-high',
   {
     variants: {},
   }
 );
 
-// Title Area
+// Title
 
-export type CardTitleAreaElementProps = React.ComponentProps<typeof CardTitleAreaElement>;
+export type CardTitleElementProps = React.ComponentProps<typeof CardTitleElement>;
 
-export const CardTitleAreaElement = classed(
-  'div',
-  CardHeadingElement,
-  'flex relative w-full justify-between items-center',
-  'border-b border-boundary-tint/5 pb-8 text-content-strong',
-  'text-content-high',
+export const CardTitleElement = classed(
+  'h6',
+  'text-md font-heading !font-bold !text-content-intense',
+  'flex-grow',
 
   {
     variants: {},
@@ -71,8 +70,8 @@ export const CardGroupSpacerElement = classed(
 );
 
 // Body
-export const CardBodyElement = classed(
-  'div',
+export const CardBodySectionElement = classed(
+  ScrollArea,
   'w-full my-8',
   'font-body',
   'text-content-moderate',
@@ -90,7 +89,7 @@ export type CardFooterElementProps = React.ComponentProps<typeof CardFooterEleme
 
 export const CardFooterElement = classed(
   'p',
-  'flex flex-wrap justify-end items-center gap-8 gap-y-6 pt-8 px-4 border-t border-highlight',
+  'flex flex-wrap justify-end items-center gap-8 gap-y-6 pt-8 px-4 border-t border-highlight mt-auto',
   {
     variants: {},
   }

@@ -1,7 +1,7 @@
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
-import React from 'react';
-import { Classed, classed, deriveClassed } from 'utils/classed';
-import InformationCircleIcon from '@heroicons/react/24/outline/InformationCircleIcon';
+import React, { useState } from 'react';
+import { Classed, classed } from 'utils/classed';
+import { getNearestColorSchemeAttribute } from 'utils/getNearestColorSchemeAttribute';
 
 type TooltipContentElementProps = Classed.ComponentProps<typeof TooltipContentElement>;
 
@@ -11,10 +11,11 @@ const TooltipContentElement = classed(
   'radix-side-right:animate-slide-left-fade',
   'radix-side-bottom:animate-slide-up-fade',
   'radix-side-left:animate-slide-right-fade',
-  'inline-flex items-center rounded py-8 px-10',
+  'inline-flex items-center py-8 px-10',
   'text-sm font-body',
-  'bg-surface text-content-intense shadow-hover',
-
+  'rounded',
+  'bg-surface-soft text-content-strong',
+  'ring-1 ring-inset ring-content-tint',
   {
     variants: {
       maxWidth: {
@@ -49,30 +50,41 @@ export const Tooltip = ({
   triggerAsChild = true,
   ...props
 }: TooltipProps) => {
+  const [colorSchemeAttribute, setColorSchemeAttribute] = useState<string | undefined>();
+
   return (
     <TooltipPrimitive.Provider>
       <TooltipPrimitive.Root delayDuration={100} {...props}>
-        <TooltipPrimitive.Trigger asChild={triggerAsChild} {...triggerProps}>
+        <TooltipPrimitive.Trigger
+          asChild={triggerAsChild}
+          {...triggerProps}
+          onMouseOverCapture={(e) => {
+            triggerProps?.onMouseOverCapture?.(e);
+            setColorSchemeAttribute(getNearestColorSchemeAttribute(e.currentTarget));
+          }}
+        >
           {children}
         </TooltipPrimitive.Trigger>
 
-        <TooltipPrimitive.Portal>
-          <TooltipContentElement
-            // data-color-scheme="neutral-dark"
-            sideOffset={4}
-            collisionPadding={30}
-            {...contentProps}
-            onClick={(e) => {
-              const { stopPropogation = true, onClick } = contentProps ?? {};
-              if (stopPropogation) {
-                e.stopPropagation();
-              }
-              onClick?.(e);
-            }}
-          >
-            {tooltip}
-          </TooltipContentElement>
-        </TooltipPrimitive.Portal>
+        {colorSchemeAttribute && (
+          <TooltipPrimitive.Portal>
+            <TooltipContentElement
+              data-color-scheme={colorSchemeAttribute}
+              sideOffset={4}
+              collisionPadding={30}
+              {...contentProps}
+              onClick={(e) => {
+                const { stopPropogation = true, onClick } = contentProps ?? {};
+                if (stopPropogation) {
+                  e.stopPropagation();
+                }
+                onClick?.(e);
+              }}
+            >
+              {tooltip}
+            </TooltipContentElement>
+          </TooltipPrimitive.Portal>
+        )}
       </TooltipPrimitive.Root>
     </TooltipPrimitive.Provider>
   );

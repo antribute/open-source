@@ -1,35 +1,31 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { LiteralUnion } from 'type-fest';
 import { getByPath } from 'dot-path-value';
-import {
-  HexAlphaPreset,
-  HexAlphaTransparency,
-  hexAlphaCodes,
-  hexTransparencyPresetMap,
-} from '../colors.constants';
+import type { ColorAlphaVariant } from '../colors.types';
+import { HexAlphaTransparency, hexAlphaCodes, hexTransparencyPresetMap } from '../colors.constants';
 import { HexAlphaOptions, generateHexAlpha } from './generateHexAlpha';
 
 type HexValueOption = {
   hexColor?: string;
 } & HexAlphaOptions;
 
-type HexAlphaOverrideValue<T extends string = HexAlphaPreset> =
+type HexAlphaOverrideValue<T extends string = ColorAlphaVariant> =
   | LiteralUnion<T, string>
   | HexValueOption
   | undefined;
 
-type HexAlphaOverridesKey = LiteralUnion<'DEFAULT' | HexAlphaPreset, string>;
+type HexAlphaOverridesKey = LiteralUnion<'DEFAULT' | ColorAlphaVariant, string>;
 // type HexAlphaOverrides = Partial<
-//   Record<LiteralUnion<'DEFAULT' | HexAlphaPreset, string>, HexAlphaOverrideValue>
+//   Record<LiteralUnion<'DEFAULT' | ColorAlphaVariant, string>, HexAlphaOverrideValue>
 // >;
 
 type HexAlphaOverrides = {
-  [K in HexAlphaOverridesKey]?: K extends HexAlphaPreset
-    ? HexAlphaOverrideValue<HexAlphaPreset | HexAlphaTransparency>
+  [K in HexAlphaOverridesKey]?: K extends ColorAlphaVariant
+    ? HexAlphaOverrideValue<ColorAlphaVariant | HexAlphaTransparency>
     : HexAlphaOverrideValue;
 };
 
-type GenerateHexAlphaColorGroupReturn = Record<HexAlphaPreset | 'DEFAULT', string>;
+type GenerateHexAlphaColorGroupReturn = Record<ColorAlphaVariant | 'DEFAULT', string>;
 export function generateHexAlphaColorGroup(
   hex: string,
   alphaOverrides?: HexAlphaOverrides
@@ -76,7 +72,7 @@ function getHexAlphaOverrideOptions({
   // Case: generateHexAlphaColorGroup('#FFFFFF', { DEFAULT: 'ghost' })
   if (typeof overrideValue === 'string' && overrideValue in hexTransparencyPresetMap) {
     return {
-      transparencyPreset: overrideValue as HexAlphaPreset,
+      transparencyPreset: overrideValue as ColorAlphaVariant,
       hexColor,
     } satisfies HexValueOption;
   }
@@ -96,8 +92,8 @@ function getHexAlphaOverrideOptions({
     } satisfies HexValueOption;
   }
 
-  // Case: generateHexAlphaColorGroup('#FFFFFF', { DEFAULT: { hexAlphaPreset: 'ghost'} })
-  // Case: generateHexAlphaColorGroup('#FFFFFF', { DEFAULT: { hexAlphaPreset: '#000000', hexAlphaPreset: 'ghost' } })
+  // Case: generateHexAlphaColorGroup('#FFFFFF', { DEFAULT: { ColorAlphaVariant: 'ghost'} })
+  // Case: generateHexAlphaColorGroup('#FFFFFF', { DEFAULT: { ColorAlphaVariant: '#000000', ColorAlphaVariant: 'ghost' } })
   return {
     hexColor: getByPath(overrideValue, 'hexColor') ?? hexColor,
     transparencyPreset: getByPath(overrideValue, 'transparencyPreset'),

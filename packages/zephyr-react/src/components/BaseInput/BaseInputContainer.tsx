@@ -73,7 +73,7 @@ const getInputStateIcon = ({
     return <CheckCircleIcon className="text-positive" {...common} />;
   }
 
-  return undefined;
+  return <CheckCircleIcon className="opacity-0" />;
 };
 
 type BaseInputIconProps = React.ComponentProps<typeof BaseInputIconSlotElement> &

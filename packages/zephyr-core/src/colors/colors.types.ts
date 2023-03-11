@@ -11,3 +11,13 @@ export type HexValue = `#${string}`;
 export type ColorShadeVariant = 'soft' | 'dark' | 'light';
 
 export type ColorPropKey = 'DEFAULT' | ColorShadeVariant;
+
+export type ColorAlphaVariant =
+  | 'tint'
+  | 'ghost'
+  | 'subtle'
+  | 'weak'
+  | 'moderate'
+  | 'high'
+  | 'strong'
+  | 'intense';

@@ -36,10 +36,14 @@ export const commonScheme = {
     base: colorPalette['palette-base'].DEFAULT,
 
     highlight: colorPalette['palette-highlight'].DEFAULT,
+    'highlight-tint': colorPalette['palette-highlight'].tint,
+    'highlight-ghost': colorPalette['palette-highlight'].ghost,
+    'highlight-subtle': colorPalette['palette-highlight'].subtle,
     'highlight-weak': colorPalette['palette-highlight'].weak,
     'highlight-moderate': colorPalette['palette-highlight'].moderate,
     'highlight-high': colorPalette['palette-highlight'].high,
     'highlight-strong': colorPalette['palette-highlight'].strong,
+    'highlight-intense': colorPalette['palette-highlight'].intense,
 
     boundary: colorPalette['palette-boundary'].DEFAULT,
     'boundary-tint': colorPalette['palette-boundary'].tint,
@@ -49,6 +53,7 @@ export const commonScheme = {
     'boundary-moderate': colorPalette['palette-boundary'].moderate,
     'boundary-strong': colorPalette['palette-boundary'].strong,
     'boundary-high': colorPalette['palette-boundary'].high,
+    'boundary-intense': colorPalette['palette-boundary'].intense,
 
     content: colorPalette['palette-content'].DEFAULT,
     'content-tint': colorPalette['palette-content'].tint,
@@ -84,10 +89,14 @@ export const commonScheme = {
     base: colorPalette['palette-base'].inverse,
 
     highlight: colorPalette['palette-highlight-inverse'].DEFAULT,
+    'highlight-tint': colorPalette['palette-highlight-inverse'].tint,
+    'highlight-ghost': colorPalette['palette-highlight-inverse'].ghost,
+    'highlight-subtle': colorPalette['palette-highlight-inverse'].subtle,
     'highlight-weak': colorPalette['palette-highlight-inverse'].weak,
     'highlight-moderate': colorPalette['palette-highlight-inverse'].moderate,
     'highlight-high': colorPalette['palette-highlight-inverse'].high,
     'highlight-strong': colorPalette['palette-highlight-inverse'].strong,
+    'highlight-intense': colorPalette['palette-highlight-inverse'].intense,
 
     boundary: colorPalette['palette-boundary-inverse'].DEFAULT,
     'boundary-tint': colorPalette['palette-boundary-inverse'].tint,
@@ -97,6 +106,7 @@ export const commonScheme = {
     'boundary-moderate': colorPalette['palette-boundary-inverse'].moderate,
     'boundary-strong': colorPalette['palette-boundary-inverse'].strong,
     'boundary-high': colorPalette['palette-boundary-inverse'].high,
+    'boundary-intense': colorPalette['palette-boundary-inverse'].intense,
 
     content: colorPalette['palette-content-inverse'].DEFAULT,
     'content-tint': colorPalette['palette-content-inverse'].tint,

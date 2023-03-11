@@ -1,24 +1,16 @@
 import { InputContainer, InputContainerProps } from 'components/Input/InputContainer';
 import { useInputProps } from 'components/Input/useInputProps';
-import { classTheme, classed } from 'utils/classed';
-import { BaseInputElement } from 'components/BaseInput/BaseInput.styles';
-import { BaseInputContainerElement } from 'components/BaseInput/BaseInputContainer.styles';
-import { InputSizeVariant, inputSizeVariants } from 'styles/input-component.variants';
-import InputLabel, { InputLabelElement } from 'components/Input/InputLabel';
-import { BasicCheckbox, CheckboxElement, CheckboxElementProps } from './Checkbox.styles';
+import { classed } from 'utils/classed';
+import { inputSizeVariants } from 'styles/input-component.variants';
+import { InputLabelElement } from 'components/Input/InputLabel';
+import { BasicCheckbox, CheckboxElementProps } from './Checkbox.styles';
 
 type CheckboxProps = Omit<CheckboxElementProps, 'type'> & Omit<InputContainerProps, 'children'>;
-
-const CheckboxInputElement = classed(
-  'label',
-  BaseInputElement,
-  'inline-flex items-center gap-8 cursor-pointer focus-within:ring-2'
-);
 
 const CheckboxContainerElement = classed(
   'div',
   'inline-flex gap-8',
-  'border-2 items-center border-transparent gap-8 bg-highlight-tint rounded',
+  'border-2 items-center border-transparent gap-8 hover:bg-highlight-ghost rounded',
   {
     variants: { size: inputSizeVariants },
   },

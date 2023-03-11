@@ -1,16 +1,12 @@
 import { getByPath } from 'dot-path-value';
-import {
-  HexAlphaTransparency,
-  HexAlphaPreset,
-  hexAlphaCodes,
-  hexTransparencyPresetMap,
-} from '../colors.constants';
+import type { ColorAlphaVariant } from '../colors.types';
+import { HexAlphaTransparency, hexAlphaCodes, hexTransparencyPresetMap } from '../colors.constants';
 
 export type HexAlphaOptions =
-  | { transparencyPreset?: HexAlphaPreset | undefined }
+  | { transparencyPreset?: ColorAlphaVariant | undefined }
   | { transparency?: HexAlphaTransparency };
 
-type GenerateHexAlphaFnOptions = HexAlphaPreset | HexAlphaOptions;
+type GenerateHexAlphaFnOptions = ColorAlphaVariant | HexAlphaOptions;
 
 export function generateHexAlpha(hexColor: string, options: GenerateHexAlphaFnOptions) {
   const hex = hexColor.slice(0, 7);

@@ -2,10 +2,10 @@ import { Classed, classed } from 'utils/classed';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { PaperElement } from 'components/Paper/Paper.styles';
 import {
-  CardBodyElement,
+  CardBodySectionElement,
   CardFooterElement,
-  CardHeadingElement,
-  CardTitleAreaElement,
+  CardTitleElement,
+  CardTitleSectionElement,
 } from 'components/Card/Card.styles';
 
 // Content
@@ -54,7 +54,7 @@ export const DialogOverlayElement = classed(
 
 export type DialogHeadingElementProps = React.ComponentProps<typeof DialogHeadingElement>;
 
-export const DialogHeadingElement = classed(CardHeadingElement);
+export const DialogHeadingElement = classed(CardTitleElement);
 
 export type DialogDescriptionElementProps = React.ComponentProps<typeof DialogDescriptionElement>;
 
@@ -70,13 +70,13 @@ export const DialogDescriptionElement = classed(
 
 export type DialogTitleElementProps = React.ComponentProps<typeof DialogTitleElement>;
 
-export const DialogTitleElement = classed(DialogPrimitive.Title, CardTitleAreaElement);
+export const DialogTitleElement = classed(DialogPrimitive.Title, CardTitleSectionElement);
 
 // Body
 
 export type DialogBodyElementProps = React.ComponentProps<typeof DialogBodyElement>;
 
-export const DialogBodyElement = classed('div', CardBodyElement);
+export const DialogBodyElement = classed('div', CardBodySectionElement);
 
 // Footer
 

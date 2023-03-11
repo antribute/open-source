@@ -214,6 +214,7 @@ export const ButtonElement = classed.button(
       color: {
         primary: '',
         secondary: '',
+        surface: '',
         inverse: '',
         info: '',
         positive: '',

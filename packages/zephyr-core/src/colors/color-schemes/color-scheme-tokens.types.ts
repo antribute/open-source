@@ -1,5 +1,4 @@
-import { ColorAlphaVariant } from '../colors.constants';
-import { ColorShadeVariant } from '../colors.types';
+import type { ColorShadeVariant, ColorAlphaVariant } from '../colors.types';
 
 export type ColorSchemeToken =
   | 'base'
@@ -12,11 +11,8 @@ export type ColorSchemeToken =
   | TokenShadeVariant<'positive'>
   | TokenShadeVariant<'caution'>
   | TokenShadeVariant<'danger'>
-  | TokenStrengthVariant<'highlight', 'weak' | 'moderate' | 'high' | 'strong' | 'DEFAULT'>
-  | TokenStrengthVariant<
-      'boundary',
-      'tint' | 'ghost' | 'subtle' | 'weak' | 'moderate' | 'high' | 'strong' | 'DEFAULT'
-    >
+  | TokenStrengthVariant<'highlight'>
+  | TokenStrengthVariant<'boundary'>
   | ContentTokenVariant<'content'>;
 
 type TokenVariant<T extends string> =
