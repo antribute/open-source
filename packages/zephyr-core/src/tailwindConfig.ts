@@ -52,8 +52,8 @@ const config = {
 
     data: {
       ...colorSchemeDataAttributes,
-      'container-padding': 'container-padding-none=true',
-      'container-padding-none': 'container-padding-none=true',
+      'container-padding': 'container-padding=true',
+      'container-padding-none': 'container-padding=false',
     },
 
     typography: (theme: PluginAPI['theme']) => ({
@@ -278,7 +278,7 @@ const config = {
       ...breakpoints(theme('screens')),
     }),
 
-    outlineColor: ({ theme }) => theme('colors'),
+    outlineColor: ({ theme }) => theme('colors', 'var(--color-highlight-high)'),
     padding: ({ theme }) => theme('spacing'),
     placeholderColor: ({ theme }) => theme('colors'),
     placeholderOpacity: ({ theme }) => theme('opacity'),

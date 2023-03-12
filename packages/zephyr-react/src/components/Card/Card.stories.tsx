@@ -20,24 +20,13 @@ import { MockSidebar } from 'components/List/List.stories';
 import { Paper } from 'components/Paper';
 import { Card } from '.';
 
-type ExampleCardProps = CardContainerProps & { childCard?: React.ReactNode };
+type ExampleCardProps = CardContainerProps;
 
-const ExampleCard = ({
-  className,
-  colorScheme: colorSchemeProp,
-  childCard,
-  ...props
-}: ExampleCardProps) => {
+const ExampleCard = ({ colorScheme: colorSchemeProp, children, ...props }: ExampleCardProps) => {
   const [colorScheme, setColorScheme] = useState<ColorSchemeName>(colorSchemeProp ?? 'surface');
 
   return (
-    <Card.Container
-      colorScheme={colorScheme}
-      border
-      shadow
-      className={twMerge('col-span-2 shadow-lg', className)}
-      {...props}
-    >
+    <Card.Container colorScheme={colorScheme} {...props}>
       <Card.TitleSection>
         <Card.Title>Add New Project</Card.Title>
 
@@ -64,66 +53,67 @@ const ExampleCard = ({
             <Tabs.Tab value="contact">Details</Tabs.Tab>
             <Tabs.Tab value="details">Metadata</Tabs.Tab>
           </Tabs.List>
+          <Tabs.ViewContainer>
+            <Tabs.View value="contact">
+              <Input label="Project Name" placeholder="Enter Name" width="full" />
+              <Combobox
+                width="full"
+                label="Theme"
+                value={colorScheme}
+                options={colorSchemeNames}
+                getOptionLabel={(color) => {
+                  return capitalCase(color ?? 'Surface');
+                }}
+                onValueChange={(c) => {
+                  setColorScheme(c);
+                }}
+              />
 
-          <Tabs.View value="contact">
-            <Input label="Project Name" placeholder="Enter Name" width="full" />
-            <Combobox
-              width="full"
-              label="Theme"
-              value={colorScheme}
-              options={colorSchemeNames}
-              getOptionLabel={(color) => {
-                return capitalCase(color ?? 'Surface');
-              }}
-              onValueChange={(c) => {
-                setColorScheme(c);
-              }}
-            />
+              {children}
+            </Tabs.View>
 
-            {childCard}
-          </Tabs.View>
+            <Tabs.View value="details">
+              <Combobox
+                width="full"
+                label="Owner"
+                options={generateMockUserList({ size: 30 })}
+                getOptionLabel={({ name }) => {
+                  return name;
+                }}
+              />
+              <Combobox
+                width="full"
+                label="Collection"
+                options={generateMockProjectList({ size: 30 })}
+                getOptionLabel={({ name }) => {
+                  return name;
+                }}
+              />
+              <Combobox
+                width="full"
+                label="Collection"
+                options={generateMockProjectList({ size: 30 })}
+                getOptionLabel={({ name }) => {
+                  return name;
+                }}
+              />
+              <Combobox
+                width="full"
+                label="Collection"
+                options={generateMockProjectList({ size: 30 })}
+                getOptionLabel={({ name }) => {
+                  return name;
+                }}
+              />
 
-          <Tabs.View value="details">
-            <Combobox
-              width="full"
-              label="Owner"
-              options={generateMockUserList({ size: 30 })}
-              getOptionLabel={({ name }) => {
-                return name;
-              }}
-            />
-            <Combobox
-              width="full"
-              label="Collection"
-              options={generateMockProjectList({ size: 30 })}
-              getOptionLabel={({ name }) => {
-                return name;
-              }}
-            />
-            <Combobox
-              width="full"
-              label="Collection"
-              options={generateMockProjectList({ size: 30 })}
-              getOptionLabel={({ name }) => {
-                return name;
-              }}
-            />
-            <Combobox
-              width="full"
-              label="Collection"
-              options={generateMockProjectList({ size: 30 })}
-              getOptionLabel={({ name }) => {
-                return name;
-              }}
-            />
+              <Card.Description className="mb-8">
+                Lorem labore magna eiusmod id eiusmod cillum ex dolore amet ullamco ex. Anim ullamco
+                ex sit elit ut.
+              </Card.Description>
 
-            <Card.Description className="mb-8">
-              Lorem labore magna eiusmod id eiusmod cillum ex dolore amet ullamco ex. Anim ullamco
-              ex sit elit ut.
-            </Card.Description>
-
-            {childCard}
-          </Tabs.View>
+              {children}
+            </Tabs.View>
+          </Tabs.ViewContainer>
         </Tabs.Root>
       </Card.BodySection>
 
@@ -149,16 +139,12 @@ const ExampleCard = ({
   );
 };
 
-const CardGrid = ({ count = 6, ...props }: ExampleCardProps & { count?: number }) => {
-  const cards = new Array(count).fill(0);
+export const Default = () => {
+  return <ExampleCard className="w-352" />;
+};
 
-  return (
-    <>
-      {cards.map((key) => (
-        <ExampleCard key={key} {...props} />
-      ))}
-    </>
-  );
+export const NoPadding = () => {
+  return <ExampleCard className="w-352" padding={false} />;
 };
 
 export const CardThemes = () => {
@@ -171,79 +157,6 @@ export const CardThemes = () => {
             return <ExampleCard colorScheme={e} className="col-span-3" />;
           })}
       </div>
-    </div>
-  );
-};
-
-export const Default = () => {
-  return (
-    <div className="grid grid-cols-12 gap-16">
-      <CardGrid colorScheme="surface" />
-      <CardGrid colorScheme="surface-light" />
-      <CardGrid colorScheme="surface-dark" />
-      <CardGrid colorScheme="neutral" />
-      <CardGrid colorScheme="neutral-light" />
-      <CardGrid colorScheme="neutral-dark" />
-      <CardGrid colorScheme="inverse" />
-      {/* ---- Nested ---- 
-      <CardGrid
-        colorScheme="surface"
-        childCard={
-          <Card.Container colorScheme="surface-light">
-            <Card.BodySection className="text-md">
-              Lorem labore magna eiusmod id eiusmod cillum.
-            </Card.BodySection>
-          </Card.Container>
-        }
-      />
-      <CardGrid
-        colorScheme="surface-light"
-        childCard={
-          <Card.Container colorScheme="surface">
-            <Card.BodySection>Lorem labore magna eiusmod id eiusmod cillum.</Card.BodySection>
-          </Card.Container>
-        }
-      />
-      <CardGrid
-        colorScheme="surface-dark"
-        childCard={
-          <Card.Container colorScheme="surface-light">
-            <Card.BodySection>Lorem labore magna eiusmod id eiusmod cillum.</Card.BodySection>
-          </Card.Container>
-        }
-      />
-      <CardGrid
-        colorScheme="neutral"
-        childCard={
-          <Card.Container colorScheme="neutral-dark">
-            <Card.BodySection>Lorem labore magna eiusmod id eiusmod cillum.</Card.BodySection>
-          </Card.Container>
-        }
-      />
-      <CardGrid
-        colorScheme="neutral-light"
-        childCard={
-          <Card.Container colorScheme="neutral">
-            <Card.BodySection>Lorem labore magna eiusmod id eiusmod cillum.</Card.BodySection>
-          </Card.Container>
-        }
-      />
-      <CardGrid
-        colorScheme="neutral-dark"
-        childCard={
-          <Card.Container colorScheme="neutral">
-            <Card.BodySection>Lorem labore magna eiusmod id eiusmod cillum.</Card.BodySection>
-          </Card.Container>
-        }
-      />
-      <CardGrid
-        colorScheme="inverse"
-        childCard={
-          <Card.Container colorScheme="inverse-light">
-            <Card.BodySection>Lorem labore magna eiusmod id eiusmod cillum.</Card.BodySection>
-          </Card.Container>
-        }
-      /> */}
     </div>
   );
 };

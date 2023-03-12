@@ -34,6 +34,37 @@ export const CardTitleSectionElement = classed(
   }
 );
 
+// Body Section
+export const CardBodySectionElement = classed(
+  ScrollArea,
+  'w-full pt-8 mb-8',
+  'font-body',
+  'text-content-moderate',
+  'flex flex-col gap-16',
+  'min-h-0 grow',
+  'group-data-container-padding-none/card:px-10',
+  'group-data-container-padding-none/card:mb-0',
+  {
+    variants: {},
+  }
+);
+
+// Footer Section
+export type CardFooterElementVariants = Classed.VariantProps<typeof CardFooterElement>;
+
+export type CardFooterElementProps = React.ComponentProps<typeof CardFooterElement>;
+
+export const CardFooterElement = classed(
+  'p',
+  'flex flex-wrap shrink-0 mt-auto',
+  'justify-end items-center gap-8 gap-y-6 pt-8 px-4 border-t border-highlight ',
+  'group-data-container-padding-none/card:px-10',
+  'group-data-container-padding-none/card:pb-8',
+  {
+    variants: {},
+  }
+);
+
 // Title
 
 export type CardTitleElementProps = React.ComponentProps<typeof CardTitleElement>;
@@ -67,34 +98,3 @@ export const CardGroupSpacerElement = classed('div', 'flex items-center flex-wra
     },
   },
 });
-
-// Body
-export const CardBodySectionElement = classed(
-  ScrollArea,
-  'w-full pt-8 mb-8',
-  'font-body',
-  'text-content-moderate',
-  'flex flex-col gap-16',
-  'min-h-0 grow',
-  'group-data-container-padding-none/card:px-10',
-  'group-data-container-padding-none/card:mb-0',
-  {
-    variants: {},
-  }
-);
-
-// Footer
-export type CardFooterElementVariants = Classed.VariantProps<typeof CardFooterElement>;
-
-export type CardFooterElementProps = React.ComponentProps<typeof CardFooterElement>;
-
-export const CardFooterElement = classed(
-  'p',
-  'flex flex-wrap shrink-0 mt-auto',
-  'justify-end items-center gap-8 gap-y-6 pt-8 px-4 border-t border-highlight ',
-  'group-data-container-padding-none/card:px-10',
-  'group-data-container-padding-none/card:pb-8',
-  {
-    variants: {},
-  }
-);

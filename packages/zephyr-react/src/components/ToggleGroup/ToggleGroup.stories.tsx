@@ -1,4 +1,8 @@
-import { RenderColorVariants, RenderSizeVariants } from 'utils/storybook-utils';
+import {
+  RenderColorVariants,
+  RenderPaperContainers,
+  RenderSizeVariants,
+} from 'utils/storybook-utils';
 import { StoryFn } from '@storybook/react';
 import { generateMockOrganizationList } from 'mock/mock-data';
 import { Paper } from 'components/Paper';
@@ -19,6 +23,7 @@ export const Basic: StoryFn = () => {
       orientation="vertical"
       // @ts-expect-error - fix this
       Component={ToggleGroup}
+      renderPaperContainers
       props={{
         items: [
           { label: 'One', value: 'one' },
@@ -34,12 +39,12 @@ export const Basic: StoryFn = () => {
 export const FullWidth: StoryFn = () => {
   const organizations = generateMockOrganizationList({ size: 4 });
   return (
-    <Paper className="w-full max-w-screen-sm">
+    <RenderPaperContainers border>
       <ToggleGroup
         fullWidth
         items={organizations.map(({ name, id }) => ({ label: name, value: `${id}` }))}
       />
-    </Paper>
+    </RenderPaperContainers>
   );
 };
 

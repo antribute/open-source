@@ -15,7 +15,7 @@ const ScrollAreaRootElement = classed(
   ScrollAreaPrimitive.Root,
   'relative transition-all',
   'rounded-sm',
-  'px-8',
+  'px-4',
   {
     variants: {
       maskGradientTop: {
@@ -23,14 +23,14 @@ const ScrollAreaRootElement = classed(
         false: '',
       },
       maskGradientBottom: {
-        true: 'shadow-mask-gradient-bottom',
+        true: 'shadow-mask-gradient-bottom ring-',
         false: '',
       },
       offsetRim: {
         true: 'ring-1 ring-highlight-tint !shadow-[rgba(0,0,0,0.07)]',
       },
       hasOffset: {
-        true: 'shadow-inner shadow-palette-black/5',
+        true: ' shadow-palette-black/5',
       },
       shadow: {
         true: '',
@@ -58,7 +58,7 @@ const ScrollAreaViewportElement = classed(
   {
     variants: {
       hasOffset: {
-        true: 'shadow-mask-gradient-top-bottom ',
+        true: 'shadow-mask-gradient-top-bottom',
       },
     },
   }

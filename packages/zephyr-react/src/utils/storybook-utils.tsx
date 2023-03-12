@@ -35,7 +35,7 @@ interface RenderVariantBaseProps<T extends ReactComponent, TProp extends string 
 const RenderVariantElement = classed('div', {
   variants: {
     orientation: {
-      vertical: 'inline-flex flex-col items-center gap-24',
+      vertical: 'inline-flex flex-col items-start gap-24',
       horizontal: 'flex gap-24 items-center flex-wrap',
     },
   },
@@ -237,7 +237,7 @@ export const RenderPaperContainers = ({
         <div
           className={clsx('inline-flex gap-16', {
             'flex-row': orientation === 'horizontal',
-            'flex-col': orientation === 'vertical',
+            'flex-row flex-wrap': orientation === 'vertical',
           })}
         >
           {c}

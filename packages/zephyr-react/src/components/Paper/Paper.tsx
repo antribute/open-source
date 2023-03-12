@@ -11,6 +11,7 @@ export type PaperProps = PaperElementVariantProps & {
   onClick?: () => void;
   hideChildrenWhileLoading?: boolean;
   colorScheme?: ColorSchemeName;
+  padding?: boolean;
 };
 
 export const Paper = ({
@@ -27,7 +28,7 @@ export const Paper = ({
   return (
     <PaperElement
       data-color-scheme={colorScheme}
-      data-container-padding-none={padding === false}
+      data-container-padding={padding}
       as={as as never}
       onClick={onClick}
       loading={loading}

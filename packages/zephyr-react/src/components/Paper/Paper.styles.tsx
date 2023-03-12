@@ -34,28 +34,18 @@ export const PaperElementBackground = classed('div', {
 export const PaperElement = classed(
   'div',
   PaperElementBackground,
-  'relative text-left bg-surface text-content',
-
-  // classTheme({
-  //   class: 'group relative  inline-block rounded-md text-left ',
-  //   light: 'text-content-moderate',
-  //   dark: 'dark:text-content-inverse-moderate',
-  // }),
+  'relative',
+  'bg-surface',
+  'text-left text-content',
   {
     variants: {
       padding: {
-        false: '',
-        none: 'p-0',
-        xs: 'p-4',
-        sm: 'p-8',
-        md: 'p-16',
-        lg: 'p-24',
+        true: 'p-16',
       },
       overflow: {
         visible: 'overflow-visible',
         hidden: 'overflow-hidden',
       },
-
       transparent: {
         true: 'bg-transparent',
       },
@@ -65,20 +55,18 @@ export const PaperElement = classed(
       cursorPointer: {
         true: 'cursor-pointer',
       },
-
       texture: {
         noise: 'noisy-surface-texture conic-gradient',
       },
-
       loading: {
         true: clsx(''),
       },
     },
 
     defaultVariants: {
-      padding: 'md',
       overflow: 'hidden',
       rounded: true,
+      padding: 'true',
     },
   }
 );

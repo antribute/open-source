@@ -10,8 +10,9 @@ export type TabsContainerElementProps = React.ComponentProps<typeof TabsContaine
 export const TabsContainerElement = classed(
   TabsPrimitive.Root,
   'inline-flex',
-  'radix-orientation-horizontal:flex-col radix-orientation-horizontal: gap-x-8',
-  'radix-orientation-vertical:flex-row gap-y-8'
+  'gap-16',
+  'radix-orientation-horizontal:flex-col',
+  'radix-orientation-vertical:flex-row'
 );
 
 export type TabsListElementProps = React.ComponentProps<typeof TabsListElement>;
@@ -59,4 +60,4 @@ export const TabsListItemElement = classed(
 
 export type TabsViewContainerElementProps = React.ComponentProps<typeof TabsViewContainerElement>;
 
-export const TabsViewContainerElement = classed('div', 'p-6');
+export const TabsViewContainerElement = classed('div', '');
