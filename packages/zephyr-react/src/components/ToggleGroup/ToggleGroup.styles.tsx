@@ -1,15 +1,17 @@
 import { classed } from '@tw-classed/react';
 import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
 import { inputComponentVariants } from 'styles/input-component.variants';
-import { Classed, classTheme, expandVariant, mergeVariants } from 'utils/classed';
-import { ColorProp, FontWeightProp } from 'types/styles';
+import { Classed, expandVariant, mergeVariants } from 'utils/classed';
+import { FontWeightProp } from 'types/styles';
 import { ElementPositonData } from './ToggleGroup.helpers';
 
-export type ToggleGroupElementVariantProps = Classed.VariantProps<typeof ToggleGroupElement>;
+export type ToggleGroupContainerElementVariantProps = Classed.VariantProps<
+  typeof ToggleGroupContainerElement
+>;
 
-export const ToggleGroupElement = classed(
+export const ToggleGroupContainerElement = classed(
   ToggleGroupPrimitive.ToggleGroup,
-  'group inline-flex shadow-sm rounded-md bg-surface',
+  'group inline-flex shadow-sm rounded-md bg-surface-soft',
   {
     variants: {
       fullWidth: {
@@ -35,13 +37,14 @@ export const ToggleGroupItemElement = classed(
   'whitespace-nowrap',
   'ring-offset-0',
   'flex-grow shrink-0',
-  'first:rounded-l-md last:rounded-r-md',
+  'first:rounded-l-md last:rounded-r-md outline-offset',
   'select-none',
   expandVariant(
     `radix-state-on:(text-primary-content,bg-primary-dark,border-boundary-subtle)
-    radix-state-off:(text-content-subtle,border-boundary-subtle)
+    radix-state-off:(text-content-subtle,border-boundary-subtle,focus-visible:text-content-weak)
     radix-state-off:hover:(text-content-weak,bg-highlight-subtle)
-    focus-visible:(outline-none,outline-offset-0,outline-content,rounded-sm)
+    focus-visible:(outline-none,outline-offset-0,outline-content,-outline-offset-2)
+    radix-state-on:focus-visible:(outline-secondary-dark)
     `
   ),
 

@@ -13,24 +13,60 @@ import {
   DialogOverlayElement,
   DialogTitleElement,
   DialogTitleElementProps,
+  DialogTitleSectionElement,
 } from 'components/Dialog/Dialog.styles';
 import XMarkIcon from '@heroicons/react/24/solid/XMarkIcon';
-import { ColorSchemeName } from '@antribute/zephyr-core';
+import { ColorSchemeName, getDataAttributes } from '@antribute/zephyr-core';
+import { getNearestColorSchemeAttribute } from 'utils/getNearestColorSchemeAttribute';
+import { useState } from 'react';
+import { Wrap } from 'components/Wrap';
+import { Card } from 'components/Card';
 
-type DialogRootProps = { colorScheme?: ColorSchemeName } & DialogPrimitive.DialogProps;
+type DialogRootProps = DialogPrimitive.DialogProps;
 
-const DialogRoot = ({ colorScheme = 'surface', ...props }: DialogRootProps) => {
-  return <DialogPrimitive.Root data-color-scheme={colorScheme} {...props} />;
+const DialogRoot = ({ children, ...props }: DialogRootProps) => {
+  return <DialogPrimitive.Root {...props}>{children}</DialogPrimitive.Root>;
 };
 
-type DialogContentProps = DialogContentElementProps;
+type DialogContentProps = DialogContentElementProps & { colorScheme?: ColorSchemeName };
 
-const DialogContent = (props: DialogContentProps) => {
+const DialogContent = ({
+  children,
+  colorScheme: colorSchemeProp,
+  padding,
+  ...props
+}: DialogContentProps) => {
+  const [colorScheme, setColorScheme] = useState<string | undefined>(undefined);
   return (
-    <DialogPrimitive.Portal>
-      <DialogOverlayElement />
-      <DialogContentElement {...props} />
-    </DialogPrimitive.Portal>
+    <Wrap
+      if={!colorSchemeProp}
+      wrap={(c) => {
+        return (
+          <div
+            className="absolute"
+            onMouseEnter={(e) => {
+              setColorScheme(getNearestColorSchemeAttribute(e.currentTarget));
+            }}
+          >
+            {c}
+          </div>
+        );
+      }}
+    >
+      <DialogPrimitive.Portal>
+        <DialogOverlayElement />
+        <DialogContentElement
+          data-color-scheme={colorSchemeProp ?? colorScheme}
+          {...getDataAttributes({
+            'data-antribute-card': { 'padding-none': padding === false },
+          })}
+          padding={padding}
+          {...props}
+        >
+          {children}
+        </DialogContentElement>
+      </DialogPrimitive.Portal>
+    </Wrap>
   );
 };
 type DialogBodyProps = DialogBodyElementProps;
@@ -44,27 +80,23 @@ const DialogCloseButtonIcon = () => {
     <DialogPrimitive.Close asChild>
       <DialogCloseButtonIconElement type="button">
         <span className="sr-only">Close</span>
-        <XMarkIcon className="fill-current h-20 w-20 " />
+        <XMarkIcon className="h-20 w-20 fill-current " />
       </DialogCloseButtonIconElement>
     </DialogPrimitive.Close>
   );
 };
 
-type DialogTitleProps = DialogTitleElementProps;
+type DialogTitleSectionProps = DialogTitleElementProps;
 
-const DialogTitle = ({ children, ...props }: DialogTitleProps) => {
+const DialogTitleSection = ({ children, ...props }: DialogTitleSectionProps) => {
   return (
-    <DialogTitleElement {...props}>
+    <DialogTitleSectionElement {...props}>
       {children} <DialogCloseButtonIcon />
-    </DialogTitleElement>
+    </DialogTitleSectionElement>
   );
 };
 
 type DialogDescriptionProps = DialogDescriptionElementProps;
-
-const DialogDescription = (props: DialogDescriptionProps) => {
-  return <DialogDescriptionElement {...props} />;
-};
 
 type DialogFooterProps = DialogFooterElementProps;
 
@@ -72,17 +104,31 @@ const DialogFooter = (props: DialogFooterProps) => {
   return <DialogFooterElement {...props} />;
 };
 
-type DialogButtonProps = Omit<ButtonProps, 'size'>;
+type DialogTitleProps = DialogTitleElementProps;
+
+const DialogTitle = ({ children, ...props }: DialogTitleProps) => {
+  return <DialogTitleElement {...props}>{children}</DialogTitleElement>;
+};
+
+const DialogDescription = (props: DialogDescriptionProps) => {
+  return <DialogDescriptionElement {...props} />;
+};
 
 const DialogButton = (props: DialogButtonProps) => {
   return <ButtonComponent color="primary" {...props} size="sm" />;
 };
 
+const DialogTrigger = (props: DialogPrimitive.DialogTriggerProps) => {
+  return <DialogPrimitive.Trigger asChild {...props} />;
+};
+
+type DialogButtonProps = Omit<ButtonProps, 'size'>;
+
 const DialogTriggerButton = (props: DialogButtonProps) => {
   return (
-    <DialogPrimitive.Trigger asChild>
+    <DialogTrigger>
       <ButtonComponent {...props} />
-    </DialogPrimitive.Trigger>
+    </DialogTrigger>
   );
 };
 
@@ -94,10 +140,6 @@ const DialogCloseButton = (props: Omit<DialogButtonProps, 'color' | 'variant'>) 
   );
 };
 
-const DialogTrigger = (props: DialogPrimitive.DialogTriggerProps) => {
-  return <DialogPrimitive.Trigger asChild {...props} />;
-};
-
 const DialogClose = (props: DialogPrimitive.DialogCloseProps) => {
   return <DialogPrimitive.Close asChild {...props} />;
 };
@@ -106,15 +148,17 @@ const Root = DialogRoot;
 
 const Content = DialogContent;
 
-const Button = DialogButton;
+const TitleSection = DialogTitleSection;
+
+const BodySection = DialogBody;
+
+const FooterSection = DialogFooter;
 
 const Title = DialogTitle;
 
-const Body = DialogBody;
-
-const Footer = DialogFooter;
-
 const Description = DialogDescription;
+
+const Button = DialogButton;
 
 const TriggerButton = DialogTriggerButton;
 
@@ -129,10 +173,11 @@ const Trigger = DialogTrigger;
 export {
   Root,
   Content,
-  Title,
+  TitleSection,
   Description,
-  Body,
-  Footer,
+  BodySection,
+  FooterSection,
+  Title,
   Trigger,
   TriggerButton,
   CloseButton,

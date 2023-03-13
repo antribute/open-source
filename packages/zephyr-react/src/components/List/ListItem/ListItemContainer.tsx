@@ -1,16 +1,15 @@
-// List Item Container
-
-import { surfaceGroupTextVariants } from 'styles/surface-colors.variants';
-import { classTheme, classed, deriveClassed } from 'utils/classed';
+import { classed, deriveClassed, expandVariant } from 'utils/classed';
 
 type ListItemContainerElementProps = React.ComponentProps<typeof ListItemContainerElement>;
 
 const ListItemContainerElement = classed(
   'li',
   'group/li list-inside',
-  'group-data-[zebra=true]:even::bg-transparent',
-  'group-data-[zebra=true]:odd:bg-highlight-subtle',
-  'dark:group-data-[zebra=true]:odd:bg-highlight-subtle',
+  'group-data-antribute-list-zebra-items:even:bg-transparent',
+  'relative',
+  expandVariant(
+    'group-data-antribute-list-zebra-items:odd:before:(content-[""],h-full,w-full,absolute,bg-content-tint)'
+  ),
 
   {
     variants: {

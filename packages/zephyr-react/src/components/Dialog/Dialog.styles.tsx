@@ -3,10 +3,11 @@ import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { PaperElement } from 'components/Paper/Paper.styles';
 import {
   CardBodySectionElement,
-  CardFooterElement,
+  CardFooterSectionElement,
   CardTitleElement,
   CardTitleSectionElement,
 } from 'components/Card/Card.styles';
+import { Card } from 'components/Card';
 
 // Content
 
@@ -68,21 +69,27 @@ export const DialogDescriptionElement = classed(
 
 // Title
 
-export type DialogTitleElementProps = React.ComponentProps<typeof DialogTitleElement>;
+export type DialogTitleSectionElementProps = React.ComponentProps<typeof DialogTitleElement>;
 
-export const DialogTitleElement = classed(DialogPrimitive.Title, CardTitleSectionElement);
+export const DialogTitleSectionElement = classed(DialogPrimitive.Title, CardTitleSectionElement);
 
-// Body
+// Body Section
 
 export type DialogBodyElementProps = React.ComponentProps<typeof DialogBodyElement>;
 
 export const DialogBodyElement = classed('div', CardBodySectionElement);
 
-// Footer
+// Footer Section
 
 export type DialogFooterElementProps = React.ComponentProps<typeof DialogFooterElement>;
 
-export const DialogFooterElement = classed(DialogPrimitive.Description, CardFooterElement);
+export const DialogFooterElement = classed(DialogPrimitive.Description, CardFooterSectionElement);
+
+// Title
+
+export type DialogTitleElementProps = React.ComponentProps<typeof DialogTitleElement>;
+
+export const DialogTitleElement = classed(DialogPrimitive.Title, CardTitleElement);
 
 // Close Icon
 

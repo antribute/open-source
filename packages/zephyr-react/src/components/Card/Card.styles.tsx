@@ -1,17 +1,12 @@
 import { ScrollArea } from 'components/ScrollArea/ScrollArea';
-import { PaperElement } from 'components/Paper/Paper.styles';
-import { Classed, classed } from 'utils/classed';
+import { Classed, classed, expandVariant } from 'utils/classed';
 import { Paper } from 'components/Paper';
 
 // Container
 
 export type CardContainerElementProps = React.ComponentProps<typeof CardContainerElement>;
 
-export const CardContainerElement = classed(
-  Paper,
-  'flex flex-col shrink-0',
-  'rounded-md group/card'
-);
+export const CardContainerElement = classed(Paper, 'flex flex-col shrink-0', 'rounded-md group');
 
 // Title Section
 
@@ -24,17 +19,16 @@ export const CardTitleSectionElement = classed(
   'text-content-high',
   'flex justify-between items-center',
   'border-b border-boundary-tint/5',
-  'group-data-container-padding-none/card:px-10',
-  'group-data-container-padding-none/card:border-highlight-weak',
-  'group-data-container-padding-none/card:pt-8',
   'mb-8',
   'bg-inherit',
+  expandVariant('group-data-antribute-card-padding-none:(px-10,border-highlight-weak,pt-8)'),
   {
     variants: {},
   }
 );
 
 // Body Section
+
 export const CardBodySectionElement = classed(
   ScrollArea,
   'w-full pt-8 mb-8',
@@ -42,24 +36,23 @@ export const CardBodySectionElement = classed(
   'text-content-moderate',
   'flex flex-col gap-16',
   'min-h-0 grow',
-  'group-data-container-padding-none/card:px-10',
-  'group-data-container-padding-none/card:mb-0',
+  expandVariant('group-data-antribute-card-padding-none:(px-10,mb-0)'),
   {
     variants: {},
   }
 );
 
 // Footer Section
-export type CardFooterElementVariants = Classed.VariantProps<typeof CardFooterElement>;
 
-export type CardFooterElementProps = React.ComponentProps<typeof CardFooterElement>;
+export type CardFooterElementVariants = Classed.VariantProps<typeof CardFooterSectionElement>;
 
-export const CardFooterElement = classed(
+export type CardFooterElementProps = React.ComponentProps<typeof CardFooterSectionElement>;
+
+export const CardFooterSectionElement = classed(
   'p',
   'flex flex-wrap shrink-0 mt-auto',
   'justify-end items-center gap-8 gap-y-6 pt-8 px-4 border-t border-highlight ',
-  'group-data-container-padding-none/card:px-10',
-  'group-data-container-padding-none/card:pb-8',
+  expandVariant('group-data-antribute-card-padding-none:(px-10,pb-8)'),
   {
     variants: {},
   }

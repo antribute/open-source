@@ -1,14 +1,14 @@
-import { ColorSchemeName } from '@antribute/zephyr-core';
+import { ColorSchemeName, getDataAttributes } from '@antribute/zephyr-core';
 import {
   CardBodySectionElement,
   CardContainerElement,
   CardDescriptionElement,
-  CardFooterElement,
+  CardFooterSectionElement,
   CardGroupSpacerElement,
   CardTitleElement,
   CardTitleSectionElement,
 } from 'components/Card/Card.styles';
-import { Paper, PaperProps } from 'components/Paper';
+import { PaperProps } from 'components/Paper';
 import { Classed } from 'utils/classed';
 
 // Container
@@ -18,7 +18,16 @@ export type CardContainerVariantProps = Classed.ComponentProps<typeof CardContai
 export type CardContainerProps = PaperProps & { colorScheme?: ColorSchemeName };
 
 const CardContainer = ({ padding, ...props }: CardContainerProps) => {
-  return <CardContainerElement padding={padding} border {...props} />;
+  return (
+    <CardContainerElement
+      {...getDataAttributes({
+        'data-antribute-card': { 'padding-none': padding === false },
+      })}
+      padding={padding}
+      border
+      {...props}
+    />
+  );
 };
 
 // Title
@@ -62,10 +71,10 @@ const Description = (props: CardDescriptionProps) => {
 
 // Footer
 
-export type CardFooterProps = React.ComponentProps<typeof CardFooterElement>;
+export type CardFooterProps = React.ComponentProps<typeof CardFooterSectionElement>;
 
 const CardFooter = (props: CardFooterProps) => {
-  return <CardFooterElement {...props} />;
+  return <CardFooterSectionElement {...props} />;
 };
 
 // Exports

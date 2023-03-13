@@ -205,6 +205,8 @@ export const getStoryUrl = () => {
 interface RenderPaperContainersProps extends Omit<PaperProps, 'color' | 'children'> {
   renderTransparentPaper?: boolean;
   orientation?: 'vertical' | 'horizontal';
+  containerClassName?: string;
+  hasContainer?: boolean;
   children:
     | React.ReactNode
     | (({ colorScheme }: { colorScheme?: ColorSchemeName }) => React.ReactNode);
@@ -215,13 +217,10 @@ export const RenderPaperContainers = ({
   renderTransparentPaper,
   className,
   orientation = 'vertical',
+  hasContainer = true,
+  containerClassName,
   ...props
 }: RenderPaperContainersProps) => {
-  const paperProps = {
-    className: twMerge('flex flex-col gap-16 rounded-md', className),
-    ...props,
-  };
-
   const colors = (['transparent', ...colorSchemeNames] as const).filter((color) => {
     if (color === 'transparent') {
       return renderTransparentPaper;
@@ -232,13 +231,16 @@ export const RenderPaperContainers = ({
 
   return (
     <Wrap
-      if={!className}
+      if={hasContainer}
       wrap={(c) => (
         <div
-          className={clsx('inline-flex gap-16', {
-            'flex-row': orientation === 'horizontal',
-            'flex-row flex-wrap': orientation === 'vertical',
-          })}
+          className={twMerge(
+            clsx('inline-flex gap-16', {
+              'flex-row': orientation === 'horizontal',
+              'flex-row flex-wrap': orientation === 'vertical',
+            }),
+            containerClassName
+          )}
         >
           {c}
         </div>
@@ -251,7 +253,8 @@ export const RenderPaperContainers = ({
             key={colorScheme}
             transparent={color === 'transparent'}
             colorScheme={colorScheme}
-            {...paperProps}
+            className={twMerge('flex flex-col gap-16 rounded-md', className)}
+            {...props}
           >
             {typeof children === 'function' ? children({ colorScheme }) : children}
           </Paper>

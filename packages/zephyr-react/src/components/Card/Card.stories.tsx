@@ -143,20 +143,20 @@ export const Default = () => {
   return <ExampleCard className="w-352" />;
 };
 
-export const NoPadding = () => {
-  return <ExampleCard className="w-352" padding={false} />;
-};
-
-export const CardThemes = () => {
+export const CardThemes = (props: ExampleCardProps) => {
   return (
     <div className="space-x-26 fixed flex h-full w-full justify-between pb-[5%]">
       <div className="grid w-full max-w-screen-lg grid-cols-9 gap-16">
         {colorSchemeNames
           .filter((e) => e !== 'default')
           .map((e) => {
-            return <ExampleCard colorScheme={e} className="col-span-3" />;
+            return <ExampleCard {...props} colorScheme={e} className="col-span-3" />;
           })}
       </div>
     </div>
   );
+};
+
+export const NoPadding = () => {
+  return <CardThemes padding={false} />;
 };

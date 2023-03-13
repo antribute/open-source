@@ -1,7 +1,5 @@
 import { Paper } from 'components/Paper';
 import { generateMockVehicleList } from 'mock/mock-data';
-import { Text } from 'components/Text';
-import { capitalCase } from 'change-case';
 import { RenderPaperContainers } from 'utils/storybook-utils';
 import { Tabs } from '.';
 
@@ -45,7 +43,7 @@ export const Default = () => {
 
 export const SixTabs = () => {
   return (
-    <Paper border color="surface-dark">
+    <Paper border>
       <Tabs.Root defaultValue={tabs6[0]?.value}>
         <Tabs.List>
           {tabs6.map((e) => (
@@ -61,7 +59,7 @@ export const SixTabs = () => {
 
 export const DisabledTab = () => {
   return (
-    <Paper border color="surface-dark">
+    <RenderPaperContainers>
       <Tabs.Root defaultValue={tabs6[0]?.value}>
         <Tabs.List>
           {tabs4.map((e, index, arr) => (
@@ -71,28 +69,30 @@ export const DisabledTab = () => {
           ))}
         </Tabs.List>
       </Tabs.Root>
-    </Paper>
+    </RenderPaperContainers>
   );
 };
 
 export const Vertical = () => {
   return (
-    <Tabs.Root orientation="vertical">
-      <Tabs.List>
-        {tabs2.map((e) => (
-          <Tabs.Tab key={e.value} value={e.value}>
-            {e.label}
-          </Tabs.Tab>
-        ))}
-      </Tabs.List>
-      <Tabs.ViewContainer>
-        {tabs2.map((tab) => (
-          <Tabs.View key={tab.value} value={tab.value}>
-            Tab View: <b>{tab.label}</b>
-          </Tabs.View>
-        ))}
-      </Tabs.ViewContainer>
-    </Tabs.Root>
+    <RenderPaperContainers className="w-208 flex flex-row gap-8">
+      <Tabs.Root orientation="vertical" defaultValue={tabs2[0]?.value}>
+        <Tabs.List>
+          {tabs2.map((e) => (
+            <Tabs.Tab key={e.value} value={e.value}>
+              {e.label}
+            </Tabs.Tab>
+          ))}
+        </Tabs.List>
+        <Tabs.ViewContainer>
+          {tabs2.map((tab) => (
+            <Tabs.View key={tab.value} value={tab.value}>
+              Tab View: <b>{tab.label}</b>
+            </Tabs.View>
+          ))}
+        </Tabs.ViewContainer>
+      </Tabs.Root>
+    </RenderPaperContainers>
   );
 };
 
@@ -111,23 +111,5 @@ export const Overflow = () => {
         </Tabs.List>
       </Tabs.Root>
     </Paper>
-  );
-};
-
-export const Contrast = () => {
-  return (
-    <div className="flex">
-      <RenderPaperContainers>
-        <Tabs.Root defaultValue={tabs6[0]?.value}>
-          <Tabs.List>
-            {tabs3.map((e) => (
-              <Tabs.Tab key={e.value} value={e.value}>
-                {e.label}
-              </Tabs.Tab>
-            ))}
-          </Tabs.List>
-        </Tabs.Root>
-      </RenderPaperContainers>
-    </div>
   );
 };

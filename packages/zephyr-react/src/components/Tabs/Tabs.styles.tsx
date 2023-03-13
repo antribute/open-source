@@ -19,11 +19,13 @@ export type TabsListElementProps = React.ComponentProps<typeof TabsListElement>;
 
 export const TabsListElement = classed(
   TabsPrimitive.List,
-  'border-highlight-tint border relative z-0',
+  'border-highlight-tint border-[0.5px] relative z-0',
   'bg-highlight-ghost',
   'inline-flex items-center gap-4 justify-center p-4 px-2',
-  expandVariant('radix-orientation-horizontal:(flex-row,rounded-md)'),
-  expandVariant('radix-orientation-vertical:(flex-col,rounded-[0.185rem,h-auto])'),
+  expandVariant(`
+  radix-orientation-horizontal:(flex-row,rounded-md)
+  radix-orientation-vertical:(flex-col,rounded-[0.185rem],h-auto)
+  `),
 
   {
     variants: {
@@ -51,11 +53,12 @@ export const TabsListItemElement = classed(
   'rounded-[0.185rem] font-medium select-none',
   'transition-all duration-75',
   'border border-transparent',
-  'disabled:pointer-events-none disabled:opacity-50',
   expandVariant(
-    'radix-state-active:(text-content-strong,bg-surface-soft,shadow,shadow-palette-black/10,border-content-tint)'
-  ),
-  expandVariant('radix-state-inactive:(text-content-weak,transition-none,hover:bg-highlight-ghost)')
+    `radix-state-active:(text-content-intense,bg-surface-soft,shadow,shadow-palette-black/10,border-content-tint)
+    radix-state-inactive:(text-content-moderate,transition-none,hover:bg-highlight-ghost)
+    disabled:(pointer-events-none,!text-content-subtle)
+    `
+  )
 );
 
 export type TabsViewContainerElementProps = React.ComponentProps<typeof TabsViewContainerElement>;

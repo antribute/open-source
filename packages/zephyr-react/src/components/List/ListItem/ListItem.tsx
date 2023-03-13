@@ -12,6 +12,7 @@ export type ListItemBaseProps = ListItemElementVariantProps & {
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
   className?: string;
+  children?: React.ReactNode;
 };
 
 export type ListItemGroupBaseProps = ListItemBaseProps & {
@@ -26,7 +27,7 @@ export type ListItemGroupBaseProps = ListItemBaseProps & {
 export type ListItemProps = React.ComponentProps<typeof ListItemGroup>;
 
 export const ListItem = deriveClassed<typeof BaseListItem, ListItemBaseProps>(
-  ({ label, startIcon, endIcon, description, ...props }) => {
+  ({ label, startIcon, endIcon, description, children, ...props }) => {
     return (
       <BaseListItem {...props}>
         <ListItemSpan
@@ -35,6 +36,7 @@ export const ListItem = deriveClassed<typeof BaseListItem, ListItemBaseProps>(
           endIcon={endIcon}
           description={description}
         />
+        {children}
       </BaseListItem>
     );
   }

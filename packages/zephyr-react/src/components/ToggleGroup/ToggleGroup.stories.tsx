@@ -1,14 +1,9 @@
-import {
-  RenderColorVariants,
-  RenderPaperContainers,
-  RenderSizeVariants,
-} from 'utils/storybook-utils';
+import { RenderPaperContainers, RenderSizeVariants } from 'utils/storybook-utils';
 import { StoryFn } from '@storybook/react';
 import { generateMockOrganizationList } from 'mock/mock-data';
-import { Paper } from 'components/Paper';
-import { ToggleGroupItem, ToggleGroup } from './ToggleGroup';
+import { ToggleGroupItemData, ToggleGroup } from './ToggleGroup';
 
-function generateItems({ count = 3 }: { count: number }): ToggleGroupItem[] {
+function generateItems({ count = 3 }: { count: number }): ToggleGroupItemData[] {
   return new Array(count).fill(0).map((_, index) => {
     return {
       label: `Item ${index + 1}`,
@@ -37,12 +32,12 @@ export const Basic: StoryFn = () => {
 };
 
 export const FullWidth: StoryFn = () => {
-  const organizations = generateMockOrganizationList({ size: 4 });
+  const organizations = generateMockOrganizationList({ size: 8, uniqueBy: 'industry' });
   return (
-    <RenderPaperContainers border>
+    <RenderPaperContainers renderTransparentPaper>
       <ToggleGroup
         fullWidth
-        items={organizations.map(({ name, id }) => ({ label: name, value: `${id}` }))}
+        items={organizations.map(({ industry, id }) => ({ label: industry, value: `${id}` }))}
       />
     </RenderPaperContainers>
   );

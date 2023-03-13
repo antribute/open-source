@@ -3,25 +3,25 @@ import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import {
   getToggleItemBorderWidth,
-  ToggleGroupElement,
-  ToggleGroupElementVariantProps,
+  ToggleGroupContainerElement,
+  ToggleGroupContainerElementVariantProps,
   ToggleGroupItemElement,
   ToggleGroupItemElementVariantProps,
 } from './ToggleGroup.styles';
 import { getElementPositionData } from './ToggleGroup.helpers';
 
-export interface ToggleGroupItem<T extends string | number = string> {
+export interface ToggleGroupItemData<T extends string | number = string> {
   value: T;
   label: React.ReactNode;
 }
 
 export interface ToggleGroupProps<T extends string = string>
   extends ToggleGroupItemElementVariantProps,
-    ToggleGroupElementVariantProps {
+    ToggleGroupContainerElementVariantProps {
   disabled?: boolean;
   onValueChange?: (value: T) => void;
   defaultValue?: T;
-  items: ToggleGroupItem[];
+  items: ToggleGroupItemData[];
   className?: string;
   value?: T;
 }
@@ -62,7 +62,7 @@ export function ToggleGroup(props: ToggleGroupProps) {
   }, [value, setSelectedValue, items]);
 
   return (
-    <ToggleGroupElement
+    <ToggleGroupContainerElement
       type="single"
       id="toggle-group"
       value={selectedValue}
@@ -74,7 +74,7 @@ export function ToggleGroup(props: ToggleGroupProps) {
     >
       {items.map((item, index) => {
         return (
-          <Item
+          <ToggleGroupItem
             key={item.value}
             index={index}
             item={item}
@@ -83,23 +83,26 @@ export function ToggleGroup(props: ToggleGroupProps) {
           />
         );
       })}
-    </ToggleGroupElement>
+    </ToggleGroupContainerElement>
   );
 }
 
-const Item = ({
+interface ToggleGroupItemProps
+  extends Pick<ToggleGroupProps, 'fontWeight' | 'size' | 'disabled' | 'items'> {
+  item: ToggleGroupItemData;
+  className?: string;
+  index: number;
+  selectedIndex: number;
+}
+
+const ToggleGroupItem = ({
   item,
   className,
   index,
   selectedIndex,
   ...props
-}: {
-  item: ToggleGroupItem;
-  className?: string;
-  index: number;
-  selectedIndex: number;
-} & Pick<ToggleGroupProps, 'color' | 'fontWeight' | 'size' | 'disabled' | 'items'>) => {
-  const { color = 'neutral', disabled, size = 'md' } = props;
+}: ToggleGroupItemProps) => {
+  const { disabled, size = 'md' } = props;
   const { value, label } = item;
 
   const elementPositonData = getElementPositionData({
@@ -112,7 +115,6 @@ const Item = ({
     <ToggleGroupItemElement
       value={value}
       disabled={disabled}
-      color={color}
       size={size}
       className={twMerge(getToggleItemBorderWidth(elementPositonData))}
     >

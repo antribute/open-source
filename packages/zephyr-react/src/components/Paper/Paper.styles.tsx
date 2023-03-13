@@ -15,11 +15,12 @@ export type PaperElementVariantProps = Classed.VariantProps<typeof PaperElement>
 
 export type PaperElementProps = React.ComponentProps<typeof PaperElement>;
 
-export const PaperElementBackground = classed('div', {
+export const PaperElementBackground = classed('div', 'border-boundary-ghost', {
   variants: {
     border: {
       // true: 'border border-solid border-boundary-subtle dark:border-boundary-inverse-subtle',
-      true: 'border-2 border-boundary-ghost',
+      true: 'border-2',
+      thin: 'border',
     },
     hoverHighlight: {
       true: 'hover:bg-surface-dark',

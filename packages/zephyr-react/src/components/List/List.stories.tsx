@@ -46,8 +46,8 @@ export const MockSidebar = ({ color }: { color: string }) => {
 
 export const Default = () => {
   return (
-    <div className="fixed flex h-5/6 w-screen gap-x-8 overflow-x-auto">
-      <RenderPaperContainers className="w-400 top-0 h-full">
+    <div className="grid h-5/6 w-full grid-cols-6 flex-wrap  gap-16">
+      <RenderPaperContainers hasContainer={false} className="col-span-1 min-h-[70vh]">
         {({ colorScheme: color }) => <MockSidebar color={capitalCase(color ?? '')} />}
       </RenderPaperContainers>
     </div>
@@ -56,20 +56,20 @@ export const Default = () => {
 
 export const ListGroup = () => {
   return (
-    <Paper padding="none" border>
+    <Paper padding={false} border="thin">
       <List.Container divide>
         <List.LinkItem label="Profile" />
         <List.LinkItem label="Settings" />
         <List.LinkItem label="Messages" />
         <List.LinkItem label="Download" />
-        <List.LinkItem label="Organization Page" showExternalLinkIcon />
+        <List.LinkItem label="Organization" isExternalLink />
       </List.Container>
     </Paper>
   );
 };
 export const ListGroupDescriptions = () => {
   return (
-    <Paper padding="none" border>
+    <RenderPaperContainers padding={false}>
       <List.Container divide>
         <List.LinkItem
           label="Profile"
@@ -89,17 +89,18 @@ export const ListGroupDescriptions = () => {
         />
         <List.LinkItem
           label="Organization Page"
-          showExternalLinkIcon
+          isExternalLink
+          href="https://google.com"
           description="Magna eu aliquip consectetur tempor labore officia."
         />
       </List.Container>
-    </Paper>
+    </RenderPaperContainers>
   );
 };
 
 export const ListGroupAlignDescriptionWithLabel = () => {
   return (
-    <Paper padding="none" border>
+    <RenderPaperContainers padding={false} border="thin">
       <List.Container divide>
         <List.LinkItem
           label="Profile"
@@ -122,46 +123,58 @@ export const ListGroupAlignDescriptionWithLabel = () => {
           description="Anim consectetur fugiat enim occaecat ipsum cupidatat Lorem officia esse ut."
         />
       </List.Container>
-    </Paper>
+    </RenderPaperContainers>
   );
 };
 
 export const ListGroupNoGutters = () => {
   return (
-    <Paper border className="w-240 ">
-      <List.Container divide removeItemGutters>
-        <List.Item label="Profile" className="pt-0" />
-        <List.Item label="Settings" />
-        <List.Item label="Messages" />
-        <List.Item label="Download" className="pb-0" />
-      </List.Container>
-    </Paper>
+    <List.Container divide noItemGutters className="w-240">
+      <List.Item label="Profile" className="pt-0" />
+      <List.Item label="Settings" />
+      <List.Item label="Messages" />
+      <List.Item label="Download" className="pb-0" />
+    </List.Container>
   );
 };
 
 export const ListGroupZebra = () => {
   return (
-    <Paper padding="none" border>
+    <RenderPaperContainers padding={false} border="thin">
       <List.Container zebraItems divide>
         <List.LinkItem label="Profile" />
         <List.LinkItem label="Settings" />
         <List.LinkItem label="Messages" />
         <List.LinkItem label="Download" />
-        <List.LinkItem label="Organization Page" showExternalLinkIcon />
+        <List.LinkItem label="Organization" isExternalLink href="https://www.google.com" />
       </List.Container>
-    </Paper>
+    </RenderPaperContainers>
+  );
+};
+
+export const HrefIndicator = () => {
+  return (
+    <RenderPaperContainers padding={false} border="thin" className="w-304">
+      <List.Container divide>
+        <List.LinkItem isExternalLink label="Profile" href="https://example.com/profile" />
+        <List.LinkItem isExternalLink label="Settings" href="https://example.com/settings" />
+        <List.LinkItem isExternalLink label="Messages" href="https://example.com/messages" />
+        <List.LinkItem isExternalLink label="Download" href="https://example.com/download" />
+        <List.LinkItem isExternalLink label="Organization" href="https://example.com/org" />
+      </List.Container>
+    </RenderPaperContainers>
   );
 };
 
 export const ListGroupIcons = () => {
   return (
-    <Paper padding="none" border>
+    <RenderPaperContainers padding={false} border="thin">
       <List.Container divide>
         <List.LinkItem label="Profile" startIcon={<ProfileIcon />} />
         <List.LinkItem label="Settings" startIcon={<SettingsIcon />} />
         <List.LinkItem label="Messages" startIcon={<MessagesIcon />} />
         <List.LinkItem label="Download" startIcon={<DownloadIcon />} />
       </List.Container>
-    </Paper>
+    </RenderPaperContainers>
   );
 };

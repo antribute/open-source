@@ -28,7 +28,6 @@ export const Paper = ({
   return (
     <PaperElement
       data-color-scheme={colorScheme}
-      data-container-padding={padding}
       as={as as never}
       onClick={onClick}
       loading={loading}

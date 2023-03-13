@@ -20,8 +20,7 @@ import { colorSchemeDataAttributes, colorSchemeTokens } from './colors/color-sch
 import { colorPalette } from './colors/colors';
 import { keyframes } from './keyframes';
 import { animation } from './animation';
-
-// Custom Plugins
+import { getTailwindDataAttributeShortcuts } from './data-attributes';
 
 const config = {
   plugins: [
@@ -52,8 +51,7 @@ const config = {
 
     data: {
       ...colorSchemeDataAttributes,
-      'container-padding': 'container-padding=true',
-      'container-padding-none': 'container-padding=false',
+      ...getTailwindDataAttributeShortcuts(),
     },
 
     typography: (theme: PluginAPI['theme']) => ({
