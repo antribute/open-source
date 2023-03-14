@@ -1,23 +1,13 @@
 import { CardContainerProps } from 'components/Card/Card';
-import { twMerge } from 'tailwind-merge';
 import { capitalCase } from 'change-case';
 import { Button } from 'components/Button';
 import { IconButton } from 'components/IconButton/IconButton';
-import { HeartIcon } from '@heroicons/react/24/solid';
 import { Input } from 'components/Input';
 import { Combobox } from 'components/Combobox';
-import {
-  generateMockProjectList,
-  generateMockUserList,
-  generateMockVehicle,
-  generateMockVehicleList,
-} from 'mock/mock-data';
+import { generateMockProjectList, generateMockUserList } from 'mock/mock-data';
 import { Tabs } from 'components/Tabs';
 import { useState } from 'react';
-import { surfaceColors } from 'styles/surface-colors.variants';
-import { ColorSchemeName, colorSchemeNames } from '@antribute/zephyr-core';
-import { MockSidebar } from 'components/List/List.stories';
-import { Paper } from 'components/Paper';
+import { ColorSchemeName, colorSchemeNames, mainColorSchemeNames } from '@antribute/zephyr-core';
 import { Card } from '.';
 
 type ExampleCardProps = CardContainerProps;
@@ -147,7 +137,7 @@ export const CardThemes = (props: ExampleCardProps) => {
   return (
     <div className="space-x-26 fixed flex h-full w-full justify-between pb-[5%]">
       <div className="grid w-full max-w-screen-lg grid-cols-9 gap-16">
-        {colorSchemeNames
+        {mainColorSchemeNames
           .filter((e) => e !== 'default')
           .map((e) => {
             return <ExampleCard {...props} colorScheme={e} className="col-span-3" />;

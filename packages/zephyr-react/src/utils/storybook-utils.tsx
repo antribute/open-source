@@ -7,7 +7,7 @@ import { Wrap } from 'components/Wrap';
 import { twMerge } from 'tailwind-merge';
 import clsx from 'clsx';
 import { Tooltip } from 'components/Tooltip';
-import { ColorSchemeName, colorSchemeNames } from '@antribute/zephyr-core';
+import { ColorSchemeName, mainColorSchemeNames } from '@antribute/zephyr-core';
 
 type RenderVariantElementProps = Partial<VariantProps<typeof RenderVariantElement>>;
 
@@ -221,7 +221,7 @@ export const RenderPaperContainers = ({
   containerClassName,
   ...props
 }: RenderPaperContainersProps) => {
-  const colors = (['transparent', ...colorSchemeNames] as const).filter((color) => {
+  const colors = (['transparent', ...mainColorSchemeNames] as const).filter((color) => {
     if (color === 'transparent') {
       return renderTransparentPaper;
     }

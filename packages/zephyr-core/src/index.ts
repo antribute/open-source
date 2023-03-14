@@ -1,6 +1,10 @@
 export type { ColorSchemeName } from './colors/color-schemes';
 
-export { colorSchemeNames } from './colors/color-schemes';
+export {
+  colorSchemeNames,
+  mainColorSchemeNames,
+  appStateColorSchemeNames,
+} from './colors/color-schemes';
 
 export type { DataAttributes } from './data-attributes';
 

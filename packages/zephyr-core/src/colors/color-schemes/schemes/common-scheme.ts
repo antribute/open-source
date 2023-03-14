@@ -1,5 +1,5 @@
 import { colorPalette } from '../../colors';
-import { ColorScheme } from '../color-scheme-config.types';
+import type { ColorScheme } from '../color-scheme-config.types';
 
 export const commonScheme = {
   all: {
@@ -32,7 +32,7 @@ export const commonScheme = {
     'secondary-content': colorPalette['palette-content-inverse'].intense,
   },
 
-  lightBgContrast: {
+  lightMode: {
     base: colorPalette['palette-base'].DEFAULT,
 
     highlight: colorPalette['palette-highlight'].DEFAULT,
@@ -85,7 +85,7 @@ export const commonScheme = {
     'inverse-content': colorPalette['palette-content'].intense,
   },
 
-  darkBgContrast: {
+  darkMode: {
     base: colorPalette['palette-base'].inverse,
 
     highlight: colorPalette['palette-highlight-inverse'].DEFAULT,

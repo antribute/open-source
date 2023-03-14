@@ -2,7 +2,7 @@ import { defineColorSchemes } from './color-schemes.helpers';
 import { schemes } from './schemes';
 import { ColorSchemeName } from './color-scheme-config.types';
 
-export const colorSchemeNames = [
+export const mainColorSchemeNames = [
   'default',
   'surface',
   'surface-light',
@@ -13,7 +13,14 @@ export const colorSchemeNames = [
   'inverse',
   'inverse-light',
   'inverse-dark',
-] as ColorSchemeName[];
+] satisfies ColorSchemeName[];
+
+export const appStateColorSchemeNames = ['danger'] satisfies ColorSchemeName[];
+
+export const colorSchemeNames = [
+  ...mainColorSchemeNames,
+  ...appStateColorSchemeNames,
+] satisfies ColorSchemeName[];
 
 export const colorSchemeDataAttributes = Object.fromEntries(
   colorSchemeNames.map((schemeName) => {

@@ -1,11 +1,16 @@
-import { GenericColorSchemeConfig } from '../color-scheme-config.types';
-import { surfaceScheme } from './surface-scheme';
+import surface from './surface';
+import surface_darkmode from './surface.darkmode';
+import surfaceLight from './surface-light';
+import surfaceLight_darkmode from './surface-light.darkmode';
+import surfaceDark from './surface-dark';
+import surfaceDark_darkmode from './surface-dark.darkmode';
 
-export const inverseScheme = {
-  inverse: surfaceScheme['dark/surface'],
-  'inverse-light': surfaceScheme['dark/surface-light'],
-  'inverse-dark': surfaceScheme['dark/surface-dark'],
-  'dark/inverse': surfaceScheme.surface,
-  'dark/inverse-light': surfaceScheme['surface-light'],
-  'dark/inverse-dark': surfaceScheme['surface-dark'],
-} satisfies Partial<GenericColorSchemeConfig>;
+export default {
+  inverse: surface_darkmode['dark/surface'],
+  'inverse-light': surfaceLight_darkmode['dark/surface-light'],
+  'inverse-dark': surfaceDark_darkmode['dark/surface-dark'],
+
+  'dark/inverse': surface.surface,
+  'dark/inverse-light': surfaceLight['surface-light'],
+  'dark/inverse-dark': surfaceDark['surface-dark'],
+} as const;

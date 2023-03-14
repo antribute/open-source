@@ -7,8 +7,20 @@ import {
   getCssVariableValue,
 } from '../helpers/cssVariables';
 import { objectMap } from '../helpers/objectMap';
-import { GenericColorSchemeConfig } from './color-scheme-config.types';
+import { ColorSchemeConfig, GenericColorSchemeConfig } from './color-scheme-config.types';
 import { ColorSchemeToken } from './color-scheme-tokens.types';
+import { commonScheme } from './schemes/common-scheme';
+
+export function defineColorScheme<T extends ColorSchemeConfig>(config: T) {
+  const colorModeScheme =
+    config.colorMode === 'dark' ? commonScheme.darkMode : commonScheme.lightMode;
+
+  const value = { ...commonScheme.all, ...colorModeScheme, ...config.scheme };
+
+  return {
+    [config.name]: value,
+  } as { [K in T['name']]: typeof value };
+}
 
 export function defineColorSchemes<T extends GenericColorSchemeConfig>(colorSchemes: T) {
   const colorSchemeCssVariableClasses = getColorSchemesCssVariableClasses(colorSchemes);

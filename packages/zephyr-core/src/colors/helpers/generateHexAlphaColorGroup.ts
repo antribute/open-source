@@ -25,11 +25,20 @@ type HexAlphaOverrides = {
     : HexAlphaOverrideValue;
 };
 
-type GenerateHexAlphaColorGroupReturn = Record<ColorAlphaVariant | 'DEFAULT', string>;
-export function generateHexAlphaColorGroup(
+type ColorGroupReturn = Record<ColorAlphaVariant | 'DEFAULT', string>;
+
+type GenerateHexAlphaColorGroupReturn<TPrefix extends string | undefined> = {
+  [K in keyof ColorGroupReturn as TPrefix extends string
+    ? K extends 'DEFAULT'
+      ? TPrefix
+      : `${TPrefix}-${K}`
+    : K]: ColorGroupReturn[K];
+};
+export function generateHexAlphaColorGroup<TPrefix extends string | undefined = undefined>(
   hex: string,
-  alphaOverrides?: HexAlphaOverrides
-): GenerateHexAlphaColorGroupReturn {
+  alphaOverrides?: HexAlphaOverrides,
+  options?: { prefix?: TPrefix }
+): GenerateHexAlphaColorGroupReturn<TPrefix> {
   const defaultColorGroup = {
     tint: generateHexAlpha(hex, 'tint'),
     ghost: generateHexAlpha(hex, 'ghost'),
@@ -56,8 +65,19 @@ export function generateHexAlphaColorGroup(
   );
 
   const colorGroup = Object.fromEntries(
-    Object.entries({ ...defaultColorGroup, ...overrides }).filter(([key, value]) => Boolean(value))
-  ) as GenerateHexAlphaColorGroupReturn;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    Object.entries({ ...defaultColorGroup, ...overrides })
+      .filter(([_, value]) => Boolean(value))
+      .map(([key, value]) => {
+        function getKey() {
+          const { prefix } = options ?? {};
+          if (!prefix) return key;
+          if (key === 'DEFAULT') return prefix;
+          return `${prefix}-${key}`;
+        }
+        return [getKey(), value];
+      })
+  ) as GenerateHexAlphaColorGroupReturn<TPrefix>;
 
   return colorGroup;
 }
