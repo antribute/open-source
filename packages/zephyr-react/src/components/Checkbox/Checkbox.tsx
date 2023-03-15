@@ -39,6 +39,7 @@ export const Checkbox = ({ label, ...props }: CheckboxProps) => {
             id={inputComponentProps.id}
             size={inputComponentProps.size}
             focusRing={false}
+            {...props}
           />
           <InputLabelElement as="div" labelSize={props.size} labelOrientation="horizontal">
             {label}

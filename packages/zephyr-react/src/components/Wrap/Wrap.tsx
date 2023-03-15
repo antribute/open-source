@@ -1,11 +1,10 @@
 import React from 'react';
-import { getByPath } from 'dot-path-value';
 import { LiteralUnion } from 'type-fest';
 import { findKey } from 'lodash-es';
 
 type WrapFn = (children: React.ReactNode) => JSX.Element;
 
-type ConditionMap = Record<string, boolean | undefined | null>;
+type ConditionMap = Record<string, unknown>;
 
 type ConditionType = boolean | undefined | null | string | ConditionMap;
 

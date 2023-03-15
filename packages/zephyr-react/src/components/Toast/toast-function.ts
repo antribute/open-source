@@ -1,9 +1,20 @@
 import { O } from 'ts-toolbelt';
 import { proxy } from 'valtio/vanilla';
-import { uniqueId } from 'lodash-es';
-import type { ToastData, ToastItem, ToastState } from 'components/Toast/Toast.types';
+import { uniqueId, debounce } from 'lodash-es';
+import type { ToastData, ToastId, ToastItem } from 'components/Toast/Toast.types';
 
-export const toastState = proxy<ToastState>({ toasts: [], toastTimeOuts: new Map() });
+export interface ToastState {
+  toasts: ToastData[];
+  toastTimeOuts: Map<ToastId, ReturnType<typeof setTimeout>>;
+  lastToastAddedTime?: number;
+  newToastStackCount: number;
+}
+
+export const toastState = proxy<ToastState>({
+  toasts: [],
+  toastTimeOuts: new Map(),
+  newToastStackCount: 1,
+});
 
 function dismissToast(toastId: string) {
   if (!toastState.toastTimeOuts.has(toastId)) {
@@ -13,9 +24,6 @@ function dismissToast(toastId: string) {
       toastState.toasts = toastState.toasts.filter((toast) => {
         return toast.id !== toastId;
       });
-      // toastState.toasts = toastState.toasts.map((toast) => {
-      //   return { ...toast, open: toast.id === toastId ? false : toast.open };
-      // });
     }, toast.duration ?? 0);
 
     updateToast({ id: toastId, closing: true });
@@ -35,6 +43,28 @@ function updateToast(toastData: O.Required<Partial<ToastData>, 'id'>) {
 
 export const toastActions = {
   addToast: (payload: ToastData) => {
+    // const currentTime = new Date().getTime();
+
+    // const lastTime = toastState.lastToastAddedTime ?? 0;
+    // const timeDiff = currentTime - lastTime;
+
+    // console.log({ currentTime, lastTime, timeDiff });
+
+    // if (timeDiff < 300) {
+    //   const { newToastStackCount } = toastState;
+    //   toastState.newToastStackCount += newToastStackCount;
+
+    //   const timeout = 300 + newToastStackCount * 10;
+
+    //   setTimeout(() => {
+    //     toastState.toasts.push(payload);
+    //     toastState.lastToastAddedTime = new Date().getTime();
+    //     toastState.newToastStackCount -= 1;
+    //   }, timeout);
+    // } else {
+    //   toastState.toasts.push(payload);
+    //   toastState.lastToastAddedTime = new Date().getTime();
+    // }
     toastState.toasts.push(payload);
   },
   removeToast: (toastId: string) => {

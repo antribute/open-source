@@ -3,7 +3,7 @@ import * as ToastPrimitive from '@radix-ui/react-toast';
 import React, { useState } from 'react';
 import { Button, ButtonProps } from 'components/Button';
 import { CloseButton } from 'components/IconButton';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion, VariantLabels, Variants as MotionVariants } from 'framer-motion';
 import { toastActions } from 'components/Toast/toast-function';
 
 const ToastContainerElement = classed(
@@ -40,6 +40,18 @@ export type ToastProps = Omit<
   'asChild' | 'ref'
 >;
 
+// const toastMotionVariants = {
+//   initial: {}
+//   animate: { scale: 0, opacity: [0, 0.9, 1], },
+//   shown: { scale: 1 },
+// } satisfies MotionVariants;
+
+const toastMotionVariants = {
+  initial: { opacity: 0, y: 40, scale: 0 },
+  animate: { scale: 0, opacity: 1, y: 0, transition: { staggerChildren: 0.3, delayChildren: 0.5 } },
+  exit: { opacity: 0 },
+} satisfies MotionVariants;
+
 const ToastContainer = React.forwardRef<HTMLDivElement, ToastProps>(
   ({ children, id, ...props }, ref) => {
     const [swipeComplete, setSwipeComplete] = useState(false);
@@ -65,7 +77,7 @@ const ToastContainer = React.forwardRef<HTMLDivElement, ToastProps>(
           drag="x"
           dragDirectionLock
           dragConstraints={{ left: 0, right: 600 }}
-          dragElastic={0.9}
+          dragElastic={0.05}
           layout="position"
           dragSnapToOrigin={!swipeComplete}
         >
@@ -100,10 +112,19 @@ const ToastClose = ({ ...props }: ToastCloseProps) => {
 
 const ToastTitle = classed(ToastPrimitive.Title, 'font-medium text-content-intense text-md');
 
-const ToastDescription = classed(
+const ToastDescriptionElement = classed(
   ToastPrimitive.Description,
   'font-body text-content-high mt-1 text-md'
 );
+
+const ToastDescription = ({
+  children,
+  ...props
+}: React.ComponentProps<typeof ToastDescriptionElement>) => {
+  return children ? (
+    <ToastDescriptionElement {...props}> {children}</ToastDescriptionElement>
+  ) : null;
+};
 
 const Container = ToastContainer;
 

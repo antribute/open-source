@@ -1,4 +1,5 @@
 import { notEmpty } from 'utils/notEmpty';
+import { toArray } from 'utils/toArray';
 import type { ComboboxOptionGetters, SelectOption, SelectOptionMap } from './Combobox';
 
 interface GetOptionMapOptions extends ComboboxOptionGetters<unknown[]> {
@@ -29,12 +30,6 @@ export function getOptionMap({ data = [], getOptionLabel, getOptionValue }: GetO
   );
 
   return optionMap;
-}
-
-function toArray<TValue, TReturn extends TValue extends unknown[] ? TValue : TValue[]>(
-  v: TValue
-): TReturn {
-  return (Array.isArray(v) ? v : [v]) as TReturn;
 }
 
 export function originalValueToSelectOption({

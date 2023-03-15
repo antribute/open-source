@@ -9,7 +9,7 @@ export type CloseButtonProps = Pick<
 export const CloseButton = ({ className, color = 'primary', ...props }: CloseButtonProps) => {
   return (
     <IconButton size="sm" variant="ghost" {...props} color={color} className={className}>
-      <XMarkIcon className={clsx({ 'fill-content': color === 'primary' })} />
+      <XMarkIcon className={clsx({ 'fill-content-intense': color === 'primary' })} />
     </IconButton>
   );
 };
