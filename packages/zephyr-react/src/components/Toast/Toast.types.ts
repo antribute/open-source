@@ -17,6 +17,8 @@ export interface ToastData
   action?: ActionProps | ActionProps[];
   closing?: boolean;
   variant?: ToastVariant;
+  index?: number;
+  autoDismiss?: boolean;
 }
 
-export type ToastItem = Omit<ToastData, 'id'>;
+export type ToastItem = Omit<ToastData, 'id' | 'index'>;

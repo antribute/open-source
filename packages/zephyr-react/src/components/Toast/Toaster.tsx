@@ -137,6 +137,7 @@ const ToastContainer = ({
       </Flex>
       <div className="-mr-4">
         <CloseButton
+          animated
           onClick={() => {
             toastActions.removeToast(id);
           }}
@@ -191,14 +192,24 @@ const ToasterContent = (props: ToastData) => {
 export const Toaster = () => {
   const isMd = useMediaQuery('(min-width: 768px)');
 
+  const { toasts } = valtioSignal(toastState) as unknown as ToastState;
+  const { maxToasts } = toastState;
   return (
     <ToastPrimitive.Provider swipeDirection="right">
       <AnimatePresence>
-        {(valtioSignal(toastState) as unknown as ToastState).toasts.map(
-          ({ id, open, ...props }) => {
-            return <ToasterToast forceMount open={open} key={id} id={id} {...props} />;
-          }
-        )}
+        {toasts.map(({ id, open, ...props }, index, arr) => {
+          return (
+            <ToasterToast
+              isStacked={arr.length > maxToasts}
+              forceMount
+              open={open}
+              key={id}
+              id={id}
+              {...props}
+              index={index}
+            />
+          );
+        })}
       </AnimatePresence>
       <Toast.Viewport />
     </ToastPrimitive.Provider>

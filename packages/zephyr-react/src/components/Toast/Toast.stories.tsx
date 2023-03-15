@@ -12,13 +12,15 @@ function addManyToasts(props: ToastItem, count = 6) {
   });
 }
 
-const toasts: Record<string, ToastItem> = {
+const toasts = {
   exampleToast: {
     title: 'Example Toast',
+    autoDismiss: false,
   },
   dangerToast: {
     title: 'Error',
     description: 'Something went wrong',
+    autoDismiss: false,
     variant: 'danger',
   },
   dangerToastAction: {
@@ -29,6 +31,8 @@ const toasts: Record<string, ToastItem> = {
   },
   actionToast: {
     title: 'Action Toast',
+    description: 'Lorem ipsum cacilus en diem',
+    variant: 'danger',
     action: {
       altText: 'Read',
       children: 'Read',
@@ -79,7 +83,7 @@ const toasts: Record<string, ToastItem> = {
       },
     ],
   },
-};
+} satisfies Record<string, ToastItem>;
 
 export const Default = () => {
   const [showDescription, setShowDescription] = useState(false);
@@ -104,6 +108,14 @@ export const Default = () => {
           </Button>
         );
       })}
+
+      <Button
+        onClick={() => {
+          addManyToasts({ ...toasts.actionToast, description: undefined }, 6);
+        }}
+      >
+        Add 6 Toasts
+      </Button>
       <Checkbox
         label="Show Description"
         onCheckedChange={(e) => {

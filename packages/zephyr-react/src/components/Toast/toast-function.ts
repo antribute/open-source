@@ -8,12 +8,16 @@ export interface ToastState {
   toastTimeOuts: Map<ToastId, ReturnType<typeof setTimeout>>;
   lastToastAddedTime?: number;
   newToastStackCount: number;
+  maxToasts: number;
+  isStacked: boolean;
 }
 
 export const toastState = proxy<ToastState>({
   toasts: [],
   toastTimeOuts: new Map(),
   newToastStackCount: 1,
+  maxToasts: 5,
+  isStacked: false,
 });
 
 function dismissToast(toastId: string) {
@@ -43,28 +47,6 @@ function updateToast(toastData: O.Required<Partial<ToastData>, 'id'>) {
 
 export const toastActions = {
   addToast: (payload: ToastData) => {
-    // const currentTime = new Date().getTime();
-
-    // const lastTime = toastState.lastToastAddedTime ?? 0;
-    // const timeDiff = currentTime - lastTime;
-
-    // console.log({ currentTime, lastTime, timeDiff });
-
-    // if (timeDiff < 300) {
-    //   const { newToastStackCount } = toastState;
-    //   toastState.newToastStackCount += newToastStackCount;
-
-    //   const timeout = 300 + newToastStackCount * 10;
-
-    //   setTimeout(() => {
-    //     toastState.toasts.push(payload);
-    //     toastState.lastToastAddedTime = new Date().getTime();
-    //     toastState.newToastStackCount -= 1;
-    //   }, timeout);
-    // } else {
-    //   toastState.toasts.push(payload);
-    //   toastState.lastToastAddedTime = new Date().getTime();
-    // }
     toastState.toasts.push(payload);
   },
   removeToast: (toastId: string) => {
@@ -78,9 +60,17 @@ export const toastActions = {
       dismissToast(toast.id);
     });
   },
+  toggleStacked: (payload?: boolean) => {
+    toastState.isStacked = payload === undefined ? toastState.isStacked : payload;
+  },
+
+  toggleMaxStacked: () => {
+    const { toasts, maxToasts } = toastState;
+    toastState.isStacked = toasts.length > maxToasts;
+  },
 } satisfies Record<string, (payload: never) => void>;
 
-export function toast({ ...props }: ToastItem) {
+export function toast({ autoDismiss = true, ...props }: ToastItem) {
   const id = uniqueId('toast');
 
   function update(props: ToastData) {
@@ -96,7 +86,9 @@ export function toast({ ...props }: ToastItem) {
     open: true,
     id,
     onOpenChange: (open) => {
-      if (!open) dismiss();
+      if (!open && autoDismiss) {
+        dismiss();
+      }
     },
   });
 
