@@ -1,5 +1,5 @@
-export function getNearestColorSchemeAttribute(element?: HTMLElement | null) {
-  if (!element) return undefined;
+export function getNearestColorSchemeAttribute(element?: HTMLElement | null, fallback = 'default') {
+  if (!element) return fallback;
 
-  return element.closest('[data-color-scheme]')?.getAttribute('data-color-scheme') ?? undefined;
+  return element.closest('[data-color-scheme]')?.getAttribute('data-color-scheme') ?? fallback;
 }

@@ -1,0 +1,18 @@
+import { ArgsTable, Canvas, Description, Meta, Story } from '@storybook/addon-docs';
+import { Toaster } from '.';
+import * as stories from './Toast.stories.tsx';
+
+<Meta title="Feedback/Toaster" component={Toaster} />
+
+# Toaster
+
+<Description component={Toaster} />
+<ArgsTable of={Toaster} />
+
+## Default
+
+Default `Toaster` component
+
+<Canvas withToolbar>
+  <Story name="Default" story={stories.Default} />
+</Canvas>

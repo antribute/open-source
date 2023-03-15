@@ -30,17 +30,21 @@ export const CardTitleSectionElement = classed(
 // Body Section
 
 export const CardBodySectionElement = classed(
-  ScrollArea,
+  'div',
   'w-full pt-8 mb-8',
   'font-body',
   'text-content-moderate',
   'flex flex-col gap-16',
-  'min-h-0 grow',
+  'min-h-0 grow overflow-y-auto',
   expandVariant('group-data-antribute-card-padding-none:(px-10,mb-0)'),
   {
     variants: {},
   }
 );
+
+// Scroll Body Section
+
+export const CardScrollBodySectionElement = classed(ScrollArea, CardBodySectionElement);
 
 // Footer Section
 

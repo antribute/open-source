@@ -79,15 +79,11 @@ export const BaseInputElement = classed(
         success: clsx(
           classTheme({
             class: 'focus-within:ring-[3px] focus-within:ring-opacity-20',
-            light: [
-              'border-positive',
-              'focus-within:ring-positive',
-              'focus-within:border-positive',
-            ],
+            light: ['border-success', 'focus-within:ring-success', 'focus-within:border-success'],
             dark: [
-              // 'dark:border-positive',
-              'focus-within:dark:ring-positive/20',
-              'focus-within:dark:border-positive',
+              // 'dark:border-success',
+              'focus-within:dark:ring-success/20',
+              'focus-within:dark:border-success',
             ],
           })
         ),

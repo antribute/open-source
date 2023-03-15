@@ -13,10 +13,10 @@ export const commonScheme = {
     'info-dark': colorPalette['palette-info'].dark,
     'info-soft': colorPalette['palette-info'].soft,
 
-    positive: colorPalette['palette-positive'].DEFAULT,
-    'positive-light': colorPalette['palette-positive'].light,
-    'positive-dark': colorPalette['palette-positive'].dark,
-    'positive-soft': colorPalette['palette-positive'].soft,
+    success: colorPalette['palette-success'].DEFAULT,
+    'success-light': colorPalette['palette-success'].light,
+    'success-dark': colorPalette['palette-success'].dark,
+    'success-soft': colorPalette['palette-success'].soft,
 
     danger: colorPalette['palette-danger'].DEFAULT,
     'danger-light': colorPalette['palette-danger'].light,

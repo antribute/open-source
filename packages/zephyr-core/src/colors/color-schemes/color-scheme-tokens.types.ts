@@ -8,7 +8,7 @@ export type ColorSchemeToken =
   | TokenShadeVariant<'surface'>
   | TokenShadeVariant<'heart'>
   | TokenShadeVariant<'info'>
-  | TokenShadeVariant<'positive'>
+  | TokenShadeVariant<'success'>
   | TokenShadeVariant<'caution'>
   | TokenShadeVariant<'danger'>
   | TokenStrengthVariant<'highlight'>

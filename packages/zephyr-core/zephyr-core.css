@@ -20,8 +20,8 @@
   .filled-accent-info {
     @apply bg-info text-palette-white;
   }
-  .filled-accent-positive {
-    @apply bg-positive text-palette-white;
+  .filled-accent-success {
+    @apply bg-success text-palette-white;
   }
   .filled-accent-caution {
     @apply bg-caution text-palette-white;
@@ -45,8 +45,8 @@
   .gradient-info {
     @apply bg-gradient-to-r from-info-dark to-info-light text-palette-white;
   }
-  .gradient-positive {
-    @apply bg-gradient-to-r from-positive-dark to-positive-light text-palette-white;
+  .gradient-success {
+    @apply bg-gradient-to-r from-success-dark to-success-light text-palette-white;
   }
   .gradient-caution {
     @apply bg-gradient-to-r from-caution-dark to-caution-light text-palette-white;
@@ -70,8 +70,8 @@
   .filled-hover-accent-info {
     @apply hover:bg-info-dark;
   }
-  .filled-hover-accent-positive {
-    @apply hover:bg-positive-dark;
+  .filled-hover-accent-success {
+    @apply hover:bg-success-dark;
   }
   .filled-hover-accent-caution {
     @apply hover:bg-caution-dark;
@@ -95,8 +95,8 @@
   .outlined-accent-info {
     @apply bg-surface-soft hover:bg-surface text-info ring-info hover:ring-info-dark;
   }
-  .outlined-accent-positive {
-    @apply bg-surface-soft hover:bg-surface text-positive ring-positive hover:ring-positive-dark;
+  .outlined-accent-success {
+    @apply bg-surface-soft hover:bg-surface text-success ring-success hover:ring-success-dark;
   }
   .outlined-accent-caution {
     @apply bg-surface-soft hover:bg-surface text-caution ring-caution hover:ring-caution-dark;
@@ -120,8 +120,8 @@
   .glass-accent-info {
     @apply bg-info/10 hover:bg-info/20 text-info;
   }
-  .glass-accent-positive {
-    @apply bg-positive/10 hover:bg-positive/20 text-positive;
+  .glass-accent-success {
+    @apply bg-success/10 hover:bg-success/20 text-success;
   }
   .glass-accent-caution {
     @apply bg-caution/10 hover:bg-caution/20 text-caution contrast-[.85];

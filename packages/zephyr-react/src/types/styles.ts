@@ -9,7 +9,7 @@ export type ColorProp =
   | 'strong'
   | 'primary'
   | 'info'
-  | 'positive'
+  | 'success'
   | 'danger'
   | 'caution';
 

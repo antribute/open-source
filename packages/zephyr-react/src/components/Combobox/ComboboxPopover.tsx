@@ -9,7 +9,7 @@ import { PaperElementBackground } from 'components/Paper/Paper.styles';
 import { Button } from 'components/Button';
 
 import { ComboboxList } from 'components/Combobox/ComboboxList';
-import type { ComboboxProps, OptionValueMap, SelectOptionMap } from 'components/Combobox/Combobox';
+import type { ComboboxProps, SelectOptionMap } from 'components/Combobox/Combobox';
 import { getNearestColorSchemeAttribute } from 'utils/getNearestColorSchemeAttribute';
 
 const SelectPopoverElement = classed(
@@ -65,7 +65,6 @@ export function ComboboxPopover<TOptions extends unknown[]>({
           selectOptionMap={selectOptionMap}
           isMultiSelect={Boolean(isMultiSelect)}
           viewAllSelected={viewAllSelected}
-          // onLastOptionItemScrollReached={onLastOptionItemScrollReached}
           searching={searching}
         />
       )}

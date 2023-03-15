@@ -6,7 +6,7 @@ export const colorVariants = {
     primary: clsx('text-primary'),
     neutral: clsx('text-neutral-300 dark:text-neutral-300'),
     inverse: clsx('text-surface-inverse-50 dark:text-surface-50'),
-    positive: clsx('text-positive'),
+    success: clsx('text-success'),
     danger: clsx('text-danger'),
     caution: clsx('text-caution'),
     surface: clsx('text-content-moderate dark:text-content-inverse-moderate'),
@@ -27,7 +27,7 @@ export const colorVariants = {
     primary: clsx('text-content-inverse-intense'),
     neutral: clsx('text-content-inverse-intense'),
     inverse: clsx('text-content-inverse-intense dark:text-surface-inverse-50'),
-    positive: clsx('text-content-inverse-intense'),
+    success: clsx('text-content-inverse-intense'),
     danger: clsx('text-content-inverse-intense'),
     caution: clsx('text-content-inverse-intense'),
     surface: clsx('text-content-moderate dark:text-content-inverse-intense'),
@@ -47,7 +47,7 @@ export const colorVariants = {
   bg: {
     primary: clsx('bg-primary'),
     neutral: clsx('bg-neutral-600'),
-    positive: clsx('bg-positive'),
+    success: clsx('bg-success'),
     danger: clsx('bg-danger'),
     caution: clsx('bg-caution'),
     inverse: clsx('bg-neutral-900', 'dark:bg-content-inverse-intense'),
@@ -71,7 +71,7 @@ export const colorVariants = {
   bgHighlight: {
     primary: clsx('bg-primary-light/10'),
     neutral: clsx('bg-neutral-400/10'),
-    positive: clsx('bg-positive-light/10'),
+    success: clsx('bg-success-light/10'),
     danger: clsx('bg-danger-light/10'),
     caution: clsx('bg-caution-light/10'),
     'various-blue': clsx('bg-various-blue-light/10'),
@@ -92,7 +92,7 @@ export const colorVariants = {
   bgHoverHighlightDark: {
     primary: clsx('hover:bg-primary-light/20'),
     neutral: clsx('hover:bg-neutral-400/20'),
-    positive: clsx('hover:bg-positive-light/20'),
+    success: clsx('hover:bg-success-light/20'),
     danger: clsx('hover:bg-danger-light/20'),
     caution: clsx('hover:bg-caution-light/20'),
     'various-blue': clsx('hover:bg-various-blue-light/20'),
@@ -113,7 +113,7 @@ export const colorVariants = {
   hoverDark: {
     primary: clsx('hover:bg-primary-dark'),
     neutral: clsx('hover:bg-neutral-600'),
-    positive: clsx('hover:bg-positive-dark'),
+    success: clsx('hover:bg-success-dark'),
     danger: clsx('hover:bg-danger-dark'),
     caution: clsx('hover:bg-caution-dark'),
     inverse: clsx('hover:bg-surface-inverse-dark dark:hover:bg-surface-dark'),
@@ -137,7 +137,7 @@ export const colorVariants = {
   border: {
     primary: clsx('border-primary'),
     neutral: clsx('border-neutral'),
-    positive: clsx('border-positive'),
+    success: clsx('border-success'),
     danger: clsx('border-danger'),
     caution: clsx('border-caution'),
     surface: clsx('border-black/20 dark:border-white/20'),
@@ -158,7 +158,7 @@ export const colorVariants = {
   focusBorder: {
     neutral: clsx('focus:border-neutral-light'),
     primary: clsx('focus:border-primary-light'),
-    positive: clsx('focus:border-positive-light'),
+    success: clsx('focus:border-success-light'),
     danger: clsx('focus:border-danger-light'),
     caution: clsx('focus:border-caution-light'),
     inverse: clsx('focus:border-surface-inverse dark:focus:border-surface'),
@@ -179,7 +179,7 @@ export const colorVariants = {
   focusRing: {
     neutral: clsx('focus:ring-neutral'),
     primary: clsx('focus:ring-primary'),
-    positive: clsx('focus:ring-positive'),
+    success: clsx('focus:ring-success'),
     danger: clsx('focus:ring-danger'),
     caution: clsx('focus:ring-caution'),
     surface: clsx('focus:ring-black/10 dark:focus:ring-white/10'),
@@ -200,10 +200,10 @@ export const colorVariants = {
   ring: {
     neutral: clsx('ring-neutral-300 dark:ring-neutral-400'),
     primary: clsx('ring-primary'),
-    positive: clsx('ring-positive'),
+    success: clsx('ring-success'),
     danger: clsx('ring-danger'),
     caution: clsx('ring-caution'),
-    surface: clsx('ring-black/10 dark:ring-surface-inverse-200'),
+    surface: clsx('dark:ring-surface-inverse-200 ring-black/10'),
     inverse: clsx('ring-surface-inverse dark:ring-surface'),
     'various-blue': clsx('ring-various-blue'),
     'various-emerald': clsx('ring-various-emerald'),
@@ -222,7 +222,7 @@ export const colorVariants = {
     primary: clsx('fill-primary'),
     neutral: clsx('fill-neutral'),
     'neutral-light': clsx('fill-neutral-light'),
-    positive: clsx('fill-positive'),
+    success: clsx('fill-success'),
     danger: clsx('fill-danger'),
     caution: clsx('fill-caution'),
     inverse: clsx('fill-surface-inverse', 'dark:fill-surface'),
@@ -247,7 +247,7 @@ export const colorVariants = {
   shadow: {
     primary: clsx('shadow-primary/50', 'dark:shadow-primary-800/60'),
     neutral: clsx('shadow-neutral-500/50', 'dark:shadow-neutral-800/80'),
-    positive: clsx('shadow-positive/50', 'dark:shadow-positive-800/60'),
+    success: clsx('shadow-success/50', 'dark:shadow-success-800/60'),
     danger: clsx('shadow-danger/50', 'dark:shadow-danger-800/60'),
     caution: clsx('shadow-caution/50', 'dark:shadow-caution-800/60'),
     inverse: clsx('shadow-surface-inverse/50', 'dark:shadow-surface-inverse-50/80'),
@@ -273,9 +273,9 @@ export const colorVariants = {
     primary: clsx('from-primary-300 via-primary-500  to-primary-700'),
     neutral: clsx(
       'from-neutral-300 via-neutral-400  to-neutral-700',
-      'dark:from-neutral-300 dark:via-neutral-600  dark:to-surface-inverse'
+      'dark:to-surface-inverse dark:from-neutral-300  dark:via-neutral-600'
     ),
-    positive: clsx('from-positive-300 via-positive-500  to-positive-700'),
+    success: clsx('from-success-300 via-success-500  to-success-700'),
     danger: clsx('from-danger-300 via-danger-500  to-danger-600'),
     caution: clsx('from-caution-300 via-caution-500  to-caution-600'),
     'various-blue': clsx('from-various-blue-300 via-various-blue-500  to-various-blue-600'),
@@ -296,12 +296,12 @@ export const colorVariants = {
     'various-gray': clsx('from-various-gray-300 via-various-gray-500  to-various-gray-600'),
 
     inverse: clsx(
-      'from-neutral-300 to-surface-inverse',
+      'to-surface-inverse from-neutral-300',
       'dark:from-surface-50  dark:to-neutral-400 '
     ),
     surface: clsx(
       'from-surface-50  via-surface-200 to-surface-900',
-      'dark:from-neutral-500 dark:via-surface-inverse-300 dark:to-surface-inverse-900'
+      'dark:via-surface-inverse-300 dark:to-surface-inverse-900 dark:from-neutral-500'
     ),
     'surface-soft': clsx(
       'from-surface-soft',

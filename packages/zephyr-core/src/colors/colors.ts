@@ -115,7 +115,7 @@ export const colors = {
     '900': '#8a121b',
   })({ DEFAULT: '500', dark: '700', light: '300', soft: '100' }),
 
-  positive: generateColorGroup(tailwindColors.emerald)({
+  success: generateColorGroup(tailwindColors.emerald)({
     DEFAULT: '500',
     dark: '600',
     light: '300',

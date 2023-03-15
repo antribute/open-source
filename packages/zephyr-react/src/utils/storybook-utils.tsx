@@ -57,14 +57,14 @@ const keys = {
     'info',
     'caution',
     'danger',
-    'positive',
+    'success',
     'heart',
   ] satisfies LiteralUnion<ColorProp, string>[],
   sizes: ['xs', 'sm', 'md', 'lg'] as LiteralUnion<SizeProp, string>[],
 } satisfies Record<string, LiteralUnion<string, string>[]>;
 
 export const getSizeKeys = () => {
-  return keys.sizes;
+  return keys.sizes as SizeProp[];
 };
 
 export const getColorKeys = () => {

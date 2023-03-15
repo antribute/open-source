@@ -70,7 +70,7 @@ const getInputStateIcon = ({
   }
 
   if (inputState === 'success') {
-    return <CheckCircleIcon className="text-positive" {...common} />;
+    return <CheckCircleIcon className="text-success" {...common} />;
   }
 
   return <CheckCircleIcon className="opacity-0" />;

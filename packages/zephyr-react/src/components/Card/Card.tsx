@@ -5,6 +5,7 @@ import {
   CardDescriptionElement,
   CardFooterSectionElement,
   CardGroupSpacerElement,
+  CardScrollBodySectionElement,
   CardTitleElement,
   CardTitleSectionElement,
 } from 'components/Card/Card.styles';
@@ -55,14 +56,21 @@ const CardGroupSpacer = (props: CardGroupSpacerProps) => {
   return <CardGroupSpacerElement {...props} />;
 };
 
-//  Body
+//  Body Seciton
 export type CardBodyProps = React.ComponentProps<typeof CardBodySectionElement>;
 
 const CardBody = (props: CardBodyProps) => {
   return <CardBodySectionElement {...props} />;
 };
 
-//  Body
+//  Scroll Body Section
+export type CardScrollBodyProps = React.ComponentProps<typeof CardScrollBodySectionElement>;
+
+const CardScrollBody = (props: CardScrollBodyProps) => {
+  return <CardScrollBodySectionElement {...props} />;
+};
+
+//  Description
 export type CardDescriptionProps = React.ComponentProps<typeof CardDescriptionElement>;
 
 const Description = (props: CardDescriptionProps) => {
@@ -82,8 +90,18 @@ const CardFooter = (props: CardFooterProps) => {
 const Container = CardContainer;
 const TitleSection = CardTitleArea;
 const BodySection = CardBody;
+const ScrollBodySection = CardScrollBody;
 const FooterSection = CardFooter;
 const Title = CardTitleHeading;
 const GroupSpacer = CardGroupSpacer;
 
-export { Container, TitleSection, BodySection, FooterSection, Title, GroupSpacer, Description };
+export {
+  Container,
+  TitleSection,
+  BodySection,
+  ScrollBodySection,
+  FooterSection,
+  Title,
+  GroupSpacer,
+  Description,
+};

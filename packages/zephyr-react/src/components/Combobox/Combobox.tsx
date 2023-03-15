@@ -1,19 +1,11 @@
 /* eslint-disable react/no-unused-prop-types */
 import * as ComboboxPrimitive from 'ariakit/combobox';
 import * as SelectPrimitive from 'ariakit/select';
-import { useCallback, useEffect, useMemo, useState, useRef } from 'react';
+import { useEffect, useMemo, useState, useRef } from 'react';
 import { InputSelect, InputSelectProps } from 'components/Input';
-import { Button } from 'components/Button';
-import { notEmpty } from 'utils/notEmpty';
-import { O } from 'ts-toolbelt';
-import { useDebounce, useDebouncedCallback } from 'use-debounce';
+import { useDebouncedCallback } from 'use-debounce';
 import { ComboboxPopover } from 'components/Combobox/ComboboxPopover';
-import {
-  getOptionMap,
-  originalValueToSelectOption,
-  originalValueToValueString,
-  valueStringToOriginalValue,
-} from 'components/Combobox/Combobox.helpers';
+import { getOptionMap } from 'components/Combobox/Combobox.helpers';
 import useDeepCompareEffect, { useDeepCompareEffectNoCheck } from 'use-deep-compare-effect';
 import { useImmer } from 'use-immer';
 import { enableMapSet } from 'immer';
@@ -89,7 +81,7 @@ function useComboboxSearch({
   onSearchDebounceDelay?: number;
 }) {
   const prevSearch = useRef<string | undefined>('');
-  const [searchingStarted, setSearchingStarted] = useState(false);
+  // const [searchingStarted, setSearchingStarted] = useState(false);
 
   const [isSearchActive, setIsSearchActive] = useState<boolean | undefined>();
 
@@ -101,18 +93,17 @@ function useComboboxSearch({
 
   const debouncedOnSearch = useDebouncedCallback((search: string) => {
     onSearch?.(search);
-    setSearchingStarted(false);
+    // setSearchingStarted(false);
   }, onSearchDebounceDelay);
 
   function handleSearch(search: string) {
     if (onSearch && prevSearch.current !== search) {
-      setSearchingStarted(true);
+      // setSearchingStarted(true);
       debouncedOnSearch(search);
       prevSearch.current = search;
     }
   }
 
-  console.log({ searching, isSearching, searchingStarted });
   return { searching, handleSearch };
 }
 
@@ -132,29 +123,15 @@ export function Combobox<TOptions extends unknown[]>({
   onSearch,
   ...props
 }: ComboboxProps<TOptions>) {
-  // const [optionsState, setOptionsState] = useState(options);
-
   const [selectOptionMap, updateSelectOptionMap] = useImmer<SelectOptionMap>(new Map([]));
 
   useDeepCompareEffectNoCheck(() => {
-    // const v = originalValueToValueString({
-    //   originalValue: originalValueProp,
-    //   getOptionLabel,
-    //   isMultiSelect,
-    // });
-
     const optionMap = getOptionMap({ data: originalValueProp, getOptionLabel, getOptionValue });
 
     updateSelectOptionMap((draft) => {
       optionMap.forEach((value, key) => {
         draft.set(key, { ...value, isSelected: true });
       });
-
-      // draft.forEach(({ isSelected }, key) => {
-      //   if (!optionMap.has(key) && !isSelected) {
-      //     draft.delete(key);
-      //   }
-      // });
     });
   }, [originalValueProp]);
 
@@ -210,23 +187,8 @@ export function Combobox<TOptions extends unknown[]>({
       }
     );
 
-    console.log({ ...reduced });
-
     return reduced;
   }, [isMultiSelect, searching, selectOptionMap]);
-
-  useDeepCompareEffect(() => {
-    console.log({ selectOptionMap });
-  }, [selectOptionMap]);
-
-  // const optionsState = useMemo(() => {
-  //   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-  //   return (options ?? []).filter(notEmpty);
-  // }, [options]);
-
-  // const { optionList, optionMap } = useMemo(() => {
-  //   return getOptionMap({ data: optionsState, getOptionLabel, getOptionValue });
-  // }, [getOptionLabel, getOptionValue, optionsState]);
 
   const [viewAllSelected, setViewAllSelected] = useState(false);
 
@@ -241,20 +203,6 @@ export function Combobox<TOptions extends unknown[]>({
       }
     },
   });
-
-  // const getValuePropStringValue = useCallback(() => {
-  //   if (originalValueProp === undefined) return isMultiSelect ? [] : '';
-  //   if (Array.isArray(originalValueProp)) return originalValueProp.map((v) => getOptionLabel(v));
-  //   return getOptionLabel(originalValueProp);
-  // }, [getOptionLabel, isMultiSelect, originalValueProp]);
-
-  // const getOriginalValue = (value?: string | string[]) => {
-  //   if (!value) return undefined;
-  //   if (Array.isArray(value)) return value.map((v) => optionMap.get(v)).filter(notEmpty);
-  //   return optionValueMap.get(value);
-  // };
-
-  // const defaultStringValue = getValuePropStringValue();
 
   const select = SelectPrimitive.useSelectState({
     ...selectProps,
@@ -284,8 +232,6 @@ export function Combobox<TOptions extends unknown[]>({
         });
       });
 
-      // console.log({ stringValue, newValue, newOptionMap, optionValueMap, optionMap });
-
       onValueChange?.(newValue as never);
 
       if (!stringValue || stringValue.length === 0) {
@@ -299,13 +245,6 @@ export function Combobox<TOptions extends unknown[]>({
 
   const { value: selectValue } = select;
 
-  // const optionValueMap = useMemo(() => {
-  //   const valueArr = Array.isArray(selectValue) ? selectValue : [selectValue];
-
-  //   return new Map(valueArr.map((e) => [e, optionMap.get(e)!]));
-  // }, [optionMap, selectValue]);
-
-  // console.log('optionValueMap', optionValueMap);
   // Resets combobox value when popover is collapsed
   if (!select.mounted && combobox.value) {
     combobox.setValue('');

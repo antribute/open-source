@@ -9,6 +9,7 @@ import { useImmer } from 'use-immer';
 import { useRef } from 'react';
 import { mergeRefs } from 'react-merge-refs';
 import { interpolate, easeInOut } from 'framer-motion';
+import useDimensions from 'react-cool-dimensions';
 
 type ScrollAreaRootElementProps = React.ComponentProps<typeof ScrollAreaPrimitive.Root>;
 const ScrollAreaRootElement = classed(
@@ -143,6 +144,10 @@ const ScrollArea = React.forwardRef<
   }
 
   const { isOffsetFromTop, isOffsetFromBottom } = getScrollOffset();
+
+  const { observe, height } = useDimensions();
+
+  console.log('HEIGHT', height);
 
   return (
     <ScrollAreaRootElement

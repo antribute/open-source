@@ -9,6 +9,7 @@ import type { Config } from 'tailwindcss';
 import tailwindCssRadixPlugin from 'tailwindcss-radix';
 import tailwindCssFormsPlugin from '@tailwindcss/forms';
 import tailwindCssTypographyPlugin from '@tailwindcss/typography';
+import tailwindLineClampPlugin from '@tailwindcss/line-clamp';
 import createVariantGroupTransformer from 'tailwind-group-variant';
 import { iconsPlugin, getIconCollections } from '@egoist/tailwindcss-icons';
 import { multiThemePlugin } from './plugins/multi-theme-plugin';
@@ -26,11 +27,11 @@ const config = {
   plugins: [
     tailwindCssRadixPlugin,
     tailwindCssFormsPlugin,
+    tailwindLineClampPlugin,
     tailwindCssTypographyPlugin,
     iconsPlugin({
       collections: getIconCollections(['heroicons']),
     }),
-
     multiThemePlugin(),
     linearGradientMaskImagePlugin(),
   ],

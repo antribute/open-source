@@ -62,9 +62,7 @@ export const ComboboxList = ({
 
   const virtualizer = useVirtualizer({
     count: filteredMatches.length,
-    // getItemKey: (index) => `${selectOptionMap.get(filteredMatches[index]!)?.id ?? index}`,
     estimateSize: () => 48,
-
     scrollingDelay: 300,
     getScrollElement: () => listRef.current,
     overscan: 10,
@@ -74,11 +72,9 @@ export const ComboboxList = ({
     // There's a bug where somes the scroll infinitely jumps to the top when the list
     // of matches changes. Adding the option to disable virtualization until
     // a solution for this bug is found.
-    // if (virtualization ?? !Boolean(onSearch)) {
+    const hasVirtualization = virtualization ?? (onSearch ? filteredMatches.length > 50 : true);
 
-    const on = virtualization ?? (onSearch ? filteredMatches.length > 50 : true);
-
-    if (on) {
+    if (hasVirtualization) {
       const virtualItems = virtualizer.getVirtualItems();
       const totalSize = virtualizer.getTotalSize();
 

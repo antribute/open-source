@@ -38,6 +38,7 @@
   "devDependencies": {
     "@antribute/config": "workspace:*",
     "@tailwindcss/forms": "^0.5.3",
+    "@tailwindcss/line-clamp": "^0.4.2",
     "@tailwindcss/typography": "^0.5.9",
     "@types/lodash-es": "^4.17.6",
     "@types/node": "18.11.9",
@@ -66,6 +67,7 @@
   "dependencies": {
     "@egoist/tailwindcss-icons": "^1.0.7",
     "@iconify-json/heroicons": "^1.1.10",
+    "@radix-ui/react-toast": "^1.1.3",
     "clsx": "^1.2.1",
     "dot-path-value": "^0.0.6",
     "hex-rgb": "^5.0.0",
