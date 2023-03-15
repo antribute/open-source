@@ -1,58 +1,64 @@
 import { classed, expandVariant } from 'utils/classed';
 import * as ToastPrimitive from '@radix-ui/react-toast';
-import React, { useState } from 'react';
+import React, { useState, forwardRef } from 'react';
 import { Button, ButtonProps } from 'components/Button';
 import { CloseButton } from 'components/IconButton';
 import { motion, useReducedMotion, VariantLabels, Variants as MotionVariants } from 'framer-motion';
 import { toastActions } from 'components/Toast/toast-function';
 
-const ToastContainerElement = classed(
-  motion.div,
-  // PaperElement,
-  'bg-surface',
-  // 'radix-state-open:animate-toast-slide-in-bottom md:radix-state-open:animate-toast-slide-in-right',
-  // 'radix-state-closed:animate-toast-hide',
-  // 'radix-swipe-direction-right:radix-swipe-end:animate-toast-swipe-out-x',
-  // 'radix-swipe-direction-right:translate-x-radix-toast-swipe-move-x',
-  // 'radix-swipe-direction-down:radix-swipe-end:animate-toast-swipe-out-y',
-  // 'radix-swipe-direction-down:translate-y-radix-toast-swipe-move-y',
-  // 'radix-swipe-cancel:translate-x-0 radix-swipe-cancel:duration-200 radix-swipe-cancel:ease-[ease]',
-  'border border-highlight',
-  'relative',
-  'p-10 rounded mb-8 last:mb-0',
-  'active:cursor-grabbing'
-);
-
-export const ToastViewport = motion(
+const ToastContainerElement = motion(
   classed(
-    ToastPrimitive.Viewport,
-    'fixed top-0 z-[100] p-8',
-    'max-h-screen w-full',
-    'flex flex-col-reverse',
-    expandVariant(`
-  md:(max-w-[400px])
-  sm:(top-auto,bottom-0,right-0,flex-col)`)
+    'li',
+    // PaperElement,
+    // 'bg-surface',
+    // 'radix-state-open:animate-toast-slide-in-bottom md:radix-state-open:animate-toast-slide-in-right',
+    // 'radix-state-closed:animate-toast-hide',
+    // 'radix-swipe-direction-right:radix-swipe-end:animate-toast-swipe-out-x',
+    // 'radix-swipe-direction-right:translate-x-radix-toast-swipe-move-x',
+    // 'radix-swipe-direction-down:radix-swipe-end:animate-toast-swipe-out-y',
+    // 'radix-swipe-direction-down:translate-y-radix-toast-swipe-move-y',
+    // 'radix-swipe-cancel:translate-x-0 radix-swipe-cancel:duration-200 radix-swipe-cancel:ease-[ease]',
+    'bg-surface-dark/95',
+    'border border-highlight-moderate',
+    // 'before-absolute-content backdrop-blur-sm backdrop-brightness-[0.3]',
+    'backdrop-blur-[1.5px]',
+    'relative',
+    'p-10 rounded mb-8 md:last:mb-0',
+    'active:cursor-grabbing',
+    'shadow-2xl'
   )
 );
+
+export const ToastViewportElement = motion(
+  classed(
+    ToastPrimitive.Viewport,
+    'fixed bottom-0 z-[100] p-8',
+    'list-none',
+    'max-h-screen',
+    'flex flex-col-reverse',
+    'right-0 w-full',
+
+    // expandVariant('md:(max-w-[400px])'),
+    // expandVariant('sm:(top-auto,bottom-0,right-0,flex-col,w-full)'),
+    // expandVariant('xs:(w-full)')
+    expandVariant(`
+      md:(max-w-[400px])
+      sm:(top-auto,bottom-0,right-0,flex-col)`)
+  )
+);
+
+type ViewportProps = React.ComponentProps<typeof ToastViewportElement>;
+
+const ToastViewport = forwardRef<HTMLDivElement, ViewportProps>((props, ref) => {
+  return <ToastViewportElement {...props} ref={ref} />;
+});
 
 export type ToastProps = Omit<
   ToastPrimitive.ToastProps & React.ComponentProps<typeof ToastContainerElement>,
   'asChild' | 'ref'
 >;
 
-// const toastMotionVariants = {
-//   initial: {}
-//   animate: { scale: 0, opacity: [0, 0.9, 1], },
-//   shown: { scale: 1 },
-// } satisfies MotionVariants;
-
-const toastMotionVariants = {
-  initial: { opacity: 0, y: 40, scale: 0 },
-  animate: { scale: 0, opacity: 1, y: 0, transition: { staggerChildren: 0.3, delayChildren: 0.5 } },
-  exit: { opacity: 0 },
-} satisfies MotionVariants;
-
-const ToastContainer = React.forwardRef<HTMLDivElement, ToastProps>(
+const ToastContainer = React.forwardRef<HTMLLIElement, ToastProps>(
   ({ children, id, ...props }, ref) => {
     const [swipeComplete, setSwipeComplete] = useState(false);
 
@@ -60,20 +66,24 @@ const ToastContainer = React.forwardRef<HTMLDivElement, ToastProps>(
       <ToastPrimitive.Root
         onSwipeEnd={() => {
           setSwipeComplete(true);
+          console.log('SWIPE END');
           if (id) {
             toastActions.removeToast(id);
           }
         }}
-        asChild
+        onSwipeStart={() => {
+          console.log('SWIPE START');
+        }}
         {...props}
         forceMount
         id={id}
+        asChild
+        ref={ref}
       >
         <ToastContainerElement
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: [0, 0.9, 1], y: 0 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: [0, 0.9, 1] }}
           exit={{ opacity: 0 }}
-          ref={ref}
           drag="x"
           dragDirectionLock
           dragConstraints={{ left: 0, right: 600 }}
@@ -110,7 +120,7 @@ const ToastClose = ({ ...props }: ToastCloseProps) => {
   );
 };
 
-const ToastTitle = classed(ToastPrimitive.Title, 'font-medium text-content-intense text-md');
+const ToastTitle = classed(ToastPrimitive.Title, ' text-content-intense text-sm');
 
 const ToastDescriptionElement = classed(
   ToastPrimitive.Description,

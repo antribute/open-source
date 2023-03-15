@@ -13,6 +13,8 @@ import { Flex, FlexProps } from 'components/Flex';
 import { CloseButton } from 'components/IconButton';
 import { twMerge } from 'tailwind-merge';
 import { toArray } from 'utils/toArray';
+import { useIsDarkMode } from 'hooks/useIsDarkMode';
+import { useBreakpoint } from 'hooks/useBreakpoints';
 
 const ToastIconElement = classed('span', 'h-24 w-24 text-content-intense', {
   variants: {
@@ -44,6 +46,8 @@ const ToastActionButtons = ({
   justify,
 }: Pick<ToastData, 'action'> & { className?: string; justify?: FlexProps['justify'] }) => {
   const actions = toArray(action, { notEmpty: true });
+  const { md } = useBreakpoint({ md: undefined });
+
   return (
     <Flex justify={justify} className="" grow gap="md">
       {actions.length > 0 &&
@@ -59,6 +63,7 @@ const ToastActionButtons = ({
             <Toast.Action
               className={twMerge('grow shrink max-w-[115px]', className)}
               variant="glass"
+              size={md ? 'sm' : 'xs'}
               key={i}
               {...defaultProps()}
               {...action}
@@ -85,13 +90,19 @@ const ToasterToast = motion((props: ToastData) => {
     variant = 'neutral',
     ...rest
   } = props;
+
+  function getColorScheme() {
+    if (variant === 'neutral') return 'neutral-dark';
+    return variant;
+  }
+
   return (
     <Toast.Container
       open
       key={id}
       defaultOpen={defaultOpen}
       onOpenChange={onOpenChange}
-      data-color-scheme={variant}
+      data-color-scheme={getColorScheme()}
       id={id}
       {...rest}
     >
@@ -181,7 +192,7 @@ export const Toaster = () => {
   const isMd = useMediaQuery('(min-width: 768px)');
 
   return (
-    <ToastPrimitive.Provider swipeDirection={isMd ? 'right' : 'down'}>
+    <ToastPrimitive.Provider swipeDirection="right">
       <AnimatePresence>
         {(valtioSignal(toastState) as unknown as ToastState).toasts.map(
           ({ id, open, ...props }) => {

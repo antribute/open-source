@@ -53,9 +53,9 @@ const toasts: Record<string, ToastItem> = {
         color: 'primary',
       },
       {
-        altText: 'Save',
-        children: 'Save',
-        color: 'secondary',
+        altText: 'Dismiss',
+        children: 'Dismiss',
+        color: 'primary',
       },
     ],
   },
@@ -84,7 +84,7 @@ const toasts: Record<string, ToastItem> = {
 export const Default = () => {
   const [showDescription, setShowDescription] = useState(false);
   return (
-    <div className="relative flex w-full max-w-[50%] flex-wrap items-center gap-16">
+    <div className="relative flex w-full flex-wrap items-center gap-16">
       {Object.entries(toasts).map(([key, { title, description, ...props }], index) => {
         return (
           <Button

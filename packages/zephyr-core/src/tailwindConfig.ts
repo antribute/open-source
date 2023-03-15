@@ -22,6 +22,7 @@ import { colorPalette } from './colors/colors';
 import { keyframes } from './keyframes';
 import { animation } from './animation';
 import { getTailwindDataAttributeShortcuts } from './data-attributes';
+import { screens } from './screens';
 
 const config = {
   plugins: [
@@ -54,6 +55,8 @@ const config = {
       ...colorSchemeDataAttributes,
       ...getTailwindDataAttributeShortcuts(),
     },
+
+    screens,
 
     typography: (theme: PluginAPI['theme']) => ({
       DEFAULT: {
