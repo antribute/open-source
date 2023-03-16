@@ -14,6 +14,7 @@ import {
   easeIn,
   easeInOut,
   useAnimationControls,
+  AnimatePresence,
 } from 'framer-motion';
 import { toastActions, toastState } from 'components/Toast/toast-function';
 import clsx from 'clsx';
@@ -69,9 +70,8 @@ interface Custom {
 
 const ToastContainer = React.forwardRef<HTMLLIElement, ToastProps>(
   ({ children, id, index = 0, ...props }, forwardRef) => {
-    const { toasts, maxToasts } = useSnapshot(toastState);
+    const { toasts, maxToasts, showAllToasts, isStacked } = useSnapshot(toastState);
 
-    const isStacked = toasts.length > maxToasts;
     const [swipeComplete, setSwipeComplete] = useState(false);
 
     const { observe } = useDimensions<HTMLLIElement>();
@@ -126,6 +126,8 @@ const ToastContainer = React.forwardRef<HTMLLIElement, ToastProps>(
       },
     };
 
+    const [hovering, setHovering] = useState(false);
+
     return (
       <ToastPrimitive.Root
         onSwipeEnd={() => {
@@ -154,6 +156,12 @@ const ToastContainer = React.forwardRef<HTMLLIElement, ToastProps>(
           exit="exit"
           drag="x"
           dragDirectionLock
+          onMouseEnter={() => {
+            setHovering(true);
+          }}
+          onMouseLeave={() => {
+            setHovering(false);
+          }}
           dragConstraints={{ left: 0, right: 600 }}
           dragElastic={0.05}
           // layoutId={id}
@@ -162,11 +170,172 @@ const ToastContainer = React.forwardRef<HTMLLIElement, ToastProps>(
           className={clsx('w-full max-w-[400px]', { 'mb-0': isStacked && index === 0 })}
         >
           {children}
+
+          <ToastViewportActions index={index} hovering={hovering} />
+
+          {/* {isStacked && index === 0 && (
+            <motion.div
+              onMouseEnter={() => {
+                setHovering(true);
+              }}
+              className={clsx(
+                'absolute top-[-115%] bottom-0 left-0 -mb-28 flex h-[115%] w-full items-center overflow-hidden pt-24'
+              )}
+              layout
+            >
+              <AnimatePresence>
+                {hovering && (
+                  <motion.div
+                    className="flex w-full justify-end gap-6"
+                    initial={{ y: '150%', zIndex: -10 }}
+                    animate={{ y: 0, zIndex: 0 }}
+                  >
+                    <Button
+                      size="xs"
+                      rounded
+                      color="primary"
+                      variant="glass"
+                      onDrag={(e) => {
+                        e.stopPropagation();
+                      }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        console.log('CLICK');
+                        toastActions.toggleShowAllToasts(true);
+                      }}
+                    >
+                      Show All
+                    </Button>
+                    <Button
+                      size="xs"
+                      rounded
+                      color="primary"
+                      variant="glass"
+                      hoverBackgroundColor="danger"
+                      onDrag={(e) => {
+                        e.stopPropagation();
+                      }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                      }}
+                    >
+                      Clear All
+                    </Button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          )} */}
         </ToastContainerElement>
       </ToastPrimitive.Root>
     );
   }
 );
+
+const ToastViewportActionButton = ({
+  children,
+  onClick,
+  ...props
+}: Pick<ButtonProps, 'children' | 'onClick' | 'hoverBackgroundColor'>) => {
+  return (
+    <Button
+      size="xs"
+      rounded
+      color="primary"
+      variant="glass"
+      {...props}
+      onClick={(e) => {
+        e.stopPropagation();
+        onClick?.(e);
+      }}
+    >
+      {children}
+    </Button>
+  );
+};
+
+const ToastViewportActions = ({ hovering, index }: { index: number; hovering: boolean }) => {
+  const { toasts, maxToasts, showAllToasts, isStacked } = useSnapshot(toastState);
+
+  const isFirstStackItem = isStacked && index === 0;
+  const isFirstListItem = !isStacked && index === toasts.length - 1;
+  return (
+    <ToastViewportActionsContainer hovering={hovering}>
+      {isFirstStackItem && (
+        <>
+          <ToastViewportActionButton
+            onClick={() => {
+              toastActions.toggleShowAllToasts(true);
+            }}
+          >
+            Show All
+          </ToastViewportActionButton>
+        </>
+      )}
+      {isFirstListItem && (
+        <>
+          {showAllToasts && (
+            <ToastViewportActionButton
+              onClick={() => {
+                toastActions.toggleShowAllToasts(false);
+              }}
+            >
+              Collapse
+            </ToastViewportActionButton>
+          )}
+        </>
+      )}
+      {(isFirstListItem || isFirstListItem) && (
+        <ToastViewportActionButton
+          hoverBackgroundColor="danger"
+          onClick={() => {
+            toastActions.dismissToasts();
+          }}
+        >
+          Clear All
+        </ToastViewportActionButton>
+      )}
+    </ToastViewportActionsContainer>
+  );
+};
+
+const ToastViewportActionsContainer = ({
+  hovering: hoveringProp,
+  children,
+}: {
+  hovering: boolean;
+  children?: React.ReactNode;
+}) => {
+  const [mouseEnter, setMouseEnter] = useState(hoveringProp);
+
+  const hovering = mouseEnter || hoveringProp;
+  return (
+    <motion.div
+      onMouseEnter={() => {
+        setMouseEnter(true);
+      }}
+      onMouseLeave={() => {
+        setMouseEnter(false);
+      }}
+      className={clsx(
+        'absolute top-[-115%] bottom-0 left-0 -mb-28 flex h-[115%] w-full items-center overflow-hidden pt-24'
+      )}
+      layout
+    >
+      <AnimatePresence>
+        {hovering && (
+          <motion.div
+            className="flex w-full justify-end gap-6"
+            initial={{ y: '150%', zIndex: -10 }}
+            animate={{ y: 0, zIndex: 0 }}
+          >
+            {children}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+};
 
 export type ToastActionProps = Pick<ToastPrimitive.ToastActionProps, 'altText'> & ButtonProps;
 

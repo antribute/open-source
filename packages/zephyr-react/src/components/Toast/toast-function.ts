@@ -10,6 +10,7 @@ export interface ToastState {
   newToastStackCount: number;
   maxToasts: number;
   isStacked: boolean;
+  showAllToasts: boolean;
 }
 
 export const toastState = proxy<ToastState>({
@@ -18,6 +19,7 @@ export const toastState = proxy<ToastState>({
   newToastStackCount: 1,
   maxToasts: 5,
   isStacked: false,
+  showAllToasts: false,
 });
 
 // const derivedToastStat = derive
@@ -50,10 +52,19 @@ function updateToast(toastData: O.Required<Partial<ToastData>, 'id'>) {
 export const toastActions = {
   addToast: (payload: ToastData) => {
     toastState.toasts.push(payload);
+    const { toasts, maxToasts, showAllToasts } = toastState;
+    if (toasts.length > maxToasts && !showAllToasts) {
+      toastState.isStacked = true;
+    }
   },
   removeToast: (toastId: string) => {
     toastState.toasts = toastState.toasts.filter(({ id }) => id !== toastId);
     toastState.toastTimeOuts.delete(toastId);
+
+    const { toasts, maxToasts } = toastState;
+    if (toasts.length <= maxToasts) {
+      toastState.isStacked = false;
+    }
   },
   updateToast,
   dismissToast,
@@ -61,6 +72,9 @@ export const toastActions = {
     toastState.toasts.forEach((toast) => {
       dismissToast(toast.id);
     });
+
+    toastState.isStacked = false;
+    toastState.showAllToasts = false;
   },
   toggleStacked: (payload?: boolean) => {
     toastState.isStacked = payload === undefined ? toastState.isStacked : payload;
@@ -69,6 +83,16 @@ export const toastActions = {
   toggleMaxStacked: () => {
     const { toasts, maxToasts } = toastState;
     toastState.isStacked = toasts.length > maxToasts;
+  },
+  toggleShowAllToasts: (payload: boolean) => {
+    if (payload) {
+      toastState.showAllToasts = true;
+      toastState.isStacked = false;
+    } else {
+      const { toasts, maxToasts } = toastState;
+      toastState.showAllToasts = false;
+      toastState.isStacked = toasts.length > maxToasts;
+    }
   },
 } satisfies Record<string, (payload: never) => void>;
 

@@ -166,6 +166,7 @@ const surfaceGroupColors = {
 export const ButtonElement = classed.button(
   'cursor-pointer inline-flex font-medium items-center justify-center select-none align-middle',
   'disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-default disabled:border-gray-200 relative',
+  'transition-colors duration-100',
   'shrink-0',
   {
     variants: {

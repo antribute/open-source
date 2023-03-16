@@ -194,16 +194,16 @@ const ToasterContent = (props: ToastData) => {
 export const Toaster = () => {
   const isMd = useMediaQuery('(min-width: 768px)');
 
-  const { toasts } = useSnapshot(toastState) as unknown as ToastState;
-  const { maxToasts } = toastState;
-
-  const isStacked = toasts.length > maxToasts;
+  const { toasts, maxToasts, showAllToasts, isStacked } = useSnapshot(
+    toastState
+  ) as unknown as ToastState;
 
   const toastsArr = useMemo(() => {
     const arr = isStacked ? [...toasts].reverse() : toasts;
 
-    return slice(arr, 0, maxToasts);
-  }, [isStacked, maxToasts, toasts]);
+    console.log('showALlToasts', { showAllToasts, isStacked });
+    return showAllToasts ? arr : slice(arr, 0, maxToasts);
+  }, [isStacked, maxToasts, showAllToasts, toasts]);
 
   return (
     <ToastPrimitive.Provider swipeDirection="right" key={isStacked ? '1' : '2'}>
