@@ -1,7 +1,7 @@
 import { Classed, classed } from 'utils/classed';
 import * as ToastPrimitive from '@radix-ui/react-toast';
 import { useMediaQuery } from 'hooks/useMediaQuery';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { $ as valtioSignal } from 'valtio-signal';
 import { ButtonProps } from 'components/Button';
 import { toastActions, toastState } from 'components/Toast/toast-function';
@@ -15,6 +15,8 @@ import { twMerge } from 'tailwind-merge';
 import { toArray } from 'utils/toArray';
 import { useIsDarkMode } from 'hooks/useIsDarkMode';
 import { useBreakpoint } from 'hooks/useBreakpoints';
+import { useSnapshot } from 'valtio';
+import { slice } from 'lodash-es';
 
 const ToastIconElement = classed('span', 'h-24 w-24 text-content-intense', {
   variants: {
@@ -192,26 +194,25 @@ const ToasterContent = (props: ToastData) => {
 export const Toaster = () => {
   const isMd = useMediaQuery('(min-width: 768px)');
 
-  const { toasts } = valtioSignal(toastState) as unknown as ToastState;
+  const { toasts } = useSnapshot(toastState) as unknown as ToastState;
   const { maxToasts } = toastState;
+
+  const isStacked = toasts.length > maxToasts;
+
+  const toastsArr = useMemo(() => {
+    const arr = isStacked ? [...toasts].reverse() : toasts;
+
+    return slice(arr, 0, maxToasts);
+  }, [isStacked, maxToasts, toasts]);
+
   return (
-    <ToastPrimitive.Provider swipeDirection="right">
+    <ToastPrimitive.Provider swipeDirection="right" key={isStacked ? '1' : '2'}>
       <AnimatePresence>
-        {toasts.map(({ id, open, ...props }, index, arr) => {
-          return (
-            <ToasterToast
-              isStacked={arr.length > maxToasts}
-              forceMount
-              open={open}
-              key={id}
-              id={id}
-              {...props}
-              index={index}
-            />
-          );
+        {toastsArr.map(({ id, open, ...props }, index, arr) => {
+          return <ToasterToast forceMount open={open} key={id} id={id} {...props} index={index} />;
         })}
       </AnimatePresence>
-      <Toast.Viewport />
+      <Toast.Viewport layout layoutRoot />
     </ToastPrimitive.Provider>
   );
 };

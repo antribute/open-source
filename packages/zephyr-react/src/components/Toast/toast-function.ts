@@ -1,5 +1,5 @@
 import { O } from 'ts-toolbelt';
-import { proxy } from 'valtio/vanilla';
+import { proxy } from 'valtio';
 import { uniqueId, debounce } from 'lodash-es';
 import type { ToastData, ToastId, ToastItem } from 'components/Toast/Toast.types';
 
@@ -19,6 +19,8 @@ export const toastState = proxy<ToastState>({
   maxToasts: 5,
   isStacked: false,
 });
+
+// const derivedToastStat = derive
 
 function dismissToast(toastId: string) {
   if (!toastState.toastTimeOuts.has(toastId)) {
