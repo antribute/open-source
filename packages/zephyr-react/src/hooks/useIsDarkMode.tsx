@@ -1,19 +1,58 @@
-import { useEffect, useState } from 'react';
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
+import { useState, useEffect, useMemo } from 'react';
 
-export const useIsDarkMode = () => {
-  const [isDark, setIsDark] = useState<boolean>(true);
+export const LIGHT_MODE = 'light';
+export const DARK_MODE = 'dark';
+export const DEFAULT_THEME = DARK_MODE;
 
-  useEffect(() => {
-    const observer = new MutationObserver(() => {
-      const containsDarkClass = document.documentElement.classList.contains('dark');
-      setIsDark(containsDarkClass);
-    });
+const isClientSide = () => typeof window !== 'undefined';
 
-    observer.observe(document.documentElement, { attributes: true });
-    return () => {
-      observer.disconnect();
-    };
+const getInitialIsDarkMode = () => {
+  if (!isClientSide()) return DEFAULT_THEME === DARK_MODE;
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const savedTheme = localStorage.getItem('color-theme');
+  return savedTheme === DARK_MODE || (!savedTheme && prefersDark);
+};
+
+export const useDarkMode = () => {
+  const initialIsDarkMode = useMemo(() => {
+    return getInitialIsDarkMode();
   }, []);
 
-  return isDark;
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(initialIsDarkMode);
+
+  const setDarkMode = (enabled: boolean): void => {
+    if (!isClientSide()) return;
+
+    const htmlTag = document.documentElement;
+
+    if (enabled) {
+      htmlTag.classList.add(DARK_MODE);
+      htmlTag.setAttribute('data-mode', DARK_MODE);
+      localStorage.setItem('color-theme', DARK_MODE);
+    } else {
+      htmlTag.classList.remove(DARK_MODE);
+      htmlTag.removeAttribute('data-mode');
+      localStorage.setItem('color-theme', LIGHT_MODE);
+    }
+
+    setIsDarkMode(enabled);
+  };
+
+  const toggleDarkMode = (): void => {
+    setDarkMode(!isDarkMode);
+  };
+
+  useEffect(() => {
+    if (!isClientSide()) return;
+
+    setIsDarkMode(getInitialIsDarkMode());
+  }, []);
+
+  return { isDarkMode, setDarkMode, toggleDarkMode };
 };
+
+export function useIsDarkMode() {
+  const { isDarkMode } = useDarkMode();
+  return isDarkMode;
+}

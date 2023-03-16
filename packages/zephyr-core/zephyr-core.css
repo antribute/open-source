@@ -5,6 +5,9 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    @apply bg-base;
+  }
   .filled-accent-primary {
     @apply bg-primary text-primary-content;
   }

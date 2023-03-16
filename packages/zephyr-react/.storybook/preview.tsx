@@ -3,21 +3,22 @@ import '@antribute/zephyr-core/zephyr-core.css';
 import { API_Layout, GlobalTypes } from '@storybook/types';
 import type { Decorator } from '@storybook/react';
 import { colorPalette } from '@antribute/zephyr-core';
+// .storybook/preview.js
 
-const LIGHT_MODE = 'light';
-const DARK_MODE = 'dark';
+import { useDarkMode, DARK_MODE, LIGHT_MODE, DEFAULT_THEME } from '../src/hooks/useIsDarkMode';
 
 export const globalTypes: GlobalTypes = {
   theme: {
     name: 'Theme',
     description: 'Global theme for components',
-    defaultValue: DARK_MODE,
+    defaultValue: DEFAULT_THEME,
     toolbar: {
-      icon: 'circlehollow',
+      icon: 'paintbrush',
       // Array of plain string values or MenuItem shape (see below)
-      items: [LIGHT_MODE, DARK_MODE],
-      // Property that specifies if the name of the item will be displayed
-      showName: true,
+      items: [
+        { value: LIGHT_MODE, title: 'Light', left: '🌞' },
+        { value: DARK_MODE, title: 'Dark', left: '🌛' },
+      ],
       // Change title based on selected value
       dynamicTitle: true,
     },
@@ -29,7 +30,6 @@ type Parameters = Record<string, any> & {
 };
 
 export const parameters: Parameters = {
-  layout: 'fullScreen',
   actions: { argTypesRegex: '^on[A-Z].*' },
   options: {
     showPanel: false,
@@ -49,33 +49,50 @@ export const parameters: Parameters = {
   },
 };
 
-const withThemeProvider: Decorator = (Story, context) => {
+export const withTailwindTheme = (Story, context) => {
   const { theme } = context.globals;
 
-  const isDarkMode = theme === DARK_MODE;
+  console.log('THEME', theme);
 
+  const { setDarkMode } = useDarkMode();
   useEffect(() => {
-    const htmlTag = document.documentElement;
-
-    // Set the "data-mode" attribute on the iFrame html tag
-    htmlTag.setAttribute('data-mode', theme || LIGHT_MODE);
+    if (theme === DARK_MODE) {
+      setDarkMode(true);
+    } else {
+      setDarkMode(false);
+    }
   }, [theme]);
 
-  return (
-    <div
-      id="custom-root"
-      style={{
-        height: '100%',
-        minHeight: '100vh',
-        padding: '10px',
-        background: isDarkMode
-          ? colorPalette['palette-base'].inverse
-          : colorPalette['palette-base'].DEFAULT,
-      }}
-    >
-      <Story {...context} />
-    </div>
-  );
+  return <Story />;
 };
 
-export const decorators: Decorator[] = [withThemeProvider];
+// const withThemeProvider: Decorator = (Story, context) => {
+//   const { theme } = context.globals;
+
+//   const isDarkMode = theme === DARK_MODE;
+
+//   useEffect(() => {
+//     const htmlTag = document.documentElement;
+
+//     // Set the "data-mode" attribute on the iFrame html tag
+//     htmlTag.setAttribute('data-mode', theme || LIGHT_MODE);
+//   }, [theme]);
+
+//   return (
+//     <div
+//       id="custom-root"
+//       style={{
+//         height: '100%',
+//         minHeight: '100vh',
+//         padding: '10px',
+//         background: isDarkMode
+//           ? colorPalette['palette-base'].inverse
+//           : colorPalette['palette-base'].DEFAULT,
+//       }}
+//     >
+//       <Story {...context} />
+//     </div>
+//   );
+// };
+
+export const decorators: Decorator[] = [withTailwindTheme];
