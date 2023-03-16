@@ -35,6 +35,9 @@ const AvatarElement = classed(
         default: 'bg-surface',
         alternate: 'bg-surface-light',
       },
+      shrinkContent: {
+        true: 'scale-[0.8]',
+      },
     },
     defaultVariants: {
       size: 'md',
@@ -55,6 +58,7 @@ export interface AvatarProps
   tooltipProps?: Omit<TooltipProps, 'tooltip'>;
   truncateLabel?: boolean;
   onClick?: () => void;
+  shrinkContent?: boolean;
 }
 
 const AvatarImageElement = classed(
@@ -72,6 +76,7 @@ export const Avatar = ({
   className,
   tooltipProps,
   color = 'default',
+  shrinkContent,
   truncateLabel = true,
   onClick,
 }: AvatarProps) => {
@@ -140,6 +145,7 @@ export const Avatar = ({
               loading={loading}
               size={size}
               truncateLabel={truncateLabel}
+              shrinkContent={shrinkContent}
             />
           )}
         </AvatarElement>
@@ -177,6 +183,7 @@ function AvatarContent({
   loading,
   truncateLabel = true,
   size,
+  shrinkContent,
 }: AvatarContentProps) {
   function getContent() {
     if (!truncateLabel) {
@@ -196,7 +203,12 @@ function AvatarContent({
         </AvatarPrimitive.Fallback>
       )}
     >
-      <AvatarContentElement className={className} loading={loading} size={size}>
+      <AvatarContentElement
+        shrinkContent={shrinkContent}
+        className={className}
+        loading={loading}
+        size={size}
+      >
         {content}
       </AvatarContentElement>
     </Wrap>

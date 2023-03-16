@@ -129,6 +129,7 @@ const AvatarGroupRoot = ({
           <Avatar
             label={`+${totalAdditionalAvatars}`}
             color="alternate"
+            shrinkContent
             border={hasBorder}
             truncateLabel={false}
             size={size}

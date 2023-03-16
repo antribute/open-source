@@ -22,6 +22,7 @@ import { mergeRefs } from 'react-merge-refs';
 import useDimensions from 'react-cool-dimensions';
 import { twMerge } from 'tailwind-merge';
 import { useSnapshot } from 'valtio';
+import { useIsDarkMode } from 'hooks/useIsDarkMode';
 
 const ToastContainerElement = motion(
   classed(
@@ -34,7 +35,7 @@ const ToastContainerElement = motion(
     // 'mb-4 md:mb-8 first:mb-0',
     'mb-4 md:mb-8',
     'active:cursor-grabbing',
-    'shadow-2xl'
+    'shadow-lg'
   )
 );
 
@@ -87,27 +88,28 @@ const ToastContainer = React.forwardRef<HTMLLIElement, ToastProps>(
       y: 0,
     };
     const initial: MotionVariant = {
-      opacity: 0,
-      y: 40,
+      opacity: isStacked ? (index === 0 ? 1 : [0, 0.9, 1]) : 0,
+      y: isStacked ? 0 : 40,
       position: 'relative',
     };
 
+    const isDarkMode = useIsDarkMode();
     const toastMotionVariants: MotionVariants = {
       initial,
       animate,
-      exit: { opacity: 0 },
+      exit: { opacity: 0, y: 0 },
       initialStacked: { ...initial, opacity: 1, scaleX: 'unset' },
       exitFirstStacked: { opacity: 1 },
       animateStacked: ({ index, count }: Custom) => {
-        // const brightnessRatio = 1 - (index * 0.3) / count;
-        // const blurRatio = 1 * (index / count);
-        // const opacity = 1 - index / count;
-
         const input = [0, count - 1];
+
+        const lightModeBrightness = interpolate([0, count], [1, 1.5])(index);
+        const darkModeBrightness = interpolate(input, [1, 0.3])(index);
+        const brightness = isDarkMode ? darkModeBrightness : lightModeBrightness;
 
         const zIndex = interpolate(input, [100, 50])(index);
         const opacity = interpolate(input, [1, 0], { ease: easeIn })(index);
-        const brightness = interpolate(input, [1, 0.3])(index);
+
         const blur = interpolate(input, [0, 1.2])(index);
         const scaleX = interpolate(input, [1, 0.7])(index);
         const y = interpolate(input, [0, -30])(index);
@@ -115,6 +117,7 @@ const ToastContainer = React.forwardRef<HTMLLIElement, ToastProps>(
         return {
           opacity,
           scaleX,
+          transition: { bounce: 0, duration: 2, restSpeed: 0.5 },
           x: 0,
           y: index === 0 ? 0 : y,
           zIndex,
@@ -128,6 +131,8 @@ const ToastContainer = React.forwardRef<HTMLLIElement, ToastProps>(
 
     const [hovering, setHovering] = useState(false);
 
+    const [swipeXDelta, setSwipeXDelta] = useState(0);
+
     return (
       <ToastPrimitive.Root
         onSwipeEnd={() => {
@@ -136,9 +141,16 @@ const ToastContainer = React.forwardRef<HTMLLIElement, ToastProps>(
           if (id) {
             toastActions.removeToast(id);
           }
+          setSwipeXDelta(0);
         }}
         onSwipeStart={() => {
           console.log('SWIPE START');
+        }}
+        onSwipeMove={(e) => {
+          setSwipeXDelta(e.detail.delta.x);
+        }}
+        onSwipeCancel={() => {
+          setSwipeXDelta(0);
         }}
         {...props}
         forceMount
@@ -149,12 +161,14 @@ const ToastContainer = React.forwardRef<HTMLLIElement, ToastProps>(
         <ToastContainerElement
           variants={toastMotionVariants}
           custom={custom}
+          key={isStacked ? `${id}-stacked` : index === 0 ? `${id}-stacked` : undefined}
           // initial={isStacked ? 'initialFirstStacked' : 'initial'}
           // initial={isStacked ? 'initial' : 'initialStacked'}
           initial="initial"
           animate={isStacked ? 'animateStacked' : 'animate'}
           exit="exit"
           drag="x"
+          // layoutId={!isStacked ? id : undefined}
           dragDirectionLock
           onMouseEnter={() => {
             setHovering(true);
@@ -164,68 +178,16 @@ const ToastContainer = React.forwardRef<HTMLLIElement, ToastProps>(
           }}
           dragConstraints={{ left: 0, right: 600 }}
           dragElastic={0.05}
-          // layoutId={id}
+          layoutId={id}
           layout="position"
           dragSnapToOrigin={!swipeComplete}
-          className={clsx('w-full max-w-[400px]', { 'mb-0': isStacked && index === 0 })}
+          className={clsx('w-full max-w-[400px]', {
+            'mb-0': isStacked && index === 0,
+          })}
         >
           {children}
 
-          <ToastViewportActions index={index} hovering={hovering} />
-
-          {/* {isStacked && index === 0 && (
-            <motion.div
-              onMouseEnter={() => {
-                setHovering(true);
-              }}
-              className={clsx(
-                'absolute top-[-115%] bottom-0 left-0 -mb-28 flex h-[115%] w-full items-center overflow-hidden pt-24'
-              )}
-              layout
-            >
-              <AnimatePresence>
-                {hovering && (
-                  <motion.div
-                    className="flex w-full justify-end gap-6"
-                    initial={{ y: '150%', zIndex: -10 }}
-                    animate={{ y: 0, zIndex: 0 }}
-                  >
-                    <Button
-                      size="xs"
-                      rounded
-                      color="primary"
-                      variant="glass"
-                      onDrag={(e) => {
-                        e.stopPropagation();
-                      }}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        console.log('CLICK');
-                        toastActions.toggleShowAllToasts(true);
-                      }}
-                    >
-                      Show All
-                    </Button>
-                    <Button
-                      size="xs"
-                      rounded
-                      color="primary"
-                      variant="glass"
-                      hoverBackgroundColor="danger"
-                      onDrag={(e) => {
-                        e.stopPropagation();
-                      }}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                      }}
-                    >
-                      Clear All
-                    </Button>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          )} */}
+          <ToastViewportActions swipeXDelta={swipeXDelta} index={index} hovering={hovering} />
         </ToastContainerElement>
       </ToastPrimitive.Root>
     );
@@ -236,13 +198,18 @@ const ToastViewportActionButton = ({
   children,
   onClick,
   ...props
-}: Pick<ButtonProps, 'children' | 'onClick' | 'hoverBackgroundColor'>) => {
+}: Pick<ButtonProps, 'children' | 'onClick' | 'color' | 'hoverBackgroundColor'>) => {
+  const isDarkMode = useIsDarkMode();
   return (
     <Button
+      data-color-scheme={isDarkMode ? undefined : 'default'}
       size="xs"
       rounded
-      color="primary"
+      color="inverse"
       variant="glass"
+      // className="dark:bg-opacity-60"
+      // coloredShadow
+      // gradient
       {...props}
       onClick={(e) => {
         e.stopPropagation();
@@ -254,21 +221,30 @@ const ToastViewportActionButton = ({
   );
 };
 
-const ToastViewportActions = ({ hovering, index }: { index: number; hovering: boolean }) => {
+const ToastViewportActions = ({
+  hovering,
+  swipeXDelta,
+  index,
+}: {
+  index: number;
+  hovering: boolean;
+  swipeXDelta: number;
+}) => {
   const { toasts, maxToasts, showAllToasts, isStacked } = useSnapshot(toastState);
 
   const isFirstStackItem = isStacked && index === 0;
   const isFirstListItem = !isStacked && index === toasts.length - 1;
   return (
-    <ToastViewportActionsContainer hovering={hovering}>
+    <ToastViewportActionsContainer hovering={hovering} swipeXDelta={swipeXDelta}>
       {isFirstStackItem && (
         <>
           <ToastViewportActionButton
+            color="inverse"
             onClick={() => {
               toastActions.toggleShowAllToasts(true);
             }}
           >
-            Show All
+            {toasts.length} Notifications
           </ToastViewportActionButton>
         </>
       )}
@@ -285,7 +261,7 @@ const ToastViewportActions = ({ hovering, index }: { index: number; hovering: bo
           )}
         </>
       )}
-      {(isFirstListItem || isFirstListItem) && (
+      {(isFirstListItem || isFirstStackItem) && (
         <ToastViewportActionButton
           hoverBackgroundColor="danger"
           onClick={() => {
@@ -302,13 +278,16 @@ const ToastViewportActions = ({ hovering, index }: { index: number; hovering: bo
 const ToastViewportActionsContainer = ({
   hovering: hoveringProp,
   children,
+  swipeXDelta,
 }: {
   hovering: boolean;
   children?: React.ReactNode;
+  swipeXDelta: number;
 }) => {
   const [mouseEnter, setMouseEnter] = useState(hoveringProp);
 
   const hovering = mouseEnter || hoveringProp;
+
   return (
     <motion.div
       onMouseEnter={() => {
@@ -318,16 +297,18 @@ const ToastViewportActionsContainer = ({
         setMouseEnter(false);
       }}
       className={clsx(
-        'absolute top-[-115%] bottom-0 left-0 -mb-28 flex h-[115%] w-full items-center overflow-hidden pt-24'
+        'absolute top-[-115%] bottom-0 left-0 -mb-28 flex h-[115%] w-full items-end overflow-hidden pb-10'
       )}
       layout
     >
       <AnimatePresence>
-        {hovering && (
+        {hovering && !swipeXDelta && (
           <motion.div
             className="flex w-full justify-end gap-6"
-            initial={{ y: '150%', zIndex: -10 }}
-            animate={{ y: 0, zIndex: 0 }}
+            initial={{ y: '150%', zIndex: -10, opacity: 0 }}
+            animate={{ y: 0, zIndex: 0, opacity: 1, transition: { delay: 0.5 } }}
+            exit={{ y: '150%', opacity: [0.5, 0, 0, 0] }}
+            transition={{ y: { damping: 300 } }}
           >
             {children}
           </motion.div>
@@ -359,7 +340,7 @@ const ToastClose = ({ className, ...props }: ToastCloseProps) => {
   );
 };
 
-const ToastTitle = classed(ToastPrimitive.Title, ' text-content-intense text-sm');
+const ToastTitle = classed(ToastPrimitive.Title, 'font-medium text-content-intense text-sm');
 
 const ToastDescriptionElement = classed(
   ToastPrimitive.Description,

@@ -75,7 +75,7 @@ export const AdditionalAvatarsDialog = () => {
 
       <Dialog.Content>
         <Dialog.Title>Members</Dialog.Title>
-        <Dialog.Body className="gap-y-18 grid grid-cols-3 gap-x-24">
+        <Dialog.BodySection className="gap-y-18 grid grid-cols-3 gap-x-24">
           {users.map(({ name, email }) => (
             <div className="flex shrink-0 items-center gap-8">
               <Avatar label={name} enableTooltip={false} />
@@ -89,7 +89,7 @@ export const AdditionalAvatarsDialog = () => {
               </div>
             </div>
           ))}
-        </Dialog.Body>
+        </Dialog.BodySection>
       </Dialog.Content>
     </Dialog.Root>
   );

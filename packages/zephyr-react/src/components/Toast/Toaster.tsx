@@ -64,8 +64,9 @@ const ToastActionButtons = ({
           return (
             <Toast.Action
               className={twMerge('grow shrink max-w-[115px]', className)}
-              variant="glass"
-              size={md ? 'sm' : 'xs'}
+              variant="filled"
+              color="surface"
+              size={md ? 'xs' : 'xs'}
               key={i}
               {...defaultProps()}
               {...action}
@@ -93,7 +94,11 @@ const ToasterToast = motion((props: ToastData) => {
     ...rest
   } = props;
 
+  const isDarkMode = useIsDarkMode();
+
+  console.log({ isDarkMode });
   function getColorScheme() {
+    if (!isDarkMode && variant === 'neutral') return 'surface';
     if (variant === 'neutral') return 'neutral-dark';
     return variant;
   }
@@ -206,8 +211,8 @@ export const Toaster = () => {
   }, [isStacked, maxToasts, showAllToasts, toasts]);
 
   return (
-    <ToastPrimitive.Provider swipeDirection="right" key={isStacked ? '1' : '2'}>
-      <AnimatePresence>
+    <ToastPrimitive.Provider swipeDirection="right">
+      <AnimatePresence initial={isStacked}>
         {toastsArr.map(({ id, open, ...props }, index, arr) => {
           return <ToasterToast forceMount open={open} key={id} id={id} {...props} index={index} />;
         })}

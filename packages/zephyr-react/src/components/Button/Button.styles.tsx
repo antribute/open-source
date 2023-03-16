@@ -1,167 +1,16 @@
 /* eslint-disable tailwindcss/no-custom-classname */
 import clsx from 'clsx';
-import { buttonVariants } from 'components/Button/buttonVariants';
 import { colorVariants } from 'styles/colors.variants';
 import { inputComponentVariants } from 'styles/input-component.variants';
 import { sizeVariants } from 'styles/size.variants';
-import { surfaceColors } from 'styles/surface-colors.variants';
 import { textVariants } from 'styles/text.variants';
-import {
-  Classed,
-  classTheme,
-  classed,
-  expandVariant,
-  generateCompoundVariants,
-  mergeVariants,
-} from 'utils/classed';
+import { Classed, classed, generateCompoundVariants, mergeVariants } from 'utils/classed';
 
 export type ButtonVariant = 'filled' | 'glass' | 'ghost' | 'text' | 'outlined';
 
 export type ButtonElementVariantProps = Classed.VariantProps<typeof ButtonElement>;
 
 export type ButtonElementProps = React.ComponentProps<typeof ButtonElement>;
-
-const surfaceGroupColors = {
-  'surface-primary': {
-    contained: expandVariant(
-      clsx(
-        // Neutral
-        [
-          'group-surface-neutral:(bg-various-slate-500,hover:bg-various-slate-600,text-content-inverse-intense)',
-          'group-surface-neutral-light:(bg-various-slate-500,hover:bg-various-slate-600,text-content-inverse-intense)',
-        ],
-        // Surface
-        [
-          'group-surface:(bg-various-slate-800,hover:bg-various-slate-900,text-content-inverse-white)',
-          'group-surface-light:(bg-various-slate-700,hover:bg-various-slate-800)',
-          'dark:group-surface:(bg-various-slate-600,hover:bg-various-slate-700)',
-          'dark:group-surface-light:(bg-various-slate-500,hover:bg-various-slate-600)',
-          'dark:group-surface-dark:(bg-various-slate-500,hover:bg-various-slate-600)',
-        ]
-      )
-    ),
-    soft: expandVariant(
-      clsx(
-        // Neutral
-        [
-          'group-surface-neutral:(bg-various-slate-400/30,hover:bg-various-slate-400/30,text-content-inverse-moderate)',
-        ],
-        // Surface
-        [
-          'group-surface:(bg-various-slate-300/50,hover:bg-various-slate-300/50,text-content-moderate)',
-          'dark:group-surface:(bg-various-slate-400/30,hover:bg-various-slate-300/50,text-content-inverse-moderate)',
-
-          // 'group-surface:(bg-various-slate-800,hover:bg-various-slate-900,text-content-inverse-white)',
-          // 'group-surface-light:(bg-various-slate-700,hover:bg-various-slate-800)',
-          // 'dark:group-surface:(bg-various-slate-600,hover:bg-various-slate-700)',
-          // 'dark:group-surface-light:(bg-various-slate-500,hover:bg-various-slate-600)',
-          // 'dark:group-surface-dark:(bg-various-slate-500,hover:bg-various-slate-600)',
-        ]
-      )
-    ),
-  },
-  'surface-secondary': {
-    contained: expandVariant(
-      clsx(
-        // Neutral
-        [
-          'group-surface-neutral:(bg-various-slate-500,text-content-inverse-intense)',
-          'group-surface-neutral-base:(bg-various-slate-600,hover:bg-various-slate-700)',
-          'group-surface-neutral-light:(bg-various-slate-600,hover:bg-various-slate-700)',
-          'group-surface-neutral-dark:(bg-various-slate-600,hover:bg-various-slate-700)',
-        ],
-        // Surface
-        [
-          'group-surface:(bg-various-slate-500,hover:bg-various-slate-600,text-content-inverse-intense)',
-          'dark:group-surface:(bg-surface-inverse,hover:bg-surface-inverse)',
-          'dark:group-surface-base:(bg-neutral,hover:bg-neutral)',
-          'dark:group-surface-light:(bg-neutral-500,hover:bg-neutral-600)',
-          'dark:group-surface-dark:(bg-various-slate-700,hover:bg-various-slate-800)',
-        ]
-      )
-    ),
-    soft: expandVariant(
-      clsx(
-        // Neutral
-        [
-          'group-surface-neutral:(bg-various-slate-300/10,hover:bg-various-slate-400/60,text-content-inverse-moderate)',
-          // 'group-surface-neutral-base:(bg-various-slate-600,hover:bg-various-slate-700)',
-          // 'group-surface-neutral-light:(bg-various-slate-600,hover:bg-various-slate-700)',
-          // 'group-surface-neutral-dark:(bg-various-slate-600,hover:bg-various-slate-700)',
-        ],
-        // Surface
-        [
-          'group-surface:(bg-various-slate-200/50,hover:bg-various-slate-300/50,text-content-moderate,dark:text-content-inverse-moderate)',
-          'dark:group-surface:(bg-various-slate-400/50,hover:bg-various-slate-500/50,text-content-moderate,dark:text-content-inverse-moderate)',
-          // 'dark:group-surface:(bg-surface-inverse,hover:bg-surface-inverse)',
-          // 'dark:group-surface-base:(bg-neutral,hover:bg-neutral)',
-          // 'dark:group-surface-light:(bg-neutral-500,hover:bg-neutral-600)',
-          // 'dark:group-surface-dark:(bg-various-slate-700,hover:bg-various-slate-800)',
-        ]
-      )
-    ),
-  },
-  'surface-tertiary': {
-    contained: expandVariant(
-      clsx(
-        // Neutral
-        [
-          'group-surface-neutral:(bg-various-slate-700,hover:bg-various-slate-800,text-content-inverse-intense)',
-          'group-surface-neutral-light:(bg-various-slate-700,hover:bg-various-slate-800)',
-          'group-surface-neutral-dark:(bg-neutral-500,hover:bg-neutral-600)',
-        ],
-        // Surface Dark
-        [
-          'group-surface:(bg-various-slate-400,hover:bg-various-slate-500,text-content-inverse-intense)',
-          'dark:group-surface:(bg-various-gray-800,hover:bg-various-gray-900)',
-          'dark:group-surface-base:(bg-various-gray-800,hover:bg-various-gray-900)',
-          'dark:group-surface-light:(bg-neutral-800,hover:bg-neutral-800)',
-          'dark:group-surface-dark:(bg-neutral-800,hover:bg-neutral-900)',
-        ]
-      )
-    ),
-    soft: expandVariant(
-      clsx(
-        // Neutral
-        [
-          'group-surface-neutral:(bg-various-slate-400/10,hover:bg-various-slate-500/30,text-content-inverse-moderate)',
-        ],
-        // Surface Dark
-        [
-          'group-surface:(bg-various-slate-600/50,hover:bg-various-slate-700/50,dark:text-content-inverse-moderate)',
-          'group-surface-light:(bg-various-slate-400/50,hover:bg-various-slate-700/50,dark:text-content-inverse-moderate)',
-          // 'dark:group-surface:(bg-various-gray-800,hover:bg-various-gray-900)',
-          // 'dark:group-surface-base:(bg-various-gray-800,hover:bg-various-gray-900)',
-          // 'dark:group-surface-light:(bg-neutral-800,hover:bg-neutral-800)',
-          // 'dark:group-surface-dark:(bg-neutral-800,hover:bg-neutral-900)',
-        ]
-      )
-    ),
-  },
-  'surface-soft': {
-    contained: expandVariant(
-      clsx(
-        // Neutral
-        [
-          'group-surface-neutral:(bg-various-slate-700,hover:bg-various-slate-800,text-content-inverse-intense)',
-          'group-surface-neutral-light:(bg-various-slate-700,hover:bg-various-slate-800)',
-          'group-surface-neutral-dark:(bg-neutral-500,hover:bg-neutral-600)',
-        ],
-        // Surface
-        [
-          'group-surface:(bg-various-gray-300,hover:bg-various-gray-900,text-content-intense)',
-          // 'group-surface-base:(bg-various-gray-800,hover:bg-various-gray-900)',
-          // 'group-surface-light:(bg-neutral-800,hover:bg-neutral-800)',
-          // 'group-surface-dark:(bg-neutral-800,hover:bg-neutral-900)',
-          'dark:group-surface:(bg-various-gray-800,hover:bg-various-gray-900)',
-          'dark:group-surface-base:(bg-various-gray-800,hover:bg-various-gray-900)',
-          'dark:group-surface-light:(bg-neutral-800,hover:bg-neutral-800)',
-          'dark:group-surface-dark:(bg-neutral-800,hover:bg-neutral-900)',
-        ]
-      )
-    ),
-  },
-};
 
 export const ButtonElement = classed.button(
   'cursor-pointer inline-flex font-medium items-center justify-center select-none align-middle',
@@ -334,8 +183,17 @@ export const ButtonElement = classed.button(
       // Colored Shadow
       ...generateCompoundVariants({
         coloredShadow: true,
-        className: clsx('shadow-lg'),
-        color: colorVariants.shadow,
+        className: clsx('shadow-lg '),
+        color: {
+          primary: 'shadow-primary/70',
+          secondary: 'shadow-secondary/70',
+          inverse: 'shadow-inverse/70',
+          heart: 'shadow-heart/70',
+          info: 'shadow-info/70',
+          success: 'shadow-success/70',
+          danger: 'shadow-danger/70',
+          caution: 'shadow-caution/70',
+        },
       }),
 
       // Gradient
