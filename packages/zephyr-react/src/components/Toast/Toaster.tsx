@@ -106,11 +106,11 @@ const ToasterToast = motion((props: ToastData) => {
   return (
     <Toast.Container
       open
-      key={id}
       defaultOpen={defaultOpen}
       onOpenChange={onOpenChange}
       data-color-scheme={getColorScheme()}
       id={id}
+      layout
       {...rest}
     >
       {closing && (
@@ -212,12 +212,12 @@ export const Toaster = () => {
 
   return (
     <ToastPrimitive.Provider swipeDirection="right">
-      <AnimatePresence initial={isStacked}>
-        {toastsArr.map(({ id, open, ...props }, index, arr) => {
+      <AnimatePresence mode="popLayout">
+        {toastsArr.map(({ id, open, ...props }, index) => {
           return <ToasterToast forceMount open={open} key={id} id={id} {...props} index={index} />;
         })}
       </AnimatePresence>
-      <Toast.Viewport layout layoutRoot />
+      <Toast.Viewport layoutRoot />
     </ToastPrimitive.Provider>
   );
 };

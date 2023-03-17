@@ -102,7 +102,8 @@ const ToastContainer = React.forwardRef<HTMLLIElement, ToastProps>(
       y: 0,
     };
     const initial: MotionVariant = {
-      opacity: isStacked ? (index === 0 ? 1 : [0, 0.9, 1]) : 0,
+      // opacity: isStacked ? (index === 0 ? 1 : [0, 0.9, 1]) : 0,
+      opacity: 0,
       y: isStacked ? 0 : 40,
       position: 'relative',
     };
@@ -111,9 +112,10 @@ const ToastContainer = React.forwardRef<HTMLLIElement, ToastProps>(
     const toastMotionVariants: MotionVariants = {
       initial,
       animate,
-      exit: { opacity: 0, y: 0 },
-      initialStacked: { ...initial, opacity: 1, scaleX: 'unset' },
-      exitFirstStacked: { opacity: 1 },
+      exit: { opacity: 0 },
+      exitStacked: { opacity: 0, y: 0 },
+      initialStacked: { y: 0, opacity: index === 0 ? 1 : 0 },
+
       animateStacked: ({ index, count }: Custom) => {
         const input = [0, count - 1];
 
@@ -172,38 +174,54 @@ const ToastContainer = React.forwardRef<HTMLLIElement, ToastProps>(
         asChild
         ref={ref}
       >
-        <motion.li className="group relative w-full max-w-[400px] px-8">
-          <Wrap if={isStacked} wrap={(c) => <motion.div className="relative">{c}</motion.div>}>
-            <ToastContainerElement
-              variants={toastMotionVariants}
-              custom={custom}
-              // key={isStacked ? `${id}-stacked` : index === 0 ? `${id}-stacked` : undefined}
-              initial="initial"
-              animate={isStacked ? 'animateStacked' : 'animate'}
-              exit="exit"
-              drag="x"
-              // layoutId={!isStacked ? id : undefined}
-              dragDirectionLock
-              onMouseEnter={() => {
-                setHovering(true);
-              }}
-              onMouseLeave={() => {
-                setHovering(false);
-              }}
-              dragConstraints={{ left: 0, right: 600 }}
-              dragElastic={0.05}
-              layoutId={id}
-              layout="position"
-              className="right-0"
-              dragSnapToOrigin={!swipeComplete}
-              firstStackItem={isStacked && index === 0}
-              stacked={isStacked}
-            >
-              {children}
-              <ToastViewportActions index={index}>
-                <div className="absolute top-0 right-0 h-full w-full bg-transparent" />
-              </ToastViewportActions>
-            </ToastContainerElement>
+        <motion.li layout className="group relative w-full max-w-[400px] px-8">
+          <Wrap
+            if={isStacked}
+            wrap={(c) => (
+              <motion.div layout className="relative">
+                {c}
+              </motion.div>
+            )}
+          >
+            <ToastViewportActions index={index}>
+              <ToastContainerElement
+                variants={toastMotionVariants}
+                custom={custom}
+                // key={isStacked ? `${id}-stacked` : index === 0 ? `${id}-stacked` : undefined}
+                exit="exit"
+                initial="initial"
+                // initial={isStacked ? 'initialStacked' : 'initial'}
+                animate={isStacked ? 'animateStacked' : 'animate'}
+                // exit={isStacked ? 'existStacked' : 'exit'}
+                drag="x"
+                // layoutId={!isStacked ? id : undefined}
+                dragDirectionLock
+                onMouseEnter={() => {
+                  setHovering(true);
+                }}
+                // key={id}
+                onMouseLeave={() => {
+                  setHovering(false);
+                }}
+                dragConstraints={{ left: 0, right: 600 }}
+                dragElastic={0.05}
+                layoutId={id}
+                layout="position"
+                className="right-0"
+                dragSnapToOrigin={!swipeComplete}
+                firstStackItem={isStacked && index === 0}
+                stacked={isStacked}
+              >
+                {children}
+                {/* <ToastViewportActions index={index} hovering={hovering} /> */}
+                {/* <ToastViewportActions index={index} >
+                  <div
+                    
+                    className="absolute top-0 right-0 z-[0] h-full w-full bg-transparent"
+                  />
+                </ToastViewportActions> */}
+              </ToastContainerElement>
+            </ToastViewportActions>
           </Wrap>
         </motion.li>
       </ToastPrimitive.Root>
@@ -241,8 +259,10 @@ const ToastViewportActionButton = ({
 const ToastViewportActions = ({
   children,
   index,
+  hovering,
 }: {
   index: number;
+  hovering?: boolean;
   children: React.ReactNode;
 }) => {
   const { toasts, showAllToasts, isStacked } = useSnapshot(toastState);
@@ -253,16 +273,7 @@ const ToastViewportActions = ({
   const [open, setOpen] = useState(false);
   const [zIndex, setZIndex] = useState(0);
 
-  React.useEffect(() => {
-    const timer = setTimeout(() => {
-      setZIndex(open ? 200 : 0);
-    });
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [open]);
-
-  if (!(isFirstListItem || isFirstStackItem)) return null;
+  // if (!(isFirstListItem || isFirstStackItem)) return null;
 
   return (
     <Tooltip.Provider>
@@ -277,8 +288,10 @@ const ToastViewportActions = ({
         <Tooltip.Portal forceMount>
           <Tooltip.Content
             align="end"
-            sideOffset={7}
-            className={clsx({ 'gradient-mask-t-90 z-[101]  p-16 pb-0': isStacked })}
+            sideOffset={-2}
+            className={clsx('pb-8', {
+              'gradient-mask-t-90 z-[101]  p-16 pb-8': isStacked,
+            })}
           >
             <AnimatePresence>
               {open && (
