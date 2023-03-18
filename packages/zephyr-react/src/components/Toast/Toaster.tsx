@@ -11,7 +11,7 @@ import { Flex, FlexProps } from 'components/Flex';
 import { CloseButton } from 'components/IconButton';
 import { twMerge } from 'tailwind-merge';
 import { toArray } from 'utils/toArray';
-import { useIsDarkMode } from 'hooks/useIsDarkMode';
+import { useIsDarkMode } from 'hooks/useDarkMode';
 import { useSnapshot } from 'valtio';
 import { slice } from 'lodash-es';
 

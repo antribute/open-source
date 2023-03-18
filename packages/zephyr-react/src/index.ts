@@ -23,3 +23,4 @@ export * from './components/Tabs';
 export * from './components/Tooltip';
 export * from './components/Wrap';
 export * from './components/Text';
+export * from './hooks';

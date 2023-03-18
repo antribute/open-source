@@ -44,8 +44,6 @@ export const useDarkMode = () => {
   };
 
   useEffect(() => {
-    if (!isClientSide()) return;
-
     setIsDarkMode(getInitialIsDarkMode());
   }, []);
 

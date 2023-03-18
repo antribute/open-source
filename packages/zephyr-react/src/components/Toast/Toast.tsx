@@ -17,7 +17,7 @@ import clsx from 'clsx';
 import { mergeRefs } from 'react-merge-refs';
 import useDimensions from 'react-cool-dimensions';
 import { useSnapshot } from 'valtio';
-import { useIsDarkMode } from 'hooks/useIsDarkMode';
+import { useIsDarkMode } from 'hooks/useDarkMode';
 import { Wrap } from 'components/Wrap';
 import * as Tooltip from '@radix-ui/react-tooltip';
 
