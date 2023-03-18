@@ -20,7 +20,6 @@ import { ColorSchemeName, getDataAttributes } from '@antribute/zephyr-core';
 import { getNearestColorSchemeAttribute } from 'utils/getNearestColorSchemeAttribute';
 import { useState } from 'react';
 import { Wrap } from 'components/Wrap';
-import { Card } from 'components/Card';
 
 type DialogRootProps = DialogPrimitive.DialogProps;
 

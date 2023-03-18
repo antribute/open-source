@@ -1,8 +1,6 @@
 import { Classed, classed } from 'utils/classed';
 import * as ToastPrimitive from '@radix-ui/react-toast';
-import { useMediaQuery } from 'hooks/useMediaQuery';
 import React, { useMemo } from 'react';
-import { $ as valtioSignal } from 'valtio-signal';
 import { ButtonProps } from 'components/Button';
 import { toastActions, toastState } from 'components/Toast/toast-function';
 import { Toast } from 'components/Toast';
@@ -14,7 +12,6 @@ import { CloseButton } from 'components/IconButton';
 import { twMerge } from 'tailwind-merge';
 import { toArray } from 'utils/toArray';
 import { useIsDarkMode } from 'hooks/useIsDarkMode';
-import { useBreakpoint } from 'hooks/useBreakpoints';
 import { useSnapshot } from 'valtio';
 import { slice } from 'lodash-es';
 
@@ -48,7 +45,6 @@ const ToastActionButtons = ({
   justify,
 }: Pick<ToastData, 'action'> & { className?: string; justify?: FlexProps['justify'] }) => {
   const actions = toArray(action, { notEmpty: true });
-  const { md } = useBreakpoint({ md: undefined });
 
   return (
     <Flex justify={justify} className="" grow gap="md">
@@ -66,7 +62,7 @@ const ToastActionButtons = ({
               className={twMerge('grow shrink max-w-[115px]', className)}
               variant="filled"
               color="surface"
-              size={md ? 'xs' : 'xs'}
+              size="xs"
               key={i}
               {...defaultProps()}
               {...action}
@@ -96,7 +92,6 @@ const ToasterToast = motion((props: ToastData) => {
 
   const isDarkMode = useIsDarkMode();
 
-  console.log({ isDarkMode });
   function getColorScheme() {
     if (!isDarkMode && variant === 'neutral') return 'surface';
     if (variant === 'neutral') return 'neutral-dark';
@@ -177,17 +172,6 @@ const ToasterContent = (props: ToastData) => {
     );
   }
 
-  // if (actions.length > 2) {
-  //   return (
-  //     <ToastContainer {...containerProps}>
-  //       <div>
-  //         <Toast.Title>{title}</Toast.Title>
-  //         <ToastActionButtons action={action} />
-  //       </div>
-  //     </ToastContainer>
-  //   );
-  // }
-
   return (
     <ToastContainer {...containerProps} align="center" justify="between">
       <Toast.Title className="mr-8 shrink-0 ">{title}</Toast.Title>
@@ -197,16 +181,12 @@ const ToasterContent = (props: ToastData) => {
 };
 
 export const Toaster = () => {
-  const isMd = useMediaQuery('(min-width: 768px)');
-
   const { toasts, maxToasts, showAllToasts, isStacked } = useSnapshot(
     toastState
   ) as unknown as ToastState;
 
   const toastsArr = useMemo(() => {
     const arr = isStacked ? [...toasts].reverse() : toasts;
-
-    console.log('showALlToasts', { showAllToasts, isStacked });
     return showAllToasts ? arr : slice(arr, 0, maxToasts);
   }, [isStacked, maxToasts, showAllToasts, toasts]);
 

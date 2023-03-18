@@ -30,7 +30,7 @@ type ComboboxPopoverProps = {
   setViewAllSelected: React.Dispatch<React.SetStateAction<boolean>>;
 } & Pick<ComboboxProps<unknown[]>, 'searching' | 'isMultiSelect'>;
 
-export function ComboboxPopover<TOptions extends unknown[]>({
+export function ComboboxPopover({
   searching,
   isMultiSelect,
   select,
@@ -108,7 +108,7 @@ const AllSelectedFilterButton = ({
           setViewAllSelected((prev) => !prev);
         }}
       >
-        {viewAllSelected ? 'View All Results' : 'View All Selected'}
+        View All Selected
       </Button>
     </div>
   ) : null;

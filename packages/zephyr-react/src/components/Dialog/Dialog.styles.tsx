@@ -1,4 +1,4 @@
-import { Classed, classed } from 'utils/classed';
+import { classed } from 'utils/classed';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { PaperElement } from 'components/Paper/Paper.styles';
 import {
@@ -7,7 +7,6 @@ import {
   CardTitleElement,
   CardTitleSectionElement,
 } from 'components/Card/Card.styles';
-import { Card } from 'components/Card';
 
 // Content
 

@@ -29,7 +29,7 @@ const AvatarElement = classed(
         true: 'cursor-pointer',
       },
       clickable: {
-        true: clsx('hover:border-boundary-subtle dark:hover:border-boundary-inverse-subtle'),
+        true: clsx('hover:border-boundary-subtle'),
       },
       color: {
         default: 'bg-surface',

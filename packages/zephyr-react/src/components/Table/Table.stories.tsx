@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { UserMockData, generateMockUserList } from 'mock/mock-data';
 import { useMemo } from 'react';
 import { Paper } from 'components/Paper';

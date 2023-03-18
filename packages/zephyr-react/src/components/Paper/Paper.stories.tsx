@@ -1,15 +1,10 @@
-import { capitalCase } from 'change-case';
 import { Paper, PaperProps } from 'components/Paper/Paper';
 import { SimpleList } from 'components/SimpleList';
-import { map } from 'lodash-es';
 import { twMerge } from 'tailwind-merge';
 
-const PaperRow = ({ className, color, ...props }: PaperProps) => {
-  const colorLabel = capitalCase(color ?? '');
-
+const PaperRow = ({ className, colorScheme, ...props }: PaperProps) => {
   const paperRowProps: PaperProps[] = [
-    // { children: colorLabel },
-    { hoverHighlight: true, color },
+    { hoverHighlight: true, colorScheme },
     {
       border: true,
       hoverHighlight: true,
@@ -29,7 +24,7 @@ const PaperRow = ({ className, color, ...props }: PaperProps) => {
           <Paper
             {...props}
             {...e}
-            color={color}
+            colorScheme={colorScheme}
             className={twMerge('col-span-3 w-full ', className)}
           >
             <SimpleList.Root variant="bullets">
@@ -37,7 +32,7 @@ const PaperRow = ({ className, color, ...props }: PaperProps) => {
                 <SimpleList.Item className="font-mono">
                   {k}:
                   <>
-                    <span className="float-right align-middle text-xs leading-md">
+                    <span className="leading-md float-right align-middle text-xs">
                       {v?.toString()}
                     </span>
                   </>
@@ -54,25 +49,13 @@ const PaperRow = ({ className, color, ...props }: PaperProps) => {
 export const Default = () => {
   return (
     <div className="w-full">
-      <Paper color="surface" className="mb-38 flex h-200 w-200 flex-col gap-8">
-        <div>Surface</div>
-        <Paper color="surface-light" className="h-full grow">
-          Surface Light
-        </Paper>
-      </Paper>
-      <Paper color="surface-neutral" className="mb-38 flex h-200 w-200 flex-col gap-8">
-        <div> Neutral</div>
-        <Paper color="surface-neutral-light" className="h-full grow">
-          Neutral Light
-        </Paper>
-      </Paper>
       <div className="grid w-full grid-cols-12 gap-16">
-        <PaperRow color="surface" />
-        <PaperRow color="surface-light" />
-        <PaperRow color="surface-dark" />
-        <PaperRow color="surface-neutral" />
-        <PaperRow color="surface-neutral-light" />
-        <PaperRow color="surface-neutral-dark" />
+        <PaperRow colorScheme="surface" />
+        <PaperRow colorScheme="surface-light" />
+        <PaperRow colorScheme="surface-dark" />
+        <PaperRow colorScheme="neutral" />
+        <PaperRow colorScheme="neutral-light" />
+        <PaperRow colorScheme="neutral-dark" />
       </div>
     </div>
   );

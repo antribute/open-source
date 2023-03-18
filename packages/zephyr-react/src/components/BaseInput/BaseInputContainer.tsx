@@ -4,13 +4,7 @@ import {
   BaseInputIconSlotElement,
   BaseInputIconSlotElementVariantProps,
 } from 'components/BaseInput/BaseInputContainer.styles';
-import {
-  InlineInputAddonType,
-  InputAddonSlotProps,
-  InputComponentProps,
-  InputComponentState,
-  InputComponentStateMessagePair,
-} from 'types/input-component.types';
+import { InputComponentState, InputComponentStateMessagePair } from 'types/input-component.types';
 import { flattenDeep } from 'lodash-es';
 import ExclamationCircleIcon from '@heroicons/react/20/solid/ExclamationCircleIcon';
 import CheckCircleIcon from '@heroicons/react/20/solid/CheckCircleIcon';
@@ -22,11 +16,34 @@ import { notEmpty } from 'utils/notEmpty';
 import { PlaceholderElement } from 'components/BaseInput/BaseInput.styles';
 import { twMerge } from 'tailwind-merge';
 import { InvisibleCharacter } from 'components/InvisibleCharacter';
-import { classed, expandVariant, mergeVariants } from 'utils/classed';
-import clsx from 'clsx';
+import { classed, mergeVariants } from 'utils/classed';
 import { Spinner } from 'components/Spinner';
-import { getRelativeSizeProp } from 'utils/getRelativeSizeProp';
 import { sizeVariants } from 'styles/size.variants';
+import { SizeProp, WidthProp } from 'types/styles';
+
+export interface InputAddonProps extends InputAddonSlotProps, InputIconProps {}
+
+export interface InputIconProps {
+  leadingIcon?: React.ReactNode;
+  trailingIcon?: React.ReactNode;
+}
+
+export interface InputAddonSlotProps {
+  inlineLeadingAddonSlot?: (InlineInputAddonType | React.ReactNode)[];
+  inlineTrailingAddonSlot?: (InlineInputAddonType | React.ReactNode)[];
+}
+
+export interface InlineInputAddonType {
+  focusInputOnClick?: boolean;
+  className?: string;
+  content: React.ReactNode;
+}
+
+export interface InputAddonSlotElement {
+  type?: 'div' | 'button';
+  filled?: boolean;
+  className?: string;
+}
 
 function isAddonType(e: unknown): e is InlineInputAddonType {
   return Boolean(e && typeof e === 'object' && 'content' in e);
@@ -113,15 +130,20 @@ const BaseInputIcon = deriveClassed<typeof BaseInputIconSlotElement, BaseInputIc
   }
 );
 
+type BaseInputContainerChildren =
+  | React.ReactNode
+  | ((props: { ref: React.ForwardedRef<HTMLInputElement> }) => React.ReactNode);
+
 export type BaseInputContainerProps = {
+  size?: SizeProp;
+  width?: WidthProp;
+  className?: string;
   placeholderShown?: boolean;
   focusElementOnClick?: boolean;
-  children:
-    | React.ReactNode
-    | ((props: { ref: React.ForwardedRef<HTMLInputElement> }) => React.ReactNode);
-} & InputComponentProps &
-  BaseInputIconSlotElementVariantProps &
-  InputAddonSlotProps &
+  children: BaseInputContainerChildren;
+  loading?: boolean;
+} & BaseInputIconSlotElementVariantProps &
+  InputAddonProps &
   Pick<InputComponentStateMessagePair, 'inputState'>;
 
 const toAddonType = (e?: unknown): InlineInputAddonType | undefined => {

@@ -4,7 +4,7 @@ import { ToastItem } from 'components/Toast/Toast.types';
 import { useState } from 'react';
 import { Checkbox } from 'components/Checkbox';
 import { capitalCase } from 'change-case';
-import { ToastAction, Toaster, toast } from '.';
+import { Toaster, toast } from '.';
 
 function addManyToasts(props: ToastItem, count = 6) {
   new Array(count).fill(0).forEach(() => {
@@ -16,6 +16,7 @@ const toasts = {
   exampleToast: {
     title: 'Example Toast',
     autoDismiss: false,
+    description: undefined,
   },
   dangerToast: {
     title: 'Error',
@@ -41,6 +42,7 @@ const toasts = {
   },
   actionToastDelay: {
     title: 'Action Toast w/ Delay',
+    description: undefined,
     duration: 2000,
     action: {
       altText: 'Read',
@@ -50,6 +52,7 @@ const toasts = {
   },
   twoActionsToast: {
     title: 'Multi Action Toast',
+    description: undefined,
     action: [
       {
         altText: 'Read',
@@ -65,6 +68,7 @@ const toasts = {
   },
   threeActionsToast: {
     title: 'Multi Action Toast',
+    description: undefined,
     action: [
       {
         altText: 'Read',
@@ -83,7 +87,7 @@ const toasts = {
       },
     ],
   },
-} satisfies Record<string, ToastItem>;
+} satisfies Record<string, ToastItem & { description: string | undefined }>;
 
 export const Default = () => {
   const [showDescription, setShowDescription] = useState(false);

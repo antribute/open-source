@@ -1,10 +1,9 @@
 import { generateMockUserList } from 'mock/mock-data';
 
-import { Paper } from 'components/Paper';
 import { Dialog } from 'components/Dialog';
 import { Avatar } from 'components/Avatar/Avatar';
 import { Text } from 'components/Text';
-import { RenderPaperContainers, RenderSizeVariants, getSizeKeys } from 'utils/storybook-utils';
+import { RenderPaperContainers, getSizeKeys } from 'utils/storybook-utils';
 import { AvatarGroup } from '.';
 
 const users = generateMockUserList({ size: 30 });

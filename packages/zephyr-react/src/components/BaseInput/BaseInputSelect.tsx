@@ -1,23 +1,26 @@
-import React, { HTMLProps } from 'react';
+import React from 'react';
 import { BaseInputContainer } from 'components/BaseInput/BaseInputContainer';
 import { Select, SelectArrow, SelectOptions, SelectState } from 'ariakit';
 import { useBaseInputProps } from 'components/BaseInput/useBaseInputProps';
 import { OmitHtmlInputComponentProps } from 'types/input-component.types';
-import { expandVariant } from 'utils/classed';
-import * as Popover from '@radix-ui/react-popover';
 import { IconButton } from 'components/IconButton/IconButton';
-import clsx from 'clsx';
-import { List } from 'components/List';
 import { ChevronDownIcon, XMarkIcon } from '@heroicons/react/24/solid';
+import { SharedInputProps } from 'components/Input/Input.typess';
 import { PlaceholderElement } from './BaseInput.styles';
 import { BaseInputBaseProps } from './BaseInput';
+
+type ReactHtmlButtonProps = OmitHtmlInputComponentProps<
+  React.ButtonHTMLAttributes<HTMLButtonElement>
+>;
 
 export type BaseInputSelectProps = {
   state: SelectOptions['state'];
   clearable?: boolean;
+
   onClearValue?: ClearValueActionProps['onClearValue'];
 } & BaseInputBaseProps &
-  Omit<OmitHtmlInputComponentProps<HTMLProps<HTMLButtonElement>>, 'label'>;
+  SharedInputProps &
+  ReactHtmlButtonProps;
 
 interface ClearValueActionProps {
   selectState: SelectState;
@@ -44,36 +47,6 @@ const ClearValueAction = ({ selectState, onClearValue }: ClearValueActionProps) 
       <XMarkIcon className="text-content-weak stroke-current stroke-2 " />
     </IconButton>
   ) : null;
-};
-
-const SelectAction = ({ selectState }: { selectState: SelectState }) => {
-  return (
-    <Popover.Root>
-      <Popover.Trigger>e</Popover.Trigger>
-      <Popover.Portal>
-        <Popover.Content
-          align="center"
-          sideOffset={10}
-          className={clsx(
-            'radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down',
-            'z-50  rounded p-4 shadow-md ',
-            'bg-surface border-surface-light/30 border  backdrop-blur-sm',
-            'text-content-moderate'
-          )}
-        >
-          {Array.isArray(selectState.value) ? (
-            <List.Container divide>
-              {selectState.value.map((e) => {
-                return <List.Item label={e} />;
-              })}
-            </List.Container>
-          ) : (
-            selectState.value
-          )}
-        </Popover.Content>
-      </Popover.Portal>
-    </Popover.Root>
-  );
 };
 
 export const BaseInputSelect = React.forwardRef<HTMLButtonElement, BaseInputSelectProps>(

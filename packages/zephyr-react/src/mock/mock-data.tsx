@@ -136,28 +136,9 @@ function makeListFactory<T extends MockDataGeneratorFn<unknown>, TReturnType ext
   };
 }
 
-// type MakeListFactoryFnReturn = <
-//   T extends MockDataGeneratorFn<unknown> = MockDataGeneratorFn<unknown>,
-//   TReturnType extends ReturnType<T> = ReturnType<T>
-// >(
-//   generator: T
-// ) => (options?: MakeListFnOptions<TReturnType>) => TReturnType[];
-
 type ListFactoryFn<TReturnType = unknown> = (
   options?: MakeListFnOptions<TReturnType>
 ) => TReturnType[];
-
-async function fetchServerPage(
-  limit: number,
-  offset = 0
-): Promise<{ rows: string[]; nextOffset: number }> {
-  const rows = new Array(limit).fill(0).map((_, i) => `Async loaded row #${i + offset * limit}`);
-
-  // eslint-disable-next-line no-promise-executor-return
-  await new Promise((r) => setTimeout(r, 500));
-
-  return { rows, nextOffset: offset + 1 };
-}
 
 interface HookProps {
   limit: number;

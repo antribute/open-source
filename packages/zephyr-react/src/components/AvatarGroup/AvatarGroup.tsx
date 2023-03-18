@@ -141,7 +141,7 @@ const AvatarGroupRoot = ({
                   ))}
                 </SimpleList.Root>
                 {totalHiddenAdditionalAvatars ? (
-                  <div className="text-content-inverse-moderate ml-16 text-sm opacity-80">
+                  <div className="text-content-moderate ml-16 text-sm opacity-80">
                     +{totalHiddenAdditionalAvatars} more
                   </div>
                 ) : null}

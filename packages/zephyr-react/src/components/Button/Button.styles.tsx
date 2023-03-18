@@ -1,6 +1,5 @@
 /* eslint-disable tailwindcss/no-custom-classname */
 import clsx from 'clsx';
-import { colorVariants } from 'styles/colors.variants';
 import { inputComponentVariants } from 'styles/input-component.variants';
 import { sizeVariants } from 'styles/size.variants';
 import { textVariants } from 'styles/text.variants';

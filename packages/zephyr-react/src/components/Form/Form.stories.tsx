@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { createTsForm } from '@ts-react/form';
 import { Button } from 'components/Button';
 import { z } from 'zod';
@@ -21,13 +22,12 @@ export const Default = () => {
     <Form
       formProps={{ className: 'flex items-center gap-16' }}
       schema={SignUpSchema}
-      onSubmit={(d) => {
+      onSubmit={() => {
         console.log('SUBMIT');
       }}
       props={{
         email: {},
         name: {},
-        checked: { hideLabel: false, hideMessage: false, className: 'inline-block' },
       }}
       renderAfter={() => (
         <div className="col-span-full row-end-auto">

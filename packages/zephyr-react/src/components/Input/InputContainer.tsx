@@ -1,23 +1,22 @@
 import clsx from 'clsx';
-import { BaseInputProps } from 'components/BaseInput';
 import InputLabel, { InputLabelProps } from 'components/Input/InputLabel';
 import InputMessage from 'components/Input/InputMessage';
 import { InvisibleCharacter } from 'components/InvisibleCharacter';
-import {
-  InputComponentOrientationVariant,
-  InputComponentWidthVariant,
-} from 'styles/input-component.variants';
+import { InputComponentWidthVariant } from 'styles/input-component.variants';
 import { InputComponentStateMessagePair } from 'types/input-component.types';
 import { Classed, classed } from 'utils/classed';
 
+type InputContainerVariantProps = Classed.VariantProps<typeof InputContainerElement>;
+
+type InputContainerLabelProps = Pick<
+  InputLabelProps,
+  'htmlFor' | 'optionalLabel' | 'labelDescription' | 'required' | 'labelSize'
+>;
+
 export interface InputContainerProps
-  extends Pick<BaseInputProps, 'size' | 'width'>,
-    Classed.VariantProps<typeof InputContainerElement>,
+  extends InputContainerVariantProps,
     InputComponentStateMessagePair,
-    Pick<
-      InputLabelProps,
-      'htmlFor' | 'optionalLabel' | 'labelDescription' | 'required' | 'labelSize'
-    > {
+    InputContainerLabelProps {
   label?: React.ReactNode;
   hideLabel?: boolean;
   hideMessage?: boolean;

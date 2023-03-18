@@ -1,4 +1,3 @@
-import { Button } from 'components/Button';
 import { RenderPaperContainers } from 'utils/storybook-utils';
 import { Dialog } from '.';
 

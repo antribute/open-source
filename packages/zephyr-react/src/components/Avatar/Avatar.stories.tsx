@@ -1,4 +1,4 @@
-import { generateMockUser, generateMockUserList } from 'mock/mock-data';
+import { generateMockUserList } from 'mock/mock-data';
 
 import { Avatar } from './Avatar';
 

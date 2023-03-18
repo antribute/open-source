@@ -5,7 +5,8 @@ import { inputSizeVariants } from 'styles/input-component.variants';
 import { InputLabelElement } from 'components/Input/InputLabel';
 import { BasicCheckbox, CheckboxElementProps } from './Checkbox.styles';
 
-type CheckboxProps = Omit<CheckboxElementProps, 'type'> & Omit<InputContainerProps, 'children'>;
+export type CheckboxProps = Omit<CheckboxElementProps, 'type'> &
+  Omit<InputContainerProps, 'children'>;
 
 const CheckboxContainerElement = classed(
   'div',
@@ -21,27 +22,30 @@ const CheckboxContainerElement = classed(
   }
 );
 
-export const Checkbox = ({ label, ...props }: CheckboxProps) => {
-  const { inputContainerProps, inputComponentProps } = useInputProps(props);
+export const Checkbox = (props: CheckboxProps) => {
+  const { label, name } = props;
+  const { id, inputStateMessagePair, size } = useInputProps(props);
+
+  const checkboxProps = {
+    name,
+    id,
+    size,
+  };
 
   if (label) {
     return (
       <InputContainer
         hideLabel
-        labelSize={props.size}
-        {...inputContainerProps}
+        labelSize={size}
+        htmlFor={id}
         width="auto"
         asLabel
         className="!inline-flex cursor-pointer"
+        {...inputStateMessagePair}
       >
-        <CheckboxContainerElement size={props.size}>
-          <BasicCheckbox
-            id={inputComponentProps.id}
-            size={inputComponentProps.size}
-            focusRing={false}
-            {...props}
-          />
-          <InputLabelElement as="div" labelSize={props.size} labelOrientation="horizontal">
+        <CheckboxContainerElement size={size}>
+          <BasicCheckbox {...checkboxProps} focusRing={false} {...props} />
+          <InputLabelElement as="div" labelSize={size} labelOrientation="horizontal">
             {label}
           </InputLabelElement>
         </CheckboxContainerElement>
@@ -49,5 +53,5 @@ export const Checkbox = ({ label, ...props }: CheckboxProps) => {
     );
   }
 
-  return <BasicCheckbox {...inputComponentProps} />;
+  return <BasicCheckbox {...checkboxProps} />;
 };

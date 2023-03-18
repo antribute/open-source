@@ -8,8 +8,7 @@
 
 import { get } from 'lodash-es';
 import * as React from 'react';
-import { ForwardRef, Memo, isElement } from 'react-is';
-import { isReactComponent, isReactNode } from 'utils/component-is-utils';
+import { ForwardRef, Memo } from 'react-is';
 
 const fnNameMatchRegex = /^\s*function(?:\s|\s*\/\*.*\*\/\s*)+([^(\s/]*)\s*/;
 export function getFunctionName(fn: Function): string {

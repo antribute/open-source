@@ -1,5 +1,5 @@
 import React from 'react';
-import { Classed, classed, deriveClassed } from 'utils/classed';
+import { classed, deriveClassed } from 'utils/classed';
 import InformationCircleIcon from '@heroicons/react/24/outline/InformationCircleIcon';
 import { Tooltip, TooltipProps } from 'components/Tooltip/Tooltip';
 
@@ -20,7 +20,7 @@ export const InfoTooltipIcon = deriveClassed<
     <Tooltip tooltip={tooltip} {...tooltipProps}>
       <button
         type="button"
-        className="rounded-full focus:ring-black/10"
+        className="focus:ring-boundary-tint rounded-full"
         onClick={(e) => {
           e.stopPropagation();
         }}

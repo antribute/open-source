@@ -1,4 +1,4 @@
-import { BaseInputBaseProps, BaseInputProps } from 'components/BaseInput/BaseInput';
+import { BaseInputBaseProps } from 'components/BaseInput/BaseInput';
 import { BaseInputContainerProps } from 'components/BaseInput/BaseInputContainer';
 import { getInputComponentFieldTypeProps } from 'constants/input-component-field-type-map';
 
@@ -42,8 +42,6 @@ export function useBaseInputProps(props: UseBaseInputPropsOptions) {
     inlineLeadingAddonSlot,
     inlineTrailingAddonSlot,
     focusElementOnClick,
-    type,
-    label,
     loading,
   };
 

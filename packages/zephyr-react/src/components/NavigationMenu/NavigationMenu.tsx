@@ -69,7 +69,7 @@ type NavigationMenuIndicatorProps = NavigationMenuPrimitive.NavigationMenuIndica
 const NavigationMenuIndicator = (props: NavigationMenuIndicatorProps) => {
   return (
     <NavigationMenuIndicatorElement {...props}>
-      <div className="relative top-8 h-12 w-12 rotate-45 bg-surface-50 shadow-sm dark:bg-surface-inverse" />
+      <div className="bg-surface-soft relative top-8 h-12 w-12 rotate-45 shadow-sm" />
     </NavigationMenuIndicatorElement>
   );
 };

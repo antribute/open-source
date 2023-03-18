@@ -1,32 +1,25 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import { classed, expandVariant } from 'utils/classed';
 import * as ToastPrimitive from '@radix-ui/react-toast';
-import React, { useState, forwardRef, useEffect } from 'react';
+import React, { useState, forwardRef } from 'react';
 import { Button, ButtonProps } from 'components/Button';
 import { CloseButton } from 'components/IconButton';
 import {
   motion,
   Variants as MotionVariants,
   Variant as MotionVariant,
-  useAnimation,
   interpolate,
-  easeOut,
   easeIn,
-  easeInOut,
-  useAnimationControls,
   AnimatePresence,
 } from 'framer-motion';
 import { toastActions, toastState } from 'components/Toast/toast-function';
 import clsx from 'clsx';
 import { mergeRefs } from 'react-merge-refs';
 import useDimensions from 'react-cool-dimensions';
-import { twMerge } from 'tailwind-merge';
 import { useSnapshot } from 'valtio';
 import { useIsDarkMode } from 'hooks/useIsDarkMode';
 import { Wrap } from 'components/Wrap';
 import * as Tooltip from '@radix-ui/react-tooltip';
-import { useMediaQuery } from 'hooks/useMediaQuery';
-import { useBreakpoint } from 'hooks/useBreakpoints';
 
 const ToastContainerElement = motion(
   classed(
@@ -85,15 +78,13 @@ interface Custom {
 
 const ToastContainer = React.forwardRef<HTMLLIElement, ToastProps>(
   ({ children, id, index = 0, ...props }, forwardRef) => {
-    const { toasts, maxToasts, showAllToasts, isStacked } = useSnapshot(toastState);
+    const { toasts, isStacked } = useSnapshot(toastState);
 
     const [swipeComplete, setSwipeComplete] = useState(false);
 
     const { observe } = useDimensions<HTMLLIElement>();
 
     const ref = mergeRefs([forwardRef, observe]);
-
-    const count = Math.min(toasts.length, 5);
 
     const custom: Custom = { index, count: toasts.length };
 
@@ -145,28 +136,13 @@ const ToastContainer = React.forwardRef<HTMLLIElement, ToastProps>(
       },
     };
 
-    const [hovering, setHovering] = useState(false);
-
-    const [swipeStart, setSwipeStart] = useState(false);
-
-    const breakpoints = useBreakpoint();
-
-    console.log('breakpoints', breakpoints);
     return (
       <ToastPrimitive.Root
         onSwipeEnd={() => {
           setSwipeComplete(true);
-          setSwipeStart(false);
-          console.log('SWIPE END');
-          if (id) {
-            toastActions.removeToast(id);
-          }
-        }}
-        onSwipeCancel={() => {
-          setSwipeStart(false);
         }}
         onSwipeStart={() => {
-          setSwipeStart(true);
+          setSwipeComplete(false);
         }}
         {...props}
         forceMount
@@ -187,22 +163,13 @@ const ToastContainer = React.forwardRef<HTMLLIElement, ToastProps>(
               <ToastContainerElement
                 variants={toastMotionVariants}
                 custom={custom}
-                // key={isStacked ? `${id}-stacked` : index === 0 ? `${id}-stacked` : undefined}
                 exit="exit"
                 initial="initial"
-                // initial={isStacked ? 'initialStacked' : 'initial'}
                 animate={isStacked ? 'animateStacked' : 'animate'}
+                // initial={isStacked ? 'initialStacked' : 'initial'}
                 // exit={isStacked ? 'existStacked' : 'exit'}
                 drag="x"
-                // layoutId={!isStacked ? id : undefined}
                 dragDirectionLock
-                onMouseEnter={() => {
-                  setHovering(true);
-                }}
-                // key={id}
-                onMouseLeave={() => {
-                  setHovering(false);
-                }}
                 dragConstraints={{ left: 0, right: 600 }}
                 dragElastic={0.05}
                 layoutId={id}
@@ -213,13 +180,6 @@ const ToastContainer = React.forwardRef<HTMLLIElement, ToastProps>(
                 stacked={isStacked}
               >
                 {children}
-                {/* <ToastViewportActions index={index} hovering={hovering} /> */}
-                {/* <ToastViewportActions index={index} >
-                  <div
-                    
-                    className="absolute top-0 right-0 z-[0] h-full w-full bg-transparent"
-                  />
-                </ToastViewportActions> */}
               </ToastContainerElement>
             </ToastViewportActions>
           </Wrap>
@@ -242,9 +202,6 @@ const ToastViewportActionButton = ({
       rounded
       color="inverse"
       variant="glass"
-      // className="dark:bg-opacity-60"
-      // coloredShadow
-      // gradient
       {...props}
       onClick={(e) => {
         e.stopPropagation();
@@ -259,10 +216,8 @@ const ToastViewportActionButton = ({
 const ToastViewportActions = ({
   children,
   index,
-  hovering,
 }: {
   index: number;
-  hovering?: boolean;
   children: React.ReactNode;
 }) => {
   const { toasts, showAllToasts, isStacked } = useSnapshot(toastState);
@@ -271,9 +226,6 @@ const ToastViewportActions = ({
   const isFirstListItem = !isStacked && index === toasts.length - 1;
 
   const [open, setOpen] = useState(false);
-  const [zIndex, setZIndex] = useState(0);
-
-  // if (!(isFirstListItem || isFirstStackItem)) return null;
 
   return (
     <Tooltip.Provider>

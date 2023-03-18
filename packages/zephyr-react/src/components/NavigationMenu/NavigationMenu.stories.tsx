@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import { NavigationMenu } from '.';
 
 const features = [
@@ -26,7 +25,7 @@ export const NavMenuExample = () => (
       <NavigationMenu.Item>
         <NavigationMenu.Trigger>Features</NavigationMenu.Trigger>
 
-        <NavigationMenu.Content className="grid max-w-512 grid-cols-[repeat(auto-fill,minmax(theme(width.200),1fr))] gap-8 p-8">
+        <NavigationMenu.Content className="max-w-512 grid grid-cols-[repeat(auto-fill,minmax(theme(width.200),1fr))] gap-8 p-8">
           {features.map((e) => (
             <NavigationMenu.ContentLink className="" title={e.title} description={e.description} />
           ))}

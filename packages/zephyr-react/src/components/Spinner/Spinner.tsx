@@ -1,4 +1,3 @@
-import { colorVariants } from 'styles/colors.variants';
 import { positionVariants } from 'styles/position.variants';
 import { sizeVariants } from 'styles/size.variants';
 import { Classed, classed, mergeVariants } from 'utils/classed';
@@ -29,10 +28,6 @@ export const SpinnerSvg = ({ ...props }: React.SVGProps<SVGSVGElement>) => {
   );
 };
 
-//    // color: {
-//   ...colorVariants.fill,
-// } satisfies Partial<Record<keyof typeof colorVariants.fill, string>>,
-
 const SpinnerElement = classed(
   SpinnerSvg,
   'w-8 h-8 mr-2 text-highlight animate-spin fill-primary-light',
@@ -47,18 +42,7 @@ const SpinnerElement = classed(
     },
     defaultVariants: {
       size: 'md',
-      color: 'neutral',
     },
-    compoundVariants: [
-      {
-        color: 'surface',
-        class: 'dark:contrast-50',
-      },
-      {
-        color: 'neutral',
-        class: 'dark:contrast-50',
-      },
-    ],
   }
 );
 

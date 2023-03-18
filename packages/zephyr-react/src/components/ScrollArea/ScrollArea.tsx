@@ -4,12 +4,11 @@
 
 import * as React from 'react';
 import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area';
-import { classed, expandVariant } from 'utils/classed';
+import { classed } from 'utils/classed';
 import { useImmer } from 'use-immer';
 import { useRef } from 'react';
 import { mergeRefs } from 'react-merge-refs';
 import { interpolate, easeInOut } from 'framer-motion';
-import useDimensions from 'react-cool-dimensions';
 
 type ScrollAreaRootElementProps = React.ComponentProps<typeof ScrollAreaPrimitive.Root>;
 const ScrollAreaRootElement = classed(
@@ -144,10 +143,6 @@ const ScrollArea = React.forwardRef<
   }
 
   const { isOffsetFromTop, isOffsetFromBottom } = getScrollOffset();
-
-  const { observe, height } = useDimensions();
-
-  console.log('HEIGHT', height);
 
   return (
     <ScrollAreaRootElement

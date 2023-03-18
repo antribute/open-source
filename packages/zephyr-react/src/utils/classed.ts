@@ -1,16 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ClassedVariantMap, SizeProp } from 'types/styles';
 import { twMerge } from 'tailwind-merge';
-import {
-  filter,
-  map,
-  mapValues,
-  merge,
-  mergeWith,
-  pick,
-  pickBy,
-  transform,
-  union,
-} from 'lodash-es';
+import { map, mapValues, mergeWith, pick, transform } from 'lodash-es';
 import { createClassed, deriveClassed } from '@tw-classed/react';
 import { createClassed as createClassedCore } from '@tw-classed/core';
 import type * as Classed from '@tw-classed/react';

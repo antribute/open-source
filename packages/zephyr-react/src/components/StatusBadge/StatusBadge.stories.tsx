@@ -1,5 +1,4 @@
 import { RenderColorVariants, RenderSizeVariants } from 'utils/storybook-utils';
-import { generateMockUser, generateMockUserList } from 'mock/mock-data';
 import { useState } from 'react';
 import { StatusBadge } from './StatusBadge';
 

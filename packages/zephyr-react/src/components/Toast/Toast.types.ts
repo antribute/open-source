@@ -1,5 +1,5 @@
 import type { ToastProps } from '@radix-ui/react-toast';
-import type { ToastActionProps, ToastActionReactElement } from './Toast';
+import type { ToastActionProps } from './Toast';
 
 export type ToastId = string;
 

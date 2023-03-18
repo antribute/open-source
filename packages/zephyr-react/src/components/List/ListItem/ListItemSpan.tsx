@@ -42,7 +42,6 @@ const Description = classed(
 
 export interface ListItemSpanProps extends ListItemLabelSpanProps {
   description?: React.ReactNode;
-  startIconMarker?: boolean;
   className?: string;
 }
 
@@ -50,7 +49,6 @@ export const ListItemSpan = ({
   startIcon,
   endIcon,
   className,
-  startIconMarker,
   description,
   label,
 }: ListItemSpanProps) => {

@@ -21,12 +21,12 @@ export const Colors = () => {
 const ColorBlock = ({ label, color }: { label: string; color: string }) => {
   return (
     <div>
-      <div className="dark:text-content-inverse-weak pb-8  text-md  text-content-weak ">
+      <div className="text-md  text-content-weak  pb-8 ">
         <span className="mr-8"> {label}:</span>
         <span className="text-center text-sm">{color}</span>
       </div>
       <div
-        className="text-white relative  flex h-104 w-104 shrink-0 items-center justify-center rounded-md shadow-sm "
+        className="h-104 w-104  text-content-weak relative flex shrink-0 items-center justify-center rounded-md shadow-sm "
         style={{ background: color }}
       />
     </div>
@@ -43,7 +43,7 @@ const ColorGroupContainer = ({
   return (
     <Paper border className="w-full pb-24">
       {title && (
-        <div className="dark:text-content-inverse-intense  flex select-none gap-16 pb-16 font-body font-bold text-content-intense">
+        <div className="font-body text-content-intense flex select-none gap-16 pb-16 font-bold">
           <div> {capitalCase(title)} </div>
           <StatusBadge size="xs" color="surface">
             {title}

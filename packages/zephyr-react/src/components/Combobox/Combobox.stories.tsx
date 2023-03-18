@@ -1,21 +1,7 @@
-import { UserMockData, generateMockUserList, generateMockUserListHook } from 'mock/mock-data';
+/* eslint-disable no-console */
+import { generateMockUserList } from 'mock/mock-data';
 import { useState, useEffect } from 'react';
-import { Button } from 'components/Button';
 import { Combobox } from '.';
-
-const options = ['One', 'Two', 'Three'];
-
-interface User {
-  name: string;
-  age: number;
-  email: string;
-}
-
-const user1: User = { name: 'Jake', age: 22, email: 'jake@gmail.com' };
-const user2: User = { name: 'Dan', age: 22, email: 'dan@gmail.com' };
-const user3: User = { name: 'Paul', age: 22, email: 'paul@gmail.com' };
-
-const users: User[] = [user1, user2, user3];
 
 const smUserOptions = generateMockUserList({ seed: 1, size: 3 });
 const mdUserOptions = generateMockUserList({ seed: 1, size: 8 });
@@ -53,8 +39,6 @@ export const Default = () => {
   );
 };
 
-const useMockUserList = generateMockUserListHook({ size: 300, delay: 1000 });
-
 const SWAPI_BASE_URL = 'https://swapi.dev/api';
 
 interface Character {
@@ -91,8 +75,7 @@ function useCharacters({ search }: { search?: string }) {
 
 export const MultiSelectCombobox = () => {
   const [search, setSearch] = useState<string | undefined>();
-  const [values, setValues] = useState<Character[] | undefined>();
-  // const { data, loading } = useMockUserList({ limit: 11, offset: 0 });
+
   const { data, loading } = useCharacters({ search });
 
   console.log('DATA', data);

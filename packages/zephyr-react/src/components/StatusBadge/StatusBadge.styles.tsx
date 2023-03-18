@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import { colorVariants } from 'styles/colors.variants';
 import { inputComponentVariants } from 'styles/input-component.variants';
-import { sizeVariants } from 'styles/size.variants';
 import { Classed, classTheme, classed, mergeVariants } from 'utils/classed';
 
 export type StatusBadgeElementVariants = Classed.VariantProps<typeof StatusBadgeElement>;
@@ -15,7 +14,7 @@ const disabledClass = classTheme({
 
 export const StatusBadgeElement = classed(
   'button',
-  'group inline-flex items-center gap-6 font-medium border  text-white rounded-full select-none transition-all ring-0 focus:ring-0 ring-transparent',
+  'group inline-flex items-center gap-6 font-medium border rounded-full select-none transition-all ring-0 focus:ring-0 ring-transparent',
   'border-boundary-ghost dark:border-boundary-inverse-ghost  outline-none border-none',
   disabledClass,
 
@@ -37,7 +36,7 @@ export const StatusBadgeElement = classed(
       variant: {
         text: 'px-0 py-0 border-none bg-transparent',
         outlined: 'bg-opacity-10',
-        contained: clsx('text-white', 'bg-gradient-to-r from-white/5 via-white/5 to-transparent'),
+        contained: clsx('from-palette-white/5 via-palette-white/5 bg-gradient-to-r to-transparent'),
         dropdown: 'cursor-pointer',
       },
 
@@ -51,29 +50,6 @@ export const StatusBadgeElement = classed(
       variant: 'contained',
       clickable: false,
     },
-
-    compoundVariants: [
-      // { disabled: true, class: clsx('cursor-default hover:bg-current') },
-      {
-        color: 'surface',
-        class: clsx(
-          'bg-surface dark:bg-surface-inverse',
-          'text-content-intense dark:text-content-inverse-intense',
-          'border-boundary-weak dark:border-boundary-inverse-weak',
-          'from-transparent via-transparent to-transparent '
-        ),
-      },
-      {
-        color: 'surface',
-        class: 'bg-neutral/5',
-        // class: clsx(
-        //   'bg-surface dark:bg-surface-inverse',
-        //   'text-content-intense dark:text-content-inverse-intense',
-        //   'border-boundary-weak dark:border-boundary-inverse-weak',
-        //   'from-transparent via-transparent to-transparent '
-        // ),
-      },
-    ],
   }
 );
 

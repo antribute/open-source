@@ -1,12 +1,9 @@
 import { BoltIcon } from '@heroicons/react/24/solid';
 
-import { Button } from 'components/Button';
 import { Card } from 'components/Card';
 import { Flex, FlexProps } from 'components/Flex/Flex';
 import { IconButton } from 'components/IconButton/IconButton';
-import { Paper } from 'components/Paper';
-import { SizeProp } from 'types/styles';
-import { RenderSizeVariants, getSizeKeys } from 'utils/storybook-utils';
+import { getSizeKeys } from 'utils/storybook-utils';
 
 const FlexExample = ({ label, ...props }: FlexProps & { label?: string }) => {
   return (

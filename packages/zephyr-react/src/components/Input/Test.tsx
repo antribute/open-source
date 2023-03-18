@@ -24,16 +24,3 @@ export const Button = deriveClassed<typeof ButtonBase, ButtonProps>(
     );
   }
 );
-
-interface LinkProps {
-  icon?: React.ReactNode;
-}
-
-const LinkButton = deriveClassed<typeof Button>(({ icon, ...props }, ref) => {
-  return (
-    <div>
-      {icon}
-      <Button as="a" />
-    </div>
-  );
-});

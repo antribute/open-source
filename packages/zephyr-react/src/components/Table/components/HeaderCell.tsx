@@ -1,4 +1,3 @@
-import { useTableContext } from 'components/Table/Table.context';
 import { classed } from 'utils/classed';
 import { Header } from '../Table.types';
 import { renderHeader } from '../helpers';
@@ -27,8 +26,6 @@ const HeaderElement = classed(
 );
 
 export const HeaderCell = ({ header }: HeaderCellProps) => {
-  const { table } = useTableContext();
-
   return (
     <HeaderElement colSpan={header.colSpan} style={{ width: header.getSize() }}>
       {renderHeader(header)}

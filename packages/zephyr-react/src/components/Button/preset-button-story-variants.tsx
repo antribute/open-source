@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unnecessary-type-constraint */
-import { omit, omitBy } from 'lodash-es';
+import { omit } from 'lodash-es';
 import { notEmpty } from 'utils/notEmpty';
 import { RenderColorVariants, RenderSizeVariants } from 'utils/storybook-utils';
 

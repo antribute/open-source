@@ -193,5 +193,3 @@ interface RelativeElementOptions<T extends string = string> {
   maxElement?: T;
   elements?: T[];
 }
-
-const a = getRelativeSizeProp(2, { relativeSize: 'sm' });

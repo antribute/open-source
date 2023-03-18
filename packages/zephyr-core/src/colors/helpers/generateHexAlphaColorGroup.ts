@@ -67,7 +67,7 @@ export function generateHexAlphaColorGroup<TPrefix extends string | undefined = 
   const colorGroup = Object.fromEntries(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     Object.entries({ ...defaultColorGroup, ...overrides })
-      .filter(([_, value]) => Boolean(value))
+      .filter((entry) => Boolean(entry[1]))
       .map(([key, value]) => {
         function getKey() {
           const { prefix } = options ?? {};

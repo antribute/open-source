@@ -1,12 +1,8 @@
 import { RenderSizeVariants, getSizeKeys } from 'utils/storybook-utils';
-import { Button } from 'components/Button/Button';
-import { getRelativeSizeProp } from 'utils/getRelativeSizeProp';
-import { SizeProp } from 'types/styles';
 import ChevronDownIcon from '@heroicons/react/24/outline/ChevronDownIcon';
 import CurrencyDollarIcon from '@heroicons/react/24/outline/CurrencyDollarIcon';
 import { InfoTooltipIcon } from 'components/Tooltip';
 import { PrimitiveBaseInput } from 'components/BaseInput/PrimitiveBaseInput';
-import { Paper } from 'components/Paper';
 import { BaseInput } from './BaseInput';
 
 export const Default = () => {
@@ -50,7 +46,7 @@ export const InlineAddons = () => {
         sizes={['md']}
         noChildren
         Component={BaseInput}
-        getProps={(size) => {
+        getProps={() => {
           return {
             placeholder: 'Enter value',
 

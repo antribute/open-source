@@ -7,8 +7,8 @@ describe('createCtx', () => {
   it('should throw an error when a component uses the context without the provider', () => {
     const [useContext] = createCtx<{ foo: string }>();
     function TestComponent() {
-      const context = useContext();
-      return <h1>{context.foo}</h1>;
+      const { foo } = useContext();
+      return <h1>{foo}</h1>;
     }
     expect(() => render(<TestComponent />)).toThrow();
   });
@@ -16,8 +16,8 @@ describe('createCtx', () => {
   it('should appropriately provide context to children of the provider', () => {
     const [useContext, ContextProvider] = createCtx<{ foo: string }>();
     function TestComponent() {
-      const context = useContext();
-      return <h1>{context.foo}</h1>;
+      const { foo } = useContext();
+      return <h1>{foo}</h1>;
     }
     render(
       <ContextProvider value={{ foo: 'bar' }}>

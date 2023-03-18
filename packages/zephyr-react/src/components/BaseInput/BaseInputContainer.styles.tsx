@@ -1,5 +1,4 @@
 import { classed } from '@tw-classed/react';
-import clsx from 'clsx';
 import { BaseInputElement } from 'components/BaseInput/BaseInput.styles';
 import {
   InputComponentWidthVariant,

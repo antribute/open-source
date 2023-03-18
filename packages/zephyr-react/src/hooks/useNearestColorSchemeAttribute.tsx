@@ -1,4 +1,4 @@
-import { useEffect, useState, useLayoutEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getNearestColorSchemeAttribute } from 'utils/getNearestColorSchemeAttribute';
 
 export function useNearestColorSchemeAttribute({

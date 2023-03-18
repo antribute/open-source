@@ -1,8 +1,10 @@
 import { useDescription, useTsController } from '@ts-react/form';
-import { Checkbox } from 'components/Checkbox/Checkbox';
-import { InputProps } from 'components/Input/Input';
+import { Checkbox, CheckboxProps } from 'components/Checkbox/Checkbox';
 
-type ControlledCheckboxProps = Omit<InputProps, 'value' | 'name' | 'onChange' | 'onBlue' | 'ref'>;
+type ControlledCheckboxProps = Omit<
+  CheckboxProps,
+  'value' | 'name' | 'onChange' | 'onBlur' | 'ref'
+>;
 
 export const ControlledCheckbox = (props: ControlledCheckboxProps) => {
   const { field, error } = useTsController<boolean>();
@@ -14,9 +16,12 @@ export const ControlledCheckbox = (props: ControlledCheckboxProps) => {
       name={name}
       checked={value} // conditional to prevent "uncontrolled to controlled" react warning
       onBlur={onBlur}
+      onCheckedChange={(e) => {
+        onChange(Boolean(e));
+      }}
       ref={ref}
       error={Boolean(error)}
-      errorMessage={error?.errorMessage}
+      message={error?.errorMessage}
       size="md"
       {...props}
       label={label}

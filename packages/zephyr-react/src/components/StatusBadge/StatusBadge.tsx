@@ -5,11 +5,7 @@ import { colorVariants } from 'styles/colors.variants';
 import { stringToDistinctColorClass } from 'utils/stringToDistinctColorClass';
 import { twMerge } from 'tailwind-merge';
 import { fetchStatusColor } from 'components/StatusBadge/fetchStatusColors';
-import {
-  StatusBadgeElement,
-  StatusBadgeElementProps,
-  StatusBadgeElementVariants,
-} from './StatusBadge.styles';
+import { StatusBadgeElement, StatusBadgeElementProps } from './StatusBadge.styles';
 
 const DiscardButtonElement = classed(
   'button',

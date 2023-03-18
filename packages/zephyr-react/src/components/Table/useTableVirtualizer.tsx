@@ -12,7 +12,7 @@ export interface UseTableVirtualizerProps {
   virtualizerProps?: TableVirtualizerProps;
 }
 
-export function useTableVirtualizer({ rows, virtualizerProps }: UseTableVirtualizerProps) {
+export function useTableVirtualizer({ rows }: UseTableVirtualizerProps) {
   const tableContainerRef = useRef<HTMLDivElement>(null);
 
   const rowVirtualizer = useVirtualizer({
