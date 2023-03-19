@@ -1,10 +1,13 @@
 'use client';
 
-import { DARK_MODE, LIGHT_MODE } from 'constants/theme';
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
+import { DARK_MODE, LIGHT_MODE, DEFAULT_THEME } from 'constants/theme';
 import { useState, useEffect, useMemo } from 'react';
 
+const isClientSide = () => typeof window !== 'undefined';
+
 const getInitialIsDarkMode = () => {
+  if (!isClientSide()) return DEFAULT_THEME === DARK_MODE;
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const savedTheme = localStorage.getItem('color-theme');
   return savedTheme === DARK_MODE || (!savedTheme && prefersDark);
