@@ -1,0 +1,16 @@
+import { ArgsTable, Canvas, Description, Meta, Story } from '@storybook/addon-docs';
+import { ThemeSwitcher } from '.';
+import * as stories from './ThemeSwitcher.stories.tsx';
+
+<Meta title="Layout/ThemeSwitcher" component={ThemeSwitcher} />
+
+# Theme Switcher
+
+<Description component={ThemeSwitcher} />
+<ArgsTable of={ThemeSwitcher} />
+
+## Default
+
+<Canvas withToolbar>
+  <Story name="Default" story={stories.Default} />
+</Canvas>
