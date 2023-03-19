@@ -41,7 +41,7 @@ const config = {
       './*.{htm,html}',
       './public/*.{htm,html}',
       './src/**/*.{ts,tsx}',
-      './node_modules/@antribute/zephyr-core/dist/index.js',
+      './node_modules/@antribute/zephyr-react/src/**/*.{js,jsx,ts,tsx}',
     ],
     transform: createVariantGroupTransformer(),
   },
