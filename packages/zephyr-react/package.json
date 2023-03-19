@@ -112,6 +112,7 @@
     "react-hook-form": "^7.41.5",
     "react-is": "^18.2.0",
     "react-merge-refs": "^2.0.1",
+    "react-wrap-balancer": "^0.4.0",
     "tailwind-group-variant": "^1.0.0",
     "tailwind-merge": "^1.8.1",
     "ts-toolbelt": "^9.6.0",
