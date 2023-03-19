@@ -3,7 +3,8 @@
   "description": "React Component Library for the Zephyr Design System",
   "version": "0.1.0",
   "type": "module",
-  "main": "./dist/index.cjs",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "exports": {
     ".": {
       "require": "./dist/index.cjs",
@@ -15,7 +16,7 @@
     "dist/**"
   ],
   "scripts": {
-    "build": "NODE_OPTIONS=\"--max_old_space_size=4096\" tsup",
+    "build": "NODE_OPTIONS=\"--max_old_space_size=4096\" tsup src/index.ts --format esm,cjs --dts",
     "build-storybook": "storybook build",
     "clean": "rimraf .turbo && rimraf .next && rimraf node_modules && rimraf build",
     "dev": "pnpm run build:watch",
