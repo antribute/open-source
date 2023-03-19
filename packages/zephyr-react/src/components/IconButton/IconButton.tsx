@@ -1,4 +1,5 @@
 import { ButtonElement } from 'components/Button/Button.styles';
+import { forwardRef } from 'react';
 import { sizeVariants } from 'styles/size.variants';
 import { classed, mergeVariants } from 'utils/classed';
 
@@ -10,10 +11,12 @@ const IconButtonElement = classed('button', ButtonElement, 'p-8 shrink-0', {
 
 export type IconButtonProps = React.ComponentProps<typeof IconButtonElement>;
 
-export const IconButton = ({ className, children, ...props }: IconButtonProps) => {
-  return (
-    <IconButtonElement {...props} className={children ? className : undefined}>
-      {children ?? <span className={className} />}
-    </IconButtonElement>
-  );
-};
+export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
+  ({ className, children, ...props }, ref) => {
+    return (
+      <IconButtonElement {...props} className={children ? className : undefined} ref={ref}>
+        {children ?? <span className={className} />}
+      </IconButtonElement>
+    );
+  }
+);

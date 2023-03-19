@@ -1,4 +1,5 @@
 import '@antribute/zephyr-core/zephyr-core.css';
+
 import type { ReactNode } from 'react';
 
 interface RootLayoutProps {

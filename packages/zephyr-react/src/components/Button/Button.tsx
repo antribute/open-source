@@ -1,3 +1,5 @@
+'use client';
+
 import { deriveClassed } from '@tw-classed/react';
 import { ButtonElement, ButtonElementVariantProps } from 'components/Button/Button.styles';
 import React from 'react';

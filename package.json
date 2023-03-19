@@ -5,6 +5,7 @@
     "build:packages": "turbo run build --filter=./packages/*",
     "build:servers": "turbo run build --filter=./servers/*",
     "storybook-react": "turbo run storybook --filter=@antribute/zephyr-react...",
+    "app:landing-page": "turbo run dev --filter=@antribute/landing-page",
     "clean": "turbo run clean",
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint -- --fix",
@@ -14,7 +15,8 @@
     "reset:hard": "pnpm run nuke && rm pnpm-lock.yaml && pnpm i",
     "style:format": "prettier --ignore-unknown --write .",
     "style:lint": "prettier --ignore-unknown --check .",
-    "test": "turbo run test -- run"
+    "test": "turbo run test -- run",
+    "kill-port": "pnpm dlx kill-port"
   },
   "devDependencies": {
     "@manypkg/cli": "^0.19.2",

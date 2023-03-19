@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
 import '@antribute/zephyr-core/zephyr-core.css';
+
+import React, { useEffect } from 'react';
 import { API_Layout, GlobalTypes } from '@storybook/types';
 import type { Decorator } from '@storybook/react';
 import { colorPalette } from '@antribute/zephyr-core';
-// .storybook/preview.js
-
-import { useDarkMode, DARK_MODE, LIGHT_MODE, DEFAULT_THEME } from '../src/hooks/useIsDarkMode';
+import { useDarkMode } from '../src/hooks/useDarkMode';
+import { LIGHT_MODE, DARK_MODE, DEFAULT_THEME } from '../src/constants/theme';
 
 export const globalTypes: GlobalTypes = {
   theme: {
