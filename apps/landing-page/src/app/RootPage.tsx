@@ -12,9 +12,6 @@ import {
 } from '@antribute/zephyr-react';
 import { AntributeLogo } from 'components/AntributeLogo';
 
-const Grid = () => (
-  <div className="h-1/2 absolute w-full bottom-0 pointer-events-none bg-[url(https://play.tailwindcss.com/img/grid.svg)] gradient-mask-t-10 bg-center dark:invert animate-fade-in" />
-);
 function RootPage() {
   const track = useTracking();
   useEffect(() => {
@@ -25,8 +22,10 @@ function RootPage() {
 
   return (
     <>
-      <div className="fixed  top-0 right-0 p-6">
-        <ThemeSwitcher />
+      <div className="fixed top-8 flex justify-center w-full">
+        <div className="absolute right-8 top-0 z-10">
+          <ThemeSwitcher />
+        </div>
       </div>
       <div className="container mx-auto  flex h-full min-h-screen flex-col items-center justify-center px-24  before-absolute-content">
         <Flex justify="center" align="center" gap className="mb-16">
@@ -79,6 +78,10 @@ function RootPage() {
   );
 }
 
+const Grid = () => (
+  <div className="h-1/2 absolute w-full bottom-0 pointer-events-none bg-[url(https://play.tailwindcss.com/img/grid.svg)] gradient-mask-t-10 bg-center dark:invert animate-fade-in" />
+);
+
 const EmphasizeText = ({ children }: { children: React.ReactNode }) => (
   <Text
     className="before-absolute-content before:!w-auto before:block before:p-4 before:from-caution/10  before:via-info/20  before:to-heart/10 before:bg-gradient-to-r  before:scale-105 before:rounded-sm relative mx-4 gradient-mask-b-95 before:gradient-mask-t-10 rounded-[14px] px-6 pb-2"
@@ -101,10 +104,9 @@ const LinkButton = ({
   return (
     <Button
       as="a"
-      className="!text-content-intense"
       variant="ghost"
       size="sm"
-      color="secondary"
+      color="primary"
       rounded
       rel="noopener noreferrer"
       target="_blank"
