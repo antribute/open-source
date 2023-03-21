@@ -3,8 +3,6 @@ import { InputContainer } from 'components/Input/InputContainer';
 import { BaseInputSelect, BaseInputSelectProps } from 'components/BaseInput';
 import { useInputProps } from 'components/Input/useInputProps';
 
-export type InputSelectProps = BaseInputSelectProps;
-
 export const InputSelect = forwardRef<HTMLButtonElement, BaseInputSelectProps>(
   ({ width = 'fixed', label, labelDescription, optionalLabel, required, ...props }, ref) => {
     const { id, size, inputStateMessagePair } = useInputProps(props);
@@ -19,7 +17,7 @@ export const InputSelect = forwardRef<HTMLButtonElement, BaseInputSelectProps>(
         size={size}
         {...inputStateMessagePair}
       >
-        <BaseInputSelect {...props} ref={ref} id={id} {...inputStateMessagePair} />
+        <BaseInputSelect width="full" {...props} ref={ref} id={id} {...inputStateMessagePair} />
       </InputContainer>
     );
   }

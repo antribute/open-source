@@ -70,7 +70,7 @@ const InputLabel = ({
         {required && <span className="text-danger ml-px">*</span>}
       </span>
       {labelDescription && (
-        <Text as="p" size="xs" className="leading-sm mt-1" color="weak">
+        <Text as="p" size="xs" className="leading-sm mt-2 -mb-4" color="weak">
           {labelDescription}
         </Text>
       )}

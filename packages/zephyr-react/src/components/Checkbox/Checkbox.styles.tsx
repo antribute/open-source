@@ -14,8 +14,13 @@ export const CheckboxElement = classed(
   'rounded-[0.185rem]',
   'focus:ring-0 p-2',
   'text-content-intense',
-  'bg-highlight',
-  expandVariant('radix-state-checked:(bg-primary,text-primary-content,border-highlight)'),
+  'bg-highlight-subtle',
+  expandVariant(
+    `radix-state-checked:(bg-primary,text-primary-content,border-highlight)
+    radix-state-unchecked:(hover:bg-highlight-weak)
+    
+    `
+  ),
   'focus:ring-offset-0',
   {
     variants: {

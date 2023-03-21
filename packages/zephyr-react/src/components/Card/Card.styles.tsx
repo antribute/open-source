@@ -20,7 +20,6 @@ export const CardTitleSectionElement = classed(
   'flex justify-between items-center',
   'border-b border-boundary-tint/5',
   'mb-8',
-  'bg-inherit',
   expandVariant('group-data-antribute-card-padding-none:(px-10,border-highlight-weak,pt-8)'),
   {
     variants: {},

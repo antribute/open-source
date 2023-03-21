@@ -9,7 +9,7 @@ export type InputProps = InputComponentStateMessageProps &
   BaseInputProps;
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ label, labelDescription, optionalLabel, required, ...props }, ref) => {
+  ({ label, labelDescription, optionalLabel, width, required, ...props }, ref) => {
     const { id, inputStateMessagePair, size } = useInputProps(props);
     return (
       <InputContainer
@@ -19,9 +19,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         required={required}
         htmlFor={id}
         size={size}
+        width={width}
         {...inputStateMessagePair}
       >
-        <BaseInput {...props} ref={ref} id={id} {...inputStateMessagePair} />
+        <BaseInput width="full" {...props} ref={ref} id={id} {...inputStateMessagePair} />
       </InputContainer>
     );
   }
