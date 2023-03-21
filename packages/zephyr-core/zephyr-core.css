@@ -102,17 +102,17 @@
     @apply bg-surface-soft hover:bg-surface text-success ring-success hover:ring-success-dark;
   }
   .outlined-accent-caution {
-    @apply bg-surface-soft hover:bg-surface text-caution ring-caution hover:ring-caution-dark;
+    @apply bg-surface-soft  hover:bg-surface text-caution ring-caution hover:ring-caution-dark;
   }
   .outlined-accent-danger {
     @apply bg-surface-soft hover:bg-surface text-danger ring-danger hover:ring-danger-dark;
   }
 
   .glass-accent-primary {
-    @apply bg-primary/20  text-content-max-contrast hover:bg-primary/30;
+    @apply bg-primary/40  text-content-intense hover:bg-highlight-strong;
   }
   .glass-accent-secondary {
-    @apply bg-secondary/20 text-content-max-contrast hover:bg-secondary/30;
+    @apply bg-highlight-weak text-content-max-contrast hover:bg-highlight-moderate;
   }
   .glass-accent-inverse {
     @apply bg-inverse/30 text-palette-white hover:bg-inverse/40;
@@ -133,12 +133,40 @@
     @apply bg-danger/10 hover:bg-danger/20 text-danger;
   }
 
+  .ghost-accent-primary {
+    @apply text-content-strong hover:bg-highlight-weak;
+  }
+  .ghost-accent-secondary {
+    @apply text-content-weak hover:bg-highlight-weak;
+  }
+  .ghost-accent-inverse {
+    @apply text-inverse hover:bg-highlight-weak;
+  }
+  .ghost-accent-heart {
+    @apply text-heart hover:bg-heart/20;
+  }
+  .ghost-accent-info {
+    @apply text-info hover:bg-info/20;
+  }
+  .ghost-accent-success {
+    @apply text-success hover:bg-success/20;
+  }
+  .ghost-accent-caution {
+    @apply text-caution hover:bg-caution/20 contrast-[.85];
+  }
+  .ghost-accent-danger {
+    @apply text-danger hover:bg-danger/20;
+  }
+
   .noisy-texture {
     @apply bg-[url('https://liveblocks.io/images/noise.png')] bg-repeat bg-[length:125px] opacity-[0.035];
   }
 
   .before-absolute-content {
     @apply before:content-[''] before:absolute before:w-full before:h-full before:pointer-events-none before:inset-0;
+  }
+  .after-absolute-content {
+    @apply after:content-[''] after:absolute after:w-full after:h-full after:pointer-events-none after:inset-0;
   }
 
   .noisy-surface-texture {

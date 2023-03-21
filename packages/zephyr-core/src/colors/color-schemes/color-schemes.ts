@@ -1,5 +1,5 @@
 import { defineColorSchemes } from './color-schemes.helpers';
-import { schemes } from './schemes';
+import { colorSchemeConfigs } from './schemes';
 import { ColorSchemeName } from './color-scheme-config.types';
 
 export const mainColorSchemeNames = [
@@ -29,4 +29,4 @@ export const colorSchemeDataAttributes = Object.fromEntries(
 );
 
 export const { colorSchemeTokens, colorSchemeCssVariableClasses, colorSchemes } =
-  defineColorSchemes(schemes);
+  defineColorSchemes(colorSchemeConfigs);

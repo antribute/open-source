@@ -2,6 +2,7 @@
 
 export * from './hooks';
 export * from './constants';
+export * from './components/AntributeUiProvider';
 export * from './components/BaseInput';
 export * from './components/Button';
 export * from './components/Checkbox';

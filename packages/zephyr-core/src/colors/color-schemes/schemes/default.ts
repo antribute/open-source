@@ -4,5 +4,5 @@ import surfaceScheme from './surface';
 export default defineColorScheme({
   name: 'default',
   colorMode: 'light',
-  scheme: surfaceScheme.surface,
+  scheme: surfaceScheme.scheme,
 });

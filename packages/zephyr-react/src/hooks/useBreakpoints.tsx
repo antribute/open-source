@@ -37,6 +37,8 @@ type BetweenBreakpoint =
   | Between<'$lg', '$xl'>
   | Between<'$xl', '$2xl'>;
 
+export type Breakpoint = keyof typeof breakpointMediaQueryMap;
+
 const breakpointMediaQueryMap = {
   $xsAndAbove: andAbove('$xs'),
   $xsAndBelow: andBelow('$xs'),

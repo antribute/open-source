@@ -19,6 +19,7 @@ const FlexElement = classed('div', 'flex', {
       true: 'inline-flex',
     },
     gap: {
+      true: 'gap-8',
       xs: 'gap-2',
       sm: 'gap-4',
       md: 'gap-8',

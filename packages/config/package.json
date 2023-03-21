@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "eslint": "^8.28.0",
-    "next": "13.0.5",
+    "next": "13.2.4",
     "prettier": "2.8.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -57,7 +57,7 @@
   },
   "peerDependencies": {
     "eslint": ">= 8.0.0 < 9",
-    "next": ">= 13.0.0 < 14",
+    "next": "13.2.4",
     "prettier": "2.8.2",
     "tsup": ">= 6.0.0 < 7",
     "typescript": "5.0.0-beta",

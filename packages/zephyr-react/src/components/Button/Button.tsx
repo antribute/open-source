@@ -1,15 +1,73 @@
-'use client';
-
-import { deriveClassed } from '@tw-classed/react';
-import { ButtonElement, ButtonElementVariantProps } from 'components/Button/Button.styles';
 import React from 'react';
+import { deriveClassed } from '@tw-classed/react';
+import { ButtonElement } from 'components/Button/Button.styles';
+import { InlineButtonIcon, InlineButtonIconProps } from 'components/Button/InlineButtonIcon';
+import type { ComponentProps } from 'react';
 
 export type ButtonProps = React.ComponentProps<typeof Button>;
 
-export const Button = deriveClassed<typeof ButtonElement, ButtonElementVariantProps>(
-  ({ variant = 'filled', color = 'primary', ...props }, ref) => {
+export const Button = deriveClassed<
+  typeof ButtonElement,
+  {
+    startIcon?: React.ReactNode;
+    endIcon?: React.ReactNode;
+    startIconClassName?: string;
+    endIconClassName?: string;
+  } & ComponentProps<typeof ButtonElement>
+>(
+  (
+    {
+      size,
+      startIcon,
+      endIcon,
+      startIconClassName,
+      endIconClassName,
+      children,
+      variant = 'filled',
+      color = 'primary',
+      rounded,
+      extraRoundedPadding: extraRoundedPaddingProp,
+      ...props
+    },
+    ref
+  ) => {
+    function getExtraRoundedPaddingProp() {
+      if (extraRoundedPaddingProp) return extraRoundedPaddingProp;
+      if (variant === 'ghost' || variant === 'text') return false;
+      return true;
+    }
+
+    const extraRoundedPadding = getExtraRoundedPaddingProp();
+
+    const inlineButtonIconProps: Partial<InlineButtonIconProps> = {
+      size,
+      offset: Boolean(rounded && extraRoundedPadding),
+    };
+
     return (
-      <ButtonElement variant={variant} color={color} extraRoundedPadding {...props} ref={ref} />
+      <ButtonElement
+        variant={variant}
+        color={color}
+        extraRoundedPadding={extraRoundedPadding}
+        rounded={rounded}
+        size={size}
+        {...props}
+        ref={ref}
+      >
+        <InlineButtonIcon
+          position="left"
+          icon={startIcon}
+          className={startIconClassName}
+          {...inlineButtonIconProps}
+        />
+        {children}
+        <InlineButtonIcon
+          position="right"
+          icon={endIcon}
+          className={endIconClassName}
+          {...inlineButtonIconProps}
+        />
+      </ButtonElement>
     );
   }
 );

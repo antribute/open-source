@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unnecessary-type-constraint */
+import { BoltIcon } from '@heroicons/react/24/solid';
 import { omit } from 'lodash-es';
 import { notEmpty } from 'utils/notEmpty';
 import { RenderColorVariants, RenderSizeVariants } from 'utils/storybook-utils';
@@ -31,6 +32,23 @@ export const PresetButtonStoryVariants = <
         noChildren={noDefaultChildren}
         props={getProps(props, { children: 'Default' })}
       />
+    ),
+    StartAndEndIconVariant: (props: TProps) => (
+      <div className="space-y-10">
+        {[
+          { startIcon: <BoltIcon /> },
+          { endIcon: <BoltIcon /> },
+          { startIcon: <BoltIcon />, rounded: true },
+          { endIcon: <BoltIcon />, rounded: true },
+        ].map((props) => (
+          <RenderSizeVariants
+            showVariantLabel
+            Component={Button}
+            noChildren={noDefaultChildren}
+            props={getProps(props, { children: 'Get Started', ...props })}
+          />
+        ))}
+      </div>
     ),
     SizeVariant: (props: TProps) => (
       <RenderSizeVariants

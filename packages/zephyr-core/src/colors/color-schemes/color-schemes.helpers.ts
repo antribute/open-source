@@ -7,22 +7,35 @@ import {
   getCssVariableValue,
 } from '../helpers/cssVariables';
 import { objectMap } from '../helpers/objectMap';
-import { ColorSchemeConfig, GenericColorSchemeConfig } from './color-scheme-config.types';
+import {
+  ColorSchemeConfig,
+  GenericColorSchemeConfig,
+  ResolvedColorSchemeConfig,
+} from './color-scheme-config.types';
 import { ColorSchemeToken } from './color-scheme-tokens.types';
 import { commonScheme } from './schemes/common-scheme';
 
-export function defineColorScheme<T extends ColorSchemeConfig>(config: T) {
-  const colorModeScheme =
-    config.colorMode === 'dark' ? commonScheme.darkMode : commonScheme.lightMode;
+export function defineColorScheme<T extends ColorSchemeConfig>({ name, colorMode, scheme }: T) {
+  const colorModeScheme = colorMode === 'dark' ? commonScheme.darkMode : commonScheme.lightMode;
 
-  const value = { ...commonScheme.all, ...colorModeScheme, ...config.scheme };
+  const resolvedScheme = { ...commonScheme.all, ...colorModeScheme, ...scheme };
 
   return {
-    [config.name]: value,
-  } as { [K in T['name']]: typeof value };
+    name,
+    colorMode,
+    scheme: resolvedScheme,
+  } as ResolvedColorSchemeConfig;
 }
 
-export function defineColorSchemes<T extends GenericColorSchemeConfig>(colorSchemes: T) {
+export function defineColorSchemes<T extends ResolvedColorSchemeConfig[]>(
+  resolvedSchemeConfigs: T
+) {
+  const colorSchemes = resolvedSchemeConfigs.reduce<GenericColorSchemeConfig>((acc, cur) => {
+    acc[cur.name] = cur.scheme;
+    return acc;
+    // eslint-disable-next-line @typescript-eslint/prefer-reduce-type-parameter
+  }, {} as GenericColorSchemeConfig);
+
   const colorSchemeCssVariableClasses = getColorSchemesCssVariableClasses(colorSchemes);
 
   const lightDefault = colorSchemes.default;
@@ -33,11 +46,16 @@ export function defineColorSchemes<T extends GenericColorSchemeConfig>(colorSche
   ) as Record<keyof typeof lightDefault, string>;
 
   // eslint-disable-next-line no-console
-  console.log({ colorSchemeTokens, colorSchemes, colorSchemeCssVariableClasses });
+  console.log({
+    colorSchemeTokens,
+    colorSchemes: resolvedSchemeConfigs,
+    colorSchemeCssVariableClasses,
+  });
   return {
     colorSchemes,
     colorSchemeCssVariableClasses,
     colorSchemeTokens,
+    colorSchemeConfigs: resolvedSchemeConfigs,
   };
 }
 

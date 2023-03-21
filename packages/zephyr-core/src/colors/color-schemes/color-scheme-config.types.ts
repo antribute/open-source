@@ -30,6 +30,10 @@ export interface ColorSchemeConfig<
   >;
 }
 
+export type ResolvedColorSchemeConfig = Omit<ColorSchemeConfig, 'scheme'> & {
+  scheme: ColorScheme;
+};
+
 export type GenericColorSchemeConfig = Partial<Record<`dark/${ColorSchemeName}`, ColorScheme>> & {
   [K in ColorSchemeName | 'dark/default']: ColorScheme;
 };

@@ -13,7 +13,22 @@ export function linearGradientMaskImagePlugin() {
       tl: 'to top left',
     } as const;
 
-    const steps = ['0', '10', '20', '30', '40', '50', '60', '70', '80', '90'] as const;
+    const steps = [
+      '0',
+      '2',
+      '5',
+      '10',
+      '20',
+      '30',
+      '40',
+      '50',
+      '60',
+      '70',
+      '80',
+      '90',
+      '95',
+      '98',
+    ] as const;
 
     const utilities = Object.entries(directions).reduce((result, [shorthand, direction]) => {
       const gradientMaskClassEntries = steps.map((step) => {

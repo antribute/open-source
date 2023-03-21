@@ -81,6 +81,9 @@ export const ButtonElement = classed.button(
         caution: '',
         heart: '',
       },
+      gap: {
+        true: '',
+      },
     },
 
     defaultVariants: {
@@ -91,9 +94,19 @@ export const ButtonElement = classed.button(
       color: 'primary',
       justify: 'center',
       variant: 'filled',
+      gap: true,
     },
 
     compoundVariants: [
+      ...generateCompoundVariants({
+        gap: true,
+        size: {
+          xs: clsx('gap-4'),
+          sm: clsx('gap-6'),
+          md: clsx('gap-6'),
+          lg: clsx('gap-6'),
+        },
+      }),
       ...generateCompoundVariants({
         variant: 'filled',
         color: {
@@ -136,7 +149,7 @@ export const ButtonElement = classed.button(
 
       ...generateCompoundVariants({
         variant: 'glass',
-        className: 'overflow-hidden relative z-0 ',
+        className: 'overflow-hidden',
         color: {
           primary: 'glass-accent-primary',
           secondary: 'glass-accent-secondary',
@@ -151,22 +164,22 @@ export const ButtonElement = classed.button(
 
       ...generateCompoundVariants({
         variant: 'ghost',
-        className: 'overflow-hidden bg-transparent relative z-0 ',
+        className: 'overflow-hidden bg-transparent',
         color: {
-          primary: 'glass-accent-primary text-primary',
-          secondary: 'glass-accent-secondary text-secondary',
-          inverse: 'glass-accent-inverse text-inverse',
-          heart: 'glass-accent-heart',
-          info: 'glass-accent-info',
-          success: 'glass-accent-success',
-          danger: 'glass-accent-danger',
-          caution: 'glass-accent-caution',
+          primary: 'ghost-accent-primary',
+          secondary: 'ghost-accent-secondary',
+          inverse: 'ghost-accent-inverse',
+          heart: 'ghost-accent-heart',
+          info: 'ghost-accent-info',
+          success: 'ghost-accent-success',
+          danger: 'ghost-accent-danger',
+          caution: 'ghost-accent-caution',
         },
       }),
 
       ...generateCompoundVariants({
         variant: 'outlined',
-        className: 'overflow-hidden relative z-0',
+        className: 'overflow-hidden z-0',
         color: {
           primary: 'outlined-accent-primary',
           secondary: 'outlined-accent-secondary',

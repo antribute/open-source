@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ClassedVariantMap, SizeProp } from 'types/styles';
-import { twMerge } from 'tailwind-merge';
+import { extendTailwindMerge } from 'tailwind-merge';
 import { map, mapValues, mergeWith, pick, transform } from 'lodash-es';
 import { createClassed, deriveClassed } from '@tw-classed/react';
 import { createClassed as createClassedCore } from '@tw-classed/core';
@@ -20,6 +20,18 @@ export type ClassedComponentTypeProps<
   TElementType extends ElementType,
   TProps extends object = object
 > = Classed.ComponentProps<Classed.ClassedComponentType<TElementType, TProps>>;
+
+const twMerge = extendTailwindMerge({
+  classGroups: {
+    'font-size': [
+      {
+        // Fixes incorect merging of text size
+        text: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+      },
+    ],
+  },
+});
+
 const { classed } = createClassed({ merger: twMerge });
 const { classed: classedCore } = createClassedCore({ merger: twMerge });
 

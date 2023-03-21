@@ -21,7 +21,7 @@ export const Default = () => {
             </Dialog.Description>
           </Dialog.BodySection>
           <Dialog.FooterSection>
-            <Dialog.CloseButton>Cancel</Dialog.CloseButton>
+            <Dialog.CancelButton>Cancel</Dialog.CancelButton>
             <Dialog.Button>Confirm</Dialog.Button>
           </Dialog.FooterSection>
         </Dialog.Content>

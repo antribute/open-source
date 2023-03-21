@@ -1,4 +1,5 @@
 import { PresetButtonStoryVariants } from 'components/Button/preset-button-story-variants';
+
 import { Button, ButtonProps } from './Button';
 
 export const {
@@ -13,4 +14,5 @@ export const {
   RoundedSize,
   ContainedGradientVariant,
   GhostVariant,
+  StartAndEndIconVariant,
 } = PresetButtonStoryVariants<ButtonProps>(Button);

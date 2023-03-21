@@ -37,7 +37,7 @@
     "eslint": "^8.28.0",
     "graphql": "^16.6.0",
     "happy-dom": "^7.7.0",
-    "next": "13.0.5",
+    "next": "13.2.4",
     "prettier": "2.8.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -51,6 +51,6 @@
   },
   "peerDependencies": {
     "graphql": ">= 16.0.0 < 17",
-    "next": ">= 13.0.0 < 14"
+    "next": "13.2.4"
   }
 }

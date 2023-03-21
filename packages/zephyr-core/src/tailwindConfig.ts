@@ -31,7 +31,7 @@ const config = {
     tailwindLineClampPlugin,
     tailwindCssTypographyPlugin,
     iconsPlugin({
-      collections: getIconCollections(['heroicons']),
+      collections: getIconCollections(['heroicons', 'fa6-brands']),
     }),
     multiThemePlugin(),
     linearGradientMaskImagePlugin(),
@@ -158,6 +158,14 @@ const config = {
       full: '100%',
     }),
     fontFamily: {
+      display: [
+        'Cal Sans',
+        'sans-serif',
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"',
+        '"Noto Color Emoji"',
+      ],
       body: [
         'Figtree',
         'sans-serif',
