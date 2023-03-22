@@ -93,7 +93,7 @@
     "@radix-ui/react-tooltip": "^1.0.3",
     "@tanstack/react-table": "^8.7.9",
     "@tanstack/react-virtual": "3.0.0-beta.47",
-    "@ts-react/form": "^1.2.0",
+    "@ts-react/form": "^1.4.5",
     "@tw-classed/core": "1.4.0",
     "@tw-classed/react": "1.4.2",
     "ariakit": "2.0.0-next.43",

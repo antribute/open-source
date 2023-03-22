@@ -24,8 +24,8 @@
     "prettier": "2.8.2",
     "rimraf": "^3.0.2",
     "simple-git-hooks": "^2.8.1",
-    "typescript": "^5.0.0-beta",
-    "turbo": "latest"
+    "turbo": "latest",
+    "typescript": "^5.0.0-beta"
   },
   "prettier": "./packages/config/prettier/.prettierrc.cjs",
   "private": true,
@@ -47,6 +47,11 @@
       "@storybook/core-events": "^7.0.0-beta.21",
       "@storybook/theming": "^7.0.0-beta.21",
       "react": "^18.20.0"
+    }
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "@ts-react/form@1.4.5": "patches/@ts-react__form@1.4.5.patch"
     }
   }
 }
