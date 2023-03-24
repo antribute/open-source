@@ -48,5 +48,10 @@
       "@storybook/theming": "^7.0.0-beta.21",
       "react": "^18.20.0"
     }
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "@ts-react/form@1.4.5": "patches/@ts-react__form@1.4.5.patch"
+    }
   }
 }
