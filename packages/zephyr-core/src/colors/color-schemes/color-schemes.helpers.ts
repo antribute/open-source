@@ -45,12 +45,6 @@ export function defineColorSchemes<T extends ResolvedColorSchemeConfig[]>(
     colorSchemeCssVariableClasses[':root']!
   ) as Record<keyof typeof lightDefault, string>;
 
-  // eslint-disable-next-line no-console
-  console.log({
-    colorSchemeTokens,
-    colorSchemes: resolvedSchemeConfigs,
-    colorSchemeCssVariableClasses,
-  });
   return {
     colorSchemes,
     colorSchemeCssVariableClasses,

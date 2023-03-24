@@ -31,6 +31,4 @@ const dangerScheme = defineColorScheme({
   },
 });
 
-console.log('DANGER SCHEME', dangerContent, dangerScheme);
-
 export default dangerScheme;
