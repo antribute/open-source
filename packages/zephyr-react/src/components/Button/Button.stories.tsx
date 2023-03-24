@@ -1,38 +1,18 @@
-import { RenderColorVariants, RenderSizeVariants } from 'utils/storybook-utils';
-import { Button } from './Button';
+import { PresetButtonStoryVariants } from 'components/Button/preset-button-story-variants';
 
-export const Default = () => {
-  return <RenderColorVariants Component={Button} props={{ children: 'Default' }} />;
-};
+import { Button, ButtonProps } from './Button';
 
-export const Contained = () => {
-  return (
-    <RenderSizeVariants
-      Component={Button}
-      props={{ children: 'Contained', variant: 'contained' }}
-    />
-  );
-};
-
-export const Soft = () => {
-  return <RenderSizeVariants Component={Button} props={{ children: 'Soft', variant: 'soft' }} />;
-};
-
-export const Outlined = () => {
-  return (
-    <RenderSizeVariants Component={Button} props={{ children: 'Outlined', variant: 'outlined' }} />
-  );
-};
-
-export const OutlinedFilled = () => {
-  return (
-    <RenderSizeVariants
-      Component={Button}
-      props={{ children: 'Outlined Filled', variant: 'outlined-filled' }}
-    />
-  );
-};
-
-export const Text = () => {
-  return <RenderSizeVariants Component={Button} props={{ children: 'Text', variant: 'text' }} />;
-};
+export const {
+  Default,
+  SizeVariant,
+  ContainedVariant,
+  OutlinedVariant,
+  OutlinedRoundedVariant,
+  GlassVariant,
+  TextVariant,
+  RoundedVariant,
+  RoundedSize,
+  ContainedGradientVariant,
+  GhostVariant,
+  StartAndEndIconVariant,
+} = PresetButtonStoryVariants<ButtonProps>(Button);

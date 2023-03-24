@@ -13,6 +13,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint'],
   rules: {
+    'no-extra-boolean-cast': 'off',
     'no-param-reassign': 'off',
     'import/extensions': 'off',
     'import/prefer-default-export': 'off',
@@ -23,6 +24,8 @@ module.exports = {
     '@typescript-eslint/no-unnecessary-type-assertion': 'off',
     '@typescript-eslint/no-unsafe-return': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
+    // This sometimes interferes with third-party packages
+    '@typescript-eslint/no-unsafe-member-access': 'off',
     // This allows us to import devdeps in tests
     'import/no-extraneous-dependencies': [
       'error',

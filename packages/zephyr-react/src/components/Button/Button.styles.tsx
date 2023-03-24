@@ -1,50 +1,89 @@
+/* eslint-disable tailwindcss/no-custom-classname */
 import clsx from 'clsx';
-import { colorVariants } from 'styles/colors.variants';
 import { inputComponentVariants } from 'styles/input-component.variants';
-import { fontWeightMap } from 'styles/text.variants';
-import { Classed, classed, mergeVariants } from 'utils/classed';
+import { sizeVariants } from 'styles/size.variants';
+import { textVariants } from 'styles/text.variants';
+import { Classed, classed, generateCompoundVariants, mergeVariants } from 'utils/classed';
 
-export type ButtonVariant = 'contained' | 'soft' | 'text' | 'outlined' | 'outlined-filled';
+export type ButtonVariant = 'filled' | 'glass' | 'ghost' | 'text' | 'outlined';
 
-export type ButtonElementVariants = Classed.VariantProps<typeof ButtonElement>;
+export type ButtonElementVariantProps = Classed.VariantProps<typeof ButtonElement>;
 
 export type ButtonElementProps = React.ComponentProps<typeof ButtonElement>;
 
-export const ButtonElement = classed(
-  'button',
-  'cursor-pointer inline-flex items-center select-none align-middle',
+export const ButtonElement = classed.button(
+  'cursor-pointer inline-flex font-medium items-center justify-center select-none align-middle',
   'disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-default disabled:border-gray-200 relative',
+  'transition-colors duration-100',
+  'shrink-0',
   {
     variants: {
       loading: {
         true: 'cursor-default',
       },
-      size: mergeVariants(inputComponentVariants.size),
-      fontWeight: fontWeightMap,
+      size: mergeVariants([
+        inputComponentVariants.size.lineHeight,
+        inputComponentVariants.size.paddingX,
+        inputComponentVariants.size.paddingY,
+        inputComponentVariants.size.textSize,
+      ]),
+      fontWeight: textVariants.fontWeight,
       noWrap: {
         true: 'whitespace-nowrap',
+      },
+      justify: {
+        center: 'justify-center',
+        start: 'justify-start',
+        end: 'justify-end',
       },
       fullWidth: {
         true: 'w-full',
       },
       variant: {
-        contained: clsx('border border-solid border-transparent'),
-        soft: clsx('border bg-transparent'),
-        outlined: clsx('border bg-transparent'),
-        'outlined-filled': clsx('border bg-transparent'),
-        text: clsx('border border-transparent'),
+        filled: '',
+        outlined: 'ring-[1.35px] ring-inset',
+        glass: '',
+        text: '',
+        ghost: '',
       } satisfies Record<ButtonVariant, string>,
       rounded: {
-        sm: clsx('rounded'),
-        default: clsx('rounded-md'),
-        full: clsx('rounded-full'),
+        sm: clsx('rounded '),
+        default: clsx('rounded'),
+        true: 'rounded-full',
       },
-      color: mergeVariants([
-        colorVariants.bg,
-        colorVariants.text,
-        colorVariants.border,
-        colorVariants.hoverDark,
-      ]),
+      gradient: {
+        true: '',
+      },
+      coloredShadow: {
+        true: '',
+      },
+      extraRoundedPadding: {
+        true: '',
+      },
+      color: {
+        primary: '',
+        secondary: '',
+        surface: '',
+        inverse: '',
+        info: '',
+        success: '',
+        danger: '',
+        caution: '',
+        heart: '',
+      },
+      hoverBackgroundColor: {
+        primary: '',
+        secondary: '',
+        inverse: '',
+        info: '',
+        success: '',
+        danger: '',
+        caution: '',
+        heart: '',
+      },
+      gap: {
+        true: '',
+      },
     },
 
     defaultVariants: {
@@ -53,170 +92,145 @@ export const ButtonElement = classed(
       noWrap: true,
       fontWeight: 'medium',
       color: 'primary',
-      variant: 'contained',
+      justify: 'center',
+      variant: 'filled',
+      gap: true,
     },
 
     compoundVariants: [
-      // Contained Variant
+      ...generateCompoundVariants({
+        gap: true,
+        size: {
+          xs: clsx('gap-4'),
+          sm: clsx('gap-6'),
+          md: clsx('gap-6'),
+          lg: clsx('gap-6'),
+        },
+      }),
+      ...generateCompoundVariants({
+        variant: 'filled',
+        color: {
+          primary: 'filled-accent-primary filled-hover-accent-primary',
+          secondary: 'filled-accent-secondary filled-hover-accent-secondary',
+          inverse: 'filled-accent-inverse filled-hover-accent-inverse',
+          heart: 'filled-accent-heart filled-hover-accent-heart',
+          info: 'filled-accent-info filled-hover-accent-info',
+          success: 'filled-accent-success filled-hover-accent-success',
+          danger: 'filled-accent-danger filled-hover-accent-danger',
+          caution: 'filled-accent-caution filled-hover-accent-caution',
+        },
+      }),
+      ...generateCompoundVariants({
+        variant: 'filled',
+        hoverBackgroundColor: {
+          primary: 'hover:bg-primary',
+          secondary: 'hover:bg-secondary',
+          inverse: 'hover:bg-inverse',
+          heart: 'hover:bg-heart',
+          info: 'hover:bg-info',
+          success: 'hover:bg-success',
+          danger: 'hover:bg-danger',
+          caution: 'hover:bg-caution',
+        },
+      }),
+      ...generateCompoundVariants({
+        variant: 'glass',
+        hoverBackgroundColor: {
+          primary: 'hover:glass-accent-primary',
+          secondary: 'hover:glass-accent-secondary',
+          inverse: 'hover:glass-accent-inverse',
+          heart: 'hover:glass-accent-heart',
+          info: 'hover:glass-accent-info',
+          success: 'hover:glass-accent-success',
+          danger: 'hover:glass-accent-danger',
+          caution: 'hover:glass-accent-caution',
+        },
+      }),
 
-      { variant: 'contained', class: 'text-white' },
-      // --- Colors ---
-      {
-        variant: 'contained',
-        color: 'primary',
-        class: clsx('bg-primary hover:border-primary-dark hover:bg-primary-dark'),
-      },
-      {
-        variant: 'contained',
-        color: 'secondary',
-        class: clsx('bg-secondary hover:border-secondary-dark hover:bg-secondary-dark'),
-      },
-      {
-        variant: 'contained',
-        color: 'positive',
-        class: clsx('bg-positive hover:border-positive-dark hover:bg-positive-dark '),
-      },
-      {
-        variant: 'contained',
-        color: 'danger',
-        class: clsx('bg-danger hover:border-danger-dark hover:bg-danger-dark'),
-      },
-      {
-        variant: 'contained',
-        color: 'caution',
-        class: clsx('bg-caution hover:border-caution hover:bg-caution-dark'),
-      },
+      ...generateCompoundVariants({
+        variant: 'glass',
+        className: 'overflow-hidden',
+        color: {
+          primary: 'glass-accent-primary',
+          secondary: 'glass-accent-secondary',
+          inverse: 'glass-accent-inverse',
+          heart: 'glass-accent-heart',
+          info: 'glass-accent-info',
+          success: 'glass-accent-success',
+          danger: 'glass-accent-danger',
+          caution: 'glass-accent-caution',
+        },
+      }),
 
-      // Text Variant
-      {
-        variant: 'text',
-        class: clsx('border-transparent bg-transparent'),
-      },
-      // --- Colors ---
-      {
-        variant: 'text',
-        color: 'primary',
-        class: clsx('hover:bg-current/10  text-primary'),
-      },
-      {
-        variant: 'text',
-        color: 'secondary',
-        class: clsx('hover:bg-current/10  text-primary'),
-      },
-      {
-        variant: 'text',
-        color: 'positive',
-        class: clsx('hover:bg-current/10  text-positive'),
-      },
-      {
-        variant: 'text',
-        color: 'danger',
-        class: clsx('hover:bg-current/10  text-danger'),
-      },
-      {
-        variant: 'text',
-        color: 'caution',
-        class: clsx('hover:bg-current/10  text-caution'),
-      },
+      ...generateCompoundVariants({
+        variant: 'ghost',
+        className: 'overflow-hidden bg-transparent',
+        color: {
+          primary: 'ghost-accent-primary',
+          secondary: 'ghost-accent-secondary',
+          inverse: 'ghost-accent-inverse',
+          heart: 'ghost-accent-heart',
+          info: 'ghost-accent-info',
+          success: 'ghost-accent-success',
+          danger: 'ghost-accent-danger',
+          caution: 'ghost-accent-caution',
+        },
+      }),
 
-      // Outlined Variant
-      {
+      ...generateCompoundVariants({
         variant: 'outlined',
-        class: clsx('border'),
-      },
-      // --- Colors ---
-      {
-        variant: 'outlined',
-        class: 'bg-transparent',
-      },
-      {
-        variant: 'outlined',
-        color: 'primary',
-        class: clsx('hover:bg-current/10 text-primary'),
-      },
-      {
-        variant: 'outlined',
-        color: 'secondary',
-        class: clsx('hover:bg-current/10 text-primary'),
-      },
-      {
-        variant: 'outlined',
-        color: 'positive',
-        class: clsx('hover:bg-current/10 text-positive'),
-      },
-      {
-        variant: 'outlined',
-        color: 'danger',
-        class: clsx('hover:bg-current/10 text-danger'),
-      },
-      {
-        variant: 'outlined',
-        color: 'caution',
-        class: clsx('hover:bg-current/10 text-caution'),
-      },
+        className: 'overflow-hidden z-0',
+        color: {
+          primary: 'outlined-accent-primary',
+          secondary: 'outlined-accent-secondary',
+          inverse: 'outlined-accent-inverse',
+          heart: 'outlined-accent-heart',
+          info: 'outlined-accent-info',
+          success: 'outlined-accent-success',
+          danger: 'outlined-accent-danger',
+          caution: 'outlined-accent-caution',
+        },
+      }),
 
-      // Outlined-Filled Variant
-      {
-        variant: 'outlined-filled',
-        class: clsx('border text-white'),
-      },
-      // --- Colors ---
-      {
-        variant: 'outlined-filled',
-        color: 'primary',
-        class: clsx('bg-current/10 hover:bg-current/10  text-primary'),
-      },
-      {
-        variant: 'outlined-filled',
-        color: 'secondary',
-        class: clsx('bg-current/10 hover:bg-current/10  text-primary'),
-      },
-      {
-        variant: 'outlined-filled',
-        color: 'positive',
-        class: clsx('bg-current/10 hover:bg-current/10  text-positive'),
-      },
-      {
-        variant: 'outlined-filled',
-        color: 'danger',
-        class: clsx('bg-current/10 hover:bg-current/10  text-danger'),
-      },
-      {
-        variant: 'outlined-filled',
-        color: 'caution',
-        class: clsx('bg-current/10 hover:bg-current/10  text-caution'),
-      },
-      // soft Variant
-      {
-        variant: 'soft',
-        class: clsx('border-transparent'),
-      },
-      // --- Colors ---
-      {
-        variant: 'soft',
-        color: 'primary',
-        class: clsx('bg-current/10 hover:bg-current/10  text-primary'),
-      },
-      {
-        variant: 'soft',
-        color: 'secondary',
-        class: clsx('bg-current/10 hover:bg-current/10  text-primary'),
-      },
-      {
-        variant: 'soft',
-        color: 'positive',
-        class: clsx('bg-current/10 hover:bg-current/10  text-positive'),
-      },
-      {
-        variant: 'soft',
-        color: 'danger',
-        class: clsx('bg-current/10 hover:bg-current/10  text-danger'),
-      },
-      {
-        variant: 'soft',
-        color: 'caution',
-        class: clsx('bg-current/10 hover:bg-current/10  text-caution'),
-      },
+      // Colored Shadow
+      ...generateCompoundVariants({
+        coloredShadow: true,
+        className: clsx('shadow-lg '),
+        color: {
+          primary: 'shadow-primary/70',
+          secondary: 'shadow-secondary/70',
+          inverse: 'shadow-inverse/70',
+          heart: 'shadow-heart/70',
+          info: 'shadow-info/70',
+          success: 'shadow-success/70',
+          danger: 'shadow-danger/70',
+          caution: 'shadow-caution/70',
+        },
+      }),
+
+      // Gradient
+      ...generateCompoundVariants({
+        gradient: true,
+        variant: 'filled',
+        className: clsx('border-none bg-gradient-to-tr transition-all  hover:brightness-[1.05]'),
+        color: {
+          primary: 'gradient-primary',
+          secondary: 'gradient-secondary',
+          inverse: 'gradient-inverse',
+          heart: 'gradient-heart',
+          info: 'gradient-info',
+          success: 'gradient-success',
+          danger: 'gradient-danger',
+          caution: 'gradient-caution',
+        },
+      }),
+
+      // Extra Padding X
+      ...generateCompoundVariants({
+        rounded: true,
+        extraRoundedPadding: true,
+        size: sizeVariants.extraPaddingX,
+      }),
     ],
   }
 );

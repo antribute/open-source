@@ -19,9 +19,21 @@ module.exports = {
   plugins: ['@typescript-eslint', 'tailwindcss'],
   rules: {
     ...base.rules,
+    'tailwindcss/classnames-order': 'off',
     'react/function-component-definition': 'off',
     'react/require-default-props': 'off',
     'react/jsx-props-no-spreading': 'off',
+    'react/jsx-no-useless-fragment': 'off',
+    'react/no-array-index-key': 'off',
+    'react/no-unstable-nested-components': [
+      'off',
+      {
+        allowAsProps: true | false,
+        customValidators: [] /* optional array of validators used for propTypes validation */,
+      },
+    ],
+    // This makes typings for `@tw-classed/react` work
+    '@typescript-eslint/no-unsafe-assignment': 'off',
 
     // This allows us to import devdeps in tests
     'import/no-extraneous-dependencies': [

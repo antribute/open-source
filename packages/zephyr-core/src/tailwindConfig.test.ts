@@ -6,17 +6,20 @@ import tailwindConfig from './tailwindConfig';
 describe('tailwindConfig', () => {
   it('should allow all classNames from zephyr-core to be used', () => {
     const { content } = tailwindConfig;
-    expect((content as string[]).includes('./node_modules/@antribute/zephyr-core/dist/index.js'));
+    const { files } = content;
+    expect(files.includes('./node_modules/@antribute/zephyr-core/dist/index.js'));
   });
 
   it('should allow all classNames from local ts and tsx files to be used', () => {
     const { content } = tailwindConfig;
-    expect((content as string[]).includes('./src/**/*.{ts,tsx}'));
+    const { files } = content;
+    expect(files.includes('./src/**/*.{ts,tsx}'));
   });
 
   it('should allow all classNames from local htm and html files to be used', () => {
     const { content } = tailwindConfig;
-    expect((content as string[]).includes('./*.{htm,html}'));
-    expect((content as string[]).includes('./public/*.{htm,html}'));
+    const { files } = content;
+    expect(files.includes('./*.{htm,html}'));
+    expect(files.includes('./public/*.{htm,html}'));
   });
 });

@@ -1,49 +1,115 @@
+import { Paper } from 'components/Paper';
+import { generateMockVehicleList } from 'mock/mock-data';
+import { RenderPaperContainers } from 'utils/storybook-utils';
 import { Tabs } from '.';
 
-const tabs = [
-  { label: 'One', value: 'A' },
-  { label: 'Two', value: 'B' },
-  { label: 'Three', value: 'C' },
+const tabs2 = [
+  { label: 'Account', value: 'account' },
+  { label: 'Password', value: 'password' },
 ];
+const tabs3 = [...tabs2, { label: 'Home', value: 'home' }];
 
-const tabViews = [
-  { label: 'One', value: 'A' },
-  { label: 'Two', value: 'B' },
-  { label: 'Three', value: 'C' },
+const tabs4 = [...tabs3, { label: 'Projects', value: 'projects' }];
+
+const tabs6 = [
+  ...tabs4,
+  { label: 'Password', value: 'passowrd' },
+  { label: 'Billing', value: 'billing' },
 ];
 
 export const Default = () => {
   return (
-    <Tabs.Root defaultValue="A">
-      <Tabs.List className="mb-8">
-        {tabs.map((e) => (
-          <Tabs.Tab value={e.value}>{e.label}</Tabs.Tab>
-        ))}
-      </Tabs.List>
+    <RenderPaperContainers border>
+      <Tabs.Root defaultValue={tabs2[0]?.value}>
+        <Tabs.List>
+          {tabs2.map((e) => (
+            <Tabs.Tab key={e.value} value={e.value}>
+              {e.label}
+            </Tabs.Tab>
+          ))}
+        </Tabs.List>
 
-      {tabs.map((tab) => (
-        <Tabs.View value={tab.value}>
-          Tab View: <b>{tab.label}</b>
-        </Tabs.View>
-      ))}
-    </Tabs.Root>
+        <Tabs.ViewContainer>
+          {tabs2.map((tab) => (
+            <Tabs.View value={tab.value}>
+              Tab View: <b>{tab.label}</b>
+            </Tabs.View>
+          ))}
+        </Tabs.ViewContainer>
+      </Tabs.Root>
+    </RenderPaperContainers>
+  );
+};
+
+export const SixTabs = () => {
+  return (
+    <Paper border>
+      <Tabs.Root defaultValue={tabs6[0]?.value}>
+        <Tabs.List>
+          {tabs6.map((e) => (
+            <Tabs.Tab key={e.value} value={e.value}>
+              {e.label}
+            </Tabs.Tab>
+          ))}
+        </Tabs.List>
+      </Tabs.Root>
+    </Paper>
+  );
+};
+
+export const DisabledTab = () => {
+  return (
+    <RenderPaperContainers>
+      <Tabs.Root defaultValue={tabs6[0]?.value}>
+        <Tabs.List>
+          {tabs4.map((e, index, arr) => (
+            <Tabs.Tab key={e.value} value={e.value} disabled={index === arr.length - 1}>
+              {e.label}
+            </Tabs.Tab>
+          ))}
+        </Tabs.List>
+      </Tabs.Root>
+    </RenderPaperContainers>
   );
 };
 
 export const Vertical = () => {
   return (
-    <Tabs.Root defaultValue="A" className="flex">
-      <Tabs.List className="mr-8" orientation="vertical">
-        {tabs.map((e) => (
-          <Tabs.Tab value={e.value}>{e.label}</Tabs.Tab>
-        ))}
-      </Tabs.List>
+    <RenderPaperContainers className="w-208 flex flex-row gap-8">
+      <Tabs.Root orientation="vertical" defaultValue={tabs2[0]?.value}>
+        <Tabs.List>
+          {tabs2.map((e) => (
+            <Tabs.Tab key={e.value} value={e.value}>
+              {e.label}
+            </Tabs.Tab>
+          ))}
+        </Tabs.List>
+        <Tabs.ViewContainer>
+          {tabs2.map((tab) => (
+            <Tabs.View key={tab.value} value={tab.value}>
+              Tab View: <b>{tab.label}</b>
+            </Tabs.View>
+          ))}
+        </Tabs.ViewContainer>
+      </Tabs.Root>
+    </RenderPaperContainers>
+  );
+};
 
-      {tabs.map((tab) => (
-        <Tabs.View value={tab.value}>
-          Tab View: <b>{tab.label}</b>
-        </Tabs.View>
-      ))}
-    </Tabs.Root>
+const vehicles = generateMockVehicleList({ size: 20, uniqueBy: 'type' });
+
+export const Overflow = () => {
+  return (
+    <Paper border>
+      <Tabs.Root defaultValue={tabs6[0]?.value}>
+        <Tabs.List>
+          {vehicles.map(({ type }) => (
+            <Tabs.Tab key={type} value={type}>
+              {type}
+            </Tabs.Tab>
+          ))}
+        </Tabs.List>
+      </Tabs.Root>
+    </Paper>
   );
 };

@@ -1,25 +1,38 @@
-import { RenderSizeVariants } from 'utils/storybook-utils';
-import { Button } from 'components/Button/Button';
-import { getRelativeSizeProp } from 'utils/getRelativeSizeProp';
-import { SizeProp } from 'types/styles';
+import { RenderSizeVariants, getSizeKeys } from 'utils/storybook-utils';
+import ChevronDownIcon from '@heroicons/react/24/outline/ChevronDownIcon';
+import CurrencyDollarIcon from '@heroicons/react/24/outline/CurrencyDollarIcon';
+import { InfoTooltipIcon } from 'components/Tooltip';
+import { PrimitiveBaseInput } from 'components/BaseInput/PrimitiveBaseInput';
 import { BaseInput } from './BaseInput';
 
 export const Default = () => {
   return <RenderSizeVariants Component={BaseInput} props={{ placeholder: 'Enter value' }} />;
 };
 
+export const PrimitiveBaseInputComponent = () => {
+  return (
+    <div className="flex items-center gap-8">
+      {getSizeKeys().map((size) => (
+        <div className="bg-highlight flex">
+          <PrimitiveBaseInput size={size} placeholder="Enter value" />
+        </div>
+      ))}
+    </div>
+  );
+};
+
 export const Icon = () => {
   return (
     <div className="space-y-40">
       <RenderSizeVariants
-        orientation="vertical"
+        orientation="horizontal"
         Component={BaseInput}
-        props={{ placeholder: 'Enter value', leadingIcon: '🎉' }}
+        props={{ placeholder: 'Enter value', leadingIcon: <CurrencyDollarIcon /> }}
       />
       <RenderSizeVariants
-        orientation="vertical"
+        orientation="horizontal"
         Component={BaseInput}
-        props={{ placeholder: 'Enter value', trailingIcon: '🎉' }}
+        props={{ placeholder: 'Enter value', trailingIcon: <CurrencyDollarIcon /> }}
       />
     </div>
   );
@@ -30,63 +43,36 @@ export const InlineAddons = () => {
     <div className="space-y-40">
       <RenderSizeVariants
         orientation="vertical"
+        sizes={['md']}
+        noChildren
         Component={BaseInput}
-        props={{
-          placeholder: 'Enter value',
-          trailingIcon: '🎉',
-          inlineTrailingAddonSlot: [
-            { content: '✨', pointerEvents: false },
-            { content: '✨', pointerEvents: false },
-          ],
-        }}
-      />
-
-      <RenderSizeVariants
-        orientation="vertical"
-        Component={BaseInput}
-        getProps={(size) => {
-          const relativeSize = getRelativeSizeProp(-1, {
-            relativeSize: size as SizeProp,
-            maxSize: 'md',
-          });
-
-          const props = {
-            size: relativeSize,
-            className: 'h-3/4',
-          };
-
+        getProps={() => {
           return {
             placeholder: 'Enter value',
-            inlineLeadingAddonSlot: [
-              {
-                content: (
-                  <Button {...props} color="primary">
-                    A
-                  </Button>
-                ),
-                pointerEvents: true,
-              },
-              {
-                content: (
-                  <Button {...props} color="secondary">
-                    B
-                  </Button>
-                ),
-                pointerEvents: true,
-              },
-            ],
+
             inlineTrailingAddonSlot: [
               {
+                focusInputOnClick: false,
                 content: (
-                  <Button {...props} color="positive">
-                    C
-                  </Button>
+                  <InfoTooltipIcon tooltip="Ad nostrud dolore culpa cupidatat quis tempor commodo dolore Lorem sint reprehenderit laborum quis." />
                 ),
-                pointerEvents: true,
               },
+              <ChevronDownIcon />,
             ],
           };
         }}
+      />
+    </div>
+  );
+};
+
+export const Loading = () => {
+  return (
+    <div className="space-y-40">
+      <RenderSizeVariants
+        noChildren
+        Component={BaseInput}
+        props={{ loading: true, placeholder: 'Enter value' }}
       />
     </div>
   );

@@ -1,61 +1,80 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
+
+import defaultTailwindTheme from 'tailwindcss/defaultTheme';
+import { PluginAPI } from 'tailwindcss/types/config';
+import type { Config } from 'tailwindcss';
+
+// Plugins
 import tailwindCssRadixPlugin from 'tailwindcss-radix';
 import tailwindCssFormsPlugin from '@tailwindcss/forms';
+import tailwindCssTypographyPlugin from '@tailwindcss/typography';
+import tailwindLineClampPlugin from '@tailwindcss/line-clamp';
+import createVariantGroupTransformer from 'tailwind-group-variant';
+import { iconsPlugin, getIconCollections } from '@egoist/tailwindcss-icons';
+import { multiThemePlugin } from './plugins/multi-theme-plugin';
+import { linearGradientMaskImagePlugin } from './plugins/linear-gradient-mask-image-plugin';
 
-import type { Config } from 'tailwindcss';
 // eslint-disable-next-line import/extensions
-import defaultTailwindTheme from 'tailwindcss/defaultTheme';
-import { colors as colorPalette } from './colors';
+import { create8PtGrid } from './helpers/create8PtGrid';
+import { colorSchemeDataAttributes, colorSchemeTokens } from './colors/color-schemes';
+import { colorPalette } from './colors/colors';
+import { keyframes } from './keyframes';
+import { animation } from './animation';
+import { getTailwindDataAttributeShortcuts } from './data-attributes';
+import { screens } from './screens';
 
-export const create8PtGrid = (max = 512) => {
-  const finalGrid: Record<string, string> = {
-    auto: 'auto',
-    0: '0px',
-  };
-
-  let currentGridStep = 2;
-
-  while (currentGridStep <= max) {
-    finalGrid[currentGridStep.toString()] = `${currentGridStep}px`;
-
-    if (currentGridStep < 40) {
-      currentGridStep += 2;
-    } else {
-      currentGridStep += 8;
-    }
-  }
-
-  return finalGrid;
-};
-
-const config: Config = {
-  content: [
-    './*.{htm,html}',
-    './public/*.{htm,html}',
-    './src/**/*.{ts,tsx}',
-    './node_modules/@antribute/zephyr-core/dist/index.js',
+const config = {
+  plugins: [
+    tailwindCssRadixPlugin,
+    tailwindCssFormsPlugin,
+    tailwindLineClampPlugin,
+    tailwindCssTypographyPlugin,
+    iconsPlugin({
+      collections: getIconCollections(['heroicons', 'fa6-brands']),
+    }),
+    multiThemePlugin(),
+    linearGradientMaskImagePlugin(),
   ],
+  content: {
+    files: [
+      './*.{htm,html}',
+      './public/*.{htm,html}',
+      './src/**/*.{ts,tsx}',
+      './node_modules/@antribute/zephyr-react/src/**/*.{js,jsx,ts,tsx}',
+    ],
+    transform: createVariantGroupTransformer(),
+  },
   presets: [],
   darkMode: ['class', '[data-mode="dark"]'],
+
   theme: {
     ...defaultTailwindTheme,
+
+    data: {
+      ...colorSchemeDataAttributes,
+      ...getTailwindDataAttributeShortcuts(),
+    },
+
+    screens,
+
+    typography: (theme: PluginAPI['theme']) => ({
+      DEFAULT: {
+        css: {
+          color: '#fafa',
+          a: {
+            color: theme('colors.content-inverse'),
+          },
+        },
+      },
+    }),
+
+    keyframes,
+    animation,
     accentColor: ({ theme }) => ({
       ...theme('colors'),
       auto: 'auto',
     }),
-    backdropBlur: ({ theme }) => theme('blur'),
-    backdropBrightness: ({ theme }) => theme('brightness'),
-    backdropContrast: ({ theme }) => theme('contrast'),
-    backdropGrayscale: ({ theme }) => theme('grayscale'),
-    backdropHueRotate: ({ theme }) => theme('hueRotate'),
-    backdropInvert: ({ theme }) => theme('invert'),
-    backdropOpacity: ({ theme }) => theme('opacity'),
-    backdropSaturate: ({ theme }) => theme('saturate'),
-    backdropSepia: ({ theme }) => theme('sepia'),
-    backgroundColor: ({ theme }) => theme('colors'),
-    backgroundOpacity: ({ theme }) => theme('opacity'),
-
     borderColor: ({ theme }) => theme('colors'),
     borderOpacity: ({ theme }) => theme('opacity'),
     borderRadius: {
@@ -81,29 +100,24 @@ const config: Config = {
       '2xl': '0 25px 50px -12px rgb(0 0 0 / 0.25)',
       inner: 'inset 0 2px 4px 0 rgb(0 0 0 / 0.05)',
       none: 'none',
+      hover: '0px 2px 5px 0px rgb(64 68 82 / 0.08), 0px 3px 9px 0px rgb(64 68 82 / 0.08)',
     },
     boxShadowColor: ({ theme }) => theme('colors'),
-
     caretColor: ({ theme }) => theme('colors'),
-    colors: ({ colors }) => ({
-      inherit: colors.inherit,
-      current: colors.current,
-      transparent: colors.transparent,
-      white: colors.white,
-      ...colorPalette,
-    }),
+    colors: { ...colorPalette, ...colorSchemeTokens },
+
     divideColor: ({ theme }) => theme('borderColor'),
     divideOpacity: ({ theme }) => theme('borderOpacity'),
     divideWidth: ({ theme }) => theme('borderWidth'),
     dropShadow: {
       sm: '0 1px 1px rgb(0 0 0 / 0.05)',
-      // @ts-expect-error: Tailwind fucked up their typings
+
       DEFAULT: ['0 1px 2px rgb(0 0 0 / 0.1)', '0 1px 1px rgb(0 0 0 / 0.06)'],
-      // @ts-expect-error: Tailwind fucked up their typings
+
       md: ['0 4px 3px rgb(0 0 0 / 0.07)', '0 2px 2px rgb(0 0 0 / 0.06)'],
-      // @ts-expect-error: Tailwind fucked up their typings
+
       lg: ['0 10px 8px rgb(0 0 0 / 0.04)', '0 4px 3px rgb(0 0 0 / 0.1)'],
-      // @ts-expect-error: Tailwind fucked up their typings
+
       xl: ['0 20px 13px rgb(0 0 0 / 0.03)', '0 8px 5px rgb(0 0 0 / 0.08)'],
       '2xl': '0 25px 25px rgb(0 0 0 / 0.15)',
       none: '0 0 #0000',
@@ -144,6 +158,14 @@ const config: Config = {
       full: '100%',
     }),
     fontFamily: {
+      display: [
+        'Cal Sans',
+        'sans-serif',
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"',
+        '"Noto Color Emoji"',
+      ],
       body: [
         'Figtree',
         'sans-serif',
@@ -180,11 +202,12 @@ const config: Config = {
       h6: ['16px', { lineHeight: '24px' }],
       lg: ['21px', { lineHeight: '32px' }],
       md: ['16px', { lineHeight: '24px' }],
-      sm: ['12px', { lineHeight: '16px' }],
-      xs: ['10px', { lineHeight: '12px' }],
+      sm: ['14px', { lineHeight: '18px' }],
+      xs: ['12px', { lineHeight: '16px' }],
     },
     fontWeight: {
       body: '400',
+      regular: '400',
       medium: '500',
       bold: '600',
       heading: '700',
@@ -215,6 +238,7 @@ const config: Config = {
       max: 'max-content',
       fit: 'fit-content',
     }),
+
     inset: ({ theme }) => ({
       auto: 'auto',
       ...theme('spacing'),
@@ -259,15 +283,20 @@ const config: Config = {
       max: 'max-content',
       fit: 'fit-content',
       prose: '65ch',
+
       ...theme('spacing'),
       ...breakpoints(theme('screens')),
     }),
-    outlineColor: ({ theme }) => theme('colors'),
+
+    outlineColor: ({ theme }) => theme('colors', 'var(--color-highlight-high)'),
     padding: ({ theme }) => theme('spacing'),
     placeholderColor: ({ theme }) => theme('colors'),
     placeholderOpacity: ({ theme }) => theme('opacity'),
     ringColor: ({ theme }) => ({
-      DEFAULT: theme('colors.primary.light', '#25AED0') as string,
+      DEFAULT: theme(
+        'colors.highlight.moderate',
+        colorSchemeTokens['highlight-moderate']
+      ) as string,
       ...theme('colors'),
     }),
     ringOffsetColor: ({ theme }) => theme('colors'),
@@ -342,7 +371,6 @@ const config: Config = {
       fit: 'fit-content',
     }),
   },
-  plugins: [tailwindCssRadixPlugin, tailwindCssFormsPlugin],
-};
+} satisfies Config;
 
 export default config;

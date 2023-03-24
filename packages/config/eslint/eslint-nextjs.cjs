@@ -1,4 +1,5 @@
 const base = require('./eslint-base.cjs');
+const react = require('./eslint-react.cjs');
 
 module.exports = {
   extends: [
@@ -20,17 +21,8 @@ module.exports = {
   plugins: ['@typescript-eslint', '@next/next', 'tailwindcss'],
   rules: {
     ...base.rules,
+    ...react.rules,
     // This allows us to import devdeps in tests
-    'import/no-extraneous-dependencies': [
-      'error',
-      {
-        devDependencies: ['**/*.stories.tsx', '**/*.test.ts', '**/*.test.tsx'],
-      },
-    ],
-    // This allows us to "export { default } from which is nice for reducing boilerplate"
-    'no-restricted-exports': 'off',
-    // We use React 18, this is no longer needed
-    'react/react-in-jsx-scope': 'off',
   },
   settings: {
     tailwindcss: {

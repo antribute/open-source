@@ -1,0 +1,25 @@
+import { ArgsTable, Canvas, Description, Meta, Story } from '@storybook/addon-docs';
+
+import { Spinner } from '.';
+import * as stories from './Spinner.stories.tsx';
+
+<Meta title="Display/Spinner" component={Spinner} />
+
+# Spinner
+
+<Description component={Spinner} />
+<ArgsTable of={Spinner} />
+
+## Default
+
+Default `Spinner` component
+
+<Canvas withToolbar>
+  <Story name="Default" story={stories.Default} />
+</Canvas>
+
+## Sizes
+
+<Canvas withToolbar>
+  <Story name="Sizes" story={stories.Sizes} />
+</Canvas>

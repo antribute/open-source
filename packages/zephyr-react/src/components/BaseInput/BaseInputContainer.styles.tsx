@@ -1,5 +1,9 @@
 import { classed } from '@tw-classed/react';
-import { InputSizeVariant, inputComponentVariants } from 'styles/input-component.variants';
+import { BaseInputElement } from 'components/BaseInput/BaseInput.styles';
+import {
+  InputComponentWidthVariant,
+  inputComponentVariants,
+} from 'styles/input-component.variants';
 import { Classed } from 'utils/classed';
 
 export type BaseInputContainerElementVariantProps = Classed.VariantProps<
@@ -8,8 +12,17 @@ export type BaseInputContainerElementVariantProps = Classed.VariantProps<
 
 export const BaseInputContainerElement = classed(
   'div',
-  'relative inline-flex items-center',
-  InputSizeVariant
+  'flex items-center relative overflow-hidden group',
+  // Tailwind Arbitrary Group (https://tailwindcss.com/docs/hover-focus-and-other-states#arbitrary-groups)
+  // eslint-disable-next-line tailwindcss/no-custom-classname
+  // clsx('group-[.is-contained]/input:w-full', 'group/base-input is-contained'),
+  InputComponentWidthVariant,
+  BaseInputElement,
+  {
+    defaultVariants: {
+      width: 'auto',
+    },
+  }
 );
 
 export type BaseInputIconSlotElementVariantProps = Classed.VariantProps<
@@ -18,7 +31,7 @@ export type BaseInputIconSlotElementVariantProps = Classed.VariantProps<
 
 export const BaseInputIconSlotElement = classed(
   'div',
-  'absolute inset-y-0 inline-flex items-center jusitfy-center flex-nowrap gap-8  select-none peer-placeholder-shown:text-gray-400',
+  'inline-flex items-center jusitfy-center flex-nowrap gap-8  select-none peer-placeholder-shown:text-gray-400',
   'peer-placeholder-shown:text-light-gray-dark text-type-soft',
   {
     variants: {
