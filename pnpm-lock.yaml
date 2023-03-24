@@ -1,10 +1,5 @@
 lockfileVersion: 5.4
 
-patchedDependencies:
-  '@ts-react/form@1.4.5':
-    hash: wxaltedxvrpvoq3cfevv7bmqkm
-    path: patches/@ts-react__form@1.4.5.patch
-
 importers:
 
   .:
@@ -534,7 +529,7 @@ importers:
       '@radix-ui/react-tooltip': 1.0.5_2zx2umvpluuhvlq44va5bta2da
       '@tanstack/react-table': 8.8.0_biqbaboplfbrettd7655fr4n2y
       '@tanstack/react-virtual': 3.0.0-beta.47_react@18.2.0
-      '@ts-react/form': 1.4.5_wxaltedxvrpvoq3cfevv7bmqkm_hoysfsjjqdmwqvwu7tsn2ztsrm
+      '@ts-react/form': 1.4.5_hoysfsjjqdmwqvwu7tsn2ztsrm
       '@tw-classed/core': 1.4.0
       '@tw-classed/react': 1.4.2_react@18.2.0
       ariakit: 2.0.0-next.43_2zx2umvpluuhvlq44va5bta2da
@@ -5239,7 +5234,7 @@ packages:
       '@testing-library/dom': 8.20.0
     dev: false
 
-  /@ts-react/form/1.4.5_wxaltedxvrpvoq3cfevv7bmqkm_hoysfsjjqdmwqvwu7tsn2ztsrm:
+  /@ts-react/form/1.4.5_hoysfsjjqdmwqvwu7tsn2ztsrm:
     resolution: {integrity: sha512-Bulgs3rFY0ME7A5b4zQs2ILKHJPUs6Gp2yAl6dUDjzsYH+PlcEvh3h1+6p8/JSlZ/f3TH/zE8q0dAJgDQUxnYA==}
     peerDependencies:
       '@hookform/resolvers': ^2.8.0
@@ -5252,7 +5247,6 @@ packages:
       react-hook-form: 7.43.7_react@18.2.0
       zod: 3.21.4
     dev: false
-    patched: true
 
   /@tw-classed/core/1.4.0:
     resolution: {integrity: sha512-0D4+EREaHEZ5wfxoWNwe5tzpaUbac6xHYiuJGVgwuhCPzWP4H0IwxhW/3bU/SzvLZcwJsuQjZx72lxDnJUn1rw==}
