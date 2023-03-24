@@ -2,8 +2,8 @@
 import { textVariants } from 'styles/text.variants';
 import { Classed, classed } from 'utils/classed';
 import { HeadingLevel, SizeProp } from 'types/styles';
-import Balancer from 'react-wrap-balancer';
 import { Wrap } from 'components/Wrap';
+// import Balancer from 'react-wrap-balancer';
 
 // Due to issues with text size class conflcits, using `basicClassed` which doesn't use `tw-merge`
 export const TextElement = classed('span', {
@@ -41,21 +41,21 @@ export const TextElement = classed('span', {
 type TextProps = {
   className?: string;
   children?: React.ReactNode;
-  balancer?: boolean;
-  balancerRatio?: number;
+  // balancer?: boolean;
+  // balancerRatio?: number;
   as?: 'p' | 'span' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'b' | 'i';
 } & Classed.VariantProps<typeof TextElement>;
 
 const Text = ({
   children,
   className,
-  balancerRatio,
-  balancer,
+  // balancerRatio,
+  // balancer,
   fullWidth,
   as,
   ...props
 }: TextProps) => {
-  const showBalancer = balancer ?? typeof balancerRatio === 'number';
+  // const showBalancer = balancer ?? typeof balancerRatio === 'number';
 
   return (
     <TextElement
@@ -63,9 +63,13 @@ const Text = ({
       as={as as any}
       {...props}
       // Balancer requires 100% width inorder to balance properly
-      fullWidth={fullWidth ?? showBalancer}
+      fullWidth={
+        fullWidth
+        // ?? showBalancer
+      }
     >
-      {showBalancer ? <Balancer ratio={balancerRatio}>{children}</Balancer> : children}
+      {/* {showBalancer ? <Balancer ratio={balancerRatio}>{children}</Balancer> : children} */}
+      {children}
     </TextElement>
   );
 };

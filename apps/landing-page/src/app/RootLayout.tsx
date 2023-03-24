@@ -13,7 +13,7 @@ function RootLayout({ children }: RootLayoutProps) {
   return (
     <SessionProvider>
       <TrackingProvider value={{ token: process.env.NEXT_PUBLIC_MIXPANEL_TOKEN }}>
-        <AntributeUiProvider> {children}</AntributeUiProvider>
+        <AntributeUiProvider>{children}</AntributeUiProvider>
       </TrackingProvider>
     </SessionProvider>
   );

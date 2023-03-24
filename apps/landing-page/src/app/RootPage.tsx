@@ -39,7 +39,6 @@ function RootPage() {
             block
             color="moderate"
             fontWeight="regular"
-            balancerRatio={0.5}
             className="bg-gradient-to-r from-caution to-heart via-info bg-clip-text !text-content-moderate dark:!text-content-strong mb-16 sm:mb-6 "
           >
             A team of

@@ -17,6 +17,7 @@ export * from './components/InvisibleCharacter';
 export * from './components/List';
 export * from './components/NavigationMenu';
 export * from './components/Paper';
+export * from './components/Popover';
 export * from './components/ScrollArea';
 export * from './components/SimpleList';
 export * from './components/StatusBadge';
