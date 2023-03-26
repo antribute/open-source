@@ -1,16 +1,17 @@
-import { InputComponentFieldType, InputComponentProps } from 'types/input-component.types';
+import { InputComponentFieldType } from 'types/input-component.types';
 import { get, merge } from 'lodash-es';
 import EmailIcon from '@heroicons/react/24/solid/EnvelopeIcon';
 import UrlIcon from '@heroicons/react/24/solid/LinkIcon';
 import PhoneIcon from '@heroicons/react/24/solid/PhoneIcon';
 import PasswordIcon from '@heroicons/react/24/solid/LockClosedIcon';
+import { InputAddonProps } from 'components/BaseInput';
 
 type HeroIconType = typeof EmailIcon;
 
-type InputComponentFieldTypeOptions = Pick<
-  InputComponentProps,
-  'leadingIcon' | 'trailingIcon' | 'placeholder' | 'type'
->;
+type InputComponentFieldTypeOptions = {
+  placeholder?: string;
+  type: InputComponentFieldType;
+} & Pick<InputAddonProps, 'leadingIcon' | 'trailingIcon'>;
 
 type InputComponentFieldTypeProps = Omit<InputComponentFieldTypeOptions, 'type'> & {
   htmlInputComponentProps: Partial<Pick<HTMLInputElement, 'type' | 'step' | 'placeholder'>>;
@@ -79,12 +80,16 @@ const inputComponentFieldTypeMap: InputComponentFieldTypeMap = {
   },
 };
 
+export type GetInputComponentFieldTypePropsOptions = {
+  type: InputComponentFieldType | undefined;
+} & Pick<InputAddonProps, 'leadingIcon' | 'trailingIcon'>;
+
 export const getInputComponentFieldTypeProps = ({
   type,
   ...props
 }: {
   type: InputComponentFieldType | undefined;
-} & Pick<InputComponentProps, 'leadingIcon' | 'trailingIcon'>) => {
+} & Pick<InputAddonProps, 'leadingIcon' | 'trailingIcon'>) => {
   const inputComponentFieldTypeProps = get(inputComponentFieldTypeMap, type ?? '');
 
   const { htmlInputComponentProps, ...rest } = inputComponentFieldTypeProps ?? {};

@@ -6,14 +6,27 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
+
   "tailwindCSS.experimental.classRegex": [
+    // Variables
+    ["const [a-zA-Z]+[vV]ariants = {([^)]*)}", "\"([^\"]*)\""],
+    ["const [a-zA-Z]+[vV]ariants = {([^)]*)}", "`([^`]*)`"],
+    ["const [a-zA-Z]+[vV]ariants = {([^)]*)}", "'([^']*)'"],
+
     // tw-classed
     ["classed(?:\\.\\w*)?\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["classedCore(?:\\.\\w*)?\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
     ["classedVariantMap(?:\\.\\w*)?\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
 
-    // clsx package
+    // clsx
     ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
-    ["classTheme\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+    // ["expandVariant\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
+    ["classTheme\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
+    ["generateCompoundVariants\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
+    ["className:\\s*(?:'|\"|`)([^']*)(?:'|\"|`)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
+
+    ".*ClassName=\"([^\"]*)", // <div anythingClassName="..." />
+    ".*ClassName={\"([^\"}]*)" // <div anythingClassName={"..."} />
   ],
   "eslint.workingDirectories": [
     {
@@ -25,5 +38,6 @@
     {
       "pattern": "servers/*"
     }
-  ]
+  ],
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

@@ -1,0 +1,25 @@
+import { ArgsTable, Canvas, Description, Meta, Story } from '@storybook/addon-docs';
+
+import { SimpleList } from '.';
+import * as stories from './SimpleList.stories';
+
+<Meta title="Display/SimpleList" component={SimpleList} />
+
+# SimpleList
+
+<Description component={SimpleList} />
+<ArgsTable of={SimpleList} />
+
+## Default
+
+Default `SimpleList` component
+
+<Canvas withToolbar>
+  <Story name="Bullet List" story={stories.Default} />
+</Canvas>
+
+## Number List
+
+<Canvas withToolbar>
+  <Story name="Number List" story={stories.NumberList} />
+</Canvas>

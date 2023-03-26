@@ -1,50 +1,66 @@
-import { Classed, classed, mergeVariants } from 'utils/classed';
+import { Classed, classed, expandVariant, mergeVariants } from 'utils/classed';
 import * as TabsPrimitive from '@radix-ui/react-tabs';
 import { inputComponentVariants } from 'styles/input-component.variants';
+import { highlightBackdropContrastClass } from 'styles/highlightContrast';
 
-export type TabsListElementVariants = Classed.VariantProps<typeof TabsListElement>;
+export type TabsContainerElementVariants = Classed.VariantProps<typeof TabsContainerElement>;
+
+export type TabsContainerElementProps = React.ComponentProps<typeof TabsContainerElement>;
+
+export const TabsContainerElement = classed(
+  TabsPrimitive.Root,
+  'inline-flex',
+  'gap-16',
+  'radix-orientation-horizontal:flex-col',
+  'radix-orientation-vertical:flex-row'
+);
 
 export type TabsListElementProps = React.ComponentProps<typeof TabsListElement>;
 
 export const TabsListElement = classed(
   TabsPrimitive.List,
-  'flex space-x-2  border-divider-weak dark:border-divider-inverse-weak',
+  'border-highlight-tint border-[0.5px] relative z-0',
+  'bg-highlight-ghost',
+  'inline-flex items-center gap-4 justify-center p-4 px-2',
+  expandVariant(`
+  radix-orientation-horizontal:(flex-row,rounded-md)
+  radix-orientation-vertical:(flex-col,rounded-[0.185rem],h-auto)
+  `),
+
   {
     variants: {
-      orientation: {
-        horizontal: 'flex-row border-b',
-        vertical: 'flex-col border-r',
-      },
       size: mergeVariants([
-        inputComponentVariants.size.textSize,
         inputComponentVariants.size.lineHeight,
-        inputComponentVariants.size.paddingX,
+        inputComponentVariants.size.height,
       ]),
+      contrast: {
+        true: highlightBackdropContrastClass,
+      },
     },
     defaultVariants: {
-      orientation: 'horizontal',
       size: 'md',
+      contrast: true,
     },
   }
 );
-
-export type TabsListItemElementVariants = Classed.VariantProps<typeof TabsListItemElement>;
 
 export type TabsListItemElementProps = React.ComponentProps<typeof TabsListItemElement>;
 
 export const TabsListItemElement = classed(
   TabsPrimitive.Trigger,
-  'py-4 px-4 inline-flex items-center justify-center gap-2 font-medium  border-b-2 border-transparent text-center whitespace-nowrap',
-
-  {
-    variants: {
-      activeColor: {
-        primary:
-          'radix-state-active:border-primary-500 radix-state-active:text-primary-500 hover:text-primary-700',
-      },
-    },
-    defaultVariants: {
-      activeColor: 'primary',
-    },
-  }
+  'min-w-[104px] p-4 px-16 flex-grow relative z-10',
+  'inline-flex items-center justify-center',
+  'rounded-[0.185rem] font-medium select-none',
+  'transition-all duration-75',
+  'border border-transparent',
+  expandVariant(
+    `radix-state-active:(text-content-intense,bg-surface-soft,shadow,shadow-palette-black/10,border-content-tint)
+    radix-state-inactive:(text-content-moderate,transition-none,hover:bg-highlight-ghost)
+    disabled:(pointer-events-none,!text-content-subtle)
+    `
+  )
 );
+
+export type TabsViewContainerElementProps = React.ComponentProps<typeof TabsViewContainerElement>;
+
+export const TabsViewContainerElement = classed('div', '');

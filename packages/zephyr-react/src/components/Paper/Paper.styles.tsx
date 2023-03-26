@@ -1,62 +1,64 @@
-import { Classed, classTheme, classed } from 'utils/classed';
+import clsx from 'clsx';
+import { Classed, classed } from 'utils/classed';
+
+export type PaperElementBackgroundVariantProps = Classed.VariantProps<typeof PaperElement>;
 
 export type PaperElementVariantProps = Classed.VariantProps<typeof PaperElement>;
 
 export type PaperElementProps = React.ComponentProps<typeof PaperElement>;
 
+export const PaperElementBackground = classed('div', 'border-boundary-ghost', {
+  variants: {
+    border: {
+      true: 'border-2',
+      thin: 'border',
+    },
+    hoverHighlight: {
+      true: 'hover:bg-surface-dark',
+    },
+
+    shadow: {
+      true: 'shadow-xl',
+    },
+  },
+});
+
 export const PaperElement = classed(
   'div',
-
-  classTheme({
-    class: 'bg-surface inline-block rounded-md hover:bg-surface-elevated text-left',
-    light: 'text-content-moderate',
-    dark: 'dark:text-content-inverse-moderate',
-  }),
+  PaperElementBackground,
+  'relative',
+  'bg-surface',
+  'text-left text-content',
   {
     variants: {
-      border: {
-        true: 'border border-solid',
-      },
       padding: {
-        none: 'p-0',
-        xs: 'p-4',
-        sm: 'p-8',
-        md: 'p-18',
-        lg: 'p-24',
+        true: 'p-16',
       },
-
-      hoverHighlight: {
-        true: classTheme({
-          light: 'hover:bg-surface-200',
-          dark: 'dark:hover:bg-surface-inverse-soft ',
-        }),
+      overflow: {
+        visible: 'overflow-visible',
+        hidden: 'overflow-hidden',
+      },
+      transparent: {
+        true: 'bg-transparent',
+      },
+      rounded: {
+        true: 'rounded-md',
+      },
+      cursorPointer: {
+        true: 'cursor-pointer',
+      },
+      texture: {
+        noise: 'noisy-surface-texture conic-gradient',
       },
       loading: {
-        true: classTheme({
-          class: 'animate-pulse',
-          light: 'text-content-weak',
-          dark: 'dark:text-content-inverse-weak',
-        }),
-      },
-      color: {
-        default: classTheme({
-          light: 'bg-surface border-black-alpha-200',
-          dark: 'dark:bg-surface-inverse dark:border-white-alpha-soft',
-        }),
-        secondary: classTheme({
-          light: 'bg-surface-700 border-black-alpha-50',
-          dark: 'dark:bg-surface-inverse-light dark:border-white-alpha-soft',
-        }),
-        tertiary: classTheme({
-          light: 'bg-surface-light border-black-alpha-soft',
-          dark: 'dark:bg-surface-inverse-dark dark:border-white-alpha-soft',
-        }),
+        true: clsx(''),
       },
     },
+
     defaultVariants: {
-      padding: 'md',
-      color: 'default',
-      border: true,
+      overflow: 'hidden',
+      rounded: true,
+      padding: 'true',
     },
   }
 );

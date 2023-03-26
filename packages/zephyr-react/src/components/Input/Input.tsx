@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import { InputContainer, InputContainerProps } from 'components/Input/InputContainer';
-import { BaseInput, BaseInputProps } from 'components/BaseInput/BaseInput';
+import { BaseInput, BaseInputProps } from 'components/BaseInput';
 import { InputComponentStateMessageProps } from 'types/input-component.types';
 import { useInputProps } from 'components/Input/useInputProps';
 
@@ -8,11 +8,22 @@ export type InputProps = InputComponentStateMessageProps &
   Omit<InputContainerProps, 'children'> &
   BaseInputProps;
 
-export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
-  const { inputContainerProps, inputComponentProps } = useInputProps(props);
-  return (
-    <InputContainer {...props} {...inputContainerProps}>
-      <BaseInput {...props} ref={ref} {...inputComponentProps} />
-    </InputContainer>
-  );
-});
+export const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ label, labelDescription, optionalLabel, width, required, ...props }, ref) => {
+    const { id, inputStateMessagePair, size } = useInputProps(props);
+    return (
+      <InputContainer
+        label={label}
+        labelDescription={labelDescription}
+        optionalLabel={optionalLabel}
+        required={required}
+        htmlFor={id}
+        size={size}
+        width={width}
+        {...inputStateMessagePair}
+      >
+        <BaseInput width="full" {...props} ref={ref} id={id} {...inputStateMessagePair} />
+      </InputContainer>
+    );
+  }
+);

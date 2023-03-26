@@ -1,0 +1,97 @@
+import { ArgsTable, Canvas, Description, Meta, Story } from '@storybook/addon-docs';
+
+import { IconButton } from './IconButton';
+import * as stories from './IconButton.stories.tsx';
+
+<Meta title="Input/IconButton" component={IconButton} />
+
+# IconButton
+
+<Description component={IconButton} />
+<ArgsTable of={IconButton} />
+
+## Default
+
+Default `IconButton` component
+
+<Canvas withToolbar>
+  <Story name="Default" story={stories.Default} />
+</Canvas>
+
+## Size
+
+`contained` variant
+
+<Canvas withToolbar>
+  <Story name="Size" story={stories.SizeVariant} />
+</Canvas>
+
+## Rounded
+
+`rounded`
+
+<Canvas withToolbar>
+  <Story name="Rounded" story={stories.RoundedVariant} />
+</Canvas>
+
+## Rounded Size
+
+`rounded`
+
+<Canvas withToolbar>
+  <Story name="Rounded Size" story={stories.RoundedSize} />
+</Canvas>
+
+## Contained
+
+`contained` variant
+
+<Canvas withToolbar>
+  <Story name="Contained Variant" story={stories.ContainedVariant} />
+</Canvas>
+
+## Glass
+
+`glass` variant
+
+<Canvas withToolbar>
+  <Story name="Glass Variant" story={stories.GlassVariant} />
+</Canvas>
+
+## Outlined
+
+<Canvas withToolbar>
+  <Story name="Outlined Rounded Variant" story={stories.OutlinedVariant} />
+</Canvas>
+
+## Outlined Rounded
+
+`variant="outlined"` `rounded` variant
+
+<Canvas withToolbar>
+  <Story name="Outlined Rounded Variant" story={stories.OutlinedRoundedVariant} />
+</Canvas>
+
+## Ghost Variant
+
+`ghost` variant
+
+<Canvas withToolbar>
+  <Story name="Ghost Variant" story={stories.GhostVariant} />
+</Canvas>
+
+## Text
+
+`text` variant
+
+<Canvas withToolbar>
+  <Story name="Text Variant" story={stories.TextVariant} />
+</Canvas>
+
+## Contained
+
+`contained` variant
+
+<Canvas withToolbar>
+  <Story name="Contained Gradient" story={stories.ContainedGradientVariant} />
+</Canvas>

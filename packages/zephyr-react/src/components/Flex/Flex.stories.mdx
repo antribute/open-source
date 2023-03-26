@@ -1,0 +1,34 @@
+import { ArgsTable, Canvas, Description, Meta, Story } from '@storybook/addon-docs';
+import { Flex } from '.';
+import * as stories from './Flex.stories.tsx';
+
+<Meta title="Layout/Flex" component={Flex} />
+
+# Flex
+
+<Description component={Flex} />
+<ArgsTable of={Flex} />
+
+## Justify
+
+<Canvas withToolbar>
+  <Story name="Justify" story={stories.Justify} />
+</Canvas>
+
+## Align
+
+<Canvas withToolbar>
+  <Story name="Align" story={stories.Align} />
+</Canvas>
+
+## Gap
+
+<Canvas withToolbar>
+  <Story name="Gap" story={stories.Gap} />
+</Canvas>
+
+## Center
+
+<Canvas withToolbar>
+  <Story name="Center" story={stories.Center} />
+</Canvas>

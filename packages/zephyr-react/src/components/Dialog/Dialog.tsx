@@ -3,7 +3,6 @@ import { Button as ButtonComponent, ButtonProps } from 'components/Button';
 import {
   DialogBodyElement,
   DialogBodyElementProps,
-  DialogCloseButtonIconElement,
   DialogContentElement,
   DialogContentElementProps,
   DialogDescriptionElement,
@@ -13,23 +12,59 @@ import {
   DialogOverlayElement,
   DialogTitleElement,
   DialogTitleElementProps,
+  DialogTitleSectionElement,
 } from 'components/Dialog/Dialog.styles';
-import XMarkIcon from '@heroicons/react//20/solid/XMarkIcon';
+import { ColorSchemeName, getDataAttributes } from '@antribute/zephyr-core';
+import { getNearestColorSchemeAttribute } from 'utils/getNearestColorSchemeAttribute';
+import { useState } from 'react';
+import { Wrap } from 'components/Wrap';
+import { CloseButton } from 'components/IconButton';
 
 type DialogRootProps = DialogPrimitive.DialogProps;
 
-const DialogRoot = (props: DialogRootProps) => {
-  return <DialogPrimitive.Root {...props} />;
+const DialogRoot = ({ children, ...props }: DialogRootProps) => {
+  return <DialogPrimitive.Root {...props}>{children}</DialogPrimitive.Root>;
 };
 
-type DialogContentProps = DialogContentElementProps;
+type DialogContentProps = DialogContentElementProps & { colorScheme?: ColorSchemeName };
 
-const DialogContent = (props: DialogContentProps) => {
+const DialogContent = ({
+  children,
+  colorScheme: colorSchemeProp,
+  padding,
+  ...props
+}: DialogContentProps) => {
+  const [colorScheme, setColorScheme] = useState<string | undefined>(undefined);
   return (
-    <DialogPrimitive.Portal>
-      <DialogOverlayElement />
-      <DialogContentElement {...props} />
-    </DialogPrimitive.Portal>
+    <Wrap
+      if={!colorSchemeProp}
+      wrap={(c) => {
+        return (
+          <div
+            className="absolute"
+            onMouseEnter={(e) => {
+              setColorScheme(getNearestColorSchemeAttribute(e.currentTarget));
+            }}
+          >
+            {c}
+          </div>
+        );
+      }}
+    >
+      <DialogPrimitive.Portal>
+        <DialogOverlayElement />
+        <DialogContentElement
+          data-color-scheme={colorSchemeProp ?? colorScheme}
+          {...getDataAttributes({
+            'data-antribute-card': { 'padding-none': padding === false },
+          })}
+          padding={padding}
+          {...props}
+        >
+          {children}
+        </DialogContentElement>
+      </DialogPrimitive.Portal>
+    </Wrap>
   );
 };
 type DialogBodyProps = DialogBodyElementProps;
@@ -38,32 +73,25 @@ const DialogBody = (props: DialogBodyProps) => {
   return <DialogBodyElement {...props} />;
 };
 
-const DialogCloseButtonIcon = () => {
+const DialogCloseButtonIcon = ({ className }: { className?: string }) => {
   return (
     <DialogPrimitive.Close asChild>
-      <DialogCloseButtonIconElement type="button">
-        <span className="sr-only">Close</span>
-        <XMarkIcon className="h-20 w-20 fill-current " />
-      </DialogCloseButtonIconElement>
+      <CloseButton rounded className={className} />
     </DialogPrimitive.Close>
   );
 };
 
-type DialogTitleProps = DialogTitleElementProps;
+type DialogTitleSectionProps = DialogTitleElementProps;
 
-const DialogTitle = ({ children, ...props }: DialogTitleProps) => {
+const DialogTitleSection = ({ children, ...props }: DialogTitleSectionProps) => {
   return (
-    <DialogTitleElement {...props}>
-      {children} <DialogCloseButtonIcon />
-    </DialogTitleElement>
+    <DialogTitleSectionElement {...props}>
+      {children} <DialogCloseButtonIcon className="relative -top-4" />
+    </DialogTitleSectionElement>
   );
 };
 
 type DialogDescriptionProps = DialogDescriptionElementProps;
-
-const DialogDescription = (props: DialogDescriptionProps) => {
-  return <DialogDescriptionElement {...props} />;
-};
 
 type DialogFooterProps = DialogFooterElementProps;
 
@@ -71,46 +99,84 @@ const DialogFooter = (props: DialogFooterProps) => {
   return <DialogFooterElement {...props} />;
 };
 
-type DialogButtonProps = Omit<ButtonProps, 'size'>;
+type DialogTitleProps = DialogTitleElementProps;
+
+const DialogTitle = ({ children, ...props }: DialogTitleProps) => {
+  return <DialogTitleElement {...props}>{children}</DialogTitleElement>;
+};
+
+const DialogDescription = (props: DialogDescriptionProps) => {
+  return <DialogDescriptionElement {...props} />;
+};
 
 const DialogButton = (props: DialogButtonProps) => {
-  return <ButtonComponent {...props} size="sm" />;
+  return <ButtonComponent color="primary" {...props} size="sm" />;
 };
+
+const DialogTrigger = (props: DialogPrimitive.DialogTriggerProps) => {
+  return <DialogPrimitive.Trigger asChild {...props} />;
+};
+
+type DialogButtonProps = Omit<ButtonProps, 'size'>;
 
 const DialogTriggerButton = (props: DialogButtonProps) => {
   return (
-    <DialogPrimitive.Trigger asChild>
+    <DialogTrigger>
       <ButtonComponent {...props} />
-    </DialogPrimitive.Trigger>
+    </DialogTrigger>
   );
 };
 
-const DialogCloseButton = (props: DialogButtonProps) => {
+const DialogCancelButton = (props: Omit<DialogButtonProps, 'color' | 'variant'>) => {
   return (
     <DialogPrimitive.Close asChild>
-      <DialogButton {...props} />
+      <DialogButton {...props} variant="glass" color="secondary" />
     </DialogPrimitive.Close>
   );
+};
+
+const DialogClose = (props: DialogPrimitive.DialogCloseProps) => {
+  return <DialogPrimitive.Close asChild {...props} />;
 };
 
 const Root = DialogRoot;
 
 const Content = DialogContent;
 
-const Button = DialogButton;
+const TitleSection = DialogTitleSection;
+
+const BodySection = DialogBody;
+
+const FooterSection = DialogFooter;
 
 const Title = DialogTitle;
 
-const Body = DialogBody;
-
-const Footer = DialogFooter;
-
 const Description = DialogDescription;
+
+const Button = DialogButton;
 
 const TriggerButton = DialogTriggerButton;
 
-const Close = DialogCloseButton;
+const CancelButton = DialogCancelButton;
+
+const Close = DialogClose;
 
 const CloseIcon = DialogCloseButtonIcon;
 
-export { Root, Content, Title, Description, Body, Footer, TriggerButton, Close, CloseIcon, Button };
+const Trigger = DialogTrigger;
+
+export {
+  Root,
+  Content,
+  TitleSection,
+  Description,
+  BodySection,
+  FooterSection,
+  Title,
+  Trigger,
+  TriggerButton,
+  CancelButton,
+  CloseIcon,
+  Close,
+  Button,
+};

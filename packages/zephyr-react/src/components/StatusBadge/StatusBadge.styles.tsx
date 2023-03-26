@@ -1,14 +1,23 @@
+import clsx from 'clsx';
 import { colorVariants } from 'styles/colors.variants';
 import { inputComponentVariants } from 'styles/input-component.variants';
-import { Classed, classed, mergeVariants } from 'utils/classed';
+import { Classed, classTheme, classed, mergeVariants } from 'utils/classed';
 
 export type StatusBadgeElementVariants = Classed.VariantProps<typeof StatusBadgeElement>;
 
-export type StatusBadgeElementProps = React.ComponentProps<typeof StatusBadgeElement>;
+export type StatusBadgeElementProps = Classed.ComponentProps<typeof StatusBadgeElement>;
+
+const disabledClass = classTheme({
+  light: 'disabled:bg-boundary-ghost disabled:border-boundary-ghost disabled:text-content-subtle',
+  dark: 'dark:disabled:bg-boundary-inverse-ghost dark:disabled:border-boundary-inverse-ghost dark:disabled:text-content-inverse-subtle',
+});
 
 export const StatusBadgeElement = classed(
-  'div',
-  'group inline-flex items-center gap-8 font-medium border border-storm-50 bg-white rounded-full select-none ',
+  'button',
+  'group inline-flex items-center gap-6 font-medium border rounded-full select-none transition-all ring-0 focus:ring-0 ring-transparent',
+  'border-boundary-ghost dark:border-boundary-inverse-ghost  outline-none border-none',
+  disabledClass,
+
   {
     variants: {
       size: mergeVariants([
@@ -17,39 +26,54 @@ export const StatusBadgeElement = classed(
         inputComponentVariants.size.textSize,
       ]),
 
-      color: mergeVariants([colorVariants.border, colorVariants.text]),
+      color: mergeVariants([
+        colorVariants.bg,
+        colorVariants.border,
+        colorVariants.hoverDark,
+        colorVariants.text,
+      ]),
 
       variant: {
         text: 'px-0 py-0 border-none bg-transparent',
-        pill: '',
+        outlined: 'bg-opacity-10',
+        contained: clsx('from-palette-white/5 via-palette-white/5 bg-gradient-to-r to-transparent'),
         dropdown: 'cursor-pointer',
+      },
+
+      clickable: {
+        true: 'cursor-pointer',
+        false: 'cursor-default focus:ring-0',
       },
     },
     defaultVariants: {
       size: 'md',
-      variant: 'pill',
-      color: 'primary',
+      variant: 'contained',
+      clickable: false,
     },
   }
 );
 
-export const StatusBadgeDot = classed('div', 'rounded-full inline-block bg-red-500', {
-  variants: {
-    dotPosition: {
-      left: 'order-first',
-      right: 'order-last',
+export const StatusBadgeDot = classed(
+  'div',
+  'rounded-full inline-block border filter brightness-125 border-white border-opacity-10',
+  {
+    variants: {
+      dotPosition: {
+        left: 'order-first',
+        right: 'order-last',
+      },
+      size: {
+        xs: 'w-8 h-8',
+        sm: 'w-8 h-8',
+        md: 'w-10 h-10',
+        lg: 'w-10 h-10',
+        xl: 'w-14 h-14',
+      },
+      color: mergeVariants([colorVariants.bg, colorVariants.text]),
     },
-    size: {
-      xs: 'w-8 h-8',
-      sm: 'w-8 h-8',
-      md: 'w-10 h-10',
-      lg: 'w-10 h-10',
-      xl: 'w-14 h-14',
+    defaultVariants: {
+      dotPosition: 'left',
+      size: 'md',
     },
-    color: mergeVariants([colorVariants.bg, colorVariants.text]),
-  },
-  defaultVariants: {
-    dotPosition: 'left',
-    size: 'md',
-  },
-});
+  }
+);

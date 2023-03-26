@@ -1,38 +1,57 @@
-import { InputContainerProps } from 'components/Input/InputContainer';
+import { InputContainer, InputContainerProps } from 'components/Input/InputContainer';
 import { useInputProps } from 'components/Input/useInputProps';
-import { classTheme, classed } from 'utils/classed';
-import { BaseInputElement } from 'components/BaseInput/BaseInput.styles';
-import { CheckboxElement, CheckboxElementProps } from './Checkbox.styles';
+import { classed } from 'utils/classed';
+import { inputSizeVariants } from 'styles/input-component.variants';
+import { InputLabelElement } from 'components/Input/InputLabel';
+import { BasicCheckbox, CheckboxElementProps } from './Checkbox.styles';
 
-type CheckboxProps = Omit<CheckboxElementProps, 'type'> & Omit<InputContainerProps, 'children'>;
+export type CheckboxProps = Omit<CheckboxElementProps, 'type'> &
+  Omit<InputContainerProps, 'children'>;
 
-const CheckboxInputElement = classed(
-  'label',
-  BaseInputElement,
-  'inline-flex items-center gap-8 cursor-pointer focus-within:ring-2'
+const CheckboxContainerElement = classed(
+  'div',
+  'inline-flex gap-8',
+  'border-2 items-center border-transparent gap-8 hover:bg-highlight-ghost rounded',
+  {
+    variants: { size: inputSizeVariants },
+  },
+  {
+    defaultVariants: {
+      size: 'md',
+    },
+  }
 );
 
-export const Checkbox = ({ label, ...props }: CheckboxProps) => {
-  const { inputContainerProps, inputComponentProps } = useInputProps(props);
+export const Checkbox = (props: CheckboxProps) => {
+  const { label, name } = props;
+  const { id, inputStateMessagePair, size } = useInputProps(props);
+
+  const checkboxProps = {
+    name,
+    id,
+    size,
+  };
 
   if (label) {
     return (
-      <CheckboxInputElement width="fixed" {...inputContainerProps}>
-        <CheckboxElement type="checkbox" {...inputComponentProps} focusRing={false} />
-        {label && (
-          <span
-            className={classTheme({
-              class: 'font-bold select-none',
-              light: 'text-content-strong peer-checked:text-content-weak',
-              dark: 'dark:text-content-inverse-strong  dark:peer-checked:text-content-inverse-weak',
-            })}
-          >
+      <InputContainer
+        hideLabel
+        labelSize={size}
+        htmlFor={id}
+        width="auto"
+        asLabel
+        className="!inline-flex cursor-pointer"
+        {...inputStateMessagePair}
+      >
+        <CheckboxContainerElement size={size}>
+          <BasicCheckbox {...checkboxProps} focusRing={false} {...props} />
+          <InputLabelElement as="div" labelSize={size} labelOrientation="horizontal">
             {label}
-          </span>
-        )}
-      </CheckboxInputElement>
+          </InputLabelElement>
+        </CheckboxContainerElement>
+      </InputContainer>
     );
   }
 
-  return <CheckboxElement type="checkbox" {...inputComponentProps} />;
+  return <BasicCheckbox {...checkboxProps} />;
 };

@@ -1,0 +1,35 @@
+import { ArgsTable, Canvas, Description, Meta, Story } from '@storybook/addon-docs';
+
+import { AvatarGroup } from '.';
+import * as stories from './AvatarGroup.stories.tsx';
+
+<Meta title="Display/AvatarGroup" component={AvatarGroup} />
+
+# AvatarGroup
+
+<Description component={AvatarGroup} />
+<ArgsTable of={AvatarGroup} />
+
+## Sizes
+
+<Canvas withToolbar>
+  <Story name="Sizes" story={stories.Sizes} />
+</Canvas>
+
+## Manual Total Count
+
+<Canvas withToolbar>
+  <Story name="Manual Total Count" story={stories.ManualTotal} />
+</Canvas>
+
+## Stacked Avatar Group
+
+<Canvas withToolbar>
+  <Story name="StackedAvatarGroup" story={stories.StackedAvatarGroup} />
+</Canvas>
+
+## Additional Avatars Dialog
+
+<Canvas withToolbar>
+  <Story name="AdditionalAvatarsDialog" story={stories.AdditionalAvatarsDialog} />
+</Canvas>

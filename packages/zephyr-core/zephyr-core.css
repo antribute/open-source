@@ -1,9 +1,229 @@
-@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply text-content dark:text-content-inverse;
+@layer base {
+  html {
+    @apply bg-base;
+  }
+  .filled-accent-primary {
+    @apply bg-primary text-primary-content;
+  }
+  .filled-accent-secondary {
+    @apply bg-secondary text-secondary-content;
+  }
+  .filled-accent-inverse {
+    @apply bg-inverse text-inverse-content-max-contrast;
+  }
+  .filled-accent-heart {
+    @apply bg-heart text-palette-white;
+  }
+  .filled-accent-info {
+    @apply bg-info text-palette-white;
+  }
+  .filled-accent-success {
+    @apply bg-success text-palette-white;
+  }
+  .filled-accent-caution {
+    @apply bg-caution text-palette-white;
+  }
+  .filled-accent-danger {
+    @apply bg-danger text-palette-white;
+  }
+
+  .gradient-primary {
+    @apply bg-gradient-to-r from-primary-dark to-primary-light text-primary-content;
+  }
+  .gradient-secondary {
+    @apply bg-gradient-to-r from-secondary-dark to-secondary-light text-secondary-content;
+  }
+  .gradient-inverse {
+    @apply bg-gradient-to-r from-inverse-dark to-inverse-light text-inverse-content-max-contrast;
+  }
+  .gradient-heart {
+    @apply bg-gradient-to-r from-heart-dark to-heart-light text-palette-white;
+  }
+  .gradient-info {
+    @apply bg-gradient-to-r from-info-dark to-info-light text-palette-white;
+  }
+  .gradient-success {
+    @apply bg-gradient-to-r from-success-dark to-success-light text-palette-white;
+  }
+  .gradient-caution {
+    @apply bg-gradient-to-r from-caution-dark to-caution-light text-palette-white;
+  }
+  .gradient-danger {
+    @apply bg-gradient-to-r from-danger-dark to-danger-light text-palette-white;
+  }
+
+  .filled-hover-accent-primary {
+    @apply hover:bg-primary-dark;
+  }
+  .filled-hover-accent-secondary {
+    @apply hover:bg-secondary-dark;
+  }
+  .filled-hover-accent-inverse {
+    @apply hover:bg-inverse-light;
+  }
+  .filled-hover-accent-heart {
+    @apply hover:bg-heart-dark;
+  }
+  .filled-hover-accent-info {
+    @apply hover:bg-info-dark;
+  }
+  .filled-hover-accent-success {
+    @apply hover:bg-success-dark;
+  }
+  .filled-hover-accent-caution {
+    @apply hover:bg-caution-dark;
+  }
+  .filled-hover-accent-danger {
+    @apply hover:bg-danger-dark;
+  }
+
+  .outlined-accent-primary {
+    @apply bg-surface-soft hover:bg-surface-dark/30 text-primary-content-min-contrast ring-boundary-weak;
+  }
+  .outlined-accent-secondary {
+    @apply bg-surface-soft hover:bg-surface-dark/30 text-secondary-content-min-contrast ring-boundary-ghost;
+  }
+  .outlined-accent-inverse {
+    @apply bg-surface-soft hover:bg-surface-dark/30 text-inverse ring-inverse/80;
+  }
+  .outlined-accent-heart {
+    @apply bg-surface-soft hover:bg-surface text-heart ring-heart hover:ring-heart-dark;
+  }
+  .outlined-accent-info {
+    @apply bg-surface-soft hover:bg-surface text-info ring-info hover:ring-info-dark;
+  }
+  .outlined-accent-success {
+    @apply bg-surface-soft hover:bg-surface text-success ring-success hover:ring-success-dark;
+  }
+  .outlined-accent-caution {
+    @apply bg-surface-soft  hover:bg-surface text-caution ring-caution hover:ring-caution-dark;
+  }
+  .outlined-accent-danger {
+    @apply bg-surface-soft hover:bg-surface text-danger ring-danger hover:ring-danger-dark;
+  }
+
+  .glass-accent-primary {
+    @apply bg-primary/40  text-content-intense hover:bg-highlight-strong;
+  }
+  .glass-accent-secondary {
+    @apply bg-highlight-weak text-content-max-contrast hover:bg-highlight-moderate;
+  }
+  .glass-accent-inverse {
+    @apply bg-inverse/30 text-palette-white hover:bg-inverse/40;
+  }
+  .glass-accent-heart {
+    @apply bg-heart/10 hover:bg-heart/20 text-heart;
+  }
+  .glass-accent-info {
+    @apply bg-info/10 hover:bg-info/20 text-info;
+  }
+  .glass-accent-success {
+    @apply bg-success/10 hover:bg-success/20 text-success;
+  }
+  .glass-accent-caution {
+    @apply bg-caution/10 hover:bg-caution/20 text-caution contrast-[.85];
+  }
+  .glass-accent-danger {
+    @apply bg-danger/10 hover:bg-danger/20 text-danger;
+  }
+
+  .ghost-accent-primary {
+    @apply text-content-strong hover:bg-highlight-weak;
+  }
+  .ghost-accent-secondary {
+    @apply text-content-weak hover:bg-highlight-weak;
+  }
+  .ghost-accent-inverse {
+    @apply text-inverse hover:bg-highlight-weak;
+  }
+  .ghost-accent-heart {
+    @apply text-heart hover:bg-heart/20;
+  }
+  .ghost-accent-info {
+    @apply text-info hover:bg-info/20;
+  }
+  .ghost-accent-success {
+    @apply text-success hover:bg-success/20;
+  }
+  .ghost-accent-caution {
+    @apply text-caution hover:bg-caution/20 contrast-[.85];
+  }
+  .ghost-accent-danger {
+    @apply text-danger hover:bg-danger/20;
+  }
+
+  .noisy-texture {
+    @apply bg-[url('https://liveblocks.io/images/noise.png')] bg-repeat bg-[length:125px] opacity-[0.035];
+  }
+
+  .before-absolute-content {
+    @apply before:content-[''] before:absolute before:w-full before:h-full before:pointer-events-none before:inset-0;
+  }
+  .after-absolute-content {
+    @apply after:content-[''] after:absolute after:w-full after:h-full after:pointer-events-none after:inset-0;
+  }
+
+  .noisy-surface-texture {
+    @apply before:noisy-texture before-absolute-content;
+  }
+
+  .image-mask-gradient {
+    mask-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0.5) 20%,
+      transparent 80%
+    );
+  }
+  .shadow-mask-gradient-top {
+    mask-image: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(0, 0, 0, 1) var(--shadow-threshold-top, 15%)
+    );
+  }
+  .shadow-mask-gradient-bottom {
+    mask-image: linear-gradient(
+      to top,
+      transparent,
+      rgba(0, 0, 0, 1) var(--shadow-threshold-bottom, 15%)
+    );
+  }
+
+  .shadow-mask-gradient-top-bottom {
+    mask-image: linear-gradient(
+      transparent 0%,
+      black var(--shadow-threshold-top, 15%),
+      black calc(100% - var(--shadow-threshold-bottom, 15%)),
+      transparent 100%
+    );
+  }
+
+  .scroll-shadow {
+    @apply noisy-surface-texture absolute z-10 w-full h-16 transition-opacity duration-700 ease-in-out from-transparent to-palette-black/5;
+  }
+
+  .scroll-shadow-top {
+    @apply scroll-shadow before:image-mask-gradient z-10;
+  }
+
+  .scroll-shadow-bottom {
+    @apply scroll-shadow noisy-surface-texture before:gradient-mask-t-0;
+  }
+
+  .conic-gradient {
+    background-blend-mode: luminosity;
+    background-color: var(--color-surface);
+    background-image: conic-gradient(
+      from 90deg at 50% 50%,
+      rgb(var(--color-surface-dark) / 27%) 0deg,
+      rgb(var(--color-surface-dark) / 10%) 360deg
+    );
+  }
 }
