@@ -1,0 +1,5 @@
+dist
+node_modules
+.eslintrc.cjs
+tsup.config.js
+vitest.config.js
