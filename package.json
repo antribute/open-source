@@ -4,7 +4,7 @@
     "build:apps": "turbo run build --filter=./apps/*",
     "build:packages": "turbo run build --filter=./packages/*",
     "build:servers": "turbo run build --filter=./servers/*",
-    "storybook-react": "turbo run storybook --filter=@antribute/zephyr-react...",
+    "storybook-react": "NODE_OPTIONS='--inspect' turbo run storybook --filter=@antribute/zephyr-react...",
     "app:landing-page": "turbo run dev --filter=@antribute/landing-page",
     "clean": "turbo run clean",
     "lint": "turbo run lint",
@@ -16,12 +16,13 @@
     "style:format": "prettier --ignore-unknown --write .",
     "style:lint": "prettier --ignore-unknown --check .",
     "test": "turbo run test -- run",
-    "kill-port": "pnpm dlx kill-port"
+    "kill-port": "kill-port"
   },
   "devDependencies": {
     "@manypkg/cli": "^0.19.2",
+    "kill-port": "^2.0.1",
     "lint-staged": "^13.0.3",
-    "prettier": "2.8.2",
+    "prettier": "2.8.7",
     "rimraf": "^3.0.2",
     "simple-git-hooks": "^2.8.1",
     "turbo": "latest",
