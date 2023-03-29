@@ -10,3 +10,6 @@ pnpm-lock.yaml
 
 node_modules/**
 .eslintcache
+
+# Ignoring error introduced by TypeScript v5's new `const T` Generics syntax  
+packages/zephyr-react/src/components/Form/createFormSchema.tsx
