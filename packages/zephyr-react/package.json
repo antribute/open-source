@@ -21,6 +21,8 @@
     "clean": "rimraf .turbo && rimraf .next && rimraf node_modules && rimraf build",
     "dev": "pnpm run build:watch",
     "lint": "eslint --cache src/**",
+    "style:lint": "prettier --ignore-unknown --check .",
+    "style:format": "prettier --ignore-unknown --check .",
     "storybook": "storybook dev -p 6006 --no-open",
     "test": "vitest"
   },

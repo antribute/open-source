@@ -7,7 +7,7 @@ interface SvgGradientStopProp {
   opacity?: number;
 }
 
-const { caution, info, heart, success } = colors;
+const { caution, info, heart } = colors;
 
 const SvgGradientStops = ({ stops }: { stops: SvgGradientStopProp[] }) => {
   function getOffset({ stop, index }: { stop: SvgGradientStopProp; index: number }) {

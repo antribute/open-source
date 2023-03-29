@@ -40,12 +40,16 @@ export const PresetButtonStoryVariants = <
           { endIcon: <BoltIcon /> },
           { startIcon: <BoltIcon />, rounded: true },
           { endIcon: <BoltIcon />, rounded: true },
-        ].map((props) => (
+        ].map((p) => (
           <RenderSizeVariants
             showVariantLabel
             Component={Button}
             noChildren={noDefaultChildren}
-            props={getProps(props, { children: 'Get Started', ...props })}
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+            props={getProps(
+              { ...(props as object), ...p },
+              { children: 'Get Started', ...(props as object) }
+            )}
           />
         ))}
       </div>
