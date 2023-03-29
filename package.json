@@ -32,7 +32,7 @@
   "private": true,
   "engines": {
     "node": ">=18",
-    "pnpm": ">=7"
+    "pnpm": ">=8"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm exec lint-staged"
