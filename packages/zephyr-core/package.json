@@ -56,7 +56,7 @@
     "ts-toolbelt": "^9.6.0",
     "tsup": "^6.5.0",
     "type-fest": "^3.5.1",
-    "typescript": "^5.0.0-beta",
+    "typescript": "^5.0.2",
     "vitest": "^0.25.3"
   },
   "peerDependencies": {

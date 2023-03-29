@@ -37,7 +37,7 @@
     "happy-dom": "^7.7.0",
     "prettier": "2.8.7",
     "tsup": "^6.5.0",
-    "typescript": "^5.0.0-beta",
+    "typescript": "^5.0.2",
     "vitest": "^0.25.3"
   },
   "dependencies": {
