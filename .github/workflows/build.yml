@@ -21,4 +21,6 @@ jobs:
       - name: Setup
         uses: antribute/actions/setup@main
       - name: Run Build
+        env:
+          NODE_OPTIONS: '--max_old_space_size=4096'
         run: pnpm run build
