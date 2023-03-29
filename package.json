@@ -9,6 +9,7 @@
     "clean": "turbo run clean",
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint -- --fix",
+    "preinstall": "npx only-allow pnpm",
     "postinstall": "simple-git-hooks",
     "nuke": "pnpm run clean && turbo run reset && rm -r ./node_modules",
     "reset": "pnpm run nuke && pnpm i",
