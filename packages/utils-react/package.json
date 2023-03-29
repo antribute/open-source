@@ -33,7 +33,7 @@
     "@testing-library/react": "^13.4.0",
     "@types/react": "18.0.25",
     "@vitest/coverage-c8": "^0.25.3",
-    "eslint": "^8.36.0",
+    "eslint": "^8.37.0",
     "happy-dom": "^7.7.0",
     "prettier": "2.8.7",
     "react": "18.2.0",
