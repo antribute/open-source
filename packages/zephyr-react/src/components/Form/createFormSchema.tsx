@@ -8,7 +8,7 @@ type ArrTransform<T extends Readonly<FormFieldSchemaData[]>> = {
 
 type ToObj<T extends readonly FormFieldSchemaData[]> = { [K in keyof T]: T[K]['uniqueId'] };
 
-export function createFormSchema<const T extends readonly FormFieldSchemaData[]>(fieldType: T) {
+export function createFormSchema<T extends readonly FormFieldSchemaData[]>(fieldType: T) {
   type UniqueIdArr = { [K in keyof ToObj<T>]: ToObj<T>[K] };
 
   const schemas = mapValues(

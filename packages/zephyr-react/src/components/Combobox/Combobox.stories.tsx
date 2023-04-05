@@ -1,7 +1,19 @@
-/* eslint-disable no-console */
+/* eslint-disable no-console, react-hooks/rules-of-hooks */
+
+import type { Meta, StoryObj } from '@storybook/react';
 import { generateMockUserList } from 'mock/mock-data';
 import { useState, useEffect } from 'react';
+
 import { Combobox } from '.';
+
+const meta = {
+  args: {},
+  title: 'Input/Combobox',
+  component: Combobox,
+} satisfies Meta<typeof Combobox>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 const smUserOptions = generateMockUserList({ seed: 1, size: 3 });
 const mdUserOptions = generateMockUserList({ seed: 1, size: 8 });
@@ -19,8 +31,9 @@ const optionSet = [
   { options: emptyUserOptions, size: 'Empty' },
 ];
 
-export const Default = () => {
-  return (
+export const Default: Story = {
+  args: {},
+  render: () => (
     <div className="flex flex-wrap gap-8">
       {optionSet.map(({ options, size }) => (
         <div>
@@ -36,7 +49,7 @@ export const Default = () => {
         </div>
       ))}
     </div>
-  );
+  ),
 };
 
 const SWAPI_BASE_URL = 'https://swapi.dev/api';
@@ -73,29 +86,32 @@ function useCharacters({ search }: { search?: string }) {
   return { data, loading };
 }
 
-export const MultiSelectCombobox = () => {
-  const [search, setSearch] = useState<string | undefined>();
+export const MultiSelectCombobox: Story = {
+  args: {},
+  render: () => {
+    const [search, setSearch] = useState<string | undefined>();
 
-  const { data, loading } = useCharacters({ search });
+    const { data, loading } = useCharacters({ search });
 
-  console.log('DATA', data);
+    console.log('DATA', data);
 
-  return (
-    <>
-      <Combobox
-        // value={values}
-        options={data}
-        getOptionLabel={(e) => e.name}
-        onValueChange={(e) => {
-          console.log('On value change: ', e);
-        }}
-        searching={loading}
-        isMultiSelect
-        onSearch={(v) => {
-          console.log('SEAARCH', v);
-          setSearch(v);
-        }}
-      />
-    </>
-  );
+    return (
+      <>
+        <Combobox
+          // value={values}
+          options={data}
+          getOptionLabel={(e) => e.name}
+          onValueChange={(e) => {
+            console.log('On value change: ', e);
+          }}
+          searching={loading}
+          isMultiSelect
+          onSearch={(v) => {
+            console.log('SEARCH', v);
+            setSearch(v);
+          }}
+        />
+      </>
+    );
+  },
 };

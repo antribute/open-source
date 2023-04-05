@@ -43,7 +43,7 @@ type TextProps = {
   children?: React.ReactNode;
   // balancer?: boolean;
   // balancerRatio?: number;
-  as?: 'p' | 'span' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'b' | 'i';
+  as?: 'p' | 'span' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'b' | 'i' | 'div';
 } & Classed.VariantProps<typeof TextElement>;
 
 const Text = ({
