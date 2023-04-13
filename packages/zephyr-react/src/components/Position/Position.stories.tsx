@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Flex } from 'components/Flex';
-import { Paper } from 'components/Paper';
 import { Position } from 'components/Position/Position';
 import { PositionProp } from 'types/styles';
 
