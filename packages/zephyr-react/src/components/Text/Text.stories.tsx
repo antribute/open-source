@@ -1,7 +1,19 @@
+import type { Meta, StoryObj } from '@storybook/react';
+
 import { Text } from 'components/Text/Text';
 
-export const Default = () => {
-  return (
+const meta = {
+  args: {},
+  title: 'Display/Text',
+  component: Text,
+} satisfies Meta<typeof Text>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {},
+  render: () => (
     <div className="flex flex-col gap-16">
       <Text>Text.Default</Text>
       <Text size="xs">Size: xs</Text>
@@ -32,5 +44,5 @@ export const Default = () => {
       <Text.Bold size="lg">Text.Bold</Text.Bold>
       <Text.Italic size="lg">Text.Italics</Text.Italic>
     </div>
-  );
+  ),
 };

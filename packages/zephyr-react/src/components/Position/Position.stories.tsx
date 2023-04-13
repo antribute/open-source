@@ -1,7 +1,17 @@
+import type { Meta, StoryObj } from '@storybook/react';
 import { Flex } from 'components/Flex';
 import { Paper } from 'components/Paper';
 import { Position } from 'components/Position/Position';
 import { PositionProp } from 'types/styles';
+
+const meta = {
+  args: {},
+  title: 'Layout/Position',
+  component: Position,
+} satisfies Meta<typeof Position>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 const positionPropMap: Record<PositionProp, undefined> = {
   'top-center': undefined,
@@ -17,8 +27,9 @@ const positionPropMap: Record<PositionProp, undefined> = {
 
 const positions = Object.keys(positionPropMap) as PositionProp[];
 
-export const Default = () => {
-  return (
+export const Default: Story = {
+  args: {},
+  render: () => (
     <Flex centerAlign className="w-full h-screen pb-[20%]">
       <div className="h-400 w-400 bg-surface relative">
         {positions.map((position) => {
@@ -33,5 +44,5 @@ export const Default = () => {
         })}
       </div>
     </Flex>
-  );
+  ),
 };

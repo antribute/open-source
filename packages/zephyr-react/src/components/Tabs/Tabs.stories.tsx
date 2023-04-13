@@ -1,3 +1,5 @@
+import type { Meta, StoryObj } from '@storybook/react';
+
 import { Paper } from 'components/Paper';
 import { generateMockVehicleList } from 'mock/mock-data';
 import { RenderPaperContainers } from 'utils/storybook-utils';
@@ -17,8 +19,18 @@ const tabs6 = [
   { label: 'Billing', value: 'billing' },
 ];
 
-export const Default = () => {
-  return (
+const meta = {
+  args: {},
+  title: 'Navigation/Tabs',
+  component: Tabs.Root,
+} satisfies Meta<typeof Tabs.Root>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {},
+  render: () => (
     <RenderPaperContainers border>
       <Tabs.Root defaultValue={tabs2[0]?.value}>
         <Tabs.List>
@@ -38,11 +50,12 @@ export const Default = () => {
         </Tabs.ViewContainer>
       </Tabs.Root>
     </RenderPaperContainers>
-  );
+  ),
 };
 
-export const SixTabs = () => {
-  return (
+export const SixTabs: Story = {
+  args: {},
+  render: () => (
     <Paper border>
       <Tabs.Root defaultValue={tabs6[0]?.value}>
         <Tabs.List>
@@ -54,11 +67,12 @@ export const SixTabs = () => {
         </Tabs.List>
       </Tabs.Root>
     </Paper>
-  );
+  ),
 };
 
-export const DisabledTab = () => {
-  return (
+export const DisabledTab: Story = {
+  args: {},
+  render: () => (
     <RenderPaperContainers>
       <Tabs.Root defaultValue={tabs6[0]?.value}>
         <Tabs.List>
@@ -70,11 +84,12 @@ export const DisabledTab = () => {
         </Tabs.List>
       </Tabs.Root>
     </RenderPaperContainers>
-  );
+  ),
 };
 
-export const Vertical = () => {
-  return (
+export const Vertical: Story = {
+  args: {},
+  render: () => (
     <RenderPaperContainers className="w-208 flex flex-row gap-8">
       <Tabs.Root orientation="vertical" defaultValue={tabs2[0]?.value}>
         <Tabs.List>
@@ -93,13 +108,14 @@ export const Vertical = () => {
         </Tabs.ViewContainer>
       </Tabs.Root>
     </RenderPaperContainers>
-  );
+  ),
 };
 
 const vehicles = generateMockVehicleList({ size: 20, uniqueBy: 'type' });
 
-export const Overflow = () => {
-  return (
+export const Overview: Story = {
+  args: {},
+  render: () => (
     <Paper border>
       <Tabs.Root defaultValue={tabs6[0]?.value}>
         <Tabs.List>
@@ -111,5 +127,5 @@ export const Overflow = () => {
         </Tabs.List>
       </Tabs.Root>
     </Paper>
-  );
+  ),
 };

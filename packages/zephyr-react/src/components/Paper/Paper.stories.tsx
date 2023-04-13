@@ -2,6 +2,17 @@ import { Paper, PaperProps } from 'components/Paper/Paper';
 import { SimpleList } from 'components/SimpleList';
 import { twMerge } from 'tailwind-merge';
 
+import type { Meta, StoryObj } from '@storybook/react';
+
+const meta = {
+  args: {},
+  title: 'Surface/Paper',
+  component: Paper,
+} satisfies Meta<typeof Paper>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
 const PaperRow = ({ className, colorScheme, ...props }: PaperProps) => {
   const paperRowProps: PaperProps[] = [
     { hoverHighlight: true, colorScheme },
@@ -46,8 +57,9 @@ const PaperRow = ({ className, colorScheme, ...props }: PaperProps) => {
   );
 };
 
-export const Default = () => {
-  return (
+export const Default: Story = {
+  args: {},
+  render: () => (
     <div className="w-full">
       <div className="grid w-full grid-cols-12 gap-16">
         <PaperRow colorScheme="surface" />
@@ -58,5 +70,5 @@ export const Default = () => {
         <PaperRow colorScheme="neutral-dark" />
       </div>
     </div>
-  );
+  ),
 };

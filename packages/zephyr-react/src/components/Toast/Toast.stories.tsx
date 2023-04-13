@@ -1,5 +1,6 @@
-import { Button } from 'components/Button';
+import type { Meta, StoryObj } from '@storybook/react';
 
+import { Button } from 'components/Button';
 import { ToastItem } from 'components/Toast/Toast.types';
 import { useState } from 'react';
 import { Checkbox } from 'components/Checkbox';
@@ -89,44 +90,57 @@ const toasts = {
   },
 } satisfies Record<string, ToastItem & { description: string | undefined }>;
 
-export const Default = () => {
-  const [showDescription, setShowDescription] = useState(false);
-  return (
-    <div className="relative flex w-full flex-wrap items-center gap-16">
-      {Object.entries(toasts).map(([key, { title, description, ...props }], index) => {
-        return (
-          <Button
-            rounded
-            key={index}
-            onClick={() => {
-              toast({
-                description:
-                  showDescription &&
-                  (description ?? 'Lorem dolor commodo mollit qui laborum nisi aute elit.'),
-                ...props,
-                title,
-              });
-            }}
-          >
-            {capitalCase(key)}
-          </Button>
-        );
-      })}
+const meta = {
+  args: {},
+  title: 'Feedback/Toaster',
+  component: Button,
+} satisfies Meta<typeof Button>;
 
-      <Button
-        onClick={() => {
-          addManyToasts({ ...toasts.actionToast, description: undefined }, 6);
-        }}
-      >
-        Add 6 Toasts
-      </Button>
-      <Checkbox
-        label="Show Description"
-        onCheckedChange={(e) => {
-          setShowDescription(Boolean(e));
-        }}
-      />
-      <Toaster />
-    </div>
-  );
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {},
+  render: () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [showDescription, setShowDescription] = useState(false);
+    return (
+      <div className="relative flex w-full flex-wrap items-center gap-16">
+        {Object.entries(toasts).map(([key, { title, description, ...props }], index) => {
+          return (
+            <Button
+              rounded
+              key={index}
+              onClick={() => {
+                toast({
+                  description:
+                    showDescription &&
+                    (description ?? 'Lorem dolor commodo mollit qui laborum nisi aute elit.'),
+                  ...props,
+                  title,
+                });
+              }}
+            >
+              {capitalCase(key)}
+            </Button>
+          );
+        })}
+
+        <Button
+          onClick={() => {
+            addManyToasts({ ...toasts.actionToast, description: undefined }, 6);
+          }}
+        >
+          Add 6 Toasts
+        </Button>
+        <Checkbox
+          label="Show Description"
+          onCheckedChange={(e) => {
+            setShowDescription(Boolean(e));
+          }}
+        />
+        <Toaster />
+      </div>
+    );
+  },
 };
