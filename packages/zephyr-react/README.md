@@ -11,7 +11,7 @@ pnpm i @antribute/zephyr-react
 ## Setup
 
 In order to set up your app appropriately, please go through the instructions to set up
-[`@antribute/core`](https://github.com/antribute/open-source/blob/main/packages/zephyr-core/README.md)
+[`@antribute/core`](https://github.com/antribute/open-source/blob/main/packages/zephyr-core/README.md).
 
 ## Running Storybook for Local Development
 
