@@ -1,25 +1,21 @@
 import type { Meta, StoryObj } from '@storybook/react';
-
-import { Button, ButtonProps } from './Button';
+import { ButtonComponent } from 'components/Button/Button';
+import { Button, ButtonProps } from '.';
 import { PresetButtonStoryVariants } from './preset-button-story-variants';
 
 const meta = {
   args: {},
   title: 'Input/Button',
-  component: Button,
-} satisfies Meta<typeof Button>;
+  component: ButtonComponent,
+} as Meta<typeof Button>;
 
 export default meta;
+
 type Story = StoryObj<typeof meta>;
 
 const variants = PresetButtonStoryVariants<ButtonProps>(Button);
 
 export const Default: Story = {
-  args: {},
-  render: variants.Default,
-};
-
-export const Sizes: Story = {
   args: {},
   render: variants.Default,
 };
@@ -44,11 +40,6 @@ export const Glass: Story = {
   render: variants.GlassVariant,
 };
 
-export const Text: Story = {
-  args: {},
-  render: variants.TextVariant,
-};
-
 export const Rounded: Story = {
   args: {},
   render: variants.RoundedVariant,
@@ -67,9 +58,4 @@ export const ContainedGradient: Story = {
 export const Ghost: Story = {
   args: {},
   render: variants.GhostVariant,
-};
-
-export const StartAndEndIcon: Story = {
-  args: {},
-  render: variants.StartAndEndIconVariant,
 };
