@@ -1,44 +1,61 @@
+import type { Meta, StoryObj } from '@storybook/react';
+
 import { Input } from './Input';
 
-export const Default = () => {
-  return <Input name="User name" label="Username" placeholder="Enter username" />;
+const meta = {
+  args: {},
+  title: 'Input/Input',
+  component: Input,
+} satisfies Meta<typeof Input>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {},
+  render: () => <Input name="User name" label="Username" placeholder="Enter username" />,
 };
 
-export const Required = () => {
-  return <Input name="username" label="Username" placeholder="Enter username" required />;
+export const Required: Story = {
+  args: {},
+  render: () => <Input name="username" label="Username" placeholder="Enter username" required />,
 };
 
-export const LabelDescription = () => {
-  return (
+export const LabelDescription: Story = {
+  args: {},
+  render: () => (
     <Input
       name="Name"
       label="Name"
       labelDescription="This will be your display name"
       placeholder="Enter username"
     />
-  );
+  ),
 };
 
-export const OptionalInputIndicator = () => {
-  return <Input name="User name" label="Username" placeholder="Enter username" optionalLabel />;
+export const OptionalInputIndicator: Story = {
+  args: {},
+  render: () => (
+    <Input name="User name" label="Username" placeholder="Enter username" optionalLabel />
+  ),
 };
 
-export const OptionalInputIndicatorLabelDescription = () => {
-  return (
-    <div>
-      <Input
-        name="Name"
-        label="Name"
-        labelDescription="This will be your display name"
-        placeholder="Enter username"
-        optionalLabel
-      />
-    </div>
-  );
+export const OptionalInputIndicatorLabelDescription: Story = {
+  args: {},
+  render: () => (
+    <Input
+      name="Name"
+      label="Name"
+      labelDescription="This will be your display name"
+      placeholder="Enter username"
+      optionalLabel
+    />
+  ),
 };
 
-export const ErrorMessage = () => {
-  return (
+export const ErrorMessage: Story = {
+  args: {},
+  render: () => (
     <Input
       name="User name"
       label="Username"
@@ -46,11 +63,12 @@ export const ErrorMessage = () => {
       errorMessage="This username isn't available"
       defaultValue="daishi"
     />
-  );
+  ),
 };
 
-export const SuccessMessage = () => {
-  return (
+export const SuccessMessage: Story = {
+  args: {},
+  render: () => (
     <Input
       name="User name"
       label="Username"
@@ -58,11 +76,12 @@ export const SuccessMessage = () => {
       successMessage="This username is available!"
       defaultValue="daishi"
     />
-  );
+  ),
 };
 
-export const FieldTypes = () => {
-  return (
+export const FieldTypes: Story = {
+  args: {},
+  render: () => (
     <div className="space-y-4">
       <Input type="email" name="email" label="Email" placeholder="Enter email" />
       <Input type="password" name="password" label="Password" placeholder="Enter password" />
@@ -77,5 +96,5 @@ export const FieldTypes = () => {
       <Input type="time" name="time" label="Date/Time" placeholder="Enter date/time" />
       <Input type="datetime-local" name="dt" label="Date/Time" placeholder="Enter date/time" />
     </div>
-  );
+  ),
 };

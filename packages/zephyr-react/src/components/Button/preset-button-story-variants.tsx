@@ -33,7 +33,7 @@ export const PresetButtonStoryVariants = <
         props={getProps(props, { children: 'Default' })}
       />
     ),
-    StartAndEndIconVariant: (props: TProps) => (
+    StartAndEndIconVariant: () => (
       <div className="space-y-10">
         {[
           { startIcon: <BoltIcon /> },

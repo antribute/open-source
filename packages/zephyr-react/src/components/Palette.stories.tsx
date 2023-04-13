@@ -1,22 +1,9 @@
+import type { Meta, StoryObj } from '@storybook/react';
+
 import { colorPalette } from '@antribute/zephyr-core';
 import { capitalCase } from 'change-case';
 import { Paper } from 'components/Paper';
 import { StatusBadge } from 'components/StatusBadge';
-
-export const Colors = () => {
-  const colorList = getColorGroupArray();
-  return (
-    <div className="space-y-16 p-8">
-      {colorList.map(({ colorName, colorList }) => (
-        <ColorGroupContainer title={colorName}>
-          {colorList.map(({ color, colorName }) => (
-            <ColorBlock key={color as string} label={colorName} color={color as string} />
-          ))}
-        </ColorGroupContainer>
-      ))}
-    </div>
-  );
-};
 
 const ColorBlock = ({ label, color }: { label: string; color: string }) => {
   return (
@@ -75,3 +62,30 @@ function getColorGroupArray() {
     };
   });
 }
+
+const meta = {
+  args: {},
+  title: 'Palette',
+  component: ColorGroupContainer,
+} satisfies Meta<typeof ColorGroupContainer>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Colors: Story = {
+  args: {},
+  render: () => {
+    const colorList = getColorGroupArray();
+    return (
+      <div className="space-y-16 p-8">
+        {colorList.map(({ colorName, colorList }) => (
+          <ColorGroupContainer title={colorName}>
+            {colorList.map(({ color, colorName }) => (
+              <ColorBlock key={color as string} label={colorName} color={color as string} />
+            ))}
+          </ColorGroupContainer>
+        ))}
+      </div>
+    );
+  },
+};

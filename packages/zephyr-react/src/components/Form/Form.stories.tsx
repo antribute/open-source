@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import type { Meta, StoryObj } from '@storybook/react';
 import { createTsForm } from '@ts-react/form';
 import { Button } from 'components/Button';
 import { z } from 'zod';
@@ -11,14 +12,25 @@ const { mappings, schemas } = createFormSchema([EmailField, CheckboxField, Strin
 
 const Form = createTsForm(mappings);
 
+const meta = {
+  args: {},
+  title: 'Form/Form',
+  component: Form,
+} satisfies Meta<typeof Form>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
 const SignUpSchema = z.object({
   email: schemas.email,
   name: schemas.stringfield.describe('User name // Enter username'),
   // checked: schemas.CheckboxField,
 });
 
-export const Default = () => {
-  return (
+export const Default: Story = {
+  // @ts-expect-error: @Tyler let's actually get storybook 7 setup correctly sometime
+  args: {},
+  render: () => (
     <Form
       formProps={{ className: 'flex items-center gap-16' }}
       schema={SignUpSchema}
@@ -37,5 +49,5 @@ export const Default = () => {
         </div>
       )}
     />
-  );
+  ),
 };
