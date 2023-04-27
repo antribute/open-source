@@ -10,6 +10,7 @@ const generate = async (configPath?: string) => {
   // have a direct effect on other portions of the app such as the ORM or GraphQL Resolvers
   await importAndRunGenerator('Authorization', config.auth.platform, config);
   await importAndRunGenerator('ORM', config.orm.platform, config);
+  await importAndRunGenerator('GraphQL', config.graphql.platform, config);
   // await generateGraphqlBuilder(config);
   // await generateGraphqlSchema(config);
   // await generatePlatform(config);

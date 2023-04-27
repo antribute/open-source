@@ -29,7 +29,7 @@ const appendSchemaConfig = async (generatedDir: string, config: Config) => {
   logger.debug('Appending schema configuration to generated Prisma schema', config);
 
   const schemaOutputPath = resolve(process.cwd(), config.orm.dir, 'generatedSchema.prisma');
-  const prismaOutputDir = join(generatedDir, 'prisma');
+  const prismaOutputDir = join('..', 'prisma');
 
   let pothosGenerator = '';
   if (config.graphql.platform === '@antribute/backend-graphql-pothos') {

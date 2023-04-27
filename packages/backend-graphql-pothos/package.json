@@ -1,0 +1,61 @@
+{
+  "name": "@antribute/backend-graphql-pothos",
+  "description": "Antribute Backend GraphQL Adapter for Pothos",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    "import": "./dist/index.js",
+    "require": "./dist/index.cjs"
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "clean": "rimraf .turbo && rimraf node_modules && rimraf dist",
+    "dev": "pnpm run build --watch",
+    "lint": "eslint --cache src/**",
+    "test": "vitest"
+  },
+  "keywords": [
+    "antribute",
+    "antribute-backend",
+    "pothos"
+  ],
+  "author": "Antribute, Inc. (https://www.antribute.com)",
+  "license": "MIT",
+  "devDependencies": {
+    "@antribute/backend-core": "workspace:*",
+    "@antribute/config": "workspace:*",
+    "@types/node": "18.11.9",
+    "@vitest/coverage-c8": "^0.25.3",
+    "eslint": "^8.28.0",
+    "happy-dom": "^7.7.0",
+    "prettier": "2.8.2",
+    "tsup": "^6.5.0",
+    "typescript": "^4.9.3",
+    "vitest": "^0.25.3"
+  },
+  "peerDependencies": {
+    "@antribute/backend-core": "*",
+    "@pothos/core": ">= 3.0.0 < 4",
+    "@pothos/plugin-prisma": ">= 3.0.0 < 4",
+    "@pothos/plugin-prisma-utils": "^0.8.0",
+    "@prisma/client": ">= 4.0.0 < 5"
+  },
+  "peerDependenciesMeta": {
+    "@pothos/plugin-prisma": {
+      "optional": true
+    },
+    "@pothos/plugin-prisma-utils": {
+      "optional": true
+    },
+    "@prisma/client": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "fast-glob": "^3.2.12"
+  }
+}

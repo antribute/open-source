@@ -19,7 +19,7 @@ const generateOrmNoneTemplates = async (authModuleDir: string, config: Config) =
     return;
   }
 
-  logger.debug('Populating auth model population, ORM platform is set to "none"', config);
+  logger.debug('Populating auth model population skipped, ORM platform is set to "none"', config);
 
   logger.debug('Populating auth utils for ORM: none', config);
   const utilsContent = populateTemplate<OrmNoneUtilsTemplate>(ormNoneUtilsTemplate, {});
