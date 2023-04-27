@@ -15,22 +15,32 @@ import { createYoga } from 'graphql-yoga'
 import { NextResponse } from 'next/server';
 import schema from '../schema';
 
-const apiCatchAll = async (request: Request) => {
-  const yogaServer = createYoga<Request, {}>({ graphqlEndpoint: '/api/graphql', schema })(request, NextResponse)
-
-  return yogaServer
+interface Ctx {
+  params: {
+    path: string[];
+  };
 }
 
-export async function GET(request: Request) {
-  return apiCatchAll(request);
+export async function apiCatchAll(request: Request, { params }: Ctx) {
+  const yoga = createYoga({
+    graphqlEndpoint: '/api/graphql',
+    schema,
+  });
+
+  const yogaRes = await yoga.fetch(request);
+  return new NextResponse(yogaRes.body, yogaRes);
 }
 
-export async function POST(request: Request) {
-  return apiCatchAll(request);
+export async function GET(request: Request, ctx: Ctx) {
+  return apiCatchAll(request, ctx);
+}
+
+export async function POST(request: Request, ctx: Ctx) {
+  return apiCatchAll(request, ctx);
 }
 `;
 
-  const nextDir = resolve(process.cwd(), config.serverDir, 'generated', 'nextjs');
+  const nextDir = resolve(process.cwd(), config.server.dir, 'generated', 'nextjs');
   logger.debug(
     `Creating Next.js handler directory (if it doesn't already exist) at ${nextDir}`,
     config
@@ -40,11 +50,11 @@ export async function POST(request: Request) {
   logger.debug(`Writing Next.js handler to ${nextFile}`, config);
   await writeFile(nextFile, handlerOutput);
 
-  logger.info('Next.js Platform Successfully Updated', config);
+  logger.info('Next.js Platform Successfully Generated', config);
 };
 
 export const generatePlatform = async (config: Config) => {
-  switch (config.platform) {
+  switch (config.server.platform) {
     case 'express':
       logger.debug('Selected Platform: Express.js', config);
       logger.warn(
@@ -52,12 +62,12 @@ export const generatePlatform = async (config: Config) => {
         config
       );
       break;
-    case 'nextjs':
+    case 'next':
       logger.debug('Selected Platform: Next.js', config);
       await generateNextPlatform(config);
       break;
     default:
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      throw new Error(`Invalid Platform ${config.platform}`);
+      throw new Error(`Invalid Platform ${config.server.platform}`);
   }
 };

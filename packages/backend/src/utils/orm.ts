@@ -11,16 +11,16 @@ const dirname = fileURLToPath(new URL('.', import.meta.url));
 
 export const generatePrismaConfig = async (config: Config) => {
   logger.debug('Computing directories for Prisma schema generating', config);
-  const { capabilities, prismaDir, serverDir } = config;
+  const { graphql, orm, server } = config;
   const prismaBin = resolve(dirname, '..', 'node_modules', '.bin', 'prisma');
   logger.debug(`Prisma script path set to ${prismaBin}`, config);
   const prismaImportBin = resolve(dirname, '..', 'node_modules', '.bin', 'prisma-import');
   logger.debug(`Prisma Import script path set to ${prismaImportBin}`, config);
   // This glob here tries its best to avoid generated/schema.prisma. We may need to refactor this
   // later to account for someone naming one of their modules "schema"
-  const allSchemasGlob = resolve(process.cwd(), serverDir, '**', '!(schema).prisma');
+  const allSchemasGlob = resolve(process.cwd(), server.dir, '**', '!(schema).prisma');
   logger.debug(`Schema search glob set to ${allSchemasGlob}`, config);
-  const generatedPrismaSchemaPath = resolve(process.cwd(), prismaDir, 'generatedSchema.prisma');
+  const generatedPrismaSchemaPath = resolve(process.cwd(), orm.dir, 'generatedSchema.prisma');
   logger.debug(`Schema output file set to ${generatedPrismaSchemaPath}`, config);
 
   logger.debug('Deleting current prisma schema if exists', config);
@@ -46,7 +46,7 @@ export const generatePrismaConfig = async (config: Config) => {
 //
 
 generator client {
-  output   = "${resolve(process.cwd(), serverDir, 'generated', 'prisma')}"
+  output   = "${resolve(process.cwd(), server.dir, 'generated', 'prisma')}"
   provider = "prisma-client-js"
 }
 
@@ -56,10 +56,10 @@ datasource db {
 }
 
 ${
-  capabilities.graphql
+  graphql.enabled
     ? `generator pothos {
-  clientOutput = "${resolve(process.cwd(), serverDir, 'generated', 'prisma')}"
-  output       = "${resolve(process.cwd(), serverDir, 'generated', 'pothos', 'index.ts')}"
+  clientOutput = "${resolve(process.cwd(), server.dir, 'generated', 'prisma')}"
+  output       = "${resolve(process.cwd(), server.dir, 'generated', 'pothos', 'index.ts')}"
   provider     = "prisma-pothos-types"
 }
 `
@@ -86,7 +86,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 `;
 
-  const dbAccessorDir = resolve(process.cwd(), config.serverDir, 'generated', 'db');
+  const dbAccessorDir = resolve(process.cwd(), server.dir, 'generated', 'db');
   logger.debug(
     `Creating db accessor directory (if it doesn't already exist) at ${dbAccessorDir}`,
     config
@@ -98,7 +98,7 @@ if (process.env.NODE_ENV !== 'production') {
 
   logger.debug('Appending Antribute content to generated schema', config);
   await appendFile(generatedPrismaSchemaPath, additionalSchemaContent);
-  logger.info('Prisma Schema Successfully Updated', config);
+  logger.info('Prisma Schema Successfully Generated', config);
 
   logger.debug('Running Prisma generate', config);
   await execa(prismaBin, ['generate', '--schema', generatedPrismaSchemaPath]);
@@ -106,20 +106,17 @@ if (process.env.NODE_ENV !== 'production') {
 };
 
 export const generateOrmConfig = async (config: Config) => {
-  if (!config.capabilities.orm) {
+  if (!config.orm.enabled) {
     logger.info('ORM capability set to false, skipping generation', config);
     return;
   }
-  switch (config.orm) {
-    case 'none':
-      logger.info('ORM set to "none", skipping generation', config);
-      break;
+  switch (config.orm.platform) {
     case 'prisma':
       logger.debug('Selected ORM: Prisma', config);
       await generatePrismaConfig(config);
       break;
     default:
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      throw new Error(`Invalid ORM type ${config.orm}`);
+      throw new Error(`Invalid ORM type ${config.orm.platform}`);
   }
 };

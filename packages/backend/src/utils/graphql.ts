@@ -6,7 +6,7 @@ import logger from 'utils/logger';
 
 // Once we finalize adding more capabilities like auth, this will likely need modification
 export const generateGraphqlBuilder = async (config: Config) => {
-  if (!config.capabilities.graphql) {
+  if (!config.graphql.enabled) {
     logger.info('GraphQL capability set to false, skipping generation', config);
     return;
   }
@@ -20,7 +20,9 @@ export const generateGraphqlBuilder = async (config: Config) => {
   let builderPlugins: string[] = [];
   let builderBody = '';
 
-  if (config.orm === 'prisma') {
+  // Disabling this rule for now as we plan on adding support for more ORMs in the future
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+  if (config.orm.platform === 'prisma') {
     logger.debug('Adding builder imports for Prisma ORM', config);
     builderOrmImports = `${builderOrmImports}
 import PrismaPlugin from '@pothos/plugin-prisma';
@@ -64,25 +66,25 @@ builder.mutationType({});
 export default builder;
 `;
 
-  const builderDir = resolve(process.cwd(), config.serverDir, 'generated', 'builder');
+  const builderDir = resolve(process.cwd(), config.server.dir, 'generated', 'builder');
   logger.debug(`Creating builder directory (if it doesn't already exist) at ${builderDir}`, config);
   await mkdir(builderDir, { recursive: true });
   const builderFile = resolve(builderDir, 'index.ts');
   logger.debug(`Writing builder to ${builderFile}`, config);
 
   await writeFile(builderFile, builderOutput);
-  logger.info('GraphQL Builder Successfully Updated', config);
+  logger.info('GraphQL Builder Successfully Generated', config);
 };
 
 export const generateGraphqlSchema = async (config: Config) => {
-  if (!config.capabilities.graphql) {
+  if (!config.graphql.enabled) {
     logger.info('GraphQL capability set to false, skipping schema generation', config);
     return;
   }
   logger.debug('Computing directories for Pothos schema generating', config);
-  const schemaPartsGlob = join(config.serverDir, '**', '*.{mutations,objects,queries}.ts');
+  const schemaPartsGlob = join(config.server.dir, '**', '*.{mutations,objects,queries}.ts');
   logger.debug(`Schema search glob set to ${schemaPartsGlob}`, config);
-  const generatedPothosSchemaPath = resolve(process.cwd(), config.serverDir, 'schema', 'index.ts');
+  const generatedPothosSchemaPath = resolve(process.cwd(), config.server.dir, 'schema', 'index.ts');
   logger.debug(`Schema output file set to ${generatedPothosSchemaPath}`, config);
 
   logger.debug('Starting Pothos schema build', config);
@@ -95,14 +97,14 @@ import builder from '../builder';
 `;
   const schemaParts = await glob(schemaPartsGlob);
   schemaParts.forEach((schemaPartPath: string) => {
-    const parsedServerDir = config.serverDir.includes('./')
-      ? config.serverDir.split('./')[1]!
-      : config.serverDir;
+    const parsedServerDir = config.server.dir.includes('./')
+      ? config.server.dir.split('./')[1]!
+      : config.server.dir;
     const relativePath = schemaPartPath.split(parsedServerDir)[1];
     if (relativePath) {
       logger.debug(`Found Pothos schema chunk at ${schemaPartsGlob}`, config);
       schemaOutput = `${schemaOutput}
-import '..${relativePath.split('.ts')[0]!}';`;
+import '../..${relativePath.split('.ts')[0]!}';`;
     }
   });
 
@@ -111,7 +113,7 @@ const schema = builder.toSchema();
 export default schema;
 `;
 
-  const schemaDir = resolve(process.cwd(), config.serverDir, 'generated', 'schema');
+  const schemaDir = resolve(process.cwd(), config.server.dir, 'generated', 'schema');
   logger.debug(`Creating schema directory (if it doesn't already exist) at ${schemaDir}`, config);
 
   await mkdir(schemaDir, { recursive: true });
@@ -121,5 +123,5 @@ export default schema;
   logger.debug(`Writing Pothos schema to ${schemaFile}`, config);
 
   await writeFile(schemaFile, schemaOutput);
-  logger.info('GraphQL Schema Successfully Updated', config);
+  logger.info('GraphQL Schema Successfully Generated', config);
 };

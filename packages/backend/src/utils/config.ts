@@ -4,35 +4,41 @@ import { resolve } from 'path';
 import logger from 'utils/logger';
 
 export interface Config {
-  capabilities: {
-    auth: boolean;
-    graphql: boolean;
-    orm: boolean;
-    rest: boolean;
+  auth: {
+    platform: '@antribute/backend-auth-nextauth' | 'none';
   };
   graphql: {
-    builderPath?: string;
+    dir: string;
+    platform: '@antribute/backend-graphql-pothos' | 'none';
   };
   logLevel: 'debug' | 'info' | 'warn' | 'error';
-  orm: 'prisma' | 'none';
-  prismaDir: string;
-  platform: 'express' | 'nextjs';
-  serverDir: string;
+  orm: {
+    dir: string;
+    platform: '@antribute/backend-orm-prisma' | 'none';
+  };
+  server: {
+    dir: string;
+    platform: '@antribute/backend-server-express' | '@antribute/backend-server-nextjs' | 'none';
+  };
 }
 
 export const defaultConfig: Config = {
-  capabilities: {
-    auth: true,
-    graphql: true,
-    orm: true,
-    rest: false,
+  auth: {
+    platform: '@antribute/backend-auth-nextauth',
   },
-  graphql: {},
+  graphql: {
+    dir: resolve('generated', 'pothos'),
+    platform: '@antribute/backend-graphql-pothos',
+  },
   logLevel: 'info',
-  orm: 'prisma',
-  prismaDir: 'prisma',
-  platform: 'nextjs',
-  serverDir: resolve('src', 'server'),
+  orm: {
+    dir: 'prisma',
+    platform: '@antribute/backend-orm-prisma',
+  },
+  server: {
+    dir: resolve('src', 'server'),
+    platform: '@antribute/backend-server-nextjs',
+  },
 };
 
 export const getConfig = async (configPath: string): Promise<Config> => {

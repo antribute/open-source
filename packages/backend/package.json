@@ -1,22 +1,18 @@
 {
   "name": "@antribute/backend",
-  "description": "An enterprise grade, fully typed backend framework",
+  "description": "The Antribute Backend Framework, in convenient CLI form",
   "version": "0.1.0",
   "type": "module",
-  "main": "./dist/index.cjs",
-  "exports": {
-    ".": {
-      "require": "./dist/index.cjs",
-      "import": "./dist/index.js"
-    }
+  "bin": {
+    "antribute-backend": "./dist/index.js"
   },
-  "types": "./dist/index.d.ts",
   "files": [
     "dist/**"
   ],
   "scripts": {
     "build": "tsup",
     "clean": "rimraf .turbo && rimraf .next && rimraf node_modules && rimraf build",
+    "cli": "node ./dist/index.js",
     "dev": "pnpm run build --watch",
     "lint": "eslint --cache src/**",
     "test": "vitest"
@@ -29,6 +25,7 @@
   "author": "Antribute, Inc. (https://www.antribute.com)",
   "license": "MIT",
   "devDependencies": {
+    "@antribute/backend-core": "workspace:^",
     "@antribute/config": "workspace:*",
     "@types/node": "18.11.9",
     "@vitest/coverage-c8": "^0.25.3",
@@ -43,10 +40,9 @@
     "vitest": "^0.25.3"
   },
   "dependencies": {
-    "encoding": "^0.1.13",
-    "graphql-yoga": "^3.1.1"
+    "cmd-ts": "^0.12.1"
   },
   "peerDependencies": {
-    "graphql": ">= 16.0.0 < 17"
+    "@antribute/backend-core": "*"
   }
 }

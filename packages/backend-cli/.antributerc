@@ -1,5 +1,0 @@
-{
-  "logLevel": "debug",
-  "prismaDir": "./test-prisma",
-  "serverDir": "./test-server"
-}
