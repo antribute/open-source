@@ -60,6 +60,7 @@ const nextAuthGenerator: GeneratorFunc = async (config) => {
   try {
     await access(authModuleDir);
     logger.debug('Auth module has already been generated, skipping', config);
+    return;
   } catch (err) {
     // Do nothing, if the auth dir doesn't exist we can continue generation
   }

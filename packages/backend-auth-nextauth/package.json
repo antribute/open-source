@@ -38,6 +38,13 @@
     "vitest": "^0.25.3"
   },
   "peerDependencies": {
-    "@antribute/backend-core": "*"
+    "@antribute/backend-core": "*",
+    "@next-auth/prisma-adapter": ">= 1.0.0 < 2",
+    "next-auth": ">= 4.0.0 < 5"
+  },
+  "peerDependenciesMeta": {
+    "@next-auth/prisma-adapter": {
+      "optional": true
+    }
   }
 }
