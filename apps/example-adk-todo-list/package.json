@@ -1,0 +1,35 @@
+{
+  "name": "@antribute/example-adk-todo-list",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "antribute:generate": "antribute-backend generate",
+    "build": "next build",
+    "clean": "rimraf .turbo && rimraf .next && rimraf node_modules && rimraf build",
+    "dev": "next dev",
+    "lint": "next lint",
+    "start": "next start",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@antribute/backend": "workspace:*",
+    "@antribute/backend-auth-nextauth": "workspace:*",
+    "@antribute/backend-core": "workspace:*",
+    "next": "13.2.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@antribute/config": "workspace:*",
+    "@types/node": "18.11.9",
+    "@types/react": "18.0.25",
+    "@types/react-dom": "18.0.9",
+    "@vitest/coverage-c8": "^0.25.3",
+    "eslint": "^8.28.0",
+    "happy-dom": "^7.7.0",
+    "prettier": "2.8.2",
+    "typescript": "^5.0.0-beta",
+    "vitest": "^0.25.3"
+  }
+}
