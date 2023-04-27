@@ -5,17 +5,17 @@ describe('config', () => {
   describe('getConfig', () => {
     it('should import a typescript-based config and override the default config', async () => {
       const config = await getConfig('./test-config-files/.antributerc.ts');
-      expect(config.server.platform).toBe('express');
+      expect(config.server.platform).toBe('@antribute/backend-server-express');
     });
 
     it('should import a commonjs-based config and override the default config', async () => {
       const config = await getConfig('./test-config-files/.antributerc.cjs');
-      expect(config.server.platform).toBe('express');
+      expect(config.server.platform).toBe('@antribute/backend-server-express');
     });
 
     it('should return a default config if loading the config fails', async () => {
-      const config = await getConfig();
-      expect(config.server.platform).toBe('express');
+      const config = await getConfig('oops');
+      expect(config.server.platform).toBe('@antribute/backend-server-nextjs');
     });
   });
 

@@ -5,44 +5,39 @@ import { parse, resolve } from 'path';
 
 export interface Config {
   auth: {
-    enabled: boolean;
-    platform: 'nextauth';
-    tenancy: 'multi' | 'single';
+    platform: '@antribute/backend-auth-nextauth' | 'none';
   };
   graphql: {
-    enabled: boolean;
-    builderPath?: string;
+    dir: string;
+    platform: '@antribute/backend-graphql-pothos' | 'none';
   };
   logLevel: 'debug' | 'info' | 'warn' | 'error';
   orm: {
-    enabled: boolean;
     dir: string;
-    platform: 'prisma';
+    platform: '@antribute/backend-orm-prisma' | 'none';
   };
   server: {
     dir: string;
-    platform: 'express' | 'next';
+    platform: '@antribute/backend-server-express' | '@antribute/backend-server-nextjs' | 'none';
   };
 }
 
 export const defaultConfig: Config = {
   auth: {
-    enabled: true,
-    platform: 'nextauth',
-    tenancy: 'multi',
+    platform: '@antribute/backend-auth-nextauth',
   },
   graphql: {
-    enabled: true,
+    dir: resolve('generated', 'pothos'),
+    platform: '@antribute/backend-graphql-pothos',
   },
   logLevel: 'info',
   orm: {
-    enabled: true,
     dir: 'prisma',
-    platform: 'prisma',
+    platform: '@antribute/backend-orm-prisma',
   },
   server: {
     dir: resolve('src', 'server'),
-    platform: 'next',
+    platform: '@antribute/backend-server-nextjs',
   },
 };
 
@@ -66,5 +61,5 @@ export const getConfig = async (configPath?: string): Promise<Config> => {
   const rawConfig = await bundleRequire({ filepath: configFile });
   const mod = rawConfig.mod as { default?: Partial<Config> };
   const configContent = mod.default ?? (rawConfig.mod as Partial<Config>);
-  return merge(defaultConfig, configContent);
+  return merge({ ...defaultConfig }, configContent);
 };

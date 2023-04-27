@@ -1,6 +1,6 @@
 module.exports = {
   server: {
     dir: './',
-    platform: 'express',
+    platform: '@antribute/backend-server-express',
   },
 };

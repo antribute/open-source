@@ -7,8 +7,7 @@ import logger from './logger';
 interface GenerateFileParams {
   fileContent: string;
   fileName: string;
-  filePath?: string;
-  parentPath?: string;
+  filePath: string;
 }
 
 export const getServerDir = (config: Config) => resolve(process.cwd(), config.server.dir);
@@ -16,10 +15,9 @@ export const getServerDir = (config: Config) => resolve(process.cwd(), config.se
 export const getGeneratedDir = (config: Config) => join(getServerDir(config), 'generated');
 
 export const generateFile = async (params: GenerateFileParams, config: Config) => {
-  const directoryPath = join(params.parentPath ?? getGeneratedDir(config), params.filePath ?? '');
-  const filePath = join(directoryPath, params.fileName);
-  logger.debug(`Creating directory if not exists: ${directoryPath}`, config);
-  await mkdir(directoryPath, { recursive: true });
+  const filePath = join(params.filePath, params.fileName);
+  logger.debug(`Creating directory if not exists: ${params.filePath}`, config);
+  await mkdir(params.filePath, { recursive: true });
   logger.debug('Directory created successfully', config);
 
   logger.debug(`Writing file to: ${filePath}`, config);

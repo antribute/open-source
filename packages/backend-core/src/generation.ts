@@ -1,17 +1,29 @@
+import { bundleRequire } from 'bundle-require';
 import { resolve } from 'path';
 import type { Config } from './config';
 import logger from './logger';
 
-export type GeneratorFunc = (stepName: string, config: Config) => Promise<void>;
+export type GeneratorFunc = (config: Config) => Promise<void>;
 
 export const importAndRunGenerator = async (
   stepName: string,
   generator: string,
   config: Config
 ) => {
-  // We're not using bundle-require here as there is no plan for the antribute backend to ever
-  // support non-ts generators
-  const rawImport = (await import(resolve(process.cwd(), generator))) as { default: unknown };
+  // We have to do some weird things with paths here to get our imports working. This is a really
+  // bad practice and we need to find a better way to load these modules ASAP because this will
+  // block any engineers that use a different build system than ours to write extensions
+  const ieEsm = import.meta.url.startsWith('file:');
+  const fullGeneratorPath = resolve(
+    process.cwd(),
+    'node_modules',
+    generator,
+    'dist',
+    ieEsm ? 'index.js' : 'index.cjs'
+  );
+  const rawImport = (await bundleRequire({ filepath: fullGeneratorPath })).mod as {
+    default: unknown;
+  };
   if (!rawImport.default) {
     logger.error(
       `Step ${stepName} is attempting to import ${generator}, however no default export was provided.`
@@ -26,5 +38,5 @@ export const importAndRunGenerator = async (
     throw new Error('BAD_GENERATOR_EXPORT_TYPE');
   }
 
-  await (rawImport.default as GeneratorFunc)(stepName, config);
+  await (rawImport.default as GeneratorFunc)(config);
 };

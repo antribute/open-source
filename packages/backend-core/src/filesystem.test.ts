@@ -31,7 +31,10 @@ describe('filesystem', () => {
 
   describe('generateFile', () => {
     it('should write a file to the given path', async () => {
-      await generateFile({ fileContent: 'Hello, world!', fileName: 'testFile' }, config);
+      await generateFile(
+        { fileContent: 'Hello, world!', fileName: 'testFile', filePath: './test-output' },
+        config
+      );
       const fileOutput = await readFile(resolve(getGeneratedDir(config), 'testFile'));
       expect(fileOutput.toString()).toBe('Hello, world!');
     });
