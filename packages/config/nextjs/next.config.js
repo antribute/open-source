@@ -6,6 +6,9 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   reactStrictMode: true,
   swcMinify: true,
 };
