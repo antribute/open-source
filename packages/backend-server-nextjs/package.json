@@ -1,0 +1,50 @@
+{
+  "name": "@antribute/backend-server-nextjs",
+  "description": "Antribute Backend Server Adapter for Next.js",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    "import": "./dist/index.js",
+    "require": "./dist/index.cjs"
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "clean": "rimraf .turbo && rimraf node_modules && rimraf dist",
+    "dev": "pnpm run build --watch",
+    "lint": "eslint --cache src/**",
+    "test": "vitest"
+  },
+  "keywords": [
+    "antribute",
+    "antribute-backend",
+    "nextjs"
+  ],
+  "author": "Antribute, Inc. (https://www.antribute.com)",
+  "license": "MIT",
+  "devDependencies": {
+    "@antribute/backend-core": "workspace:*",
+    "@antribute/config": "workspace:*",
+    "@types/node": "18.11.9",
+    "@vitest/coverage-c8": "^0.25.3",
+    "graphql-yoga": "^3.1.1",
+    "next": "^13.3.1"
+  },
+  "peerDependencies": {
+    "@antribute/backend-core": "*",
+    "@graphql-yoga/plugin-disable-introspection": ">= 0.8.0 < 1",
+    "graphql-yoga": ">= 3.0.0 < 4",
+    "next": ">= 13.0.0 < 14"
+  },
+  "peerDependenciesMeta": {
+    "@graphql-yoga/plugin-disable-introspection": {
+      "optional": true
+    },
+    "graphql-yoga": {
+      "optional": true
+    }
+  }
+}
