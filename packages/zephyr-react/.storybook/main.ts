@@ -3,7 +3,7 @@ import { mergeConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default <StorybookConfig>{
-  stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.tsx'],
+  stories: ['../src/**/*.mdx', '../src/**/*.stories.tsx'],
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
@@ -14,10 +14,7 @@ export default <StorybookConfig>{
     options: {},
   },
   docs: {
-    docsPage: true,
-  },
-  typescript: {
-    reactDocgen: 'react-docgen-typescript',
+    autodocs: 'tag',
   },
   async viteFinal(config, options) {
     return mergeConfig(config, {

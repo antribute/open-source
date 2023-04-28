@@ -1,4 +1,4 @@
-import { CardContainerProps } from 'components/Card/Card';
+import type { Meta, StoryObj } from '@storybook/react';
 import { capitalCase } from 'change-case';
 import { Button } from 'components/Button';
 import { IconButton } from 'components/IconButton/IconButton';
@@ -10,9 +10,20 @@ import { useState } from 'react';
 import { ColorSchemeName, colorSchemeNames, mainColorSchemeNames } from '@antribute/zephyr-core';
 import { Card } from '.';
 
-type ExampleCardProps = CardContainerProps;
+const meta = {
+  args: {},
+  title: 'Input/Card',
+  component: Card.Container,
+} satisfies Meta<Card.CardContainerProps>;
 
-const ExampleCard = ({ colorScheme: colorSchemeProp, children, ...props }: ExampleCardProps) => {
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+const ExampleCard = ({
+  colorScheme: colorSchemeProp,
+  children,
+  ...props
+}: Card.CardContainerProps) => {
   const [colorScheme, setColorScheme] = useState<ColorSchemeName>(colorSchemeProp ?? 'surface');
 
   return (
@@ -129,24 +140,39 @@ const ExampleCard = ({ colorScheme: colorSchemeProp, children, ...props }: Examp
   );
 };
 
-export const Default = () => {
-  return <ExampleCard className="w-352" />;
+export const Default: Story = {
+  args: {},
+  render: () => <ExampleCard className="w-352" />,
 };
 
-export const CardThemes = (props: ExampleCardProps) => {
-  return (
+export const CardThemes: Story = {
+  args: {},
+  render: (args) => (
     <div className="space-x-26 fixed flex h-full w-full justify-between pb-[5%]">
       <div className="grid w-full max-w-screen-lg grid-cols-9 gap-16">
         {mainColorSchemeNames
           .filter((e) => e !== 'default')
           .map((e) => {
-            return <ExampleCard {...props} colorScheme={e} className="col-span-3" />;
+            return <ExampleCard {...args} colorScheme={e} className="col-span-3" />;
           })}
       </div>
     </div>
-  );
+  ),
 };
 
-export const NoPadding = () => {
-  return <CardThemes padding={false} />;
+export const NoPadding: Story = {
+  args: {
+    padding: false,
+  },
+  render: (args) => (
+    <div className="space-x-26 fixed flex h-full w-full justify-between pb-[5%]">
+      <div className="grid w-full max-w-screen-lg grid-cols-9 gap-16">
+        {mainColorSchemeNames
+          .filter((e) => e !== 'default')
+          .map((e) => {
+            return <ExampleCard {...args} colorScheme={e} className="col-span-3" />;
+          })}
+      </div>
+    </div>
+  ),
 };

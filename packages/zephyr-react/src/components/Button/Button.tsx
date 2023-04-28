@@ -1,20 +1,17 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { deriveClassed } from '@tw-classed/react';
 import { ButtonElement } from 'components/Button/Button.styles';
 import { InlineButtonIcon, InlineButtonIconProps } from 'components/Button/InlineButtonIcon';
 import type { ComponentProps } from 'react';
 
-export type ButtonProps = React.ComponentProps<typeof Button>;
+type ButtonComponentProps = {
+  startIcon?: React.ReactNode;
+  endIcon?: React.ReactNode;
+  startIconClassName?: string;
+  endIconClassName?: string;
+} & ComponentProps<typeof ButtonElement>;
 
-export const Button = deriveClassed<
-  typeof ButtonElement,
-  {
-    startIcon?: React.ReactNode;
-    endIcon?: React.ReactNode;
-    startIconClassName?: string;
-    endIconClassName?: string;
-  } & ComponentProps<typeof ButtonElement>
->(
+export const ButtonComponent = forwardRef<HTMLButtonElement, ButtonComponentProps>(
   (
     {
       size,
@@ -71,3 +68,15 @@ export const Button = deriveClassed<
     );
   }
 );
+
+/**
+ * TODO: Whenever Storybook docgen bug is fixed, simply export a single Button component
+ *
+ * We're separately defining and exporting ButtonComponent due
+ * to a bug in storybook@7.0.4 where prop table isn't generated
+ */
+export type ButtonProps = React.ComponentProps<typeof Button>;
+
+export const Button = deriveClassed<typeof ButtonElement, ButtonComponentProps>((props, ref) => (
+  <ButtonComponent {...props} ref={ref} />
+));

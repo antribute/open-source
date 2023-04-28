@@ -1,8 +1,20 @@
+import type { Meta, StoryObj } from '@storybook/react';
 import { RenderPaperContainers } from 'utils/storybook-utils';
+
 import { Dialog } from '.';
 
-export const Default = () => {
-  return (
+const meta = {
+  args: {},
+  title: 'Navigation/Dialog',
+  component: Dialog.Root,
+} satisfies Meta<typeof Dialog.Root>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {},
+  render: () => (
     <RenderPaperContainers>
       <Dialog.Root>
         <Dialog.TriggerButton>Open</Dialog.TriggerButton>
@@ -27,5 +39,5 @@ export const Default = () => {
         </Dialog.Content>
       </Dialog.Root>
     </RenderPaperContainers>
-  );
+  ),
 };
