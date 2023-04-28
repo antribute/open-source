@@ -29,15 +29,14 @@ const appendSchemaConfig = async (generatedDir: string, config: Config) => {
   logger.debug('Appending schema configuration to generated Prisma schema', config);
 
   const schemaOutputPath = resolve(process.cwd(), config.orm.dir, 'generatedSchema.prisma');
-  const prismaOutputDir = join('..', 'prisma');
 
   let pothosGenerator = '';
   if (config.graphql.platform === '@antribute/backend-graphql-pothos') {
     logger.debug('Adding additional Prisma configuration for GraphQL platform: Pothos', config);
 
-    const pothosOutputFile = join(generatedDir, 'pothos', 'index.ts');
+    const pothosOutputFile = join(generatedDir, 'pothos', 'types.ts');
     pothosGenerator = populateTemplate<PothosGeneratorTemplate>(pothosGeneratorTemplate, {
-      prismaOutputDir,
+      prismaOutputDir: join('..', 'prisma'),
       pothosOutputFile,
     });
   }
@@ -46,7 +45,12 @@ const appendSchemaConfig = async (generatedDir: string, config: Config) => {
   const content = populateTemplate<AdditionalSchemaContentTemplate>(
     additionalSchemaContentTemplate,
     // TODO: Post-mvp let's make this configurable
-    { dbType: 'postgres', dbUrl: 'env("DATABASE_URL")', pothosGenerator, prismaOutputDir }
+    {
+      dbType: 'postgres',
+      dbUrl: 'env("DATABASE_URL")',
+      pothosGenerator,
+      prismaOutputDir: join(generatedDir, 'prisma'),
+    }
   );
 
   logger.debug(`Writing to Prisma schema at ${schemaOutputPath}`, config);

@@ -30,6 +30,7 @@ export const pothosGeneratorTemplate = `generator pothos {
   provider = "prisma-pothos-types"
   clientOutput = "{{prismaOutputDir}}"
   output = "{{pothosOutputFile}}"
+  prismaUtils = true
 }`;
 
 export interface PrismaAccessorTemplate {
