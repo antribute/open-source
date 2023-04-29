@@ -7,8 +7,11 @@ builder.mutationField('createTask', (t) =>
     args: {
       input: t.arg({ type: TaskCreateInput, required: true }),
     },
-    resolve: async (_query, _root, { input }) =>
-      createTask({ ...input, complete: false, user: { connect: { id: 'foo' } } }),
+    authScopes: {
+      loggedIn: true,
+    },
+    resolve: async (_query, _root, { input }, { userId }) =>
+      createTask({ ...input, complete: false, user: { connect: { id: 'foo' } } }, userId),
     type: 'Task',
   })
 );
@@ -17,6 +20,9 @@ builder.mutationField('deleteTask', (t) =>
   t.prismaField({
     args: {
       id: t.arg.string({ required: true }),
+    },
+    authScopes: {
+      loggedIn: true,
     },
     resolve: async (_query, _root, { id }) => deleteTaskById(id),
     type: 'Task',
@@ -28,6 +34,9 @@ builder.mutationField('updateTask', (t) =>
     args: {
       id: t.arg.string({ required: true }),
       input: t.arg({ type: TaskUpdateInput, required: true }),
+    },
+    authScopes: {
+      loggedIn: true,
     },
     resolve: async (_query, _root, { id, input }) => updateTaskById(id, input),
     type: 'Task',

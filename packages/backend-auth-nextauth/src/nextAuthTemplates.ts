@@ -82,7 +82,18 @@ import type { AuthOptions } from 'next-auth';
 import { prisma } from '../generated/db';
 
 export const adapter = PrismaAdapter(prisma);
+export const callbacks: AuthOptions['callbacks'] = {
+  session({ session, user }) {
+    return { ...session, user: { ...session.user, id: user.id } };
+  },
+};
 export const providers: AuthOptions['providers'] = [
   /* TODO: Add your providers here! */
 ];
+
+export const authOptions: AuthOptions = {
+  adapter,
+  callbacks,
+  providers,
+};
 `;

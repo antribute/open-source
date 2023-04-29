@@ -3,5 +3,6 @@ node_modules
 .eslintrc.cjs
 next-env.d.ts
 next.config.js
+generated
 vitest.config.js
  

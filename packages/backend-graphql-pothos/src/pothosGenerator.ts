@@ -27,28 +27,39 @@ const createBuilder = async (pothosOutputDir: string, config: Config) => {
   logger.debug('Generating Pothos builder', config);
 
   let additionalImports = '';
-  let ormBody = '';
-  let ormTypings = '';
-  let ormPlugins: PothosBuilderTemplate['ormPlugins'] = [];
+  let body = '';
+  let plugins: PothosBuilderTemplate['plugins'] = [];
+  let typings: PothosBuilderTemplate['typings'] = [];
+
+  if (config.auth.platform === '@antribute/backend-auth-nextauth') {
+    logger.debug('Populating Pothos Config for Auth: NextAuth', config);
+    body += 'authScopes: (context) => ({ loggedIn: context.loggedIn }),';
+    plugins = [...plugins, { name: 'ScopeAuthPlugin', from: '@pothos/plugin-scope-auth' }];
+    typings = [
+      ...typings,
+      { name: 'AuthScopes', value: '{ loggedIn: boolean }' },
+      { name: 'Context', value: '{ loggedIn: boolean, userId: string }' },
+    ];
+  }
 
   if (config.orm.platform === '@antribute/backend-orm-prisma') {
     logger.debug('Populating Pothos Config for ORM: Prisma', config);
     additionalImports += prismaAdditionalImports;
-    ormBody += 'prisma: { client: prisma },\n';
-    ormPlugins = [
-      ...ormPlugins,
+    body += '\nprisma: { client: prisma },';
+    plugins = [
+      ...plugins,
       { name: 'PrismaPlugin', from: '@pothos/plugin-prisma' },
       { name: 'PrismaUtilPlugin', from: '@pothos/plugin-prisma-utils' },
     ];
-    ormTypings += 'PrismaTypes: PrismaTypes;\n';
+    typings = [...typings, { name: 'PrismaTypes', value: 'PrismaTypes' }];
   }
 
   logger.debug('Populating Pothos builder', config);
   const content = populateTemplate<PothosBuilderTemplate>(pothosBuilderTemplate, {
     additionalImports,
-    ormBody,
-    ormPlugins,
-    ormTypings,
+    body,
+    plugins,
+    typings,
   });
 
   await generateFile(

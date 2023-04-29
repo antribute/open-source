@@ -1,4 +1,7 @@
 export interface NextHandlerTemplate {
+  authContext: string;
+  authHandler: string;
+  authImports: { name: string; from: string }[];
   useGraphql: boolean;
 }
 export const nextHandlerTemplate = `//
@@ -12,6 +15,7 @@ import { useDisableIntrospection } from '@graphql-yoga/plugin-disable-introspect
 import { createYoga } from 'graphql-yoga'
 import schema from '../graphqlSchema';
 {{/if}}
+{{#each authImports}}import {{name}} from '{{from}}';\n{{/each}}
 
 interface Ctx {
   params: {
@@ -21,21 +25,25 @@ interface Ctx {
 
 {{#if useGraphql}}
 const yoga = createYoga({
+  context: async () => {
+    {{authContext}}
+  },
   graphiql: process.env.NODE_ENV !== 'production',
-  plugins: process.env.NODE_ENV !== 'production' ? [useDisableIntrospection()] : [],
+  plugins: process.env.NODE_ENV === 'production' ? [useDisableIntrospection()] : [],
   graphqlEndpoint: '/api/graphql',
   schema,
 });
 {{/if}}
 
-export async function apiCatchAll(request: Request, { params }: Ctx) {
+export async function apiCatchAll(request: Request, ctx: Ctx) {
   {{#if useGraphql}}
-  if (params.path?.[0] === 'graphql') {
-    const yogaRes = await yoga.fetch(request);
+  if (ctx.params.path?.[0] === 'graphql') {
+    const yogaRes = await yoga.fetch(request, ctx);
     return new NextResponse(yogaRes.body, yogaRes);
   }
-  return NextResponse.json({ errors: [{ message: 'Not found.' }] }, { status: 404 });
   {{/if}}
+  {{authHandler}}
+  return NextResponse.json({ errors: [{ message: 'Not found.' }] }, { status: 404 });
 }
 
 export async function GET(request: Request, ctx: Ctx) {

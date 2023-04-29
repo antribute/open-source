@@ -10,6 +10,9 @@ builder.queryField('task', (t) =>
         required: true,
       }),
     },
+    authScopes: {
+      loggedIn: true,
+    },
     resolve: async (_query, args) => getTaskById(args.id),
     type: Task,
   })
@@ -20,7 +23,10 @@ builder.queryField('tasks', (t) =>
     args: {
       pagination: t.arg({ type: PaginationInput, required: false }),
     },
-    resolve: async (_query, args) => getAllTasks(args.pagination),
+    authScopes: {
+      loggedIn: true,
+    },
+    resolve: async (_query, args, { userId }) => getAllTasks(userId, args.pagination),
     type: PaginatedTask,
   })
 );
