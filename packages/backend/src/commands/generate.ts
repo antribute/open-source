@@ -5,6 +5,7 @@ const generate = async (configPath?: string) => {
 
   await importAndRunGenerator('Authorization', config.auth.platform, config);
   await importAndRunGenerator('ORM', config.orm.platform, config);
+  await importAndRunGenerator('Permissions', config.permissions.platform, config);
   await importAndRunGenerator('GraphQL', config.graphql.platform, config);
   await importAndRunGenerator('Server', config.server.platform, config);
 };

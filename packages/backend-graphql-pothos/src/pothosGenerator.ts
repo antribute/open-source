@@ -20,8 +20,8 @@ import type {
   PothosSchemaTemplate,
 } from './pothosTemplates';
 
-const prismaAdditionalImports = `import { prisma } from '../db';
-import type PrismaTypes from './types';\n`;
+const prismaAdditionalImports = `\nimport { prisma } from '../db';
+import type PrismaTypes from './types';`;
 
 const createBuilder = async (pothosOutputDir: string, config: Config) => {
   logger.debug('Generating Pothos builder', config);
@@ -31,13 +31,39 @@ const createBuilder = async (pothosOutputDir: string, config: Config) => {
   let plugins: PothosBuilderTemplate['plugins'] = [];
   let typings: PothosBuilderTemplate['typings'] = [];
 
-  if (config.auth.platform === '@antribute/backend-auth-nextauth') {
-    logger.debug('Populating Pothos Config for Auth: NextAuth', config);
+  // There's a tony bit of duplicated code here, we might wanna clean this up down the line
+  if (
+    config.auth.platform === '@antribute/backend-auth-nextauth' &&
+    config.permissions.platform === 'none'
+  ) {
+    logger.debug('Populating Pothos Config for Auth: NextAuth with no Permissions Adapter', config);
     body += 'authScopes: (context) => ({ loggedIn: context.loggedIn }),';
     plugins = [...plugins, { name: 'ScopeAuthPlugin', from: '@pothos/plugin-scope-auth' }];
     typings = [
       ...typings,
       { name: 'AuthScopes', value: '{ loggedIn: boolean }' },
+      { name: 'Context', value: '{ loggedIn: boolean, userId: string }' },
+    ];
+  }
+
+  if (
+    config.auth.platform === '@antribute/backend-auth-nextauth' &&
+    config.permissions.platform === '@antribute/backend-perms-auth0-fga'
+  ) {
+    logger.debug(
+      'Populating Pothos Config for Auth: NextAuth with Permissions Adapter: Auth0 FGA',
+      config
+    );
+    additionalImports += "import { checkPermissions, PermissionsParams } from '../auth0Fga';";
+    body +=
+      'authScopes: (context) => ({ loggedIn: context.loggedIn, hasPermissions: (perm) => checkPermissions({ ...perm, userId: context.userId }) }),';
+    plugins = [...plugins, { name: 'ScopeAuthPlugin', from: '@pothos/plugin-scope-auth' }];
+    typings = [
+      ...typings,
+      {
+        name: 'AuthScopes',
+        value: "{ hasPermissions: Omit<PermissionsParams, 'userId'>, loggedIn: boolean }",
+      },
       { name: 'Context', value: '{ loggedIn: boolean, userId: string }' },
     ];
   }

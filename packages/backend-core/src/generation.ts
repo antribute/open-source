@@ -10,6 +10,10 @@ export const importAndRunGenerator = async (
   generator: string,
   config: Config
 ) => {
+  if (generator === 'none') {
+    logger.info(`Platform set to "none" for step ${stepName}, skipping generation`, config);
+    return;
+  }
   // We have to do some weird things with paths here to get our imports working. This is a really
   // bad practice and we need to find a better way to load these modules ASAP because this will
   // block any engineers that use a different build system than ours to write extensions

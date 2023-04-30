@@ -10,9 +10,14 @@ builder.queryField('task', (t) =>
         required: true,
       }),
     },
-    authScopes: {
+    authScopes: (_, args) => ({
       loggedIn: true,
-    },
+      hasPermissions: {
+        authModelId: '',
+        objectId: args.id,
+        relation: 'owner',
+      },
+    }),
     resolve: async (_query, args) => getTaskById(args.id),
     type: Task,
   })

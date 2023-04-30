@@ -16,6 +16,9 @@ export interface Config {
     dir: string;
     platform: '@antribute/backend-orm-prisma' | 'none';
   };
+  permissions: {
+    platform: '@antribute/backend-perms-auth0-fga' | 'none';
+  };
   server: {
     dir: string;
     platform: '@antribute/backend-server-express' | '@antribute/backend-server-nextjs' | 'none';
@@ -34,6 +37,9 @@ export const defaultConfig: Config = {
   orm: {
     dir: 'prisma',
     platform: '@antribute/backend-orm-prisma',
+  },
+  permissions: {
+    platform: '@antribute/backend-perms-auth0-fga',
   },
   server: {
     dir: resolve('src', 'server'),
