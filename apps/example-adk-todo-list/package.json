@@ -5,12 +5,12 @@
   "private": true,
   "scripts": {
     "antribute:generate": "antribute-backend generate",
-    "build": "next build",
+    "build": "pnpm run antribute:generate && next build",
     "clean": "rimraf .turbo && rimraf .next && rimraf node_modules && rimraf build",
     "dev": "next dev",
-    "lint": "next lint",
+    "lint": "pnpm run antribute:generate && next lint",
     "start": "next start",
-    "test": "vitest"
+    "test": "pnpm run antribute:generate && vitest"
   },
   "dependencies": {
     "@antribute/backend": "workspace:*",
