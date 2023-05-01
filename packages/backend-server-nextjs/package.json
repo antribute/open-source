@@ -30,8 +30,11 @@
     "@antribute/config": "workspace:*",
     "@types/node": "18.11.9",
     "@vitest/coverage-c8": "^0.25.3",
+    "graphql": "^16.6.0",
     "graphql-yoga": "^3.1.1",
-    "next": "^13.3.1"
+    "next": "^13.3.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
   },
   "peerDependencies": {
     "@antribute/backend-core": "*",
