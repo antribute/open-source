@@ -21,9 +21,14 @@ builder.mutationField('deleteTask', (t) =>
     args: {
       id: t.arg.string({ required: true }),
     },
-    authScopes: {
+    authScopes: (_, args) => ({
       loggedIn: true,
-    },
+      hasPermissions: {
+        objectId: args.id,
+        objectType: 'task',
+        relation: 'owner',
+      },
+    }),
     resolve: async (_query, _root, { id }) => deleteTaskById(id),
     type: 'Task',
   })
@@ -35,9 +40,14 @@ builder.mutationField('updateTask', (t) =>
       id: t.arg.string({ required: true }),
       input: t.arg({ type: TaskUpdateInput, required: true }),
     },
-    authScopes: {
+    authScopes: (_, args) => ({
       loggedIn: true,
-    },
+      hasPermissions: {
+        objectId: args.id,
+        objectType: 'task',
+        relation: 'owner',
+      },
+    }),
     resolve: async (_query, _root, { id, input }) => updateTaskById(id, input),
     type: 'Task',
   })

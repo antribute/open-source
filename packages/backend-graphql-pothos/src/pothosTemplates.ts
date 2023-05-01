@@ -34,11 +34,20 @@ export const pothosSchemaTemplate = `//
 // Any modifications will be overwritten on subsequent runs.
 //
 
+import { writeFile } from 'fs/promises';
+import { printSchema, lexicographicSortSchema } from 'graphql';
+import { join } from 'path';
 import builder from './pothos/builder';
 
 {{#each modules}}import '..{{this}}';{{/each}}
 
 const schema = builder.toSchema();
+
+const schemaAsString = printSchema(lexicographicSortSchema(schema));
+writeFile(join('.', 'schema.graphql'), schemaAsString).catch((err) => {
+  console.warn('An error occurred while generating your static GraphQL Schema:', err);
+});
+
 export default schema;
 `;
 
@@ -64,7 +73,9 @@ export const StringFilter = builder.prismaFilter('String', {
 
 export interface PaginatedObject<Obj = unknown> {
   count: number;
+  next?: string;
   objects: Obj[];
+  prev?: string;
 }
 
 export const buildPaginatedObj = <ObjectType>(type: any, description?: string) => {
@@ -73,20 +84,22 @@ export const buildPaginatedObj = <ObjectType>(type: any, description?: string) =
     description,
     fields: (t) => ({
       count: t.exposeInt('count'),
-      objects: t.expose('objects', { type: [type] })
+      next: t.exposeString('next', { nullable: true }),
+      objects: t.expose('objects', { type: [type] }),
+      prev: t.exposeString('prev', { nullable: true }),
     })
   })
 }
 
 export const PaginationInput = builder.inputType('PaginationInput', {
   fields: (t) => ({
-    skip: t.int({ required: true }),
+    cursor: t.string({ required: true }),
     take: t.int({ required: true }),
   }),
 });
 
 export interface PaginationParams {
-  skip?: number;
+  cursor?: string;
   take?: number;
 }
 

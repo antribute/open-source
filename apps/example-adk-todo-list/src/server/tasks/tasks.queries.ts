@@ -13,8 +13,8 @@ builder.queryField('task', (t) =>
     authScopes: (_, args) => ({
       loggedIn: true,
       hasPermissions: {
-        authModelId: '',
         objectId: args.id,
+        objectType: 'task',
         relation: 'owner',
       },
     }),

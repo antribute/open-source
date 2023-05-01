@@ -108,7 +108,7 @@ const createIndex = async (pothosOutputDir: string, config: Config) => {
   );
 };
 
-const stitchSchema = async (pothosOutputDir: string, config: Config) => {
+const stitchSchema = async (generatedDir: string, config: Config) => {
   logger.debug('Stitching GraphQL Schema', config);
 
   const serverDir = getServerDir(config);
@@ -129,7 +129,7 @@ const stitchSchema = async (pothosOutputDir: string, config: Config) => {
   logger.debug('Populating Pothos schema', config);
   const content = populateTemplate<PothosSchemaTemplate>(pothosSchemaTemplate, { modules });
   await generateFile(
-    { fileContent: content, fileName: 'graphqlSchema.ts', filePath: pothosOutputDir },
+    { fileContent: content, fileName: 'graphqlSchema.ts', filePath: generatedDir },
     config
   );
 };

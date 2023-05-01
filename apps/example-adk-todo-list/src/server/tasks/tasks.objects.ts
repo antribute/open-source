@@ -21,7 +21,7 @@ export const TaskCreateInput = builder.prismaCreate('Task', {
 
 export const TaskUpdateInput = builder.prismaUpdate('Task', {
   fields: (t) => ({
-    done: t.boolean({ required: false }),
+    complete: t.boolean({ required: false }),
     name: t.string({ required: false }),
   }),
 });
