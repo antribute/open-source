@@ -13,7 +13,7 @@
   ],
   "scripts": {
     "build": "tsup",
-    "clean": "rimraf .turbo && rimraf node_modules && rimraf dist",
+    "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf text-results && rimraf .eslintcache",
     "dev": "pnpm run build --watch",
     "lint": "eslint --cache src/**",
     "test": "vitest"

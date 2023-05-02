@@ -4,9 +4,9 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "antribute:generate": "./node_modules/.bin/antribute-backend generate",
+    "antribute:generate": "node ./node_modules/@antribute/backend/dist/index.js generate",
     "build": "pnpm run antribute:generate && next build",
-    "clean": "rimraf .turbo && rimraf .next && rimraf node_modules && rimraf build",
+    "clean": "rimraf .next && rimraf .turbo &&  rimraf coverage && rimraf node_modules && rimraf text-results && rimraf .eslintcache",
     "dev": "next dev",
     "lint": "pnpm run antribute:generate && next lint",
     "start": "next start",

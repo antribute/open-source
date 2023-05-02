@@ -74,7 +74,7 @@ const runPrismaGenerate = async (config: Config) => {
 
   const schemaOutputPath = resolve(process.cwd(), config.orm.dir, 'generatedSchema.prisma');
 
-  const prismaBin = resolve(dirname, '..', 'node_modules', '.bin', 'prisma');
+  const prismaBin = resolve(process.cwd(), 'node_modules', '.bin', 'prisma');
   logger.debug(`Prisma script path set to ${prismaBin}`, config);
   await execa(prismaBin, ['generate', '--schema', schemaOutputPath]);
 };

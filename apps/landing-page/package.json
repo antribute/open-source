@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "clean": "rimraf .turbo && rimraf .next && rimraf node_modules && rimraf build",
+    "clean": "rimraf .next && rimraf .turbo &&  rimraf coverage && rimraf node_modules && rimraf text-results && rimraf .eslintcache",
     "cypress:open": "cypress open",
     "dev": "next dev",
     "lint": "next lint",
