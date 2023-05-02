@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { logger } from '@antribute/backend-core';
 import { command, run, string, positional, option, optional, oneOf } from 'cmd-ts';
 
