@@ -4,7 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "antribute:generate": "antribute-backend generate",
+    "antribute:generate": "./node_modules/.bin/antribute-backend generate",
     "build": "pnpm run antribute:generate && next build",
     "clean": "rimraf .turbo && rimraf .next && rimraf node_modules && rimraf build",
     "dev": "next dev",
