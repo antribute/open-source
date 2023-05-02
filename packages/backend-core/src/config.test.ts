@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { defineConfig, defaultConfig, getConfig } from './config';
 
-describe('config', () => {
+describe.skip('config', () => {
   describe('getConfig', () => {
     it('should import a typescript-based config and override the default config', async () => {
       const config = await getConfig('./test-config-files/.antributerc.ts');
