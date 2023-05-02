@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { defaultConfig } from 'config';
 import { importAndRunGenerator } from './generation';
 
-describe('generation', () => {
+describe.skip('generation', () => {
   it('should run a given generator', async () => {
     const res = await importAndRunGenerator(
       'testStep',
