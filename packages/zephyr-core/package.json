@@ -22,7 +22,7 @@
     "build": "pnpm run build:classnames && pnpm run build:config",
     "build:config": "tsup src/tailwindConfig.ts --format cjs --dts --minify --no-config --sourcemap",
     "build:classnames": "tsup",
-    "clean": "rimraf .turbo && rimraf .next && rimraf node_modules && rimraf build",
+    "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf text-results && rimraf .eslintcache",
     "dev": "concurrently \"pnpm run build:classnames --watch\" \"pnpm run build:config --watch\"",
     "lint": "eslint --cache src/**",
     "test": "vitest"

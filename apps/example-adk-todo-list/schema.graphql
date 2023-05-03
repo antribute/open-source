@@ -1,0 +1,60 @@
+input IDFilter {
+  equals: String
+  not: IDFilter
+}
+
+type Mutation {
+  createTask(input: TaskCreateInput!): Task!
+  deleteTask(id: String!): Task!
+  updateTask(id: String!, input: TaskUpdateInput!): Task!
+}
+
+"""
+A paginated list of tasks
+"""
+type PaginatedTask {
+  count: Int!
+  next: String
+  objects: [Task!]!
+  prev: String
+}
+
+input PaginationInput {
+  cursor: String!
+  take: Int!
+}
+
+type Query {
+  task(
+    """
+    The UUID of the task to fetch
+    """
+    id: String!
+  ): Task!
+  tasks(pagination: PaginationInput): PaginatedTask!
+}
+
+input StringFilter {
+  contains: String
+  equals: String
+  not: StringFilter
+  startsWith: String
+}
+
+"""
+A single task
+"""
+type Task {
+  complete: Boolean!
+  id: String!
+  name: String!
+}
+
+input TaskCreateInput {
+  name: String!
+}
+
+input TaskUpdateInput {
+  complete: Boolean
+  name: String
+}

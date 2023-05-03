@@ -18,7 +18,7 @@
   "scripts": {
     "build": "NODE_OPTIONS=\"--max_old_space_size=4096\" tsup src/index.ts --format esm,cjs --dts",
     "build-storybook": "storybook build",
-    "clean": "rimraf .turbo && rimraf .next && rimraf node_modules && rimraf build",
+    "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf storybook-static && rimraf text-results && rimraf .eslintcache",
     "dev": "pnpm run build:watch",
     "lint": "eslint --cache src/**",
     "storybook": "storybook dev -p 6006 --no-open",

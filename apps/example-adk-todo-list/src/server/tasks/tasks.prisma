@@ -1,0 +1,11 @@
+import { User } from "../auth/auth"
+
+model Task {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  complete  Boolean
+  name      String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+}

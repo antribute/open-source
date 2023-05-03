@@ -39,5 +39,8 @@
       "pattern": "servers/*"
     }
   ],
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "[prisma]": {
+    "editor.defaultFormatter": "ajmnz.prisma-import"
+  }
 }

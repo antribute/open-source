@@ -17,6 +17,7 @@ node_modules
 
 # Generated Code
 **/generated
+generatedSchema.prisma
 
 # System Files
 .DS_Store

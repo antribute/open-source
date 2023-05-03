@@ -1,0 +1,50 @@
+{
+  "name": "@antribute/backend-auth-nextauth",
+  "description": "Antribute Backend Authentication Adapter for NextAuth.js",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    "import": "./dist/index.js",
+    "require": "./dist/index.cjs"
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf text-results && rimraf .eslintcache",
+    "dev": "pnpm run build --watch",
+    "lint": "eslint --cache src/**",
+    "test": "vitest"
+  },
+  "keywords": [
+    "antribute",
+    "antribute-backend",
+    "nextauth"
+  ],
+  "author": "Antribute, Inc. (https://www.antribute.com)",
+  "license": "MIT",
+  "devDependencies": {
+    "@antribute/backend-core": "workspace:*",
+    "@antribute/config": "workspace:*",
+    "@types/node": "18.11.9",
+    "@vitest/coverage-c8": "^0.25.3",
+    "eslint": "^8.28.0",
+    "happy-dom": "^7.7.0",
+    "prettier": "2.8.2",
+    "tsup": "^6.5.0",
+    "typescript": "^4.9.3",
+    "vitest": "^0.25.3"
+  },
+  "peerDependencies": {
+    "@antribute/backend-core": "*",
+    "@next-auth/prisma-adapter": ">= 1.0.0 < 2",
+    "next-auth": ">= 4.0.0 < 5"
+  },
+  "peerDependenciesMeta": {
+    "@next-auth/prisma-adapter": {
+      "optional": true
+    }
+  }
+}

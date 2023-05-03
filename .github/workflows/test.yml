@@ -22,30 +22,6 @@ jobs:
         uses: antribute/actions/setup@main
       - name: Run Test
         run: pnpm run test
-      - name: Upload Antribute Landing Page Coverage to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          files: ./apps/landing-page/coverage/cobertura-coverage.xml
-          flags: antribute-landing-page
-          fail_ci_if_error: true
-      - name: Upload GraphQL Auth0 Coverage to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          files: ./packages/graphql-auth/coverage/cobertura-coverage.xml
-          flags: graphql-auth
-          fail_ci_if_error: true
-      - name: Upload GraphQL Logger Axiom to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          files: ./packages/graphql-logger-axiom/coverage/cobertura-coverage.xml
-          flags: graphql-logger-axiom
-          fail_ci_if_error: true
-      - name: Upload GraphQL NextJS Coverage to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          files: ./packages/graphql-nextjs/coverage/cobertura-coverage.xml
-          flags: graphql-nextjs
-          fail_ci_if_error: true
       - name: Upload Tracking Coverage to Codecov
         uses: codecov/codecov-action@v3
         with:

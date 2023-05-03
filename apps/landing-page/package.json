@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "clean": "rimraf .turbo && rimraf .next && rimraf node_modules && rimraf build",
+    "clean": "rimraf .next && rimraf .turbo &&  rimraf coverage && rimraf node_modules && rimraf text-results && rimraf .eslintcache",
     "cypress:open": "cypress open",
     "dev": "next dev",
     "lint": "next lint",
@@ -14,18 +14,11 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@antribute/graphql-auth": "workspace:*",
-    "@antribute/graphql-logger-axiom": "workspace:*",
-    "@antribute/graphql-nextjs": "workspace:*",
     "@antribute/tracking": "workspace:*",
     "@antribute/zephyr-core": "workspace:*",
     "@antribute/zephyr-react": "workspace:*",
-    "@pothos/core": "^3.23.0",
-    "@pothos/plugin-scope-auth": "^3.16.0",
     "cal-sans": "^1.0.1",
-    "graphql": "^16.6.0",
     "next": "13.2.4",
-    "next-auth": "^4.18.8",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },

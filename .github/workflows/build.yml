@@ -10,6 +10,11 @@ jobs:
     name: Build All Apps, Packages, and Servers
     runs-on: ubuntu-latest
     env:
+      # These envs are required for Next.js to build, however they're just empty strings
+      AUTH0_FGA_CLIENT_ID: ''
+      AUTH0_FGA_CLIENT_SECRET: ''
+      AUTH0_FGA_MODEL_ID: ''
+      AUTH0_FGA_STORE_ID: ''
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
       TURBO_REMOTE_ONLY: true
