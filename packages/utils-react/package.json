@@ -3,7 +3,6 @@
   "description": "Shared React utilities for Antribute projects",
   "version": "0.1.0",
   "type": "module",
-  "main": "./dist/index.cjs",
   "exports": {
     ".": {
       "require": "./dist/index.cjs",
@@ -17,7 +16,7 @@
   "scripts": {
     "build": "tsup",
     "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf text-results && rimraf .eslintcache",
-    "dev": "pnpm run build:watch",
+    "dev": "pnpm run build --watch",
     "lint": "eslint --cache src/**",
     "test": "vitest"
   },

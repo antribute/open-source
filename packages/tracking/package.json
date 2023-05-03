@@ -3,7 +3,6 @@
   "description": "An Antribute abstraction over Mixpanel",
   "version": "0.1.0",
   "type": "module",
-  "main": "./dist/client.cjs",
   "exports": {
     ".": {
       "require": "./dist/client.cjs",
@@ -21,7 +20,7 @@
   "scripts": {
     "build": "tsup",
     "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf text-results && rimraf .eslintcache",
-    "dev": "pnpm run build:watch",
+    "dev": "pnpm run build --watch",
     "lint": "eslint --cache src/**",
     "test": "vitest"
   },

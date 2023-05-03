@@ -5,6 +5,7 @@ withRoutes();
 const nextConfig = {
   experimental: {
     appDir: true,
+    esmExternals: true,
   },
   eslint: {
     ignoreDuringBuilds: true,

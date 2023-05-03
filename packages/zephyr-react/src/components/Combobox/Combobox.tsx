@@ -2,7 +2,8 @@
 import * as ComboboxPrimitive from 'ariakit/combobox';
 import * as SelectPrimitive from 'ariakit/select';
 import { useEffect, useMemo, useState, useRef } from 'react';
-import { InputSelect, InputSelectProps } from 'components/Input';
+import { BaseInputSelectProps } from 'components/BaseInput';
+import { InputSelect } from 'components/Input';
 import { useDebouncedCallback } from 'use-debounce';
 import { ComboboxPopover } from 'components/Combobox/ComboboxPopover';
 import { getOptionMap } from 'components/Combobox/Combobox.helpers';
@@ -18,7 +19,7 @@ export interface ComboboxOptionGetters<TOptions extends unknown[]> {
 
 interface ComboboxBaseProps<TOptions extends unknown[] = unknown[]>
   extends ComboboxOptionGetters<TOptions>,
-    Omit<InputSelectProps, 'state' | 'value' | 'defaultValue' | 'as' | 'ref'> {
+    Omit<BaseInputSelectProps, 'state' | 'value' | 'defaultValue' | 'as' | 'ref'> {
   options: TOptions;
   searchOptions?: TOptions;
   onLastOptionItemScrollReached?: () => void;

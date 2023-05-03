@@ -3,8 +3,6 @@
   "description": "React Component Library for the Zephyr Design System",
   "version": "0.1.0",
   "type": "module",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
   "exports": {
     ".": {
       "require": "./dist/index.cjs",
@@ -16,10 +14,13 @@
     "dist/**"
   ],
   "scripts": {
-    "build": "NODE_OPTIONS=\"--max_old_space_size=4096\" tsup src/index.ts --format esm,cjs --dts",
+    "build": "pnpm run build:components && pnpm run build:helpers && pnpm run build:index",
+    "build:index": "tsup --config ./tsup.config.js",
+    "build:components": "tsup --config ./tsup.config.components.js",
+    "build:helpers": "tsup --config ./tsup.config.helpers.js",
     "build-storybook": "storybook build",
     "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf storybook-static && rimraf text-results && rimraf .eslintcache",
-    "dev": "pnpm run build:watch",
+    "dev": "concurrently \"pnpm run build:components --watch\" \"pnpm run build:helpers --watch\" \"pnpm run build:index --watch --ignore-watch='src/components'\" --raw",
     "lint": "eslint --cache src/**",
     "storybook": "storybook dev -p 6006 --no-open",
     "test": "vitest"
@@ -50,8 +51,10 @@
     "@types/react-dom": "18.0.9",
     "@vitest/coverage-c8": "^0.25.3",
     "autoprefixer": "^10.4.13",
+    "concurrently": "^7.6.0",
     "eslint": "^8.28.0",
     "eslint-plugin-storybook": "^0.6.11",
+    "fast-glob": "^3.2.12",
     "happy-dom": "^7.7.0",
     "postcss": "^8.4.19",
     "prettier": "2.8.7",

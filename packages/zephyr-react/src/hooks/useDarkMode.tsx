@@ -1,5 +1,3 @@
-'use client';
-
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import { DARK_MODE, LIGHT_MODE, DEFAULT_THEME } from 'constants/theme';
 import { useState, useEffect, useMemo } from 'react';
