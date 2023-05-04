@@ -37,7 +37,6 @@ export const pothosSchemaTemplate = `//
 
 import { writeFile } from 'fs/promises';
 import { printSchema, lexicographicSortSchema } from 'graphql';
-import { join } from 'path';
 import builder from './pothos/builder';
 
 {{#each modules}}import '..{{this}}';{{/each}}
