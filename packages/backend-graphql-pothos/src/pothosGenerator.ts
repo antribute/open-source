@@ -127,7 +127,7 @@ const stitchSchema = async (generatedDir: string, config: Config) => {
     .filter((path) => !!path.length);
 
   logger.debug('Populating Pothos schema', config);
-  const schemaPath = join('generatedDir', 'schema.graphql');
+  const schemaPath = join(generatedDir, 'schema.graphql');
   const content = populateTemplate<PothosSchemaTemplate>(pothosSchemaTemplate, {
     modules,
     schemaPath,
