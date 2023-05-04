@@ -45,7 +45,7 @@ import builder from './pothos/builder';
 const schema = builder.toSchema();
 
 const schemaAsString = printSchema(lexicographicSortSchema(schema));
-writeFile(join({{schemaPath}}), schemaAsString).catch((err) => {
+writeFile('{{schemaPath}}', schemaAsString).catch((err) => {
   console.warn('An error occurred while generating your static GraphQL Schema:', err);
 });
 
