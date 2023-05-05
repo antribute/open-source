@@ -9,16 +9,25 @@ export const pothosBuilderTemplate = `//
 // Any modifications will be overwritten on subsequent runs.
 //
 
+import { DateTimeResolver } from "graphql-scalars";
 import SchemaBuilder from '@pothos/core';
 {{#each plugins}}import {{name}} from '{{from}}';\n{{/each}}
 {{additionalImports}}
 
 const builder = new SchemaBuilder<{
-  {{#each typings}}{{name}}: {{value}};\n{{/each}}
+{{#each typings}}  {{name}}: {{value}};\n{{/each}}
+  Scalars: {
+    DateTime: {
+      Output: Date;
+      Input: Date;
+    };
+  };
 }>({
   plugins: [{{#each plugins}}{{name}}, {{/each}}],
   {{body}}
 });
+
+builder.addScalarType("DateTime", DateTimeResolver, {});
 
 builder.queryType({});
 builder.mutationType({});
