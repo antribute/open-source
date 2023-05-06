@@ -1,1 +1,1 @@
-export { default } from '@antribute/config/vitest/vitest.config.js';
+export { default } from '@antribute/config/vitest/vitest.base.config.js';

@@ -15,6 +15,7 @@ export default defineConfig({
       src: 'src',
     },
     environment: 'happy-dom',
+    include: ['src/**/*.test.ts', 'src/**/*.test.tsx'],
     globals: true,
     outputFile: 'test-results/results.xml',
     reporters: ['default', 'junit'],

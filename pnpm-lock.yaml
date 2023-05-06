@@ -225,16 +225,13 @@ importers:
         version: 18.11.9
       '@vitest/coverage-c8':
         specifier: ^0.25.3
-        version: 0.25.8(happy-dom@7.8.1)
+        version: 0.25.8
       eslint:
         specifier: ^8.28.0
         version: 8.38.0
       graphql:
         specifier: ^16.6.0
         version: 16.6.0
-      happy-dom:
-        specifier: ^7.7.0
-        version: 7.8.1
       prettier:
         specifier: 2.8.2
         version: 2.8.2
@@ -252,7 +249,7 @@ importers:
         version: 4.9.3
       vitest:
         specifier: ^0.25.3
-        version: 0.25.8(happy-dom@7.8.1)
+        version: 0.25.8
 
   packages/backend-auth-nextauth:
     devDependencies:
@@ -267,13 +264,10 @@ importers:
         version: 18.11.9
       '@vitest/coverage-c8':
         specifier: ^0.25.3
-        version: 0.25.8(happy-dom@7.8.1)
+        version: 0.25.8
       eslint:
         specifier: ^8.28.0
         version: 8.38.0
-      happy-dom:
-        specifier: ^7.7.0
-        version: 7.8.1
       prettier:
         specifier: 2.8.2
         version: 2.8.2
@@ -285,7 +279,7 @@ importers:
         version: 4.9.3
       vitest:
         specifier: ^0.25.3
-        version: 0.25.8(happy-dom@7.8.1)
+        version: 0.25.8
 
   packages/backend-core:
     dependencies:
@@ -322,13 +316,10 @@ importers:
         version: 18.11.9
       '@vitest/coverage-c8':
         specifier: ^0.25.3
-        version: 0.25.8(happy-dom@7.8.1)
+        version: 0.25.8
       eslint:
         specifier: ^8.28.0
         version: 8.38.0
-      happy-dom:
-        specifier: ^7.7.0
-        version: 7.8.1
       prettier:
         specifier: 2.8.2
         version: 2.8.2
@@ -340,7 +331,7 @@ importers:
         version: 4.9.3
       vitest:
         specifier: ^0.25.3
-        version: 0.25.8(happy-dom@7.8.1)
+        version: 0.25.8
 
   packages/backend-graphql-pothos:
     dependencies:
@@ -365,16 +356,13 @@ importers:
         version: 18.11.9
       '@vitest/coverage-c8':
         specifier: ^0.25.3
-        version: 0.25.8(happy-dom@7.8.1)
+        version: 0.25.8
       eslint:
         specifier: ^8.28.0
         version: 8.38.0
       graphql:
         specifier: ^16.6.0
         version: 16.6.0
-      happy-dom:
-        specifier: ^7.7.0
-        version: 7.8.1
       prettier:
         specifier: 2.8.2
         version: 2.8.2
@@ -386,7 +374,7 @@ importers:
         version: 4.9.3
       vitest:
         specifier: ^0.25.3
-        version: 0.25.8(happy-dom@7.8.1)
+        version: 0.25.8
 
   packages/backend-orm-prisma:
     dependencies:
@@ -411,13 +399,10 @@ importers:
         version: 18.11.9
       '@vitest/coverage-c8':
         specifier: ^0.25.3
-        version: 0.25.8(happy-dom@7.8.1)
+        version: 0.25.8
       eslint:
         specifier: ^8.28.0
         version: 8.38.0
-      happy-dom:
-        specifier: ^7.7.0
-        version: 7.8.1
       prettier:
         specifier: 2.8.2
         version: 2.8.2
@@ -429,7 +414,7 @@ importers:
         version: 4.9.3
       vitest:
         specifier: ^0.25.3
-        version: 0.25.8(happy-dom@7.8.1)
+        version: 0.25.8
 
   packages/backend-perms-auth0-fga:
     devDependencies:
@@ -444,13 +429,10 @@ importers:
         version: 18.11.9
       '@vitest/coverage-c8':
         specifier: ^0.25.3
-        version: 0.25.8(happy-dom@7.8.1)
+        version: 0.25.8
       eslint:
         specifier: ^8.28.0
         version: 8.38.0
-      happy-dom:
-        specifier: ^7.7.0
-        version: 7.8.1
       prettier:
         specifier: 2.8.2
         version: 2.8.2
@@ -462,7 +444,7 @@ importers:
         version: 4.9.3
       vitest:
         specifier: ^0.25.3
-        version: 0.25.8(happy-dom@7.8.1)
+        version: 0.25.8
 
   packages/backend-server-nextjs:
     devDependencies:
@@ -477,7 +459,7 @@ importers:
         version: 18.11.9
       '@vitest/coverage-c8':
         specifier: ^0.25.3
-        version: 0.25.8(happy-dom@7.8.1)
+        version: 0.25.8
       eslint:
         specifier: ^8.28.0
         version: 8.38.0
@@ -487,21 +469,9 @@ importers:
       graphql-yoga:
         specifier: ^3.1.1
         version: 3.8.0(graphql@16.6.0)
-      happy-dom:
-        specifier: ^7.7.0
-        version: 7.8.1
-      next:
-        specifier: ^13.3.1
-        version: 13.3.1(react-dom@18.2.0)(react@18.2.0)
       prettier:
         specifier: 2.8.2
         version: 2.8.2
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-dom:
-        specifier: 18.2.0
-        version: 18.2.0(react@18.2.0)
       tsup:
         specifier: ^6.5.0
         version: 6.7.0(typescript@4.9.3)
@@ -510,7 +480,7 @@ importers:
         version: 4.9.3
       vitest:
         specifier: ^0.25.3
-        version: 0.25.8(happy-dom@7.8.1)
+        version: 0.25.8
 
   packages/config:
     dependencies:
@@ -632,13 +602,10 @@ importers:
         version: 18.0.25
       '@vitest/coverage-c8':
         specifier: ^0.25.3
-        version: 0.25.8(happy-dom@7.8.1)
+        version: 0.25.8
       eslint:
         specifier: ^8.28.0
         version: 8.38.0
-      happy-dom:
-        specifier: ^7.7.0
-        version: 7.8.1
       prettier:
         specifier: 2.8.2
         version: 2.8.2
@@ -662,7 +629,7 @@ importers:
         version: 3.6.0(vite@4.2.1)
       vitest:
         specifier: ^0.25.3
-        version: 0.25.8(happy-dom@7.8.1)
+        version: 0.25.8
 
   packages/utils-react:
     devDependencies:
@@ -768,7 +735,7 @@ importers:
         version: 18.0.25
       '@vitest/coverage-c8':
         specifier: ^0.25.3
-        version: 0.25.8(happy-dom@7.8.1)
+        version: 0.25.8
       autoprefixer:
         specifier: ^10.4.13
         version: 10.4.14(postcss@8.4.21)
@@ -778,9 +745,6 @@ importers:
       eslint:
         specifier: ^8.28.0
         version: 8.38.0
-      happy-dom:
-        specifier: ^7.7.0
-        version: 7.8.1
       postcss:
         specifier: ^8.4.19
         version: 8.4.21
@@ -807,7 +771,7 @@ importers:
         version: 5.0.4
       vitest:
         specifier: ^0.25.3
-        version: 0.25.8(happy-dom@7.8.1)
+        version: 0.25.8
 
   packages/zephyr-react:
     dependencies:
@@ -3576,10 +3540,6 @@ packages:
   /@next/env@13.2.4:
     resolution: {integrity: sha512-+Mq3TtpkeeKFZanPturjcXt+KHfKYnLlX6jMLyCrmpq6OOs4i1GqBOAauSkii9QeKCMTYzGppar21JU57b/GEA==}
 
-  /@next/env@13.3.1:
-    resolution: {integrity: sha512-EDtCoedIZC7JlUQ3uaQpSc4aVmyhbLHmQVALg7pFfQgOTjgSnn7mKtA0DiCMkYvvsx6aFb5octGMtWrOtGXW9A==}
-    dev: true
-
   /@next/env@13.3.2:
     resolution: {integrity: sha512-W+RJPtDj8PhOmZFi0MMhFoyWCz4tJeDEm7WtTTKflD+fgvmxpuOwxfQ2RWMz2gwnz6gL6hCuXtCtPpBBHDB7rg==}
     dev: false
@@ -3614,15 +3574,6 @@ packages:
     requiresBuild: true
     optional: true
 
-  /@next/swc-darwin-arm64@13.3.1:
-    resolution: {integrity: sha512-UXPtriEc/pBP8luSLSCZBcbzPeVv+SSjs9cH/KygTbhmACye8/OOXRZO13Z2Wq1G0gLmEAIHQAOuF+vafPd2lw==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [darwin]
-    requiresBuild: true
-    dev: true
-    optional: true
-
   /@next/swc-darwin-arm64@13.3.2:
     resolution: {integrity: sha512-Wa5o2EbkBP0NcUM13sEjzGoB86YTZWUfoqbbVB7gs9RJAy8KkIoGNoLV7K55fru7GNgHsRMga3j1FadjJJWQYg==}
     engines: {node: '>= 10'}
@@ -3638,15 +3589,6 @@ packages:
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
-    optional: true
-
-  /@next/swc-darwin-x64@13.3.1:
-    resolution: {integrity: sha512-lT36yYxosCfLtplFzJWgo0hrPu6/do8+msgM7oQkPeohDNdhjtjFUgOOwdSnPublLR6Mo2Ym4P/wl5OANuD2bw==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [darwin]
-    requiresBuild: true
-    dev: true
     optional: true
 
   /@next/swc-darwin-x64@13.3.2:
@@ -3682,15 +3624,6 @@ packages:
     requiresBuild: true
     optional: true
 
-  /@next/swc-linux-arm64-gnu@13.3.1:
-    resolution: {integrity: sha512-wRb76nLWJhonH8s3kxC/1tFguEkeOPayIwe9mkaz1G/yeS3OrjeyKMJsb4+Kdg0zbTo53bNCOl59NNtDM7yyyw==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [linux]
-    requiresBuild: true
-    dev: true
-    optional: true
-
   /@next/swc-linux-arm64-gnu@13.3.2:
     resolution: {integrity: sha512-+5OC61uF33s0GdiGK2D5436Z2BqE8tJnlC6csTcBvCKQyvLsp6H5sPND5A1D2p/Gzh0mIGV/5vqfQ8yy+akOjw==}
     engines: {node: '>= 10'}
@@ -3706,15 +3639,6 @@ packages:
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
-    optional: true
-
-  /@next/swc-linux-arm64-musl@13.3.1:
-    resolution: {integrity: sha512-qz3BzjJRZ16Iq/jrp+pjiYOc0jTjHlfmxQmZk9x/+5uhRP6/eWQSTAPVJ33BMo6oK5O5N4644OgTAbzXzorecg==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [linux]
-    requiresBuild: true
-    dev: true
     optional: true
 
   /@next/swc-linux-arm64-musl@13.3.2:
@@ -3734,15 +3658,6 @@ packages:
     requiresBuild: true
     optional: true
 
-  /@next/swc-linux-x64-gnu@13.3.1:
-    resolution: {integrity: sha512-6mgkLmwlyWlomQmpl21I3hxgqE5INoW4owTlcLpNsd1V4wP+J46BlI/5zV5KWWbzjfncIqzXoeGs5Eg+1GHODA==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [linux]
-    requiresBuild: true
-    dev: true
-    optional: true
-
   /@next/swc-linux-x64-gnu@13.3.2:
     resolution: {integrity: sha512-aVoiakznPxGFIMcNlnY4HlZ4Be6oGhthaLSoXiVeplAgHLzHU2UqPMWqB/8/1TfMdWwISmwH4hb6DcdQ/PzTyA==}
     engines: {node: '>= 10'}
@@ -3758,15 +3673,6 @@ packages:
     cpu: [x64]
     os: [linux]
     requiresBuild: true
-    optional: true
-
-  /@next/swc-linux-x64-musl@13.3.1:
-    resolution: {integrity: sha512-uqm5sielhQmKJM+qayIhgZv1KlS5pqTdQ99b+Z7hMWryXS96qE0DftTmMZowBcUL6x7s2vSXyH5wPtO1ON7LBg==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [linux]
-    requiresBuild: true
-    dev: true
     optional: true
 
   /@next/swc-linux-x64-musl@13.3.2:
@@ -3786,15 +3692,6 @@ packages:
     requiresBuild: true
     optional: true
 
-  /@next/swc-win32-arm64-msvc@13.3.1:
-    resolution: {integrity: sha512-WomIiTj/v3LevltlibNQKmvrOymNRYL+a0dp5R73IwPWN5FvXWwSELN/kiNALig/+T3luc4qHNTyvMCp9L6U5Q==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [win32]
-    requiresBuild: true
-    dev: true
-    optional: true
-
   /@next/swc-win32-arm64-msvc@13.3.2:
     resolution: {integrity: sha512-mjiWKEf9i1JAVePOa0Uw7c5c9Dp5D0LrevwIg31SNEpp8NwTr+ifHQzgf/ELNBWMxMLyiZiywWbYdcIjoa5y4A==}
     engines: {node: '>= 10'}
@@ -3812,15 +3709,6 @@ packages:
     requiresBuild: true
     optional: true
 
-  /@next/swc-win32-ia32-msvc@13.3.1:
-    resolution: {integrity: sha512-M+PoH+0+q658wRUbs285RIaSTYnGBSTdweH/0CdzDgA6Q4rBM0sQs4DHmO3BPP0ltCO/vViIoyG7ks66XmCA5g==}
-    engines: {node: '>= 10'}
-    cpu: [ia32]
-    os: [win32]
-    requiresBuild: true
-    dev: true
-    optional: true
-
   /@next/swc-win32-ia32-msvc@13.3.2:
     resolution: {integrity: sha512-fee18wB9lfAnyAwJbyqN/PhcXWH1lGpBWJVF0gTB8G8/eUU0Vlq524Qt1RCt0K0pxLsSEhw1wEpGvqYYrAdQTA==}
     engines: {node: '>= 10'}
@@ -3836,15 +3724,6 @@ packages:
     cpu: [x64]
     os: [win32]
     requiresBuild: true
-    optional: true
-
-  /@next/swc-win32-x64-msvc@13.3.1:
-    resolution: {integrity: sha512-Sl1F4Vp5Z1rNXWZYqJwMuWRRol4bqOB6+/d7KqkgQ4AcafKPN1PZmpkCoxv4UFHtFNIB7EotnuIhtXu3zScicQ==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [win32]
-    requiresBuild: true
-    dev: true
     optional: true
 
   /@next/swc-win32-x64-msvc@13.3.2:
@@ -5772,12 +5651,6 @@ packages:
     dependencies:
       tslib: 2.5.0
 
-  /@swc/helpers@0.5.0:
-    resolution: {integrity: sha512-SjY/p4MmECVVEWspzSRpQEM3sjR17sP8PbGxELWrT+YZMBfiUyt1MRUNjMV23zohwlG2HYtCQOsCwsTHguXkyg==}
-    dependencies:
-      tslib: 2.5.0
-    dev: true
-
   /@swc/helpers@0.5.1:
     resolution: {integrity: sha512-sJ902EfIzn1Fa+qYmjdQqh8tPsoxyBz+8yBKC2HKUxyezKJFwPGOn7pv4WY6QuQW//ySQi5lJjA/ZT9sNWWNTg==}
     dependencies:
@@ -6394,6 +6267,25 @@ packages:
       vite: 4.2.1
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /@vitest/coverage-c8@0.25.8:
+    resolution: {integrity: sha512-fWgzQoK2KNzTTNnDcLCyibfO9/pbcpPOMtZ9Yvq/Eggpi2X8lewx/OcKZkO5ba5q9dl6+BBn6d5hTcS1709rZw==}
+    dependencies:
+      c8: 7.13.0
+      vitest: 0.25.8
+    transitivePeerDependencies:
+      - '@edge-runtime/vm'
+      - '@vitest/browser'
+      - '@vitest/ui'
+      - happy-dom
+      - jsdom
+      - less
+      - sass
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
     dev: true
 
   /@vitest/coverage-c8@0.25.8(happy-dom@7.8.1):
@@ -11144,50 +11036,6 @@ packages:
       - '@babel/core'
       - babel-plugin-macros
 
-  /next@13.3.1(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-eByWRxPzKHs2oQz1yE41LX35umhz86ZSZ+mYyXBqn2IBi2hyUqxBA88avywdr4uyH+hCJczegGsDGWbzQA5Rqw==}
-    engines: {node: '>=14.18.0'}
-    hasBin: true
-    peerDependencies:
-      '@opentelemetry/api': ^1.1.0
-      fibers: '>= 3.1.0'
-      node-sass: ^6.0.0 || ^7.0.0
-      react: ^18.2.0
-      react-dom: ^18.2.0
-      sass: ^1.3.0
-    peerDependenciesMeta:
-      '@opentelemetry/api':
-        optional: true
-      fibers:
-        optional: true
-      node-sass:
-        optional: true
-      sass:
-        optional: true
-    dependencies:
-      '@next/env': 13.3.1
-      '@swc/helpers': 0.5.0
-      busboy: 1.6.0
-      caniuse-lite: 1.0.30001478
-      postcss: 8.4.14
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      styled-jsx: 5.1.1(react@18.2.0)
-    optionalDependencies:
-      '@next/swc-darwin-arm64': 13.3.1
-      '@next/swc-darwin-x64': 13.3.1
-      '@next/swc-linux-arm64-gnu': 13.3.1
-      '@next/swc-linux-arm64-musl': 13.3.1
-      '@next/swc-linux-x64-gnu': 13.3.1
-      '@next/swc-linux-x64-musl': 13.3.1
-      '@next/swc-win32-arm64-msvc': 13.3.1
-      '@next/swc-win32-ia32-msvc': 13.3.1
-      '@next/swc-win32-x64-msvc': 13.3.1
-    transitivePeerDependencies:
-      - '@babel/core'
-      - babel-plugin-macros
-    dev: true
-
   /next@13.3.2(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-82VuWoMGWFqGUwCEWcqkIhGgdRry+VKVBZ9KNte1Uk2byZKvPZrC5c62fYHrIhSf36YKY6m21hxdyDzn6MDHFA==}
     engines: {node: '>=16.8.0'}
@@ -14171,6 +14019,51 @@ packages:
       rollup: 3.20.2
     optionalDependencies:
       fsevents: 2.3.2
+
+  /vitest@0.25.8:
+    resolution: {integrity: sha512-X75TApG2wZTJn299E/TIYevr4E9/nBo1sUtZzn0Ci5oK8qnpZAZyhwg0qCeMSakGIWtc6oRwcQFyFfW14aOFWg==}
+    engines: {node: '>=v14.16.0'}
+    hasBin: true
+    peerDependencies:
+      '@edge-runtime/vm': '*'
+      '@vitest/browser': '*'
+      '@vitest/ui': '*'
+      happy-dom: '*'
+      jsdom: '*'
+    peerDependenciesMeta:
+      '@edge-runtime/vm':
+        optional: true
+      '@vitest/browser':
+        optional: true
+      '@vitest/ui':
+        optional: true
+      happy-dom:
+        optional: true
+      jsdom:
+        optional: true
+    dependencies:
+      '@types/chai': 4.3.4
+      '@types/chai-subset': 1.3.3
+      '@types/node': 18.11.9
+      acorn: 8.8.2
+      acorn-walk: 8.2.0
+      chai: 4.3.7
+      debug: 4.3.4
+      local-pkg: 0.4.3
+      source-map: 0.6.1
+      strip-literal: 1.0.1
+      tinybench: 2.4.0
+      tinypool: 0.3.1
+      tinyspy: 1.1.1
+      vite: 4.2.1(@types/node@18.11.9)
+    transitivePeerDependencies:
+      - less
+      - sass
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+    dev: true
 
   /vitest@0.25.8(happy-dom@7.8.1):
     resolution: {integrity: sha512-X75TApG2wZTJn299E/TIYevr4E9/nBo1sUtZzn0Ci5oK8qnpZAZyhwg0qCeMSakGIWtc6oRwcQFyFfW14aOFWg==}
