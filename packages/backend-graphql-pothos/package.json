@@ -45,7 +45,8 @@
     "@pothos/plugin-prisma-utils": "^0.8.0",
     "@pothos/plugin-scope-auth": ">= 3.0.0 < 4",
     "@prisma/client": ">= 4.0.0 < 5",
-    "graphql": ">= 16.0.0 < 17"
+    "graphql": ">= 16.0.0 < 17",
+    "graphql-scalars": ">= 1.0.0 < 2"
   },
   "peerDependenciesMeta": {
     "@pothos/plugin-prisma": {
@@ -62,6 +63,8 @@
     }
   },
   "dependencies": {
-    "fast-glob": "^3.2.12"
+    "execa": "^7.1.1",
+    "fast-glob": "^3.2.12",
+    "tsx": "^3.12.7"
   }
 }

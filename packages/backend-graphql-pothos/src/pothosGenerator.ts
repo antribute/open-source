@@ -6,19 +6,25 @@ import {
   getGeneratedDir,
 } from '@antribute/backend-core';
 import type { Config, GeneratorFunc } from '@antribute/backend-core';
+import { execa } from 'execa';
 import glob from 'fast-glob';
-import { join } from 'path';
+import { join, resolve } from 'path';
+import { fileURLToPath } from 'url';
 
 import {
   pothosBuilderTemplate,
+  pothosGenerateSchemaTemplate,
   pothosIndexTemplate,
   pothosSchemaTemplate,
 } from './pothosTemplates';
 import type {
   PothosBuilderTemplate,
+  PothosGenerateSchemaTemplate,
   PothosIndexTemplate,
   PothosSchemaTemplate,
 } from './pothosTemplates';
+
+const dirname = fileURLToPath(new URL('.', import.meta.url));
 
 const prismaAdditionalImports = `\nimport { prisma } from '../db';
 import type PrismaTypes from './types';`;
@@ -108,6 +114,24 @@ const createIndex = async (pothosOutputDir: string, config: Config) => {
   );
 };
 
+const generateSchema = async (generatedDir: string, config: Config) => {
+  logger.debug('Generating Complete GraphQL Schema', config);
+
+  logger.debug('Populating Generator Template', config);
+  const schemaPath = join(generatedDir, 'schema.graphql');
+  const content = populateTemplate<PothosGenerateSchemaTemplate>(pothosGenerateSchemaTemplate, {
+    schemaPath,
+  });
+  await generateFile(
+    { fileContent: content, fileName: 'generateSchema.ts', filePath: join(generatedDir, 'pothos') },
+    config
+  );
+
+  logger.debug('Running Generation Script', config);
+  const tsxBin = resolve(dirname, '..', 'node_modules', '.bin', 'tsx');
+  await execa(tsxBin, [resolve(generatedDir, 'pothos', 'generateSchema.ts')]);
+};
+
 const stitchSchema = async (generatedDir: string, config: Config) => {
   logger.debug('Stitching GraphQL Schema', config);
 
@@ -127,10 +151,8 @@ const stitchSchema = async (generatedDir: string, config: Config) => {
     .filter((path) => !!path.length);
 
   logger.debug('Populating Pothos schema', config);
-  const schemaPath = join(generatedDir, 'schema.graphql');
   const content = populateTemplate<PothosSchemaTemplate>(pothosSchemaTemplate, {
     modules,
-    schemaPath,
   });
   await generateFile(
     { fileContent: content, fileName: 'graphqlSchema.ts', filePath: generatedDir },
@@ -147,6 +169,7 @@ const prismaGenerator: GeneratorFunc = async (config) => {
   await createBuilder(pothosOutputDir, config);
   await stitchSchema(generatedDir, config);
   await createIndex(pothosOutputDir, config);
+  await generateSchema(generatedDir, config);
   logger.info('Successfully generated GraphQL Schema for platform: Pothos', config);
 };
 

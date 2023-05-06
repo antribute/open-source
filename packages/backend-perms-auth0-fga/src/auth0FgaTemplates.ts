@@ -6,13 +6,6 @@ export const fgaIndexTemplate = `//
 
 import { Auth0FgaApi } from '@auth0/fga';
 
-const auth0Fga = new Auth0FgaApi({
-  clientId: process.env.AUTH0_FGA_CLIENT_ID!,
-  clientSecret: process.env.AUTH0_FGA_CLIENT_SECRET!,
-  environment: process.env.AUTH0_FGA_ENVIRONMENT!,
-  storeId: process.env.AUTH0_FGA_STORE_ID!,
-});
-
 export interface PermissionsParams {
   authModelId?: string;
   objectId: string;
@@ -21,7 +14,18 @@ export interface PermissionsParams {
   userId: string;
 }
 
+export const buildFga = () => {
+  const auth0Fga = new Auth0FgaApi({
+    clientId: process.env.AUTH0_FGA_CLIENT_ID!,
+    clientSecret: process.env.AUTH0_FGA_CLIENT_SECRET!,
+    environment: process.env.AUTH0_FGA_ENVIRONMENT!,
+    storeId: process.env.AUTH0_FGA_STORE_ID!,
+  });
+  return auth0Fga;
+}
+
 export const addPermissions = async ({ authModelId, objectId, objectType, relation, userId }: PermissionsParams): Promise<void> => {
+  const auth0Fga = buildFga();
   await auth0Fga.write({
     authorization_model_id: authModelId || process.env.AUTH0_FGA_MODEL_ID!,
     writes: {
@@ -31,6 +35,7 @@ export const addPermissions = async ({ authModelId, objectId, objectType, relati
 };
 
 export const checkPermissions = async ({ authModelId, objectId, objectType, relation, userId }: PermissionsParams): Promise<boolean> => {
+  const auth0Fga = buildFga();
   const res = await auth0Fga.check({
     authorization_model_id: authModelId || process.env.AUTH0_FGA_MODEL_ID!,
     tuple_key: { object: \`\${objectType}:\${objectId}\`, relation, user: \`user:\${userId}\` }
@@ -39,6 +44,7 @@ export const checkPermissions = async ({ authModelId, objectId, objectType, rela
 };
 
 export const removePermissions = async ({ authModelId, objectId, objectType, relation, userId }: PermissionsParams): Promise<void> => {
+  const auth0Fga = buildFga();
   await auth0Fga.write({
     authorization_model_id: authModelId || process.env.AUTH0_FGA_MODEL_ID!,
     deletes: {
@@ -47,5 +53,5 @@ export const removePermissions = async ({ authModelId, objectId, objectType, rel
   });
 };
 
-export default auth0Fga;
+export default buildFga;
 `;
