@@ -61,7 +61,7 @@ const BaseTextAreaElement = classed(
 
 BaseTextAreaElement.defaultProps = defaultInputProps;
 
-interface BaseTextAreaProps
+export interface BaseTextAreaProps
   extends Omit<AriaInputProps, 'size' | 'width'>,
     InputSizeVariants,
     InputFieldContainerVariants,

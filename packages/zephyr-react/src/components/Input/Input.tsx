@@ -15,13 +15,6 @@ import {
   CheckboxGroupField,
 } from './input-fields';
 
-
-export type { InputContainerProps } from './components'
-
-export type { InputComponentProps } from './Input.types'
-
-export type * from './input-fields';
-
 export const Input = Object.assign(TextField, {
   TextField,
   NumberField,

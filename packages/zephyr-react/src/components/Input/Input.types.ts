@@ -32,13 +32,13 @@ export interface InputComponentStateProps {
   showValidationMessageInTooltip?: boolean;
 }
 
-interface InputFieldProps {
+export interface InputFieldProps {
   placeholder?: string;
 }
 
-type AddonGroupProps = Pick<InputAddonGroupProps, 'leadingIcon' | 'trailingIcon'>;
+export type AddonGroupProps = Pick<InputAddonGroupProps, 'leadingIcon' | 'trailingIcon'>;
 
-interface IInputComponentProps {
+export interface IInputComponentProps {
   size: InputSizeVariants;
   surface: InputSurfaceVariants;
   state: InputComponentStateProps;

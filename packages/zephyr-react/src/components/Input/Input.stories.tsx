@@ -5,7 +5,7 @@ import { Flex } from 'components/Flex';
 import { Paper } from 'components/Paper';
 import { useState } from 'react';
 import { TextAreaFieldProps } from 'components/Input';
-import { Input, TextFieldProps } from './Input';
+import { Input, TextFieldProps } from '.';
 
 const meta = {
   title: 'Input/Input',
