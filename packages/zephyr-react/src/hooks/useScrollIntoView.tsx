@@ -1,11 +1,10 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useMemo } from 'react';
 import useDimensions from 'react-cool-dimensions';
 import { useImmer } from 'use-immer';
 import { enableMapSet, castDraft } from 'immer';
 import { sortBy } from 'lodash-es';
-import { useMemo } from 'react';
 import { OverflowData, getOverflowData } from 'utils/viewport/getOverflowData';
-import { InViewportOptions } from 'utils/viewport/inViewport';
+import { InViewOptions } from 'utils/viewport/inViewport';
 import { inView } from 'framer-motion';
 
 enableMapSet();
@@ -14,8 +13,8 @@ export function useScrollIntoView<TViewportElement extends HTMLElement = HTMLDiv
   elements: Element[] | undefined | null;
   // viewport: HTMLElement | React.RefObject<HTMLElement> | undefined;
   shouldUpdate?: boolean;
-  inViewAmount?: InViewportOptions['amount'];
-  inViewMargin?: InViewportOptions['margin'];
+  inViewAmount?: InViewOptions['amount'];
+  inViewMargin?: InViewOptions['margin'];
   updateDependency?: unknown;
 }) {
   const {
@@ -31,11 +30,11 @@ export function useScrollIntoView<TViewportElement extends HTMLElement = HTMLDiv
   const [inViewState, updateInViewState] = useImmer<{
     previousElementId?: string;
     overflowData: OverflowData;
-    inViewChildren: Array<{
+    inViewChildren: {
       id: string;
       index: number;
       entry: IntersectionObserverEntry;
-    }>;
+    }[];
   }>({ overflowData: getOverflowData(), inViewChildren: [] });
 
   const {
@@ -52,13 +51,13 @@ export function useScrollIntoView<TViewportElement extends HTMLElement = HTMLDiv
 
   useEffect(() => {
     if (viewportRef.current) {
-      observeViewport(viewportRef?.current!);
+      observeViewport(viewportRef.current!);
     }
 
     return () => {
       unobserve();
     };
-  }, []);
+  }, [observeViewport, unobserve]);
 
   useEffect(() => {
     if (viewportRef.current) {
@@ -66,7 +65,7 @@ export function useScrollIntoView<TViewportElement extends HTMLElement = HTMLDiv
         draft.overflowData = getOverflowData(viewportRef.current);
       });
     }
-  }, []);
+  }, [updateInViewState]);
 
   useEffect(() => {
     const viewportElement = viewportRef.current;
@@ -78,7 +77,7 @@ export function useScrollIntoView<TViewportElement extends HTMLElement = HTMLDiv
         element,
         (entry) => {
           updateInViewState((draft) => {
-            const id = entry.target.id;
+            const { id } = entry.target;
 
             if (!draft.inViewChildren.some((e) => e.id === id)) {
               const item = castDraft({ id, index, entry, element });
@@ -92,7 +91,7 @@ export function useScrollIntoView<TViewportElement extends HTMLElement = HTMLDiv
           });
 
           return (entry) => {
-            const id = entry.target.id;
+            const { id } = entry.target;
 
             updateInViewState((draft) => {
               const newArr = draft.inViewChildren.filter((e) => e.id !== id);
@@ -110,25 +109,26 @@ export function useScrollIntoView<TViewportElement extends HTMLElement = HTMLDiv
       return unobserve;
     });
 
+    // eslint-disable-next-line consistent-return
     return () => {
       unobserveList.forEach((unobserve) => {
         unobserve();
       });
     };
-  }, [elements, viewportRef, updateDependency, viewportWidth]);
+  }, [elements, viewportRef, updateDependency, viewportWidth, shouldUpdate, updateInViewState]);
 
   const { nextLeftDirectionData, nextRightDirectionData } = useMemo(() => {
     const elementsList = elements ?? [];
 
     const { inViewChildren, previousElementId } = inViewState;
 
-    type NextDirectionData = {
+    interface NextDirectionData {
       nextIndexDelta: number;
       boundingIndex: number;
       inViewWindowStartIndex: number;
       leftScrollOffset: number | undefined;
       clampIndex: (x: number) => number;
-    };
+    }
 
     const left: NextDirectionData = {
       nextIndexDelta: -1,
@@ -184,26 +184,11 @@ export function useScrollIntoView<TViewportElement extends HTMLElement = HTMLDiv
       nextLeftDirectionData: nextLeftDirectionData!,
       nextRightDirectionData: nextRightDirectionData!,
     };
-  }, [elements, inViewState.inViewChildren]);
+  }, [elements, inViewState]);
 
   function handleScroll(direction: 'left' | 'right') {
-    const {
-      nextElement,
-      nextIndex,
-      nextElementId,
-      isBoundaryReached,
-      leftScrollOffset,
-      nextIsSameAsBefore,
-    } = direction === 'left' ? nextLeftDirectionData : nextRightDirectionData;
-
-    console.log({
-      nextElementId: nextElement?.id,
-      nextIndex,
-      isBoundaryReached,
-      leftScrollOffset,
-      nextIsSameAsBefore,
-      inView: inViewState.inViewChildren.map((e) => e.id),
-    });
+    const { nextElement, nextElementId, isBoundaryReached, leftScrollOffset } =
+      direction === 'left' ? nextLeftDirectionData : nextRightDirectionData;
 
     if (isBoundaryReached) {
       viewportRef.current?.scrollTo({

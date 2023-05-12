@@ -7,7 +7,7 @@ import { Checkbox as AriaCheckbox } from 'react-aria-components';
 
 import { svgIcon } from 'components/Icon/SvgIconWrapper';
 import { useToggleState } from 'react-stately';
-import { generatePropPickerFn, objectMap, pickProps } from 'utils';
+import { generatePropPickerFn, objectMap } from 'utils';
 import clsx from 'clsx';
 import { Wrap } from 'components/Wrap';
 import { Tooltip } from 'components/Tooltip';

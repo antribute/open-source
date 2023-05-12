@@ -2,7 +2,7 @@
 import { useTableContext } from 'components/Table/Table.context';
 import { getTableMeta } from 'components/Table/helpers';
 import { classed } from 'utils/classed';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Row as _Row } from '../Table.types';
 
 const DataRowElement = classed('tr', 'border-b border-highlight-ghost', {

@@ -2,10 +2,10 @@
 import { useMemo } from 'react';
 import clsx from 'clsx';
 import ArrowTopRightOnSquareIcon from '@heroicons/react/24/solid/ArrowTopRightOnSquareIcon';
-import { Classed, classed, deriveClassed } from 'utils/classed';
-import { ListItemGroup, ListItemGroupBaseProps } from './ListItem';
+import { Classed, deriveClassed } from 'utils/classed';
 import { Tooltip, TooltipProps } from 'components/Tooltip';
 import { Wrap } from 'components/Wrap';
+import { ListItemGroup, ListItemGroupBaseProps } from './ListItem';
 
 // List Item Link
 

@@ -1,7 +1,5 @@
-import { Text } from 'components/Text';
-import { AntributeLogo } from './AntributeLogo';
-import { Flex } from 'components/Flex';
 import { twMerge } from 'tailwind-merge';
+import { AntributeLogo } from './AntributeLogo';
 
 export const AntributeWordmark = ({
   className,

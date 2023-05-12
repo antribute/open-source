@@ -1,4 +1,3 @@
-import DashboardIcon from '@heroicons/react/24/outline/HomeIcon';
 import ProfileIcon from '@heroicons/react/24/outline/UsersIcon';
 import CalendarIcon from '@heroicons/react/24/outline/CalendarIcon';
 import ProjectsIcon from '@heroicons/react/24/outline/Square2StackIcon';
@@ -12,9 +11,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { RenderPaperContainers, getStoryUrl } from 'utils/storybook-utils';
 import { Paper } from 'components/Paper';
 import { capitalCase } from 'change-case';
+import { generateMockUserList } from 'mock/mock-data';
 import { List } from '.';
-import { generateMockUserList, generateMockVehicle, generateMockVehicleList } from 'mock/mock-data';
-import { groupBy } from 'lodash-es';
 
 const meta = {
   args: {},
@@ -193,7 +191,7 @@ export const ListWithFilledSections: Story = {
                   description: 'Voluptate non tempor incididunt esse.',
                 }}
                 bottomBorder
-                defaultOpen={true}
+                defaultOpen
                 aria-controls="dropdown-sales"
                 data-collapse-toggle="dropdown-sales"
                 containerProps={{ id: 'dropdown-sales' }}

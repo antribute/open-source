@@ -1,4 +1,18 @@
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import clsx from 'clsx';
+import { Flex } from 'components/Flex';
+import { Text } from 'components/Text';
+import { textComponentProps } from 'components/Text/textComponentProps';
+import { capitalize, get, groupBy, isEmpty, omitBy, orderBy, pick, uniq } from 'lodash-es';
+import { CSSProperties, useLayoutEffect, useMemo, useRef, useState, forwardRef } from 'react';
+import { twMerge } from 'tailwind-merge';
+import { objectMap } from 'utils';
+import { measureElement } from 'utils/measureElement';
+import { Wrap } from 'components/Wrap';
+import { SizeProp } from 'types/styles';
+import { classed } from 'utils/classed';
+import useDimensions from 'react-cool-dimensions';
+import { BreakpointKey, useBreakpoints } from 'hooks';
 import {
   DetailSlots,
   SlotItemProps,
@@ -15,20 +29,6 @@ import {
   LabelDetailSlots,
   labelSlotIds,
 } from './Detail.types';
-import { Flex } from 'components/Flex';
-import { Text } from 'components/Text';
-import { textComponentProps } from 'components/Text/textComponentProps';
-import { capitalize, get, groupBy, isEmpty, omitBy, orderBy, pick, uniq } from 'lodash-es';
-import { CSSProperties, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { forwardRef } from 'react';
-import { twMerge } from 'tailwind-merge';
-import { objectMap } from 'utils';
-import { measureElement } from 'utils/measureElement';
-import { Wrap } from 'components/Wrap';
-import { SizeProp } from 'types/styles';
-import { classed } from 'utils/classed';
-import useDimensions from 'react-cool-dimensions';
-import { BreakpointKey, useBreakpoints } from 'hooks';
 
 export interface DetailProps extends DetailSlots {
   className?: string;
@@ -63,7 +63,7 @@ const DetailContainer = classed('div', 'grid relative w-full', {
   },
 });
 
-type DetailSlotPropBuckets = {
+interface DetailSlotPropBuckets {
   startDetailSlots: Partial<DetailSlots>;
   mainDeailSlots: Partial<DetailSlots>;
   endDetailSlots: Partial<DetailSlots>;
@@ -72,7 +72,7 @@ type DetailSlotPropBuckets = {
   labelDetailSlots: Partial<LabelDetailSlots>;
   hasSlots: boolean;
   props: DetailProps;
-};
+}
 
 function useDetailSlotProps(props: DetailProps): DetailSlotPropBuckets {
   const { adaptive = false } = props;
@@ -237,7 +237,7 @@ export const DetailComponent = ({
     });
 
     return cols.filter((e) => e.active);
-  }, [slotColumns]);
+  }, [endSlot, slotColumns, startSlot]);
 
   const activeColumnIds = activeColumns.map((e) => e.column);
 
@@ -286,7 +286,7 @@ export const DetailComponent = ({
   const slotRefs = useSlotRefs();
 
   const gridRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(!(startSlot || endSlot));
+  const [isVisible, setIsVisible] = useState(!(startSlot ?? endSlot));
 
   // This is for preventing the initial layout jumping behavior
   // that's caused by AlignedSlot's width being calculated.
@@ -317,7 +317,7 @@ export const DetailComponent = ({
         key={`${gridTemplateAreas}-start`}
       />
       {slots.map((slotData) => {
-        const { slotId, column: column, gridArea, gridData, align, columnRef } = slotData;
+        const { slotId, column, gridArea, gridData, align, columnRef } = slotData;
         const { justify } = gridData.column;
 
         const floatRight = true;
@@ -415,14 +415,14 @@ function DetailText(props: {
   );
 }
 
-type AlignSlotProps = {
+interface AlignSlotProps {
   slot?: SlotItemData;
   position: 'start' | 'end';
   gridArea?: string;
   gridHeight: number;
   slotRows: SlotData[][];
   activeSlotIds: SlotId[];
-};
+}
 
 const AlignedSlot = forwardRef<HTMLDivElement, AlignSlotProps>(
   ({ slot, position, slotRows }, forwardedRef) => {

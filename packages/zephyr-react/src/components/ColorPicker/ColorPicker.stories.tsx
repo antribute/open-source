@@ -1,19 +1,14 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable react-hooks/rules-of-hooks */
 import { StoryObj } from '@storybook/react';
-import { ColorPicker, ColorArea, ColorSlider } from '.';
 import { parseColor } from '@react-stately/color';
 import { useState } from 'react';
 import { Flex, FlexProps } from 'components/Flex';
-import { Paper } from 'components/Paper';
 import { Card } from 'components/Card';
-import { NumberField } from 'react-aria-components';
-import { Label } from 'react-aria-components';
-import { Group } from 'react-aria-components';
-import { Button } from 'react-aria-components';
-import { Input } from 'react-aria-components';
-import { useRef } from 'react';
-import { NumberFieldContext } from 'react-aria-components';
-import { useNumberField } from 'react-aria';
+
 import { ColorSwatch } from 'components/ColorPicker/ColorSwatch';
+import { Label } from 'react-aria-components';
+import { ColorArea, ColorSlider } from '.';
 
 const meta = {
   args: {},
@@ -23,12 +18,6 @@ const meta = {
 export default meta;
 
 type Story = StoryObj<typeof meta>;
-
-export const Default: Story = {
-  render: () => {
-    return <ColorPicker />;
-  },
-};
 
 export const ColorAreaEaxmple: Story = {
   render: () => {
@@ -64,7 +53,7 @@ const CardContainer = ({
 };
 export const ColorSliderExample: Story = {
   render: () => {
-    let [color, setColor] = useState(parseColor('#7f007f'));
+    const [color, setColor] = useState(parseColor('#7f007f'));
     return (
       <Flex gap>
         <CardContainer title="RGBA">
@@ -118,13 +107,13 @@ export const HslExample: Story = {
               const id = `hsl-${index}`;
               return (
                 <Flex gap column="reverse" className="min-w-[200px]" grow>
-                  <label
+                  <Label
                     className="text-xs text-content-subtle mb-2 select-none sticky top-0"
                     id={id}
                   >
                     x: {color.getChannelName(xChannel, 'en-US')}, y:{' '}
                     {color.getChannelName(yChannel, 'en-US')}
-                  </label>
+                  </Label>
                   <ColorArea
                     aria-labelledby={id}
                     className="border border-boundary-ghost"

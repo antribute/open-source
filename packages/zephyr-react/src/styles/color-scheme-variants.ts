@@ -1,7 +1,5 @@
 import clsx from 'clsx';
-import { ColorProp } from 'types/styles';
 import type { TailwindColorKey } from '@antribute/zephyr-core';
-import { ValueOf } from 'type-fest';
 
 const basicColors = {
   primary: null,
@@ -135,8 +133,8 @@ export const colorSchemeVariants = {
     base: {
       primary: clsx('bg-gradient-primary-dark-to-light-tr'),
       secondary: clsx('bg-gradient-secondary-dark-to-light-tr'),
-      // inverse: clsx('bg-gradient-inverse-dark-to-light-tr'),
-      // heart: clsx('bg-gradient-heart-dark-to-light-tr'),
+      inverse: clsx('bg-gradient-inverse-dark-to-light-tr'),
+      heart: clsx('bg-gradient-heart-dark-to-light-tr'),
       info: clsx('bg-gradient-info-dark-to-light-tr'),
       success: clsx('bg-gradient-success-dark-to-light-tr'),
       danger: clsx('bg-gradient-danger-dark-to-light-tr'),

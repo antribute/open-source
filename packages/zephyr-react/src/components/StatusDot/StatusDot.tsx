@@ -1,12 +1,12 @@
-import { colorVariants } from 'styles/colors.variants';
-import { Classed, classed, mergeVariants } from 'utils/classed';
+import { colorSchemeVariants } from 'styles/color-scheme-variants';
+import { Classed, classed } from 'utils/classed';
 
 const StatusDotElement = classed(
   'div',
   'flex-none rounded-full p-4 !bg-opacity-20 overflow-hidden relative',
   {
     variants: {
-      color: mergeVariants([colorVariants.text, colorVariants.bg]),
+      color: colorSchemeVariants.filledAccent.base,
     },
   }
 );

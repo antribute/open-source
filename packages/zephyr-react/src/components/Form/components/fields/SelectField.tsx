@@ -3,7 +3,6 @@ import {
   ControlledCombobox,
   ControlledComboboxProps,
 } from 'components/Form/components/ControlledCombobox';
-import { ControlledInput } from 'components/Form/components/ControlledInput';
 import { z } from 'zod';
 
 export const SelectFieldComponent = (props: ControlledComboboxProps) => {

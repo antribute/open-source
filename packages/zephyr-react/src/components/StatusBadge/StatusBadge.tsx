@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import XMarkIcon from '@heroicons/react/20/solid/XMarkIcon';
 import { classed, deriveClassed, mergeVariants } from 'utils/classed';
 import React, { useState } from 'react';
@@ -73,7 +74,7 @@ export const StatusBadge = ({
 
         .catch(() => {});
     }
-  }, [distinctColorClass, label]);
+  }, [colorProp, distinctColorClass, label]);
 
   const clickable = Boolean(onClick);
   return (
@@ -81,7 +82,8 @@ export const StatusBadge = ({
       clickable={clickable}
       size={size}
       onClick={onClick}
-      color={color}
+      data-color-scheme={color}
+      // color={color}
       disabled={disabled}
       className={twMerge(colorClass, className)}
       {...props}

@@ -599,9 +599,11 @@ importers:
       '@ts-react/form': ^1.6.2
       '@tw-classed/core': 1.4.4
       '@tw-classed/react': 1.4.4
+      '@types/culori': ^2.0.0
       '@types/lodash-es': ^4.17.6
       '@types/react': 18.0.25
       '@types/react-dom': 18.0.9
+      '@types/react-is': ^18.2.0
       '@vitest/coverage-c8': ^0.25.3
       ariakit: 2.0.0-next.43
       autoprefixer: ^10.4.13
@@ -692,6 +694,7 @@ importers:
       ariakit: 2.0.0-next.43_2zx2umvpluuhvlq44va5bta2da
       change-case: 4.1.2
       clsx: 1.2.1
+      culori: 3.1.0
       exhaustive: 1.1.1
       flat: 5.0.2
       focus-layers: 0.6.1_react@18.2.0
@@ -740,13 +743,14 @@ importers:
       '@storybook/react-vite': 7.0.4_dobobmrmrfksqkn6tdcjaluvja
       '@storybook/types': 7.0.4
       '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
+      '@types/culori': 2.0.0
       '@types/lodash-es': 4.17.7
       '@types/react': 18.0.25
       '@types/react-dom': 18.0.9
+      '@types/react-is': 18.2.0
       '@vitest/coverage-c8': 0.25.8_happy-dom@7.8.1
       autoprefixer: 10.4.14_postcss@8.4.23
       concurrently: 7.6.0
-      culori: 3.1.0
       eslint: 8.40.0
       eslint-plugin-storybook: 0.6.12_3qfatcekpgbllh6uk5ivyhkbxq
       fast-glob: 3.2.12
@@ -6767,6 +6771,10 @@ packages:
       '@types/node': 18.11.9
     dev: false
 
+  /@types/culori/2.0.0:
+    resolution: {integrity: sha512-bKpEra39sQS9UZ+1JoWhuGJEzwKS0dUkNCohVYmn6CAEBkqyIXimKiPDRZWtiOB7sKgkWMaTUpHFimygRoGIlg==}
+    dev: true
+
   /@types/debug/4.1.7:
     resolution: {integrity: sha512-9AonUzyTjXXhEOa0DnqpzZi6VHlqKMswga9EXjpXnnqxwLtdvPPtlO8evrI5D9S6asFRCQ6v+wpiUKbw+vKqyg==}
     dependencies:
@@ -6954,6 +6962,12 @@ packages:
 
   /@types/react-dom/18.0.9:
     resolution: {integrity: sha512-qnVvHxASt/H7i+XG1U1xMiY5t+IHcPGUK7TDMDzom08xa7e86eCeKOiLZezwCKVxJn6NEiiy2ekgX8aQssjIKg==}
+    dependencies:
+      '@types/react': 18.0.25
+    dev: true
+
+  /@types/react-is/18.2.0:
+    resolution: {integrity: sha512-1vz2yObaQkLL7YFe/pme2cpvDsCwI1WXIfL+5eLz0MI9gFG24Re16RzUsI8t9XZn9ZWvgLNDrJBmrqXJO7GNQQ==}
     dependencies:
       '@types/react': 18.0.25
     dev: true
@@ -8516,7 +8530,7 @@ packages:
   /culori/3.1.0:
     resolution: {integrity: sha512-UfE5Cz+Hy67GljfCTobMeEyOd8EfUk0Gd32N4ZrpzgWBssJEkFDg917t0CM5g1yK7MqB7MBneJfh2maIHjBrFQ==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
-    dev: true
+    dev: false
 
   /cypress/12.12.0:
     resolution: {integrity: sha512-UU5wFQ7SMVCR/hyKok/KmzG6fpZgBHHfrXcHzDmPHWrT+UUetxFzQgt7cxCszlwfozckzwkd22dxMwl/vNkWRw==}

@@ -24,7 +24,7 @@ const teams = [
 ];
 
 const statuses = {
-  offline: { color: 'surface' },
+  offline: { color: 'secondary' },
   online: { color: 'success' },
   error: { color: 'danger' },
 } satisfies Record<DeploymentMockData['status'], { color: ButtonProps['color'] }>;

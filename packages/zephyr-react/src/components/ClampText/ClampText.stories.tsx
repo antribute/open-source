@@ -1,14 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { ClampText, ClampTextProps } from './ClampText';
 import { Text } from 'components/Text';
 import { Flex } from 'components/Flex';
 import { faker } from '@faker-js/faker';
-import { RenderPaperContainers } from 'utils/storybook-utils';
 import { Paper } from 'components/Paper';
 import { Detail } from 'components/Detail';
-import { capitalize, lowerCase, lowerFirst } from 'lodash-es';
+import { lowerFirst } from 'lodash-es';
 import { Masonry } from 'react-plock';
+import { ClampText, ClampTextProps } from './ClampText';
 
 const meta = {
   args: {},
@@ -17,7 +16,8 @@ const meta = {
 } satisfies Meta<typeof ClampText>;
 
 export default meta;
-type Story = StoryObj<{}>;
+
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {},

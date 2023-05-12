@@ -1,11 +1,10 @@
-import { createTsForm, useTsController } from '@ts-react/form';
-import { CheckboxField } from 'components/Form/components/fields/CheckboxField';
-import { fields } from './components/fields';
+import { createTsForm } from '@ts-react/form';
 import { createFormSchema } from 'components/Form/createFormSchema';
 import { useFormContext } from 'react-hook-form';
 import { EmailField } from 'components/Form/components/fields/EmailField';
 import { SelectField } from 'components/Form/components/fields/SelectField';
 import { twMerge } from 'tailwind-merge';
+import { fields } from './components/fields';
 
 export function createForm() {
   const { NumberField, StringField, CheckboxField } = fields;
@@ -39,7 +38,7 @@ function FormComponent(props: {
     ...rest
   } = props;
 
-  const { formState, reset } = useFormContext();
+  const { reset } = useFormContext();
 
   return (
     <form

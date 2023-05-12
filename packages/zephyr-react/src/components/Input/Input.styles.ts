@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 
 import { SizeProp } from 'types/styles';
-import { generatePropPickerFn, objectMap, pickProps } from 'utils';
+import { generatePropPickerFn, objectMap } from 'utils';
 import { ClassedVariantProps, classed, classedCore, generateCompoundVariants } from 'utils/classed';
 
 export type InputSurfaceVariants = ClassedVariantProps<typeof inputSurfaceClassName>;
@@ -92,7 +92,7 @@ export const inputSizeClassName = classedCore('div', 'w-auto', {
 
     minWidth: {
       false: 'min-w-0',
-      // ...inputWidthPropSizes.minWidth,
+      ...inputWidthPropSizes.minWidth,
     },
     maxWidth: {
       // false: 'max-w-none',
@@ -123,14 +123,6 @@ export const inputSizeClassName = classedCore('div', 'w-auto', {
   ],
 });
 
-console.log([
-  ...generateCompoundVariants({
-    minWidth: true,
-    className: '!w-full',
-    fullWidth: false,
-    size: inputWidthPropSizes.minWidth,
-  }),
-]);
 export const pickInputSizeVariantProps = generatePropPickerFn<InputSizeVariants>({
   fixedWidth: '_pick_',
   fullWidth: '_pick_',

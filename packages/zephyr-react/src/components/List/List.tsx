@@ -6,7 +6,6 @@ import { ListItemLink } from 'components/List/ListItem/ListItemLink';
 import { ListItemButton } from 'components/List/ListItem/ListItemButton';
 import { getDataAttributes } from '@antribute/zephyr-core';
 import { listItemSizingClassName } from 'components/List/ListItem/BaseListItem';
-import { ListItemContainer } from 'components/List/ListItem/ListItemContainer';
 
 // Container
 

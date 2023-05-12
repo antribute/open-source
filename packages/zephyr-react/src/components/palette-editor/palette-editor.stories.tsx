@@ -1,16 +1,9 @@
+/* eslint-disable no-console */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 import { StoryObj } from '@storybook/react';
-import {
-  parse,
-  Color as CuloriColor,
-  Rgb,
-  rgb,
-  Hsl,
-  hsl,
-  formatCss,
-  differenceCiede2000,
-  nearest,
-  differenceEuclidean,
-} from 'culori';
+import { parse, Hsl, hsl, formatCss, nearest, differenceEuclidean } from 'culori';
 import { Flex } from 'components/Flex';
 import { proxy, useSnapshot } from 'valtio';
 import { proxyMap } from 'valtio/utils';
@@ -22,12 +15,12 @@ import defaultTailwindColors from 'tailwindcss/colors';
 import { DefaultColors } from 'tailwindcss/types/generated/colors';
 import { Path } from '@clickbar/dot-diver';
 import { flatten } from 'flat';
-import { mapValues, pick, pickBy } from 'lodash-es';
+import { mapValues, pickBy } from 'lodash-es';
 import clsx from 'clsx';
 import { paletteColorsConfig } from '@antribute/zephyr-core';
-import { objectMap } from 'utils';
 import { Tabs } from 'components/Tabs';
 import { Paper } from 'components/Paper';
+
 const meta = {
   args: {},
   title: 'Palette Editor',
@@ -71,7 +64,7 @@ function CreateColorSchemeForm() {
           </Button>
         );
       }}
-      onSubmit={(data) => {
+      onSubmit={() => {
         console.log('ON SUBMIT', p);
       }}
       props={{
@@ -91,7 +84,7 @@ export const Default: Story = {
   render: () => {
     return (
       <Tabs.Root defaultValue="schemes" className="relative ">
-        <div className="fixed top-0 p-20 bg-base px-20  w-full z-50">
+        <div className="fixed top-0 p-20 bg-base w-full  z-50">
           <Paper colorScheme="surface-soft h- bg-danger w-full">
             <Tabs.List className="bg-surface ">
               <Tabs.Tab value="schemes">Schemes</Tabs.Tab>
@@ -195,6 +188,7 @@ function ColorForm() {
 const RenderColorScale = ({ name, shades }: { name: string; shades: Shade[] }) => {
   return (
     <Flex gap="sm" shrink={false}>
+      <div>{name}</div>
       {shades.map(({ color, shadeName, isBaseShade }) => {
         return (
           <div
@@ -215,7 +209,11 @@ const RenderColorScale = ({ name, shades }: { name: string; shades: Shade[] }) =
   );
 };
 
-type Shade = { shadeName: string; color: string; isBaseShade: boolean };
+interface Shade {
+  shadeName: string;
+  color: string;
+  isBaseShade: boolean;
+}
 
 function getShadesListData({ shades, ...props }: GeneratedShade): Omit<GeneratedShade, 'shades'> & {
   shades: (Omit<GeneratedShade, 'shades'> & Shade)[];
@@ -266,12 +264,12 @@ const colorScale = {
   950: '',
 };
 
-type GeneratedShade = {
+interface GeneratedShade {
   name: string;
   baseColor: string;
   baseShade: string;
   shades: ColorShades;
-};
+}
 
 function generateTailwindShades(options: { baseColor: string; name: string }): GeneratedShade {
   const defaultTailwindScales = pickBy(defaultTailwindColors, (v) => typeof v === 'object');
@@ -281,11 +279,6 @@ function generateTailwindShades(options: { baseColor: string; name: string }): G
   const defaultTwScalePaths = Object.keys(flattenedTwColors) as DefaultTailwindScalePath[];
 
   const { baseColor: rawBaseColor, name } = options;
-
-  function perceivedBrightness(color: CuloriColor): number {
-    const { r, g, b } = rgb(color) ?? {};
-    return Math.sqrt(0.299 * r ** 2 + 0.587 * g ** 2 + 0.114 * b ** 2);
-  }
 
   const baseColor = parse(rawBaseColor)!;
 
@@ -319,6 +312,7 @@ function generateTailwindShades(options: { baseColor: string; name: string }): G
       const hueDifference = baseHsl.h! - defaultHsl.h!;
 
       const newHsl = {
+        // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
         h: defaultHsl.h! + hueDifference,
         l: defaultHsl.l,
         s: defaultHsl.s,
@@ -348,5 +342,3 @@ type FlattenedTailwindColorScales = Record<DefaultTailwindScalePath, string>;
 type ColorShadeKey = keyof DefaultTailwindColorScales['blue'];
 
 type ColorShades = Record<keyof DefaultTailwindColorScales['blue'], string>;
-
-type ColorShadeMap = Record<string, ColorShades>;

@@ -31,10 +31,6 @@ export const SvgIconWrapper = ({
   );
 };
 
-interface SvgHigherOrderComponentProps {
-  asChild?: boolean;
-}
-
 export const svgIcon = (
   svg: React.ReactElement<ReactSvgProps>,
   defaultProps?: Omit<SvgIconWrapperProps, 'asChild'>

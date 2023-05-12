@@ -9,27 +9,33 @@ import { defineColorScheme } from '../color-schemes.helpers';
 const inverseColorSchemes = [
   defineColorScheme({
     name: 'inverse',
+    colorMode: 'dark',
     extend: surface_darkmode,
   }),
   defineColorScheme({
     name: 'inverse-light',
+    colorMode: 'dark',
     extend: surfaceLight_darkmode,
   }),
   defineColorScheme({
     name: 'inverse-dark',
+    colorMode: 'dark',
     extend: surfaceDark_darkmode,
   }),
 
   defineColorScheme({
     name: 'dark/inverse',
+    colorMode: 'light',
     extend: surface,
   }),
   defineColorScheme({
     name: 'dark/inverse-light',
+    colorMode: 'light',
     extend: surfaceLight,
   }),
   defineColorScheme({
     name: 'dark/inverse-dark',
+    colorMode: 'light',
     extend: surfaceDark,
   }),
 ];

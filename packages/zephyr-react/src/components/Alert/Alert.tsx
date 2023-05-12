@@ -1,9 +1,6 @@
 import React from 'react';
 import { Detail } from 'components/Detail';
-import { ColorProp } from 'types/styles';
 import { classed } from 'utils/classed';
-import { Paper } from 'components/Paper';
-import { DiscardButtonElement } from 'components/StatusBadge';
 import { Button } from 'components/Button';
 import { ClampText } from 'components/ClampText/ClampText';
 
@@ -57,7 +54,7 @@ export const Alert = ({
         data-color-scheme={variant}
         startSubtitle={{
           color: 'current',
-          value: <AlertIconElement variant={variant} />,
+          value: icon ?? <AlertIconElement variant={variant} />,
         }}
         subtitle={{
           color: 'current',
@@ -90,6 +87,7 @@ export const Alert = ({
       {Boolean(onDiscardClick) && (
         <div className="pr-4 pt-4">
           <button
+            type="button"
             className=" p-2 rounded text-primary-dark/50  hover:bg-primary/10 relative  flex items-center justify-center ml-8"
             onClick={onDiscardClick}
           >

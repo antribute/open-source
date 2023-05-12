@@ -3,7 +3,7 @@ import { StoryFn, Meta } from '@storybook/react';
 import { Avatar } from 'components/Avatar';
 import { Detail } from 'components/Detail';
 import { Flex } from 'components/Flex';
-import { Paper, PaperProps } from 'components/Paper';
+import { Paper } from 'components/Paper';
 import { generateMockUserList } from 'mock/mock-data';
 
 const CenterStoryDecorator = (Story: StoryFn) => {

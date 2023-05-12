@@ -33,7 +33,7 @@ export function useBreakpoints(): BreakpointMatchMap {
     $xl,
     $2xl,
   };
-  console.log('BREAKPOINTS', breakpointMap);
+
   return breakpointMap;
 }
 

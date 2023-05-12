@@ -1,13 +1,13 @@
 import * as CollapsiblePrimitive from '@radix-ui/react-collapsible';
-import { classed, expandVariant } from 'utils/classed';
+import { classed } from 'utils/classed';
 import { twMerge } from 'tailwind-merge';
 import ChevronDownIcon from '@heroicons/react/24/solid/ChevronDownIcon';
-import { ListItemContainer } from './ListItemContainer';
-import { ListItemButton, ListItemButtonProps } from './ListItemButton';
 import { pickProps } from 'utils';
 import clsx from 'clsx';
 import { Detail, DetailProps } from 'components/Detail';
 import { isReactNode } from 'utils/component-is-utils';
+import { ListItemButton, ListItemButtonProps } from './ListItemButton';
+import { ListItemContainer } from './ListItemContainer';
 
 const CollapsibleContentElement = classed('ul', '', {
   variants: {
@@ -83,6 +83,7 @@ export const CollapsibleListItem = ({
         </CollapsiblePrimitive.Trigger>
         <CollapsiblePrimitive.CollapsibleContent asChild {...contentProps}>
           <CollapsibleContentElement
+            // eslint-disable-next-line no-nested-ternary
             indented={indentContent ? (startIcon ? 'lg' : 'md') : undefined}
           >
             {children}

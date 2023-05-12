@@ -2,13 +2,13 @@
 
 import type { Meta, StoryObj } from '@storybook/react';
 import { UserMockData, generateMockUserList } from 'mock/mock-data';
-import { useState, useEffect } from 'react';
-import { Combobox } from '.';
+import { useState } from 'react';
 import { Avatar } from 'components/Avatar';
 import { Detail } from 'components/Detail';
 import { Text } from 'components/Text';
 import { Flex } from 'components/Flex';
 import { useMockCharactersQuery } from 'mock/mock-apis';
+import { Combobox } from '.';
 
 const meta = {
   args: {},
@@ -58,12 +58,6 @@ export const Default: StoryObj = {
 
 export const MultiSelectCombobox: StoryObj = {
   render: () => {
-    const [search, setSearch] = useState<string | undefined>();
-
-    const { data, loading } = useMockCharactersQuery({ search });
-
-    console.log('DATA', data);
-
     return (
       <div className="flex flex-wrap gap-8">
         {optionSet.map(({ options, size }) => (
@@ -86,12 +80,6 @@ export const MultiSelectCombobox: StoryObj = {
 
 export const MultiSelectComboboxRenderOption: StoryObj = {
   render: () => {
-    const [search, setSearch] = useState<string | undefined>();
-
-    const { data, loading } = useMockCharactersQuery({ search });
-
-    console.log('DATA', data);
-
     return (
       <div className="flex flex-wrap gap-8">
         {optionSet.map(({ options, size }) => (
@@ -191,7 +179,7 @@ export const ReactAriaTst: StoryObj = {
     return (
       <div className="flex flex-wrap gap-8">
         <Combobox
-          label={`Users`}
+          label="Users"
           options={options}
           isMultiSelect={false}
           getOptionLabel={(e) => `${e.name} ${e.name}`}

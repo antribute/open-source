@@ -33,7 +33,7 @@ export async function fetchStatusColor<
 
   if (!colorToken) return undefined;
 
-  const colors = mergeVariants(pick(colorVariants, Object.keys(picked)), { pick: [colorToken] });
+  const colors = mergeVariants(pick(colorVariants, Object.keys(picked)));
 
   const colorClass = get(colors, colorToken) || undefined;
 

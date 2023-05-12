@@ -1,76 +1,6 @@
 import { classed } from '@tw-classed/react';
 import { twMerge } from 'tailwind-merge';
 
-interface SvgGradientStopProp {
-  offset?: number;
-  color: string;
-  opacity?: number;
-}
-
-const SvgGradientStops = ({ stops }: { stops: SvgGradientStopProp[] }) => {
-  function getOffset({ stop, index }: { stop: SvgGradientStopProp; index: number }) {
-    const { offset } = stop;
-    if (offset) {
-      return `${offset}%`;
-    }
-    if (index === 0) {
-      return '0%';
-    }
-    if (index === stops.length) {
-      return `100%`;
-    }
-
-    return `${index * (100 / (stops.length - 1))}%`;
-  }
-
-  return (
-    <>
-      {stops.map((stop, index) => {
-        const { color, opacity } = stop;
-
-        const style = {
-          stopColor: color,
-          stopOpacity: opacity ?? 1,
-        };
-
-        return <stop key={index} offset={getOffset({ stop, index })} style={style} />;
-      })}
-    </>
-  );
-};
-
-interface SvgLinearGradientProps {
-  id: string;
-  rotateGradient?: number;
-  stops: SvgGradientStopProp[];
-}
-
-const SvgLinearGradient = ({ id, stops, rotateGradient }: SvgLinearGradientProps) => {
-  return (
-    <linearGradient
-      id={id}
-      x1="0%"
-      x2="100%"
-      y1="0%"
-      y2="0%"
-      gradientUnits="userSpaceOnUse"
-      gradientTransform={`rotate(${rotateGradient ?? 25})`}
-    >
-      <SvgGradientStops stops={stops} />
-    </linearGradient>
-  );
-};
-
-const AntributeLogoContainerElement = classed(
-  'div',
-  'relative',
-  'bg-palette-black/90',
-  'ring-2',
-  'ring-palette-gray-300 dark:ring-content-moderate',
-  'noisy-surface-texture before:opacity-[0.09]',
-  'rounded-full overflow-hidden'
-);
-
 export const AntributeLogo = ({
   className,
   height,
@@ -102,3 +32,73 @@ export const AntributeLogo = ({
     </svg>
   </AntributeLogoContainerElement>
 );
+
+const AntributeLogoContainerElement = classed(
+  'div',
+  'relative',
+  'bg-palette-black/90',
+  'ring-2',
+  'ring-palette-gray-300 dark:ring-content-moderate',
+  'noisy-surface-texture before:opacity-[0.09]',
+  'rounded-full overflow-hidden'
+);
+
+// interface SvgGradientStopProp {
+//   offset?: number;
+//   color: string;
+//   opacity?: number;
+// }
+
+// const SvgGradientStops = ({ stops }: { stops: SvgGradientStopProp[] }) => {
+//   function getOffset({ stop, index }: { stop: SvgGradientStopProp; index: number }) {
+//     const { offset } = stop;
+//     if (offset) {
+//       return `${offset}%`;
+//     }
+//     if (index === 0) {
+//       return '0%';
+//     }
+//     if (index === stops.length) {
+//       return `100%`;
+//     }
+
+//     return `${index * (100 / (stops.length - 1))}%`;
+//   }
+
+//   return (
+//     <>
+//       {stops.map((stop, index) => {
+//         const { color, opacity } = stop;
+
+//         const style = {
+//           stopColor: color,
+//           stopOpacity: opacity ?? 1,
+//         };
+
+//         return <stop key={index} offset={getOffset({ stop, index })} style={style} />;
+//       })}
+//     </>
+//   );
+// };
+
+// interface SvgLinearGradientProps {
+//   id: string;
+//   rotateGradient?: number;
+//   stops: SvgGradientStopProp[];
+// }
+
+// const SvgLinearGradient = ({ id, stops, rotateGradient }: SvgLinearGradientProps) => {
+//   return (
+//     <linearGradient
+//       id={id}
+//       x1="0%"
+//       x2="100%"
+//       y1="0%"
+//       y2="0%"
+//       gradientUnits="userSpaceOnUse"
+//       gradientTransform={`rotate(${rotateGradient ?? 25})`}
+//     >
+//       <SvgGradientStops stops={stops} />
+//     </linearGradient>
+//   );
+// };

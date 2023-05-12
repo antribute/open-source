@@ -1,10 +1,6 @@
-import { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
+import { useState, useEffect } from 'react';
 import { Alert, AlertProps } from './Alert';
-import { StoryObj } from '@storybook/react';
-import { useImmer } from 'use-immer';
-import { useState } from 'react';
-import { Button } from 'components/Button';
-import { useEffect } from 'react';
 
 const meta = {
   args: {},
@@ -50,42 +46,40 @@ const alertsProps = (
 });
 
 const AlertsMock = (props: AlertProps) => {
-  {
-    const initialAlerts = alertsProps.map((e) => ({ ...e, ...props }));
-    const [alerts, setAlerts] = useState(initialAlerts);
+  const initialAlerts = alertsProps.map((e) => ({ ...e, ...props }));
+  const [alerts, setAlerts] = useState(initialAlerts);
 
-    function closeAlert(variant: AlertProps['variant']) {
-      setAlerts(alerts.filter((e) => e.variant !== variant));
-    }
-
-    useEffect(() => {
-      if (alerts.length === 0) {
-        setAlerts(initialAlerts);
-      }
-    }, [alerts]);
-
-    return (
-      <div className="flex flex-col gap-16">
-        {alerts.map((alert, i) => {
-          return (
-            <Alert
-              {...alert}
-              {...props}
-              key={i}
-              onDiscardClick={
-                props.onDiscardClick
-                  ? () => {
-                      closeAlert(alert.variant);
-                      props.onDiscardClick?.();
-                    }
-                  : undefined
-              }
-            />
-          );
-        })}
-      </div>
-    );
+  function closeAlert(variant: AlertProps['variant']) {
+    setAlerts(alerts.filter((e) => e.variant !== variant));
   }
+
+  useEffect(() => {
+    if (alerts.length === 0) {
+      setAlerts(initialAlerts);
+    }
+  }, [alerts, initialAlerts]);
+
+  return (
+    <div className="flex flex-col gap-16">
+      {alerts.map((alert, i) => {
+        return (
+          <Alert
+            {...alert}
+            {...props}
+            key={i}
+            onDiscardClick={
+              props.onDiscardClick
+                ? () => {
+                    closeAlert(alert.variant);
+                    props.onDiscardClick?.();
+                  }
+                : undefined
+            }
+          />
+        );
+      })}
+    </div>
+  );
 };
 
 export const Default: Story = {

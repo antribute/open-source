@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createUniqueFieldSchema, RTFSupportedZodTypes } from '@ts-react/form';
 
 export function createFormField<

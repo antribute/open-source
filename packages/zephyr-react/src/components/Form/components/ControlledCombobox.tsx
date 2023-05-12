@@ -1,6 +1,6 @@
-import { useDescription, useTsController, useFieldInfo } from '@ts-react/form';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useTsController, useFieldInfo } from '@ts-react/form';
 import { Combobox, ComboboxProps } from 'components/Combobox';
-import { Input, InputComponentProps } from 'components/Input';
 
 export type ControlledComboboxProps<T extends unknown[] = string[]> = Omit<
   ComboboxProps<T>,
@@ -14,25 +14,26 @@ export const ControlledCombobox = <T extends string[]>({
 
   const { label, placeholder, isOptional } = useFieldInfo();
 
-  const { onChange, value, name, onBlur, ref } = field;
+  const { onChange, value, name, ref } = field;
 
   return (
     <>
-      <Combobox
-        isMultiSelect={false}
-        // isRequired={!isOptional}
+      <Combobox<string[]>
+        {...(props as any)}
+        name={name}
+        isRequired={!isOptional}
+        getOptionLabel={(e) => e}
         value={value ?? ''} // conditional to prevent "uncontrolled to controlled" react warning
         onValueChange={(e) => {
           onChange(e);
         }}
-        required={!isOptional}
         placeholder={placeholder}
         label={label}
-        onBlur={onBlur}
         ref={ref}
         error={Boolean(error)}
         errorMessage={error?.errorMessage}
-        {...props}
+        isMultiSelect={false}
+        // onBlur={onBlur}
       />
     </>
   );

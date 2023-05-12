@@ -1,17 +1,23 @@
-import React, { useRef, forwardRef } from 'react';
+import React, { useRef, forwardRef, useLayoutEffect } from 'react';
 import clsx from 'clsx';
-import { Classed, classed } from 'utils/classed';
-import { useInputWithRefContext } from '../Input.helpers';
+import { classed } from 'utils/classed';
 import { VisuallyHidden } from 'react-aria';
 import { measureElement } from 'utils/measureElement';
 import { mergeRefs } from '@react-aria/utils';
-import { useLayoutEffect } from 'react';
-import { Input as AriaInput } from 'react-aria-components';
+import { Input as AriaInput, TextField as AriaTextField } from 'react-aria-components';
 import type { InputProps as AriaInputProps } from 'react-aria-components';
-import { inputSizeClassName, inputSurfaceClassName } from 'components/Input/Input.styles';
-import { BaseInputFieldElement, defaultInputProps } from '../components/BaseInput';
+import {
+  InputSizeVariants,
+  inputSizeClassName,
+  inputSurfaceClassName,
+} from 'components/Input/Input.styles';
 import { InputContainer } from 'components/Input/components/InputContainer';
-import { TextField as AriaTextField } from 'react-aria-components';
+import {
+  BaseInputFieldElement,
+  InputFieldContainerVariants,
+  defaultInputProps,
+} from '../components/BaseInput';
+import { useInputWithRefContext } from '../Input.helpers';
 import type { InputComponentProps, AriaTextFieldProps } from '../Input.types';
 
 export type TextAreaFieldProps = React.ComponentProps<typeof TextAreaField>;
@@ -57,9 +63,9 @@ BaseTextAreaElement.defaultProps = defaultInputProps;
 
 interface BaseTextAreaProps
   extends Omit<AriaInputProps, 'size' | 'width'>,
-    Classed.VariantProps<typeof BaseTextAreaElement>,
+    InputSizeVariants,
+    InputFieldContainerVariants,
     Pick<React.ComponentProps<typeof BaseTextAreaElement>, 'rows' | 'cols'> {
-  disallowNewlineInput?: boolean;
   resizeable?: boolean | 'x' | 'y';
 }
 
@@ -72,9 +78,8 @@ export const BaseTextArea = forwardRef<HTMLTextAreaElement, BaseTextAreaProps>(
       size,
       hasLeadingAddons,
       hasTrailingAddons,
-      minWidth = 'lg',
+      minWidth = false,
       maxWidth = false,
-      disallowNewlineInput = true,
       ...props
     },
     forwardedRef
@@ -103,7 +108,7 @@ export const BaseTextArea = forwardRef<HTMLTextAreaElement, BaseTextAreaProps>(
         <BaseTextAreaElement
           {...(inputProps as object)}
           onChange={(e) => {
-            inputProps?.onChange?.(e as any);
+            inputProps.onChange?.(e as never);
           }}
           ref={ref}
           {...{
@@ -116,7 +121,6 @@ export const BaseTextArea = forwardRef<HTMLTextAreaElement, BaseTextAreaProps>(
             hasLeadingAddons,
             hasTrailingAddons,
           }}
-          // style={{ minHeight: `calc(${rows}ch + 8px)` }}
           style={{ minHeight: initialHeight.current }}
         />
 

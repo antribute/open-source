@@ -1,11 +1,10 @@
 import { Slot } from '@radix-ui/react-slot';
 import { ReactVirtualizedAutoSizerProps } from 'components/AutoSizer/AutoSizer.types';
-import { get, omit, pick } from 'lodash-es';
-import { useCallback, useMemo, ReactPropTypes, ReactHTMLElement, forwardRef } from 'react';
+import { omit, pick } from 'lodash-es';
+import { useCallback, forwardRef } from 'react';
 import ReactVirtualizedAutoSizer from 'react-virtualized-auto-sizer';
 import { classed } from 'utils/classed';
 import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area';
-import { twMerge } from 'tailwind-merge';
 
 interface SizeOption {
   width?: number;
@@ -54,10 +53,6 @@ export const AutoSizer = <TAsChild extends true | undefined>({
     </ReactVirtualizedAutoSizer>
   );
 };
-
-type ResponsiveScrollScrollerContainerElementProps = React.ComponentProps<
-  typeof ScrollerContainerElement
->;
 
 const pickedScrollAreaProps = {
   scrollHideDelay: true,
@@ -112,7 +107,7 @@ const ScrollerContainer = (props: ResponsiveScrollerContainerProps) => {
 
 const ScrollAreaViewport = classed(ScrollAreaPrimitive.Viewport, 'w-full h-full');
 
-const ScrollerContainerElement = classed(ScrollAreaPrimitive.Root, 'w-full bg-danger  bg-surface', {
+const ScrollerContainerElement = classed(ScrollAreaPrimitive.Root, 'w-full bg-danger', {
   variants: {},
 });
 

@@ -1,16 +1,21 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/no-unused-prop-types */
 import { L } from 'ts-toolbelt';
 import { Select, SelectArrow } from 'ariakit';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import { Input } from 'components/Input';
 import { pickInputContainerProps } from 'components/Input/components';
+import { forwardRef } from 'react';
 import { ComboboxSelectValue } from './ComboboxSelectValue';
 import { ComboboxClearValueAction } from './ComboboxClearValueAction';
 import { useCombobox } from './useCombobox';
 import { ComboboxPopover } from './ComboboxPopover';
 import { ComboboxProps } from './Combobox.types';
 
-export function Combobox<TOptions extends L.List<unknown>>(props: ComboboxProps<TOptions>) {
+export function ComboboxComponent<TOptions extends L.List<unknown>>(
+  props: ComboboxProps<TOptions> & { ref?: any },
+  forwardedRef: React.ForwardedRef<HTMLButtonElement>
+) {
   const { select, combobox, hasSelected, selectOptionMap, viewAllSelected, setViewAllSelected } =
     useCombobox<TOptions>(props);
 
@@ -30,13 +35,14 @@ export function Combobox<TOptions extends L.List<unknown>>(props: ComboboxProps<
     fullWidth,
     autoWidth,
     size,
+    name,
   } = props;
 
   const showClearValueAction = clearable && select.value.length > 0;
 
   return (
     <Input.Container {...pickInputContainerProps(props)}>
-      <Select state={select} toggleOnClick typeahead autoFocus>
+      <Select state={select} toggleOnClick typeahead autoFocus ref={forwardedRef} name={name}>
         {(props) => {
           return (
             <Input.AddonGroup
@@ -51,7 +57,7 @@ export function Combobox<TOptions extends L.List<unknown>>(props: ComboboxProps<
                 >
                   <ComboboxSelectValue
                     multiSelectVariant={multiSelectVariant}
-                    placeholder={placeholder ?? 'Select...'}
+                    placeholder={placeholder}
                     value={select.value}
                     selectState={select}
                   />
@@ -100,3 +106,8 @@ export function Combobox<TOptions extends L.List<unknown>>(props: ComboboxProps<
     </Input.Container>
   );
 }
+
+// eslint-disable-next-line @typescript-eslint/naming-convention, no-underscore-dangle
+const Combobox = forwardRef(ComboboxComponent) as unknown as typeof ComboboxComponent;
+
+export { Combobox };

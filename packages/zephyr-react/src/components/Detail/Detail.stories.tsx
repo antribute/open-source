@@ -1,9 +1,12 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 import type { Meta, StoryObj } from '@storybook/react';
 import { Flex } from 'components/Flex';
 import { Paper } from 'components/Paper';
 import { IconButton } from 'components/IconButton';
 import { StatusBadge } from 'components/StatusBadge';
-import { Detail, DetailProps } from '.';
 import { Button } from 'components/Button';
 import { objectMap, pickProps } from 'utils';
 import {
@@ -15,12 +18,11 @@ import {
 import { InputType } from '@storybook/types';
 import { Masonry } from 'react-plock';
 import { Text } from 'components/Text';
-import { sortBy } from 'lodash-es';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import clsx from 'clsx';
-import { useMemo } from 'react';
 import { Combobox } from 'components/Combobox';
 import { CenterDetailSlots } from 'components/Detail/Detail.old';
+import { Detail, DetailProps } from '.';
 
 const meta = {
   args: {},
@@ -31,34 +33,6 @@ const meta = {
 type Story = StoryObj<typeof Detail>;
 
 export default meta;
-
-function generateCombinations<T extends unknown>(keys: T[] | Readonly<T[]>): T[][] {
-  if (keys.length === 0) {
-    return [[]];
-  }
-
-  const [firstKey, ...restKeys] = keys;
-  const restCombinations = generateCombinations(restKeys);
-
-  const result: T[][] = [];
-  for (const combination of restCombinations) {
-    result.push(combination);
-    result.push([firstKey!, ...combination]);
-  }
-
-  return result;
-}
-
-// function* generateCombinations(keys: string[], combination: string[] = []): Generator<string[]> {
-//   if (keys.length === 0) {
-//     yield combination;
-//   } else {
-//     const [firstKey, ...restKeys] = keys;
-
-//     yield* generateCombinations(restKeys, combination);
-//     yield* generateCombinations(restKeys, [...combination, firstKey]);
-//   }
-// }
 
 const args = {
   overline: 'Overline',
@@ -104,20 +78,6 @@ const detailSlotProps = () => {
   return { argTypes };
 };
 
-function generatePropCombinations(propIds: (keyof typeof args)[]) {
-  const propCombinations = generateCombinations(propIds)
-    .map((propKeys) => {
-      return Object.fromEntries(propKeys.map((prop) => [prop, args[prop]])) as DetailProps;
-    })
-    .filter((e) => {
-      const propKeys = Object.keys(e);
-
-      return propKeys.filter((e) => !e.startsWith('start') && !e.startsWith('end')).length > 0;
-    });
-
-  return sortBy(propCombinations, (e) => Object.keys(e).length);
-}
-
 const { argTypes } = detailSlotProps();
 
 const MockDetailExample = (props: DetailProps) => (
@@ -142,23 +102,14 @@ export const Default: Story = {
   render: () => {
     const storedKeys = JSON.parse(localStorage.getItem('isolated-keys') ?? '[]') as string[];
 
-    const initialPropIds = ['start', 'end', 'title', 'subtitle'] as (keyof typeof args)[];
-
     const [isolated, setIsolated] = useState<string[]>(storedKeys);
     const [filterIsolated, setFilterIsolated] = useState(false);
-    const [showCombinations, setShowCombinations] = useState(false);
 
     const mainPropIdsState = useState(mainSlotIds);
     const startPropIdsState = useState<typeof startSlotIds>([]);
     const endPropIdsState = useState<typeof endSlotIds>([]);
     const labelPropIdsState = useState<typeof labelSlotIds>([]);
     const startEndPropIdsState = useState<(keyof CenterDetailSlots)[]>([]);
-
-    // const [state, setState] = useImmer<{
-    //   startPropIds: typeof startEndPropIds;
-    //   startEndPropIds: ;
-    //   endPropIds: typeof endEndPropIds;
-    // }>({});
 
     const [mainPropIds] = mainPropIdsState;
     const [startPropIds] = startPropIdsState;
@@ -167,9 +118,6 @@ export const Default: Story = {
     const [labelPropIds] = labelPropIdsState;
 
     const propCombinations = useMemo((): DetailProps[] => {
-      // if (showCombinations) {
-      //   return generatePropCombinations(mainPropIds);
-      // }
       return new Array(3).fill(0).map(() => {
         const props = Object.fromEntries(
           [...mainPropIds, ...startEndPropIds, ...startPropIds, ...labelPropIds, ...endPropIds].map(
@@ -182,7 +130,6 @@ export const Default: Story = {
 
     const hasIsolated = storedKeys.length > 0;
 
-    console.log('propCombinations', propCombinations, labelPropIds, args);
     return (
       <div className="overflow-y-auto max-h-screen">
         <div className="w-full flex justify-end space-x-16 mb-8 sticky top-0 z-10">
@@ -216,30 +163,7 @@ export const Default: Story = {
                 setState(e);
               }}
               renderOption={(e) => {
-                return (
-                  <Detail
-                    className="w-full"
-                    subtitle={{ value: e }}
-                    // body={
-                    //   <div
-                    //     onClick={(e) => {
-                    //       e.stopPropagation();
-                    //     }}
-                    //     className="w-full"
-                    //   >
-                    //     <ToggleGroup
-                    //       size="xs"
-                    //       fullWidth
-                    //       items={[
-                    //         { label: 'Badge', value: 'badge' },
-                    //         { label: 'Icon', value: 'icon' },
-                    //       ]}
-                    //       onValueChange={() => {}}
-                    //     />
-                    //   </div>
-                    // }
-                  />
-                );
+                return <Detail className="w-full" subtitle={{ value: e }} />;
               }}
             />
           ))}

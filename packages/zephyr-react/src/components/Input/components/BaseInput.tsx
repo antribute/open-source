@@ -1,10 +1,12 @@
-import { classed, mergeVariants } from 'utils/classed';
+import { ClassedVariantProps, classed, mergeVariants } from 'utils/classed';
 import { sizeVariants } from 'styles/size.variants';
 import { primitiveInputClassName } from 'components/Input/Input.styles';
 
 import { Input as AriaInput } from 'react-aria-components';
 
 import type { InputProps as AriaInputProps } from 'react-aria-components';
+
+export type InputFieldContainerVariants = ClassedVariantProps<typeof InputFieldContainer>;
 
 export const InputFieldContainer = classed(
   'div',

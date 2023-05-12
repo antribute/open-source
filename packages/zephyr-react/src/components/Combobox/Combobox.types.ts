@@ -18,6 +18,7 @@ export interface ComboboxOptionGetters<TOptions extends ComboboxOptions> {
 export interface ComboboxBaseProps<TOptions extends ComboboxOptions = ComboboxOptions>
   extends InputComponentProps,
     ComboboxOptionGetters<TOptions> {
+  name?: string;
   options: TOptions;
   searchOptions?: TOptions;
   onLastOptionItemScrollReached?: () => void;
