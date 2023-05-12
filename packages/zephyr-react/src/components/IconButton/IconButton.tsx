@@ -9,13 +9,17 @@ const IconButtonElement = classed('button', ButtonElement, 'p-8 shrink-0', {
   },
 });
 
-export type IconButtonProps = React.ComponentProps<typeof IconButtonElement>;
+export type IconButtonProps = Omit<
+  React.ComponentProps<typeof IconButtonElement>,
+  'extraRoundedPadding'
+>;
 
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
   ({ className, children, ...props }, ref) => {
     return (
-      <IconButtonElement {...props} className={children ? className : undefined} ref={ref}>
-        {children ?? <span className={className} />}
+      <IconButtonElement {...props} className={className} ref={ref} extraRoundedPadding={false}>
+        {/* {children ?? <span className={className} />} */}
+        {children}
       </IconButtonElement>
     );
   }

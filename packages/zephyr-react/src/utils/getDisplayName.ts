@@ -31,10 +31,16 @@ function getWrappedName(outerType: any, innerType: any, wrapperName: string) {
   );
 }
 
-export default function getDisplayName(component: unknown): string | undefined {
+export default function getDisplayName(node: unknown): string | undefined {
   // if (!isElement(component)) {
   //   return undefined;
   // }
+
+  if (!React.isValidElement(node)) {
+    return undefined;
+  }
+
+  const component = node.type;
 
   if (component == null) {
     return undefined;

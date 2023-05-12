@@ -1,9 +1,12 @@
+// @ts-expect-error No type definition
+import flattenColorPalette from 'tailwindcss/lib/util/flattenColorPalette';
 import tailwindColors from 'tailwindcss/colors';
 import { variousColors } from './variousColors';
 import { generateColorGroup } from './helpers/generateColorGroup';
 import { arrayToColorGroup } from './helpers/arrayToColorGroup';
 import { generateHexAlphaColorGroup } from './helpers/generateHexAlphaColorGroup';
 import { objectMap } from './helpers/objectMap';
+import { ParamCasePathName, StripPostfix } from '../helpers/type-utilities';
 
 const black = '#000000';
 
@@ -39,8 +42,6 @@ const base = {
   inverse: '#0D0E11',
 };
 
-type Colors = typeof colors;
-
 const highlightAlphaMap = {
   DEFAULT: '7',
   tint: '2',
@@ -53,7 +54,9 @@ const highlightAlphaMap = {
   intense: '30',
 };
 
-export const colors = {
+type PaletteColorsConfig = typeof paletteColorsConfig;
+
+export const paletteColorsConfig = {
   highlight: generateHexAlphaColorGroup(neutral[500], highlightAlphaMap),
   'highlight-inverse': generateHexAlphaColorGroup(
     variousColors['various-slate'].light,
@@ -195,13 +198,45 @@ export const colors = {
   ...variousColors,
 } satisfies Record<string, string | Record<string, string>>;
 
-export type ColorPalette = { [P in keyof Colors & string as `palette-${P}`]: Colors[P] };
+type UtilityColorConfig = typeof utilityColorsConfig;
 
-export const colorPalette = {
+const utilityColorsConfig = {
   inherit: tailwindColors.inherit,
   current: tailwindColors.current,
   transparent: tailwindColors.transparent,
-  ...(objectMap<string, unknown>(colors, (key, value) => {
-    return [`palette-${key!}`, value];
-  }) as ColorPalette),
 };
+
+export type ColorPalette = ColorDictionary<UtilityColorConfig> &
+  ColorDictionary<PaletteColorsConfig, 'palette-'>;
+
+export type PaletteColor = keyof ColorPalette;
+
+export const colorPalette: ColorPalette = {
+  ...utilityColorsConfig,
+  ...objectMap(
+    flattenColorPalette(paletteColorsConfig) as ColorDictionary<PaletteColorsConfig>,
+    ({ key, value }) => {
+      return [`palette-${key}`, value];
+    }
+  ),
+};
+
+type ColorDictionary<T extends Record<string, unknown>, TPrefix extends string = ''> = Record<
+  `${TPrefix}${ColorName<T>}`,
+  string
+>;
+
+type ColorName<T extends Record<string, unknown>> = StripPostfix<ParamCasePathName<T>, '-DEFAULT'>;
+
+// type SemanticPaletteColor<T extends string> = RemoveNumberPostfix<T>;
+// type OnlyDefaultColorNames<T extends string> = T extends `${infer P}-DEFAULT` ? P : never;
+// type TopLevelColor = O.Select<AllColors, string>;
+// type BasePaletteColor = PaletteColor<
+//   Extract<TopLevelColor | OnlyDefaultColorNames<ParamCasePathName<AllColors>>, string>
+// >;
+
+// const colorPaletteDictionary = flattenColorPalette(colorPaletteConfig) as ColorPalette
+
+// export const colorPalette = objectMap(colorDictionary, ({ key, value }) => {
+//   return [`palette-${key}`, value];
+// }) as ColorPalette;

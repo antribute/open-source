@@ -14,6 +14,8 @@ export const ThemeSwitcher = (props: IconButtonProps) => {
         }}
         {...props}
         variant="glass"
+        color="secondary"
+        className="!bg-opacity-5"
       >
         {isDarkMode ? (
           <SunIcon className="fill-caution" />

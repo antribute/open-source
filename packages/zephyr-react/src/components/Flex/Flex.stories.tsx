@@ -22,7 +22,7 @@ const FlexExample = ({ label, ...props }: FlexProps & { label?: string }) => {
         <Card.Title>{label}</Card.Title>
       </Card.TitleSection>
       <Card.BodySection className="h-152">
-        <Flex className="h-full" {...props}>
+        <Flex gap className="h-full" {...props}>
           {getSizeKeys().map((size, i) => {
             return (
               <div>

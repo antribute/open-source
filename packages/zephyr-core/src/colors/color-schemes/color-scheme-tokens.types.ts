@@ -1,4 +1,6 @@
+// import { ColorScaleKey } from '../colors.constants';
 import type { ColorShadeVariant, ColorAlphaVariant } from '../colors.types';
+import type { ColorSchemeBaseTokens } from './color-schemes';
 
 export type ColorSchemeToken =
   | 'base'
@@ -11,11 +13,11 @@ export type ColorSchemeToken =
   | TokenShadeVariant<'success'>
   | TokenShadeVariant<'caution'>
   | TokenShadeVariant<'danger'>
-  | TokenStrengthVariant<'highlight'>
   | TokenStrengthVariant<'boundary'>
+  | TokenStrengthVariant<'highlight'>
   | ContentTokenVariant<'content'>;
 
-type TokenVariant<T extends string> =
+type TokenVariant<T extends ColorSchemeBaseTokens> =
   | TokenShadeVariant<T>
   | MinMaxContentContrastTokenVariant<T>
   | `${T}-content`;
@@ -36,3 +38,5 @@ type TokenStrengthVariant<
   T extends string,
   TPick extends ColorAlphaVariant | 'DEFAULT' = ColorAlphaVariant | 'DEFAULT'
 > = `${T}-${Exclude<TPick, 'DEFAULT'>}` | (TPick extends 'DEFAULT' ? T : never);
+
+// type TokenColorScaleVariant<T extends string> = `${T}-${ColorScaleKey}` | T;

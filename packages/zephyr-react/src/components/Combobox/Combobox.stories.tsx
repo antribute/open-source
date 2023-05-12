@@ -1,10 +1,14 @@
 /* eslint-disable no-console, react-hooks/rules-of-hooks */
 
 import type { Meta, StoryObj } from '@storybook/react';
-import { generateMockUserList } from 'mock/mock-data';
+import { UserMockData, generateMockUserList } from 'mock/mock-data';
 import { useState, useEffect } from 'react';
-
 import { Combobox } from '.';
+import { Avatar } from 'components/Avatar';
+import { Detail } from 'components/Detail';
+import { Text } from 'components/Text';
+import { Flex } from 'components/Flex';
+import { useMockCharactersQuery } from 'mock/mock-apis';
 
 const meta = {
   args: {},
@@ -13,7 +17,6 @@ const meta = {
 } satisfies Meta<typeof Combobox>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
 
 const smUserOptions = generateMockUserList({ seed: 1, size: 3 });
 const mdUserOptions = generateMockUserList({ seed: 1, size: 8 });
@@ -22,17 +25,18 @@ const xlUserOptions = generateMockUserList({ seed: 1, size: 10000 });
 const emptyUserOptions = generateMockUserList({ seed: 1, size: 0 });
 const singleUserOptions = generateMockUserList({ seed: 1, size: 1 });
 
-const optionSet = [
-  { options: smUserOptions, size: 'SM' },
-  { options: mdUserOptions, size: 'MD' },
-  { options: lgUserOptions, size: 'LG' },
-  { options: xlUserOptions, size: 'XL' },
-  { options: singleUserOptions, size: 'Single' },
-  { options: emptyUserOptions, size: 'Empty' },
-];
+const optionsMap = {
+  sm: { options: smUserOptions, size: 'SM' },
+  md: { options: mdUserOptions, size: 'MD' },
+  lg: { options: lgUserOptions, size: 'LG' },
+  xl: { options: xlUserOptions, size: 'XL' },
+  single: { options: singleUserOptions, size: 'Single' },
+  empty: { options: emptyUserOptions, size: 'Empty' },
+} satisfies Record<string, { options: UserMockData[]; size: string }>;
 
-export const Default: Story = {
-  args: {},
+const optionSet = Object.values(optionsMap);
+
+export const Default: StoryObj = {
   render: () => (
     <div className="flex flex-wrap gap-8">
       {optionSet.map(({ options, size }) => (
@@ -52,46 +56,111 @@ export const Default: Story = {
   ),
 };
 
-const SWAPI_BASE_URL = 'https://swapi.dev/api';
-
-interface Character {
-  name: string;
-  birth_year: string;
-  gender: string;
-}
-
-function useCharacters({ search }: { search?: string }) {
-  async function searchCharacters(query?: string): Promise<Character[]> {
-    const response = await fetch(`${SWAPI_BASE_URL}/people/?search=${query ?? ''}`);
-    const data = await response.json();
-    return data.results;
-  }
-
-  const [data, setData] = useState<Character[]>([]);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    searchCharacters(search)
-      .then((results) => {
-        setData(results);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error searching characters:', error);
-        setLoading(false);
-      });
-  }, [search]);
-
-  return { data, loading };
-}
-
-export const MultiSelectCombobox: Story = {
-  args: {},
+export const MultiSelectCombobox: StoryObj = {
   render: () => {
     const [search, setSearch] = useState<string | undefined>();
 
-    const { data, loading } = useCharacters({ search });
+    const { data, loading } = useMockCharactersQuery({ search });
+
+    console.log('DATA', data);
+
+    return (
+      <div className="flex flex-wrap gap-8">
+        {optionSet.map(({ options, size }) => (
+          <div>
+            <Combobox
+              isMultiSelect
+              label={`Users - ${size}`}
+              options={options}
+              getOptionLabel={(e) => `${e.name} ${e.name}`}
+              onValueChange={(e) => {
+                console.log('E', e);
+              }}
+            />
+          </div>
+        ))}
+      </div>
+    );
+  },
+};
+
+export const MultiSelectComboboxRenderOption: StoryObj = {
+  render: () => {
+    const [search, setSearch] = useState<string | undefined>();
+
+    const { data, loading } = useMockCharactersQuery({ search });
+
+    console.log('DATA', data);
+
+    return (
+      <div className="flex flex-wrap gap-8">
+        {optionSet.map(({ options, size }) => (
+          <div>
+            <Combobox
+              isMultiSelect
+              label={`Users - ${size}`}
+              options={options}
+              getOptionLabel={(e) => `${e.name} ${e.email}`}
+              onValueChange={(e) => {
+                console.log('Value', e);
+              }}
+              renderOption={(e) => (
+                <Detail
+                  title={
+                    <Flex gap="md" align="center">
+                      <Avatar size="inlineXs" src={e.avatarUrl} label={e.name} />
+                      <Text.Title leading="sm" noWrap>
+                        {e.name}
+                      </Text.Title>
+                    </Flex>
+                  }
+                  description={e.email}
+                />
+              )}
+            />
+          </div>
+        ))}
+      </div>
+    );
+  },
+};
+
+export const MultiSelectTagsCombobox: StoryObj = {
+  render: () => {
+    const [search, setSearch] = useState<string | undefined>();
+
+    const { data, loading } = useMockCharactersQuery({ search });
+
+    console.log('DATA', data);
+
+    return (
+      <div className="flex gap-8">
+        {[optionsMap.lg, optionsMap.lg, optionsMap.lg].map(({ options, size }) => (
+          <Combobox
+            isMultiSelect
+            multiSelectVariant="tags"
+            label={`Users - ${size}`}
+            loading={loading}
+            options={options}
+            getOptionLabel={(e) => e.name}
+            onSearch={(search) => {
+              setSearch(search);
+            }}
+            onValueChange={(e) => {
+              console.log(`Combobox Value Change`, e);
+            }}
+          />
+        ))}
+      </div>
+    );
+  },
+};
+
+export const SearchableMultiSelectCombobox: StoryObj = {
+  render: () => {
+    const [search, setSearch] = useState<string | undefined>();
+
+    const { data, loading } = useMockCharactersQuery({ search });
 
     console.log('DATA', data);
 
@@ -107,11 +176,30 @@ export const MultiSelectCombobox: Story = {
           searching={loading}
           isMultiSelect
           onSearch={(v) => {
-            console.log('SEARCH', v);
+            console.log('SEAARCH', v);
             setSearch(v);
           }}
         />
       </>
+    );
+  },
+};
+
+export const ReactAriaTst: StoryObj = {
+  render: () => {
+    const options = generateMockUserList({ size: 20 });
+    return (
+      <div className="flex flex-wrap gap-8">
+        <Combobox
+          label={`Users`}
+          options={options}
+          isMultiSelect={false}
+          getOptionLabel={(e) => `${e.name} ${e.name}`}
+          onValueChange={(e) => {
+            console.log('E', e);
+          }}
+        />
+      </div>
     );
   },
 };

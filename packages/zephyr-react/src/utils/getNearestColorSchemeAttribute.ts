@@ -1,5 +1,15 @@
-export function getNearestColorSchemeAttribute(element?: HTMLElement | null, fallback = 'default') {
-  if (!element) return fallback;
+import { ColorSchemeName } from '@antribute/zephyr-core';
+import { isClientSide } from 'utils/environment-utils';
 
-  return element.closest('[data-color-scheme]')?.getAttribute('data-color-scheme') ?? fallback;
+export function getNearestColorSchemeAttribute(
+  element?: HTMLElement | null,
+  fallback: ColorSchemeName = 'default'
+): ColorSchemeName {
+  if (!isClientSide() || !element) return fallback;
+
+  const nearestScheme = element
+    .closest('[data-color-scheme]')
+    ?.getAttribute('data-color-scheme') as ColorSchemeName;
+
+  return nearestScheme ?? fallback;
 }

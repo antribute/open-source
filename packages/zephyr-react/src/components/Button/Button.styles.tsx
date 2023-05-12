@@ -13,23 +13,31 @@ export type ButtonElementProps = React.ComponentProps<typeof ButtonElement>;
 
 export const ButtonElement = classed.button(
   'cursor-pointer inline-flex font-medium items-center justify-center select-none align-middle',
-  'disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-default disabled:border-gray-200 relative',
+  'disabled:text-content-tint disabled:cursor-default disabled:pointer-events-none relative',
   'transition-colors duration-100',
+  'box-border',
   'shrink-0',
+
   {
     variants: {
       loading: {
         true: 'cursor-default',
       },
-      size: mergeVariants([
-        inputComponentVariants.size.lineHeight,
-        inputComponentVariants.size.paddingX,
-        inputComponentVariants.size.paddingY,
-        inputComponentVariants.size.textSize,
-      ]),
+      size: mergeVariants(
+        [inputComponentVariants.size.paddingX, inputComponentVariants.size.paddingY],
+        {
+          xs: 'text-xs px-6',
+          sm: 'text-sm',
+          md: 'text-sm',
+          lg: 'text-sm',
+        }
+      ),
       fontWeight: textVariants.fontWeight,
       noWrap: {
         true: 'whitespace-nowrap',
+      },
+      inline: {
+        true: 'inline',
       },
       justify: {
         center: 'justify-center',
@@ -39,6 +47,7 @@ export const ButtonElement = classed.button(
       fullWidth: {
         true: 'w-full',
       },
+
       variant: {
         filled: '',
         outlined: 'ring-[1.35px] ring-inset',
@@ -81,6 +90,9 @@ export const ButtonElement = classed.button(
         caution: '',
         heart: '',
       },
+      backgroundNoise: {
+        true: 'noisy-surface-texture',
+      },
       gap: {
         true: '',
       },
@@ -94,6 +106,7 @@ export const ButtonElement = classed.button(
       color: 'primary',
       justify: 'center',
       variant: 'filled',
+      extraRoundedPadding: true,
       gap: true,
     },
 
@@ -179,16 +192,16 @@ export const ButtonElement = classed.button(
 
       ...generateCompoundVariants({
         variant: 'outlined',
-        className: 'overflow-hidden z-0',
+        className: 'overflow-hidden z-0 bg-surface-soft',
         color: {
-          primary: 'outlined-accent-primary',
-          secondary: 'outlined-accent-secondary',
-          inverse: 'outlined-accent-inverse',
-          heart: 'outlined-accent-heart',
-          info: 'outlined-accent-info',
-          success: 'outlined-accent-success',
-          danger: 'outlined-accent-danger',
-          caution: 'outlined-accent-caution',
+          primary: 'ring-boundary-weak',
+          secondary: 'ring-boundary-weak',
+          inverse: 'text-inverse ring-inverse',
+          heart: 'text-heart ring-heart',
+          info: 'text-info ring-info',
+          success: 'text-success ring-success',
+          danger: 'text-danger ring-danger',
+          caution: 'text-caution ring-caution',
         },
       }),
 
@@ -212,16 +225,16 @@ export const ButtonElement = classed.button(
       ...generateCompoundVariants({
         gradient: true,
         variant: 'filled',
-        className: clsx('border-none bg-gradient-to-tr transition-all  hover:brightness-[1.05]'),
+        className: clsx('border-none transition-all hover:brightness-[1.05]'),
         color: {
-          primary: 'gradient-primary',
-          secondary: 'gradient-secondary',
-          inverse: 'gradient-inverse',
-          heart: 'gradient-heart',
-          info: 'gradient-info',
-          success: 'gradient-success',
-          danger: 'gradient-danger',
-          caution: 'gradient-caution',
+          primary: clsx('bg-gradient-primary-dark-to-light-tr'),
+          secondary: clsx('bg-gradient-secondary-dark-to-light-tr'),
+          inverse: clsx('bg-gradient-inverse-dark-to-light-tr'),
+          heart: clsx('bg-gradient-heart-dark-to-light-tr'),
+          info: clsx('bg-gradient-info-dark-to-light-tr'),
+          success: clsx('bg-gradient-success-dark-to-light-tr'),
+          danger: clsx('bg-gradient-danger-dark-to-light-tr'),
+          caution: clsx('bg-gradient-caution-dark-to-light-tr'),
         },
       }),
 

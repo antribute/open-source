@@ -1,32 +1,44 @@
-import React from 'react';
-import { classed, deriveClassed } from 'utils/classed';
+import { classed } from 'utils/classed';
 import InformationCircleIcon from '@heroicons/react/24/outline/InformationCircleIcon';
 import { Tooltip, TooltipProps } from 'components/Tooltip/Tooltip';
+import { IconButtonProps } from 'components/IconButton';
 
-type InformationTooltipIconProps = React.ComponentProps<typeof InfoIconElement>;
-const InfoIconElement = classed(InformationCircleIcon, 'w-20 h-20 rounded-full text-neutral-50');
+type InformationTooltipIconProps = IconButtonProps & {
+  tooltip: TooltipProps['tooltip'];
+  tooltipProps?: Omit<TooltipProps, 'children'>;
+  hideWhenTooltipIsEmpty?: boolean;
+  iconClassName?: string;
+};
 
-export const InfoTooltipIcon = deriveClassed<
-  typeof InfoIconElement,
-  InformationTooltipIconProps & {
-    tooltip: TooltipProps['tooltip'];
-    tooltipProps?: Omit<TooltipProps, 'children'>;
-    hideWhenTooltipIsEmpty?: boolean;
-  }
->(({ tooltipProps, tooltip, hideWhenTooltipIsEmpty = true, ...props }) => {
+const InfoIconElement = classed(
+  InformationCircleIcon,
+  'rounded-full min-w-[24px] min-h-[24px] h-full w-full'
+);
+
+const IconButtonElement = classed('button', 'focus:ring-boundary-tint rounded-full');
+
+export const InfoTooltipIcon = ({
+  iconClassName,
+  size,
+  onClick,
+  tooltipProps,
+  tooltip,
+  hideWhenTooltipIsEmpty = true,
+  ...props
+}: InformationTooltipIconProps) => {
   if (hideWhenTooltipIsEmpty && !tooltip) return null;
 
   return (
     <Tooltip tooltip={tooltip} {...tooltipProps}>
-      <button
+      <IconButtonElement
         type="button"
-        className="focus:ring-boundary-tint rounded-full"
         onClick={(e) => {
           e.stopPropagation();
         }}
+        {...props}
       >
-        <InfoIconElement {...props} />
-      </button>
+        <InfoIconElement className={iconClassName} />
+      </IconButtonElement>
     </Tooltip>
   );
-});
+};

@@ -61,7 +61,7 @@ const AvatarGroupRoot = ({
         if (index < max) {
           const newProps = {
             ...props,
-            enableTooltip,
+            enableTooltip: enableTooltip ?? true,
             border: hasBorder,
             size,
           } as Partial<AvatarProps>;

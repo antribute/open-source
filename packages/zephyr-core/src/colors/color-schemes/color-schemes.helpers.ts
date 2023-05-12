@@ -1,3 +1,4 @@
+import { colorPalette } from '../colors';
 import {
   CssAlphaVariable,
   CssColorVariable,
@@ -8,22 +9,47 @@ import {
 } from '../helpers/cssVariables';
 import { objectMap } from '../helpers/objectMap';
 import {
+  ColorScheme,
   ColorSchemeConfig,
   GenericColorSchemeConfig,
+  ResolvedColorScheme,
   ResolvedColorSchemeConfig,
 } from './color-scheme-config.types';
 import { ColorSchemeToken } from './color-scheme-tokens.types';
 import { commonScheme } from './schemes/common-scheme';
 
-export function defineColorScheme<T extends ColorSchemeConfig>({ name, colorMode, scheme }: T) {
-  const colorModeScheme = colorMode === 'dark' ? commonScheme.darkMode : commonScheme.lightMode;
+function resolveColorScheme(scheme: Partial<ColorScheme>): ResolvedColorScheme {
+  return objectMap(scheme, ({ key, value }) => {
+    const color = colorPalette[value!];
+    return [key, color];
+  });
+}
 
-  const resolvedScheme = { ...commonScheme.all, ...colorModeScheme, ...scheme };
+function getExtendedConfig(options: ColorSchemeConfig) {
+  if ('extend' in options) return options.extend;
+  return undefined;
+}
+
+export function defineColorScheme<T extends ColorSchemeConfig>(options: T) {
+  const { name, colorMode, scheme } = options;
+
+  const extendedConfig = getExtendedConfig(options);
+
+  const { scheme: extendedScheme } = extendedConfig ?? {};
+
+  const colorModeScheme =
+    (colorMode ?? extendedConfig?.colorMode) === 'dark'
+      ? commonScheme.darkMode
+      : commonScheme.lightMode;
+
+  const resolvedScheme = resolveColorScheme({ ...commonScheme.all, ...colorModeScheme, ...scheme });
 
   return {
+    ...extendedConfig,
     name,
     colorMode,
-    scheme: resolvedScheme,
+    scheme: { ...extendedScheme, ...resolvedScheme },
+    unresolvedScheme: scheme,
   } as ResolvedColorSchemeConfig;
 }
 
@@ -40,10 +66,12 @@ export function defineColorSchemes<T extends ResolvedColorSchemeConfig[]>(
 
   const lightDefault = colorSchemes.default;
 
-  const colorSchemeTokens = getColorSchemeTokens(
-    lightDefault,
-    colorSchemeCssVariableClasses[':root']!
-  ) as Record<keyof typeof lightDefault, string>;
+  const rootScheme = colorSchemeCssVariableClasses[':root']!;
+
+  const colorSchemeTokens = getColorSchemeTokens(lightDefault, rootScheme) as Record<
+    keyof typeof lightDefault,
+    string
+  >;
 
   return {
     colorSchemes,
@@ -54,7 +82,7 @@ export function defineColorSchemes<T extends ResolvedColorSchemeConfig[]>(
 }
 
 function getColorSchemeTokens<T extends Record<string, string>>(scheme: T, variableMap: T) {
-  return objectMap(scheme, (token) => {
+  return objectMap(scheme, ({ key: token }) => {
     const cssVariable = getCssColorVariable(token);
     const alphaVariable = getCssAlphaVariable(token);
 

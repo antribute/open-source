@@ -13,3 +13,7 @@ node_modules/**
 
 # Ignoring error introduced by TypeScript v5's new `const T` Generics syntax  
 packages/zephyr-react/src/components/Form/createFormSchema.tsx
+packages/zephyr-react/src/utils/pickProps.ts
+packages/zephyr-react/src/utils/objectMap.ts
+packages/zephyr-core/src/colors/helpers/objectMap.ts
+# packages/zephyr-react/src/components/Wrap/Wrap.tsx

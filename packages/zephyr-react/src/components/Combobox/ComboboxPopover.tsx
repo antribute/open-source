@@ -1,115 +1,216 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable react/no-unused-prop-types */
 /* eslint-disable react/no-unused-prop-types */
 import * as ComboboxPrimitive from 'ariakit/combobox';
 import * as SelectPrimitive from 'ariakit/select';
 
-import { BaseInput } from 'components/BaseInput';
 import { classed } from '@tw-classed/react';
-import { PaperElementBackground } from 'components/Paper/Paper.styles';
-
-import { Button } from 'components/Button';
-
-import { ComboboxList } from 'components/Combobox/ComboboxList';
-import type { ComboboxProps, SelectOptionMap } from 'components/Combobox/Combobox';
+import { List } from 'components/List';
+import { BaseListItemElement } from 'components/List/ListItem/BaseListItem';
+import { ListItemContainer } from 'components/List/ListItem/ListItemContainer';
+import clsx from 'clsx';
+import { Text } from 'components/Text';
+import { BasicCheckbox } from 'components/BasicCheckbox';
+import { ScrollViewport } from 'components/ScrollViewport';
+import { ComboboxFooter, ComboboxFooterProps } from 'components/Combobox/ComboboxFooter';
 import { getNearestColorSchemeAttribute } from 'utils/getNearestColorSchemeAttribute';
+import { useComboboxListVirtualizer } from 'components/Combobox/useComboboxListVirtualizer';
+import {
+  UseToggleViewAllSelectedOnUnmountProps,
+  useToggleViewAllSelectedOnUnmount,
+} from 'components/Combobox/useToggleViewAllSelected';
+import { Flex } from 'components/Flex';
+import { elementHasOverflowY } from 'utils/elementHasOverflow';
+import { Input } from 'components/Input';
+import type { ComboboxProps, RenderComboboxOptionFn, SelectOptionMap } from './Combobox.types';
 
-const SelectPopoverElement = classed(
-  SelectPrimitive.SelectPopover,
-  PaperElementBackground,
-  'p-0',
-  'border-highlight',
-  'bg-surface-soft',
-  'shadow-lg',
-  'z-50 flex flex-col rounded border border-solid pb-0.5 transform relative'
-);
-
-type ComboboxPopoverProps = {
+export interface ComboboxListProps
+  extends Omit<ComboboxFooterProps, 'optionsCount'>,
+    Pick<ComboboxProps<any>, 'multiSelectVariant'>,
+    Pick<UseToggleViewAllSelectedOnUnmountProps, 'toggleViewAllSelectedOnPopoverUnmount'> {
+  searching?: boolean;
   select: SelectPrimitive.SelectState;
   combobox: ComboboxPrimitive.ComboboxState;
   selectOptionMap: SelectOptionMap;
+  isMultiSelect: boolean;
   viewAllSelected?: boolean;
-  setViewAllSelected: React.Dispatch<React.SetStateAction<boolean>>;
-} & Pick<ComboboxProps<unknown[]>, 'searching' | 'isMultiSelect'>;
+  virtualization?: boolean;
+  maxHeight?: React.CSSProperties['height'];
+  hasSelected?: boolean;
+  renderOption?: RenderComboboxOptionFn<unknown[]>;
+}
 
-export function ComboboxPopover({
-  searching,
-  isMultiSelect,
-  select,
+const ComboboxListItem = (props: React.ComponentProps<typeof ComboboxPrimitive.ComboboxItem>) => (
+  <ComboboxPrimitive.ComboboxItem as="li" {...props} />
+);
+
+const ComboboxItem = classed(ComboboxListItem, BaseListItemElement, 'font-body');
+
+const ComboboxListContainerElement = classed(List.Container);
+
+export const ComboboxPopover = ({
   combobox,
   selectOptionMap,
+  isMultiSelect,
   viewAllSelected,
+  searching,
+  select,
+  hasSearchableOptions,
   setViewAllSelected,
-}: ComboboxPopoverProps) {
+  maxHeight = 500,
+  multiSelectVariant,
+  toggleViewAllSelectedOnPopoverUnmount,
+  renderOption,
+  hasSelected,
+}: ComboboxListProps) => {
+  const { scrollElementRef, virtualizer, getOption, noMatches } = useComboboxListVirtualizer({
+    combobox,
+    selectOptionMap,
+    searching,
+    viewAllSelected,
+    multiSelectVariant,
+  });
+
+  const popoverListHasOverflow = elementHasOverflowY(scrollElementRef.current);
+
+  useToggleViewAllSelectedOnUnmount({
+    select,
+    setViewAllSelected,
+    popoverListHasOverflow,
+    multiSelectVariant,
+    toggleViewAllSelectedOnPopoverUnmount,
+  });
+
+  const hasCheckbox = isMultiSelect && multiSelectVariant !== 'tags';
+
+  const virutalItems = virtualizer.getVirtualItems();
+
   return (
-    <SelectPopoverElement
+    <SelectPrimitive.SelectPopover
       state={select}
       composite={false}
       data-color-scheme={getNearestColorSchemeAttribute(select.selectRef.current)}
       portal
+      className={clsx(
+        'z-50 relative',
+        'flex flex-col',
+        'bg-surface-soft',
+        'shadow-lg',
+        'border border-highlight-moderate rounded',
+        'divide-y divide-highlight-moderate',
+        'animate-slide-down'
+      )}
+      style={{ maxHeight }}
     >
-      <div className="border-boundary-tint space-y-8 border-b px-4 pt-6 pb-8">
+      <div className={clsx('px-4 pt-6 pb-8')}>
         <ComboboxPrimitive.Combobox
-          as={BaseInput}
+          as={Input}
+          autoFocus
           state={combobox}
-          autoSelect
+          // autoSelect
           size="sm"
-          width="full"
+          fullWidth
           placeholder="Search..."
-          shadow={false}
           loading={searching}
         />
       </div>
-      {combobox.mounted && (
-        <ComboboxList
-          combobox={combobox}
-          select={select}
-          selectOptionMap={selectOptionMap}
-          isMultiSelect={Boolean(isMultiSelect)}
-          viewAllSelected={viewAllSelected}
-          searching={searching}
-        />
+      {noMatches && (
+        <Flex gap as="div" centerAlign className="p-6">
+          <Text className="font-medium opacity-10" color="strong" size="sm">
+            {searching ? 'Loading...' : 'No Options'}
+          </Text>
+        </Flex>
       )}
 
-      <AllSelectedFilterButton
+      {!noMatches && (
+        <ScrollViewport.ScrollAreaContainer
+          className="grow relative w-full rounded-b-[inherit] bg-transparent"
+          style={{ height: virtualizer.getTotalSize() }}
+          // style={{ height: select.mounted ? virtualizer.getTotalSize() : 0 }}
+        >
+          <ScrollViewport.ScrollAreaViewport ref={scrollElementRef}>
+            <div
+              style={{
+                height: virtualizer.getTotalSize(),
+                width: '100%',
+                position: 'relative',
+              }}
+            >
+              <ComboboxPrimitive.ComboboxList
+                divide
+                state={combobox}
+                as={ComboboxListContainerElement}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  transform: `translateY(${virutalItems[0]?.start ?? 0}px)`,
+                }}
+              >
+                {virutalItems.map((virtualItem) => {
+                  const { label, isSelected, value } = getOption(virtualItem as never)!;
+
+                  const isActive = combobox.activeValue === label;
+
+                  const renderOptionValue = renderOption?.(value);
+
+                  return (
+                    <ListItemContainer
+                      aria-selected={isSelected}
+                      key={virtualItem.key}
+                      data-index={virtualItem.index}
+                      ref={virtualizer.measureElement}
+                    >
+                      <ComboboxItem
+                        focusOnHover
+                        hoverable
+                        hideOnClick={false}
+                        highlight={isSelected}
+                        inactive={!isActive && hasSelected}
+                        active={isActive}
+                        paddingY="md"
+                        paddingX="sm"
+                      >
+                        {(props) => (
+                          <SelectPrimitive.SelectItem {...props} value={label}>
+                            <Flex gap="md">
+                              {hasCheckbox && (
+                                <BasicCheckbox
+                                  size="sm"
+                                  excludeFromTabOrder
+                                  isSelected={isSelected}
+                                  pointerEventsNone
+                                />
+                              )}
+                              <span>
+                                {!renderOptionValue && <Text className="truncate">{label}</Text>}
+
+                                {renderOptionValue && renderOptionValue}
+                              </span>
+                            </Flex>
+                          </SelectPrimitive.SelectItem>
+                        )}
+                      </ComboboxItem>
+                    </ListItemContainer>
+                  );
+                })}
+              </ComboboxPrimitive.ComboboxList>
+            </div>
+          </ScrollViewport.ScrollAreaViewport>
+        </ScrollViewport.ScrollAreaContainer>
+      )}
+
+      <ComboboxFooter
+        optionsCount={selectOptionMap.size}
         select={select}
         combobox={combobox}
+        scrollElementRef={scrollElementRef}
+        hasSearchableOptions={hasSearchableOptions}
         viewAllSelected={viewAllSelected}
         setViewAllSelected={setViewAllSelected}
+        multiSelectVariant={multiSelectVariant}
       />
-    </SelectPopoverElement>
+    </SelectPrimitive.SelectPopover>
   );
-}
-
-const AllSelectedFilterButton = ({
-  select,
-  viewAllSelected,
-  setViewAllSelected,
-  combobox,
-}: {
-  select: SelectPrimitive.SelectState;
-  combobox: ComboboxPrimitive.ComboboxState;
-  viewAllSelected?: boolean;
-  setViewAllSelected: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
-  const { value } = select;
-
-  const show = Array.isArray(value) && value.length > 0 && !viewAllSelected;
-
-  return show ? (
-    <div className="border-boundary-tint border-t p-8">
-      <Button
-        fullWidth
-        size="xs"
-        variant="glass"
-        color="secondary"
-        className="text-content-weak"
-        fontWeight="body"
-        onClick={() => {
-          combobox.setValue('');
-          setViewAllSelected((prev) => !prev);
-        }}
-      >
-        View All Selected
-      </Button>
-    </div>
-  ) : null;
 };

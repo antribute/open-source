@@ -8,6 +8,7 @@ import { twMerge } from 'tailwind-merge';
 import clsx from 'clsx';
 import { Tooltip } from 'components/Tooltip';
 import { ColorSchemeName, mainColorSchemeNames } from '@antribute/zephyr-core';
+import { capitalize } from 'lodash-es';
 
 type RenderVariantElementProps = Partial<VariantProps<typeof RenderVariantElement>>;
 
@@ -49,22 +50,37 @@ interface RenderSizeVariantProps<T extends React.ComponentType>
   sizes?: SizeProp[];
 }
 
+const sizes = ['xs', 'sm', 'md', 'lg'] satisfies SizeProp[];
+
+const inlineSizes = sizes.map((e) => `inline${capitalize(e)}`) as SizeProp<'inline'>[];
+
+const colors = [
+  'primary',
+  'secondary',
+  'inverse',
+  'info',
+  'caution',
+  'danger',
+  'success',
+  'heart',
+] satisfies LiteralUnion<ColorProp, string>[];
+
 const keys = {
-  colors: [
-    'primary',
-    'secondary',
-    'inverse',
-    'info',
-    'caution',
-    'danger',
-    'success',
-    'heart',
-  ] satisfies LiteralUnion<ColorProp, string>[],
-  sizes: ['xs', 'sm', 'md', 'lg'] as LiteralUnion<SizeProp, string>[],
+  colors,
+  sizes,
+  inlineSizes,
 } satisfies Record<string, LiteralUnion<string, string>[]>;
 
 export const getSizeKeys = () => {
-  return keys.sizes as SizeProp[];
+  return keys.sizes;
+};
+
+export const getInlineSizeKeys = () => {
+  return keys.inlineSizes;
+};
+
+export const getAllSizeKeys = () => {
+  return [...keys.inlineSizes, ...keys.sizes];
 };
 
 export const getColorKeys = () => {

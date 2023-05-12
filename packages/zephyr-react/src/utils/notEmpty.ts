@@ -9,6 +9,8 @@ export function notEmptyEntry<TValue>(
   return value !== null && value !== undefined;
 }
 
-export function notFalsy<TValue>(value: TValue | null | undefined): value is TValue {
+export function notFalsy<TValue>(
+  value: TValue | null | undefined | false | '' | 0
+): value is TValue {
   return Boolean(value);
 }

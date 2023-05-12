@@ -2,16 +2,18 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 
 import defaultTailwindTheme from 'tailwindcss/defaultTheme';
-import { PluginAPI } from 'tailwindcss/types/config';
 import type { Config } from 'tailwindcss';
 
 // Plugins
 import tailwindCssRadixPlugin from 'tailwindcss-radix';
 import tailwindCssFormsPlugin from '@tailwindcss/forms';
 import tailwindCssTypographyPlugin from '@tailwindcss/typography';
-import tailwindLineClampPlugin from '@tailwindcss/line-clamp';
+import tailwindCssLineClampPlugin from '@tailwindcss/line-clamp';
+import tailwindContainerQueriesPlugin from '@tailwindcss/container-queries';
+import tailwindGridAreaPlugin from 'tailwindcss-grid-area';
 import createVariantGroupTransformer from 'tailwind-group-variant';
 import { iconsPlugin, getIconCollections } from '@egoist/tailwindcss-icons';
+import plugin from 'tailwindcss/plugin';
 import { multiThemePlugin } from './plugins/multi-theme-plugin';
 import { linearGradientMaskImagePlugin } from './plugins/linear-gradient-mask-image-plugin';
 
@@ -23,19 +25,37 @@ import { keyframes } from './keyframes';
 import { animation } from './animation';
 import { getTailwindDataAttributeShortcuts } from './data-attributes';
 import { screens } from './screens';
+import { shadowBorder } from './helpers/shadowBorder';
+import { customClassesPlugin } from './plugins/custom-classes-plugin';
+// import { tailwindSafelist } from './helpers/buildSafelist';
+
+export type TailwindConfig = typeof config;
+
+export type TailwindColorKey = keyof TailwindConfig['theme']['colors'];
 
 const config = {
   plugins: [
     tailwindCssRadixPlugin,
     tailwindCssFormsPlugin,
-    tailwindLineClampPlugin,
+    tailwindCssLineClampPlugin,
     tailwindCssTypographyPlugin,
+    tailwindContainerQueriesPlugin,
+    tailwindGridAreaPlugin,
     iconsPlugin({
       collections: getIconCollections(['heroicons', 'fa6-brands']),
     }),
     multiThemePlugin(),
+    customClassesPlugin(),
     linearGradientMaskImagePlugin(),
+    plugin(({ addVariant }) => {
+      addVariant('not-first', '&:not(:first-child)');
+      addVariant('not-last', '&:not(:last-child)');
+      addVariant('middle', '&:not(:first-child):not(:last-child)');
+      addVariant('second', '&:nth-child(2)');
+      addVariant('second-last', '&:not(:nth-last-child(2))');
+    }),
   ],
+
   content: {
     files: [
       './*.{htm,html}',
@@ -45,10 +65,31 @@ const config = {
     ],
     transform: createVariantGroupTransformer(),
   },
-  presets: [],
   darkMode: ['class', '[data-mode="dark"]'],
 
+  // safelist: tailwindSafelist,
+
+  presets: [],
+
   theme: {
+    extend: {
+      containers: {
+        '2xs': '16rem',
+        '3xs': '12rem',
+        '4xs': '8rem',
+      },
+      gridTemplateColumns: {
+        inherit: 'inherit',
+        unset: 'unset',
+      },
+      gridTemplateRows: {
+        inherit: 'inherit',
+        unset: 'unset',
+      },
+      gridTemplateAreas: {
+        layout: 'inherit',
+      },
+    },
     ...defaultTailwindTheme,
 
     data: {
@@ -57,17 +98,6 @@ const config = {
     },
 
     screens,
-
-    typography: (theme: PluginAPI['theme']) => ({
-      DEFAULT: {
-        css: {
-          color: '#fafa',
-          a: {
-            color: theme('colors.content-inverse'),
-          },
-        },
-      },
-    }),
 
     keyframes,
     animation,
@@ -101,6 +131,24 @@ const config = {
       inner: 'inset 0 2px 4px 0 rgb(0 0 0 / 0.05)',
       none: 'none',
       hover: '0px 2px 5px 0px rgb(64 68 82 / 0.08), 0px 3px 9px 0px rgb(64 68 82 / 0.08)',
+      'border-t': shadowBorder([{ offsetY: '1px' }]),
+      'border-b': shadowBorder([{ offsetY: '-1px' }]),
+      'border-l': shadowBorder([{ offsetX: '1px' }]),
+      'border-r': shadowBorder([{ offsetX: '-1px' }]),
+      'border-y': shadowBorder([{ offsetY: '1px' }, { offsetY: '-1px' }]),
+      'border-x': shadowBorder([{ offsetX: '1px' }, { offsetX: '-1px' }]),
+      'border-t-sm': shadowBorder([{ offsetY: '0.5px' }]),
+      'border-b-sm': shadowBorder([{ offsetY: '-0.5px' }]),
+      'border-l-sm': shadowBorder([{ offsetX: '0.5px' }]),
+      'border-r-sm': shadowBorder([{ offsetX: '-0.5px' }]),
+      'border-y-sm': shadowBorder([{ offsetY: '0.5px' }, { offsetY: '-0.5px' }]),
+      'border-x-sm': shadowBorder([{ offsetX: '0.5px' }, { offsetX: '-0.5px' }]),
+      'border-t-2': shadowBorder([{ offsetY: '2px' }]),
+      'border-b-2': shadowBorder([{ offsetY: '-2px' }]),
+      'border-l-2': shadowBorder([{ offsetX: '2px' }]),
+      'border-r-2': shadowBorder([{ offsetX: '-2px' }]),
+      'border-y-2': shadowBorder([{ offsetY: '2px' }, { offsetY: '-2px' }]),
+      'border-x-2': shadowBorder([{ offsetX: '2px' }, { offsetX: '-2px' }]),
     },
     boxShadowColor: ({ theme }) => theme('colors'),
     caretColor: ({ theme }) => theme('colors'),
@@ -199,7 +247,7 @@ const config = {
       h3: ['38px', { lineHeight: '48px' }],
       h4: ['23px', { lineHeight: '32px' }],
       h5: ['21px', { lineHeight: '24px' }],
-      h6: ['16px', { lineHeight: '24px' }],
+      h6: ['18px', { lineHeight: '24px' }],
       lg: ['21px', { lineHeight: '32px' }],
       md: ['16px', { lineHeight: '24px' }],
       sm: ['14px', { lineHeight: '18px' }],
@@ -288,7 +336,7 @@ const config = {
       ...breakpoints(theme('screens')),
     }),
 
-    outlineColor: ({ theme }) => theme('colors', 'var(--color-highlight-high)'),
+    outlineColor: ({ theme }) => theme('colors', 'var(--color-content-high)'),
     padding: ({ theme }) => theme('spacing'),
     placeholderColor: ({ theme }) => theme('colors'),
     placeholderOpacity: ({ theme }) => theme('opacity'),
@@ -313,6 +361,11 @@ const config = {
     }),
     spacing: {
       px: '1px',
+      navbar: '63px',
+      sidebar: '288px',
+      narrowbar: '40px',
+      pageheader: '77px',
+      aside: '388px',
       ...create8PtGrid(),
     },
     stroke: ({ theme }) => ({

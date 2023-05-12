@@ -1,10 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-
 import { Button } from 'components/Button';
 import { ToastItem } from 'components/Toast/Toast.types';
 import { useState } from 'react';
-import { Checkbox } from 'components/Checkbox';
 import { capitalCase } from 'change-case';
+import { Input } from 'components/Input';
 import { Toaster, toast } from '.';
 
 function addManyToasts(props: ToastItem, count = 6) {
@@ -133,10 +132,11 @@ export const Default: Story = {
         >
           Add 6 Toasts
         </Button>
-        <Checkbox
+        <Input.CheckboxField
           label="Show Description"
-          onCheckedChange={(e) => {
-            setShowDescription(Boolean(e));
+          showValidationMessageInTooltip
+          onChange={(e) => {
+            setShowDescription(e);
           }}
         />
         <Toaster />

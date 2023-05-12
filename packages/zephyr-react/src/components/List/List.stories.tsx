@@ -13,6 +13,8 @@ import { RenderPaperContainers, getStoryUrl } from 'utils/storybook-utils';
 import { Paper } from 'components/Paper';
 import { capitalCase } from 'change-case';
 import { List } from '.';
+import { generateMockUserList, generateMockVehicle, generateMockVehicleList } from 'mock/mock-data';
+import { groupBy } from 'lodash-es';
 
 const meta = {
   args: {},
@@ -22,38 +24,6 @@ const meta = {
 
 export default meta;
 type Story = StoryObj<typeof meta>;
-
-export const MockSidebar = ({ color }: { color: string }) => {
-  const href = getStoryUrl();
-  return (
-    <List.Container roundedItems>
-      <List.LinkItem href={href} label="Dashboard" startIcon={<DashboardIcon />} highlight />
-      <List.CollapsibleItem
-        label="Users"
-        startIcon={<ProfileIcon />}
-        aria-controls="dropdown-sales"
-        data-collapse-toggle="dropdown-sales"
-        containerProps={{ id: 'dropdown-sales' }}
-        type="button"
-      >
-        <List.LinkItem href={href} label="Jacob B." />
-        <List.LinkItem href={href} label="Ryan C." />
-        <List.LinkItem href={href} label="Kara H." />
-      </List.CollapsibleItem>
-      <List.CollapsibleItem label="Projects" startIcon={<ProjectsIcon />}>
-        <List.LinkItem href={href} label="Project 1" />
-        <List.LinkItem href={href} label="Project 2" />
-        <List.LinkItem href={href} label="Project 3" />
-      </List.CollapsibleItem>
-      <List.LinkItem href={href} label="Calendar" startIcon={<CalendarIcon />} />
-      <List.Spacing />
-      <List.SectionTitle>Settings</List.SectionTitle>
-      <List.LinkItem href={href} label="Account Settings" startIcon={<SettingsIcon />} />
-      <List.LinkItem href={href} label="Billing" startIcon={<BillingIcon />} />
-      <List.LinkItem href={href} label={`Appearance (${color})`} startIcon={<AppearanceIcon />} />
-    </List.Container>
-  );
-};
 
 export const Default: Story = {
   args: {},
@@ -197,4 +167,84 @@ export const ListGroupIcons: Story = {
       </List.Container>
     </RenderPaperContainers>
   ),
+};
+
+export const ListWithFilledSections: Story = {
+  args: {},
+  render: () => {
+    const userGroups = (['Following', 'Friends', 'Blocked', 'Suggestions'] as const).map(
+      (group, index) => ({
+        group,
+        users: generateMockUserList({ size: 5, seed: index }),
+      })
+    );
+
+    return (
+      <Paper padding={false} border="true" className="border-highlight-weak">
+        <List.Container divide>
+          {userGroups.map(({ group, users }) => {
+            return (
+              <List.CollapsibleItem
+                label={{
+                  subtitle: {
+                    bold: true,
+                    value: group,
+                  },
+                  description: 'Voluptate non tempor incididunt esse.',
+                }}
+                bottomBorder
+                defaultOpen={true}
+                aria-controls="dropdown-sales"
+                data-collapse-toggle="dropdown-sales"
+                containerProps={{ id: 'dropdown-sales' }}
+                type="button"
+              >
+                {users.map((props) => {
+                  return <List.LinkItem label={props.name} />;
+                })}
+              </List.CollapsibleItem>
+            );
+          })}
+        </List.Container>
+      </Paper>
+    );
+  },
+};
+
+export const MockSidebar = ({ color }: { color: string }) => {
+  const href = getStoryUrl();
+  return (
+    <List.Container roundedItems>
+      <List.LinkItem
+        href={href}
+        label="Dashboard"
+        // startIcon={<DashboardIcon className="h-10 w-10" />}
+        highlight
+      />
+      <List.CollapsibleItem
+        label="Users"
+        startIcon={<ProfileIcon />}
+        aria-controls="dropdown-sales"
+        data-collapse-toggle="dropdown-sales"
+        containerProps={{ id: 'dropdown-sales' }}
+        indentContent
+        type="button"
+      >
+        <List.LinkItem href={href} label="Jacob B." />
+        <List.LinkItem href={href} label="Ryan C." />
+        <List.LinkItem href={href} label="Kara H." />
+      </List.CollapsibleItem>
+      <List.CollapsibleItem indentContent label="Projects" startIcon={<ProjectsIcon />}>
+        <List.LinkItem href={href} label="Project 1" />
+        <List.LinkItem href={href} label="Project 2" />
+        <List.LinkItem href={href} label="Project 3" />
+      </List.CollapsibleItem>
+      <List.LinkItem href={href} label="Calendar" startIcon={<CalendarIcon />} />
+      <List.Spacing />
+      <List.SectionTitle>Settings</List.SectionTitle>
+      <List.LinkItem href={href} label="Account Settings" startIcon={<SettingsIcon />} />
+      <List.LinkItem href={href} label="Billing" startIcon={<BillingIcon />} />
+      <List.LinkItem href={href} label={`Appearance (${color})`} startIcon={<AppearanceIcon />} />
+    </List.Container>
+  );
 };

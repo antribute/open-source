@@ -5,11 +5,12 @@ import {
   CardDescriptionElement,
   CardFooterSectionElement,
   CardGroupSpacerElement,
-  CardScrollBodySectionElement,
   CardTitleElement,
   CardTitleSectionElement,
 } from 'components/Card/Card.styles';
 import { PaperProps } from 'components/Paper';
+import { ScrollViewport } from 'components/ScrollViewport';
+import { forwardRef } from 'react';
 import { Classed } from 'utils/classed';
 
 // Container
@@ -18,28 +19,33 @@ export type CardContainerVariantProps = Classed.ComponentProps<typeof CardContai
 
 export type CardContainerProps = PaperProps & { colorScheme?: ColorSchemeName };
 
-const CardContainer = ({ padding, ...props }: CardContainerProps) => {
+const CardContainer = ({ padding = true, ...props }: CardContainerProps) => {
   return (
     <CardContainerElement
       {...getDataAttributes({
-        'data-antribute-card': { 'padding-none': padding === false },
+        'data-antribute-card': {
+          padding,
+          'padding-none': !padding,
+        },
       })}
-      padding={padding}
       border
+      padding={padding}
       {...props}
     />
   );
 };
 
-// Title
+// Title Secting
 
-export type CardTitleProps = React.ComponentProps<typeof CardTitleSectionElement>;
+export type CardTitleProps = { divider?: boolean } & React.ComponentProps<
+  typeof CardTitleSectionElement
+>;
 
-const CardTitleArea = (props: CardTitleProps) => {
-  return <CardTitleSectionElement {...props} />;
+const CardTitleSection = ({ children, divider = true, ...props }: CardTitleProps) => {
+  return <CardTitleSectionElement {...props}>{children}</CardTitleSectionElement>;
 };
 
-// Title
+// Heading
 
 export type CardTitleHeadingProps = React.ComponentProps<typeof CardTitleElement>;
 
@@ -56,19 +62,16 @@ const CardGroupSpacer = (props: CardGroupSpacerProps) => {
   return <CardGroupSpacerElement {...props} />;
 };
 
-//  Body Seciton
-export type CardBodyProps = React.ComponentProps<typeof CardBodySectionElement>;
+//   Body Section
+export type ScrollBodyProps = React.ComponentProps<typeof CardBodySectionElement>;
 
-const CardBody = (props: CardBodyProps) => {
-  return <CardBodySectionElement {...props} />;
-};
-
-//  Scroll Body Section
-export type CardScrollBodyProps = React.ComponentProps<typeof CardScrollBodySectionElement>;
-
-const CardScrollBody = (props: CardScrollBodyProps) => {
-  return <CardScrollBodySectionElement {...props} />;
-};
+const CardBody = forwardRef<HTMLDivElement, ScrollBodyProps>((props, ref) => {
+  return (
+    <ScrollViewport.ScrollArea ref={ref}>
+      <CardBodySectionElement {...props} />
+    </ScrollViewport.ScrollArea>
+  );
+});
 
 //  Description
 export type CardDescriptionProps = React.ComponentProps<typeof CardDescriptionElement>;
@@ -88,20 +91,10 @@ const CardFooter = (props: CardFooterProps) => {
 // Exports
 
 const Container = CardContainer;
-const TitleSection = CardTitleArea;
+const TitleSection = CardTitleSection;
 const BodySection = CardBody;
-const ScrollBodySection = CardScrollBody;
 const FooterSection = CardFooter;
 const Title = CardTitleHeading;
 const GroupSpacer = CardGroupSpacer;
 
-export {
-  Container,
-  TitleSection,
-  BodySection,
-  ScrollBodySection,
-  FooterSection,
-  Title,
-  GroupSpacer,
-  Description,
-};
+export { Container, TitleSection, BodySection, FooterSection, Title, GroupSpacer, Description };

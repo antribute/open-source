@@ -3,8 +3,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { UserMockData, generateMockUserList } from 'mock/mock-data';
 import { useMemo } from 'react';
 import { Paper } from 'components/Paper';
+import { MockPageHeader } from 'storybook-utils/components/MockPageHeader';
 import { Table } from './Table';
-
 import { TableColumns } from './Table.types';
 
 const meta = {
@@ -14,20 +14,21 @@ const meta = {
 } satisfies Meta<typeof Table>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
 
 const users = generateMockUserList({ size: 300 });
 
-export const Default: Story = {
-  args: {},
+export const Default: StoryObj = {
   render: () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const columns = useMemo<TableColumns<UserMockData>>(
       () => [
+        // display({ id: 'placeholder-1', minSize: 10, maxSize: 10, size: 10 }),
         {
           accessorKey: 'id',
-          header: 'ID',
           size: 60,
+          enableResizing: true,
+          header: () => <div className="pl-80">ID</div>,
+          cell: ({ getValue }) => <div className="pl-80">{getValue() as string}</div>,
         },
         {
           accessorKey: 'firstName',
@@ -42,14 +43,17 @@ export const Default: Story = {
         },
         {
           accessorKey: 'role',
-          header: 'Role',
+          header: () => <div className="pr-80">ID</div>,
+          cell: ({ getValue }) => <div className="pr-80">{getValue() as string}</div>,
         },
       ],
       []
     );
 
     return (
-      <Paper className="h-400" padding={false}>
+      <div className="fixed left-0 top-0 flex flex-col h-screen  bg-surface">
+        <MockPageHeader />
+
         <Table
           columns={columns}
           data={users}
@@ -57,7 +61,9 @@ export const Default: Story = {
             console.log('data', data);
           }}
         />
-      </Paper>
+
+        <Paper colorScheme="surface" className="shrink-0 noisy-surface-texture" rounded={false} />
+      </div>
     );
   },
 };

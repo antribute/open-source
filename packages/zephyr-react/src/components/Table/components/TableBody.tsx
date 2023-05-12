@@ -1,6 +1,6 @@
 import { classed } from 'utils/classed';
 
-const TableBodyElement = classed('tbody', 'w-full h-full dark:divide-white/5');
+const TableBodyElement = classed('tbody', 'w-full h-full dark:divide-white/5 relative');
 
 type TableBodyElementProps = React.ComponentProps<typeof TableBodyElement>;
 
@@ -20,6 +20,7 @@ export const TableBody = ({ tablePadding, children, ...props }: TableBodyProps) 
           <td style={{ height: `${paddingTop}px` }} />
         </tr>
       )}
+
       {children}
       {paddingBottom > 0 && (
         <tr>

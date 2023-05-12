@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { StoryObj } from '@storybook/react';
 
-import { colorPalette } from '@antribute/zephyr-core';
+import { paletteColorsConfig } from '@antribute/zephyr-core';
 import { capitalCase } from 'change-case';
 import { Paper } from 'components/Paper';
 import { StatusBadge } from 'components/StatusBadge';
@@ -43,7 +43,7 @@ const ColorGroupContainer = ({
 };
 
 function getColorGroupArray() {
-  return Object.entries(colorPalette).map(([colorName, colorValue]) => {
+  return Object.entries(paletteColorsConfig).map(([colorName, colorValue]) => {
     if (typeof colorValue === 'string') {
       return {
         colorList: [{ colorName, color: colorValue }],
@@ -66,8 +66,7 @@ function getColorGroupArray() {
 const meta = {
   args: {},
   title: 'Palette',
-  component: ColorGroupContainer,
-} satisfies Meta<typeof ColorGroupContainer>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

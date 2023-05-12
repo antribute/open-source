@@ -1,38 +1,43 @@
 import React from 'react';
-import { LiteralUnion } from 'type-fest';
 import { findKey } from 'lodash-es';
 
-type WrapFn = (children: React.ReactNode) => JSX.Element;
+export type WrapProps<TCondition> = SingleConditionWrapProps | MultiConditionWrap<TCondition>;
 
-type ConditionMap = Record<string, unknown>;
+type BaseWrapProps = {
+  children: React.ReactNode;
+  fallback?: ConditionWrapRenderFn;
+};
 
-type ConditionType = boolean | undefined | null | string | ConditionMap;
-
-type WrapMatchMap<T extends string = string> = Partial<Record<LiteralUnion<T, string>, WrapFn>>;
-
-type ConditionKey<T extends ConditionType> = T extends ConditionMap ? keyof T : T;
-
-type ConditionMatcher<TCondition extends ConditionType> = TCondition extends string
-  ? WrapFn | WrapMatchMap<TCondition>
-  : WrapFn | WrapMatchMap;
-
-interface WrapProps<
-  TCondition extends ConditionType,
-  TConditionKey extends ConditionKey<TCondition> = ConditionKey<TCondition>,
-  TMatch extends ConditionMatcher<TConditionKey> = ConditionMatcher<TConditionKey>
-> {
-  if: TCondition;
-  children?: React.ReactNode;
-  wrap: TMatch;
-  fallback?: WrapFn;
+interface SingleConditionWrapProps extends BaseWrapProps {
+  if: unknown;
+  wrap: ConditionWrapRenderFn;
 }
 
-export function Wrap<TCondition extends ConditionType>({
+interface MultiConditionWrap<TCondition> extends BaseWrapProps {
+  if: TCondition;
+  wrap: Partial<MultiConditionWrapMap<TCondition>>;
+}
+
+type MultiConditionWrapMap<
+  TCondition,
+  T extends NonNullable<TCondition> = NonNullable<TCondition>
+> = Record<
+  T extends Record<string, unknown> ? keyof T : Extract<TCondition, string>,
+  ConditionWrapRenderFn
+>;
+
+export type ConditionWrapRenderFn = (children: React.ReactNode) => JSX.Element;
+
+export function Wrap<const TCondition>({
   children,
   if: conditionProp,
   wrap: wrapper,
   fallback,
 }: WrapProps<TCondition>) {
+  const fallbackWrapperFn: ConditionWrapRenderFn = fallback ?? ((c?: React.ReactNode) => <>{c}</>);
+
+  if (!Boolean(conditionProp)) return fallbackWrapperFn(children);
+
   const getCondition = () => {
     if (typeof conditionProp === 'object') {
       return findKey(conditionProp, (e) => Boolean(e));
@@ -42,17 +47,21 @@ export function Wrap<TCondition extends ConditionType>({
 
   const condition = getCondition();
 
-  const getWrapperFn = (): WrapFn => {
+  const getWrapperFn = (): ConditionWrapRenderFn => {
     if (typeof wrapper === 'function') return wrapper;
 
     if (typeof wrapper === 'object' && typeof condition === 'string' && condition in wrapper) {
-      return wrapper[condition as unknown as keyof typeof wrapper] as WrapFn;
+      return wrapper[condition as unknown as keyof typeof wrapper] as ConditionWrapRenderFn;
     }
 
-    return fallback ?? (((c?: React.ReactNode) => c) as WrapFn);
+    return fallbackWrapperFn;
   };
 
   const wrapperFn = getWrapperFn();
 
-  return Boolean(condition) ? wrapperFn(children) : <>{children}</>;
+  if (typeof condition === 'boolean') {
+    return Boolean(condition) ? wrapperFn(children) : <>{children}</>;
+  }
+
+  return wrapperFn(children);
 }

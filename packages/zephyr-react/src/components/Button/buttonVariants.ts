@@ -17,7 +17,6 @@ export const buttonVariants = {
     variant: 'outlined',
     className: 'ring-2 ring-inset',
     color: mergeVariants([
-      colorVariants.text,
       colorVariants.ring,
       colorVariants.focusRing,
       colorVariants.bgHoverHighlightDark,
@@ -28,13 +27,12 @@ export const buttonVariants = {
 
     color: mergeVariants([
       colorVariants.bgHighlight,
-      colorVariants.text,
       colorVariants.ring,
       colorVariants.bgHoverHighlightDark,
     ]),
   }),
   text: generateCompoundVariants({
     variant: 'text',
-    color: mergeVariants([colorVariants.text, colorVariants.bgHoverHighlightDark]),
+    color: mergeVariants([colorVariants.bgHoverHighlightDark]),
   }),
 };

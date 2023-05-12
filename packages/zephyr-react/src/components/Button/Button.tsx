@@ -14,7 +14,7 @@ type ButtonComponentProps = {
 export const ButtonComponent = forwardRef<HTMLButtonElement, ButtonComponentProps>(
   (
     {
-      size,
+      size = 'md',
       startIcon,
       endIcon,
       startIconClassName,

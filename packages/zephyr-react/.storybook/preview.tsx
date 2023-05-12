@@ -2,10 +2,17 @@ import '@antribute/zephyr-core/zephyr-core.css';
 
 import React, { useEffect } from 'react';
 import type { API_Layout, GlobalTypes } from '@storybook/types';
-import type { DecoratorFn } from '@storybook/react';
+import type { Decorator } from '@storybook/react';
 import { colorPalette } from '@antribute/zephyr-core';
 import { useDarkMode } from '../src/hooks/useDarkMode';
 import { LIGHT_MODE, DARK_MODE, DEFAULT_THEME } from '../src/constants/theme';
+import { Preview } from '@storybook/react';
+
+export const preview: Preview = {
+  parameters: {
+    layout: 'fullscreen',
+  },
+};
 
 export const globalTypes: GlobalTypes = {
   theme: {
@@ -41,17 +48,18 @@ export const parameters: Parameters = {
   backgrounds: {
     disable: true,
     values: [
-      { name: 'light', value: colorPalette['palette-base'].DEFAULT },
-      { name: 'dark', value: colorPalette['palette-base'].inverse },
+      { name: 'light', value: colorPalette['palette-base'] },
+      { name: 'dark', value: colorPalette['palette-base'] },
     ],
   },
 };
 
-export const withTailwindTheme: DecoratorFn = (Story, context) => {
+export const withTailwindTheme: Decorator = (Story, context) => {
   const { theme } = context.globals;
 
   const { setDarkMode } = useDarkMode();
   useEffect(() => {
+    console.log('THEME', theme);
     if (theme === DARK_MODE) {
       setDarkMode(true);
     } else {
@@ -62,4 +70,4 @@ export const withTailwindTheme: DecoratorFn = (Story, context) => {
   return <Story />;
 };
 
-export const decorators: DecoratorFn[] = [withTailwindTheme];
+export const decorators: Decorator[] = [withTailwindTheme];

@@ -8,6 +8,10 @@ import { HeaderCell } from 'components/Table/components/HeaderCell';
 import { THeaderElement } from 'components/Table/components/THeaderElement';
 import { TableElement } from 'components/Table/components/TableElement';
 import type { RowData } from '@tanstack/react-table';
+import { CSSProperties, useRef } from 'react';
+import { TableHeaderBackground } from 'components/Table/components/TableHeaderBackground';
+import { ScrollViewport } from 'components/ScrollViewport';
+import { twMerge } from 'tailwind-merge';
 import { useTableVirtualizer } from './useTableVirtualizer';
 import { ReactTable, ReactTableOptions } from './Table.types';
 
@@ -30,6 +34,7 @@ export const useTable = <T,>({ data, columns, meta }: UseTableProps<T>) => {
     data,
     columns,
     meta,
+    enableColumnResizing: true,
     getCoreRowModel: getCoreRowModel(),
   });
 
@@ -40,19 +45,38 @@ const HeaderRowElement = classed('tr');
 
 interface TableProps<TData extends RowData = unknown>
   extends Omit<UseTableProps<TData>, 'meta'>,
-    TableComponentMetaProps<TData> {}
+    TableComponentMetaProps<TData> {
+  className?: string;
+  zebraRows?: boolean;
+  filledHeaderBackground?: boolean;
+  height?: CSSProperties['height'];
+}
 
 function getTableMetaProps<T = unknown>({ onRowClick }: TableProps<T>): TableComponentMetaProps<T> {
   return { onRowClick };
 }
 
-export const Table = <T,>({ ...props }: TableProps<T>) => {
+export const Table = <T,>({
+  className,
+  zebraRows,
+  filledHeaderBackground,
+  height,
+  ...props
+}: TableProps<T>) => {
   const meta = getTableMetaProps(props);
   const table = useTable({ ...props, meta }) as ReactTable;
 
   const { rows } = table.getRowModel();
 
-  const { tableContainerRef, virtualRows, rowVirtualizer, tablePadding } = useTableVirtualizer({
+  const {
+    tableContainerRef,
+    virtualizer,
+    getTablePadding,
+    isScrolling,
+    mouseMovedSinceScrollStart,
+    mouseMovedSinceScrollEnd,
+    hasScrollOffsetSinceMouseMoveDuringScroll,
+  } = useTableVirtualizer({
     rows,
   });
 
@@ -60,40 +84,54 @@ export const Table = <T,>({ ...props }: TableProps<T>) => {
     table,
   };
 
+  const headerElementRef = useRef<HTMLTableSectionElement>(null);
+
   return (
     <TableProvider value={ctx}>
-      <div className="h-400 overflow-auto" ref={tableContainerRef}>
-        <TableElement>
-          <THeaderElement>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <HeaderRowElement key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <HeaderCell key={header.id} header={header} />
+      <ScrollViewport.Container className={twMerge('bg-surface', className)}>
+        <ScrollViewport.HeaderSection className="h-40"> </ScrollViewport.HeaderSection>
+        <ScrollViewport.ScrollAreaContainer className="bg-inherit">
+          <TableHeaderBackground headerElementRef={headerElementRef} />
+          <ScrollViewport.ScrollAreaViewport ref={tableContainerRef}>
+            <TableElement>
+              <THeaderElement className="z-30" ref={headerElementRef}>
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <HeaderRowElement key={headerGroup.id}>
+                    {headerGroup.headers.map((header) => (
+                      <HeaderCell key={header.id} header={header} />
+                    ))}
+                  </HeaderRowElement>
                 ))}
-              </HeaderRowElement>
-            ))}
-          </THeaderElement>
+              </THeaderElement>
 
-          <TableBody tablePadding={tablePadding}>
-            {virtualRows.map((virtualRow) => {
-              const row = rows[virtualRow.index]!;
-
-              return (
-                <DataRow
-                  row={row}
-                  key={virtualRow.key}
-                  ref={rowVirtualizer.measureElement}
-                  data-index={virtualRow.index}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <DataCell key={cell.id} cell={cell} />
-                  ))}
-                </DataRow>
-              );
-            })}
-          </TableBody>
-        </TableElement>
-      </div>
+              <TableBody tablePadding={getTablePadding(virtualizer)}>
+                {virtualizer.getVirtualItems().map((virtualRow) => {
+                  const row = rows[virtualRow.index]!;
+                  return (
+                    <DataRow
+                      row={row}
+                      key={row.id}
+                      ref={virtualizer.measureElement}
+                      data-index={virtualRow.index}
+                      tint={zebraRows && virtualRow.index % 2 !== 0}
+                      isScrolling={isScrolling}
+                      mouseMovedSinceScrollStart={mouseMovedSinceScrollStart}
+                      mouseMovedSinceScrollEnd={mouseMovedSinceScrollEnd}
+                      hasScrollOffsetSinceMouseMoveDuringScroll={
+                        hasScrollOffsetSinceMouseMoveDuringScroll
+                      }
+                    >
+                      {row.getVisibleCells().map((cell) => (
+                        <DataCell key={cell.id} cell={cell} height="50px" />
+                      ))}
+                    </DataRow>
+                  );
+                })}
+              </TableBody>
+            </TableElement>
+          </ScrollViewport.ScrollAreaViewport>
+        </ScrollViewport.ScrollAreaContainer>
+      </ScrollViewport.Container>
     </TableProvider>
   );
 };

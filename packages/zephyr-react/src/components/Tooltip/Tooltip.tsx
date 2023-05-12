@@ -1,8 +1,9 @@
+import { ColorSchemeName } from '@antribute/zephyr-core';
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
-import { pick } from 'lodash-es';
-import React, { useState } from 'react';
+import React, { CSSProperties, useState } from 'react';
 import { Classed, classed } from 'utils/classed';
 import { getNearestColorSchemeAttribute } from 'utils/getNearestColorSchemeAttribute';
+import { pickProps } from 'utils/pickProps';
 
 type TooltipContentElementProps = Classed.ComponentProps<typeof TooltipContentElement>;
 
@@ -10,6 +11,7 @@ type TooltipContentElementVariantProps = Classed.VariantProps<typeof TooltipCont
 
 const TooltipContentElement = classed(
   TooltipPrimitive.TooltipContent,
+
   'radix-side-top:animate-slide-down-fade',
   'radix-side-right:animate-slide-left-fade',
   'radix-side-bottom:animate-slide-up-fade',
@@ -19,9 +21,18 @@ const TooltipContentElement = classed(
   'rounded',
   'bg-surface-soft text-content-strong',
   'ring-1 ring-inset ring-content-tint',
+  'z-50 relative',
+
   {
     variants: {
+      size: {
+        xs: 'text-xs py-2 px-4',
+        sm: 'text-sm py-4 px-6',
+        md: 'text-md py-6 px-8',
+        lg: 'text-lg py-4 px-12',
+      },
       maxWidth: {
+        false: '',
         xs: 'max-w-[20ch]',
         sm: 'max-w-[30ch]',
         md: 'max-w-[38ch]',
@@ -33,6 +44,7 @@ const TooltipContentElement = classed(
     },
     defaultVariants: {
       maxWidth: 'md',
+      selectNone: true,
     },
   }
 );
@@ -57,6 +69,8 @@ interface TooltipContentProps
     TooltipContentElementVariantProps {
   stopPropogation?: boolean;
   onTooltipClick?: TooltipContentElementProps['onClick'];
+  className?: string;
+  style?: CSSProperties;
 }
 
 type TooltipTriggerProps = TooltipPrimitive.TooltipTriggerProps;
@@ -71,52 +85,49 @@ export type TooltipProps = {
   triggerProps?: TooltipTriggerProps;
   triggerAsChild?: boolean;
   children?: React.ReactNode;
-  forceMount?: boolean;
 } & TooltipRootProps &
   TooltipContentProps;
 
-const contentPropKeys = Object.keys({
-  maxWidth: undefined,
-  selectNone: undefined,
-  'aria-label': undefined,
-  side: undefined,
-  sideOffset: undefined,
-  align: undefined,
-  alignOffset: undefined,
-  arrowPadding: undefined,
-  collisionBoundary: undefined,
-  collisionPadding: undefined,
-  sticky: undefined,
-  hideWhenDetached: undefined,
-  avoidCollisions: undefined,
-  stopPropogation: undefined,
-  onTooltipClick: undefined,
-} satisfies TooltipContentProps);
+export const Tooltip = (props: TooltipProps) => {
+  const [colorSchemDataAttribute, setColorSchemeAttribute] = useState<
+    ColorSchemeName | undefined
+  >();
 
-const tooltipRootPropKeys = Object.keys({
-  defaultOpen: undefined,
-  open: undefined,
-  onOpenChange: undefined,
-  delayDuration: undefined,
-  disableHoverableContent: undefined,
-} satisfies TooltipRootProps);
+  const { children, tooltip, triggerProps, triggerAsChild } = pickProps(props, {
+    triggerAsChild: true,
+    children: '_pick_',
+    tooltip: '_pick_',
+    triggerProps: {},
+    forceMount: '_pick_',
+  });
 
-export const Tooltip = ({
-  children,
-  tooltip,
-  triggerProps,
-  triggerAsChild = true,
-  forceMount,
-  ...props
-}: TooltipProps) => {
-  const [colorSchemeAttribute, setColorSchemeAttribute] = useState<string | undefined>();
-
-  const { onTooltipClick, stopPropogation, ...contentProps } = pick(
+  const { onTooltipClick, stopPropogation, ...contentProps } = pickProps<TooltipContentProps>(
     props,
-    contentPropKeys
-  ) as TooltipContentProps;
+    {
+      side: 'bottom',
+      className: '_pick_',
+      maxWidth: '_pick_',
+      selectNone: '_pick_',
+      'aria-label': '_pick_',
+      align: '_pick_',
+      arrowPadding: '_pick_',
+      collisionBoundary: '_pick_',
+      sticky: '_pick_',
+      hideWhenDetached: '_pick_',
+      avoidCollisions: '_pick_',
+      stopPropogation: '_pick_',
+      onTooltipClick: '_pick_',
+      style: '_pick_',
+    }
+  );
 
-  const tooltipRootProps = pick(props, tooltipRootPropKeys) as TooltipRootProps;
+  const tooltipRootProps = pickProps<TooltipRootProps>(props, {
+    defaultOpen: '_pick_',
+    open: '_pick_',
+    onOpenChange: '_pick_',
+    delayDuration: '_pick_',
+    disableHoverableContent: '_pick_',
+  });
 
   return (
     <TooltipPrimitive.Provider>
@@ -125,33 +136,67 @@ export const Tooltip = ({
           asChild={triggerAsChild}
           {...triggerProps}
           onMouseOverCapture={(e) => {
-            triggerProps?.onMouseOverCapture?.(e);
+            triggerProps.onMouseOverCapture?.(e);
             setColorSchemeAttribute(getNearestColorSchemeAttribute(e.currentTarget));
           }}
         >
           {children}
         </TooltipPrimitive.Trigger>
 
-        {colorSchemeAttribute && (
+        {colorSchemDataAttribute && (
           <TooltipPrimitive.Portal>
-            <TooltipContentElement
-              data-color-scheme={colorSchemeAttribute}
-              sideOffset={4}
-              collisionPadding={4}
-              side="bottom"
-              {...contentProps}
-              onClick={(e) => {
-                if (stopPropogation) {
-                  e.stopPropagation();
-                }
-                onTooltipClick?.(e);
-              }}
-            >
+            <TooltipContent colorScheme={colorSchemDataAttribute} {...contentProps}>
               {tooltip}
-            </TooltipContentElement>
+            </TooltipContent>
           </TooltipPrimitive.Portal>
         )}
       </TooltipPrimitive.Root>
     </TooltipPrimitive.Provider>
   );
 };
+
+export const TooltipContent = ({
+  children,
+  colorScheme,
+  onTooltipClick,
+  stopPropogation,
+
+  asChild,
+  ...contentProps
+}: {
+  colorScheme?: ColorSchemeName;
+  children?: React.ReactNode;
+  asChild?: boolean;
+} & TooltipContentProps) => {
+  return (
+    <TooltipContentElement
+      size="md"
+      sideOffset={4}
+      collisionPadding={4}
+      alignOffset={4}
+      data-color-scheme={colorScheme}
+      asChild={asChild}
+      {...contentProps}
+      onClick={(e) => {
+        if (stopPropogation) {
+          e.stopPropagation();
+        }
+        onTooltipClick?.(e);
+      }}
+    >
+      {children}
+    </TooltipContentElement>
+  );
+};
+
+Tooltip.Provider = TooltipPrimitive.Provider;
+
+Tooltip.Root = TooltipPrimitive.Root;
+
+Tooltip.Trigger = TooltipPrimitive.Trigger;
+
+Tooltip.Portal = TooltipPrimitive.Portal;
+
+Tooltip.PrimitiveContent = TooltipPrimitive.Content;
+
+Tooltip.Content = TooltipContent;

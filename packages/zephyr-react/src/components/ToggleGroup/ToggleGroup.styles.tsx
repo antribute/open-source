@@ -11,15 +11,24 @@ export type ToggleGroupContainerElementVariantProps = Classed.VariantProps<
 
 export const ToggleGroupContainerElement = classed(
   ToggleGroupPrimitive.ToggleGroup,
-  'group inline-flex shadow-sm rounded-md bg-surface-soft',
+  'group inline-flex  bg-surface-soft',
   {
     variants: {
+      variant: {
+        ghost: 'gap-4 bg-transparent shadow-none',
+        outlined: 'rounded-md shadow-sm',
+      },
       fullWidth: {
         true: 'flex w-full',
+      },
+      border: {
+        true: 'shadow-sm  rounded-md',
+        false: '',
       },
     },
     defaultVariants: {
       fullWidth: false,
+      variant: 'outlined',
     },
   }
 );
@@ -34,17 +43,20 @@ export const ToggleGroupItemElement = classed(
   ToggleGroupPrimitive.Item,
   'relative',
   'border-y',
+  'group/tgi',
   'whitespace-nowrap',
+  'flex items-center justify-center',
   'ring-offset-0',
   'flex-grow shrink-0',
-  'first:rounded-l-md last:rounded-r-md outline-offset',
   'select-none',
+  'before-absolute-content',
   expandVariant(
-    `radix-state-on:(text-primary-content,bg-primary-dark,border-boundary-subtle)
-    radix-state-off:(text-content-subtle,border-boundary-subtle,focus-visible:text-content-weak)
+    `radix-state-on:(text-primary-content,bg-primary,border-highlight-strong)
+    radix-state-off:(text-content-subtle,border-boundary-ghost,focus-visible:text-content-weak)
     radix-state-off:hover:(text-content-weak,bg-highlight-subtle)
-    focus-visible:(outline-none,outline-offset-0,outline-content,-outline-offset-2)
-    radix-state-on:focus-visible:(outline-secondary-dark)
+    focus-visible:(outline-none,-outline-offset-2,ring-2)
+    radix-state-off:focus-visible:(outline-primary-content/70,ring-highlight-intense,text-content-high)
+    radix-state-on:focus-visible:(outline-primary,outline-offset-0,ring-inset,ring-[1.5px],ring-primary-content/90)
     `
   ),
 
@@ -56,6 +68,11 @@ export const ToggleGroupItemElement = classed(
         inputComponentVariants.size.paddingX,
       ]),
 
+      border: {
+        true: 'first:rounded-l-md last:rounded-r-md outline-offset',
+        false: 'rounded-md border-none radix-state-on:bg-secondary/20 radix-state-on:text-content',
+      },
+
       fontWeight: {
         medium: 'font-medium',
         semibold: 'font-semibold',
@@ -64,8 +81,20 @@ export const ToggleGroupItemElement = classed(
 
     defaultVariants: {
       fontWeight: 'medium',
+      border: true,
     },
   }
+);
+
+export const ToggleGroupItemOutline = classed(
+  'div',
+  'absolute inset-0',
+  expandVariant(
+    `
+    group-radix-state-on:(-left-px,-right-px)
+    group-radix-state-on:(first:border-r-2,middle:border-l-2,right:border-l-2)
+    `
+  )
 );
 
 /**
@@ -85,7 +114,7 @@ export const getToggleItemBorderWidth = ({
   }
 
   if (isLeftSiblingSelected && isLast) {
-    return 'border-r border-l-0';
+    return 'border-r border-l-0 border-l-0';
   }
 
   if (isRightSiblingSelected && isFirst) {

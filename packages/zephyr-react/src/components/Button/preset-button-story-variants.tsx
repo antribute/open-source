@@ -30,7 +30,7 @@ export const PresetButtonStoryVariants = <
         renderPaperContainers
         Component={Button}
         noChildren={noDefaultChildren}
-        props={getProps(props, { children: 'Default' })}
+        props={getProps(props, { children: 'Button text' })}
       />
     ),
     StartAndEndIconVariant: () => (
@@ -55,7 +55,7 @@ export const PresetButtonStoryVariants = <
         showVariantLabel
         Component={Button}
         noChildren={noDefaultChildren}
-        props={getProps(props, { children: 'Default' })}
+        props={getProps(props, { children: 'Button text' })}
       />
     ),
     RoundedVariant: (props: TProps) => (

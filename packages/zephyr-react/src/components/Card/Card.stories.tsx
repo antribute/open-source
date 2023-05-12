@@ -8,26 +8,33 @@ import { generateMockProjectList, generateMockUserList } from 'mock/mock-data';
 import { Tabs } from 'components/Tabs';
 import { useState } from 'react';
 import { ColorSchemeName, colorSchemeNames, mainColorSchemeNames } from '@antribute/zephyr-core';
+import { twMerge } from 'tailwind-merge';
+import { CardContainerProps } from 'components/Card/Card';
 import { Card } from '.';
 
 const meta = {
   args: {},
   title: 'Input/Card',
-  component: Card.Container,
-} satisfies Meta<Card.CardContainerProps>;
+} satisfies Meta<object>;
 
 export default meta;
+
 type Story = StoryObj<typeof meta>;
 
 const ExampleCard = ({
   colorScheme: colorSchemeProp,
   children,
+  className,
   ...props
-}: Card.CardContainerProps) => {
+}: CardContainerProps) => {
   const [colorScheme, setColorScheme] = useState<ColorSchemeName>(colorSchemeProp ?? 'surface');
 
   return (
-    <Card.Container colorScheme={colorScheme} {...props}>
+    <Card.Container
+      colorScheme={colorScheme}
+      className={twMerge(className, 'min-h-[475px]')}
+      {...props}
+    >
       <Card.TitleSection>
         <Card.Title>Add New Project</Card.Title>
 
@@ -56,14 +63,14 @@ const ExampleCard = ({
           </Tabs.List>
           <Tabs.ViewContainer>
             <Tabs.View value="contact">
-              <Input label="Project Name" placeholder="Enter Name" width="full" />
+              <Input label="Project Name" placeholder="Enter Name" fullWidth />
               <Combobox
-                width="full"
+                fullWidth
                 label="Theme"
                 value={colorScheme}
                 options={colorSchemeNames}
                 getOptionLabel={(color) => {
-                  return capitalCase(color ?? 'Surface');
+                  return capitalCase(color);
                 }}
                 onValueChange={(c) => {
                   setColorScheme(c);
@@ -75,7 +82,7 @@ const ExampleCard = ({
 
             <Tabs.View value="details">
               <Combobox
-                width="full"
+                fullWidth
                 label="Owner"
                 options={generateMockUserList({ size: 30 })}
                 getOptionLabel={({ name }) => {
@@ -83,7 +90,7 @@ const ExampleCard = ({
                 }}
               />
               <Combobox
-                width="full"
+                fullWidth
                 label="Collection"
                 options={generateMockProjectList({ size: 30 })}
                 getOptionLabel={({ name }) => {
@@ -91,7 +98,7 @@ const ExampleCard = ({
                 }}
               />
               <Combobox
-                width="full"
+                fullWidth
                 label="Collection"
                 options={generateMockProjectList({ size: 30 })}
                 getOptionLabel={({ name }) => {
@@ -99,7 +106,7 @@ const ExampleCard = ({
                 }}
               />
               <Combobox
-                width="full"
+                fullWidth
                 label="Collection"
                 options={generateMockProjectList({ size: 30 })}
                 getOptionLabel={({ name }) => {
@@ -140,37 +147,39 @@ const ExampleCard = ({
   );
 };
 
-export const Default: Story = {
+export const Default: StoryObj = {
   args: {},
   render: () => <ExampleCard className="w-352" />,
 };
 
 export const CardThemes: Story = {
   args: {},
-  render: (args) => (
-    <div className="space-x-26 fixed flex h-full w-full justify-between pb-[5%]">
-      <div className="grid w-full max-w-screen-lg grid-cols-9 gap-16">
-        {mainColorSchemeNames
-          .filter((e) => e !== 'default')
-          .map((e) => {
-            return <ExampleCard {...args} colorScheme={e} className="col-span-3" />;
-          })}
+  render: () => {
+    return (
+      <div className="space-x-26 flex h-full w-full justify-between pb-[5%]">
+        <div className="grid w-full max-w-screen-lg grid-cols-9 gap-16">
+          {mainColorSchemeNames
+            .filter((e) => e !== 'default')
+            .map((e) => {
+              return <ExampleCard colorScheme={e} className="col-span-3" />;
+            })}
+        </div>
       </div>
-    </div>
-  ),
+    );
+  },
 };
 
 export const NoPadding: Story = {
   args: {
     padding: false,
   },
-  render: (args) => (
+  render: () => (
     <div className="space-x-26 fixed flex h-full w-full justify-between pb-[5%]">
       <div className="grid w-full max-w-screen-lg grid-cols-9 gap-16">
         {mainColorSchemeNames
           .filter((e) => e !== 'default')
           .map((e) => {
-            return <ExampleCard {...args} colorScheme={e} className="col-span-3" />;
+            return <ExampleCard colorScheme={e} className="col-span-3" />;
           })}
       </div>
     </div>

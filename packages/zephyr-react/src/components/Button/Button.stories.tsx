@@ -20,6 +20,11 @@ export const Default: Story = {
   render: variants.Default,
 };
 
+export const Sizes: Story = {
+  args: {},
+  render: variants.SizeVariant,
+};
+
 export const Contained: Story = {
   args: {},
   render: variants.ContainedVariant,
@@ -58,4 +63,15 @@ export const ContainedGradient: Story = {
 export const Ghost: Story = {
   args: {},
   render: variants.GhostVariant,
+};
+
+export const ButtonIcon: Story = {
+  args: {},
+  render: () => {
+    return (
+      <Button fullWidth startIcon={<span className="i-fa6-brands-google" />}>
+        Continue with Google
+      </Button>
+    );
+  },
 };

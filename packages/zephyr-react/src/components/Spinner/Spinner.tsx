@@ -30,7 +30,7 @@ export const SpinnerSvg = ({ ...props }: React.SVGProps<SVGSVGElement>) => {
 
 const SpinnerElement = classed(
   SpinnerSvg,
-  'w-8 h-8 mr-2 text-highlight animate-spin fill-primary-light',
+  'w-8 h-8 text-highlight animate-spin fill-primary-light',
   {
     variants: {
       size: mergeVariants([sizeVariants.inlineWidth, sizeVariants.inlineHeight]),
@@ -46,7 +46,7 @@ const SpinnerElement = classed(
   }
 );
 
-type SpinnerProps = Classed.VariantProps<typeof SpinnerElement>;
+export type SpinnerProps = { className?: string } & Classed.VariantProps<typeof SpinnerElement>;
 
 export const Spinner = (props: SpinnerProps) => {
   return <SpinnerElement {...props} />;

@@ -1,6 +1,7 @@
 import clsx from 'clsx';
-import { colorVariants } from 'styles/colors.variants';
+import { colorVariants, filledAccents } from 'styles/colors.variants';
 import { inputComponentVariants } from 'styles/input-component.variants';
+import { getRelativeSizeProp, objectMap } from 'utils';
 import { Classed, classTheme, classed, mergeVariants } from 'utils/classed';
 
 export type StatusBadgeElementVariants = Classed.VariantProps<typeof StatusBadgeElement>;
@@ -14,24 +15,20 @@ const disabledClass = classTheme({
 
 export const StatusBadgeElement = classed(
   'button',
-  'group inline-flex items-center gap-6 font-medium border rounded-full select-none transition-all ring-0 focus:ring-0 ring-transparent',
-  'border-boundary-ghost dark:border-boundary-inverse-ghost  outline-none border-none',
+  'group inline-flex items-center justify-center gap-6 font-medium border select-none transition-all ring-0 focus:ring-0 ring-transparent',
+  'border-boundary-ghost dark:border-boundary-inverse-ghost  outline-none border-none text-primary-content',
   disabledClass,
 
   {
     variants: {
       size: mergeVariants([
         inputComponentVariants.size.paddingX,
+        inputComponentVariants.size.inlineHeight,
         inputComponentVariants.size.lineHeight,
         inputComponentVariants.size.textSize,
       ]),
 
-      color: mergeVariants([
-        colorVariants.bg,
-        colorVariants.border,
-        colorVariants.hoverDark,
-        colorVariants.text,
-      ]),
+      color: mergeVariants([filledAccents]),
 
       variant: {
         text: 'px-0 py-0 border-none bg-transparent',
@@ -44,11 +41,18 @@ export const StatusBadgeElement = classed(
         true: 'cursor-pointer',
         false: 'cursor-default focus:ring-0',
       },
+
+      rounded: {
+        true: 'rounded',
+        false: '',
+        full: 'rounded-full',
+      },
     },
     defaultVariants: {
       size: 'md',
       variant: 'contained',
       clickable: false,
+      rounded: 'full',
     },
   }
 );

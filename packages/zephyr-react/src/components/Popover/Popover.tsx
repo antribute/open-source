@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 import React from 'react';
 import * as PopoverPrimitive from '@radix-ui/react-popover';
 import { classed } from 'utils/classed';
@@ -8,18 +9,25 @@ const PopoverContentElement = classed(
   'bg-surface p-8 rounded border border-highlight relative z-0',
   {
     variants: {
+      backgroundNoise: {
+        true: 'noisy-surface-texture',
+      },
       closeButton: {
         true: 'pr-40',
       },
     },
+    defaultVariants: {
+      backgroundNoise: true,
+    },
   }
 );
 
-interface PopoverContentProps extends PopoverPrimitive.PopperContentProps {
+export interface PopoverContentProps extends PopoverPrimitive.PopoverContentImplProps {
   children?: React.ReactNode;
   showArrow?: boolean;
   showCloseButton?: boolean;
   closeOnInteractOutside?: boolean;
+  backgroundNoise?: boolean;
 }
 
 <svg width="10" height="5" viewBox="0 0 10 5" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -42,6 +50,7 @@ const PopoverContent = ({
   closeOnInteractOutside = true,
   showCloseButton: showCloseButtonProp,
   className,
+  backgroundNoise,
   ...props
 }: PopoverContentProps) => {
   const showCloseButton = showCloseButtonProp ?? !closeOnInteractOutside;
@@ -51,6 +60,7 @@ const PopoverContent = ({
       <PopoverContentElement
         sideOffset={5}
         collisionPadding={5}
+        backgroundNoise={backgroundNoise}
         {...props}
         onInteractOutside={(e) => {
           if (!closeOnInteractOutside) {
@@ -67,17 +77,14 @@ const PopoverContent = ({
               size="xs"
               rounded
               color="secondary"
-              className="absolute right-[3px] top-[5.8px]"
-              // variant="filled"
-              // rounded
-              // className="border-highlight border absolute bg-surface hover:bg-surface-light  -top-8 -right-8  !h-20 !w-20 !p-4"
+              className="absolute right-[3px] top-[5.8px] noisy-surface-texture"
             />
           </PopoverPrimitive.Close>
         )}
         {showArrow && (
           <>
-            <PopoverPrimitive.Arrow className="fill-highlight-high  relative top-px" />
-            <PopoverPrimitive.Arrow className="fill-surface scale-105 relative " />
+            <PopoverPrimitive.Arrow className="fill-highlight-subtle relative top-px" />
+            <PopoverPrimitive.Arrow className="fill-surface scale-105 relative" />
           </>
         )}
       </PopoverContentElement>
@@ -85,15 +92,19 @@ const PopoverContent = ({
   );
 };
 
-const PopoverRoot = (props: PopoverPrimitive.PopoverProps) => {
+export type PopoverRootProps = PopoverPrimitive.PopoverProps;
+
+const PopoverRoot = (props: PopoverRootProps) => {
   return <PopoverPrimitive.Root {...props} />;
 };
 
-type PopoverTriggerProps = PopoverPrimitive.PopoverTriggerProps;
+export type PopoverTriggerProps = PopoverPrimitive.PopoverTriggerProps;
 
 const PopoverTrigger = (props: PopoverTriggerProps) => {
   return <PopoverPrimitive.Trigger asChild {...props} />;
 };
+
+const Close = PopoverPrimitive.Close;
 
 const Root = PopoverRoot;
 
@@ -101,4 +112,10 @@ const Content = PopoverContent;
 
 const Trigger = PopoverTrigger;
 
-export { Root, Trigger, Content };
+const PrimitiveContent = PopoverPrimitive.Content;
+
+const Portal = PopoverPrimitive.Portal;
+
+const Anchor = PopoverPrimitive.Anchor;
+
+export { Root, Trigger, Content, Close, PrimitiveContent, Portal, Anchor };

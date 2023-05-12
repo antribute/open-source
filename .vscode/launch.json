@@ -5,11 +5,17 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Storybook Debug",
       "type": "node-terminal",
-      "name": "Debug Current TS File (ts-node)",
       "request": "launch",
-      "command": "tsx -- ${fileBasename}",
-      "cwd": "${fileDirname}"
+      "command": "pnpm run storybook-react",
+      "internalConsoleOptions": "openOnFirstSessionStart",
+      "serverReadyAction": {
+        "pattern": "Local:.+(https?://[^:]+:[0-9]+)",
+        "uriFormat": "%s",
+        "action": "debugWithChrome",
+        "webRoot": "${workspaceFolder}/packages/zephyr-react"
+      }
     }
   ]
 }

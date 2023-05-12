@@ -1,10 +1,10 @@
 import { deriveClassed } from '@tw-classed/react';
 import { Classed } from 'utils/classed';
-import { BaseListItem } from './BaseListItem';
+import { BaseListItemElement } from './BaseListItem';
 import { ListItemContainer, ListItemContainerProps } from './ListItemContainer';
-import { ListItemSpan } from './ListItemSpan';
+import { Detail } from 'components/Detail';
 
-type ListItemElementVariantProps = Classed.VariantProps<typeof BaseListItem>;
+type ListItemElementVariantProps = Classed.VariantProps<typeof BaseListItemElement>;
 
 export type ListItemBaseProps = ListItemElementVariantProps & {
   label?: React.ReactNode;
@@ -26,26 +26,27 @@ export type ListItemGroupBaseProps = ListItemBaseProps & {
 
 export type ListItemProps = React.ComponentProps<typeof ListItemGroup>;
 
-export const ListItem = deriveClassed<typeof BaseListItem, ListItemBaseProps>(
-  ({ label, startIcon, endIcon, description, children, ...props }) => {
+export const ListItem = deriveClassed<typeof BaseListItemElement, ListItemBaseProps>(
+  ({ label, startIcon, endIcon, description, children, ...props }, forwardedRef) => {
     return (
-      <BaseListItem {...props}>
-        <ListItemSpan
-          label={label}
-          startIcon={startIcon}
-          endIcon={endIcon}
+      <BaseListItemElement {...props} ref={forwardedRef}>
+        <Detail
+          className="w-full"
+          subtitle={{ color: 'inherit', value: label }}
+          startSubtitle={startIcon}
+          endSubtitle={endIcon}
           description={description}
         />
         {children}
-      </BaseListItem>
+      </BaseListItemElement>
     );
   }
 );
 
-export const ListItemGroup = deriveClassed<typeof BaseListItem, ListItemGroupBaseProps>(
-  ({ containerProps, ...props }) => {
+export const ListItemGroup = deriveClassed<typeof BaseListItemElement, ListItemGroupBaseProps>(
+  ({ containerProps, ...props }, forwardedRef) => {
     return (
-      <ListItemContainer {...containerProps}>
+      <ListItemContainer {...containerProps} ref={forwardedRef as never}>
         <ListItem {...props} />
       </ListItemContainer>
     );
