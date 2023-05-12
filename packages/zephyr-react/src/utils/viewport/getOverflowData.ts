@@ -1,6 +1,6 @@
 import { getElement } from 'utils/getElement';
 
-export type OverflowData = {
+export interface OverflowData {
   hasOverflow: boolean;
   hasOverflowX: boolean;
   hasOverflowY: boolean;
@@ -10,7 +10,7 @@ export type OverflowData = {
   isScrollAtRightBoundary: boolean;
   isScrollAtXBoundary: boolean;
   isScrollAtYBoundary: boolean;
-};
+}
 
 export function getOverflowData(
   elementRef?: React.RefObject<HTMLElement> | HTMLElement | null

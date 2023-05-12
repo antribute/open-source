@@ -85,7 +85,7 @@ export const InputLabel = deriveClassed<typeof InputLabelElement, InputLabelProp
               )}
             </span>
             {labelDescription && (
-              <Text as="p" size="xs" className="leading-sm mt-4 mb-4" color="weak">
+              <Text as="p" size="xs" className="leading-sm my-4" color="weak">
                 {labelDescription}
               </Text>
             )}

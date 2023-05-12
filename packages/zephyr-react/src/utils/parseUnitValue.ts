@@ -1,6 +1,9 @@
 import { isNaN, isNumber } from 'lodash-es';
 
-type ParsedValue = { value: number; unit: string | null };
+interface ParsedValue {
+  value: number;
+  unit: string | null;
+}
 
 export const parseUnitValue = (str: string): ParsedValue => {
   const match = str.match(/^(\d+(?:\.\d+)?)(\D*)$/);

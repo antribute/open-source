@@ -61,7 +61,7 @@ export type MockDataDeploymentStatus = (typeof mockDataDeploymentStatuses)[numbe
 
 export const mockDataDeploymentStatuses = ['offline', 'online', 'error'] as const;
 
-export type DeploymentMockData = {
+export interface DeploymentMockData {
   id: number;
   href: string;
   projectName: string;
@@ -71,7 +71,7 @@ export type DeploymentMockData = {
   description: string;
   environment: MockDataEnvironemnt;
   deploymentTime: string;
-};
+}
 
 export const generateMockDeployment: MockDataGeneratorFn<DeploymentMockData> = ({ id, seed }) => {
   fakerSeed(seed);

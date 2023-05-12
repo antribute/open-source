@@ -21,7 +21,7 @@
     "build-storybook": "storybook build",
     "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf storybook-static && rimraf text-results && rimraf .eslintcache",
     "dev": "concurrently \"pnpm run build:components --watch\" \"pnpm run build:helpers --watch\" \"pnpm run build:index --watch --ignore-watch='src/components'\" --raw",
-    "lint": "eslint --cache src/**",
+    "lint": "eslint  ./src",
     "storybook": "storybook dev -p 6006 --no-open",
     "test": "vitest"
   },

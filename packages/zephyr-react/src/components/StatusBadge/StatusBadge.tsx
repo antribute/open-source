@@ -6,7 +6,9 @@ import { colorVariants } from 'styles/colors.variants';
 import { stringToDistinctColorClass } from 'utils/stringToDistinctColorClass';
 import { twMerge } from 'tailwind-merge';
 import { fetchStatusColor } from 'components/StatusBadge/fetchStatusColors';
-import { StatusBadgeElement, StatusBadgeElementProps } from './StatusBadge.styles';
+import { ButtonElement } from 'components/Button/Button.styles';
+import { inputComponentVariants } from 'styles/input-component.variants';
+import { StatusBadgeElementProps } from './StatusBadge.styles';
 
 export const DiscardButtonElement = classed(
   'button',
@@ -37,6 +39,25 @@ interface StatusBadgeProps extends Omit<StatusBadgeElementProps, 'color'> {
   onDiscard?: () => void;
 }
 
+const StatusBadgeElement = classed(ButtonElement, {
+  variants: {
+    clickable: {
+      true: 'cursor-pointer',
+      false: 'cursor-auto',
+    },
+    size: mergeVariants([
+      inputComponentVariants.size.paddingX,
+      inputComponentVariants.size.inlineHeight,
+      inputComponentVariants.size.lineHeight,
+      inputComponentVariants.size.textSize,
+    ]),
+    rounded: {
+      true: 'rounded',
+      false: '',
+      full: 'rounded-full',
+    },
+  },
+});
 export const StatusBadge = ({
   children: childrenProp,
   label: labelProp,
@@ -46,7 +67,6 @@ export const StatusBadge = ({
   className,
   onDiscard,
   disabled,
-  ...props
 }: StatusBadgeProps) => {
   const label =
     labelProp ?? typeof childrenProp === 'string' ? (childrenProp as string) : undefined;
@@ -77,17 +97,18 @@ export const StatusBadge = ({
   }, [colorProp, distinctColorClass, label]);
 
   const clickable = Boolean(onClick);
+
   return (
     <StatusBadgeElement
       clickable={clickable}
       size={size}
       onClick={onClick}
-      data-color-scheme={color}
-      // color={color}
+      color={color}
       disabled={disabled}
       className={twMerge(colorClass, className)}
-      {...props}
-      tabIndex={clickable ? undefined : -1}
+      // {...props}
+      // tabIndex={clickable ? undefined : -1}
+      rounded="full"
     >
       {children}
       {onDiscard && (

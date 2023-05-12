@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useRef } from 'react';
 import * as AvatarPrimitive from '@radix-ui/react-avatar';
 import { Classed, classed, mergeVariants } from 'utils/classed';
 import { Wrap } from 'components/Wrap';
@@ -8,14 +8,12 @@ import { sizeVariants } from 'styles/size.variants';
 import { twMerge } from 'tailwind-merge';
 import { stringToDistinctColorClass } from 'utils/stringToDistinctColorClass';
 import clsx from 'clsx';
-import { AvatarElementName } from './Avatar.types';
 import { objectMap } from 'utils';
 import { capitalize, isEmpty, pick, truncate } from 'lodash-es';
 import { SizeProp } from 'types/styles';
 import { Detail, DetailProps } from 'components/Detail';
-import { useMemo } from 'react';
-import { useRef } from 'react';
 import { DetailSlots, SlotItemData, slotIds } from 'components/Detail/Detail.types';
+import { AvatarElementName } from './Avatar.types';
 
 const inlineSizeVariants = objectMap(
   mergeVariants([sizeVariants.textSize, sizeVariants.inlineWidth, sizeVariants.inlineHeight]),
@@ -149,8 +147,6 @@ export const Avatar = ({
   const [loadingStatus, setLoadingStatus] = useState<AvatarPrimitive.ImageLoadingStatus>();
 
   const loading = loadingStatus === 'loading';
-
-  console.log('loadingStatus', loadingStatus);
 
   const colorClass = stringToDistinctColorClass(
     label,

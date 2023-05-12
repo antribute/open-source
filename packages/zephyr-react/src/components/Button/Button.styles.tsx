@@ -16,6 +16,9 @@ export const buttonVariants = {
     loading: {
       true: 'cursor-default',
     },
+    cursorPointer: {
+      false: 'cursor-auto',
+    },
     size: mergeVariants(
       [inputComponentVariants.size.paddingX, inputComponentVariants.size.paddingY],
       {
@@ -25,6 +28,7 @@ export const buttonVariants = {
         lg: 'text-sm',
       }
     ),
+
     fontWeight: textVariants.fontWeight,
     noWrap: {
       true: 'whitespace-nowrap',
@@ -116,15 +120,28 @@ export const buttonVariants = {
     }),
     ...generateCompoundVariants({
       variant: 'filled',
+      color: {
+        primary: 'filled-hover-accent-primary',
+        secondary: 'filled-hover-accent-secondary',
+        inverse: 'filled-hover-accent-inverse',
+        heart: 'filled-hover-accent-heart',
+        info: 'filled-hover-accent-info',
+        success: 'filled-hover-accent-success',
+        danger: 'filled-hover-accent-danger',
+        caution: 'filled-hover-accent-caution',
+      },
+    }),
+    ...generateCompoundVariants({
+      variant: 'filled',
       hoverBackgroundColor: {
-        primary: 'hover:bg-primary',
-        secondary: 'hover:bg-secondary',
-        inverse: 'hover:bg-inverse',
-        heart: 'hover:bg-heart',
-        info: 'hover:bg-info',
-        success: 'hover:bg-success',
-        danger: 'hover:bg-danger',
-        caution: 'hover:bg-caution',
+        primary: 'filled-hover-accent-primary',
+        secondary: 'filled-hover-accent-secondary',
+        inverse: 'filled-hover-accent-inverse',
+        heart: 'filled-hover-accent-heart',
+        info: 'filled-hover-accent-info',
+        success: 'filled-hover-accent-success',
+        danger: 'filled-hover-accent-danger',
+        caution: 'filled-hover-accent-caution',
       },
     }),
     ...generateCompoundVariants({
@@ -229,7 +246,7 @@ export const buttonVariants = {
 };
 
 export const ButtonElement = classed.button(
-  'cursor-pointer inline-flex font-medium items-center justify-center select-none align-middle',
+  'inline-flex font-medium items-center justify-center select-none align-middle',
   'disabled:text-content-tint disabled:cursor-default disabled:pointer-events-none relative',
   'transition-colors duration-100',
   'box-border',

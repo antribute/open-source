@@ -4,8 +4,13 @@ import { useImmer } from 'use-immer';
 import { enableMapSet, castDraft } from 'immer';
 import { sortBy } from 'lodash-es';
 import { OverflowData, getOverflowData } from 'utils/viewport/getOverflowData';
-import { InViewOptions } from 'utils/viewport/inViewport';
 import { inView } from 'framer-motion';
+
+export interface InViewOptions {
+  root?: Element | Document;
+  margin?: string;
+  amount?: 'any' | 'all' | number;
+}
 
 enableMapSet();
 

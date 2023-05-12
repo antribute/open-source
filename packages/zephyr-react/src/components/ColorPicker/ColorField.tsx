@@ -2,7 +2,7 @@ import { useColorField, AriaColorFieldProps } from '@react-aria/color';
 import { useColorFieldState } from '@react-stately/color';
 import { useRef } from 'react';
 
-interface ColorFieldProps extends AriaColorFieldProps {}
+type ColorFieldProps = AriaColorFieldProps;
 
 export function BaseColorFieldInput(props: ColorFieldProps) {
   const state = useColorFieldState(props);

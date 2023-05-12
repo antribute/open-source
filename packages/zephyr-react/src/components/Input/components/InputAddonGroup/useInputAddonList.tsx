@@ -1,10 +1,9 @@
-import { Children, ReactElement } from 'react';
-import { InputAddon } from './InputAddon';
+import { Children, ReactElement, cloneElement } from 'react';
 import { notEmpty, objectMap } from 'utils';
 import { mapValues } from 'lodash-es';
-import { cloneElement } from 'react';
 import getDisplayName from 'utils/getDisplayName';
 import clsx from 'clsx';
+import { InputAddon } from './InputAddon';
 import type { ResolvedInputComponentStateProps } from '../../Input.types';
 import type { InputAddonProps } from './InputAddon';
 import type { InputAddonGroupProps } from './InputAddonGroup';
@@ -102,7 +101,7 @@ function findInputIcons({
       trailingInlineAddons: [],
       trailingOutsideAddons: [],
       leadingOutsideAddons: [],
-    } as ReducedAddonsData
+    }
   );
 
   const { leadingIconAddonProps, trailingIconAddonProps } = mapValues(

@@ -7,5 +7,5 @@ export function getElement<TElement extends HTMLElement | Element>(
     return elementOrRef;
   }
 
-  return elementOrRef?.current;
+  return elementOrRef.current;
 }

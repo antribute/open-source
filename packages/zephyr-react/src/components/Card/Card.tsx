@@ -41,7 +41,7 @@ export type CardTitleProps = { divider?: boolean } & React.ComponentProps<
   typeof CardTitleSectionElement
 >;
 
-const CardTitleSection = ({ children, divider = true, ...props }: CardTitleProps) => {
+const CardTitleSection = ({ children, ...props }: CardTitleProps) => {
   return <CardTitleSectionElement {...props}>{children}</CardTitleSectionElement>;
 };
 

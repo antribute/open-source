@@ -112,7 +112,10 @@ const Description = (props: TxtProps) => <PresetTextComponent preset="descriptio
 const Caption = (props: TxtProps) => <PresetTextComponent preset="caption" {...props} />;
 
 // Character Components
-type CharComponentProps = { count?: number; className?: string };
+interface CharComponentProps {
+  count?: number;
+  className?: string;
+}
 
 const Br = (props: CharComponentProps) => (
   <DuplicateChildren {...props}>

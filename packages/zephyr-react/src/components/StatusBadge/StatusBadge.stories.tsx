@@ -40,7 +40,7 @@ export const Discard: Story = {
     return (
       <div className="space-x-8">
         <StatusBadge
-          color="neutral"
+          color="surface"
           onClick={() => {
             setStatuses(initialStatuses);
           }}

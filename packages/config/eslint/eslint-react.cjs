@@ -59,8 +59,7 @@ module.exports = {
   settings: {
     tailwindcss: {
       callees: ['clsx', 'twsx'],
-      // config: './node_modules/@antribute/zephyr-core/tailwind.config.cjs',
-      config: './tailwind.config.cjs',
+      config: './node_modules/@antribute/zephyr-core/tailwind.config.cjs',
       removeDuplicates: true,
     },
   },

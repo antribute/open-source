@@ -1,6 +1,5 @@
-import clsx from 'clsx';
+import { buttonVariants } from 'components/Button/Button.styles';
 import { colorSchemeVariants } from 'styles/color-scheme-variants';
-import { filledAccents } from 'styles/colors.variants';
 import { inputComponentVariants } from 'styles/input-component.variants';
 import { Classed, classTheme, classed, mergeVariants } from 'utils/classed';
 
@@ -22,12 +21,14 @@ export const StatusBadgeElement = classed(
   {
     defaultVariants: {
       size: 'md',
-      variant: 'contained',
+      variant: 'filled',
       clickable: false,
       rounded: 'full',
     },
 
     variants: {
+      ...buttonVariants.variants,
+      // color: buttonVariants.variants.color,
       size: mergeVariants([
         inputComponentVariants.size.paddingX,
         inputComponentVariants.size.inlineHeight,
@@ -35,16 +36,12 @@ export const StatusBadgeElement = classed(
         inputComponentVariants.size.textSize,
       ]),
 
-      color: mergeVariants([filledAccents]),
-
-      variant: {
-        text: clsx('p-0 border-none bg-transparent'),
-        outlined: clsx(
-          'text-content-min-contrast ring-1 ring-primary focus:ring-primary focus:ring-1'
-        ),
-        contained: clsx('bg-primary text-content-intense '),
-        dropdown: 'cursor-pointer',
-      },
+      // variant: {
+      //   text: clsx('p-0 border-none bg-transparent'),
+      //   outlined: clsx('text-content ring-1 ring-primary focus:ring-primary focus:ring-1'),
+      //   contained: clsx('bg-primary text-palette-white'),
+      //   dropdown: 'cursor-pointer',
+      // },
 
       clickable: {
         true: 'cursor-pointer',
@@ -57,6 +54,7 @@ export const StatusBadgeElement = classed(
         full: 'rounded-full',
       },
     },
+    compoundVariants: [...buttonVariants.compoundVariants],
   }
 );
 

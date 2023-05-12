@@ -290,6 +290,7 @@ function generateTailwindShades(options: { baseColor: string; name: string }): G
     (name) => flattenedTwColors[name]
   )(baseColor, 1)[0];
 
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (!nearestDefaultColorPath) {
     return { name, baseColor: options.baseColor, baseShade: '', shades: colorScale };
   }

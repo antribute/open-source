@@ -3,10 +3,10 @@ import { findKey } from 'lodash-es';
 
 export type WrapProps<TCondition> = SingleConditionWrapProps | MultiConditionWrap<TCondition>;
 
-type BaseWrapProps = {
+interface BaseWrapProps {
   children: React.ReactNode;
   fallback?: ConditionWrapRenderFn;
-};
+}
 
 interface SingleConditionWrapProps extends BaseWrapProps {
   if: unknown;
@@ -51,7 +51,7 @@ export function Wrap<const TCondition>({
     if (typeof wrapper === 'function') return wrapper;
 
     if (typeof wrapper === 'object' && typeof condition === 'string' && condition in wrapper) {
-      return wrapper[condition as unknown as keyof typeof wrapper] as ConditionWrapRenderFn;
+      return wrapper[condition as unknown as keyof typeof wrapper]!;
     }
 
     return fallbackWrapperFn;

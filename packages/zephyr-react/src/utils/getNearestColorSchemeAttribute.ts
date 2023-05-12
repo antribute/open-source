@@ -9,7 +9,7 @@ export function getNearestColorSchemeAttribute(
 
   const nearestScheme = element
     .closest('[data-color-scheme]')
-    ?.getAttribute('data-color-scheme') as ColorSchemeName;
+    ?.getAttribute('data-color-scheme') as ColorSchemeName | undefined;
 
   return nearestScheme ?? fallback;
 }

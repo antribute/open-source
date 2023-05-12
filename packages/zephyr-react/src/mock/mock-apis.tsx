@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useEffect } from 'react';
+/* eslint-disable no-console */
+import { useState, useEffect } from 'react';
 
 export interface MockCharacter {
   name: string;

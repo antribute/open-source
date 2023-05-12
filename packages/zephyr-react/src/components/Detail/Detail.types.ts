@@ -92,11 +92,11 @@ export type SlotItemTextProps = Pick<
   | 'bold'
 >;
 
-export type GridData = {
+export interface GridData {
   gridTemplateColumn: string;
   column: { justify?: FlexProps['justify'] };
   className?: string;
-};
+}
 
 export type SlotData = SlotItemProps & {
   placeholder?: string;
@@ -107,13 +107,13 @@ export type SlotData = SlotItemProps & {
   columnRef: React.RefObject<HTMLDivElement>;
 };
 
-export type SlotColumn = {
+export interface SlotColumn {
   gridData: GridData;
   column: SlotColumnId;
   slotRecord: Partial<SlotDataRecord>;
   active: boolean;
   columnRef: React.RefObject<HTMLDivElement>;
-};
+}
 
 type SlotRecord<K extends string, V = SlotItemProps> = Partial<
   Record<K, React.ReactNode | null | V>

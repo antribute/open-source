@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import { DARK_MODE, LIGHT_MODE, DEFAULT_THEME } from 'constants/theme';
-import { useLayoutEffect } from 'react';
-import { useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { isClientSide } from 'utils/environment-utils';
 
 const getInitialIsDarkMode = (fallback?: boolean) => {
@@ -49,7 +48,7 @@ export const useDarkMode = () => {
     if (initialIsDarkMode !== isDarkMode) {
       setDarkMode(initialIsDarkMode);
     }
-  }, [initialIsDarkMode]);
+  }, [initialIsDarkMode, isDarkMode]);
 
   return { isDarkMode, setDarkMode, toggleDarkMode };
 };

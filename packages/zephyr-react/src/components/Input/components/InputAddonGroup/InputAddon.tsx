@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import React from 'react';
 import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -102,7 +103,7 @@ export const InputAddon = deriveClassed<typeof InputAddonElement, InputAddonProp
 
     return (
       <>
-        {enabled === false ? null : (
+        {!enabled ? null : (
           <Wrap
             if={tooltipEnabled}
             wrap={(c) => {

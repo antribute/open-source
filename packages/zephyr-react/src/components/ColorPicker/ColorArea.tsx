@@ -1,10 +1,8 @@
-import { useColorArea } from '@react-aria/color';
+import { useColorArea, AriaColorAreaOptions } from '@react-aria/color';
 import { useColorAreaState } from '@react-stately/color';
 import { useFocusRing } from '@react-aria/focus';
-import React from 'react';
-import { AriaColorAreaOptions } from '@react-aria/color';
+import React, { CSSProperties } from 'react';
 import { classed } from 'utils/classed';
-import { CSSProperties } from 'react';
 
 interface ColorAreaProps
   extends Omit<AriaColorAreaOptions, 'inputXRef' | 'inputYRef' | 'containerRef'> {
@@ -61,20 +59,20 @@ export function ColorArea({
   style,
   ...props
 }: ColorAreaProps) {
-  let { isDisabled } = props;
+  const { isDisabled } = props;
 
-  let inputXRef = React.useRef(null);
-  let inputYRef = React.useRef(null);
-  let containerRef = React.useRef(null);
+  const inputXRef = React.useRef(null);
+  const inputYRef = React.useRef(null);
+  const containerRef = React.useRef(null);
 
-  let state = useColorAreaState(props);
+  const state = useColorAreaState(props);
 
-  let { colorAreaProps, gradientProps, xInputProps, yInputProps, thumbProps } = useColorArea(
+  const { colorAreaProps, gradientProps, xInputProps, yInputProps, thumbProps } = useColorArea(
     { ...props, inputXRef, inputYRef, containerRef },
     state
   );
 
-  let { focusProps, isFocusVisible } = useFocusRing();
+  const { focusProps, isFocusVisible } = useFocusRing();
 
   return (
     <ColorAreaContainerElement
