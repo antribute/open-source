@@ -8,7 +8,7 @@
     "clean": "rimraf .next && rimraf .turbo &&  rimraf coverage && rimraf node_modules && rimraf text-results && rimraf .eslintcache",
     "cypress:open": "cypress open",
     "dev": "next dev",
-    "lint": "next lint",
+    "lint": "eslint ./src",
     "reset": "rimraf node_modules",
     "start": "next start",
     "test": "vitest"
