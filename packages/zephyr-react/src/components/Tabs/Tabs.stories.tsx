@@ -90,7 +90,7 @@ export const DisabledTab: Story = {
 export const Vertical: Story = {
   args: {},
   render: () => (
-    <RenderPaperContainers className="w-208 flex flex-row gap-8">
+    <RenderPaperContainers containerClassName="grid grid-cols-3">
       <Tabs.Root orientation="vertical" defaultValue={tabs2[0]?.value}>
         <Tabs.List>
           {tabs2.map((e) => (
@@ -113,11 +113,11 @@ export const Vertical: Story = {
 
 const vehicles = generateMockVehicleList({ size: 20, uniqueBy: 'type' });
 
-export const Overview: Story = {
+export const Overflow: Story = {
   args: {},
   render: () => (
-    <Paper border>
-      <Tabs.Root defaultValue={tabs6[0]?.value}>
+    <Paper border className="max-w-screen-sm">
+      <Tabs.Root>
         <Tabs.List>
           {vehicles.map(({ type }) => (
             <Tabs.Tab key={type} value={type}>

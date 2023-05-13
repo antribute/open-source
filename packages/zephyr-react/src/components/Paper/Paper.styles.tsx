@@ -7,7 +7,7 @@ export type PaperElementVariantProps = Classed.VariantProps<typeof PaperElement>
 
 export type PaperElementProps = React.ComponentProps<typeof PaperElement>;
 
-export const PaperElementBackground = classed('div', 'border-boundary-ghost', {
+export const PaperElementBackground = classed('div', 'border-highlight-subtle', {
   variants: {
     border: {
       true: 'border-2',
@@ -28,11 +28,12 @@ export const PaperElement = classed(
   PaperElementBackground,
   'relative',
   'bg-surface',
-  'text-left text-content',
+  'text-left text-content p-16 rounded',
   {
     variants: {
       padding: {
-        true: 'p-16',
+        true: '',
+        false: 'p-0',
       },
       overflow: {
         visible: 'overflow-visible',
@@ -42,7 +43,8 @@ export const PaperElement = classed(
         true: 'bg-transparent',
       },
       rounded: {
-        true: 'rounded-md',
+        true: '',
+        false: 'rounded-none',
       },
       cursorPointer: {
         true: 'cursor-pointer',
@@ -53,12 +55,18 @@ export const PaperElement = classed(
       loading: {
         true: clsx(''),
       },
+      fullHeight: {
+        true: 'h-full',
+      },
+      fullWidth: {
+        true: 'w-full',
+      },
     },
 
     defaultVariants: {
       overflow: 'hidden',
       rounded: true,
-      padding: 'true',
+      padding: true,
     },
   }
 );

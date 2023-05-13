@@ -1,8 +1,8 @@
 import { useDescription, useTsController } from '@ts-react/form';
-import { Checkbox, CheckboxProps } from 'components/Checkbox/Checkbox';
+import { CheckboxFieldProps, Input } from 'components/Input';
 
 type ControlledCheckboxProps = Omit<
-  CheckboxProps,
+  CheckboxFieldProps,
   'value' | 'name' | 'onChange' | 'onBlur' | 'ref'
 >;
 
@@ -12,16 +12,16 @@ export const ControlledCheckbox = (props: ControlledCheckboxProps) => {
   const { label } = useDescription();
   const { onChange, value, name, onBlur, ref } = field;
   return (
-    <Checkbox
+    <Input.CheckboxField
       name={name}
-      checked={value} // conditional to prevent "uncontrolled to controlled" react warning
+      isSelected={value} // conditional to prevent "uncontrolled to controlled" react warning
       onBlur={onBlur}
-      onCheckedChange={(e) => {
-        onChange(Boolean(e));
+      onChange={(e) => {
+        onChange(e);
       }}
       ref={ref}
       error={Boolean(error)}
-      message={error?.errorMessage}
+      errorMessage={error?.errorMessage}
       size="md"
       {...props}
       label={label}

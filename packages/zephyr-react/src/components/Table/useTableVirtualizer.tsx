@@ -1,5 +1,8 @@
-import { useVirtualizer, VirtualizerOptions } from '@tanstack/react-virtual';
-import { useRef } from 'react';
+import { useVirtualizer, VirtualizerOptions, Virtualizer } from '@tanstack/react-virtual';
+import { useRef, useEffect, useMemo } from 'react';
+import useMousePosition from '@react-hook/mouse-position';
+import { isEqual } from 'lodash-es';
+import { MousePosition } from 'hooks/useMousePosition';
 import { Rows } from './Table.types';
 
 export type TableVirtualizerProps = Pick<
@@ -12,44 +15,120 @@ export interface UseTableVirtualizerProps {
   virtualizerProps?: TableVirtualizerProps;
 }
 
+function useScrollingData<T extends HTMLElement>({
+  isScrolling,
+  scrollOffset,
+}: Virtualizer<T, Element>) {
+  const prevMousePositionSinceScrollStart = useRef<MousePosition>();
+  const prevMousePositionSinceScrollEnd = useRef<MousePosition>();
+
+  const mouseData = useMousePosition(document.body, { fps: 20 });
+
+  const mousePosition = useMemo(() => {
+    return { x: mouseData.x, y: mouseData.y };
+  }, [mouseData.x, mouseData.y]);
+
+  const mousePositionAtScrollStart = useRef<MousePosition | undefined>();
+
+  const mousePositionAtScrollEnd = useRef<MousePosition | undefined>();
+
+  useEffect(() => {
+    if (isScrolling && !mousePositionAtScrollStart.current) {
+      mousePositionAtScrollStart.current = mousePosition;
+    }
+    if (!isScrolling && mousePositionAtScrollStart.current) {
+      mousePositionAtScrollStart.current = undefined;
+    }
+
+    if (isScrolling) {
+      prevMousePositionSinceScrollStart.current = mousePosition;
+    } else {
+      prevMousePositionSinceScrollStart.current = undefined;
+    }
+
+    if (!isScrolling && !mousePositionAtScrollEnd.current) {
+      mousePositionAtScrollEnd.current = mousePosition;
+    }
+
+    if (isScrolling && mousePositionAtScrollEnd.current) {
+      mousePositionAtScrollEnd.current = undefined;
+    }
+
+    if (!isScrolling) {
+      prevMousePositionSinceScrollEnd.current = mousePosition;
+    } else {
+      prevMousePositionSinceScrollEnd.current = undefined;
+    }
+  }, [isScrolling, mousePosition, scrollOffset]);
+
+  const mouseMovedSinceScrollStart = !isEqual(
+    mousePositionAtScrollStart.current,
+    prevMousePositionSinceScrollStart.current
+  );
+
+  const mouseMovedSinceScrollEnd = !isEqual(
+    mousePositionAtScrollEnd.current,
+    prevMousePositionSinceScrollEnd.current
+  );
+
+  const scrollOffsetSinceMouseMoveDuringScroll = useRef<number | undefined>();
+
+  useEffect(() => {
+    if (isScrolling && mouseMovedSinceScrollStart) {
+      scrollOffsetSinceMouseMoveDuringScroll.current = scrollOffset;
+    } else {
+      scrollOffsetSinceMouseMoveDuringScroll.current = undefined;
+    }
+  }, [isScrolling, mouseMovedSinceScrollStart, scrollOffset]);
+
+  const hasScrollOffsetSinceMouseMoveDuringScroll =
+    Boolean(scrollOffsetSinceMouseMoveDuringScroll.current) &&
+    scrollOffset !== scrollOffsetSinceMouseMoveDuringScroll.current;
+
+  return {
+    isScrolling,
+    hasScrollOffsetSinceMouseMoveDuringScroll,
+    mouseMovedSinceScrollStart,
+    mouseMovedSinceScrollEnd,
+  };
+}
+
 export function useTableVirtualizer({ rows }: UseTableVirtualizerProps) {
   const tableContainerRef = useRef<HTMLDivElement>(null);
 
-  const rowVirtualizer = useVirtualizer({
+  const virtualizer = useVirtualizer({
     count: rows.length,
     getScrollElement: () => tableContainerRef.current,
     overscan: 10,
-    // Note: Without this, an infinite re-render at cetain parts occurs while at certain
-    scrollPaddingEnd: 2,
-    estimateSize: () => 64,
+    estimateSize: () => 50,
   });
 
-  const { getVirtualItems, getTotalSize } = rowVirtualizer;
+  const scrollData = useScrollingData(virtualizer);
 
+  return {
+    virtualizer,
+    tableContainerRef,
+    getTablePadding,
+    ...scrollData,
+  };
+}
+
+function getTablePadding<T extends HTMLElement>(virtualizer: Virtualizer<T, Element>) {
+  const { getVirtualItems, getTotalSize } = virtualizer;
   const virtualRows = getVirtualItems();
-
   const totalSize = getTotalSize();
 
-  function getTablePadding() {
-    if (virtualRows.length > 0) {
-      const firstVirtualRow = virtualRows[0];
-      const lastVirtualRow = virtualRows[virtualRows.length - 1];
-      return {
-        paddingTop: firstVirtualRow?.start ?? 0,
-        paddingBottom: totalSize - (lastVirtualRow?.end ?? 0),
-      };
-    }
-
+  if (virtualRows.length > 0) {
+    const firstVirtualRow = virtualRows[0];
+    const lastVirtualRow = virtualRows[virtualRows.length - 1];
     return {
-      paddingTop: 0,
-      paddingBottom: 0,
+      paddingTop: firstVirtualRow?.start ?? 0,
+      paddingBottom: totalSize - (lastVirtualRow?.end ?? 0),
     };
   }
 
   return {
-    tableContainerRef,
-    virtualRows,
-    rowVirtualizer,
-    tablePadding: getTablePadding(),
+    paddingTop: 0,
+    paddingBottom: 0,
   };
 }

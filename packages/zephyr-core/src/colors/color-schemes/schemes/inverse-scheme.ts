@@ -7,13 +7,37 @@ import surfaceDark_darkmode from './surface-dark.darkmode';
 import { defineColorScheme } from '../color-schemes.helpers';
 
 const inverseColorSchemes = [
-  defineColorScheme({ ...surface_darkmode, name: 'inverse' }),
-  defineColorScheme({ ...surfaceLight_darkmode, name: 'inverse-light' }),
-  defineColorScheme({ ...surfaceDark_darkmode, name: 'inverse-dark' }),
+  defineColorScheme({
+    name: 'inverse',
+    colorMode: 'dark',
+    extend: surface_darkmode,
+  }),
+  defineColorScheme({
+    name: 'inverse-light',
+    colorMode: 'dark',
+    extend: surfaceLight_darkmode,
+  }),
+  defineColorScheme({
+    name: 'inverse-dark',
+    colorMode: 'dark',
+    extend: surfaceDark_darkmode,
+  }),
 
-  defineColorScheme({ ...surface, name: 'dark/inverse' }),
-  defineColorScheme({ ...surfaceLight, name: 'dark/inverse-light' }),
-  defineColorScheme({ ...surfaceDark, name: 'dark/inverse-dark' }),
+  defineColorScheme({
+    name: 'dark/inverse',
+    colorMode: 'light',
+    extend: surface,
+  }),
+  defineColorScheme({
+    name: 'dark/inverse-light',
+    colorMode: 'light',
+    extend: surfaceLight,
+  }),
+  defineColorScheme({
+    name: 'dark/inverse-dark',
+    colorMode: 'light',
+    extend: surfaceDark,
+  }),
 ];
 
 export default inverseColorSchemes;

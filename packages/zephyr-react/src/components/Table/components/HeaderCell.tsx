@@ -3,32 +3,34 @@ import { Header } from '../Table.types';
 import { renderHeader } from '../helpers';
 import { BaseCellElement } from './BaseCellElement';
 
-interface HeaderCellProps {
+interface HeaderCellProps extends React.ComponentProps<typeof HeaderElement> {
   header: Header;
 }
 
 const HeaderElement = classed(
   'th',
   BaseCellElement,
-  'text-left py-8',
+  'text-left py-8 pb-14',
   'first:rounded-tl-lg last:rounded-tr-lg',
-  'text-content-inverse-weak font-medium',
+  'text-sm font-medium  font-body text-content-weak  tracking-wide',
+  'relative',
+
   {
-    variants: {
-      headerBackground: {
-        true: 'dark:bg-surface-inverse-light',
-      },
-    },
+    variants: {},
     defaultVariants: {
       headerBackground: true,
     },
   }
 );
 
-export const HeaderCell = ({ header }: HeaderCellProps) => {
+export const HeaderCell = ({ header, style, ...props }: HeaderCellProps) => {
   return (
-    <HeaderElement colSpan={header.colSpan} style={{ width: header.getSize() }}>
-      {renderHeader(header)}
+    <HeaderElement
+      colSpan={header.colSpan}
+      {...props}
+      style={{ width: header.getSize(), ...style }}
+    >
+      {header.isPlaceholder ? null : renderHeader(header)}
     </HeaderElement>
   );
 };

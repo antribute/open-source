@@ -1,26 +1,32 @@
-import { ScrollArea } from 'components/ScrollArea/ScrollArea';
 import { Classed, classed, expandVariant } from 'utils/classed';
 import { Paper } from 'components/Paper';
+import { ScrollViewport } from 'components/ScrollViewport';
 
 // Container
 
 export type CardContainerElementProps = React.ComponentProps<typeof CardContainerElement>;
 
-export const CardContainerElement = classed(Paper, 'flex flex-col shrink-0', 'rounded-md group');
+export const CardContainerElement = classed(
+  Paper,
+  ScrollViewport.Container,
+  'rounded-md group max-h-400 h-full'
+);
 
 // Title Section
 
 export type CardTitleSectionElementProps = React.ComponentProps<typeof CardTitleSectionElement>;
 
 export const CardTitleSectionElement = classed(
-  'div',
+  ScrollViewport.HeaderSection,
   'pb-8',
   'relative w-full',
   'text-content-high',
   'flex justify-between items-center',
   'border-b border-boundary-tint/5',
-  'mb-8',
-  expandVariant('group-data-antribute-card-padding-none:(px-10,border-highlight-weak,pt-8)'),
+  expandVariant(`
+  group-data-antribute-card-padding-none:(px-10,border-highlight-weak,pt-8)
+  
+  `),
   {
     variants: {},
   }
@@ -33,17 +39,14 @@ export const CardBodySectionElement = classed(
   'w-full pt-8 mb-8',
   'font-body',
   'text-content-moderate',
-  'flex flex-col gap-16',
-  'min-h-0 grow overflow-y-auto',
-  expandVariant('group-data-antribute-card-padding-none:(px-10,mb-0)'),
+  'flex flex-col gap-16 px-',
+  expandVariant(`
+
+  group-data-antribute-card-padding-none:(px-10,mb-0)`),
   {
     variants: {},
   }
 );
-
-// Scroll Body Section
-
-export const CardScrollBodySectionElement = classed(ScrollArea, CardBodySectionElement);
 
 // Footer Section
 
@@ -52,10 +55,12 @@ export type CardFooterElementVariants = Classed.VariantProps<typeof CardFooterSe
 export type CardFooterElementProps = React.ComponentProps<typeof CardFooterSectionElement>;
 
 export const CardFooterSectionElement = classed(
-  'p',
+  ScrollViewport.FooterSection,
   'flex flex-wrap shrink-0 mt-auto',
-  'justify-end items-center gap-8 gap-y-6 pt-8 px-4 border-t border-highlight ',
-  expandVariant('group-data-antribute-card-padding-none:(px-10,pb-8)'),
+  'justify-end items-center gap-8 gap-y-6 pt-8 px-4 border-t border-highlight',
+  expandVariant(`
+  group-data-antribute-card-padding:(px-16)
+  group-data-antribute-card-padding-none:(px-10,pb-8)`),
   {
     variants: {},
   }

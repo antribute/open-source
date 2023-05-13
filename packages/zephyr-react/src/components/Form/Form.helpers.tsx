@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createUniqueFieldSchema, RTFSupportedZodTypes } from '@ts-react/form';
 
 export function createFormField<
@@ -13,7 +14,7 @@ export function createFormField<
 
 export function createUniqueFormField<
   TSchema extends RTFSupportedZodTypes,
-  TComponent extends React.ComponentType,
+  TComponent extends React.ComponentType<any>,
   TUniqueId extends string
 >(options: { schema: TSchema; component: TComponent; uniqueId: TUniqueId }) {
   const { schema, component, uniqueId } = options;

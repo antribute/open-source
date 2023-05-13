@@ -1,12 +1,21 @@
+import type { SearchableObject, Path, PathValue } from '@clickbar/dot-diver';
 import { notEmpty } from './generateHexAlphaColorGroup';
 
-export function objectMap<K extends string, V, NK = K, NV = V>(
-  obj: Record<K, V>,
-  fn: (key: K, value: V) => [NK, NV] | undefined
-): Record<K, V> {
+type ObjectKey<T extends SearchableObject> = Path<T, 1>;
+
+export function objectMap<
+  const TNewKey,
+  const TNewValue,
+  const T extends SearchableObject = SearchableObject,
+  K extends ObjectKey<T> = ObjectKey<T>,
+  V extends PathValue<T, K> = PathValue<T, K>
+>(
+  obj: T,
+  fn: (options: { key: K; value: V }) => [TNewKey, TNewValue] | undefined
+): Record<Extract<TNewKey, string>, TNewValue> {
   return Object.fromEntries(
     Object.entries(obj)
-      .map(([k, v]) => fn(k as K, v as V))
+      .map(([k, v]) => fn({ key: k as K, value: v as V }))
       .filter(notEmpty)
   );
 }

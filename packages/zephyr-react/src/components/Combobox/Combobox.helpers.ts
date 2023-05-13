@@ -1,6 +1,6 @@
 import { notEmpty } from 'utils/notEmpty';
 import { toArray } from 'utils/toArray';
-import type { ComboboxOptionGetters, SelectOption, SelectOptionMap } from './Combobox';
+import type { ComboboxOptionGetters, SelectOption, SelectOptionMap } from './Combobox.types';
 
 interface GetOptionMapOptions extends ComboboxOptionGetters<unknown[]> {
   data?: unknown | unknown[];

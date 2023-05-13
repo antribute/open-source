@@ -13,6 +13,7 @@ import defaultDarkScheme from './default.darkmode';
 import inverseColorSchemes from './inverse-scheme';
 
 import { ResolvedColorSchemeConfig } from '../color-scheme-config.types';
+import stateColorSchemes from './state-schemes';
 
 export const colorSchemeConfigs = [
   defaultScheme,
@@ -28,4 +29,5 @@ export const colorSchemeConfigs = [
   surfaceLight_darkmode,
   surfaceDark_darkmode,
   ...inverseColorSchemes,
+  ...stateColorSchemes,
 ] satisfies ResolvedColorSchemeConfig[];

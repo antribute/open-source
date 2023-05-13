@@ -1,8 +1,12 @@
 import type { O } from 'ts-toolbelt';
 import { ColorSchemeToken } from './color-scheme-tokens.types';
 import { commonScheme } from './schemes/common-scheme';
+import { PaletteColor } from '../colors';
+import { OptionalExceptFor } from '../../helpers/type-utilities';
 
-export type ColorScheme = Record<ColorSchemeToken, string>;
+export type ColorScheme = Record<ColorSchemeToken, PaletteColor>;
+
+export type ResolvedColorScheme = { [K in keyof ColorScheme]: string };
 
 export type ColorSchemeName =
   | 'default'
@@ -15,25 +19,44 @@ export type ColorSchemeName =
   | 'inverse'
   | 'inverse-light'
   | 'inverse-dark'
-  | 'danger';
+  | 'success'
+  | 'danger'
+  | 'info'
+  | 'caution'
+  | 'heart';
 
-export interface ColorSchemeConfig<
-  TName extends keyof GenericColorSchemeConfig = keyof GenericColorSchemeConfig
+export interface BaseColorSchemeConfig<
+  TName extends ColorSchemeConfigName = ColorSchemeConfigName
 > {
   name: TName;
   colorMode: 'light' | 'dark';
-  scheme: O.Optional<
-    ColorScheme,
-    | keyof (typeof commonScheme)['all']
-    | keyof (typeof commonScheme)['darkMode']
-    | keyof (typeof commonScheme)['lightMode']
-  >;
+  scheme: O.Optional<ColorScheme, DefaultColorSchemeProperties>;
 }
 
+export interface ExtendedColorSchemeConfig<
+  TName extends ColorSchemeConfigName = ColorSchemeConfigName
+> extends OptionalExceptFor<BaseColorSchemeConfig<TName>, 'name'> {
+  extend: ResolvedColorSchemeConfig;
+}
+
+export type ColorSchemeConfig<TName extends ColorSchemeConfigName = ColorSchemeConfigName> =
+  | BaseColorSchemeConfig<TName>
+  | ExtendedColorSchemeConfig<TName>;
+
 export type ResolvedColorSchemeConfig = Omit<ColorSchemeConfig, 'scheme'> & {
-  scheme: ColorScheme;
+  scheme: ResolvedColorScheme;
+  unresolvedScheme: ColorScheme;
 };
 
-export type GenericColorSchemeConfig = Partial<Record<`dark/${ColorSchemeName}`, ColorScheme>> & {
-  [K in ColorSchemeName | 'dark/default']: ColorScheme;
+type ColorSchemeConfigName = keyof GenericColorSchemeConfig;
+
+export type GenericColorSchemeConfig = Partial<
+  Record<`dark/${ColorSchemeName}`, ResolvedColorScheme>
+> & {
+  [K in ColorSchemeName | 'dark/default']: ResolvedColorScheme;
 };
+
+type DefaultColorSchemeProperties =
+  | keyof (typeof commonScheme)['all']
+  | keyof (typeof commonScheme)['darkMode']
+  | keyof (typeof commonScheme)['lightMode'];

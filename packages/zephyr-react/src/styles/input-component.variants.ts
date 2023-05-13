@@ -22,6 +22,23 @@ export const InputComponentOrientationVariant = classed('div', {
   },
 });
 
+const inputComponentWidths = {
+  xs: clsx('w-168'),
+  sm: clsx('w-184'),
+  md: clsx('w-216'),
+  lg: clsx('w-400'),
+};
+
+const inputComponentMinWidths = {
+  none: '',
+  xs: clsx('min-w-[168px]'),
+  sm: clsx('min-w-[184px]'),
+  md: clsx('min-w-[216px]'),
+  lg: clsx('min-w-[400px]'),
+};
+
+export type InputWidth = 'autoWidth' | 'fullWidth' | 'fixedWidth';
+
 export const InputComponentWidthVariant = classed('div', {
   variants: {
     size: {
@@ -30,21 +47,23 @@ export const InputComponentWidthVariant = classed('div', {
       md: '',
       lg: '',
     },
+    minWidth: inputComponentMinWidths,
+
     width: {
-      auto: 'w-auto',
-      full: 'w-full',
-      fixed: '',
-    },
+      autoWidth: 'w-auto',
+      fullWidth: '!w-full',
+      fixedWidth: '',
+    } satisfies Record<InputWidth, string>,
   },
   defaultVariants: {
-    width: 'fixed',
+    width: 'fixedWidth',
     size: 'md',
   },
   compoundVariants: [
-    { size: 'xs', width: 'fixed', class: clsx('w-168') },
-    { size: 'sm', width: 'fixed', class: clsx('w-184') },
-    { size: 'md', width: 'fixed', class: clsx('w-216') },
-    { size: 'lg', width: 'fixed', class: clsx('w-256') },
+    { size: 'xs', width: 'fixedWidth', class: inputComponentWidths.xs },
+    { size: 'sm', width: 'fixedWidth', class: inputComponentWidths.sm },
+    { size: 'md', width: 'fixedWidth', class: inputComponentWidths.md },
+    { size: 'lg', width: 'fixedWidth', class: inputComponentWidths.lg },
   ],
 });
 

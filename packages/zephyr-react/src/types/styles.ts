@@ -1,4 +1,19 @@
-export type SizeProp = 'xs' | 'sm' | 'md' | 'lg';
+export type SizeProp<TSizeProperties extends keyof ISizeProperties = 'base'> =
+  ISizeProperties[TSizeProperties];
+
+type BaseSizeProp = 'xs' | 'sm' | 'md' | 'lg';
+
+interface ISizeProperties {
+  base: BaseSizeProp;
+  inline: PrefixedSizeProp<'inline'>;
+}
+
+export type PrefixedSizeProp<
+  TPrefix extends string,
+  TBaseSizeProp extends BaseSizeProp = BaseSizeProp
+> = `${TPrefix}${Capitalize<TBaseSizeProp>}`;
+
+export type InlineSizeProp = PrefixedSizeProp<'inline'>;
 
 export type HeadingLevel = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 

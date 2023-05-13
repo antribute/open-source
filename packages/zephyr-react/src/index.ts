@@ -1,9 +1,8 @@
 /* eslint-disable import/export */
 
 export * from './components/AntributeUiProvider';
-export * from './components/BaseInput';
 export * from './components/Button';
-export * from './components/Checkbox';
+export * from './components/BasicCheckbox';
 export * from './components/Card';
 export * from './components/Avatar';
 export * from './components/AvatarGroup';
@@ -16,7 +15,6 @@ export * from './components/List';
 export * from './components/NavigationMenu';
 export * from './components/Paper';
 export * from './components/Popover';
-export * from './components/ScrollArea';
 export * from './components/SimpleList';
 export * from './components/StatusBadge';
 export * from './components/Spinner';

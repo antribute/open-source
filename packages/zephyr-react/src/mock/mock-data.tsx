@@ -1,6 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { chunk, uniqBy } from 'lodash-es';
 import { useEffect, useState } from 'react';
+import { paramCase } from 'change-case';
 
 const fakerSeed = (seed?: number) => {
   if (seed !== undefined) {
@@ -18,6 +19,7 @@ export interface UserMockData {
   lastName: string;
   sexType: 'male' | 'female';
   avatarUrl: string;
+  aboutMe: string;
 }
 
 type MockDataGeneratorFn<T> = (options: { id: number; seed?: number }) => T;
@@ -34,6 +36,7 @@ export const generateMockUser: MockDataGeneratorFn<UserMockData> = ({ id, seed }
     id,
     name,
     firstName,
+    aboutMe: faker.lorem.lines(2),
     username,
     lastName,
     email: faker.internet.email().toLowerCase(),
@@ -49,6 +52,59 @@ export const generateMockUser: MockDataGeneratorFn<UserMockData> = ({ id, seed }
 export const generateMockUserList = makeListFactory(generateMockUser);
 
 export const generateMockUserListHook = generateMockDataHook(generateMockUserList);
+
+export type MockDataEnvironemnt = (typeof mockDataEnvironments)[number];
+
+export const mockDataEnvironments = ['staging', 'preview', 'production', 'sandbox'] as const;
+
+export type MockDataDeploymentStatus = (typeof mockDataDeploymentStatuses)[number];
+
+export const mockDataDeploymentStatuses = ['offline', 'online', 'error'] as const;
+
+export interface DeploymentMockData {
+  id: number;
+  href: string;
+  projectName: string;
+  teamName: string;
+  status: MockDataDeploymentStatus;
+  statusText: string;
+  description: string;
+  environment: MockDataEnvironemnt;
+  deploymentTime: string;
+}
+
+export const generateMockDeployment: MockDataGeneratorFn<DeploymentMockData> = ({ id, seed }) => {
+  fakerSeed(seed);
+
+  const href = '#';
+  const teamName = faker.company.name();
+  const projectName = faker.helpers.arrayElement([
+    `${paramCase(teamName)}.com`,
+    paramCase(teamName),
+  ]);
+  const statusText = faker.lorem.sentence();
+  const description = 'Deploys from Github';
+  const status = faker.helpers.arrayElement([...mockDataDeploymentStatuses, 'online'] as const);
+  const environment = faker.helpers.arrayElement(mockDataEnvironments);
+
+  const deploymentTime = faker.helpers.arrayElement(['1d ago', '3m ago', '1m 32s ago', '6d ago']);
+
+  return {
+    id,
+    href,
+    projectName,
+    teamName,
+    status,
+    statusText,
+    description,
+    environment,
+    deploymentTime,
+  };
+};
+
+export const generateMockDeploymentList = makeListFactory(generateMockDeployment);
+
+export const generateMockDeploymentListHook = generateMockDataHook(generateMockDeploymentList);
 
 interface Organization {
   id: number;
@@ -96,6 +152,9 @@ export interface VehicleMockData {
   model: string;
   vin: string;
   manufacturer: string;
+  fuel: string;
+  purchaseDate: Date;
+  price: string;
 }
 
 export const generateMockVehicle: MockDataGeneratorFn<VehicleMockData> = ({ id, seed }) => {
@@ -108,6 +167,9 @@ export const generateMockVehicle: MockDataGeneratorFn<VehicleMockData> = ({ id, 
     vin: faker.vehicle.vin(),
     type: faker.vehicle.type(),
     manufacturer: faker.vehicle.manufacturer(),
+    fuel: faker.vehicle.fuel(),
+    purchaseDate: faker.date.recent(),
+    price: faker.commerce.price(5000, 100000),
   };
 };
 

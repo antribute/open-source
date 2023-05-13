@@ -1,5 +1,13 @@
 const base = require('./eslint-base.cjs');
 
+/** @type {import('eslint-plugin-tailwindcss')['configs']['recommended']['rules']} */
+const tailwindRules = {
+  /** Unnecessary rules*/
+  'tailwindcss/classnames-order': 'off',
+  'tailwindcss/no-custom-classname': 'off',
+};
+
+/** @type {import('eslint').Linter.Config} */
 module.exports = {
   extends: [
     'airbnb',
@@ -19,12 +27,13 @@ module.exports = {
   plugins: ['@typescript-eslint', 'tailwindcss'],
   rules: {
     ...base.rules,
-    'tailwindcss/classnames-order': 'off',
+    ...tailwindRules,
     'react/function-component-definition': 'off',
     'react/require-default-props': 'off',
     'react/jsx-props-no-spreading': 'off',
     'react/jsx-no-useless-fragment': 'off',
     'react/no-array-index-key': 'off',
+    'react/destructuring-assignment': 'off',
     'react/no-unstable-nested-components': [
       'off',
       {

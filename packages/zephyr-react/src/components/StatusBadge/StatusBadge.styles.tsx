@@ -1,5 +1,5 @@
-import clsx from 'clsx';
-import { colorVariants } from 'styles/colors.variants';
+import { buttonVariants } from 'components/Button/Button.styles';
+import { colorSchemeVariants } from 'styles/color-scheme-variants';
 import { inputComponentVariants } from 'styles/input-component.variants';
 import { Classed, classTheme, classed, mergeVariants } from 'utils/classed';
 
@@ -14,42 +14,47 @@ const disabledClass = classTheme({
 
 export const StatusBadgeElement = classed(
   'button',
-  'group inline-flex items-center gap-6 font-medium border rounded-full select-none transition-all ring-0 focus:ring-0 ring-transparent',
-  'border-boundary-ghost dark:border-boundary-inverse-ghost  outline-none border-none',
+  'group inline-flex items-center justify-center gap-6 font-medium border select-none transition-all  ring-transparent',
+  'border-boundary-ghost dark:border-boundary-inverse-ghost  outline-none border-none text-primary-content',
   disabledClass,
 
   {
+    defaultVariants: {
+      size: 'md',
+      variant: 'filled',
+      clickable: false,
+      rounded: 'full',
+    },
+
     variants: {
+      ...buttonVariants.variants,
+      // color: buttonVariants.variants.color,
       size: mergeVariants([
         inputComponentVariants.size.paddingX,
+        inputComponentVariants.size.inlineHeight,
         inputComponentVariants.size.lineHeight,
         inputComponentVariants.size.textSize,
       ]),
 
-      color: mergeVariants([
-        colorVariants.bg,
-        colorVariants.border,
-        colorVariants.hoverDark,
-        colorVariants.text,
-      ]),
-
-      variant: {
-        text: 'px-0 py-0 border-none bg-transparent',
-        outlined: 'bg-opacity-10',
-        contained: clsx('from-palette-white/5 via-palette-white/5 bg-gradient-to-r to-transparent'),
-        dropdown: 'cursor-pointer',
-      },
+      // variant: {
+      //   text: clsx('p-0 border-none bg-transparent'),
+      //   outlined: clsx('text-content ring-1 ring-primary focus:ring-primary focus:ring-1'),
+      //   contained: clsx('bg-primary text-palette-white'),
+      //   dropdown: 'cursor-pointer',
+      // },
 
       clickable: {
         true: 'cursor-pointer',
-        false: 'cursor-default focus:ring-0',
+        false: 'cursor-default',
+      },
+
+      rounded: {
+        true: 'rounded',
+        false: '',
+        full: 'rounded-full',
       },
     },
-    defaultVariants: {
-      size: 'md',
-      variant: 'contained',
-      clickable: false,
-    },
+    compoundVariants: [...buttonVariants.compoundVariants],
   }
 );
 
@@ -69,7 +74,7 @@ export const StatusBadgeDot = classed(
         lg: 'w-10 h-10',
         xl: 'w-14 h-14',
       },
-      color: mergeVariants([colorVariants.bg, colorVariants.text]),
+      color: mergeVariants([colorSchemeVariants.filledAccent.base]),
     },
     defaultVariants: {
       dotPosition: 'left',

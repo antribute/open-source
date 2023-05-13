@@ -33,10 +33,17 @@ export const textVariants = {
     mono: 'font-mono',
   },
   leading: {
+    none: clsx('leading-none'),
     xs: clsx('leading-xs'),
     sm: clsx('leading-sm'),
     md: clsx('leading-md'),
     lg: clsx('leading-lg'),
+    h1: clsx('leading-h1'),
+    h2: clsx('leading-h2'),
+    h3: clsx('leading-h3'),
+    h4: clsx('leading-h4'),
+    h5: clsx('leading-h5'),
+    h6: clsx('leading-h6'),
   },
   spaceY: {
     xs: clsx('space-y-4'),
@@ -50,11 +57,14 @@ export const textVariants = {
     md: clsx('space-x-8'),
     lg: clsx('space-x-16'),
   },
+
   color: {
+    inherit: clsx('text-inherit'),
     current: clsx('text-current'),
     tint: clsx('text-content-tint'),
     ghost: clsx('text-content-ghost'),
     subtle: clsx('text-content-subtle'),
+    medium: clsx('text-content'),
     weak: clsx('text-content-weak'),
     moderate: clsx('text-content-moderate'),
     high: clsx('text-content-high'),
@@ -67,5 +77,15 @@ export const textVariants = {
     center: clsx('text-center'),
     right: clsx('text-right'),
     left: clsx('text-left'),
+    start: clsx('text-left'),
+    end: clsx('text-end'),
+  },
+  maxLines: {
+    1: 'line-clamp-1',
+    2: 'line-clamp-2',
+    3: 'line-clamp-3',
+    4: 'line-clamp-4',
+    5: 'line-clamp-5',
+    6: 'line-clamp-6',
   },
 };

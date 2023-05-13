@@ -22,3 +22,6 @@ export const testClassName: ClassName = {
 };
 
 export * from './colors/colors';
+export * from './colors/colors.types';
+
+export type { TailwindConfig, TailwindColorKey } from './tailwindConfig';

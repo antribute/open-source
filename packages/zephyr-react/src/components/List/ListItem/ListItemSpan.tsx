@@ -34,7 +34,7 @@ const Label = ({ label, startIcon, endIcon, className }: ListItemLabelSpanProps)
 
 const Description = classed(
   'p',
-  'block text-sm  text-content-weak leading-xs dark:text-content-inverse-weak',
+  'block text-sm  text-content-weak leading-md dark:text-content-inverse-weak',
   {
     variants: {},
   }

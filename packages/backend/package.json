@@ -14,7 +14,7 @@
     "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf text-results && rimraf .eslintcache",
     "cli": "node ./dist/index.js",
     "dev": "pnpm run build --watch",
-    "lint": "eslint --cache src/**",
+    "lint": "eslint --cache ./src",
     "test": "vitest"
   },
   "keywords": [

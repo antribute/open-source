@@ -1,10 +1,15 @@
-import { getByPath } from 'dot-path-value';
 import type { ColorAlphaVariant } from '../colors.types';
 import { HexAlphaTransparency, hexAlphaCodes, hexTransparencyPresetMap } from '../colors.constants';
 
-export type HexAlphaOptions =
-  | { transparencyPreset?: ColorAlphaVariant | undefined }
-  | { transparency?: HexAlphaTransparency };
+interface TransparencyPresetOption {
+  transparencyPreset?: ColorAlphaVariant | undefined;
+}
+
+interface TransparencyOption {
+  transparency?: HexAlphaTransparency;
+}
+
+export type HexAlphaOptions = TransparencyPresetOption | TransparencyOption;
 
 type GenerateHexAlphaFnOptions = ColorAlphaVariant | HexAlphaOptions;
 
@@ -16,9 +21,9 @@ export function generateHexAlpha(hexColor: string, options: GenerateHexAlphaFnOp
   if (typeof options === 'string') {
     hexAlphaCode = hexAlphaCodes[hexTransparencyPresetMap[options]];
   } else {
-    const transparency = getByPath(options, 'transparency');
+    const transparency = getTransparencyOption(options);
 
-    const transparencyPreset = getByPath(options, 'transparencyPreset');
+    const transparencyPreset = getTransparencyPresetOption(options);
 
     const code = transparencyPreset ? hexTransparencyPresetMap[transparencyPreset] : transparency;
 
@@ -26,4 +31,24 @@ export function generateHexAlpha(hexColor: string, options: GenerateHexAlphaFnOp
   }
 
   return `${hex}${hexAlphaCode ?? ''}`;
+}
+
+export function getTransparencyPresetOption(option: TransparencyPresetOption | TransparencyOption) {
+  function isPreset(
+    option: TransparencyPresetOption | TransparencyOption
+  ): option is TransparencyPresetOption {
+    return 'transparencyPreset' in option;
+  }
+
+  return isPreset(option) ? option.transparencyPreset : undefined;
+}
+
+export function getTransparencyOption(option: TransparencyPresetOption | TransparencyOption) {
+  function isPreset(
+    option: TransparencyPresetOption | TransparencyOption
+  ): option is TransparencyOption {
+    return 'transparency' in option;
+  }
+
+  return isPreset(option) ? option.transparency : undefined;
 }

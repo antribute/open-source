@@ -1,3 +1,5 @@
+import clsx from 'clsx';
+import { mapValues } from 'lodash-es';
 import { PositionProp } from 'types/styles';
 
 export const positionVariants = {
@@ -11,3 +13,7 @@ export const positionVariants = {
   'bottom-left': 'translate-y-1/2 -translate-x-1/2 right-auto bottom-0 left-0',
   'bottom-right': 'translate-y-1/2 translate-x-1/2 left-auto bottom-0 right-0',
 } satisfies Record<PositionProp, string>;
+
+export const absolutePositionVariants = mapValues(positionVariants, (className) =>
+  clsx(className, 'absolute')
+);

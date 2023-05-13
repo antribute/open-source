@@ -1,24 +1,30 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import { DARK_MODE, LIGHT_MODE, DEFAULT_THEME } from 'constants/theme';
-import { useState, useEffect, useMemo } from 'react';
+import { useLayoutEffect, useState } from 'react';
+import { isClientSide } from 'utils/environment-utils';
 
-const isClientSide = () => typeof window !== 'undefined';
-
-const getInitialIsDarkMode = () => {
+const getInitialIsDarkMode = (fallback?: boolean) => {
   if (!isClientSide()) return DEFAULT_THEME === DARK_MODE;
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
   const savedTheme = localStorage.getItem('color-theme');
-  return savedTheme === DARK_MODE || (!savedTheme && prefersDark);
+
+  if (!savedTheme) {
+    return Boolean(fallback);
+  }
+
+  return savedTheme === DARK_MODE;
 };
 
 export const useDarkMode = () => {
-  const initialIsDarkMode = useMemo(() => {
-    return getInitialIsDarkMode();
-  }, []);
+  const initialIsDarkMode = getInitialIsDarkMode();
 
   const [isDarkMode, setIsDarkMode] = useState<boolean>(initialIsDarkMode);
 
   function setDarkMode(enabled: boolean) {
+    if (!isClientSide()) {
+      return;
+    }
+
     const htmlTag = document.documentElement;
 
     if (enabled) {
@@ -38,10 +44,11 @@ export const useDarkMode = () => {
     setDarkMode(!isDarkMode);
   };
 
-  useEffect(() => {
-    const mode = getInitialIsDarkMode();
-    setDarkMode(mode);
-  }, []);
+  useLayoutEffect(() => {
+    if (initialIsDarkMode !== isDarkMode) {
+      setDarkMode(initialIsDarkMode);
+    }
+  }, [initialIsDarkMode, isDarkMode]);
 
   return { isDarkMode, setDarkMode, toggleDarkMode };
 };

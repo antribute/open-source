@@ -2,6 +2,8 @@ import { Classed, classed, expandVariant, mergeVariants } from 'utils/classed';
 import * as TabsPrimitive from '@radix-ui/react-tabs';
 import { inputComponentVariants } from 'styles/input-component.variants';
 import { highlightBackdropContrastClass } from 'styles/highlightContrast';
+import { motion } from 'framer-motion';
+import clsx from 'clsx';
 
 export type TabsContainerElementVariants = Classed.VariantProps<typeof TabsContainerElement>;
 
@@ -9,34 +11,43 @@ export type TabsContainerElementProps = React.ComponentProps<typeof TabsContaine
 
 export const TabsContainerElement = classed(
   TabsPrimitive.Root,
-  'inline-flex',
+  'group',
   'gap-16',
+  'flex',
   'radix-orientation-horizontal:flex-col',
-  'radix-orientation-vertical:flex-row'
+  'radix-orientation-vertical:flex-row',
+  'relative'
 );
 
 export type TabsListElementProps = React.ComponentProps<typeof TabsListElement>;
 
 export const TabsListElement = classed(
-  TabsPrimitive.List,
-  'border-highlight-tint border-[0.5px] relative z-0',
+  motion(TabsPrimitive.List),
+  'border-highlight-tint border-[0.5px] relative z-0 ',
   'bg-highlight-ghost',
-  'inline-flex items-center gap-4 justify-center p-4 px-2',
+  'items-center gap-4 justify-center p-[3px]',
+  'whitespace-nowrap',
   expandVariant(`
-  radix-orientation-horizontal:(flex-row,rounded-md)
-  radix-orientation-vertical:(flex-col,rounded-[0.185rem],h-auto)
+  radix-orientation-horizontal:(flex,flex-row,rounded-md,min-w-fit)
+  radix-orientation-vertical:(inline-flex,flex-col,rounded-[0.185rem],h-auto,min-h-fit)
   `),
+  'flex-start',
+  'shrink-0',
 
   {
     variants: {
       size: mergeVariants([
         inputComponentVariants.size.lineHeight,
-        inputComponentVariants.size.height,
+        // inputComponentVariants.size.height,
       ]),
       contrast: {
         true: highlightBackdropContrastClass,
       },
+      fullWidth: {
+        true: 'w-full flex',
+      },
     },
+
     defaultVariants: {
       size: 'md',
       contrast: true,
@@ -46,21 +57,53 @@ export const TabsListElement = classed(
 
 export type TabsListItemElementProps = React.ComponentProps<typeof TabsListItemElement>;
 
+const MotionTrigger = motion(TabsPrimitive.Trigger);
+
+const activeTabVariant = clsx(
+  'radix-state-active:text-content-intense',
+  'radix-state-active:ring-1',
+  'radix-state-active:ring-boundary-weak/30',
+  'radix-state-active:bg-surface-soft',
+  'radix-state-active:shadow-sm',
+  'radix-state-active:shadow-surface-dark/30',
+  'radix-state-active:sm:sticky',
+  'radix-state-active:z-20',
+  'radix-state-active:left-[3px]',
+  'radix-state-active:right-[3px]'
+);
+
+const inactiveTabVariant = clsx(
+  'radix-state-inactive:text-content-subtle',
+  'radix-state-inactive:transition-none',
+  'radix-state-inactive:hover:bg-highlight-ghost'
+);
+
+const disabledTabVariant = clsx('disabled:pointer-events-none');
+
 export const TabsListItemElement = classed(
-  TabsPrimitive.Trigger,
-  'min-w-[104px] p-4 px-16 flex-grow relative z-10',
-  'inline-flex items-center justify-center',
-  'rounded-[0.185rem] font-medium select-none',
-  'transition-all duration-75',
-  'border border-transparent',
-  expandVariant(
-    `radix-state-active:(text-content-intense,bg-surface-soft,shadow,shadow-palette-black/10,border-content-tint)
-    radix-state-inactive:(text-content-moderate,transition-none,hover:bg-highlight-ghost)
-    disabled:(pointer-events-none,!text-content-subtle)
-    `
-  )
+  MotionTrigger,
+  'group',
+  'relative',
+  'z-10',
+  'shrink-0',
+  'flex-grow',
+  'min-w-[104px]',
+  'p-4 px-16',
+  'inline-flex',
+  'justify-center',
+  'items-center',
+  'rounded-[0.185rem]',
+  'select-none',
+  'font-medium',
+  'border-[1.5px]',
+  'border-transparent',
+  'transition-all',
+  'duration-75',
+  activeTabVariant,
+  inactiveTabVariant,
+  disabledTabVariant
 );
 
 export type TabsViewContainerElementProps = React.ComponentProps<typeof TabsViewContainerElement>;
 
-export const TabsViewContainerElement = classed('div', '');
+export const TabsViewContainerElement = classed('div', 'grow');

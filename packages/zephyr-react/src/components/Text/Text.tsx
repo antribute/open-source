@@ -1,11 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { textVariants } from 'styles/text.variants';
-import { Classed, classed } from 'utils/classed';
-import { HeadingLevel, SizeProp } from 'types/styles';
-import { Wrap } from 'components/Wrap';
-// import Balancer from 'react-wrap-balancer';
+import { Classed, classed, deriveClassed } from 'utils/classed';
+import { HeadingLevel } from 'types/styles';
+import { CSSProperties } from 'react';
+import { TextComponentType, textComponentProps } from 'components/Text/textComponentProps';
+import { Dot } from 'components/Text/Dot';
+import { DuplicateChildren } from 'components/Text/DuplicateChildren';
 
-// Due to issues with text size class conflcits, using `basicClassed` which doesn't use `tw-merge`
+type TextElementProps = React.ComponentProps<typeof TextElement>;
+
+type TextElementVariantProps = Classed.VariantProps<typeof TextElement>;
+
 export const TextElement = classed('span', {
   variants: {
     size: textVariants.size,
@@ -16,7 +21,23 @@ export const TextElement = classed('span', {
     font: textVariants.font,
     spaceY: textVariants.spaceY,
     spaceX: textVariants.spaceX,
-
+    maxLines: textVariants.maxLines,
+    uppercase: {
+      true: 'uppercase',
+    },
+    noWrap: {
+      true: 'whitespace-nowrap',
+    },
+    bold: {
+      true: textVariants.fontWeight.bold,
+    },
+    medium: {
+      true: textVariants.fontWeight.medium,
+    },
+    tracking: {
+      wide: 'tracking-wide',
+      tight: 'tracking-tight',
+    },
     block: {
       true: 'block',
     },
@@ -38,89 +59,128 @@ export const TextElement = classed('span', {
   },
 });
 
-type TextProps = {
+export type TextProps = {
   className?: string;
   children?: React.ReactNode;
-  // balancer?: boolean;
-  // balancerRatio?: number;
-  as?: 'p' | 'span' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'b' | 'i' | 'div';
-} & Classed.VariantProps<typeof TextElement>;
+  style?: CSSProperties;
+} & TextElementVariantProps &
+  Pick<TextElementProps, 'aria-hidden' | 'as'>;
 
-const Text = ({
-  children,
-  className,
-  // balancerRatio,
-  // balancer,
-  fullWidth,
-  as,
-  ...props
-}: TextProps) => {
-  // const showBalancer = balancer ?? typeof balancerRatio === 'number';
+const TextComponent = deriveClassed<typeof TextElement, TextProps>(
+  ({ children, className, as, ...props }, forwardedRef) => {
+    return (
+      <TextElement className={className} as={as as any} {...props} ref={forwardedRef}>
+        {children}
+      </TextElement>
+    );
+  }
+);
 
-  return (
-    <TextElement
-      className={className}
-      as={as as any}
-      {...props}
-      // Balancer requires 100% width inorder to balance properly
-      fullWidth={
-        fullWidth
-        // ?? showBalancer
-      }
-    >
-      {/* {showBalancer ? <Balancer ratio={balancerRatio}>{children}</Balancer> : children} */}
-      {children}
-    </TextElement>
-  );
-};
-
-// Body Font
-
-type BodyFontProps = { size?: SizeProp } & Omit<TextProps, 'size' | 'font'>;
-
-const Body = (props: BodyFontProps) => <Text font="body" color="current" {...props} />;
-
-type TextBodyProps = Omit<BodyFontProps, 'as'>;
-
-Text.Paragraph = (props: TextBodyProps) => <Body as="span" {...props} />;
-
-// Heading Font
+// Heading Components
 
 type HeadingFontProps = { as: HeadingLevel } & Omit<TextProps, 'as' | 'size' | 'font'>;
 
-const Heading = ({ as, ...props }: HeadingFontProps) => (
-  <Text as={as} size={as} font="heading" color="intense" {...props} />
-);
+const Header = ({ as, ...props }: HeadingFontProps) => <Text as="a" {...props} />;
 
 type TextHeadingProps = Omit<HeadingFontProps, 'as'>;
 
-Text.H1 = (props: TextHeadingProps) => <Heading as="h1" {...props} />;
-Text.H2 = (props: TextHeadingProps) => <Heading as="h2" {...props} />;
-Text.H3 = (props: TextHeadingProps) => <Heading as="h3" {...props} />;
-Text.H4 = (props: TextHeadingProps) => <Heading as="h4" {...props} />;
-Text.H5 = (props: TextHeadingProps) => <Heading as="h5" {...props} />;
-Text.H6 = (props: TextHeadingProps) => <Heading as="h6" {...props} />;
+const H1 = (props: TextHeadingProps) => <Header as="h1" {...props} />;
+const H2 = (props: TextHeadingProps) => <Header as="h2" {...props} />;
+const H3 = (props: TextHeadingProps) => <Header as="h3" {...props} />;
+const H4 = (props: TextHeadingProps) => <Header as="h4" {...props} />;
+const H5 = (props: TextHeadingProps) => <Header as="h5" {...props} />;
+const H6 = (props: TextHeadingProps) => <Header as="h6" {...props} />;
 
-// Other
+// Preset Text Components
 
-Text.Bold = (props: TextBodyProps) => <Body as="b" fontWeight="bold" {...props} />;
-Text.Italic = (props: TextBodyProps) => <Body as="i" italic {...props} />;
-Text.LineBreak = () => <br />;
-Text.Dash = ({ className }: { className?: string }) => (
-  <Wrap if={Boolean(className)} wrap={(c) => <span className={className}>{c}</span>}>
-    &ndash;
-  </Wrap>
+type TxtProps = Omit<TextProps, 'as'>;
+
+const PresetTextComponent = deriveClassed<
+  typeof TextElement,
+  TxtProps & { preset: TextComponentType }
+>(({ preset, ...props }, forwardedRef) => {
+  return <TextComponent {...textComponentProps[preset]} {...props} ref={forwardedRef} />;
+});
+
+const Overline = (props: TxtProps) => <PresetTextComponent preset="overline" {...props} />;
+const Heading = (props: TxtProps) => <PresetTextComponent preset="heading" {...props} />;
+const Subheading = (props: TxtProps) => <PresetTextComponent preset="subheading" {...props} />;
+const Title = (props: TxtProps) => <PresetTextComponent preset="title" {...props} />;
+const Subtitle = (props: TxtProps) => <PresetTextComponent preset="subtitle" {...props} />;
+const Body = (props: TxtProps) => <PresetTextComponent preset="body" {...props} />;
+const Description = (props: TxtProps) => <PresetTextComponent preset="description" {...props} />;
+const Caption = (props: TxtProps) => <PresetTextComponent preset="caption" {...props} />;
+
+// Character Components
+interface CharComponentProps {
+  count?: number;
+  className?: string;
+}
+
+const Br = (props: CharComponentProps) => (
+  <DuplicateChildren {...props}>
+    <br />
+  </DuplicateChildren>
 );
-Text.InvisibleCharacter = () => <>&#8205;</>;
-Text.WhiteSpace = ({ count = 1 }: { count?: number }) =>
-  count === 1 ? (
-    <>&nbsp;</>
-  ) : (
-    <>
-      {new Array(count).fill(0).map(() => (
-        <>&nbsp;</>
-      ))}
-    </>
-  );
+
+const Space = (props: CharComponentProps) => (
+  <DuplicateChildren {...props}>&nbsp;</DuplicateChildren>
+);
+
+const Blank = (props: CharComponentProps) => (
+  <DuplicateChildren {...props}>&#8205;</DuplicateChildren>
+);
+
+/** Dash symbol */
+const Dash = (props: CharComponentProps) => (
+  <DuplicateChildren {...props}> &ndash;</DuplicateChildren>
+);
+
+// SubComponents
+
+const SubComponents = {
+  /** Header 1 */
+  H1,
+  /** Header 2 */
+  H2,
+  /** Header 3 */
+  H3,
+  /** Header 4 */
+  H4,
+  /** Header 5 */
+  H5,
+  /** Header 6 */
+  H6,
+
+  /** Preset Text component */
+  Overline,
+  /** Preset Text component */
+  Heading,
+  /** Preset Text component */
+  Subheading,
+  /** Preset Text component */
+  Title,
+  /** Preset Text component */
+  Subtitle,
+  /** Preset Text component */
+  Body,
+  /** Preset Text component */
+  Caption,
+  /** Preset Text component */
+  Description,
+
+  /** Line break: <br/> */
+  Br,
+  /** Simple dot symbol */
+  Dot,
+  /** White space */
+  Space,
+  /** Invisible character */
+  Blank,
+  /** Dash symbol */
+  Dash,
+};
+
+const Text = Object.assign(TextComponent, SubComponents);
 
 export { Text };

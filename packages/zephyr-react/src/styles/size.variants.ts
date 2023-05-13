@@ -8,7 +8,6 @@ export const sizeVariants = {
     md: clsx('w-40'),
     lg: clsx('w-48'),
   },
-
   height: {
     xs: clsx('h-28'),
     sm: clsx('h-34'),
@@ -17,19 +16,18 @@ export const sizeVariants = {
   },
 
   inlineWidth: {
-    xs: clsx('w-22'),
-    sm: clsx('w-24'),
-    md: clsx('w-26'),
-    lg: clsx('w-32'),
+    xs: clsx('w-16 text-xs'),
+    sm: clsx('w-20 text-xs'),
+    md: clsx('w-22 text-xs'),
+    lg: clsx('w-26 text-xs'),
   },
 
   inlineHeight: {
-    xs: clsx('h-22'),
-    sm: clsx('h-24'),
-    md: clsx('h-26'),
-    lg: clsx('h-32'),
+    xs: clsx('h-16 text-xs'),
+    sm: clsx('h-20 text-xs'),
+    md: clsx('h-22 text-xs'),
+    lg: clsx('h-26 text-xs'),
   },
-
   textSize: {
     xs: 'text-xs',
     sm: 'text-sm',
@@ -43,14 +41,14 @@ export const sizeVariants = {
     lg: 'leading-lg',
   },
   paddingY: {
-    xs: 'py-6',
-    sm: 'py-8',
+    xs: 'py-4',
+    sm: 'py-6',
     md: 'py-8',
-    lg: 'py-8',
+    lg: 'py-10',
   },
   paddingX: {
-    xs: clsx('px-6'),
-    sm: clsx('px-8'),
+    xs: clsx('px-4'),
+    sm: clsx('px-6'),
     md: clsx('px-8'),
     lg: clsx('px-10'),
   },

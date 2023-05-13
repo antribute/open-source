@@ -71,7 +71,7 @@ export const ManualTotal: Story = {
   args: {},
   render: () => (
     <div className="flex flex-wrap items-center gap-16">
-      <AvatarGroup.Root totalCount={200} stacked>
+      <AvatarGroup.Root totalCount={300} stacked>
         {users.map(({ name }) => (
           <AvatarGroup.Avatar label={name} />
         ))}

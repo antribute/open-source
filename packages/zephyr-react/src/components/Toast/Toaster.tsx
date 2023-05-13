@@ -52,20 +52,19 @@ const ToastActionButtons = ({
         actions.map((action, i) => {
           function defaultProps() {
             const indexProps: Record<number, Omit<ButtonProps, 'children'>> = {
-              0: { color: 'primary' },
-              1: { color: 'primary' },
+              0: { variant: 'glass' },
+              1: { variant: 'outlined' },
             };
             return indexProps[i];
           }
           return (
             <Toast.Action
               className={twMerge('grow shrink max-w-[115px]', className)}
-              variant="filled"
-              color="surface"
               size="xs"
               key={i}
               {...defaultProps()}
               {...action}
+              color="inverse"
             />
           );
         })}
@@ -132,8 +131,8 @@ const ToastContainer = ({
   'variant' | 'id'
 >) => {
   return (
-    <Flex justify="between">
-      <Flex align={align} justify={justify} className="w-full">
+    <Flex gap justify="between">
+      <Flex gap align={align} justify={justify} className="w-full">
         <ToastIcon variant={variant} />
         {children}
       </Flex>

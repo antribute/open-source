@@ -1,5 +1,5 @@
 export * from './Input';
-export * from './InputLabel';
-export * from './InputContainer';
-export * from './InputMessage';
-export * from './InputSelect';
+
+export type * from './input-fields';
+
+export type * from './Input.types';

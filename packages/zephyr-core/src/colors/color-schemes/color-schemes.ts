@@ -15,12 +15,35 @@ export const mainColorSchemeNames = [
   'inverse-dark',
 ] satisfies ColorSchemeName[];
 
-export const appStateColorSchemeNames = ['danger'] satisfies ColorSchemeName[];
+export type ColorSchemeBaseTokens = (typeof colorSchemeBaseTokens)[number];
+
+export const colorSchemeBaseTokens = [
+  'primary',
+  'secondary',
+  'inverse',
+  'surface',
+  'heart',
+  'info',
+  'success',
+  'caution',
+  'danger',
+  'highlight',
+  'boundary',
+  'content',
+] as const;
+
+export const appStateColorSchemeNames = [
+  'danger',
+  'info',
+  'danger',
+  'caution',
+  'success',
+] satisfies ColorSchemeName[];
 
 export const colorSchemeNames = [
   ...mainColorSchemeNames,
   ...appStateColorSchemeNames,
-] satisfies ColorSchemeName[];
+] as ColorSchemeName[];
 
 export const colorSchemeDataAttributes = Object.fromEntries(
   colorSchemeNames.map((schemeName) => {

@@ -34,7 +34,7 @@ function RootPage() {
         </Flex>
         <Grid />
 
-        <Text.Paragraph fullWidth size="lg" align="center" spaceY="lg" className="mb-16 relative">
+        <Text as="p" fullWidth size="lg" align="center" spaceY="lg" className="mb-16 relative">
           <Text
             block
             color="moderate"
@@ -53,7 +53,7 @@ function RootPage() {
             {/* create <Text fontWeight="medium">the best tech</Text> to support the{' '} */}
             create the best tech to support the <Text fontWeight="medium">even better ideas</Text>.
           </EmphasizeText>
-        </Text.Paragraph>
+        </Text>
 
         <Flex gap="xs">
           <LinkButton

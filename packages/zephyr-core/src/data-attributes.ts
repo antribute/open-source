@@ -9,8 +9,8 @@ export type DataAttributes = Writable<typeof dataAttributes>;
  * An object containing predefined data attributes and their default values.
  */
 export const dataAttributes = {
-  'data-antribute-list': 'divide no-item-gutters zebra-items rounded-items',
-  'data-antribute-card': 'padding-none',
+  'data-antribute-list': 'divide no-item-gutters no-gap zebra-items rounded-items',
+  'data-antribute-card': 'padding padding-none',
 } as const satisfies Record<`data-antribute-${string}`, string | boolean>;
 
 /**

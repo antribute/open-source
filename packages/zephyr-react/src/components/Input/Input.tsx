@@ -1,29 +1,30 @@
-import { forwardRef } from 'react';
-import { InputContainer, InputContainerProps } from 'components/Input/InputContainer';
-import { BaseInput, BaseInputProps } from 'components/BaseInput';
-import { InputComponentStateMessageProps } from 'types/input-component.types';
-import { useInputProps } from 'components/Input/useInputProps';
+import {
+  BaseInputField,
+  InputFieldContainer,
+  InputAddon,
+  InputAddonGroup,
+  InputContainer,
+  InputLabel,
+} from './components';
 
-export type InputProps = InputComponentStateMessageProps &
-  Omit<InputContainerProps, 'children'> &
-  BaseInputProps;
+import {
+  TextField,
+  TextAreaField,
+  NumberField,
+  CheckboxField,
+  CheckboxGroupField,
+} from './input-fields';
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ label, labelDescription, optionalLabel, width, required, ...props }, ref) => {
-    const { id, inputStateMessagePair, size } = useInputProps(props);
-    return (
-      <InputContainer
-        label={label}
-        labelDescription={labelDescription}
-        optionalLabel={optionalLabel}
-        required={required}
-        htmlFor={id}
-        size={size}
-        width={width}
-        {...inputStateMessagePair}
-      >
-        <BaseInput width="full" {...props} ref={ref} id={id} {...inputStateMessagePair} />
-      </InputContainer>
-    );
-  }
-);
+export const Input = Object.assign(TextField, {
+  TextField,
+  NumberField,
+  TextAreaField,
+  CheckboxField,
+  CheckboxGroupField,
+  Container: InputContainer,
+  Addon: InputAddon,
+  AddonGroup: InputAddonGroup,
+  BaseInputField,
+  Label: InputLabel,
+  InputFieldContainer,
+});
