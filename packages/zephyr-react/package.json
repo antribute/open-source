@@ -54,7 +54,7 @@
     "@vitest/coverage-c8": "^0.25.3",
     "autoprefixer": "^10.4.13",
     "concurrently": "^7.6.0",
-    "eslint": "^8.28.0",
+    "eslint": "^8.40.0",
     "eslint-plugin-storybook": "^0.6.11",
     "fast-glob": "^3.2.12",
     "happy-dom": "^7.7.0",
@@ -62,7 +62,7 @@
     "prettier": "2.8.7",
     "storybook": "7.0.4",
     "tsup": "^6.5.0",
-    "typescript": "^5.0.0-beta",
+    "typescript": "^5.0.4",
     "vite": "^4.0.4",
     "vite-tsconfig-paths": "^3.6.0",
     "vitest": "^0.25.3"
