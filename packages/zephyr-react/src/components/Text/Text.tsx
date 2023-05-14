@@ -78,18 +78,18 @@ const TextComponent = deriveClassed<typeof TextElement, TextProps>(
 
 // Heading Components
 
-type HeadingFontProps = { as: HeadingLevel } & Omit<TextProps, 'as' | 'size' | 'font'>;
+type HeadingFontProps = { as: HeadingLevel } & Omit<TextProps, 'as' | 'font'>;
 
-const Header = ({ as, ...props }: HeadingFontProps) => <Text as="a" {...props} />;
+const Header = ({ as, ...props }: HeadingFontProps) => <Text as={as} {...props} />;
 
 type TextHeadingProps = Omit<HeadingFontProps, 'as'>;
 
-const H1 = (props: TextHeadingProps) => <Header as="h1" {...props} />;
-const H2 = (props: TextHeadingProps) => <Header as="h2" {...props} />;
-const H3 = (props: TextHeadingProps) => <Header as="h3" {...props} />;
-const H4 = (props: TextHeadingProps) => <Header as="h4" {...props} />;
-const H5 = (props: TextHeadingProps) => <Header as="h5" {...props} />;
-const H6 = (props: TextHeadingProps) => <Header as="h6" {...props} />;
+const H1 = (props: TextHeadingProps) => <Header as="h1" size="h1" {...props} />;
+const H2 = (props: TextHeadingProps) => <Header as="h2" size="h2" {...props} />;
+const H3 = (props: TextHeadingProps) => <Header as="h3" size="h3" {...props} />;
+const H4 = (props: TextHeadingProps) => <Header as="h4" size="h4" {...props} />;
+const H5 = (props: TextHeadingProps) => <Header as="h5" size="h5" {...props} />;
+const H6 = (props: TextHeadingProps) => <Header as="h6" size="h6" {...props} />;
 
 // Preset Text Components
 
