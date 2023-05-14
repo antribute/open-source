@@ -23,7 +23,7 @@ importers:
         specifier: latest
         version: 1.9.4
       typescript:
-        specifier: ^5.0.0-beta
+        specifier: ^5.0.4
         version: 5.0.4
 
   apps/example-adk-todo-list:
@@ -114,7 +114,7 @@ importers:
         specifier: ^0.25.3
         version: 0.25.8(happy-dom@7.8.1)
       eslint:
-        specifier: ^8.28.0
+        specifier: ^8.40.0
         version: 8.40.0
       happy-dom:
         specifier: ^7.7.0
@@ -123,7 +123,7 @@ importers:
         specifier: 2.8.2
         version: 2.8.2
       typescript:
-        specifier: ^5.0.0-beta
+        specifier: ^5.0.4
         version: 5.0.4
       vitest:
         specifier: ^0.25.3
@@ -187,7 +187,7 @@ importers:
         specifier: ^0.16.4
         version: 0.16.17
       eslint:
-        specifier: ^8.28.0
+        specifier: ^8.40.0
         version: 8.40.0
       happy-dom:
         specifier: ^7.7.0
@@ -202,7 +202,7 @@ importers:
         specifier: ^3.3.1
         version: 3.3.2
       typescript:
-        specifier: ^5.0.0-beta
+        specifier: ^5.0.4
         version: 5.0.4
       vitest:
         specifier: ^0.25.3
@@ -227,7 +227,7 @@ importers:
         specifier: ^0.25.3
         version: 0.25.8
       eslint:
-        specifier: ^8.28.0
+        specifier: ^8.40.0
         version: 8.40.0
       graphql:
         specifier: ^16.6.0
@@ -243,10 +243,10 @@ importers:
         version: 18.2.0(react@18.2.0)
       tsup:
         specifier: ^6.5.0
-        version: 6.7.0(typescript@4.9.5)
+        version: 6.7.0(typescript@5.0.4)
       typescript:
-        specifier: ^4.9.3
-        version: 4.9.5
+        specifier: ^5.0.4
+        version: 5.0.4
       vitest:
         specifier: ^0.25.3
         version: 0.25.8
@@ -266,17 +266,17 @@ importers:
         specifier: ^0.25.3
         version: 0.25.8
       eslint:
-        specifier: ^8.28.0
+        specifier: ^8.40.0
         version: 8.40.0
       prettier:
         specifier: 2.8.2
         version: 2.8.2
       tsup:
         specifier: ^6.5.0
-        version: 6.7.0(typescript@4.9.5)
+        version: 6.7.0(typescript@5.0.4)
       typescript:
-        specifier: ^4.9.3
-        version: 4.9.5
+        specifier: ^5.0.4
+        version: 5.0.4
       vitest:
         specifier: ^0.25.3
         version: 0.25.8
@@ -318,17 +318,17 @@ importers:
         specifier: ^0.25.3
         version: 0.25.8
       eslint:
-        specifier: ^8.28.0
+        specifier: ^8.40.0
         version: 8.40.0
       prettier:
         specifier: 2.8.2
         version: 2.8.2
       tsup:
         specifier: ^6.5.0
-        version: 6.7.0(typescript@4.9.5)
+        version: 6.7.0(typescript@5.0.4)
       typescript:
-        specifier: ^4.9.3
-        version: 4.9.5
+        specifier: ^5.0.4
+        version: 5.0.4
       vitest:
         specifier: ^0.25.3
         version: 0.25.8
@@ -358,7 +358,7 @@ importers:
         specifier: ^0.25.3
         version: 0.25.8
       eslint:
-        specifier: ^8.28.0
+        specifier: ^8.40.0
         version: 8.40.0
       graphql:
         specifier: ^16.6.0
@@ -368,10 +368,10 @@ importers:
         version: 2.8.2
       tsup:
         specifier: ^6.5.0
-        version: 6.7.0(typescript@4.9.5)
+        version: 6.7.0(typescript@5.0.4)
       typescript:
-        specifier: ^4.9.3
-        version: 4.9.5
+        specifier: ^5.0.4
+        version: 5.0.4
       vitest:
         specifier: ^0.25.3
         version: 0.25.8
@@ -401,17 +401,17 @@ importers:
         specifier: ^0.25.3
         version: 0.25.8
       eslint:
-        specifier: ^8.28.0
+        specifier: ^8.40.0
         version: 8.40.0
       prettier:
         specifier: 2.8.2
         version: 2.8.2
       tsup:
         specifier: ^6.5.0
-        version: 6.7.0(typescript@4.9.5)
+        version: 6.7.0(typescript@5.0.4)
       typescript:
-        specifier: ^4.9.3
-        version: 4.9.5
+        specifier: ^5.0.4
+        version: 5.0.4
       vitest:
         specifier: ^0.25.3
         version: 0.25.8
@@ -431,17 +431,17 @@ importers:
         specifier: ^0.25.3
         version: 0.25.8
       eslint:
-        specifier: ^8.28.0
+        specifier: ^8.40.0
         version: 8.40.0
       prettier:
         specifier: 2.8.2
         version: 2.8.2
       tsup:
         specifier: ^6.5.0
-        version: 6.7.0(typescript@4.9.5)
+        version: 6.7.0(typescript@5.0.4)
       typescript:
-        specifier: ^4.9.3
-        version: 4.9.5
+        specifier: ^5.0.4
+        version: 5.0.4
       vitest:
         specifier: ^0.25.3
         version: 0.25.8
@@ -461,7 +461,7 @@ importers:
         specifier: ^0.25.3
         version: 0.25.8
       eslint:
-        specifier: ^8.28.0
+        specifier: ^8.40.0
         version: 8.40.0
       graphql:
         specifier: ^16.6.0
@@ -474,10 +474,10 @@ importers:
         version: 2.8.2
       tsup:
         specifier: ^6.5.0
-        version: 6.7.0(typescript@4.9.5)
+        version: 6.7.0(typescript@5.0.4)
       typescript:
-        specifier: ^4.9.3
-        version: 4.9.5
+        specifier: ^5.0.4
+        version: 5.0.4
       vitest:
         specifier: ^0.25.3
         version: 0.25.8
@@ -537,7 +537,7 @@ importers:
         version: 3.6.0(vite@4.3.5)
     devDependencies:
       eslint:
-        specifier: ^8.28.0
+        specifier: ^8.40.0
         version: 8.40.0
       next:
         specifier: 13.2.4
@@ -555,7 +555,7 @@ importers:
         specifier: ^6.5.0
         version: 6.7.0(typescript@5.0.4)
       typescript:
-        specifier: ^5.0.0-beta
+        specifier: ^5.0.4
         version: 5.0.4
       vite:
         specifier: ^4.0.4
@@ -604,7 +604,7 @@ importers:
         specifier: ^0.25.3
         version: 0.25.8
       eslint:
-        specifier: ^8.28.0
+        specifier: ^8.40.0
         version: 8.40.0
       prettier:
         specifier: 2.8.2
@@ -619,7 +619,7 @@ importers:
         specifier: ^6.5.0
         version: 6.7.0(typescript@5.0.4)
       typescript:
-        specifier: ^5.0.0-beta
+        specifier: ^5.0.4
         version: 5.0.4
       vite:
         specifier: ^4.0.4
@@ -646,7 +646,7 @@ importers:
         specifier: ^0.25.3
         version: 0.25.8(happy-dom@7.8.1)
       eslint:
-        specifier: ^8.28.0
+        specifier: ^8.40.0
         version: 8.40.0
       happy-dom:
         specifier: ^7.7.0
@@ -664,7 +664,7 @@ importers:
         specifier: ^6.5.0
         version: 6.7.0(typescript@5.0.4)
       typescript:
-        specifier: ^5.0.0-beta
+        specifier: ^5.0.4
         version: 5.0.4
       vite:
         specifier: ^4.0.4
@@ -752,7 +752,7 @@ importers:
         specifier: ^7.6.0
         version: 7.6.0
       eslint:
-        specifier: ^8.28.0
+        specifier: ^8.40.0
         version: 8.40.0
       postcss:
         specifier: ^8.4.19
@@ -776,7 +776,7 @@ importers:
         specifier: ^3.5.1
         version: 3.10.0(typescript@5.0.4)
       typescript:
-        specifier: ^5.0.0-beta
+        specifier: ^5.0.4
         version: 5.0.4
       vitest:
         specifier: ^0.25.3
@@ -1059,7 +1059,7 @@ importers:
         specifier: ^7.6.0
         version: 7.6.0
       eslint:
-        specifier: ^8.28.0
+        specifier: ^8.40.0
         version: 8.40.0
       eslint-plugin-storybook:
         specifier: ^0.6.11
@@ -1083,7 +1083,7 @@ importers:
         specifier: ^6.5.0
         version: 6.7.0(postcss@8.4.23)(typescript@5.0.4)
       typescript:
-        specifier: ^5.0.0-beta
+        specifier: ^5.0.4
         version: 5.0.4
       vite:
         specifier: ^4.0.4
@@ -14965,42 +14965,6 @@ packages:
       - ts-node
     dev: true
 
-  /tsup@6.7.0(typescript@4.9.5):
-    resolution: {integrity: sha512-L3o8hGkaHnu5TdJns+mCqFsDBo83bJ44rlK7e6VdanIvpea4ArPcU3swWGsLVbXak1PqQx/V+SSmFPujBK+zEQ==}
-    engines: {node: '>=14.18'}
-    hasBin: true
-    peerDependencies:
-      '@swc/core': ^1
-      postcss: ^8.4.12
-      typescript: '>=4.1.0'
-    peerDependenciesMeta:
-      '@swc/core':
-        optional: true
-      postcss:
-        optional: true
-      typescript:
-        optional: true
-    dependencies:
-      bundle-require: 4.0.1(esbuild@0.17.18)
-      cac: 6.7.14
-      chokidar: 3.5.3
-      debug: 4.3.4
-      esbuild: 0.17.18
-      execa: 5.1.1
-      globby: 11.1.0
-      joycon: 3.1.1
-      postcss-load-config: 3.1.4
-      resolve-from: 5.0.0
-      rollup: 3.21.6
-      source-map: 0.8.0-beta.0
-      sucrase: 3.32.0
-      tree-kill: 1.2.2
-      typescript: 4.9.5
-    transitivePeerDependencies:
-      - supports-color
-      - ts-node
-    dev: true
-
   /tsup@6.7.0(typescript@5.0.4):
     resolution: {integrity: sha512-L3o8hGkaHnu5TdJns+mCqFsDBo83bJ44rlK7e6VdanIvpea4ArPcU3swWGsLVbXak1PqQx/V+SSmFPujBK+zEQ==}
     engines: {node: '>=14.18'}
@@ -15218,12 +15182,6 @@ packages:
 
   /typedarray@0.0.6:
     resolution: {integrity: sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==}
-    dev: true
-
-  /typescript@4.9.5:
-    resolution: {integrity: sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==}
-    engines: {node: '>=4.2.0'}
-    hasBin: true
     dev: true
 
   /typescript@5.0.4:
