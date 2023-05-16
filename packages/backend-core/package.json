@@ -1,8 +1,11 @@
 {
   "name": "@antribute/backend-core",
-  "description": "Core code generators and typings for the Antribute Backend",
+  "description": "The Antribute Backend Framework",
   "version": "0.1.0",
   "type": "module",
+  "bin": {
+    "antribute-backend": "./dist/cli.js"
+  },
   "exports": {
     "import": "./dist/index.js",
     "require": "./dist/index.cjs"
@@ -37,6 +40,7 @@
   },
   "dependencies": {
     "bundle-require": "^4.0.1",
+    "cmd-ts": "^0.12.1",
     "esbuild": "^0.17.18",
     "handlebars": "^4.7.7",
     "joycon": "^3.1.1",

@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-import { logger } from '@antribute/backend-core';
 import { command, run, string, positional, option, optional, oneOf } from 'cmd-ts';
 
 import generate from 'commands/generate';
+import logger from 'logger';
 
 const commands = {
   generate,

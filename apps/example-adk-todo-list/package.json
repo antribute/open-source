@@ -4,16 +4,15 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "antribute:generate": "node ./node_modules/@antribute/backend/dist/index.js generate",
-    "build": "pnpm run antribute:generate && next build",
+    "build": "pnpm run generate:antribute && next build",
     "clean": "rimraf .next && rimraf .turbo &&  rimraf coverage && rimraf node_modules && rimraf text-results && rimraf .eslintcache",
     "dev": "next dev",
-    "lint": "pnpm run antribute:generate && eslint --cache ./src",
+    "generate:antribute": "node ./node_modules/@antribute/backend-core/dist/cli.js generate",
+    "lint": "pnpm run generate:antribute && eslint --cache ./src",
     "start": "next start",
-    "test": "pnpm run antribute:generate && vitest"
+    "test": "pnpm run generate:antribute && vitest"
   },
   "dependencies": {
-    "@antribute/backend": "workspace:*",
     "@antribute/backend-auth-nextauth": "workspace:*",
     "@antribute/backend-core": "workspace:*",
     "@antribute/backend-graphql-pothos": "workspace:^",

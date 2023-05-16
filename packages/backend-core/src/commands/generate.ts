@@ -1,4 +1,5 @@
-import { getConfig, importAndRunGenerator } from '@antribute/backend-core';
+import { getConfig } from 'config';
+import { importAndRunGenerator } from 'generation';
 
 const generate = async (configPath?: string) => {
   const config = await getConfig(configPath);
