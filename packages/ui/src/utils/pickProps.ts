@@ -6,25 +6,19 @@ import { IsUnion } from 'types/typeUtilities';
 import { isDevelopment } from 'utils/environment-utils';
 import { objectMap } from 'utils/objectMap';
 
+export function generatePropPickerFn<T extends object>(pickedRecord: Record<keyof T, '_pick_'>) {
+  const pickedKeys = Object.keys(pickedRecord) as (keyof T)[];
 
+  const pickerFn = <TProps extends object & T>(props: TProps) => {
+    return pick(props, pickedKeys) as T;
+  };
 
-export function generatePropPickerFn<T extends object>(pickedRecord: Record<keyof T, '_pick_'> ){
+  pickerFn.pickedKeys = pickedKeys;
 
-  const pickedKeys = Object.keys(pickedRecord) as (keyof T)[]
+  pickerFn.pickedRecord = pickedRecord;
 
-  const pickerFn =  <TProps extends object & T>(props: TProps) => {
-      return pick(props, pickedKeys) as T;
-  }
-
-  pickerFn.pickedKeys = pickedKeys
-  
-  pickerFn.pickedRecord = pickedRecord
-
-
-  return pickerFn
-
+  return pickerFn;
 }
-
 
 /** A special string that indicates the property should be picked without a default value */
 const NO_DEFAULT_VALUE = '_pick_' as const;
@@ -123,7 +117,7 @@ export function pickProps<
       return [path, prop];
     }
     if (shouldValidatePickProp) {
-      validatePickProp(defaultValue,pickedProps );
+      validatePickProp(defaultValue, pickedProps);
     }
     return [path, prop ?? defaultValue];
   });
@@ -134,9 +128,9 @@ export function pickProps<
 /**
  *
  *  Used to catch cases where a typo was possibly made when using `_pick_` as a value in `pickProps`
- * 
+ *
  * */
-function validatePickProp(input: unknown,pickedProps: object) {
+function validatePickProp(input: unknown, pickedProps: object) {
   if (isDevelopment()) {
     const startsWith = ['_p', 'pick'];
 
@@ -155,7 +149,14 @@ function validatePickProp(input: unknown,pickedProps: object) {
 
       Received value: "${input}" ❌
 
-      ${JSON.stringify(objectMap(pickedProps, ({key,value})=>[key, value === input ? `${value as string} ❌` : value]), null, 2)}
+      ${JSON.stringify(
+        objectMap(pickedProps, ({ key, value }) => [
+          key,
+          value === input ? `${value as string} ❌` : value,
+        ]),
+        null,
+        2
+      )}
  
       If this is intended, add \`shouldValidatePickProp: true\` to the options.
 

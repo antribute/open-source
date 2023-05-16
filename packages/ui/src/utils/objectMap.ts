@@ -1,10 +1,8 @@
 import { getByPath } from 'utils/getByPath';
 import { notEmpty } from 'utils/notEmpty';
-import type { Path, PathValue , SearchableObject} from '@clickbar/dot-diver';
-
+import type { Path, PathValue, SearchableObject } from '@clickbar/dot-diver';
 
 type ObjectKey<T extends SearchableObject> = Path<T, 1>;
-
 
 export function objectMap<
   const TNewKey,
@@ -15,7 +13,12 @@ export function objectMap<
   V extends PathValue<T, TPath> = PathValue<T, TPath>
 >(
   obj: T,
-  fn: (options: { key: TKey; value: V; get: typeof getByPath, index: number }) => [TNewKey, TNewValue] | undefined
+  fn: (options: {
+    key: TKey;
+    value: V;
+    get: typeof getByPath;
+    index: number;
+  }) => [TNewKey, TNewValue] | undefined
 ): Record<Extract<TNewKey, string>, TNewValue> {
   return Object.fromEntries(
     Object.entries(obj)
