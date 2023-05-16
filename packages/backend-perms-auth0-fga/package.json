@@ -31,7 +31,7 @@
     "@types/node": "18.11.9",
     "@vitest/coverage-c8": "^0.25.3",
     "eslint": "^8.40.0",
-    "prettier": "2.8.2",
+    "prettier": "2.8.7",
     "tsup": "^6.7.0",
     "typescript": "^5.0.4",
     "vitest": "^0.25.3"
