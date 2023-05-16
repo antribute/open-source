@@ -4,7 +4,7 @@ import { CollapsibleListItem } from 'components/List/ListItem/CollapsibleListIte
 import { ListItemGroup } from 'components/List/ListItem/ListItem';
 import { ListItemLink } from 'components/List/ListItem/ListItemLink';
 import { ListItemButton } from 'components/List/ListItem/ListItemButton';
-import { getDataAttributes } from '@antribute/zephyr-core';
+import { getDataAttributes } from 'config';
 import { listItemSizingClassName } from 'components/List/ListItem/BaseListItem';
 
 // Container

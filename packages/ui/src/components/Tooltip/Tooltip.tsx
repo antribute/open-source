@@ -1,4 +1,4 @@
-import { ColorSchemeName } from '@antribute/zephyr-core';
+import { ColorSchemeName } from 'config';
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 import React, { CSSProperties, useState } from 'react';
 import { Classed, classed } from 'utils/classed';

@@ -51,7 +51,6 @@
     "vitest": "^0.25.3"
   },
   "dependencies": {
-    "@antribute/utils-react": "workspace:*",
     "@testing-library/user-event": "^14.4.3",
     "cli-color": "^2.0.3",
     "mixpanel": "^0.17.0",

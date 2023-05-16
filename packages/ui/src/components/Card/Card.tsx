@@ -1,4 +1,4 @@
-import { ColorSchemeName, getDataAttributes } from '@antribute/zephyr-core';
+import { ColorSchemeName, getDataAttributes } from 'config';
 import {
   CardBodySectionElement,
   CardContainerElement,

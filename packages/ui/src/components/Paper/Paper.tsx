@@ -1,4 +1,4 @@
-import { ColorSchemeName } from '@antribute/zephyr-core';
+import { ColorSchemeName } from 'config';
 import clsx from 'clsx';
 import { PaperElement, PaperElementVariantProps } from 'components/Paper/Paper.styles';
 import { Position } from 'components/Position';

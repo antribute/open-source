@@ -1,36 +1,64 @@
-# Antribute React Utilities
+# Antribute Tracking
 
-Shared React utilities for Antribute projects
+An Antribute abstraction over Mixpanel
 
 ## Installation
 
 ```bash
-pnpm i @antribute/utils-react
-```
-
-## Running Storybook for Local Development
-
-```bash
-pnpm run storybook:start
+pnpm i @antribute/tracking
 ```
 
 ## Usage
 
-This package exports many components, each with their own seperate usage docs
+### Client-Side
 
-### `createCtx`
+In the root of your app, add the following:
 
 ```tsx
-import { createCtx } from '@antribute/utils-react';
+import { TrackingProvider } from '@antribute/tracking';
 
-const [useContext, ContextProvider] = createCtx<{ foo: string }>();
-
-function TestComponent() {
-  const context = useContext();
-  return <h1>{context.foo}</h1>;
+function MyApp() {
+  return (
+    <TrackingProvider value={{ token: process.env.NEXT_PUBLIC_MIXPANEL_TOKEN }}>
+      {/* The rest of your app goes here! */}
+    </TrackingProvider>
+  );
 }
 
-<ContextProvider value={{ foo: 'bar' }}>
-  <TestComponent />
-</ContextProvider>;
+export default MyApp;
+```
+
+To track events in individual components, do the following
+
+```tsx
+import { useTracking } from '@antribute/tracking';
+
+function MyComponent() {
+  const track = useTracking();
+
+  const handleClick = () => {
+    track('button-click');
+  };
+
+  return (
+    <button onClick={handleClick} type="button">
+      Click Me!
+    </button>
+  );
+}
+
+export default MyComponent;
+```
+
+### Server-Side
+
+To track events in server-side code, do the following
+
+```tsx
+import { track } from '@antribute/tracking/server';
+
+function MyBackendFunction() {
+  track({ event: 'some-backend-event', token: process.env.NEXT_PUBLIC_MIXPANEL_TOKEN });
+  // Finish your function
+}
 ```

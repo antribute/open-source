@@ -17,7 +17,7 @@ import { Path } from '@clickbar/dot-diver';
 import { flatten } from 'flat';
 import { mapValues, pickBy } from 'lodash-es';
 import clsx from 'clsx';
-import { paletteColorsConfig } from '@antribute/zephyr-core';
+import { paletteColorsConfig } from 'config';
 import { Tabs } from 'components/Tabs';
 import { Paper } from 'components/Paper';
 

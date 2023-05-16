@@ -12,13 +12,16 @@ pnpm i @antribute/ui
 
 1. [Set up TailwindCSS](https://tailwindcss.com/docs/installation) for your build system
 1. Set the contents of your newly-created `tailwind.config.js` to
-   `export { default } from '@antribute/ui/tailwindConfig');`
+   ```javascript
+   import tailwindConfig from '@antribute/ui/tailwindConfig';
+   export default tailwindConfig;
+   ```
 1. In the entrypoint of your app, add `import '@antribute/ui/antribute.css';`
 
 ## Running Storybook for Local Development
 
 ```bash
-pnpm run storybook:start
+pnpm run storybook
 ```
 
 ## Usage

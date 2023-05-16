@@ -14,7 +14,7 @@ import {
   DialogTitleElementProps,
   DialogTitleSectionElement,
 } from 'components/Dialog/Dialog.styles';
-import { ColorSchemeName, getDataAttributes } from '@antribute/zephyr-core';
+import { ColorSchemeName, getDataAttributes } from 'config';
 import { getNearestColorSchemeAttribute } from 'utils/getNearestColorSchemeAttribute';
 import { useState } from 'react';
 import { Wrap } from 'components/Wrap';

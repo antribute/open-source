@@ -7,7 +7,7 @@ import { Combobox } from 'components/Combobox';
 import { generateMockProjectList, generateMockUserList } from 'mock/mock-data';
 import { Tabs } from 'components/Tabs';
 import { useState } from 'react';
-import { ColorSchemeName, colorSchemeNames, mainColorSchemeNames } from '@antribute/zephyr-core';
+import { ColorSchemeName, colorSchemeNames, mainColorSchemeNames } from 'config';
 import { twMerge } from 'tailwind-merge';
 import { CardContainerProps } from 'components/Card/Card';
 import { Card } from '.';

@@ -7,7 +7,7 @@ import { Wrap } from 'components/Wrap';
 import { twMerge } from 'tailwind-merge';
 import clsx from 'clsx';
 import { Tooltip } from 'components/Tooltip';
-import { ColorSchemeName, mainColorSchemeNames } from '@antribute/zephyr-core';
+import { ColorSchemeName, mainColorSchemeNames } from 'config';
 import { capitalize } from 'lodash-es';
 
 type RenderVariantElementProps = Partial<VariantProps<typeof RenderVariantElement>>;

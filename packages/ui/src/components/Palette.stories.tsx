@@ -1,6 +1,6 @@
 import type { StoryObj } from '@storybook/react';
 
-import { paletteColorsConfig } from '@antribute/zephyr-core';
+import { paletteColorsConfig } from 'config';
 import { capitalCase } from 'change-case';
 import { Paper } from 'components/Paper';
 import { StatusBadge } from 'components/StatusBadge';

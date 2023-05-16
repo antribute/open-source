@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-syntax */
-import { screens } from '@antribute/zephyr-core';
+import { screens } from 'config';
 import { useMediaQuery } from 'react-responsive';
 import { objectMap } from 'utils/objectMap';
 import { parseUnitValue } from 'utils/parseUnitValue';

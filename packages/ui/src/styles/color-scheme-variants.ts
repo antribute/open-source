@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import type { TailwindColorKey } from '@antribute/zephyr-core';
+import type { TailwindColorKey } from 'config';
 
 const basicColors = {
   primary: null,

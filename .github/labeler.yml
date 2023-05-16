@@ -10,9 +10,5 @@
   - 'pnpm-lock.yaml'
 'Package: Config':
   - 'packages/config/**'
-'Package: React Utils':
-  - 'packages/utils-react/**'
-'Package: Zephyr Core':
-  - 'packages/zephyr-core/**'
-'Package: Zephyr React':
-  - 'packages/zephyr-react/**'
+'Package: UI':
+  - 'packages/ui/**'

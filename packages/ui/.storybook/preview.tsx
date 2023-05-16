@@ -1,9 +1,9 @@
-import '@antribute/zephyr-core/zephyr-core.css';
+import '../antribute.css';
 
 import React, { useEffect } from 'react';
 import type { API_Layout, GlobalTypes } from '@storybook/types';
 import type { Decorator } from '@storybook/react';
-import { colorPalette } from '@antribute/zephyr-core';
+import { colorPalette } from '../src/config';
 import { useDarkMode } from '../src/hooks/useDarkMode';
 import { LIGHT_MODE, DARK_MODE, DEFAULT_THEME } from '../src/constants/theme';
 import { Preview } from '@storybook/react';
