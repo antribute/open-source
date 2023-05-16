@@ -70,7 +70,6 @@
     "@tailwindcss/typography": "^0.5.9",
     "cal-sans": "^1.0.1",
     "clsx": "^1.2.1",
-    "dot-path-value": "^0.0.9",
     "hex-rgb": "^5.0.0",
     "lodash-es": "^4.17.21",
     "tailwindcss-grid-area": "^1.0.10",
