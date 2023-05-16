@@ -1,6 +1,6 @@
 {
-  "name": "@antribute/zephyr-react",
-  "description": "React Component Library for the Zephyr Design System",
+  "name": "@antribute/ui",
+  "description": "The Antribute Design Language and Component Library",
   "version": "0.1.0",
   "type": "module",
   "exports": {
@@ -18,6 +18,7 @@
     "build:index": "tsup --config ./tsup.config.js",
     "build:components": "tsup --config ./tsup.config.components.js",
     "build:helpers": "tsup --config ./tsup.config.helpers.js",
+    "build:tailwind": "tsup --config ./tsup.config.tailwind.js",
     "build-storybook": "storybook build",
     "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf storybook-static && rimraf text-results && rimraf .eslintcache",
     "dev": "concurrently \"pnpm run build:components --watch\" \"pnpm run build:helpers --watch\" \"pnpm run build:index --watch --ignore-watch='src/components'\" --raw",
@@ -28,6 +29,8 @@
   "keywords": [
     "antribute",
     "design system",
+    "react",
+    "react-aria",
     "tailwindcss",
     "typescript"
   ],
@@ -66,9 +69,6 @@
     "vite": "^4.0.4",
     "vite-tsconfig-paths": "^3.6.0",
     "vitest": "^0.25.3"
-  },
-  "peerDependencies": {
-    "@antribute/zephyr-react": "^0.1.0"
   },
   "dependencies": {
     "@antribute/zephyr-core": "workspace:*",

@@ -2,14 +2,7 @@
 
 import { useTracking } from '@antribute/tracking';
 import { useEffect } from 'react';
-import {
-  ButtonProps,
-  ThemeSwitcher,
-  useDarkMode,
-  Button,
-  Flex,
-  Text,
-} from '@antribute/zephyr-react';
+import { ButtonProps, ThemeSwitcher, useDarkMode, Button, Flex, Text } from '@antribute/ui';
 import { AntributeLogo } from 'components/AntributeLogo';
 
 function RootPage() {

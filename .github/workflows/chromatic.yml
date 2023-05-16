@@ -6,8 +6,7 @@ on:
     tags-ignore:
       - '**'
     paths:
-      - 'packages/zephyr-core/**'
-      - 'packages/zephyr-react/**'
+      - 'packages/ui/**'
 jobs:
   chromatic:
     name: Build Packages and Push Storybook to Chromatic
@@ -23,13 +22,13 @@ jobs:
           fetch-depth: 0
       - name: Setup
         uses: antribute/actions/setup@main
-      - name: Build Zephyr
-        run: pnpm exec turbo run build --filter=@antribute/zephyr-react
+      - name: Build Antribute UI
+        run: pnpm exec turbo run build --filter=@antribute/ui
       - name: Publish to Chromatic
         uses: chromaui/action@v1
         with:
           exitZeroOnChanges: true
           onlyChanged: true
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          workingDir: './packages/zephyr-react'
+          workingDir: './packages/ui'
           zip: true

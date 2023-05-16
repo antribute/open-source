@@ -27,7 +27,6 @@ import { getTailwindDataAttributeShortcuts } from './data-attributes';
 import { screens } from './screens';
 import { shadowBorder } from './helpers/shadowBorder';
 import { customClassesPlugin } from './plugins/custom-classes-plugin';
-// import { tailwindSafelist } from './helpers/buildSafelist';
 
 export type TailwindConfig = typeof config;
 
@@ -60,8 +59,8 @@ const config = {
     files: [
       './*.{htm,html}',
       './public/*.{htm,html}',
-      './src/**/*.{ts,tsx}',
-      './node_modules/@antribute/zephyr-react/src/**/*.{js,jsx,ts,tsx}',
+      './src/**/*.{js,jsx,ts,tsx}',
+      './node_modules/@antribute/ui/lib/**/*.js',
     ],
     transform: createVariantGroupTransformer(),
   },

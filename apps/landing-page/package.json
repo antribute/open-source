@@ -15,8 +15,8 @@
   },
   "dependencies": {
     "@antribute/tracking": "workspace:*",
+    "@antribute/ui": "workspace:*",
     "@antribute/zephyr-core": "workspace:*",
-    "@antribute/zephyr-react": "workspace:*",
     "cal-sans": "^1.0.1",
     "next": "13.2.4",
     "react": "18.2.0",
