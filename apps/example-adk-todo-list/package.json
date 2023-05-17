@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "@antribute/config": "workspace:*",
-    "@types/node": "18.11.9",
+    "@types/node": "20.1.7",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.9",
     "@vitest/coverage-c8": "^0.25.3",

@@ -4,11 +4,11 @@
   "exclude": ["node_modules"],
   "compilerOptions": {
     "baseUrl": "./src",
+    "types": ["@types/node"],
     "typeRoots": ["./types"],
     "noEmit": true,
     "noEmitOnError": true
   },
-
   "typeAcquisition": {
     "enable": true,
     "include": ["react", "@tw-classed/react", "@tw-classed/core"]

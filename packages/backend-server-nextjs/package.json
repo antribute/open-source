@@ -3,14 +3,17 @@
   "description": "Antribute Backend Server Adapter for Next.js",
   "version": "0.1.0",
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "exports": {
     "import": "./dist/index.js",
     "require": "./dist/index.cjs"
   },
-  "types": "./dist/index.d.ts",
   "files": [
     "dist/**"
   ],
+  "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsup",
     "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf text-results && rimraf .eslintcache",
@@ -28,7 +31,7 @@
   "devDependencies": {
     "@antribute/backend-core": "workspace:*",
     "@antribute/config": "workspace:*",
-    "@types/node": "18.11.9",
+    "@types/node": "20.1.7",
     "@vitest/coverage-c8": "^0.25.3",
     "eslint": "^8.40.0",
     "graphql": "^16.6.0",

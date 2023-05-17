@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 
+import { resolve } from 'path';
 import defaultTailwindTheme from 'tailwindcss/defaultTheme';
 import type { Config } from 'tailwindcss';
 
@@ -57,10 +58,10 @@ const config = {
 
   content: {
     files: [
-      './*.{htm,html}',
-      './public/*.{htm,html}',
-      './src/**/*.{js,jsx,ts,tsx}',
-      './node_modules/@antribute/ui/lib/**/*.js',
+      resolve(process.cwd(), '*.{htm,html}'),
+      resolve(process.cwd(), 'public', '**', '*.{htm,html}'),
+      resolve(process.cwd(), 'src', '**', '*.{js,jsx,mdx,ts,tsx}'),
+      resolve(process.cwd(), 'node_modules', '@antribute', 'ui', 'dist', '**', '*.js'),
     ],
     transform: createVariantGroupTransformer(),
   },

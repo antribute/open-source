@@ -17,7 +17,6 @@
 ############
 
 # Backend
-./packages/backend/* @jrkienle
 ./packages/backend-auth-nextauth/* @jrkienle
 ./packages/backend-core/* @jrkienle
 ./packages/backend-graphql-pothos/* @jrkienle
