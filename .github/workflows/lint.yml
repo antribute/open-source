@@ -1,17 +1,13 @@
 name: Lint
 on:
-  push:
-    branches:
-      - '**'
-    tags-ignore:
-      - '**'
+  - pull_request
 jobs:
   lint:
     name: Lint All Apps, Packages, and Servers
     runs-on: ubuntu-latest
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+      TURBO_TEAM: antribute
       TURBO_REMOTE_ONLY: true
     steps:
       - name: Checkout

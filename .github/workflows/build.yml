@@ -1,10 +1,6 @@
 name: Build
 on:
-  push:
-    branches:
-      - '**'
-    tags-ignore:
-      - '**'
+  - pull_request
 jobs:
   build:
     name: Build All Apps, Packages, and Servers
@@ -16,7 +12,7 @@ jobs:
       AUTH0_FGA_MODEL_ID: ''
       AUTH0_FGA_STORE_ID: ''
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+      TURBO_TEAM: antribute
       TURBO_REMOTE_ONLY: true
     steps:
       - name: Checkout

@@ -9,13 +9,58 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+      TURBO_TEAM: antribute
       TURBO_REMOTE_ONLY: true
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup
         uses: antribute/actions/setup@main
+      - name: Publish @antribute/backend-auth-nextauth Dev Release to NPM
+        uses: antribute/actions/publish-dev-package@main
+        with:
+          npmToken: ${{ secrets.NPM_TOKEN }}
+          pkgPath: './packages/backend-auth-nextauth/package.json'
+      - name: Publish @antribute/backend-core Dev Release to NPM
+        uses: antribute/actions/publish-dev-package@main
+        with:
+          npmToken: ${{ secrets.NPM_TOKEN }}
+          pkgPath: './packages/backend-core/package.json'
+      - name: Publish @antribute/backend-graphql-pothos Dev Release to NPM
+        uses: antribute/actions/publish-dev-package@main
+        with:
+          npmToken: ${{ secrets.NPM_TOKEN }}
+          pkgPath: './packages/backend-graphql-pothos/package.json'
+      - name: Publish @antribute/backend-orm-prisma Dev Release to NPM
+        uses: antribute/actions/publish-dev-package@main
+        with:
+          npmToken: ${{ secrets.NPM_TOKEN }}
+          pkgPath: './packages/backend-orm-prisma/package.json'
+      - name: Publish @antribute/backend-perms-auth0-fga Dev Release to NPM
+        uses: antribute/actions/publish-dev-package@main
+        with:
+          npmToken: ${{ secrets.NPM_TOKEN }}
+          pkgPath: './packages/backend-perms-auth0-fga/package.json'
+      - name: Publish @antribute/backend-server-nextjs Dev Release to NPM
+        uses: antribute/actions/publish-dev-package@main
+        with:
+          npmToken: ${{ secrets.NPM_TOKEN }}
+          pkgPath: './packages/backend-server-nextjs/package.json'
+      - name: Publish @antribute/config Dev Release to NPM
+        uses: antribute/actions/publish-dev-package@main
+        with:
+          npmToken: ${{ secrets.NPM_TOKEN }}
+          pkgPath: './packages/config/package.json'
+      - name: Publish @antribute/tracking Dev Release to NPM
+        uses: antribute/actions/publish-dev-package@main
+        with:
+          npmToken: ${{ secrets.NPM_TOKEN }}
+          pkgPath: './packages/tracking/package.json'
+      - name: Publish @antribute/ui Dev Release to NPM
+        uses: antribute/actions/publish-dev-package@main
+        with:
+          npmToken: ${{ secrets.NPM_TOKEN }}
+          pkgPath: './packages/ui/package.json'
       - name: Deploy Antribute Landing to Vercel
         uses: BetaHuhn/deploy-to-vercel-action@v1
         with:
