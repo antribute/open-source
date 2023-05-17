@@ -1,6 +1,6 @@
 {
-  "name": "@antribute/backend-server-nextjs",
-  "description": "Antribute Backend Server Adapter for Next.js",
+  "name": "@antribute/backend-server-koa",
+  "description": "Antribute Backend Server Adapter for Koa",
   "version": "0.1.0",
   "type": "module",
   "publishConfig": {
@@ -25,7 +25,7 @@
     "antribute",
     "antribute-backend",
     "antribute-backend-server",
-    "nextjs"
+    "koa"
   ],
   "author": "Antribute, Inc. (https://www.antribute.com)",
   "license": "MIT",

@@ -1,6 +1,6 @@
 {
-  "name": "@antribute/backend-server-nextjs",
-  "description": "Antribute Backend Server Adapter for Next.js",
+  "name": "@antribute/backend-perms-permify",
+  "description": "Adds Permify Support to the Antribute Backend",
   "version": "0.1.0",
   "type": "module",
   "publishConfig": {
@@ -24,8 +24,8 @@
   "keywords": [
     "antribute",
     "antribute-backend",
-    "antribute-backend-server",
-    "nextjs"
+    "antribute-backend-perms",
+    "permify"
   ],
   "author": "Antribute, Inc. (https://www.antribute.com)",
   "license": "MIT",
@@ -35,8 +35,6 @@
     "@types/node": "20.1.7",
     "@vitest/coverage-c8": "^0.25.3",
     "eslint": "^8.40.0",
-    "graphql": "^16.6.0",
-    "graphql-yoga": "^3.1.1",
     "prettier": "2.8.7",
     "tsup": "^6.7.0",
     "typescript": "^5.0.4",
@@ -44,16 +42,6 @@
   },
   "peerDependencies": {
     "@antribute/backend-core": "*",
-    "@graphql-yoga/plugin-disable-introspection": ">= 0.8.0 < 1",
-    "graphql-yoga": ">= 3.0.0 < 4",
-    "next": ">= 13.0.0 < 14"
-  },
-  "peerDependenciesMeta": {
-    "@graphql-yoga/plugin-disable-introspection": {
-      "optional": true
-    },
-    "graphql-yoga": {
-      "optional": true
-    }
+    "@auth0/fga": ">= 0.9.0 < 1"
   }
 }

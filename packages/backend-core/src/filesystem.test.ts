@@ -9,23 +9,24 @@ import { getGeneratedDir, getServerDir, generateFile } from './filesystem';
 describe.skip('filesystem', () => {
   const config = {
     ...defaultConfig,
-    server: { dir: './test-output', logLevel: 'debug', platform: defaultConfig.server.platform },
+    dir: './test-output',
+    server: { customConfig: {}, platform: defaultConfig.server.platform },
   };
   afterAll(async () => {
-    await rimraf(resolve(config.server.dir));
+    await rimraf(resolve(config.dir));
   });
 
   describe('getServerDir', () => {
     it('should return the server directory from the config', () => {
       const dir = getServerDir(defaultConfig);
-      expect(dir).toBe(resolve(process.cwd(), defaultConfig.server.dir));
+      expect(dir).toBe(resolve(process.cwd(), defaultConfig.dir));
     });
   });
 
   describe('getGeneratedDir', () => {
     it('should return the server directory from the config, appending generated to the path', () => {
       const dir = getGeneratedDir(defaultConfig);
-      expect(dir).toBe(resolve(process.cwd(), defaultConfig.server.dir, 'generated'));
+      expect(dir).toBe(resolve(process.cwd(), defaultConfig.dir, 'generated'));
     });
   });
 
