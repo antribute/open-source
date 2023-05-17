@@ -16,6 +16,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Setup
         uses: antribute/actions/setup@main
+      - name: Build All Packages
+        run: pnpm run build:packages
       - name: Publish @antribute/backend-auth-nextauth Dev Release to NPM
         uses: antribute/actions/publish-dev-package@main
         with:
