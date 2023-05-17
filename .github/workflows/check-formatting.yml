@@ -1,10 +1,6 @@
 name: Check Formatting
 on:
-  push:
-    branches:
-      - '**'
-    tags-ignore:
-      - '**'
+  - pull_request
 jobs:
   check-formatting:
     name: Check Repo Formatting with Prettier

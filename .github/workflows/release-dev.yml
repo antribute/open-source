@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - main
-      - james/rework-ci-pipeline
 jobs:
   build-and-release:
     name: Build and Release
@@ -17,17 +16,57 @@ jobs:
         uses: actions/checkout@v3
       - name: Setup
         uses: antribute/actions/setup@main
-      # - name: Deploy Antribute Landing to Vercel
-      #   uses: BetaHuhn/deploy-to-vercel-action@v1
-      #   with:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-      #     VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-      #     VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_DEV }}
-      #     PRODUCTION: true
-      #     GITHUB_DEPLOYMENT: false
+      - name: Publish @antribute/backend-auth-nextauth Dev Release to NPM
+        uses: antribute/actions/publish-dev-package@main
+        with:
+          npmToken: ${{ secrets.NPM_TOKEN }}
+          pkgPath: './packages/backend-auth-nextauth/package.json'
+      - name: Publish @antribute/backend-core Dev Release to NPM
+        uses: antribute/actions/publish-dev-package@main
+        with:
+          npmToken: ${{ secrets.NPM_TOKEN }}
+          pkgPath: './packages/backend-core/package.json'
+      - name: Publish @antribute/backend-graphql-pothos Dev Release to NPM
+        uses: antribute/actions/publish-dev-package@main
+        with:
+          npmToken: ${{ secrets.NPM_TOKEN }}
+          pkgPath: './packages/backend-graphql-pothos/package.json'
+      - name: Publish @antribute/backend-orm-prisma Dev Release to NPM
+        uses: antribute/actions/publish-dev-package@main
+        with:
+          npmToken: ${{ secrets.NPM_TOKEN }}
+          pkgPath: './packages/backend-orm-prisma/package.json'
+      - name: Publish @antribute/backend-perms-auth0-fga Dev Release to NPM
+        uses: antribute/actions/publish-dev-package@main
+        with:
+          npmToken: ${{ secrets.NPM_TOKEN }}
+          pkgPath: './packages/backend-perms-auth0-fga/package.json'
+      - name: Publish @antribute/backend-server-nextjs Dev Release to NPM
+        uses: antribute/actions/publish-dev-package@main
+        with:
+          npmToken: ${{ secrets.NPM_TOKEN }}
+          pkgPath: './packages/backend-server-nextjs/package.json'
       - name: Publish @antribute/config Dev Release to NPM
         uses: antribute/actions/publish-dev-package@main
         with:
           npmToken: ${{ secrets.NPM_TOKEN }}
           pkgPath: './packages/config/package.json'
+      - name: Publish @antribute/tracking Dev Release to NPM
+        uses: antribute/actions/publish-dev-package@main
+        with:
+          npmToken: ${{ secrets.NPM_TOKEN }}
+          pkgPath: './packages/tracking/package.json'
+      - name: Publish @antribute/ui Dev Release to NPM
+        uses: antribute/actions/publish-dev-package@main
+        with:
+          npmToken: ${{ secrets.NPM_TOKEN }}
+          pkgPath: './packages/ui/package.json'
+      - name: Deploy Antribute Landing to Vercel
+        uses: BetaHuhn/deploy-to-vercel-action@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_DEV }}
+          PRODUCTION: true
+          GITHUB_DEPLOYMENT: false

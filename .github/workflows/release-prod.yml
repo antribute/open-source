@@ -4,7 +4,8 @@ on:
     tags:
       - '**'
 jobs:
-  release-landing-page:
+  # Apps
+  release-app-landing-page:
     if: startsWith(github.ref_name, 'landing-page/')
     name: Release Antribute Landing Page
     runs-on: ubuntu-latest
@@ -45,10 +46,10 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_PROD }}
           PRODUCTION: true
           GITHUB_DEPLOYMENT: false
-
-  release-configs:
-    if: startsWith(github.ref_name, 'config/')
-    name: Release Configs Package
+  # Packages
+  release-package-backend-auth-nextauth:
+    if: startsWith(github.ref_name, 'backend-auth-nextauth/')
+    name: Release @antribute/backend-auth-nextauth
     runs-on: ubuntu-latest
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
@@ -63,17 +64,18 @@ jobs:
         uses: antribute/actions/check-tag-release@main
         with:
           delimiter: '/'
-          pkgPath: './packages/config/package.json'
-      - name: Publish @antribute/config to NPM
+          pkgPath: './packages/@antribute/backend-auth-nextauth/package.json'
+      - name: Build Package and Dependencies
+        run: turbo run build --filter=@antribute/backend-auth-nextauth...
+      - name: Publish @antribute/backend-auth-nextauth Latest Release to NPM
         uses: JS-DevTools/npm-publish@v1
         with:
-          access: 'public'
-          dry-run: true # TODO: Remove this once we verify this script works
-          package: './packages/config/package.json'
+          package: './packages/@antribute/backend-auth-nextauth/package.json'
+          tag: latest
           token: ${{ secrets.NPM_TOKEN }}
-  release-zephyr-core:
-    if: startsWith(github.ref_name, 'zephyr-core/')
-    name: Release Zephyr Core Package
+  release-package-backend-core:
+    if: startsWith(github.ref_name, 'backend-core/')
+    name: Release @antribute/backend-core
     runs-on: ubuntu-latest
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
@@ -88,10 +90,194 @@ jobs:
         uses: antribute/actions/check-tag-release@main
         with:
           delimiter: '/'
-          pkgPath: './packages/zephyr-core/package.json'
-      - name: Publish @antribute/config to NPM
+          pkgPath: './packages/@antribute/backend-core/package.json'
+      - name: Build Package and Dependencies
+        run: turbo run build --filter=@antribute/backend-core...
+      - name: Publish @antribute/backend-core Latest Release to NPM
         uses: JS-DevTools/npm-publish@v1
         with:
-          access: 'public'
-          package: './packages/zephyr-core/package.json'
+          package: './packages/@antribute/backend-core/package.json'
+          tag: latest
+          token: ${{ secrets.NPM_TOKEN }}
+  release-package-backend-graphql-pothos:
+    if: startsWith(github.ref_name, 'backend-graphql-pothos/')
+    name: Release @antribute/backend-graphql-pothos
+    runs-on: ubuntu-latest
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: antribute
+      TURBO_REMOTE_ONLY: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup
+        uses: antribute/actions/setup@main
+      - name: Check If Version is Valid
+        uses: antribute/actions/check-tag-release@main
+        with:
+          delimiter: '/'
+          pkgPath: './packages/@antribute/backend-graphql-pothos/package.json'
+      - name: Build Package and Dependencies
+        run: turbo run build --filter=@antribute/backend-graphql-pothos...
+      - name: Publish @antribute/backend-graphql-pothos Latest Release to NPM
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          package: './packages/@antribute/backend-graphql-pothos/package.json'
+          tag: latest
+          token: ${{ secrets.NPM_TOKEN }}
+  release-package-backend-orm-prisma:
+    if: startsWith(github.ref_name, 'backend-orm-prisma/')
+    name: Release @antribute/backend-orm-prisma
+    runs-on: ubuntu-latest
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: antribute
+      TURBO_REMOTE_ONLY: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup
+        uses: antribute/actions/setup@main
+      - name: Check If Version is Valid
+        uses: antribute/actions/check-tag-release@main
+        with:
+          delimiter: '/'
+          pkgPath: './packages/@antribute/backend-orm-prisma/package.json'
+      - name: Build Package and Dependencies
+        run: turbo run build --filter=@antribute/backend-orm-prisma...
+      - name: Publish @antribute/backend-orm-prisma Latest Release to NPM
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          package: './packages/@antribute/backend-orm-prisma/package.json'
+          tag: latest
+          token: ${{ secrets.NPM_TOKEN }}
+  release-package-backend-perms-auth0-fga:
+    if: startsWith(github.ref_name, 'backend-perms-auth0-fga/')
+    name: Release @antribute/backend-perms-auth0-fga
+    runs-on: ubuntu-latest
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: antribute
+      TURBO_REMOTE_ONLY: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup
+        uses: antribute/actions/setup@main
+      - name: Check If Version is Valid
+        uses: antribute/actions/check-tag-release@main
+        with:
+          delimiter: '/'
+          pkgPath: './packages/@antribute/backend-perms-auth0-fga/package.json'
+      - name: Build Package and Dependencies
+        run: turbo run build --filter=@antribute/backend-perms-auth0-fga...
+      - name: Publish @antribute/backend-perms-auth0-fga Latest Release to NPM
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          package: './packages/@antribute/backend-perms-auth0-fga/package.json'
+          tag: latest
+          token: ${{ secrets.NPM_TOKEN }}
+  release-package-backend-server-nextjs:
+    if: startsWith(github.ref_name, 'backend-server-nextjs/')
+    name: Release @antribute/backend-server-nextjs
+    runs-on: ubuntu-latest
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: antribute
+      TURBO_REMOTE_ONLY: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup
+        uses: antribute/actions/setup@main
+      - name: Check If Version is Valid
+        uses: antribute/actions/check-tag-release@main
+        with:
+          delimiter: '/'
+          pkgPath: './packages/@antribute/backend-server-nextjs/package.json'
+      - name: Build Package and Dependencies
+        run: turbo run build --filter=@antribute/backend-server-nextjs...
+      - name: Publish @antribute/backend-server-nextjs Latest Release to NPM
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          package: './packages/@antribute/backend-server-nextjs/package.json'
+          tag: latest
+          token: ${{ secrets.NPM_TOKEN }}
+  release-package-config:
+    if: startsWith(github.ref_name, 'config/')
+    name: Release @antribute/config
+    runs-on: ubuntu-latest
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: antribute
+      TURBO_REMOTE_ONLY: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup
+        uses: antribute/actions/setup@main
+      - name: Check If Version is Valid
+        uses: antribute/actions/check-tag-release@main
+        with:
+          delimiter: '/'
+          pkgPath: './packages/@antribute/config/package.json'
+      - name: Build Package and Dependencies
+        run: turbo run build --filter=@antribute/config...
+      - name: Publish @antribute/config Latest Release to NPM
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          package: './packages/@antribute/config/package.json'
+          tag: latest
+          token: ${{ secrets.NPM_TOKEN }}
+  release-package-tracking:
+    if: startsWith(github.ref_name, 'tracking/')
+    name: Release @antribute/tracking
+    runs-on: ubuntu-latest
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: antribute
+      TURBO_REMOTE_ONLY: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup
+        uses: antribute/actions/setup@main
+      - name: Check If Version is Valid
+        uses: antribute/actions/check-tag-release@main
+        with:
+          delimiter: '/'
+          pkgPath: './packages/@antribute/tracking/package.json'
+      - name: Build Package and Dependencies
+        run: turbo run build --filter=@antribute/tracking...
+      - name: Publish @antribute/tracking Latest Release to NPM
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          package: './packages/@antribute/tracking/package.json'
+          tag: latest
+          token: ${{ secrets.NPM_TOKEN }}
+  release-package-ui:
+    if: startsWith(github.ref_name, 'ui/')
+    name: Release @antribute/ui
+    runs-on: ubuntu-latest
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: antribute
+      TURBO_REMOTE_ONLY: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup
+        uses: antribute/actions/setup@main
+      - name: Check If Version is Valid
+        uses: antribute/actions/check-tag-release@main
+        with:
+          delimiter: '/'
+          pkgPath: './packages/@antribute/ui/package.json'
+      - name: Build Package and Dependencies
+        run: turbo run build --filter=@antribute/ui...
+      - name: Publish @antribute/ui Latest Release to NPM
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          package: './packages/@antribute/ui/package.json'
+          tag: latest
           token: ${{ secrets.NPM_TOKEN }}
