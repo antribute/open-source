@@ -1,4 +1,4 @@
-import '@antribute/zephyr-core/zephyr-core.css';
+import '@antribute/ui/antribute.css';
 import 'cal-sans';
 import type { ReactNode } from 'react';
 import { Metadata } from 'next';

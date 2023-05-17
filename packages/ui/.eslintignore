@@ -1,0 +1,10 @@
+dist
+node_modules
+.eslintrc.cjs
+postcss.config.cjs
+tailwind.config.js
+tsup.config.js
+tsup.config.components.js
+tsup.config.helpers.js
+tsup.config.tailwind.js
+vitest.config.js

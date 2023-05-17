@@ -1,0 +1,16 @@
+{
+  "extends": "@antribute/config/tsconfig/tsconfig.react.json",
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/index.test.ts1"],
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "types": ["@types/node"],
+    "typeRoots": ["./types"],
+    "noEmit": true,
+    "noEmitOnError": true
+  },
+  "typeAcquisition": {
+    "enable": true,
+    "include": ["react", "@tw-classed/react", "@tw-classed/core"]
+  }
+}

@@ -3,6 +3,9 @@
   "description": "An Antribute abstraction over Mixpanel",
   "version": "0.1.0",
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "exports": {
     ".": {
       "require": "./dist/client.cjs",
@@ -13,10 +16,10 @@
       "import": "./dist/server.js"
     }
   },
-  "types": "./dist/client.d.ts",
   "files": [
     "dist/**"
   ],
+  "types": "./dist/client.d.ts",
   "scripts": {
     "build": "tsup",
     "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf text-results && rimraf .eslintcache",
@@ -32,6 +35,12 @@
   ],
   "author": "Antribute, Inc. (https://www.antribute.com)",
   "license": "MIT",
+  "dependencies": {
+    "@testing-library/user-event": "^14.4.3",
+    "cli-color": "^2.0.3",
+    "mixpanel": "^0.17.0",
+    "mixpanel-browser": "^2.45.0"
+  },
   "devDependencies": {
     "@antribute/config": "workspace:*",
     "@testing-library/dom": "^8.19.0",
@@ -41,7 +50,7 @@
     "@types/react": "18.0.25",
     "@vitest/coverage-c8": "^0.25.3",
     "eslint": "^8.40.0",
-    "prettier": "2.8.2",
+    "prettier": "2.8.7",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "tsup": "^6.7.0",
@@ -49,13 +58,6 @@
     "vite": "^4.0.4",
     "vite-tsconfig-paths": "^3.6.0",
     "vitest": "^0.25.3"
-  },
-  "dependencies": {
-    "@antribute/utils-react": "workspace:*",
-    "@testing-library/user-event": "^14.4.3",
-    "cli-color": "^2.0.3",
-    "mixpanel": "^0.17.0",
-    "mixpanel-browser": "^2.45.0"
   },
   "peerDependencies": {
     "react": ">= 18.0.0 < 19"

@@ -1,16 +1,19 @@
 {
   "name": "@antribute/backend-perms-auth0-fga",
-  "description": "Antribute Backend Permissions Adapter for Auth0 FGA",
+  "description": "Adds Auth0 FGA Support to the Antribute Backend",
   "version": "0.1.0",
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "exports": {
     "import": "./dist/index.js",
     "require": "./dist/index.cjs"
   },
-  "types": "./dist/index.d.ts",
   "files": [
     "dist/**"
   ],
+  "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsup",
     "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf text-results && rimraf .eslintcache",
@@ -21,17 +24,18 @@
   "keywords": [
     "antribute",
     "antribute-backend",
-    "nextauth"
+    "antribute-backend-perms",
+    "auth0-fga"
   ],
   "author": "Antribute, Inc. (https://www.antribute.com)",
   "license": "MIT",
   "devDependencies": {
     "@antribute/backend-core": "workspace:*",
     "@antribute/config": "workspace:*",
-    "@types/node": "18.11.9",
+    "@types/node": "20.1.7",
     "@vitest/coverage-c8": "^0.25.3",
     "eslint": "^8.40.0",
-    "prettier": "2.8.2",
+    "prettier": "2.8.7",
     "tsup": "^6.7.0",
     "typescript": "^5.0.4",
     "vitest": "^0.25.3"

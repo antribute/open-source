@@ -1,16 +1,19 @@
 {
   "name": "@antribute/backend-graphql-pothos",
-  "description": "Antribute Backend GraphQL Adapter for Pothos",
+  "description": "Adds Pothos GraphQL Support to the Antribute Backend",
   "version": "0.1.0",
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "exports": {
     "import": "./dist/index.js",
     "require": "./dist/index.cjs"
   },
-  "types": "./dist/index.d.ts",
   "files": [
     "dist/**"
   ],
+  "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsup",
     "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf text-results && rimraf .eslintcache",
@@ -21,18 +24,24 @@
   "keywords": [
     "antribute",
     "antribute-backend",
+    "antribute-backend-graphql",
     "pothos"
   ],
   "author": "Antribute, Inc. (https://www.antribute.com)",
   "license": "MIT",
+  "dependencies": {
+    "execa": "^7.1.1",
+    "fast-glob": "^3.2.12",
+    "tsx": "^3.12.7"
+  },
   "devDependencies": {
     "@antribute/backend-core": "workspace:*",
     "@antribute/config": "workspace:*",
-    "@types/node": "18.11.9",
+    "@types/node": "20.1.7",
     "@vitest/coverage-c8": "^0.25.3",
     "eslint": "^8.40.0",
     "graphql": "^16.6.0",
-    "prettier": "2.8.2",
+    "prettier": "2.8.7",
     "tsup": "^6.7.0",
     "typescript": "^5.0.4",
     "vitest": "^0.25.3"
@@ -60,10 +69,5 @@
     "@prisma/client": {
       "optional": true
     }
-  },
-  "dependencies": {
-    "execa": "^7.1.1",
-    "fast-glob": "^3.2.12",
-    "tsx": "^3.12.7"
   }
 }

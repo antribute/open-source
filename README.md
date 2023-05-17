@@ -7,8 +7,8 @@
 In order to start using this monorepo, you're gonna need to install a few things:
 
 - [Node Version Manager](https://github.com/nvm-sh/nvm)
-- [Node.js 18](https://nodejs.org/en/) (Installed by running `nvm use` in the root of the repo)
-- [PNPM 7.x](https://pnpm.io/)
+- [Node.js 20](https://nodejs.org/en/) (Installed by running `nvm use` in the root of the repo)
+- [PNPM 8.x](https://pnpm.io/)
 
 Additionally, the following things are nice to have, and have built-in support in this repo:
 
@@ -23,36 +23,45 @@ Additionally, the following things are nice to have, and have built-in support i
 
 ## List of Apps
 
-| Name          | Location   | Port | Start Command             |
-| ------------- | ---------- | ---- | ------------------------- |
-| Todo: Add App | `apps/foo` | 3000 | `pnpm run start apps/foo` |
+| Name                   | Location                     | Port | Start Command           |
+| ---------------------- | ---------------------------- | ---- | ----------------------- |
+| Antribute Landing Page | `apps/landing-page`          | 3000 | `pnpm run dev:lp`       |
+| ADK Todo List Example  | `apps/example-adk-todo-list` | 3000 | `pnpm run dev:adk-todo` |
 
 ## List of Packages
 
-| Name          | Location               | Purpose                                                                             |
-| ------------- | ---------------------- | ----------------------------------------------------------------------------------- |
-| `config`      | `packages/config`      | Stores common configuration files to be shared between apps, packages, and services |
-| `zephyr-core` | `packages/zephyr-core` | Core TailwindCSS Configurations and ClassNames for Zephyr Components                |
+| Name                      | Location                           |
+| ------------------------- | ---------------------------------- |
+| `backend-auth-nextauth`   | `packages/backend-auth-nextauth`   |
+| `backend-core`            | `packages/backend-core`            |
+| `backend-graphql-pothos`  | `packages/backend-graphql-pothos`  |
+| `backend-orm-prisma`      | `packages/backend-orm-prisma`      |
+| `backend-perms-auth0-fga` | `packages/backend-perms-auth0-fga` |
+| `backend-server-nextjs`   | `packages/backend-server-nextjs`   |
+| `config`                  | `packages/config`                  |
+| `tracking`                | `packages/tracking`                |
+| `ui`                      | `packages/ui`                      |
 
-## List of Servers
+<!-- ## List of Servers
 
 | Name             | Location      | Port | Start Command                |
 | ---------------- | ------------- | ---- | ---------------------------- |
-| Todo: Add Server | `servers/foo` | 8000 | `pnpm run start servers/foo` |
+| Todo: Add Server | `servers/foo` | 8000 | `pnpm run start servers/foo` | -->
 
 ## Additional Commands
 
 Each app, package, and server will very likely have its own set of commands, however the monorepo
 root does have a few additional global commands that affect everything:
 
-- `pnpm run build` - creates production builds of all everything in the monorepo
-- `pnpm run build:apps` - creates production builds of all apps
-- `pnpm run build:packages` - creates production builds of all packages
-- `pnpm run build:servers` - creates production builds of all servers
-- `pnpm run lint` - runs ESLint on all apps and packages
-- `pnpm run lint:fix` - runs ESLint on all apps and packages, adds `--fix`
-- `pnpm run release` - runs a script used to create releases
-- `pnpm run reset` - deletes all node modules and builds, re-installs dependencies
-- `pnpm run style:format` - runs Prettier format on all files
-- `pnpm run style:lint` - runs Prettier check on all files
-- `pnpm run test` - runs unit tests on all apps and packages
+- `pnpm run build` - Creates production builds of all everything in the monorepo
+- `pnpm run build:apps` - Creates production builds of all apps
+- `pnpm run build:packages` - Creates production builds of all packages
+- `pnpm run build:servers` - Creates production builds of all servers
+- `pnpm run clean` - Deletes all node modules and builds, re-installs dependencies
+- `pnpm run dev:ui` - Runs storybook for the Antribute UI
+- `pnpm run lint` - Runs ESLint on all apps, packages, and servers
+- `pnpm run lint:fix` - Runs ESLint on all apps, packages, and servers, adds `--fix` to auto-fix any issues
+- `pnpm run postinstall` - Runs after `pnpm i`, auto installs precommit hooks
+- `pnpm run style:format` - Runs Prettier format on all files (except those `.prettierignore`)
+- `pnpm run style:lint` - Runs Prettier check on all files (except those `.prettierignore`)
+- `pnpm run test` - Runs unit tests on all apps packages, and servers

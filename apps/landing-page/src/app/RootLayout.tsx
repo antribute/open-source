@@ -2,7 +2,7 @@
 
 import { TrackingProvider } from '@antribute/tracking';
 import type { ReactNode } from 'react';
-import { AntributeUiProvider } from '@antribute/zephyr-react';
+import { AntributeUiProvider } from '@antribute/ui';
 
 interface RootLayoutProps {
   children: ReactNode;

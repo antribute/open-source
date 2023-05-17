@@ -4,24 +4,21 @@
     "build:apps": "turbo run build --filter=./apps/*",
     "build:packages": "turbo run build --filter=./packages/*",
     "build:servers": "turbo run build --filter=./servers/*",
-    "storybook-react": "turbo run storybook --filter=@antribute/zephyr-react...",
-    "app:landing-page": "turbo run dev --filter=@antribute/landing-page",
-    "clean": "turbo run clean",
+    "clean": "turbo run clean && rm -r ./node_modules && pnpm i",
+    "dev:adk-todo": "turbo run dev --filter=@antribute/example-adk-todo-list...",
+    "dev:lp": "turbo run dev --filter=@antribute/landing-page...",
+    "dev:ui": "turbo run storybook --filter=@antribute/ui...",
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint -- --fix",
     "postinstall": "simple-git-hooks",
-    "nuke": "pnpm run clean && turbo run reset && rm -r ./node_modules",
-    "reset": "pnpm run nuke && pnpm i",
-    "reset:hard": "pnpm run nuke && rm pnpm-lock.yaml && pnpm i",
     "style:format": "prettier --ignore-unknown --write .",
     "style:lint": "prettier --ignore-unknown --check .",
-    "test": "turbo run test -- run",
-    "kill-port": "pnpm dlx kill-port"
+    "test": "turbo run test -- run"
   },
   "devDependencies": {
     "@manypkg/cli": "^0.19.2",
     "lint-staged": "^13.0.3",
-    "prettier": "2.8.2",
+    "prettier": "2.8.7",
     "rimraf": "^3.0.2",
     "simple-git-hooks": "^2.8.1",
     "turbo": "latest",
@@ -30,8 +27,8 @@
   "prettier": "./packages/config/prettier/.prettierrc.cjs",
   "private": true,
   "engines": {
-    "node": ">=18",
-    "pnpm": ">=7"
+    "node": ">=20",
+    "pnpm": ">=8"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm exec lint-staged"

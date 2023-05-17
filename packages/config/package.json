@@ -3,6 +3,9 @@
   "description": "Common configuration files used between all Antribute projects",
   "version": "0.1.0",
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "eslint/**",
     "nextjs/**",
@@ -19,9 +22,13 @@
     "antribute",
     "config",
     "eslint",
-    "prettuer",
+    "nextjs",
+    "postcss",
+    "prettier",
     "tsconfig",
-    "typescript"
+    "tsup",
+    "typescript",
+    "vitest"
   ],
   "author": "Antribute, Inc. (https://www.antribute.com)",
   "license": "MIT",
@@ -47,7 +54,7 @@
   "devDependencies": {
     "eslint": "^8.40.0",
     "next": "13.2.4",
-    "prettier": "2.8.2",
+    "prettier": "2.8.7",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "tsup": "^6.7.0",
@@ -58,7 +65,7 @@
   "peerDependencies": {
     "eslint": "8.40.0",
     "next": "13.2.4",
-    "prettier": "2.8.2",
+    "prettier": "2.8.7",
     "tsup": "6.7.0",
     "typescript": "5.0.4",
     "vitest": ">= 0.25.0 < 1"
