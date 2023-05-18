@@ -5,9 +5,7 @@ import { Select, SelectArrow } from 'ariakit';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import { Input, InputComponentProps } from 'components/Input';
 import { pickInputContainerProps } from 'components/Input/components';
-import { forwardRef, useRef } from 'react';
-import { useObjectRef } from '@react-aria/utils';
-import { measureElement } from 'utils/measureElement';
+import { forwardRef } from 'react';
 import { clsx } from 'clsx';
 import { ComboboxSelectValue } from './ComboboxSelectValue';
 import { ComboboxClearValueAction } from './ComboboxClearValueAction';
@@ -82,18 +80,6 @@ export function ComboboxComponent<TOptions extends L.List<unknown>>(
                 </Input.InputFieldContainer>
               )}
             >
-              {/* <Input.Addon
-                grouping="inline"
-                invisible={!showClearValueAction}
-                focusInputOnClick={false}
-              >
-                <ComboboxClearValueAction
-                  selectState={select}
-                  onClearValue={onClearValue}
-                  clearAllRequiresConfirmation={clearRequiresConfirmation ?? isMultiSelect}
-                />
-              </Input.Addon> */}
-
               <Input.Addon invisible={loading} grouping="inline" className="pr-6 cursor-pointer">
                 <>
                   {showClearValueAction && (

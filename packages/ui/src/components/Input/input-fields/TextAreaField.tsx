@@ -125,7 +125,7 @@ export const BaseTextArea = forwardRef<HTMLTextAreaElement, BaseTextAreaProps>(
         />
 
         <VisuallyHidden>
-          <AriaInput {...props} />
+          <AriaInput {...(props as object)} />
         </VisuallyHidden>
       </>
     );
