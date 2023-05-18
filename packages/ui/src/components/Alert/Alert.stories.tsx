@@ -20,6 +20,8 @@ const alertsProps = (
     {
       variant: 'success',
       title: 'Successfully uploaded',
+      actionButtonText: 'View',
+      onActionButtonClick: () => {},
     },
     {
       variant: 'info',
