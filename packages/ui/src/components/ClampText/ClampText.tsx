@@ -243,7 +243,7 @@ const EllipsisButton = ({
   );
 };
 
-const CollapseButtonElement = classed(TruncationButtonElement, 'scale-90');
+const CollapseButtonElement = classed(TruncationButtonElement, 'scale-90 select-none');
 
 const CollapseButton = ({
   children,
