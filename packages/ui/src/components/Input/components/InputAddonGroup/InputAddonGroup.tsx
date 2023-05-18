@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { deriveClassed } from 'utils/classed';
 import { InputContext as AriaInputContext } from 'react-aria-components';
+import { HoverProps, useHover } from 'react-aria';
 import { parseInputStateProps } from '../../Input.helpers';
 import { useInputAddonList } from './useInputAddonList';
 import type { InputComponentProps } from '../../Input.types';
@@ -18,7 +19,7 @@ type RenderInputFn = (options: {
   hasTrailingAddons: boolean;
 }) => React.ReactNode;
 
-export interface InputAddonGroupProps extends InputGroupElementVariantProps {
+export interface InputAddonGroupProps extends InputGroupElementVariantProps, HoverProps {
   leadingIcon?: React.ReactNode;
   trailingIcon?: React.ReactNode;
   size?: InputComponentProps['size'];
@@ -39,7 +40,7 @@ function useInputWithRefContext() {
 }
 
 export const InputAddonGroup = deriveClassed<typeof InputGroupElement, InputAddonGroupProps>(
-  ({ children, renderInput, ...props }) => {
+  ({ children, renderInput, ...props }, forwardedRef) => {
     const contextProps = useContext(InputContainerContext);
 
     const inputStateProps = contextProps ? parseInputStateProps(contextProps) : undefined;
@@ -50,6 +51,8 @@ export const InputAddonGroup = deriveClassed<typeof InputGroupElement, InputAddo
       mergedProps;
 
     const { ref } = useInputWithRefContext() ?? {};
+
+    const { hoverProps, isHovered: isGroupHovered } = useHover(props);
 
     const {
       leadingInlineAddons,
@@ -69,6 +72,7 @@ export const InputAddonGroup = deriveClassed<typeof InputGroupElement, InputAddo
       loading,
       inputRef: ref,
       showValidationMessageInTooltip,
+      isGroupHovered,
     });
 
     return (
@@ -76,6 +80,8 @@ export const InputAddonGroup = deriveClassed<typeof InputGroupElement, InputAddo
         role="button"
         {...props}
         {...pickInputGroupElementVariantProps(mergedProps)}
+        ref={forwardedRef}
+        {...hoverProps}
       >
         {leadingOutsideAddons}
         {leadingIconAddon}

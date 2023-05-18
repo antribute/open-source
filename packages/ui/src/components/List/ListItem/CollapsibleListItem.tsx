@@ -24,7 +24,7 @@ type CollapsibleRootProps = Pick<
   'open' | 'defaultOpen' | 'onOpenChange'
 >;
 
-type CollapsibleListItemProps = Omit<ListItemButtonProps, 'endIcon' | 'label'> & {
+export type CollapsibleListItemProps = Omit<ListItemButtonProps, 'endIcon' | 'label'> & {
   children: React.ReactNode;
   contentProps?: Omit<CollapsiblePrimitive.CollapsibleContentProps, 'children' | 'asChild'>;
   bottomBorder?: boolean;

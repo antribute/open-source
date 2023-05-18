@@ -1,9 +1,10 @@
 import { ColorSchemeName } from 'config';
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
-import React, { CSSProperties, useState } from 'react';
+import React, { CSSProperties, useLayoutEffect, useRef, useState } from 'react';
 import { Classed, classed } from 'utils/classed';
 import { getNearestColorSchemeAttribute } from 'utils/getNearestColorSchemeAttribute';
-import { pickProps } from 'utils/pickProps';
+import { generatePropPickerFn, pickProps } from 'utils/pickProps';
+import { useNearestColorSchemeAttribute } from 'hooks/useNearestColorSchemeAttribute';
 
 type TooltipContentElementProps = Classed.ComponentProps<typeof TooltipContentElement>;
 
@@ -80,6 +81,27 @@ type TooltipRootProps = Pick<
   'defaultOpen' | 'open' | 'onOpenChange' | 'delayDuration' | 'disableHoverableContent'
 >;
 
+const pickTooltipContentProps = generatePropPickerFn<TooltipContentProps>({
+  style: '_pick_',
+  className: '_pick_',
+  'aria-label': '_pick_',
+  size: '_pick_',
+  align: '_pick_',
+  maxWidth: '_pick_',
+  selectNone: '_pick_',
+  side: '_pick_',
+  sideOffset: '_pick_',
+  alignOffset: '_pick_',
+  arrowPadding: '_pick_',
+  collisionBoundary: '_pick_',
+  collisionPadding: '_pick_',
+  sticky: '_pick_',
+  hideWhenDetached: '_pick_',
+  avoidCollisions: '_pick_',
+  stopPropogation: '_pick_',
+  onTooltipClick: '_pick_',
+});
+
 export type TooltipProps = {
   tooltip?: React.ReactNode;
   triggerProps?: TooltipTriggerProps;
@@ -89,9 +111,9 @@ export type TooltipProps = {
   TooltipContentProps;
 
 export const Tooltip = (props: TooltipProps) => {
-  const [colorSchemDataAttribute, setColorSchemeAttribute] = useState<
-    ColorSchemeName | undefined
-  >();
+  const triggerRef = useRef<HTMLButtonElement>(null);
+
+  const colorSchemeAttribute = useNearestColorSchemeAttribute({ element: triggerRef });
 
   const { children, tooltip, triggerProps, triggerAsChild } = pickProps(props, {
     triggerAsChild: true,
@@ -101,25 +123,7 @@ export const Tooltip = (props: TooltipProps) => {
     forceMount: '_pick_',
   });
 
-  const { onTooltipClick, stopPropogation, ...contentProps } = pickProps<TooltipContentProps>(
-    props,
-    {
-      side: 'bottom',
-      className: '_pick_',
-      maxWidth: '_pick_',
-      selectNone: '_pick_',
-      'aria-label': '_pick_',
-      align: '_pick_',
-      arrowPadding: '_pick_',
-      collisionBoundary: '_pick_',
-      sticky: '_pick_',
-      hideWhenDetached: '_pick_',
-      avoidCollisions: '_pick_',
-      stopPropogation: '_pick_',
-      onTooltipClick: '_pick_',
-      style: '_pick_',
-    }
-  );
+  const tooltipContentProps = pickTooltipContentProps(props);
 
   const tooltipRootProps = pickProps<TooltipRootProps>(props, {
     defaultOpen: '_pick_',
@@ -130,28 +134,19 @@ export const Tooltip = (props: TooltipProps) => {
   });
 
   return (
-    <TooltipPrimitive.Provider>
+    <>
       <TooltipPrimitive.Root delayDuration={100} {...tooltipRootProps}>
-        <TooltipPrimitive.Trigger
-          asChild={triggerAsChild}
-          {...triggerProps}
-          onMouseOverCapture={(e) => {
-            triggerProps.onMouseOverCapture?.(e);
-            setColorSchemeAttribute(getNearestColorSchemeAttribute(e.currentTarget));
-          }}
-        >
+        <TooltipPrimitive.Trigger asChild={triggerAsChild} ref={triggerRef} {...triggerProps}>
           {children}
         </TooltipPrimitive.Trigger>
 
-        {colorSchemDataAttribute && (
-          <TooltipPrimitive.Portal>
-            <TooltipContent colorScheme={colorSchemDataAttribute} {...contentProps}>
-              {tooltip}
-            </TooltipContent>
-          </TooltipPrimitive.Portal>
-        )}
+        <TooltipPrimitive.Portal>
+          <TooltipContent colorScheme={colorSchemeAttribute} {...tooltipContentProps}>
+            {tooltip}
+          </TooltipContent>
+        </TooltipPrimitive.Portal>
       </TooltipPrimitive.Root>
-    </TooltipPrimitive.Provider>
+    </>
   );
 };
 
@@ -160,7 +155,7 @@ export const TooltipContent = ({
   colorScheme,
   onTooltipClick,
   stopPropogation,
-
+  side = 'bottom',
   asChild,
   ...contentProps
 }: {
@@ -171,6 +166,7 @@ export const TooltipContent = ({
   return (
     <TooltipContentElement
       size="md"
+      side={side}
       sideOffset={4}
       collisionPadding={4}
       alignOffset={4}

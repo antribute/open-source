@@ -15,6 +15,7 @@ export const InputFieldContainer = classed(
   'placeholder:select-none',
   'shrink w-full',
   'overflow-hidden',
+
   {
     variants: {
       size: mergeVariants([sizeVariants.paddingY, sizeVariants.paddingX, sizeVariants.textSize]),

@@ -19,6 +19,7 @@ export interface UseInputAddonListProps
   extends Pick<InputAddonGroupProps, 'leadingIcon' | 'trailingIcon' | 'loading' | 'size'> {
   inputStateProps?: ResolvedInputComponentStateProps;
   showValidationMessageInTooltip?: boolean;
+  isGroupHovered: boolean;
   children?: React.ReactNode;
   inputRef:
     | React.RefObject<HTMLInputElement>
@@ -58,6 +59,7 @@ function findInputIcons({
   children,
   inputRef,
   showValidationMessageInTooltip,
+  isGroupHovered,
 }: UseInputAddonListProps): UseInputAddonListReturn {
   const reducedAddons = Children.toArray(children).reduce<ReducedAddonsData>(
     (acc, childNode) => {
@@ -167,7 +169,9 @@ function findInputIcons({
   const addons = objectMap(reducedAddons, ({ key, value }) => {
     return [
       key,
-      (value as InputAddonElement[]).map((e) => cloneElement(e, { _inputRef: inputRef })),
+      (value as InputAddonElement[]).map((e) =>
+        cloneElement(e, { _inputRef: inputRef, isGroupHovered })
+      ),
     ];
   });
 

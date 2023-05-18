@@ -33,17 +33,17 @@ export const CheckboxField = forwardRef<
   ) => {
     return (
       <InputContainer {...props} hideLabel>
-        <InputGroupElement autoWidth filled={Boolean(label)} minWidth={false}>
-          <InputFieldContainer size={size}>
-            <BasicCheckbox
-              {...pickCheckboxProps(props)}
-              ref={forwardedRef}
-              onChange={onChange}
-              focusVisibleRing={false}
-            >
-              {label}
-            </BasicCheckbox>
-          </InputFieldContainer>
+        <InputGroupElement width="auto" cursor="pointer" filled={Boolean(label)} minWidth={false}>
+          <BasicCheckbox
+            {...pickCheckboxProps(props)}
+            ref={forwardedRef}
+            onChange={onChange}
+            focusVisibleRing={false}
+            containerElement={InputFieldContainer}
+            size={size}
+          >
+            {label}
+          </BasicCheckbox>
         </InputGroupElement>
       </InputContainer>
     );

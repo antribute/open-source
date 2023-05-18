@@ -13,7 +13,6 @@ import { Text } from 'components/Text';
 import { BasicCheckbox } from 'components/BasicCheckbox';
 import { ScrollViewport } from 'components/ScrollViewport';
 import { ComboboxFooter, ComboboxFooterProps } from 'components/Combobox/ComboboxFooter';
-import { getNearestColorSchemeAttribute } from 'utils/getNearestColorSchemeAttribute';
 import { useComboboxListVirtualizer } from 'components/Combobox/useComboboxListVirtualizer';
 import {
   UseToggleViewAllSelectedOnUnmountProps,
@@ -22,6 +21,7 @@ import {
 import { Flex } from 'components/Flex';
 import { elementHasOverflowY } from 'utils/elementHasOverflow';
 import { Input } from 'components/Input';
+import { useNearestColorSchemeAttribute } from 'hooks/useNearestColorSchemeAttribute';
 import type { ComboboxProps, RenderComboboxOptionFn, SelectOptionMap } from './Combobox.types';
 
 export interface ComboboxListProps
@@ -85,11 +85,13 @@ export const ComboboxPopover = ({
 
   const virutalItems = virtualizer.getVirtualItems();
 
+  const colorSchemeAttribute = useNearestColorSchemeAttribute({ element: select.anchorRef });
+
   return (
     <SelectPrimitive.SelectPopover
       state={select}
       composite={false}
-      data-color-scheme={getNearestColorSchemeAttribute(select.selectRef.current)}
+      data-color-scheme={colorSchemeAttribute}
       portal
       className={clsx(
         'z-50 relative',
@@ -102,14 +104,20 @@ export const ComboboxPopover = ({
       )}
       style={{ maxHeight }}
     >
-      <div className={clsx('px-4 pt-6 pb-8')}>
+      <div className={clsx('px-4 py-6')}>
         <ComboboxPrimitive.Combobox
           as={Input}
           autoFocus
+          noContainer
           state={combobox}
+          // width="auto"
+          minWidth={false}
+          maxWidth={false}
           // autoSelect
           size="sm"
           fullWidth
+          border={false}
+          filled={false}
           placeholder="Search..."
           loading={searching}
         />
@@ -126,7 +134,6 @@ export const ComboboxPopover = ({
         <ScrollViewport.ScrollAreaContainer
           className="grow relative w-full rounded-b-[inherit] bg-transparent"
           style={{ height: virtualizer.getTotalSize() }}
-          // style={{ height: select.mounted ? virtualizer.getTotalSize() : 0 }}
         >
           <ScrollViewport.ScrollAreaViewport ref={scrollElementRef}>
             <div
@@ -170,7 +177,7 @@ export const ComboboxPopover = ({
                         inactive={!isActive && hasSelected}
                         active={isActive}
                         paddingY="md"
-                        paddingX="sm"
+                        paddingX="xs"
                       >
                         {(props) => (
                           <SelectPrimitive.SelectItem {...props} value={label}>

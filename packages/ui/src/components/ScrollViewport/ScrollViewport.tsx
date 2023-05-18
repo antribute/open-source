@@ -1,14 +1,18 @@
 import { forwardRef } from 'react';
 import { classed } from 'utils/classed';
 import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area';
+import { ScrollBar } from 'components/ScrollViewport/ScrollBar';
 import { ScrollAreaContainer, ScrollAreaContainerProps } from './ScrollAreaContainer';
 
 const ScrollArea = forwardRef<HTMLDivElement, ScrollAreaContainerProps>(
   ({ children, ...props }, forwardedRef) => {
     return (
-      <ScrollAreaContainer {...props}>
-        <ScrollAreaViewport ref={forwardedRef}>{children}</ScrollAreaViewport>
-      </ScrollAreaContainer>
+      <ScrollAreaPrimitive.Root {...props} className="overflow-hidden grow">
+        <ScrollAreaPrimitive.Viewport className="h-full w-full" ref={forwardedRef}>
+          {children}
+        </ScrollAreaPrimitive.Viewport>
+        <ScrollBar />
+      </ScrollAreaPrimitive.Root>
     );
   }
 );

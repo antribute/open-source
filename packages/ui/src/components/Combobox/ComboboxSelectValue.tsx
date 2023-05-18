@@ -40,7 +40,8 @@ export const ComboboxSelectValue = ({
 
 const SelectValueContainerElement = classed(
   'div',
-  'font-body relative z-0 min-w-0 shrink whitespace-nowrap font-medium grow text-left'
+  'font-body relative z-0 min-w-0 shrink whitespace-nowrap font-medium grow text-left',
+  'select-none'
 );
 
 const PlaceholderElement = classed('div', 'font-body text-content-subtle focus:text-content-weak');

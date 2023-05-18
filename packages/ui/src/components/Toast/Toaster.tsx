@@ -190,13 +190,13 @@ export const Toaster = () => {
   }, [isStacked, maxToasts, showAllToasts, toasts]);
 
   return (
-    <ToastPrimitive.Provider swipeDirection="right">
+    <>
       <AnimatePresence mode="popLayout">
         {toastsArr.map(({ id, open, ...props }, index) => {
           return <ToasterToast forceMount open={open} key={id} id={id} {...props} index={index} />;
         })}
       </AnimatePresence>
       <Toast.Viewport layoutRoot />
-    </ToastPrimitive.Provider>
+    </>
   );
 };

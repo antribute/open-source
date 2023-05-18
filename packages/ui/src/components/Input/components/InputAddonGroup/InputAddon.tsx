@@ -10,6 +10,7 @@ import { Spinner } from 'components/Spinner';
 import type { SizeProp } from 'types/styles';
 import { Wrap } from 'components/Wrap';
 import { Tooltip } from 'components/Tooltip';
+import { HoverProps, useHover } from 'react-aria';
 
 type InputAddonVariantProps = Classed.VariantProps<typeof InputAddonElement>;
 
@@ -58,7 +59,7 @@ const InputAddonElement = classed(
   }
 );
 
-export interface InputAddonProps extends InputAddonVariantProps {
+export interface InputAddonProps extends InputAddonVariantProps, Omit<HoverProps, 'isDisabled'> {
   position?: 'leading' | 'trailing';
   grouping?: 'inline' | 'outside';
   focusInputOnClick?: boolean;
@@ -68,7 +69,14 @@ export interface InputAddonProps extends InputAddonVariantProps {
   loadingSpinner?: boolean;
   iconClassName?: string;
   className?: string;
-  children?: React.ReactNode | ((options: { size?: SizeProp }) => React.ReactNode);
+  isGroupHovered?: boolean;
+  children?:
+    | React.ReactNode
+    | ((options: {
+        size?: SizeProp;
+        isHovered: boolean;
+        isGroupHovered: boolean;
+      }) => React.ReactNode);
   tooltip?: React.ReactNode;
   enableTooltip?: boolean;
   /** @internal */
@@ -92,6 +100,11 @@ export const InputAddon = deriveClassed<typeof InputAddonElement, InputAddonProp
       noPadding,
       focusInputOnClick: focusInputOnClickProp,
       excludeFromTabOrder: excludeFromTabOrderProp,
+      onHoverChange,
+      onHoverEnd,
+      onHoverStart,
+      isGroupHovered,
+
       ...rest
     } = props;
 
@@ -101,6 +114,7 @@ export const InputAddon = deriveClassed<typeof InputAddonElement, InputAddonProp
 
     const tooltipEnabled = (enableTooltip && Boolean(tooltip)) || Boolean(tooltip);
 
+    const { hoverProps, isHovered } = useHover({ onHoverChange, onHoverEnd, onHoverStart });
     return (
       <>
         {!enabled ? null : (
@@ -108,14 +122,12 @@ export const InputAddon = deriveClassed<typeof InputAddonElement, InputAddonProp
             if={tooltipEnabled}
             wrap={(c) => {
               return (
-                <Tooltip.Provider>
-                  <Tooltip.Root delayDuration={100}>
-                    <Tooltip.Content side="bottom" size="sm">
-                      {tooltip}
-                    </Tooltip.Content>
-                    <Tooltip.Trigger asChild>{c}</Tooltip.Trigger>
-                  </Tooltip.Root>
-                </Tooltip.Provider>
+                <Tooltip.Root delayDuration={100}>
+                  <Tooltip.Content side="bottom" size="sm">
+                    {tooltip}
+                  </Tooltip.Content>
+                  <Tooltip.Trigger asChild>{c}</Tooltip.Trigger>
+                </Tooltip.Root>
               );
             }}
           >
@@ -131,6 +143,7 @@ export const InputAddon = deriveClassed<typeof InputAddonElement, InputAddonProp
               noPadding={noPadding}
               invisible={invisible}
               {...rest}
+              {...hoverProps}
               onClick={() => {
                 if (focusInputOnClick && _inputRef && 'current' in _inputRef) {
                   _inputRef.current?.focus();
@@ -148,7 +161,13 @@ export const InputAddon = deriveClassed<typeof InputAddonElement, InputAddonProp
                     <Spinner size="sm" />
                   </Position>
                 )}
-                {typeof children === 'function' ? children({ size }) : children}
+                {typeof children === 'function'
+                  ? children({
+                      size,
+                      isHovered,
+                      isGroupHovered: Boolean(isGroupHovered),
+                    })
+                  : children}
               </span>
             </InputAddonElement>
           </Wrap>

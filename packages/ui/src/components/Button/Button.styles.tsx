@@ -44,6 +44,9 @@ export const buttonVariants = {
     fullWidth: {
       true: 'w-full',
     },
+    hoverable: {
+      true: '',
+    },
 
     variant: {
       filled: '',
@@ -108,18 +111,19 @@ export const buttonVariants = {
     ...generateCompoundVariants({
       variant: 'filled',
       color: {
-        primary: 'filled-accent-primary filled-hover-accent-primary',
-        secondary: 'filled-accent-secondary filled-hover-accent-secondary',
-        inverse: 'filled-accent-inverse filled-hover-accent-inverse',
-        heart: 'filled-accent-heart filled-hover-accent-heart',
-        info: 'filled-accent-info filled-hover-accent-info',
-        success: 'filled-accent-success filled-hover-accent-success',
-        danger: 'filled-accent-danger filled-hover-accent-danger',
-        caution: 'filled-accent-caution filled-hover-accent-caution',
+        primary: 'filled-accent-primary',
+        secondary: 'filled-accent-secondary',
+        inverse: 'filled-accent-inverse',
+        heart: 'filled-accent-heart',
+        info: 'filled-accent-info',
+        success: 'filled-accent-success',
+        danger: 'filled-accent-danger',
+        caution: 'filled-accent-caution',
       },
     }),
     ...generateCompoundVariants({
       variant: 'filled',
+      hoverable: true,
       color: {
         primary: 'filled-hover-accent-primary',
         secondary: 'filled-hover-accent-secondary',
@@ -251,13 +255,13 @@ export const ButtonElement = classed.button(
   'transition-colors duration-100',
   'box-border',
   'shrink-0',
-
   {
     defaultVariants: {
       size: 'md',
       rounded: 'default',
       noWrap: true,
       fontWeight: 'medium',
+      hoverable: true,
       color: 'primary',
       justify: 'center',
       variant: 'filled',
