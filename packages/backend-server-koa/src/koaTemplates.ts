@@ -21,19 +21,17 @@ const app = new Koa();
 
 {{#if useGraphql}}
 const yoga = createYoga({
-  context: async () => {
-    {{authContext}}
-  },
+  {{authContext}}
   graphiql: process.env.NODE_ENV !== 'production',
   plugins: process.env.NODE_ENV === 'production' ? [useDisableIntrospection()] : [],
-  graphqlEndpoint: '/api/graphql',
+  graphqlEndpoint: '/graphql',
   schema,
 });
 {{/if}}
 
 app.use(async (ctx) => {
   {{#if useGraphql}}
-  if (ctx.url.includes('/api/graphql')) {
+  if (ctx.url.includes('/graphql')) {
     const res = await yoga.handleNodeRequest(ctx.req, ctx);
     ctx.status = res.status;
     res.headers.forEach((value, key) => {

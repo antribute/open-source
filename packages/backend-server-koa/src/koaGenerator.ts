@@ -5,11 +5,34 @@ import { join } from 'path';
 import { koaHandlerTemplate } from './koaTemplates';
 import type { KoaHandlerTemplate } from './koaTemplates';
 
-const nextAuthContext = `const session = await getServerSession(authOptions);
+const clerkContext = `context: async ({ request }) => {
+    const cookies: Record<string, string> = {};
+    request.headers.get('cookie')?.split(';')?.forEach((cookie) => {
+      const [key, value] = cookie.split('=');
+      if (key && value) {
+        cookies[key.trim()] = value.trim();
+      }
+    });
+
+    const cookieToken = cookies['__session'];
+    const headerToken = request.headers.get('authorization')?.replace('Bearer ', '');
+
+    if (!cookieToken && !headerToken) {
+      return { loggedIn: false };
+    }
+
+    const userId = (await clerk.verifyToken(cookieToken || headerToken)).sub;
+    return { loggedIn: true, userId };
+  },`;
+
+const nextAuthContext = `context: ({ request }) => {
+    const session = await getServerSession(authOptions);
     if (!session) {
       return { loggedIn: false };
     }
-    return { loggedIn: true, userId: (session as unknown as { user: { id: string } }).user.id };`;
+    return { loggedIn: true, userId: (session as unknown as { user: { id: string } }).user.id };
+  }`;
+
 const nextAuthHandler = `
   if (ctx.params.path?.[0] === 'auth' && ctx.params.path.length > 1) {
     const nextAuthHandler = NextAuth(authOptions);
@@ -23,9 +46,15 @@ const createHandler = async (config: Config) => {
   const useGraphql = config.graphql.platform !== 'none';
   const koaOutputDir = join(getGeneratedDir(config), 'koa');
 
-  let authContext = '';
+  let authContext = 'context: undefined,';
   let authHandler = '';
   let authImports: { name: string; from: string }[] = [];
+
+  if (config.auth.platform === '@antribute/backend-auth-clerk') {
+    authContext = clerkContext;
+    authImports = [{ name: 'clerk', from: '@clerk/clerk-sdk-node' }];
+  }
+
   if (config.auth.platform === '@antribute/backend-auth-nextauth') {
     authContext = nextAuthContext;
     authImports = [

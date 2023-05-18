@@ -37,9 +37,9 @@
   "license": "MIT",
   "dependencies": {
     "@testing-library/user-event": "^14.4.3",
-    "cli-color": "^2.0.3",
     "mixpanel": "^0.17.0",
-    "mixpanel-browser": "^2.45.0"
+    "mixpanel-browser": "^2.45.0",
+    "picocolors": "^1.0.0"
   },
   "devDependencies": {
     "@antribute/config": "workspace:*",
