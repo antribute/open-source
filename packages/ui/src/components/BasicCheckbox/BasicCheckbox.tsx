@@ -182,14 +182,12 @@ export const BasicCheckbox = forwardRef<HTMLInputElement, BasicCheckboxProps>(
               if={Boolean(tooltip)}
               wrap={(c) => {
                 return (
-                  <Tooltip.Provider delayDuration={100}>
-                    <Tooltip.Root>
-                      <Tooltip.Content side="right" align="center" size="sm">
-                        {tooltip}
-                      </Tooltip.Content>
-                      <Tooltip.Trigger asChild>{c}</Tooltip.Trigger>
-                    </Tooltip.Root>
-                  </Tooltip.Provider>
+                  <Tooltip.Root>
+                    <Tooltip.Content side="right" align="center" size="sm">
+                      {tooltip}
+                    </Tooltip.Content>
+                    <Tooltip.Trigger asChild>{c}</Tooltip.Trigger>
+                  </Tooltip.Root>
                 );
               }}
             >

@@ -84,32 +84,30 @@ export const ClampText = ({
       wrap={(c) => {
         const { maxTooltipWidth, tooltipWidth, minTooltipWidth } = tooltipProps ?? {};
         return (
-          <Tooltip.Provider>
-            <Tooltip.Root delayDuration={100} open={tooltipOpen} disableHoverableContent>
-              <Tooltip.Trigger asChild>{c}</Tooltip.Trigger>
-              <Tooltip.Portal>
-                <Tooltip.Content
-                  colorScheme="inverse"
-                  side="bottom"
-                  className="shadow-md shadow-palette-black/50"
-                  align="center"
-                  selectNone={false}
-                  onTooltipClick={() => {
-                    setTooltipOpen(false);
-                  }}
-                  size="sm"
-                  maxWidth={false}
-                  style={{
-                    width: tooltipWidth,
-                    minWidth: minTooltipWidth,
-                    maxWidth: maxTooltipWidth ?? measureElement(ref).width,
-                  }}
-                >
-                  {text}
-                </Tooltip.Content>
-              </Tooltip.Portal>
-            </Tooltip.Root>
-          </Tooltip.Provider>
+          <Tooltip.Root delayDuration={100} open={tooltipOpen} disableHoverableContent>
+            <Tooltip.Trigger asChild>{c}</Tooltip.Trigger>
+            <Tooltip.Portal>
+              <Tooltip.Content
+                colorScheme="inverse"
+                side="bottom"
+                className="shadow-md shadow-palette-black/50"
+                align="center"
+                selectNone={false}
+                onTooltipClick={() => {
+                  setTooltipOpen(false);
+                }}
+                size="sm"
+                maxWidth={false}
+                style={{
+                  width: tooltipWidth,
+                  minWidth: minTooltipWidth,
+                  maxWidth: maxTooltipWidth ?? measureElement(ref).width,
+                }}
+              >
+                {text}
+              </Tooltip.Content>
+            </Tooltip.Portal>
+          </Tooltip.Root>
         );
       }}
     >
@@ -131,22 +129,20 @@ export const ClampText = ({
             if={showMoreInTooltip}
             wrap={(c) => {
               return (
-                <Tooltip.Provider>
-                  <Tooltip.Root
-                    delayDuration={150}
-                    disableHoverableContent
-                    onOpenChange={(open) => {
-                      setTooltipOpen(open);
+                <Tooltip.Root
+                  delayDuration={150}
+                  disableHoverableContent
+                  onOpenChange={(open) => {
+                    setTooltipOpen(open);
+                  }}
+                >
+                  <Tooltip.Trigger asChild>{c}</Tooltip.Trigger>
+                  <Tooltip.PrimitiveContent
+                    onPointerDownOutside={(e) => {
+                      e.preventDefault();
                     }}
-                  >
-                    <Tooltip.Trigger asChild>{c}</Tooltip.Trigger>
-                    <Tooltip.PrimitiveContent
-                      onPointerDownOutside={(e) => {
-                        e.preventDefault();
-                      }}
-                    />
-                  </Tooltip.Root>
-                </Tooltip.Provider>
+                  />
+                </Tooltip.Root>
               );
             }}
           >
