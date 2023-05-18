@@ -219,7 +219,6 @@ const TruncationButtonBackgroundElement = classed(
 
 const EllipsisButtonElement = classed(
   TruncationButtonElement,
-  // 'mr-4',
   'group-hover:translate-x-6 transition-transform shrink-0 w-0'
 );
 
@@ -230,7 +229,7 @@ const EllipsisButton = ({
 }: React.ComponentProps<typeof EllipsisButtonElement>) => {
   const clickable = Boolean(onClick);
   return (
-    <EllipsisButtonElement clickable={clickable} {...props}>
+    <EllipsisButtonElement clickable={clickable} onClick={onClick} {...props}>
       <span className="shrink-0 min-w-fit relative">
         <TruncationButtonBackgroundElement
           backgroundHover={clickable}
@@ -279,81 +278,6 @@ interface UseClampTextProps {
   /** The average character width to be assumed for calculating clamped string length. */
   charWidth?: number;
 }
-
-// function truncateReactChildren(
-//   children: ReactNode | ReactNode[],
-//   maxLength: number,
-//   fallback: ReactNode | ReactNode[]
-// ): ReactNode | ReactNode[] {
-//   try {
-//     let currentLength = 0;
-
-//     const truncateChildrenRecursively = (child: ReactNode): ReactNode | null => {
-//       if (currentLength >= maxLength) {
-//         return null;
-//       }
-
-//       if (typeof child === 'string' || typeof child === 'number') {
-//         const remainingLength = maxLength - currentLength;
-//         const truncatedText = child.toString().substring(0, remainingLength);
-//         currentLength += truncatedText.length;
-//         return truncatedText;
-//       }
-
-//       if (React.isValidElement(child) && child.props.children) {
-//         const truncatedChildren = React.Children.map(
-//           child.props.children,
-//           truncateChildrenRecursively
-//         );
-//         return React.cloneElement(child, child.props, truncatedChildren);
-//       }
-
-//       return null;
-//     };
-
-//     return React.Children.map(children, truncateChildrenRecursively);
-//   } catch {
-//     return fallback;
-//   }
-// }
-
-// function truncateReactChildren(
-//   children: ReactNode | ReactNode[],
-//   maxLength: number
-// ): ReactNode | ReactNode[] {
-//   let currentLength = 0;
-
-//   const truncateChildrenRecursively = (child: ReactNode): ReactNode | null => {
-//     if (currentLength >= maxLength) {
-//       return null;
-//     }
-
-//     if (typeof child === 'string' || typeof child === 'number') {
-//       const remainingLength = maxLength - currentLength;
-//       const truncatedText = child.toString().substring(0, remainingLength);
-//       currentLength += truncatedText.length;
-//       return truncatedText;
-//     }
-
-//     if (React.isValidElement(child)) {
-//       const childProps = child.props;
-//       const renderChildren = childProps?.renderChildren;
-//       const childrenToProcess = renderChildren ? renderChildren() : childProps.children;
-//       const truncatedChildren = React.Children.toArray(childrenToProcess)
-//         .map(truncateChildrenRecursively)
-//         .filter((child) => child !== null);
-//       return React.cloneElement(child, child.props, truncatedChildren);
-//     }
-
-//     return null;
-//   };
-
-//   const truncatedChildren = React.Children.toArray(children)
-//     .map(truncateChildrenRecursively)
-//     .filter((child) => child !== null);
-
-//   return truncatedChildren;
-// }
 
 function truncateReactChildren(
   children: ReactNode | ReactNode[],
