@@ -68,9 +68,9 @@ const createBuilder = async (pothosOutputDir: string, config: Config) => {
     if (config.permissions.platform === '@antribute/backend-perms-permify') {
       logger.debug('Populating Pothos Config for Permissions: Permify', config);
 
-      additionalImports += "import { checkPermissions, PermissionsParams } from '../permify';";
+      additionalImports += "import { checkPermission, PermissionsParams } from '../permify';";
       body +=
-        'authScopes: (context) => ({ loggedIn: context.loggedIn, hasPermissions: (perm) => checkPermissions({ ...perm, userId: context.userId }) }),';
+        'authScopes: (context) => ({ loggedIn: context.loggedIn, hasPermissions: (perm) => checkPermission({ ...perm, userId: context.userId }) }),';
       typings = [
         ...typings,
         {

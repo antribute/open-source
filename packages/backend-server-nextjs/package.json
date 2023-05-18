@@ -1,6 +1,6 @@
 {
   "name": "@antribute/backend-server-nextjs",
-  "description": "Antribute Backend Server Adapter for Next.js",
+  "description": "Adds Next.js Support to the Antribute Backend",
   "version": "0.1.0",
   "type": "module",
   "publishConfig": {

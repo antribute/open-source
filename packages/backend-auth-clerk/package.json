@@ -41,6 +41,7 @@
     "vitest": "^0.25.3"
   },
   "peerDependencies": {
-    "@antribute/backend-core": "*"
+    "@antribute/backend-core": "*",
+    "@clerk/clerk-sdk-node": ">= 4.0.0 < 5"
   }
 }

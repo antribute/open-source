@@ -5,7 +5,7 @@ Adds Pothos GraphQL Support to the Antribute Backend
 ## Installation
 
 ```bash
-pnpm i @antribute/backend-graphql-pothos @pothos/core graphql graphql-scalars -D
+pnpm i @antribute/backend-graphql-pothos -D && pnpm i @pothos/core graphql graphql-scalars
 ```
 
 If your application is configured to use auth or permissions, also install the following peer dependency

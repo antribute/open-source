@@ -21,7 +21,7 @@ const clerkContext = `context: async ({ request }) => {
       return { loggedIn: false };
     }
 
-    const userId = (await clerk.verifyToken(cookieToken || headerToken)).sub;
+    const userId = (await clerk.verifyToken(cookieToken || headerToken || '')).sub;
     return { loggedIn: true, userId };
   },`;
 

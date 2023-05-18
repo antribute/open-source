@@ -47,6 +47,32 @@ jobs:
           PRODUCTION: true
           GITHUB_DEPLOYMENT: false
   # Packages
+  release-package-backend-auth-clerk:
+    if: startsWith(github.ref_name, 'backend-auth-clerk/')
+    name: Release @antribute/backend-auth-clerk
+    runs-on: ubuntu-latest
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: antribute
+      TURBO_REMOTE_ONLY: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup
+        uses: antribute/actions/setup@main
+      - name: Check If Version is Valid
+        uses: antribute/actions/check-tag-release@main
+        with:
+          delimiter: '/'
+          pkgPath: './packages/@antribute/backend-auth-clerk/package.json'
+      - name: Build Package and Dependencies
+        run: turbo run build --filter=@antribute/backend-auth-clerk...
+      - name: Publish @antribute/backend-auth-clerk Latest Release to NPM
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          package: './packages/@antribute/backend-auth-clerk/package.json'
+          tag: latest
+          token: ${{ secrets.NPM_TOKEN }}
   release-package-backend-auth-nextauth:
     if: startsWith(github.ref_name, 'backend-auth-nextauth/')
     name: Release @antribute/backend-auth-nextauth
@@ -175,6 +201,58 @@ jobs:
         uses: JS-DevTools/npm-publish@v1
         with:
           package: './packages/@antribute/backend-perms-auth0-fga/package.json'
+          tag: latest
+          token: ${{ secrets.NPM_TOKEN }}
+  release-package-backend-perms-permify:
+    if: startsWith(github.ref_name, 'backend-perms-permify/')
+    name: Release @antribute/backend-perms-permify
+    runs-on: ubuntu-latest
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: antribute
+      TURBO_REMOTE_ONLY: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup
+        uses: antribute/actions/setup@main
+      - name: Check If Version is Valid
+        uses: antribute/actions/check-tag-release@main
+        with:
+          delimiter: '/'
+          pkgPath: './packages/@antribute/backend-perms-permify/package.json'
+      - name: Build Package and Dependencies
+        run: turbo run build --filter=@antribute/backend-perms-permify...
+      - name: Publish @antribute/backend-perms-permify Latest Release to NPM
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          package: './packages/@antribute/backend-perms-permify/package.json'
+          tag: latest
+          token: ${{ secrets.NPM_TOKEN }}
+  release-package-backend-server-koa:
+    if: startsWith(github.ref_name, 'backend-server-koa/')
+    name: Release @antribute/backend-server-koa
+    runs-on: ubuntu-latest
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: antribute
+      TURBO_REMOTE_ONLY: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup
+        uses: antribute/actions/setup@main
+      - name: Check If Version is Valid
+        uses: antribute/actions/check-tag-release@main
+        with:
+          delimiter: '/'
+          pkgPath: './packages/@antribute/backend-server-koa/package.json'
+      - name: Build Package and Dependencies
+        run: turbo run build --filter=@antribute/backend-server-koa...
+      - name: Publish @antribute/backend-server-koa Latest Release to NPM
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          package: './packages/@antribute/backend-server-koa/package.json'
           tag: latest
           token: ${{ secrets.NPM_TOKEN }}
   release-package-backend-server-nextjs:

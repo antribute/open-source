@@ -1,6 +1,6 @@
 {
   "name": "@antribute/backend-server-koa",
-  "description": "Antribute Backend Server Adapter for Koa",
+  "description": "Adds Koa Support to the Antribute Backend",
   "version": "0.1.0",
   "type": "module",
   "publishConfig": {
@@ -46,7 +46,7 @@
     "@antribute/backend-core": "*",
     "@graphql-yoga/plugin-disable-introspection": ">= 0.8.0 < 1",
     "graphql-yoga": ">= 3.0.0 < 4",
-    "next": ">= 13.0.0 < 14"
+    "koa": ">= 2.0.0 < 3"
   },
   "peerDependenciesMeta": {
     "@graphql-yoga/plugin-disable-introspection": {

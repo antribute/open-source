@@ -42,6 +42,6 @@
   },
   "peerDependencies": {
     "@antribute/backend-core": "*",
-    "@auth0/fga": ">= 0.9.0 < 1"
+    "@permify/permify-node": ">= 0.3.2 < 1"
   }
 }

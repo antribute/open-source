@@ -1,11 +1,11 @@
-# Antribute Next.js Server Provider
+# Antribute Koa Server Provider
 
-Adds Next.js API Handler Support to the Antribute Backend
+Adds Koa Support to the Antribute Backend
 
 ## Installation
 
 ```bash
-pnpm i @antribute/backend-server-nextjs -D
+pnpm i @antribute/backend-server-koa -D && pnpm i koa
 ```
 
 If your application is configured to use GraphQL, also install the following peer dependency
@@ -20,6 +20,6 @@ pnpm i @graphql-yoga/plugin-disable-introspection graphql-yoga
 1. Add the following
    ```typescript
    import { defineConfig } from '@antribute/backend-core';
-   export default defineConfig({ permissions: { platform: '@antribute/backend-perms-auth0-fga' } });
+   export default defineConfig({ server: { platform: '@antribute/backend-server-koa' } });
    ```
 1. Run the Antribute CLI to auto-generate required files

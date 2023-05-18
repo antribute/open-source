@@ -5,52 +5,129 @@ export const permifyIndexTemplate = `//
 //
 
 import permify from '@permify/permify-node';
+import { readFile } from 'fs/promises';
 
 export interface PermissionsParams {
   objectId: string;
   objectType: string;
   relation: string;
+  tenantId: string;
   userId: string;
+  userType?: string;
 }
 
 export const buildPermify = () => {
   const client = permify.grpc.newClient({
     cert: null,
-    endpoint: "localhost:3478",
+    endpoint: process.env.PERMIFY_ENDPOINT!,
   });
   return client;
-}
-
-export const addPermissions = async ({ objectId, objectType, relation, userId }: PermissionsParams): Promise<void> => {
-  const permify = buildPermify();
-  console.log(objectId, objectType, relation, userId, permify);
-  // await auth0Fga.write({
-  //   authorization_model_id: authModelId || process.env.AUTH0_FGA_MODEL_ID!,
-  //   writes: {
-  //     tuple_keys: [{ object: \`\${objectType}:\${objectId}\`, relation, user: \`user:\${userId}\` }]
-  //   },
-  // });
 };
 
-export const checkPermissions = async ({ objectId, objectType, relation, userId }: PermissionsParams): Promise<boolean> => {
+export const writeSchema = async (tenantName: string, schemaPath: string) => {
   const permify = buildPermify();
-  console.log(objectId, objectType, relation, userId, permify);
-  // const res = await auth0Fga.check({
-  //   authorization_model_id: authModelId || process.env.AUTH0_FGA_MODEL_ID!,
-  //   tuple_key: { object: \`\${objectType}:\${objectId}\`, relation, user: \`user:\${userId}\` }
-  // });
-  // return res.allowed ?? false;
-  return false;
+  const schemaContent = (await readFile(schemaPath)).toString();
+  await permify.schema.write({
+    tenantId: tenantName,
+    schema: schemaContent,
+  });
 };
 
-export const removePermissions = async ({ objectId, objectType, relation, userId }: PermissionsParams): Promise<void> => {
+export const createTenant = async (tenantName: string, schemaPath?: string) => {
   const permify = buildPermify();
-  console.log(objectId, objectType, relation, userId, permify);
-  // await auth0Fga.write({
-  //   authorization_model_id: authModelId || process.env.AUTH0_FGA_MODEL_ID!,
-  //   deletes: {
-  //     tuple_keys: [{ object: \`\${objectType}:\${objectId}\`, relation, user: \`user:\${userId}\` }]
-  //   },
-  // });
+  await permify.tenancy.create({
+    id: tenantName,
+    name: tenantName,
+  });
+  if (schemaPath) {
+    await writeSchema(tenantName, schemaPath);
+  }
+};
+
+export const addPermissions = async (
+  perms: Omit<PermissionsParams, 'tenantId'>[],
+  tenantId: string
+): Promise<void> => {
+  const permify = buildPermify();
+  await permify.relationship.write({
+    tenantId,
+    tuples: perms.map(({ objectId, objectType, relation, userId, userType }) => ({
+      entity: {
+        id: objectId,
+        type: objectType,
+      },
+      relation,
+      subject: {
+        id: userId,
+        type: userType || 'user',
+      },
+    })),
+  });
+};
+
+export const checkPermission = async ({
+  objectId,
+  objectType,
+  relation,
+  tenantId,
+  userId,
+  userType,
+}: PermissionsParams): Promise<boolean> => {
+  const permify = buildPermify();
+  const res = await permify.permission.check({
+    tenantId,
+    entity: {
+      id: objectId,
+      type: objectType,
+    },
+    permission: relation,
+    subject: {
+      id: userId,
+      type: userType || 'user',
+    },
+  });
+  return res.can === 1;
+};
+
+export const getAllObjectsWithPermission = async ({
+  objectType,
+  relation,
+  tenantId,
+  userId,
+  userType,
+}: Omit<PermissionsParams, 'objectId'>) => {
+  const permify = buildPermify();
+  const res = await permify.permission.lookupEntity({
+    tenantId,
+    entityType: objectType,
+    permission: relation,
+    subject: { id: userId, type: userType || 'user' },
+  });
+  return res.entityIds;
+};
+
+export const removePermission = async ({
+  objectId,
+  objectType,
+  relation,
+  tenantId,
+  userId,
+  userType,
+}: PermissionsParams): Promise<void> => {
+  const permify = buildPermify();
+  await permify.relationship.delete({
+    tenantId,
+    filter: {
+      entity: {
+        ids: [objectId],
+        type: objectType,
+      },
+      relation,
+      subject: {
+        ids: [userId],
+        type: userType,
+      },
+    },
+  });
 };
 `;

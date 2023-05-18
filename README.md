@@ -32,11 +32,14 @@ Additionally, the following things are nice to have, and have built-in support i
 
 | Name                      | Location                           |
 | ------------------------- | ---------------------------------- |
+| `backend-auth-clerk`      | `packages/backend-auth-clerk`      |
 | `backend-auth-nextauth`   | `packages/backend-auth-nextauth`   |
 | `backend-core`            | `packages/backend-core`            |
 | `backend-graphql-pothos`  | `packages/backend-graphql-pothos`  |
 | `backend-orm-prisma`      | `packages/backend-orm-prisma`      |
 | `backend-perms-auth0-fga` | `packages/backend-perms-auth0-fga` |
+| `backend-perms-permify`   | `packages/backend-perms-permify`   |
+| `backend-server-koa`      | `packages/backend-server-koa`      |
 | `backend-server-nextjs`   | `packages/backend-server-nextjs`   |
 | `config`                  | `packages/config`                  |
 | `tracking`                | `packages/tracking`                |

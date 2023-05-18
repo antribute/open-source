@@ -18,6 +18,11 @@ jobs:
         uses: antribute/actions/setup@main
       - name: Build All Packages
         run: pnpm run build:packages
+      - name: Publish @antribute/backend-auth-clerk Dev Release to NPM
+        uses: antribute/actions/publish-dev-package@main
+        with:
+          npmToken: ${{ secrets.NPM_TOKEN }}
+          pkgPath: './packages/backend-auth-clerk/package.json'
       - name: Publish @antribute/backend-auth-nextauth Dev Release to NPM
         uses: antribute/actions/publish-dev-package@main
         with:
@@ -43,6 +48,16 @@ jobs:
         with:
           npmToken: ${{ secrets.NPM_TOKEN }}
           pkgPath: './packages/backend-perms-auth0-fga/package.json'
+      - name: Publish @antribute/backend-perms-permify Dev Release to NPM
+        uses: antribute/actions/publish-dev-package@main
+        with:
+          npmToken: ${{ secrets.NPM_TOKEN }}
+          pkgPath: './packages/backend-perms-permify/package.json'
+      - name: Publish @antribute/backend-server-koa Dev Release to NPM
+        uses: antribute/actions/publish-dev-package@main
+        with:
+          npmToken: ${{ secrets.NPM_TOKEN }}
+          pkgPath: './packages/backend-server-koa/package.json'
       - name: Publish @antribute/backend-server-nextjs Dev Release to NPM
         uses: antribute/actions/publish-dev-package@main
         with:

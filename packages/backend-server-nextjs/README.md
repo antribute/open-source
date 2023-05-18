@@ -20,6 +20,6 @@ pnpm i @graphql-yoga/plugin-disable-introspection graphql-yoga
 1. Add the following
    ```typescript
    import { defineConfig } from '@antribute/backend-core';
-   export default defineConfig({ permissions: { platform: '@antribute/backend-perms-auth0-fga' } });
+   export default defineConfig({ server: { platform: '@antribute/backend-server-nextjs' } });
    ```
 1. Run the Antribute CLI to auto-generate required files
