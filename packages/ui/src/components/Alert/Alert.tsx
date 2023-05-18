@@ -12,7 +12,9 @@ export interface AlertProps {
   variant?: AlertVariant;
   icon?: React.ReactNode;
   children?: React.ReactNode;
+  actionButtonText?: React.ReactNode;
   onDiscardClick?: () => void;
+  onActionButtonClick?: () => void;
 }
 
 const AlertContainer = classed('div', 'flex', 'rounded-md relative overflow-hidden', {
@@ -45,7 +47,9 @@ export const Alert = ({
   title,
   description,
   icon,
+  actionButtonText,
   onDiscardClick,
+  onActionButtonClick,
 }: AlertProps) => {
   return (
     <AlertContainer data-color-scheme={variant} className="!text-primary-dark bg-primary/10">
@@ -68,14 +72,18 @@ export const Alert = ({
             </div>
           ),
         }}
-        end={{
-          align: 'end',
-          value: (
-            <Button variant="glass" rounded size="xs">
-              View
-            </Button>
-          ),
-        }}
+        end={
+          onActionButtonClick
+            ? {
+                align: 'end',
+                value: (
+                  <Button variant="glass" rounded size="xs" color={variant}>
+                    {actionButtonText ?? 'View'}
+                  </Button>
+                ),
+              }
+            : undefined
+        }
         description={{
           color: 'current',
           className: 'opacity-80',
