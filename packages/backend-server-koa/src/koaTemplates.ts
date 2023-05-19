@@ -12,7 +12,9 @@ export const koaHandlerTemplate = `//
 import Koa from 'koa';
 {{#if useGraphql}}
 import { useDisableIntrospection } from '@graphql-yoga/plugin-disable-introspection'
-import { createYoga } from 'graphql-yoga'
+import { GraphQLError } from 'graphql';
+import { createYoga } from 'graphql-yoga';
+import { maskError } from 'graphql-yoga';
 import schema from '../graphqlSchema';
 {{/if}}
 {{#each authImports}}import {{name}} from '{{from}}';\n{{/each}}
@@ -26,6 +28,12 @@ const yoga = createYoga({
   plugins: process.env.NODE_ENV === 'production' ? [useDisableIntrospection()] : [],
   graphqlEndpoint: '/graphql',
   schema,
+  maskedErrors: {
+    maskError(error, message, isDev) {
+      // Leaving this in here for now in case we want to use it later
+      return maskError(error, message, isDev);
+    },
+  },
 });
 {{/if}}
 
