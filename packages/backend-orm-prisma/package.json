@@ -35,12 +35,14 @@
     "rimraf": "^4.4.1"
   },
   "devDependencies": {
-    "@antribute/backend-core": "workspace:*",
-    "@antribute/config": "workspace:*",
+    "@antribute/backend-core": "workspace:0.1.0",
+    "@antribute/config": "workspace:0.1.0",
+    "@prisma/client": "^4.8.1",
     "@types/node": "20.1.7",
     "@vitest/coverage-c8": "^0.25.3",
     "eslint": "^8.40.0",
     "prettier": "2.8.7",
+    "prisma": "^4.13.0",
     "tsup": "^6.7.0",
     "typescript": "^5.0.4",
     "vitest": "^0.25.3"

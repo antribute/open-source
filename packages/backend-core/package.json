@@ -41,7 +41,7 @@
     "rimraf": "^4.4.1"
   },
   "devDependencies": {
-    "@antribute/config": "workspace:*",
+    "@antribute/config": "workspace:0.1.0",
     "@types/lodash-es": "^4.17.6",
     "@types/node": "20.1.7",
     "@vitest/coverage-c8": "^0.25.3",
