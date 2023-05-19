@@ -2,9 +2,17 @@ import clsx from 'clsx';
 
 import { SizeProp } from 'types/styles';
 import { generatePropPickerFn, objectMap } from 'utils';
-import { ClassedVariantProps, classed, classedCore, generateCompoundVariants } from 'utils/classed';
+import {
+  ClassedVariantProps,
+  classed,
+  classedCore,
+  generateCompoundVariants,
+  mergeVariants,
+} from 'utils/classed';
 
 export type InputSurfaceVariants = ClassedVariantProps<typeof inputSurfaceClassName>;
+
+const borderRing = clsx('ring-1 ring-inset focus:ring-1 focus:ring-inset');
 
 export const inputSurfaceClassName = classed(
   'div',
@@ -15,12 +23,19 @@ export const inputSurfaceClassName = classed(
       border: true,
     },
     variants: {
+      cursor: {
+        pointer: 'cursor-pointer',
+      },
       border: {
-        true: 'ring-1 ring-boundary-weak ring-inset focus:ring-1 focus:ring-boundary-weak focus:ring-inset',
+        // true: 'ring-1 ring-boundary-weak ring-inset focus:ring-1 focus:ring-boundary-weak focus:ring-inset',
+        true: clsx(borderRing, 'ring-boundary-weak focus:ring-boundary-weak'),
+        subtle: clsx(borderRing, 'ring-highlight-subtle focus:ring-highlight-subtle'),
         false: '',
       },
       filled: {
         true: 'bg-surface-soft shadow-sm',
+        tint: clsx('bg-highlight-tint'),
+        subtle: clsx('bg-highlight-ghost'),
       },
       roundedFull: {
         true: 'rounded-full',
@@ -33,6 +48,7 @@ export const pickInputSurfaceVariantProps = generatePropPickerFn<InputSurfaceVar
   filled: '_pick_',
   border: '_pick_',
   roundedFull: '_pick_',
+  cursor: '_pick_',
 });
 
 export const primitiveInputClassName = classedCore(
@@ -52,7 +68,7 @@ const inputComponentWidths = {
   xs: { width: clsx('w-80'), minWidth: clsx('min-w-[80px]'), maxWidth: clsx('max-w-[80px]') },
   sm: { width: clsx('w-152'), minWidth: clsx('min-w-[152px]'), maxWidth: clsx('max-w-[152px]') },
   md: { width: clsx('w-216'), minWidth: clsx('min-w-[216px]'), maxWidth: clsx('max-w-[216px]') },
-  lg: { width: clsx('w-328'), minWidth: clsx('min-w-[328px]'), maxWidth: clsx('max-w-[328px]') },
+  lg: { width: clsx('w-264'), minWidth: clsx('min-w-[264px]'), maxWidth: clsx('max-w-[264px]') },
 } satisfies Record<SizeProp, Record<WidthProperty, string>>;
 
 const inputWidthPropSizes = objectMap(['width', 'minWidth', 'maxWidth'], ({ value: widthKey }) => {
@@ -67,68 +83,45 @@ export type InputSizeVariants = ClassedVariantProps<typeof inputSizeClassName>;
 
 export const inputSizeClassName = classedCore('div', 'w-auto', {
   defaultVariants: {
-    // fixedWidth: true,
     fullWidth: false,
-    maxWidth: false,
-    minWidth: false,
     size: 'md',
+    width: 'fixed',
   },
   variants: {
-    size: {
-      xs: 'text-xs',
-      sm: 'text-sm',
-      md: 'text-md',
-      lg: 'text-lg',
-    },
-    fixedWidth: {
-      true: '',
-    },
-    autoWidth: {
-      true: '!w-auto',
-    },
+    size: mergeVariants([
+      {
+        xs: 'text-xs',
+        sm: 'text-sm',
+        md: 'text-md',
+        lg: 'text-lg',
+      },
+      // inputWidthPropSizes.width,
+    ]),
     fullWidth: {
       true: '!w-full',
     },
 
-    minWidth: {
-      false: 'min-w-0',
-      ...inputWidthPropSizes.minWidth,
+    width: {
+      fixed: '',
+      auto: 'w-auto',
+      ...inputWidthPropSizes.width,
     },
-    maxWidth: {
-      // false: 'max-w-none',
-      // true: '',
-      // sm: '',
-      // xs: '',
-      // md: '',
-      // lg: '',
-      ...inputWidthPropSizes.minWidth,
-    },
+    minWidth: inputWidthPropSizes.minWidth,
+    maxWidth: inputWidthPropSizes.maxWidth,
   },
-
   compoundVariants: [
-    // Fixed Width Sizes
     ...generateCompoundVariants({
-      // fixedWidth: true,
-      // fullWidth: false,
-      // size: inputWidthPropSizes.width,
-    }),
-
-    // Max Width Sizes
-    ...generateCompoundVariants({
-      // maxWidth: true,
-      // fullWidth: true,
-      className: '!w-auto',
-      maxWidth: inputWidthPropSizes.maxWidth,
+      width: 'fixed',
+      size: inputWidthPropSizes.width,
     }),
   ],
 });
 
 export const pickInputSizeVariantProps = generatePropPickerFn<InputSizeVariants>({
-  fixedWidth: '_pick_',
   fullWidth: '_pick_',
   minWidth: '_pick_',
   size: '_pick_',
-  autoWidth: '_pick_',
+  width: '_pick_',
   maxWidth: '_pick_',
 });
 

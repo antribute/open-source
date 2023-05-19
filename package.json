@@ -5,7 +5,7 @@
     "build:apps": "turbo run build --filter=./apps/*",
     "build:packages": "turbo run build --filter=./packages/*",
     "build:servers": "turbo run build --filter=./servers/*",
-    "clean": "turbo run clean && rm -r ./node_modules && pnpm i",
+    "clean": "turbo run clean && echo \"⏳ Removing node_modules...\" && rm -r ./node_modules",
     "dev:adk-todo": "turbo run dev --filter=@antribute/example-adk-todo-list...",
     "dev:lp": "turbo run dev --filter=@antribute/landing-page...",
     "dev:ui": "turbo run storybook --filter=@antribute/ui...",
@@ -15,7 +15,10 @@
     "postinstall": "simple-git-hooks && pnpm run lint:package-versions",
     "style:format": "prettier --ignore-unknown --write .",
     "style:lint": "prettier --ignore-unknown --check .",
-    "test": "turbo run test -- run"
+    "reset": "pnpm run clean && pnpm i",
+    "reset:hard": "pnpm run clean && rm pnpm-lock.yaml && pnpm i",
+    "test": "turbo run test -- run",
+    "kill-port": "pnpm dlx kill-port"
   },
   "dependencies": {
     "@manypkg/cli": "^0.19.2",

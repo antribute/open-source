@@ -76,7 +76,7 @@ const CardBody = forwardRef<HTMLDivElement, ScrollBodyProps>((props, ref) => {
 //  Description
 export type CardDescriptionProps = React.ComponentProps<typeof CardDescriptionElement>;
 
-const Description = (props: CardDescriptionProps) => {
+const CardDescription = (props: CardDescriptionProps) => {
   return <CardDescriptionElement {...props} />;
 };
 
@@ -88,13 +88,12 @@ const CardFooter = (props: CardFooterProps) => {
   return <CardFooterSectionElement {...props} />;
 };
 
-// Exports
-
-const Container = CardContainer;
-const TitleSection = CardTitleSection;
-const BodySection = CardBody;
-const FooterSection = CardFooter;
-const Title = CardTitleHeading;
-const GroupSpacer = CardGroupSpacer;
-
-export { Container, TitleSection, BodySection, FooterSection, Title, GroupSpacer, Description };
+export const Card = Object.assign(CardContainer, {
+  Container: CardContainer,
+  TitleSection: CardTitleSection,
+  BodySection: CardBody,
+  FooterSection: CardFooter,
+  Title: CardTitleHeading,
+  GroupSpacer: CardGroupSpacer,
+  Description: CardDescription,
+});

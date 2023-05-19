@@ -9,7 +9,7 @@ export default stateColors.flatMap((color) => {
     colorMode: 'light',
     scheme: {
       'primary-content-max-contrast': `palette-${color}-500`,
-      'primary-content-min-contrast': `palette-${color}-500`,
+      'primary-content-min-contrast': `palette-${color}-600`,
 
       content: `palette-white`,
 

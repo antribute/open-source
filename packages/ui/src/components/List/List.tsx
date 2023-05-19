@@ -1,11 +1,21 @@
-import { classed, expandVariant } from 'utils/classed';
 import React from 'react';
-import { CollapsibleListItem } from 'components/List/ListItem/CollapsibleListItem';
-import { ListItemGroup } from 'components/List/ListItem/ListItem';
-import { ListItemLink } from 'components/List/ListItem/ListItemLink';
-import { ListItemButton } from 'components/List/ListItem/ListItemButton';
+import { classed, expandVariant } from 'utils/classed';
 import { getDataAttributes } from 'config';
-import { listItemSizingClassName } from 'components/List/ListItem/BaseListItem';
+import {
+  listItemSizingClassName,
+  ListItemGroup,
+  ListItemButton,
+  ListItemLink,
+  CollapsibleListItem,
+} from './ListItem';
+
+export type {
+  CollapsibleListItemProps,
+  ListItemBaseProps,
+  ListItemLinkProps,
+  ListItemProps,
+  ListItemContainerProps,
+} from './ListItem';
 
 // Container
 
@@ -109,7 +119,7 @@ const ListSectionItem = ({ title }: { title: string }) => {
 
 // Spacing
 
-const Spacing = classed('hr', 'w-full opacity-0', {
+const ListSpacing = classed('hr', 'w-full opacity-0', {
   variants: {
     size: {
       xs: 'pb-8',
@@ -123,25 +133,13 @@ const Spacing = classed('hr', 'w-full opacity-0', {
   },
 });
 
-const Container = ListContainer;
-
-const CollapsibleItem = CollapsibleListItem;
-
-const SectionTitle = ListSectionTitle;
-
-const Item = ListItemGroup;
-
-const LinkItem = ListItemLink;
-
-const ButtonItem = ListItemButton;
-
-export {
-  Container,
-  Item,
-  LinkItem,
-  ButtonItem,
-  CollapsibleItem,
-  Spacing,
-  SectionTitle,
-  ListSectionItem,
-};
+export const List = Object.assign(ListContainer, {
+  Container: ListContainer,
+  Item: ListItemGroup,
+  LinkItem: ListItemLink,
+  ButtonItem: ListItemButton,
+  CollapsibleItem: CollapsibleListItem,
+  Spacing: ListSpacing,
+  SectionTitle: ListSectionTitle,
+  SectionItem: ListSectionItem,
+});

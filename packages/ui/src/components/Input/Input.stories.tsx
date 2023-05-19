@@ -4,7 +4,8 @@ import { changeCase } from 'utils/changeCase';
 import { Flex } from 'components/Flex';
 import { Paper } from 'components/Paper';
 import { useState } from 'react';
-import { TextAreaFieldProps } from 'components/Input';
+import { InputComponentProps, TextAreaFieldProps } from 'components/Input';
+import { getSizeKeys } from 'utils/storybook-utils';
 import { Input, TextFieldProps } from '.';
 
 const meta = {
@@ -24,61 +25,37 @@ export const Default: Story = {
     </div>
   ),
 };
-export const Widths: Story = {
+
+export const Sizes: Story = {
   args: {},
-  render: () => (
-    <div>
-      {(
-        [
-          {
-            label: 'Full width',
-            fullWidth: true,
-          },
-          {
-            label: 'Max width - lg',
-            maxWidth: 'lg',
-            fullWidth: true,
-          },
-          {
-            label: 'Max width - md',
-            maxWidth: 'md',
-            fullWidth: true,
-          },
-          {
-            label: 'Max width - sm',
-            maxWidth: 'sm',
-            fullWidth: true,
-          },
-          {
-            label: 'Max width - xs',
-            maxWidth: 'xs',
-            fullWidth: true,
-          },
-          {
-            label: 'Min width',
-            minWidth: 'xs',
-            className: 'shrink',
-          },
-          {
-            label: 'Min width',
-            minWidth: 'sm',
-          },
-          {
-            label: 'Min width',
-            minWidth: 'md',
-          },
-          {
-            label: 'Min width',
-            minWidth: 'lg',
-          },
-        ] satisfies TextFieldProps[]
-      ).map((props, i) => (
-        <div>
-          <Input key={i} {...props} name="" placeholder="Enter value..." />
-        </div>
-      ))}
-    </div>
-  ),
+  render: () => {
+    const sizeProps = ['size', 'minWidth', 'maxWidth'] satisfies (keyof InputComponentProps)[];
+
+    const renderSizes = sizeProps.map((property) => {
+      return {
+        property,
+        props: getSizeKeys().map((size) => {
+          return {
+            [property]: size,
+            label: `${changeCase(property, 'capital')} - ${size}`,
+          };
+        }) satisfies TextFieldProps[],
+      };
+    });
+
+    return (
+      <div>
+        <Input name="" label="Full Width - fullWidth" fullWidth placeholder="Enter value..." />
+        {renderSizes.map(({ property, props }) => (
+          <Flex column className="my-30" key={property}>
+            {props.map((e, i) => (
+              <Input key={i} {...e} name="" placeholder="Enter value..." />
+            ))}
+          </Flex>
+        ))}
+      </div>
+    );
+  },
 };
 
 export const Required: Story = {
@@ -283,6 +260,7 @@ export const CheckboxGroupExample = () => {
           onChange={(e) => {
             setEnvironments(e);
           }}
+          columns="2"
           label="Environment"
           value={environments}
           options={mockDataEnvironments.map((e) => ({

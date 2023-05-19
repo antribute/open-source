@@ -57,6 +57,10 @@ const StatusBadgeElement = classed(ButtonElement, {
       full: 'rounded-full',
     },
   },
+  defaultVariants: {
+    // @ts-expect-error inherited default
+    hoverable: false,
+  },
 });
 export const StatusBadge = ({
   children: childrenProp,
@@ -104,6 +108,7 @@ export const StatusBadge = ({
       size={size}
       onClick={onClick}
       color={color}
+      hoverable={false}
       disabled={disabled}
       className={twMerge(colorClass, className)}
       // {...props}

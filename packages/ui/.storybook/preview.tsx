@@ -7,7 +7,7 @@ import { colorPalette } from '../src/config';
 import { useDarkMode } from '../src/hooks/useDarkMode';
 import { LIGHT_MODE, DARK_MODE, DEFAULT_THEME } from '../src/constants/theme';
 import { Preview } from '@storybook/react';
-
+import { AntributeUiProvider } from '../src/components/AntributeUiProvider';
 export const preview: Preview = {
   parameters: {
     layout: 'fullscreen',
@@ -54,7 +54,7 @@ export const parameters: Parameters = {
   },
 };
 
-export const withTailwindTheme: Decorator = (Story, context) => {
+export const withProvider: Decorator = (Story, context) => {
   const { theme } = context.globals;
 
   const { setDarkMode } = useDarkMode();
@@ -67,7 +67,11 @@ export const withTailwindTheme: Decorator = (Story, context) => {
     }
   }, [theme]);
 
-  return <Story />;
+  return (
+    <AntributeUiProvider>
+      <Story />
+    </AntributeUiProvider>
+  );
 };
 
-export const decorators: Decorator[] = [withTailwindTheme];
+export const decorators: Decorator[] = [withProvider];

@@ -8,6 +8,7 @@ import { Detail } from 'components/Detail';
 import { Text } from 'components/Text';
 import { Flex } from 'components/Flex';
 import { useMockCharactersQuery } from 'mock/mock-apis';
+import { RenderPaperContainers } from 'utils/storybook-utils';
 import { Combobox } from '.';
 
 const meta = {
@@ -53,6 +54,22 @@ export const Default: StoryObj = {
         </div>
       ))}
     </div>
+  ),
+};
+
+export const Surfaces: StoryObj = {
+  render: () => (
+    <RenderPaperContainers className="flex flex-wrap gap-8">
+      <Combobox
+        label="Users"
+        options={mdUserOptions}
+        isMultiSelect={false}
+        getOptionLabel={(e) => `${e.name} ${e.name}`}
+        onValueChange={(e) => {
+          console.log('E', e);
+        }}
+      />
+    </RenderPaperContainers>
   ),
 };
 

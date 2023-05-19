@@ -38,6 +38,7 @@ export interface DetailProps extends DetailSlots {
   breakpoints?: Record<BreakpointKey, DetailSlots>;
   /** @description Enables responsiveness (WIP) */
   adaptive?: boolean;
+  currentColor?: boolean;
 }
 
 const DetailContainer = classed('div', 'grid relative w-full', {
@@ -346,6 +347,7 @@ export const DetailComponent = ({
               })}
             >
               <DetailText
+                currentColor={props.currentColor}
                 className={clsx('items-center', {
                   'justify-end': column === 'end',
                   'inline-flex': !floatRight,
@@ -358,6 +360,7 @@ export const DetailComponent = ({
               />
               {column === 'main' && slotData.value && (
                 <DetailText
+                  currentColor={props.currentColor}
                   className={clsx('text-left shrink-0 grow', {
                     'float-right': floatRight,
                     'pl-8': slotData.value,
@@ -390,14 +393,17 @@ function DetailText(props: {
   slotId?: SlotId;
   slotProps: SlotItemData;
   className?: string;
+  currentColor?: boolean;
   style?: CSSProperties;
 }) {
-  const { slotProps, slotId, className, style } = props;
+  const { slotProps, slotId, className, style, currentColor } = props;
 
   const slotData = isSlotItemProps(slotProps) ? slotProps : normalizeSlotPropData(slotProps);
 
   const { variant, value, className: overrideClassName, ...overrideTextProps } = slotData;
   const textSlotProps = textComponentProps[variant ?? slotId ?? 'body'];
+
+  const color = overrideTextProps.color ?? (currentColor ? 'current' : textSlotProps.color);
 
   return (
     <>
@@ -405,6 +411,7 @@ function DetailText(props: {
         <Text
           {...textSlotProps}
           {...overrideTextProps}
+          color={color}
           className={twMerge(className, overrideClassName)}
           style={style}
         >

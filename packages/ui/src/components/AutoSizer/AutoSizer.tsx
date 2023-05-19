@@ -11,7 +11,7 @@ interface SizeOption {
   height?: number;
 }
 
-interface AutoSizerProps<TAsChild extends true | undefined>
+export interface AutoSizerProps<TAsChild extends true | undefined>
   extends Omit<ReactVirtualizedAutoSizerProps, 'children'> {
   autoSizerClassName?: string;
   children: TAsChild extends true ? React.ReactNode : (size: SizeOption) => JSX.Element;

@@ -24,18 +24,19 @@ export interface InputContainerProps
   label?: React.ReactNode;
   hideLabel?: InputLabelProps['hideLabel'];
   errorMessage?: React.ReactNode;
-  hideErrorMessageSlot?: boolean;
+  hideMessageSlots?: boolean;
   description?: React.ReactNode;
   labelDescription?: string;
   optionalLabelIndicator?: string | boolean;
   inputContainerClassName?: string;
   children?: React.ReactNode;
   fullWidth?: boolean;
+  noContainer?: boolean;
 }
 
 type InputContainerElementProps = React.ComponentProps<typeof InputContainerElement>;
 
-const InputContainerElement = classed('div', 'inline-block gap-8 flex-wrap', {
+const InputContainerElement = classed('div', 'group inline-block gap-8 flex-wrap', {
   variants: {
     fullWidth: { true: 'w-full' },
   },
@@ -61,8 +62,9 @@ export const InputContainer = deriveClassed<
     descriptionProps,
     errorMessageProps,
     showValidationMessageInTooltip,
-    hideErrorMessageSlot: hideErrorMessageSlotProp,
+    hideMessageSlots,
     loading,
+    noContainer,
     ...rest
   } = props;
 
@@ -75,7 +77,19 @@ export const InputContainer = deriveClassed<
 
   const { observe, width: childrenWidth } = useDimensions();
 
-  const hideErrorMessageSlot = hideErrorMessageSlotProp ?? !showValidationMessageInTooltip;
+  const showDescriptionSlot = hideMessageSlots ?? Boolean(description);
+
+  const showErrorMessageSlot = hideMessageSlots ?? !showValidationMessageInTooltip;
+
+  const ctxProps = {
+    value: { ...props, ...inputStateProps },
+  };
+
+  if (noContainer) {
+    return (
+      <InputContainerContext.Provider {...ctxProps}>{children}</InputContainerContext.Provider>
+    );
+  }
 
   return (
     <InputContainerElement className={className} {...rest} ref={forwardedRef}>
@@ -93,7 +107,7 @@ export const InputContainer = deriveClassed<
         {label}
       </InputLabel>
 
-      <InputContainerContext.Provider value={{ ...props, ...inputStateProps }}>
+      <InputContainerContext.Provider {...ctxProps}>
         <div
           ref={observe}
           className={clsx({ 'inline-block': !props.fullWidth, 'w-full': props.fullWidth })}
@@ -102,13 +116,13 @@ export const InputContainer = deriveClassed<
         </div>
       </InputContainerContext.Provider>
 
-      {description && (
+      {showDescriptionSlot && (
         <InputDescription {...descriptionProps} className="block" slot="description">
           {description}
         </InputDescription>
       )}
 
-      {hideErrorMessageSlot && (
+      {showErrorMessageSlot && (
         <InputValidationMessage
           {...errorMessageProps}
           inputStateProps={inputStateProps}
@@ -132,7 +146,8 @@ export const pickInputContainerProps = generatePropPickerFn<InputContainerProps>
   labelProps: '_pick_',
   hideLabel: '_pick_',
   errorMessage: '_pick_',
-  hideErrorMessageSlot: '_pick_',
+  hideMessageSlots: '_pick_',
+  noContainer: '_pick_',
   description: '_pick_',
   labelDescription: '_pick_',
   optionalLabelIndicator: '_pick_',

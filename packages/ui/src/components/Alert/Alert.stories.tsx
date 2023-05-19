@@ -6,6 +6,13 @@ const meta = {
   args: {},
   title: 'Feedback/Alert',
   component: Alert,
+  decorators: [
+    (Story) => (
+      <div className="p-8 bg-surface rounded-lg">
+        <Story />
+      </div>
+    ),
+  ],
 } satisfies Meta<typeof Alert>;
 
 export default meta;
@@ -17,6 +24,14 @@ const loremIpsum =
 
 const alertsProps = (
   [
+    {
+      variant: 'inverse',
+      title: 'Call to action',
+    },
+    {
+      variant: 'secondary',
+      title: 'Action items',
+    },
     {
       variant: 'success',
       title: 'Successfully uploaded',
@@ -93,5 +108,39 @@ export const Discard: Story = {
   args: {},
   render: () => {
     return <AlertsMock onDiscardClick={() => {}} />;
+  },
+};
+
+export const ActionButton: Story = {
+  args: {},
+  render: () => {
+    return (
+      <AlertsMock
+        onDiscardClick={() => {}}
+        actionButtonText="View"
+        onActionButtonClick={() => {}}
+      />
+    );
+  },
+};
+
+export const WithoutIcon: Story = {
+  args: {},
+  render: () => {
+    return <AlertsMock icon={null} actionButtonText="View" onActionButtonClick={() => {}} />;
+  },
+};
+export const Body: Story = {
+  args: {},
+  render: () => {
+    return (
+      <AlertsMock
+        icon={null}
+        description={null}
+        actionButtonText="View"
+        body="Amet nostrud commodo officia anim magna ullamco dolor. Labore est mollit in irure. Incididunt labore do veniam sunt dolor pariatur laboris veniam irure voluptate sint consequat. Aute elit tempor in sunt nulla est."
+        onActionButtonClick={() => {}}
+      />
+    );
   },
 };

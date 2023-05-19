@@ -1,5 +1,4 @@
 import { Classed, classed } from 'utils/classed';
-import * as ToastPrimitive from '@radix-ui/react-toast';
 import React, { useMemo } from 'react';
 import { ButtonProps } from 'components/Button';
 import { toastActions, toastState } from 'components/Toast/toast-function';
@@ -190,13 +189,13 @@ export const Toaster = () => {
   }, [isStacked, maxToasts, showAllToasts, toasts]);
 
   return (
-    <ToastPrimitive.Provider swipeDirection="right">
+    <>
       <AnimatePresence mode="popLayout">
         {toastsArr.map(({ id, open, ...props }, index) => {
           return <ToasterToast forceMount open={open} key={id} id={id} {...props} index={index} />;
         })}
       </AnimatePresence>
       <Toast.Viewport layoutRoot />
-    </ToastPrimitive.Provider>
+    </>
   );
 };

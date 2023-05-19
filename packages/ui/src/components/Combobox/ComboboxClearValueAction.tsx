@@ -8,12 +8,14 @@ import { Tooltip } from 'components/Tooltip';
 
 export interface ComboboxClearValueActionProps {
   selectState: SelectState;
+  className?: string;
   clearAllRequiresConfirmation?: boolean;
   onClearValue?: () => void;
 }
 
 export const ComboboxClearValueAction = ({
   selectState,
+  className,
   clearAllRequiresConfirmation,
   onClearValue,
 }: ComboboxClearValueActionProps) => {
@@ -52,14 +54,18 @@ export const ComboboxClearValueAction = ({
         size="xs"
         variant="ghost"
         color="secondary"
-        className={clsx('transition-opacity ', {
-          'opacity-0 group-hover:opacity-100': !confirmationPopoverOpen,
-        })}
+        className={clsx(
+          'transition-opacity ',
+          {
+            'opacity-0 group-hover:opacity-100': !confirmationPopoverOpen,
+          },
+          className
+        )}
         onClick={() => {
           handleClearButtonClick();
         }}
       >
-        <Tooltip tooltip="Clear" size="xs" side="bottom" sideOffset={10}>
+        <Tooltip tooltip="Clear" size="xs" side="bottom" sideOffset={5}>
           <div className="absolute h-full w-full top-0" />
         </Tooltip>
         <XMarkIcon className="text-content-weak stroke-current stroke-2 " />

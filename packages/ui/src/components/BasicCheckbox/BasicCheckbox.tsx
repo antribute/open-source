@@ -69,10 +69,10 @@ const CheckboxElement = classed(
       },
 
       isDisabled: {
-        true: 'opacity-40 cursor-auto',
+        true: 'text-content-moderate cursor-auto bg-surface-dark border-highlight-moderate',
       },
       isReadOnly: {
-        true: '!cursor-not-allowed cursor-auto',
+        true: '!cursor-not-allowed',
       },
 
       focusVisibleRing: {
@@ -108,7 +108,7 @@ const CheckboxContainerElement = classed(
     variants: {
       size: getSizeVariant('children'),
       isDisabled: {
-        true: 'opacity-40',
+        true: 'text-content-moderate',
       },
       isReadOnly: {
         true: 'cursor-auto text-content-moderate',
@@ -125,6 +125,7 @@ export interface BasicCheckboxProps
   pointerEventsNone?: boolean;
   label?: React.ReactNode;
   tooltip?: React.ReactNode;
+  containerElement?: React.ComponentType<any>;
 }
 
 export const BasicCheckbox = forwardRef<HTMLInputElement, BasicCheckboxProps>(
@@ -139,6 +140,7 @@ export const BasicCheckbox = forwardRef<HTMLInputElement, BasicCheckboxProps>(
       pointerEventsNone,
       label,
       tooltip,
+      containerElement,
       ...props
     },
     forwardedRef
@@ -180,18 +182,17 @@ export const BasicCheckbox = forwardRef<HTMLInputElement, BasicCheckboxProps>(
               if={Boolean(tooltip)}
               wrap={(c) => {
                 return (
-                  <Tooltip.Provider delayDuration={100}>
-                    <Tooltip.Root>
-                      <Tooltip.Content side="right" align="center" size="sm">
-                        {tooltip}
-                      </Tooltip.Content>
-                      <Tooltip.Trigger asChild>{c}</Tooltip.Trigger>
-                    </Tooltip.Root>
-                  </Tooltip.Provider>
+                  <Tooltip.Root>
+                    <Tooltip.Content side="right" align="center" size="sm">
+                      {tooltip}
+                    </Tooltip.Content>
+                    <Tooltip.Trigger asChild>{c}</Tooltip.Trigger>
+                  </Tooltip.Root>
                 );
               }}
             >
               <CheckboxContainerElement
+                as={containerElement as never}
                 onClick={() => {
                   toggleState.toggle();
                 }}
@@ -268,6 +269,7 @@ export const pickCheckboxProps = generatePropPickerFn<BasicCheckboxProps>({
   checkboxClassName: '_pick_',
   checkboxContainerClassName: '_pick_',
   pointerEventsNone: '_pick_',
+  containerElement: '_pick_',
 });
 
 function renderPropsClassName({

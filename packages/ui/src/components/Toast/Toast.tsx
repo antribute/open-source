@@ -228,7 +228,7 @@ const ToastViewportActions = ({
   const [open, setOpen] = useState(false);
 
   return (
-    <Tooltip.Provider>
+    <>
       <Tooltip.Root
         delayDuration={0}
         open={open}
@@ -301,7 +301,7 @@ const ToastViewportActions = ({
           </Tooltip.Content>
         </Tooltip.Portal>
       </Tooltip.Root>
-    </Tooltip.Provider>
+    </>
   );
 };
 

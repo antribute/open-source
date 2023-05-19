@@ -1,1 +1,1 @@
-export * as List from './List';
+export * from './List';
