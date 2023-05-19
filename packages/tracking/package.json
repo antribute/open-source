@@ -42,7 +42,7 @@
     "picocolors": "^1.0.0"
   },
   "devDependencies": {
-    "@antribute/config": "workspace:*",
+    "@antribute/config": "workspace:0.1.0",
     "@testing-library/dom": "^8.19.0",
     "@testing-library/react": "^13.4.0",
     "@types/cli-color": "^2.0.2",

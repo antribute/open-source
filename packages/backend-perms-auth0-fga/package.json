@@ -30,8 +30,9 @@
   "author": "Antribute, Inc. (https://www.antribute.com)",
   "license": "MIT",
   "devDependencies": {
-    "@antribute/backend-core": "workspace:*",
-    "@antribute/config": "workspace:*",
+    "@antribute/backend-core": "workspace:0.1.0",
+    "@antribute/config": "workspace:0.1.0",
+    "@auth0/fga": "^0.9.1",
     "@types/node": "20.1.7",
     "@vitest/coverage-c8": "^0.25.3",
     "eslint": "^8.40.0",
