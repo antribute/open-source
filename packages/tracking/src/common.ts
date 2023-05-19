@@ -1,5 +1,5 @@
-import clc from 'cli-color';
+import pc from 'picocolors';
 
 // eslint-disable-next-line import/prefer-default-export
 export const buildLoggingPrefix = (token?: string) =>
-  clc.blue(token?.length ? '[Tracking]:' : '[Tracking (Log Only)]:');
+  pc.blue(token?.length ? '[Tracking]:' : '[Tracking (Log Only)]:');

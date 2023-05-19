@@ -17,11 +17,14 @@
 ############
 
 # Backend
+./packages/backend-auth-clerk/* @jrkienle
 ./packages/backend-auth-nextauth/* @jrkienle
 ./packages/backend-core/* @jrkienle
 ./packages/backend-graphql-pothos/* @jrkienle
 ./packages/backend-orm-prisma/* @jrkienle
 ./packages/backend-perms-auth0-fga/* @jrkienle
+./packages/backend-perms-permify/* @jrkienle
+./packages/backend-server-koa/* @jrkienle
 ./packages/backend-server-nextjs/* @jrkienle
 
 # Config

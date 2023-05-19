@@ -1,0 +1,48 @@
+{
+  "name": "@antribute/backend-perms-permify",
+  "description": "Adds Permify Support to the Antribute Backend",
+  "version": "0.1.0",
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    "import": "./dist/index.js",
+    "require": "./dist/index.cjs"
+  },
+  "files": [
+    "dist/**"
+  ],
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf text-results && rimraf .eslintcache",
+    "dev": "pnpm run build --watch",
+    "lint": "eslint --cache ./src",
+    "test": "vitest"
+  },
+  "keywords": [
+    "antribute",
+    "antribute-backend",
+    "antribute-backend-perms",
+    "permify"
+  ],
+  "author": "Antribute, Inc. (https://www.antribute.com)",
+  "license": "MIT",
+  "devDependencies": {
+    "@antribute/backend-core": "workspace:0.1.0",
+    "@antribute/config": "workspace:0.1.0",
+    "@permify/permify-node": "^0.3.2",
+    "@types/node": "20.1.7",
+    "@vitest/coverage-c8": "^0.25.3",
+    "eslint": "^8.40.0",
+    "prettier": "2.8.7",
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.4",
+    "vitest": "^0.25.3"
+  },
+  "peerDependencies": {
+    "@antribute/backend-core": "*",
+    "@permify/permify-node": ">= 0.3.2 < 1"
+  }
+}

@@ -5,45 +5,51 @@ import { parse, resolve } from 'path';
 
 export interface Config {
   auth: {
-    platform: '@antribute/backend-auth-nextauth' | 'none';
+    customConfig: Record<string, unknown>;
+    platform: '@antribute/backend-auth-clerk' | '@antribute/backend-auth-nextauth' | 'none';
   };
+  dir: string;
   graphql: {
-    dir: string;
+    customConfig: Record<string, unknown>;
     platform: '@antribute/backend-graphql-pothos' | 'none';
   };
   logLevel: 'debug' | 'info' | 'warn' | 'error';
   orm: {
-    dir: string;
+    customConfig: Record<string, unknown>;
     platform: '@antribute/backend-orm-prisma' | 'none';
   };
   permissions: {
-    platform: '@antribute/backend-perms-auth0-fga' | 'none';
+    customConfig: Record<string, unknown>;
+    platform: '@antribute/backend-perms-auth0-fga' | '@antribute/backend-perms-permify' | 'none';
   };
   server: {
-    dir: string;
-    platform: '@antribute/backend-server-express' | '@antribute/backend-server-nextjs' | 'none';
+    customConfig: Record<string, unknown>;
+    platform: '@antribute/backend-server-koa' | '@antribute/backend-server-nextjs' | 'none';
   };
 }
 
 export const defaultConfig: Config = {
   auth: {
-    platform: '@antribute/backend-auth-nextauth',
+    customConfig: {},
+    platform: '@antribute/backend-auth-clerk',
   },
+  dir: resolve('src', 'server'),
   graphql: {
-    dir: resolve('generated', 'pothos'),
+    customConfig: {},
     platform: '@antribute/backend-graphql-pothos',
   },
   logLevel: 'info',
   orm: {
-    dir: 'prisma',
+    customConfig: {},
     platform: '@antribute/backend-orm-prisma',
   },
   permissions: {
-    platform: '@antribute/backend-perms-auth0-fga',
+    customConfig: {},
+    platform: '@antribute/backend-perms-permify',
   },
   server: {
-    dir: resolve('src', 'server'),
-    platform: '@antribute/backend-server-nextjs',
+    customConfig: {},
+    platform: '@antribute/backend-server-koa',
   },
 };
 

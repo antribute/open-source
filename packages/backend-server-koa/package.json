@@ -1,0 +1,61 @@
+{
+  "name": "@antribute/backend-server-koa",
+  "description": "Adds Koa Support to the Antribute Backend",
+  "version": "0.1.0",
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    "import": "./dist/index.js",
+    "require": "./dist/index.cjs"
+  },
+  "files": [
+    "dist/**"
+  ],
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf text-results && rimraf .eslintcache",
+    "dev": "pnpm run build --watch",
+    "lint": "eslint --cache ./src",
+    "test": "vitest"
+  },
+  "keywords": [
+    "antribute",
+    "antribute-backend",
+    "antribute-backend-server",
+    "koa"
+  ],
+  "author": "Antribute, Inc. (https://www.antribute.com)",
+  "license": "MIT",
+  "devDependencies": {
+    "@antribute/backend-core": "workspace:0.1.0",
+    "@antribute/config": "workspace:0.1.0",
+    "@graphql-yoga/plugin-disable-introspection": "^0.8.1",
+    "@types/node": "20.1.7",
+    "@vitest/coverage-c8": "^0.25.3",
+    "eslint": "^8.40.0",
+    "graphql": "^16.6.0",
+    "graphql-yoga": "^3.1.1",
+    "koa": "^2.14.2",
+    "prettier": "2.8.7",
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.4",
+    "vitest": "^0.25.3"
+  },
+  "peerDependencies": {
+    "@antribute/backend-core": "*",
+    "@graphql-yoga/plugin-disable-introspection": ">= 0.8.0 < 1",
+    "graphql-yoga": ">= 3.0.0 < 4",
+    "koa": ">= 2.0.0 < 3"
+  },
+  "peerDependenciesMeta": {
+    "@graphql-yoga/plugin-disable-introspection": {
+      "optional": true
+    },
+    "graphql-yoga": {
+      "optional": true
+    }
+  }
+}

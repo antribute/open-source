@@ -5,7 +5,7 @@ Adds NextAuth.js Support to the Antribute Backend
 ## Installation
 
 ```bash
-pnpm i @antribute/backend-auth-nextauth -D next-auth
+pnpm i @antribute/backend-auth-nextauth -D && pnpm i next-auth
 ```
 
 If your application's ORM is `prisma`, also install the following peer dependency

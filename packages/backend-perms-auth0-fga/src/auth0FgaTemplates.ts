@@ -34,7 +34,7 @@ export const addPermissions = async ({ authModelId, objectId, objectType, relati
   });
 };
 
-export const checkPermissions = async ({ authModelId, objectId, objectType, relation, userId }: PermissionsParams): Promise<boolean> => {
+export const checkPermission = async ({ authModelId, objectId, objectType, relation, userId }: PermissionsParams): Promise<boolean> => {
   const auth0Fga = buildFga();
   const res = await auth0Fga.check({
     authorization_model_id: authModelId || process.env.AUTH0_FGA_MODEL_ID!,

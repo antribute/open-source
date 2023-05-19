@@ -37,41 +37,51 @@ const createBuilder = async (pothosOutputDir: string, config: Config) => {
   let plugins: PothosBuilderTemplate['plugins'] = [];
   let typings: PothosBuilderTemplate['typings'] = [];
 
-  // There's a tony bit of duplicated code here, we might wanna clean this up down the line
-  if (
-    config.auth.platform === '@antribute/backend-auth-nextauth' &&
-    config.permissions.platform === 'none'
-  ) {
-    logger.debug('Populating Pothos Config for Auth: NextAuth with no Permissions Adapter', config);
-    body += 'authScopes: (context) => ({ loggedIn: context.loggedIn }),';
+  // First off, let's check and see if the server is using any form of auth
+  if (config.auth.platform !== 'none') {
+    logger.debug('Adding Scope Auth to Pothos Config', config);
+    additionalImports += "import { GraphQLError } from 'graphql';\n";
     plugins = [...plugins, { name: 'ScopeAuthPlugin', from: '@pothos/plugin-scope-auth' }];
-    typings = [
-      ...typings,
-      { name: 'AuthScopes', value: '{ loggedIn: boolean }' },
-      { name: 'Context', value: '{ loggedIn: boolean, userId: string }' },
-    ];
-  }
-
-  if (
-    config.auth.platform === '@antribute/backend-auth-nextauth' &&
-    config.permissions.platform === '@antribute/backend-perms-auth0-fga'
-  ) {
-    logger.debug(
-      'Populating Pothos Config for Auth: NextAuth with Permissions Adapter: Auth0 FGA',
-      config
-    );
-    additionalImports += "import { checkPermissions, PermissionsParams } from '../auth0Fga';";
+    typings = [...typings, { name: 'Context', value: '{ loggedIn: boolean, userId: string }' }];
     body +=
-      'authScopes: (context) => ({ loggedIn: context.loggedIn, hasPermissions: (perm) => checkPermissions({ ...perm, userId: context.userId }) }),';
-    plugins = [...plugins, { name: 'ScopeAuthPlugin', from: '@pothos/plugin-scope-auth' }];
-    typings = [
-      ...typings,
-      {
-        name: 'AuthScopes',
-        value: "{ hasPermissions: Omit<PermissionsParams, 'userId'>, loggedIn: boolean }",
-      },
-      { name: 'Context', value: '{ loggedIn: boolean, userId: string }' },
-    ];
+      "scopeAuthOptions: { treatErrorsAsUnauthorized: true, unauthorizedError: () => new GraphQLError('You do not have permission to access this resource') },\n";
+
+    // From there, we'll add any applicable FGA code
+    if (config.permissions.platform === 'none') {
+      logger.debug('Populating Pothos Config for Permissions: None', config);
+      body += 'authScopes: (context) => ({ loggedIn: context.loggedIn }),\n';
+      typings = [...typings, { name: 'AuthScopes', value: '{ loggedIn: boolean }' }];
+    }
+
+    if (config.permissions.platform === '@antribute/backend-perms-auth0-fga') {
+      logger.debug('Populating Pothos Config for Permissions: Auth0 FGA', config);
+
+      additionalImports += "import { checkPermissions, PermissionsParams } from '../auth0Fga';";
+      body +=
+        'authScopes: (context) => ({ loggedIn: context.loggedIn, hasPermissions: async (perm) => { if (!context.loggedIn) return false; return checkPermission({ ...perm, userId: context.userId }) }}),';
+      typings = [
+        ...typings,
+        {
+          name: 'AuthScopes',
+          value: "{ hasPermissions: Omit<PermissionsParams, 'userId'>, loggedIn: boolean }",
+        },
+      ];
+    }
+
+    if (config.permissions.platform === '@antribute/backend-perms-permify') {
+      logger.debug('Populating Pothos Config for Permissions: Permify', config);
+
+      additionalImports += "import { checkPermission, PermissionsParams } from '../permify';";
+      body +=
+        'authScopes: (context) => ({ loggedIn: context.loggedIn, hasPermissions: async (perm) => { if (!context.loggedIn) return false; return checkPermission({ ...perm, userId: context.userId }) }}),';
+      typings = [
+        ...typings,
+        {
+          name: 'AuthScopes',
+          value: "{ hasPermissions: Omit<PermissionsParams, 'userId'>, loggedIn: boolean }",
+        },
+      ];
+    }
   }
 
   if (config.orm.platform === '@antribute/backend-orm-prisma') {
@@ -139,9 +149,7 @@ const stitchSchema = async (generatedDir: string, config: Config) => {
   const pothosGlob = join(serverDir, '**', '*.{mutations,objects,queries}.ts');
   logger.debug(`Pothos schema search glob set to ${pothosGlob}`, config);
 
-  const parsedServerDir = config.server.dir.includes('./')
-    ? config.server.dir.split('./')[1]!
-    : config.server.dir;
+  const parsedServerDir = config.dir.includes('./') ? config.dir.split('./')[1]! : config.dir;
   const modules = (await glob(pothosGlob))
     .map((part) => {
       logger.debug(`Pothos schema part found at ${part}`, config);

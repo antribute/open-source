@@ -10,7 +10,7 @@ interface GenerateFileParams {
   filePath: string;
 }
 
-export const getServerDir = (config: Config) => resolve(process.cwd(), config.server.dir);
+export const getServerDir = (config: Config) => resolve(process.cwd(), config.dir);
 
 export const getGeneratedDir = (config: Config) => join(getServerDir(config), 'generated');
 

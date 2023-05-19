@@ -12,6 +12,8 @@
   - 'apps/example-adk-todo-list/**'
 'App: Antribute Landing Page':
   - 'apps/landing-page/**'
+'Package: Backend Auth (Clerk)':
+  - 'packages/backend-auth-clerk/**'
 'Package: Backend Auth (NextAuth)':
   - 'packages/backend-auth-nextauth/**'
 'Package: Backend Core':
@@ -22,6 +24,10 @@
   - 'packages/backend-orm-prisma/**'
 'Package: Backend Perms (Auth0 FGA)':
   - 'packages/backend-perms-auth0-fga/**'
+'Package: Backend Perms (Permify)':
+  - 'packages/backend-perms-permify/**'
+'Package: Backend Server (Koa)':
+  - 'packages/backend-server-koa/**'
 'Package: Backend Server (Next.js)':
   - 'packages/backend-server-nextjs/**'
 'Package: Config':
