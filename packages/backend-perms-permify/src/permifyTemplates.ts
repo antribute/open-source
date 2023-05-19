@@ -44,14 +44,19 @@ export const createTenant = async (tenantName: string, schemaPath?: string) => {
   }
 };
 
+interface AddPermissionsPerm extends Omit<PermissionsParams, 'tenantId'> {
+  userRelation?: string
+}
+
 export const addPermissions = async (
-  perms: Omit<PermissionsParams, 'tenantId'>[],
+  perms: AddPermissionsPerm[],
   tenantId: string
 ): Promise<void> => {
   const permify = buildPermify();
   await permify.relationship.write({
+    metadata: {},
     tenantId,
-    tuples: perms.map(({ objectId, objectType, relation, userId, userType }) => ({
+    tuples: perms.map(({ objectId, objectType, relation, userId, userRelation, userType }) => ({
       entity: {
         id: objectId,
         type: objectType,
@@ -60,6 +65,7 @@ export const addPermissions = async (
       subject: {
         id: userId,
         type: userType || 'user',
+        relation: userRelation
       },
     })),
   });
@@ -75,6 +81,7 @@ export const checkPermission = async ({
 }: PermissionsParams): Promise<boolean> => {
   const permify = buildPermify();
   const res = await permify.permission.check({
+    metadata: {},
     tenantId,
     entity: {
       id: objectId,
@@ -98,6 +105,7 @@ export const getAllObjectsWithPermission = async ({
 }: Omit<PermissionsParams, 'objectId'>) => {
   const permify = buildPermify();
   const res = await permify.permission.lookupEntity({
+    metadata: {},
     tenantId,
     entityType: objectType,
     permission: relation,
