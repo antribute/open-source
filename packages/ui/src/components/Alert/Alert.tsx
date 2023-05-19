@@ -2,13 +2,16 @@ import React from 'react';
 import { Detail } from 'components/Detail';
 import { classed } from 'utils/classed';
 import { Button } from 'components/Button';
-import { ClampText } from 'components/ClampText/ClampText';
+import { ClampText, ClampTextProps } from 'components/ClampText/ClampText';
+import { Text } from 'components/Text';
+import clsx from 'clsx';
 
-type AlertVariant = 'danger' | 'caution' | 'success' | 'info' | 'heart';
+type AlertVariant = 'danger' | 'caution' | 'success' | 'info' | 'heart' | 'secondary' | 'inverse';
 
 export interface AlertProps {
   title?: React.ReactNode;
   description?: React.ReactNode;
+  body?: React.ReactNode;
   variant?: AlertVariant;
   icon?: React.ReactNode;
   children?: React.ReactNode;
@@ -17,78 +20,107 @@ export interface AlertProps {
   onActionButtonClick?: () => void;
 }
 
-const AlertContainer = classed('div', 'flex', 'rounded-md relative overflow-hidden', {
-  // variants: {
-  //   variant: {
-  //     heart: 'glass-accent-heart !text-heart',
-  //     info: 'glass-accent-info !text-info',
-  //     success: 'glass-accent-success !text-success',
-  //     danger: 'glass-accent-danger !text-danger',
-  //     caution: 'glass-accent-caution !text-caution',
-  //   } satisfies Record<AlertVariant, string>,
-  // },
-});
+const AlertContainer = classed(
+  'div',
+  'flex',
+  'rounded-md relative min-w-fit max-w-full overflow-hidden'
+);
 
-const AlertIconElement = classed('div', 'h-20 w-20  flex items-center !text-primary ', {
-  variants: {
-    variant: {
-      success: 'i-heroicons-check-circle-20-solid',
-      danger: 'i-heroicons-x-circle-20-solid',
-      info: 'i-heroicons-information-circle-20-solid',
-      caution: 'i-heroicons-exclamation-circle-20-solid',
-      heart: 'i-heroicons-heart-20-solid',
-    } satisfies Record<AlertVariant, string>,
-  },
-});
+const defaultIcon =
+  'before:i-heroicons-star-20-solid before-absolute-content before:absolute-center';
 
-export const Alert = ({
-  children,
-  variant,
-  title,
-  description,
-  icon,
-  actionButtonText,
-  onDiscardClick,
-  onActionButtonClick,
-}: AlertProps) => {
+const AlertIconElement = classed(
+  'div',
+  'h-20 w-20  flex items-center !text-primary-content-min-contrast',
+  {
+    variants: {
+      variant: {
+        inverse: defaultIcon,
+        secondary: defaultIcon,
+        success: 'i-heroicons-check-circle-20-solid',
+        danger: 'i-heroicons-x-circle-20-solid',
+        info: 'i-heroicons-information-circle-20-solid',
+        caution: 'i-heroicons-exclamation-circle-20-solid',
+        heart: 'i-heroicons-heart-20-solid',
+      } satisfies Record<AlertVariant, string>,
+    },
+  }
+);
+
+export const Alert = (props: AlertProps) => {
+  const {
+    children,
+    variant = 'secondary',
+    title,
+    description,
+    body,
+    icon: iconProp,
+    actionButtonText,
+    onDiscardClick,
+    onActionButtonClick,
+  } = props;
+
+  const variantColorType = ['danger', 'info', 'heart', 'success', 'caution'].includes(variant)
+    ? 'state'
+    : 'surface';
+
+  const icon = 'icon' in props ? iconProp : <AlertIconElement variant={variant} />;
   return (
-    <AlertContainer data-color-scheme={variant} className="!text-primary-dark bg-primary/10">
+    <AlertContainer
+      data-color-scheme={variant}
+      className={clsx({
+        '!text-primary-content-min-contrast bg-primary/10': variantColorType === 'state',
+        'bg-surface-light': variantColorType === 'surface',
+      })}
+    >
       <Detail
         className="py-8 mx-10"
         data-color-scheme={variant}
+        currentColor
         startSubtitle={{
-          color: 'current',
-          value: icon ?? <AlertIconElement variant={variant} />,
+          value: 'icon' in props ? icon : <AlertIconElement variant={variant} />,
         }}
-        subtitle={{
-          color: 'current',
-          size: 'sm',
-          fontWeight: 'medium',
-          value: (
-            <div className="overflow-hidden">
+        subtitle={
+          title && {
+            fontWeight: 'medium',
+            value: (
               <ClampText maxLines={1} showMoreInTooltip clampedElementType="text">
                 {title}
               </ClampText>
-            </div>
-          ),
-        }}
-        end={
-          onActionButtonClick
-            ? {
-                align: 'end',
-                value: (
-                  <Button variant="glass" rounded size="xs" color={variant}>
-                    {actionButtonText ?? 'View'}
-                  </Button>
-                ),
-              }
-            : undefined
+            ),
+          }
         }
-        description={{
-          color: 'current',
-          className: 'opacity-80',
-          value: <ClampText maxLines={1}>{description}</ClampText>,
-        }}
+        body={
+          body && {
+            value: (
+              <ClampText maxLines={1} showMoreInTooltip clampedElementType="text">
+                {body}
+              </ClampText>
+            ),
+          }
+        }
+        end={
+          onActionButtonClick && {
+            align: 'center',
+            value: (
+              <Button
+                variant={variantColorType === 'state' ? 'glass' : 'filled'}
+                rounded
+                size="xs"
+                color={variant}
+              >
+                {actionButtonText ?? 'View'}
+              </Button>
+            ),
+          }
+        }
+        description={
+          description && {
+            color: 'current',
+            className: 'opacity-80',
+            value: <ClampText maxLines={2}>{description}</ClampText>,
+          }
+        }
       />
       {children}
 

@@ -1,5 +1,7 @@
-export function getElement<TElement extends HTMLElement | Element>(
-  elementOrRef: React.RefObject<TElement> | TElement | null | undefined
+import { ReactElementOrRef } from 'types/react-types';
+
+export function getElement<TElement extends HTMLElement | Element | null>(
+  elementOrRef: ReactElementOrRef<TElement>
 ) {
   if (!elementOrRef) return undefined;
 
