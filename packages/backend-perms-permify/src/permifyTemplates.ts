@@ -81,7 +81,7 @@ export const checkPermission = async ({
 }: PermissionsParams): Promise<boolean> => {
   const permify = buildPermify();
   const res = await permify.permission.check({
-    metadata: {},
+    metadata: { depth: 3 },
     tenantId,
     entity: {
       id: objectId,
@@ -105,7 +105,7 @@ export const getAllObjectsWithPermission = async ({
 }: Omit<PermissionsParams, 'objectId'>) => {
   const permify = buildPermify();
   const res = await permify.permission.lookupEntity({
-    metadata: {},
+    metadata: { depth: 3 },
     tenantId,
     entityType: objectType,
     permission: relation,

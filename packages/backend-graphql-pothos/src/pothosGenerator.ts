@@ -40,13 +40,16 @@ const createBuilder = async (pothosOutputDir: string, config: Config) => {
   // First off, let's check and see if the server is using any form of auth
   if (config.auth.platform !== 'none') {
     logger.debug('Adding Scope Auth to Pothos Config', config);
+    additionalImports += "import { GraphQLError } from 'graphql';\n";
     plugins = [...plugins, { name: 'ScopeAuthPlugin', from: '@pothos/plugin-scope-auth' }];
     typings = [...typings, { name: 'Context', value: '{ loggedIn: boolean, userId: string }' }];
+    body +=
+      "scopeAuthOptions: { treatErrorsAsUnauthorized: true, unauthorizedError: () => new GraphQLError('You do not have permission to access this resource') },\n";
 
     // From there, we'll add any applicable FGA code
     if (config.permissions.platform === 'none') {
       logger.debug('Populating Pothos Config for Permissions: None', config);
-      body += 'authScopes: (context) => ({ loggedIn: context.loggedIn }),';
+      body += 'authScopes: (context) => ({ loggedIn: context.loggedIn }),\n';
       typings = [...typings, { name: 'AuthScopes', value: '{ loggedIn: boolean }' }];
     }
 
@@ -55,7 +58,7 @@ const createBuilder = async (pothosOutputDir: string, config: Config) => {
 
       additionalImports += "import { checkPermissions, PermissionsParams } from '../auth0Fga';";
       body +=
-        'authScopes: (context) => ({ loggedIn: context.loggedIn, hasPermissions: (perm) => checkPermissions({ ...perm, userId: context.userId }) }),';
+        'authScopes: (context) => ({ loggedIn: context.loggedIn, hasPermissions: async (perm) => { if (!context.loggedIn) return false; return checkPermission({ ...perm, userId: context.userId }) }}),';
       typings = [
         ...typings,
         {
@@ -70,7 +73,7 @@ const createBuilder = async (pothosOutputDir: string, config: Config) => {
 
       additionalImports += "import { checkPermission, PermissionsParams } from '../permify';";
       body +=
-        'authScopes: (context) => ({ loggedIn: context.loggedIn, hasPermissions: (perm) => checkPermission({ ...perm, userId: context.userId }) }),';
+        'authScopes: (context) => ({ loggedIn: context.loggedIn, hasPermissions: async (perm) => { if (!context.loggedIn) return false; return checkPermission({ ...perm, userId: context.userId }) }}),';
       typings = [
         ...typings,
         {
