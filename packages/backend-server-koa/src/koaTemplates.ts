@@ -12,7 +12,6 @@ export const koaHandlerTemplate = `//
 import Koa from 'koa';
 {{#if useGraphql}}
 import { useDisableIntrospection } from '@graphql-yoga/plugin-disable-introspection'
-import { GraphQLError } from 'graphql';
 import { createYoga } from 'graphql-yoga';
 import { maskError } from 'graphql-yoga';
 import schema from '../graphqlSchema';
