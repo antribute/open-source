@@ -1,5 +1,4 @@
 import { Classed, classed } from 'utils/classed';
-import * as ToastPrimitive from '@radix-ui/react-toast';
 import React, { useMemo } from 'react';
 import { ButtonProps } from 'components/Button';
 import { toastActions, toastState } from 'components/Toast/toast-function';

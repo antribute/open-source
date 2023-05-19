@@ -5,7 +5,6 @@ import { Label as AriaLabel } from 'react-aria-components';
 import type { FieldAria } from 'react-aria';
 import { generatePropPickerFn } from 'utils';
 import clsx from 'clsx';
-import { Tooltip } from 'components/Tooltip';
 import { resolveInputComponentStateProps } from '../Input.helpers';
 import { InputDescription, InputValidationMessage } from './InputMessage';
 import { InputLabel, InputLabelProps } from './InputLabel';

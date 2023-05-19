@@ -1,8 +1,7 @@
 import { ColorSchemeName } from 'config';
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
-import React, { CSSProperties, useLayoutEffect, useRef, useState } from 'react';
+import React, { CSSProperties, useRef } from 'react';
 import { Classed, classed } from 'utils/classed';
-import { getNearestColorSchemeAttribute } from 'utils/getNearestColorSchemeAttribute';
 import { generatePropPickerFn, pickProps } from 'utils/pickProps';
 import { useNearestColorSchemeAttribute } from 'hooks/useNearestColorSchemeAttribute';
 

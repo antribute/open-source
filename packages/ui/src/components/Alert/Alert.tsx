@@ -2,8 +2,7 @@ import React from 'react';
 import { Detail } from 'components/Detail';
 import { classed } from 'utils/classed';
 import { Button } from 'components/Button';
-import { ClampText, ClampTextProps } from 'components/ClampText/ClampText';
-import { Text } from 'components/Text';
+import { ClampText } from 'components/ClampText/ClampText';
 import clsx from 'clsx';
 
 type AlertVariant = 'danger' | 'caution' | 'success' | 'info' | 'heart' | 'secondary' | 'inverse';
