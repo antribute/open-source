@@ -28,7 +28,7 @@ const dirname = fileURLToPath(new URL('.', import.meta.url));
 const appendSchemaConfig = async (generatedDir: string, config: Config) => {
   logger.debug('Appending schema configuration to generated Prisma schema', config);
 
-  const schemaOutputPath = resolve(process.cwd(), 'prisma', 'generatedSchema.prisma');
+  const schemaOutputPath = resolve(process.cwd(), 'prisma', 'schema.prisma');
 
   let pothosGenerator = '';
   if (config.graphql.platform === '@antribute/backend-graphql-pothos') {
@@ -72,7 +72,7 @@ const createAccessor = async (generatedDir: string, config: Config) => {
 const runPrismaGenerate = async (config: Config) => {
   logger.debug('Running prisma generate', config);
 
-  const schemaOutputPath = resolve(process.cwd(), 'prisma', 'generatedSchema.prisma');
+  const schemaOutputPath = resolve(process.cwd(), 'prisma', 'schema.prisma');
 
   const prismaBin = resolve(process.cwd(), 'node_modules', '.bin', 'prisma');
   logger.debug(`Prisma script path set to ${prismaBin}`, config);
@@ -87,7 +87,7 @@ const stitchSchemas = async (serverDir: string, config: Config) => {
   const schemaGlob = join(serverDir, '**', '!(schema).prisma');
   logger.debug(`Prisma schema search glob set to ${schemaGlob}`, config);
 
-  const schemaOutputPath = resolve(process.cwd(), 'prisma', 'generatedSchema.prisma');
+  const schemaOutputPath = resolve(process.cwd(), 'prisma', 'schema.prisma');
   logger.debug(`Generated Prisma schema path set to ${schemaOutputPath}`, config);
 
   logger.debug('Deleting current generated Prisma schema if exists', config);

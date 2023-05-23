@@ -21,8 +21,12 @@ const clerkContext = `context: async ({ request }) => {
       return { loggedIn: false };
     }
 
-    const userId = (await clerk.verifyToken(cookieToken || headerToken || '')).sub;
-    return { loggedIn: true, userId };
+    try {
+      const userId = (await clerk.verifyToken(cookieToken || headerToken || '')).sub;
+      return { loggedIn: true, userId };
+    } catch (err) {
+      throw new GraphQLError((err as Error).message)
+    }
   },`;
 
 const nextAuthContext = `context: ({ request }) => {
