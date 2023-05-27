@@ -38,7 +38,7 @@ function FormComponent(props: {
     ...rest
   } = props;
 
-  const { reset } = useFormContext();
+  const { reset, formState } = useFormContext();
 
   return (
     <form
@@ -52,7 +52,7 @@ function FormComponent(props: {
 
         onSubmit?.();
 
-        if (resetOnSubmit) {
+        if (resetOnSubmit && formState.isValid) {
           reset();
         }
       }}

@@ -13,7 +13,10 @@ module.exports = {
   },
   plugins: ['@typescript-eslint'],
   rules: {
+    'no-underscore-dangle': 'off',
+
     'no-extra-boolean-cast': 'off',
+    '@typescript-eslint/naming-convention': ['error', { leadingUnderscore: 'allow' }],
     'no-param-reassign': 'off',
     'import/extensions': 'off',
     'import/prefer-default-export': 'off',
