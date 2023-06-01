@@ -16,8 +16,26 @@ module.exports = {
     'no-underscore-dangle': 'off',
 
     'no-extra-boolean-cast': 'off',
-    '@typescript-eslint/naming-convention': ['error', { leadingUnderscore: 'allow' }],
+    '@typescript-eslint/naming-convention': [
+      'error',
+      {
+        selector: 'variable',
+        format: ['camelCase', 'PascalCase', 'UPPER_CASE'],
+        leadingUnderscore: 'allow',
+      },
+      {
+        selector: 'function',
+        format: ['camelCase', 'PascalCase'],
+        leadingUnderscore: 'allow',
+      },
+      {
+        selector: 'typeLike',
+        format: ['PascalCase'],
+        leadingUnderscore: 'allow',
+      },
+    ],
     'no-param-reassign': 'off',
+
     'import/extensions': 'off',
     'import/prefer-default-export': 'off',
     'arrow-body-style': 'off',
