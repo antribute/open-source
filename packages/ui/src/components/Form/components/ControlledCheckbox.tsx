@@ -1,7 +1,7 @@
 import { useDescription, useTsController } from '@ts-react/form';
 import { CheckboxFieldProps, Input } from 'components/Input';
 
-type ControlledCheckboxProps = Omit<
+export type ControlledCheckboxProps = Omit<
   CheckboxFieldProps,
   'value' | 'name' | 'onChange' | 'onBlur' | 'ref'
 >;

@@ -2,8 +2,11 @@
 import * as ComboboxPrimitive from 'ariakit/combobox';
 import * as SelectPrimitive from 'ariakit/select';
 import { Button, ButtonProps } from 'components/Button';
-import { RefObject } from 'react';
+import React, { RefObject } from 'react';
 import { elementHasOverflowY } from 'utils/elementHasOverflow';
+import { List } from 'components/List';
+import getDisplayName from 'utils/getDisplayName';
+import { useComboboxContext } from 'components/Combobox/Combobox';
 import { MultiSelectVariant } from './Combobox.types';
 
 export interface ComboboxFooterProps {
@@ -15,6 +18,7 @@ export interface ComboboxFooterProps {
   hasSearchableOptions?: boolean;
   setViewAllSelected: React.Dispatch<React.SetStateAction<boolean>>;
   multiSelectVariant?: MultiSelectVariant;
+  comboboxChildren?: React.ReactNode;
 }
 
 export const ComboboxFooter = ({
@@ -26,6 +30,7 @@ export const ComboboxFooter = ({
   scrollElementRef,
   optionsCount,
   multiSelectVariant,
+  comboboxChildren,
 }: ComboboxFooterProps) => {
   const { value } = select;
 
@@ -52,37 +57,52 @@ export const ComboboxFooter = ({
     optionsCount > 0 &&
     selectedValueCount !== optionsCount;
 
-  const show =
+  const footerChildren = React.Children.toArray(comboboxChildren).filter((node) => {
+    return getDisplayName(node) === 'ComboboxFooterButton';
+  });
+
+  const showViewAllSelectedButtons =
     multiSelectVariant !== 'tags' && (showViewAllSelectedButton || showViewAllOptionsButton);
 
-  return show ? (
-    <div className="p-6 w-full animate-slide-up">
+  const showFooter = footerChildren.length > 0 || showViewAllSelectedButtons;
+
+  return showFooter ? (
+    <div className="w-full animate-slide-up p-6 divide-y divide-highlight space-y-8">
+      {footerChildren}
+
       {showViewAllSelectedButton && (
-        <PopoverListButton
+        <ComboboxFooterButton
           onClick={() => {
             combobox.setValue('');
             setViewAllSelected(true);
           }}
         >
           View All Selected
-        </PopoverListButton>
+        </ComboboxFooterButton>
       )}
 
       {showViewAllOptionsButton && (
-        <PopoverListButton
+        <ComboboxFooterButton
           onClick={() => {
             combobox.setValue('');
             setViewAllSelected(false);
           }}
         >
           View All Options {!hasSearchableOptions && <>({optionsCount})</>}
-        </PopoverListButton>
+        </ComboboxFooterButton>
       )}
     </div>
   ) : null;
 };
 
-const PopoverListButton = (props: ButtonProps) => {
+export const ComboboxFooterButton = ({
+  onClick,
+  closePopoverOnClick = true,
+  ...props
+}: ButtonProps & {
+  closePopoverOnClick?: boolean;
+}) => {
+  const { combobox } = useComboboxContext();
   return (
     <Button
       fullWidth
@@ -90,7 +110,16 @@ const PopoverListButton = (props: ButtonProps) => {
       variant="glass"
       color="secondary"
       className="text-content-weak"
+      onClick={(e) => {
+        if (closePopoverOnClick) {
+          combobox.hide();
+        }
+
+        onClick?.(e);
+      }}
       {...props}
     />
   );
 };
+
+ComboboxFooterButton.displayName = 'ComboboxFooterButton';

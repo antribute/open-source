@@ -22,7 +22,7 @@ const inlineSizeVariants = objectMap(
   }
 );
 
-const avatarSizeVariant = {
+export const iconSizeVariants = {
   ...inlineSizeVariants,
   ...mergeVariants([sizeVariants.textSize, sizeVariants.width, sizeVariants.height]),
 };
@@ -35,7 +35,7 @@ const AvatarElement = classed(
 
   {
     variants: {
-      size: avatarSizeVariant,
+      size: iconSizeVariants,
       border: {
         true: 'border-2',
         thin: 'border',
@@ -86,7 +86,7 @@ const ImageLoadingOverlayElement = classed(
 
 const AvatarImageElement = classed(AvatarPrimitive.Image, 'overflow-hidden', {
   variants: {
-    size: avatarSizeVariant,
+    size: iconSizeVariants,
     hide: {
       true: 'hidden',
     },
@@ -101,7 +101,7 @@ const AvatarContentElement = classed(
   'leading-md inline-flex items-center justify-center text-center',
   {
     variants: {
-      size: avatarSizeVariant,
+      size: iconSizeVariants,
       shrinkContent: {
         true: 'scale-[0.8]',
       },

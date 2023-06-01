@@ -39,7 +39,7 @@ export const NumberField = forwardRef<
         )}
       >
         {children}
-        <InputAddon position="trailing" grouping="outside" noPadding as="div">
+        <InputAddon position="trailing" grouping="outside" noPadding as="div" fullHeight>
           <NumberIncrementorButtonGroup />
         </InputAddon>
       </InputAddonGroup>

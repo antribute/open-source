@@ -3,9 +3,10 @@ import { mockDataDeploymentStatuses, mockDataEnvironments } from 'mock/mock-data
 import { changeCase } from 'utils/changeCase';
 import { Flex } from 'components/Flex';
 import { Paper } from 'components/Paper';
-import { useState } from 'react';
 import { InputComponentProps, TextAreaFieldProps } from 'components/Input';
 import { getSizeKeys } from 'utils/storybook-utils';
+import { Button } from 'components/Button';
+import { useState } from 'react';
 import { Input, TextFieldProps } from '.';
 
 const meta = {
@@ -121,6 +122,32 @@ export const ErrorMessage: Story = {
   ),
 };
 
+export const Loading: Story = {
+  args: {},
+  render: function Loading() {
+    const [loading, setLoading] = useState(false);
+    return (
+      <Input label="Environment" defaultValue="development" loading={loading}>
+        <Input.Addon>
+          <Button
+            size="xs"
+            onClick={() => {
+              if (!loading) {
+                setLoading(true);
+                setTimeout(() => {
+                  setLoading(false);
+                }, 2000);
+              }
+            }}
+          >
+            Submit
+          </Button>
+        </Input.Addon>
+      </Input>
+    );
+  },
+};
+
 export const ErrorMessageInTooltip: Story = {
   args: {},
   render: () => (
@@ -166,39 +193,59 @@ export const SuccessMessageInTooltip: Story = {
 export const InputAddons: Story = {
   args: {},
   render: () => (
-    <Input
-      name="User name"
-      label="Username"
-      placeholder="Enter username"
-      errorMessage="This username isn't available"
-      defaultValue="daishi"
-    >
-      <Input.Addon
-        grouping="outside"
-        position="leading"
-        iconClassName="i-heroicons-bars-arrow-up-20-solid"
-      />
-      <Input.Addon
-        grouping="inline"
-        position="leading"
-        iconClassName="i-heroicons-bars-arrow-up-20-solid"
-      />
-      <Input.Addon
-        grouping="inline"
-        position="trailing"
-        iconClassName="i-heroicons-bars-arrow-up-20-solid"
-      />
-      <Input.Addon
-        grouping="inline"
-        position="trailing"
-        iconClassName="i-heroicons-bars-arrow-up-20-solid"
-      />
-      <Input.Addon
-        grouping="outside"
-        position="trailing"
-        iconClassName="i-heroicons-bars-arrow-up-20-solid"
-      />
-    </Input>
+    <Flex gap="lg">
+      <Input
+        name="User name"
+        label="Username"
+        placeholder="Enter username"
+        errorMessage="This username isn't available"
+        defaultValue="daishi"
+      >
+        <Input.Addon
+          grouping="outside"
+          position="leading"
+          iconClassName="i-heroicons-bars-arrow-up-20-solid"
+        />
+        <Input.Addon
+          grouping="inline"
+          position="leading"
+          iconClassName="i-heroicons-bars-arrow-up-20-solid"
+        />
+        <Input.Addon
+          grouping="inline"
+          position="trailing"
+          iconClassName="i-heroicons-bars-arrow-up-20-solid"
+        />
+        <Input.Addon
+          grouping="inline"
+          position="trailing"
+          iconClassName="i-heroicons-bars-arrow-up-20-solid"
+        />
+        <Input.Addon
+          grouping="outside"
+          position="trailing"
+          iconClassName="i-heroicons-bars-arrow-up-20-solid"
+        />
+      </Input>
+      <Input
+        name="Company"
+        label="Username"
+        placeholder="Enter username"
+        errorMessage="This username isn't available"
+        defaultValue="daishi"
+        size="lg"
+      >
+        <Input.Addon grouping="inline" focusInputOnClick={false} position="trailing">
+          <Button size="xs">View</Button>
+        </Input.Addon>
+        <Input.Addon
+          grouping="outside"
+          position="trailing"
+          iconClassName="i-heroicons-bars-arrow-up-20-solid"
+        />
+      </Input>
+      <Input.NumberField type="currency" label="Currency" placeholder="Enter amount" />
+    </Flex>
   ),
 };
 

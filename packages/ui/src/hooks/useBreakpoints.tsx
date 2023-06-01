@@ -13,6 +13,10 @@ const screenSizes = {
   ...screens,
 };
 
+export const p = objectMap(screenSizes, ({ key, value }) => {
+  return [`$${key}`, value];
+});
+
 const breakpoints = objectMap(screenSizes, ({ key, value: size }) => {
   return [`$${key}`, { above: `(min-width: ${size})`, below: `(max-width: ${size})` }];
 });

@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import { deriveClassed } from 'utils/classed';
 import { InputContext as AriaInputContext } from 'react-aria-components';
 import { HoverProps, useHover } from 'react-aria';
+import { InputAddonProps } from 'components/Input/components/InputAddonGroup/InputAddon';
+import { motion } from 'framer-motion';
 import { parseInputStateProps } from '../../Input.helpers';
 import { useInputAddonList } from './useInputAddonList';
 import type { InputComponentProps } from '../../Input.types';
@@ -14,10 +16,14 @@ import { InputContainerContext } from '../InputContainer';
 
 export type InputComponentState = 'error' | 'success';
 
-type RenderInputFn = (options: {
+export interface InputAddonGroupRenderFnOptions {
   hasLeadingAddons: boolean;
   hasTrailingAddons: boolean;
-}) => React.ReactNode;
+  size: InputAddonGroupProps['size'];
+  inputRef: React.ForwardedRef<HTMLInputElement> | undefined;
+}
+
+type InputAddonGroupRenderFn = (options: InputAddonGroupRenderFnOptions) => React.ReactNode;
 
 export interface InputAddonGroupProps extends InputGroupElementVariantProps, HoverProps {
   leadingIcon?: React.ReactNode;
@@ -28,7 +34,8 @@ export interface InputAddonGroupProps extends InputGroupElementVariantProps, Hov
   showValidationMessageInTooltip?: boolean;
   className?: string;
   children?: React.ReactNode;
-  renderInput: RenderInputFn;
+  defaultInputAddonProps?: Partial<InputAddonProps>;
+  renderInput: InputAddonGroupRenderFn;
 }
 
 function useInputWithRefContext() {
@@ -39,8 +46,10 @@ function useInputWithRefContext() {
   return undefined;
 }
 
+const MotionInputGroup = motion(InputGroupElement);
+
 export const InputAddonGroup = deriveClassed<typeof InputGroupElement, InputAddonGroupProps>(
-  ({ children, renderInput, ...props }, forwardedRef) => {
+  ({ children, renderInput, defaultInputAddonProps, ...props }, forwardedRef) => {
     const contextProps = useContext(InputContainerContext);
 
     const inputStateProps = contextProps ? parseInputStateProps(contextProps) : undefined;
@@ -73,24 +82,28 @@ export const InputAddonGroup = deriveClassed<typeof InputGroupElement, InputAddo
       inputRef: ref,
       showValidationMessageInTooltip,
       isGroupHovered,
+      defaultInputAddonProps,
     });
 
     return (
-      <InputGroupElement
+      <MotionInputGroup
         role="button"
         {...props}
         {...pickInputGroupElementVariantProps(mergedProps)}
         ref={forwardedRef}
-        {...hoverProps}
+        layout="preserve-aspect"
+        initial={false}
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        {...(hoverProps as any)}
       >
         {leadingOutsideAddons}
         {leadingIconAddon}
         {leadingInlineAddons}
-        {renderInput({ hasLeadingAddons, hasTrailingAddons })}
+        {renderInput({ inputRef: ref, hasLeadingAddons, hasTrailingAddons, size })}
         {trailingInlineAddons}
         {trailingIconAddon}
         {trailingOutsideAddons}
-      </InputGroupElement>
+      </MotionInputGroup>
     );
   }
 );

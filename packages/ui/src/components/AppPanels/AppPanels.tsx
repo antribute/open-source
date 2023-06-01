@@ -1,8 +1,7 @@
 import { IClassedComponent, classed, deriveClassed } from 'utils/classed';
-import { PanelResizeHandle } from './PanelResizeHandler';
-import { Panel, PanelContent } from './Panel';
-import { PanelGroup } from './PanelGroup';
-import { PanelFlex } from './PanelFlex';
+import { PanelResizeHandle } from './PanelSpacer';
+import { PanelGroupItem, PanelContent } from './Panel';
+import { PanelGroup } from './PanelFlex';
 
 // const containerClass = classed('div', 'w-full h-full flex flex-col gap-1');
 
@@ -25,6 +24,7 @@ import { PanelFlex } from './PanelFlex';
 // );
 
 type AppPanelContainerElementProps = IClassedComponent<typeof AppPanelContainerElement>;
+
 const AppPanelContainerElement = classed('div', '');
 
 const AppPanelsRoot = deriveClassed<
@@ -36,11 +36,10 @@ const AppPanelsRoot = deriveClassed<
 // Keep in mind that the
 
 const SubComponents = {
-  Panel,
-  PanelGroup,
   PanelContent,
   ResizeHandle: PanelResizeHandle,
-  Flex: PanelFlex,
+  Group: PanelGroup,
+  Item: PanelGroupItem,
 };
 
 const Panels = Object.assign(AppPanelsRoot, SubComponents);

@@ -36,7 +36,10 @@ export interface InputFieldProps {
   placeholder?: string;
 }
 
-export type AddonGroupProps = Pick<InputAddonGroupProps, 'leadingIcon' | 'trailingIcon'>;
+export type AddonGroupProps = Pick<
+  InputAddonGroupProps,
+  'leadingIcon' | 'trailingIcon' | 'inputAddonsGap'
+>;
 
 export interface IInputComponentProps {
   size: InputSizeVariants;

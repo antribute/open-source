@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { flexGapVariants } from 'components/Flex';
 
 import { SizeProp } from 'types/styles';
 import { generatePropPickerFn, objectMap } from 'utils';
@@ -21,6 +22,7 @@ export const inputSurfaceClassName = classed(
     defaultVariants: {
       filled: true,
       border: true,
+      shadow: 'sm',
     },
     variants: {
       cursor: {
@@ -32,8 +34,13 @@ export const inputSurfaceClassName = classed(
         subtle: clsx(borderRing, 'ring-highlight-subtle focus:ring-highlight-subtle'),
         false: '',
       },
+      shadow: {
+        false: '',
+        true: 'shadow-sm',
+        sm: 'shadow-sm',
+      },
       filled: {
-        true: 'bg-surface-soft shadow-sm',
+        true: 'bg-surface-soft',
         tint: clsx('bg-highlight-tint'),
         subtle: clsx('bg-highlight-ghost'),
       },
@@ -49,6 +56,7 @@ export const pickInputSurfaceVariantProps = generatePropPickerFn<InputSurfaceVar
   border: '_pick_',
   roundedFull: '_pick_',
   cursor: '_pick_',
+  shadow: '_pick_',
 });
 
 export const primitiveInputClassName = classedCore(
@@ -134,9 +142,13 @@ export const InputGroupElement = classed(
   inputSurfaceClassName,
   inputSizeClassName,
   {
+    variants: {
+      inputAddonsGap: flexGapVariants,
+    },
     defaultVariants: {
       size: 'md',
-    },
+      inputAddonsGap: 'sm',
+    } as never,
   }
 );
 
@@ -144,4 +156,5 @@ export const pickInputGroupElementVariantProps =
   generatePropPickerFn<InputGroupElementVariantProps>({
     ...pickInputSizeVariantProps.pickedRecord,
     ...pickInputSurfaceVariantProps.pickedRecord,
+    inputAddonsGap: '_pick_',
   });

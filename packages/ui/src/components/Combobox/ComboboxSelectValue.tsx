@@ -6,6 +6,7 @@ import { classed } from 'utils/classed';
 import { motion, useWillChange } from 'framer-motion';
 import { useImmer } from 'use-immer';
 import { MultiSelectVariant } from './Combobox.types';
+import { isMultiSelectValueString } from 'components/Combobox/Combobox.helpers';
 
 export interface ComboboxSelectValueProps {
   multiSelectVariant?: MultiSelectVariant;
@@ -19,11 +20,11 @@ export const ComboboxSelectValue = ({
   value,
   ...props
 }: ComboboxSelectValueProps) => {
-  if (Array.isArray(value) && multiSelectVariant === 'tags') {
+  if (isMultiSelectValueString(value) && multiSelectVariant === 'tags') {
     return <MultiSelectValueTags {...props} value={value} />;
   }
 
-  if (Array.isArray(value)) {
+  if (isMultiSelectValueString(value)) {
     return (
       <SelectValueContainerElement>
         <MultiSelectValue {...props} value={value} />

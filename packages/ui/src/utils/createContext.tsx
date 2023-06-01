@@ -1,17 +1,31 @@
 import React from 'react';
 
-export function createCtx<ContextType>() {
-  const ctx = React.createContext<ContextType | undefined>(undefined);
+function _createCtx<TCtx>(options?: { ignoreNoContextError?: boolean }) {
+  const { ignoreNoContextError } = options ?? {};
+  const ctx = React.createContext<TCtx | undefined>(undefined);
+
   function useContext() {
     const context = React.useContext(ctx);
 
     const noContext = !context;
 
-    if (noContext) {
+    if (!ignoreNoContextError && noContext) {
       throw new Error('useContext hook does not have a Provider.');
     }
 
-    return context;
+    return context as TCtx;
   }
-  return { useContext, Provider: ctx.Provider } as const;
+
+  return {
+    useContext,
+    Provider: ctx.Provider,
+  };
+}
+
+export function createCtx<TCtx>() {
+  return _createCtx<TCtx>();
+}
+
+export function createCtxNoCheck<TCtx>() {
+  return _createCtx<TCtx | undefined>({ ignoreNoContextError: true });
 }

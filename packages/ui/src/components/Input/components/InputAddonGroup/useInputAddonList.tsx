@@ -19,6 +19,7 @@ export interface UseInputAddonListProps
   extends Pick<InputAddonGroupProps, 'leadingIcon' | 'trailingIcon' | 'loading' | 'size'> {
   inputStateProps?: ResolvedInputComponentStateProps;
   showValidationMessageInTooltip?: boolean;
+  defaultInputAddonProps?: Partial<InputAddonProps>;
   isGroupHovered: boolean;
   children?: React.ReactNode;
   inputRef:
@@ -28,13 +29,13 @@ export interface UseInputAddonListProps
     | undefined;
 }
 
-export type InputAddonElement = ReactElement<InputAddonProps>;
+export type InputAddonElementProps = ReactElement<InputAddonProps>;
 
 export interface InputAddonElements {
-  leadingInlineAddons: InputAddonElement[];
-  trailingInlineAddons: InputAddonElement[];
-  leadingOutsideAddons: InputAddonElement[];
-  trailingOutsideAddons: InputAddonElement[];
+  leadingInlineAddons: InputAddonElementProps[];
+  trailingInlineAddons: InputAddonElementProps[];
+  leadingOutsideAddons: InputAddonElementProps[];
+  trailingOutsideAddons: InputAddonElementProps[];
   leadingIconAddon: React.ReactNode;
   trailingIconAddon: React.ReactNode;
 }
@@ -60,6 +61,7 @@ function findInputIcons({
   inputRef,
   showValidationMessageInTooltip,
   isGroupHovered,
+  defaultInputAddonProps,
 }: UseInputAddonListProps): UseInputAddonListReturn {
   const reducedAddons = Children.toArray(children).reduce<ReducedAddonsData>(
     (acc, childNode) => {
@@ -67,9 +69,9 @@ function findInputIcons({
         return acc;
       }
 
-      const child: InputAddonElement = {
+      const child: InputAddonElementProps = {
         ...childNode,
-        props: { ...childNode.props, size },
+        props: { ...defaultInputAddonProps, ...childNode.props, size },
       };
 
       const { props } = child;
@@ -122,6 +124,7 @@ function findInputIcons({
           position: 'trailing',
           loadingSpinner: loading,
           children: icon,
+          enterAnimation: true,
         } satisfies InputAddonProps;
       }
 
@@ -135,11 +138,11 @@ function findInputIcons({
     }
   );
 
-  const leadingIconAddon: InputAddonElement | undefined = leadingIconAddonProps && (
+  const leadingIconAddon: InputAddonElementProps | undefined = leadingIconAddonProps && (
     <InputAddon {...leadingIconAddonProps} />
   );
 
-  const trailingIconAddon: InputAddonElement | undefined = trailingIconAddonProps && (
+  const trailingIconAddon: InputAddonElementProps | undefined = trailingIconAddonProps && (
     <InputAddon {...trailingIconAddonProps} />
   );
 
@@ -169,7 +172,7 @@ function findInputIcons({
   const addons = objectMap(reducedAddons, ({ key, value }) => {
     return [
       key,
-      (value as InputAddonElement[]).map((e) =>
+      (value as InputAddonElementProps[]).map((e) =>
         cloneElement(e, { _inputRef: inputRef, isGroupHovered })
       ),
     ];
@@ -235,6 +238,6 @@ const InputStateAddon = ({
   );
 };
 
-function isInputAddon(element: unknown): element is InputAddonElement {
+function isInputAddon(element: unknown): element is InputAddonElementProps {
   return getDisplayName(element) === 'InputAddon';
 }

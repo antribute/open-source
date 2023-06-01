@@ -1,8 +1,9 @@
 /* eslint-disable import/export */
-
+export * from './components/Form';
 export * from './components/AntributeUiProvider';
 export * from './components/Button';
 export * from './components/BasicCheckbox';
+export * from './components/Combobox';
 export * from './components/Card';
 export * from './components/Avatar';
 export * from './components/AvatarGroup';
@@ -27,5 +28,9 @@ export * from './components/Toast';
 export * from './components/ToggleGroup';
 export * from './components/Tooltip';
 export * from './components/Wrap';
+export * from './components/AppPanels';
+export * from './components/Icon';
+export * from './components/Page';
+export * from './components/KBD';
 
 export * from './helpers';
