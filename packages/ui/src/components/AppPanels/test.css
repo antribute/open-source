@@ -1,0 +1,6 @@
+.mask-container {
+  height: 100%;
+  width: 50px;
+  background-color: blue;
+  mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+}

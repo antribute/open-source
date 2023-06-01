@@ -1,29 +1,56 @@
 import { Slot } from '@radix-ui/react-slot';
 import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import { LiteralUnion } from 'type-fest';
 import { ReactSvgProps } from 'types/react-types';
 
-interface SvgIconWrapperProps extends ReactSvgProps {
+export interface SvgIconWrapperProps {
   asChild?: boolean;
   autoSize?: boolean;
+  size?: string | number;
+  viewbox?: '20' | '24';
+  className?: string;
+  strokeWidth?: '0' | '1' | '2' | '4';
+  rounded?: boolean;
+  children?: React.ReactNode;
+  'aria-hidden'?: boolean;
 }
 
 export const SvgIconWrapper = ({
   children,
   asChild,
-  autoSize,
+  autoSize = true,
+  viewbox = '20',
   className,
+  svgProps,
+  strokeWidth,
+  rounded,
   ...props
-}: SvgIconWrapperProps) => {
+}: SvgIconWrapperProps & { svgProps?: ReactSvgProps }) => {
   const Svg = asChild ? Slot : 'svg';
+
+  const size = autoSize ? '100%' : viewbox;
+
+  const { className: roundedClassName, ...roundedProps } =
+    (rounded
+      ? ({
+          className: 'rounded-full',
+          strokeLinejoin: 'round',
+          strokeLinecap: 'round',
+        } satisfies ReactSvgProps)
+      : undefined) ?? {};
 
   return (
     <Svg
-      className={twMerge(clsx({ 'h-22 w-22': !autoSize, 'h-full w-full': autoSize }), className)}
+      className={twMerge(roundedClassName, className)}
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
+      viewBox={`0 0 ${viewbox} ${viewbox}`}
+      height={size}
+      width={size}
       fill="currentColor"
       stroke="currentColor"
+      {...roundedProps}
+      strokeWidth={strokeWidth}
       {...(props as object)}
     >
       {children}

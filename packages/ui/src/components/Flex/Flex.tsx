@@ -4,6 +4,16 @@ export type FlexProps = { className?: string; children?: React.ReactNode } & Par
   Classed.VariantProps<typeof Flex>
 >;
 
+export const flexGapVariants = {
+  false: 'gap-0',
+  true: 'gap-8',
+  xs: 'gap-2',
+  sm: 'gap-4',
+  md: 'gap-8',
+  lg: 'gap-16',
+  xl: 'gap-24',
+};
+
 export const Flex = classed('div', 'flex', {
   defaultVariants: {},
   variants: {
@@ -49,15 +59,7 @@ export const Flex = classed('div', 'flex', {
       true: 'justify-center items-center',
     },
 
-    gap: {
-      false: 'gap-0',
-      true: 'gap-8',
-      xs: 'gap-2',
-      sm: 'gap-4',
-      md: 'gap-8',
-      lg: 'gap-16',
-      xl: 'gap-24',
-    },
+    gap: flexGapVariants,
     textAlign: {
       left: 'text-left',
       center: 'text-center',

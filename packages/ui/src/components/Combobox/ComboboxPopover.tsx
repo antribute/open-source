@@ -29,6 +29,7 @@ export interface ComboboxListProps
     Pick<ComboboxProps<any>, 'multiSelectVariant'>,
     Pick<UseToggleViewAllSelectedOnUnmountProps, 'toggleViewAllSelectedOnPopoverUnmount'> {
   searching?: boolean;
+  showSearchBox?: boolean;
   select: SelectPrimitive.SelectState;
   combobox: ComboboxPrimitive.ComboboxState;
   selectOptionMap: SelectOptionMap;
@@ -37,6 +38,7 @@ export interface ComboboxListProps
   virtualization?: boolean;
   maxHeight?: React.CSSProperties['height'];
   hasSelected?: boolean;
+  comboboxChildren?: React.ReactNode;
   renderOption?: RenderComboboxOptionFn<unknown[]>;
 }
 
@@ -62,6 +64,8 @@ export const ComboboxPopover = ({
   toggleViewAllSelectedOnPopoverUnmount,
   renderOption,
   hasSelected,
+  showSearchBox,
+  comboboxChildren,
 }: ComboboxListProps) => {
   const { scrollElementRef, virtualizer, getOption, noMatches } = useComboboxListVirtualizer({
     combobox,
@@ -87,6 +91,8 @@ export const ComboboxPopover = ({
 
   const colorSchemeAttribute = useNearestColorSchemeAttribute({ element: select.anchorRef });
 
+  const hasNoMatches = (selectOptionMap.size <= 1 && select.value.length) || noMatches;
+
   return (
     <SelectPrimitive.SelectPopover
       state={select}
@@ -104,25 +110,32 @@ export const ComboboxPopover = ({
       )}
       style={{ maxHeight }}
     >
-      <div className={clsx('px-4 py-6')}>
-        <ComboboxPrimitive.Combobox
-          as={Input}
-          autoFocus
-          noContainer
-          state={combobox}
-          // width="auto"
-          minWidth={false}
-          maxWidth={false}
-          // autoSelect
-          size="sm"
-          fullWidth
-          border={false}
-          filled={false}
-          placeholder="Search..."
-          loading={searching}
-        />
-      </div>
-      {noMatches && (
+      {showSearchBox && (
+        <div className={clsx('px-4 py-6')}>
+          <Input
+            autoFocus
+            noContainer
+            // width="auto"
+            minWidth={false}
+            maxWidth={false}
+            // autoSelect
+            size="sm"
+            fullWidth
+            border={false}
+            filled={false}
+            placeholder="Search..."
+            loading={searching}
+            renderInput={(renderProps) => (
+              <ComboboxPrimitive.Combobox
+                as={Input.BaseInputField}
+                state={combobox}
+                {...renderProps}
+              />
+            )}
+          />
+        </div>
+      )}
+      {hasNoMatches && (
         <Flex gap as="div" centerAlign className="p-6">
           <Text className="font-medium opacity-10" color="strong" size="sm">
             {searching ? 'Loading...' : 'No Options'}
@@ -130,7 +143,7 @@ export const ComboboxPopover = ({
         </Flex>
       )}
 
-      {!noMatches && (
+      {!hasNoMatches && (
         <ScrollViewport.ScrollAreaContainer
           className="grow relative w-full rounded-b-[inherit] bg-transparent"
           style={{ height: virtualizer.getTotalSize() }}
@@ -211,6 +224,7 @@ export const ComboboxPopover = ({
       <ComboboxFooter
         optionsCount={selectOptionMap.size}
         select={select}
+        comboboxChildren={comboboxChildren}
         combobox={combobox}
         scrollElementRef={scrollElementRef}
         hasSearchableOptions={hasSearchableOptions}

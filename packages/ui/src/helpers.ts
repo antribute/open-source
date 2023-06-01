@@ -4,3 +4,5 @@ export * as config from './config';
 export * from './constants';
 export * from './hooks';
 export * from './utils';
+
+export type * from './types/typeUtilities';

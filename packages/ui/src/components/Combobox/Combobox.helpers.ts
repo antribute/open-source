@@ -1,6 +1,27 @@
 import { notEmpty } from 'utils/notEmpty';
 import { toArray } from 'utils/toArray';
-import type { ComboboxOptionGetters, SelectOption, SelectOptionMap } from './Combobox.types';
+import type {
+  ComboboxOptionGetters,
+  MultiSelectVariant,
+  SelectOption,
+  SelectOptionMap,
+} from './Combobox.types';
+
+export function isSingleSelectValueString(value: unknown): value is string {
+  return typeof value === 'string';
+}
+
+export function isMultiSelectValueString(value: unknown): value is string[] {
+  return Array.isArray(value);
+}
+
+export function getSelectedCount(stringValue: string | string[]) {
+  return !stringValue ? 0 : toArray(stringValue).length;
+}
+
+export function getHasSelected(stringValue: string | string[]) {
+  return getSelectedCount(stringValue) > 0;
+}
 
 interface GetOptionMapOptions extends ComboboxOptionGetters<unknown[]> {
   data?: unknown | unknown[];
@@ -58,14 +79,18 @@ export function originalValueToValueString<TOptions extends unknown[]>({
   return getOptionLabel(originalValue);
 }
 
-export function valueStringToOriginalValue({
-  value,
-  optionValueMap,
-}: {
-  value: string | string[];
-  optionValueMap: SelectOptionMap;
-}) {
-  if (!value) return undefined;
-  if (Array.isArray(value)) return value.map((v) => optionValueMap.get(v)).filter(notEmpty);
-  return optionValueMap.get(value);
+export function valueStringToOriginalValue<T>(
+  value: string | string[],
+  {
+    selectOptionMap,
+    isMultiSelect,
+  }: {
+    isMultiSelect: boolean | undefined;
+    selectOptionMap: SelectOptionMap<T>;
+  }
+) {
+  if (!value) return isMultiSelect ? [] : undefined;
+  if (isMultiSelectValueString(value))
+    return value.map((v) => selectOptionMap.get(v)?.value).filter(notEmpty);
+  return selectOptionMap.get(value)?.value;
 }

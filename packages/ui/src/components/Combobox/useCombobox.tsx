@@ -1,13 +1,17 @@
 /* eslint-disable react/no-unused-prop-types */
 import * as ComboboxPrimitive from 'ariakit/combobox';
 import * as SelectPrimitive from 'ariakit/select';
-import { useEffect, useMemo, useState, useRef } from 'react';
+import { useEffect, useMemo, useState, useRef, useCallback } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
-import { getOptionMap } from 'components/Combobox/Combobox.helpers';
+import {
+  getOptionMap,
+  getSelectedCount,
+  getHasSelected,
+  valueStringToOriginalValue,
+} from 'components/Combobox/Combobox.helpers';
 import { useDeepCompareEffectNoCheck } from 'use-deep-compare-effect';
 import { useImmer } from 'use-immer';
 import { L } from 'ts-toolbelt';
-import { toArray } from 'utils';
 import { enableMapSet } from 'immer';
 import type {
   ComboboxProps,
@@ -115,15 +119,23 @@ export function useCombobox<TOptions extends L.List<unknown>>({
     },
   });
 
+  const getOriginalValue = useCallback(
+    (stringValue: string | string[]) => {
+      return valueStringToOriginalValue<TOptions[number]>(stringValue, {
+        selectOptionMap,
+        isMultiSelect,
+      });
+    },
+    [isMultiSelect, selectOptionMap]
+  );
+
   const select = SelectPrimitive.useSelectState({
     ...selectProps,
     defaultValue: selectStringValue,
     value: selectStringValue,
 
     setValue: (stringValue) => {
-      const newValue = Array.isArray(stringValue)
-        ? stringValue.map((str) => selectOptionMap.get(str)?.value)
-        : selectOptionMap.get(stringValue)?.value;
+      const newValue = getOriginalValue(stringValue);
 
       const optionMap = getOptionMap({
         data: newValue,
@@ -145,7 +157,7 @@ export function useCombobox<TOptions extends L.List<unknown>>({
 
       onValueChange?.(newValue as never);
 
-      if (!stringValue || stringValue.length === 0) {
+      if (!getHasSelected(stringValue)) {
         setViewAllSelected(false);
       }
     },
@@ -159,12 +171,18 @@ export function useCombobox<TOptions extends L.List<unknown>>({
     combobox.setValue('');
   }
 
-  const hasSelected = useMemo(() => {
-    return toArray(selectStringValue).length > 0;
-  }, [selectStringValue]);
+  const { selectedValue, hasSelected, selectedCount } = useMemo(() => {
+    return {
+      selectedValue: getOriginalValue(select.value),
+      hasSelected: getHasSelected(select.value),
+      selectedCount: getSelectedCount(select.value),
+    };
+  }, [getOriginalValue, select.value]);
 
   return {
+    selectedValue,
     hasSelected,
+    selectedCount,
     select,
     loading,
     combobox,

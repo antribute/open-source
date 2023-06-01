@@ -1,45 +1,67 @@
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 /* eslint-disable @typescript-eslint/naming-convention */
-import React from 'react';
+import React, { forwardRef } from 'react';
 import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { sizeVariants } from 'styles/size.variants';
-import { Classed, classed, deriveClassed, mergeVariants } from 'utils/classed';
+import { Classed, classed, mergeVariants } from 'utils/classed';
 import { UseInputAddonListProps } from 'components/Input/components/InputAddonGroup/useInputAddonList';
-import { Position } from 'components/Position';
 import { Spinner } from 'components/Spinner';
 import type { SizeProp } from 'types/styles';
 import { Wrap } from 'components/Wrap';
 import { Tooltip } from 'components/Tooltip';
 import { HoverProps, useHover } from 'react-aria';
-
-type InputAddonVariantProps = Classed.VariantProps<typeof InputAddonElement>;
+import { AnimatePresence, motion } from 'framer-motion';
 
 const InputAddonElement = classed(
-  'button',
-  'relative',
-  'align-middle',
-  'text-sm font-semibold',
-  'gap-x-4 items-center justify-center z-10',
-  'inline-flex shrink-0',
-  'ring-inset focus:ring-inset focus:-outline-offset-2',
-  'h-auto w-auto',
+  motion.div,
+  'group/addon',
+  'inline-flex items-center',
+  'shrink-0',
+  'h-auto w-min',
+  'self-stretch',
+  'min-h-[20px] min-w-[20px]',
+  'cursor-auto',
+  'select-none',
   {
     variants: {
+      grouping: {
+        outside: clsx(
+          'border-inherit',
+          'first:border-r last:border-l',
+          'first:rounded-l-[inherit] last:rounded-r-[inherit]'
+        ),
+        inline: '',
+      },
+    },
+  }
+);
+
+type InputAddonVariantProps = Classed.VariantProps<typeof InputAddonInnerElement>;
+
+const InputAddonInnerElement = classed(
+  'button',
+  'relative z-10',
+  'text-sm font-semibold',
+  'inline-flex items-center justify-center',
+  'align-middle',
+  'shrink-0',
+  'gap-x-4',
+  'ring-inset focus:ring-inset focus:-outline-offset-2',
+  'w-auto',
+  'px-4',
+  {
+    variants: {
+      fullHeight: {
+        false: 'h-min',
+        true: 'h-auto self-stretch',
+      },
       size: mergeVariants([
         sizeVariants.inlineHeight,
         sizeVariants.inlineWidth,
         sizeVariants.textSize,
         sizeVariants.paddingX,
       ]),
-      grouping: {
-        outside: clsx(
-          'border-inherit',
-          'first:border-r last:border-l',
-          'first:rounded-l-[inherit] last:rounded-r-[inherit]',
-          'px-8'
-        ),
-        inline: 'px-4',
-      },
 
       cursorPointer: {
         true: '!cursor-pointer',
@@ -53,23 +75,29 @@ const InputAddonElement = classed(
       },
 
       clickable: {
-        false: 'cursor-default',
+        true: 'cursor-pointer',
       },
     },
   }
 );
 
+const MotionInputAddonInnerElement = motion(InputAddonInnerElement);
+
 export interface InputAddonProps extends InputAddonVariantProps, Omit<HoverProps, 'isDisabled'> {
   position?: 'leading' | 'trailing';
   grouping?: 'inline' | 'outside';
+  onClick?: (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => void;
   focusInputOnClick?: boolean;
   excludeFromTabOrder?: boolean;
+  fullHeight?: boolean;
   enabled?: boolean;
   invisible?: boolean;
   loadingSpinner?: boolean;
   iconClassName?: string;
   className?: string;
   isGroupHovered?: boolean;
+  enterAnimation?: boolean;
+  preventDefault?: boolean;
   children?:
     | React.ReactNode
     | ((options: {
@@ -83,41 +111,61 @@ export interface InputAddonProps extends InputAddonVariantProps, Omit<HoverProps
   _inputRef?: UseInputAddonListProps['inputRef'];
 }
 
-export const InputAddon = deriveClassed<typeof InputAddonElement, InputAddonProps>(
-  (props, forwardedRef) => {
-    const {
-      children,
-      size,
-      loadingSpinner,
-      iconClassName,
-      grouping = 'inline',
-      className,
-      _inputRef,
-      tooltip,
-      invisible,
-      enabled = true,
-      enableTooltip,
-      noPadding,
-      focusInputOnClick: focusInputOnClickProp,
-      excludeFromTabOrder: excludeFromTabOrderProp,
-      onHoverChange,
-      onHoverEnd,
-      onHoverStart,
-      isGroupHovered,
+export const InputAddon = forwardRef<
+  HTMLButtonElement,
+  InputAddonProps & { as?: 'button' | 'div' }
+>((props, forwardedRef) => {
+  const {
+    children,
+    size,
+    loadingSpinner,
+    iconClassName,
+    grouping = 'inline',
+    className,
+    _inputRef,
+    tooltip,
+    invisible,
+    enabled = true,
+    enableTooltip,
+    preventDefault,
+    noPadding,
+    focusInputOnClick: focusInputOnClickProp,
+    excludeFromTabOrder: excludeFromTabOrderProp,
+    onClick,
+    onHoverChange,
+    onHoverEnd,
+    onHoverStart,
+    isGroupHovered,
+    enterAnimation = false,
+    as: asProp,
+    ...rest
+  } = props;
 
-      ...rest
-    } = props;
+  const focusInputOnClick = focusInputOnClickProp ?? grouping === 'inline';
 
-    const focusInputOnClick = focusInputOnClickProp ?? grouping === 'inline';
+  const excludeFromTabOrder = excludeFromTabOrderProp ?? grouping === 'inline';
 
-    const excludeFromTabOrder = excludeFromTabOrderProp ?? grouping === 'inline';
+  const tooltipEnabled = (enableTooltip && Boolean(tooltip)) || Boolean(tooltip);
 
-    const tooltipEnabled = (enableTooltip && Boolean(tooltip)) || Boolean(tooltip);
+  const { hoverProps, isHovered } = useHover({ onHoverChange, onHoverEnd, onHoverStart });
 
-    const { hoverProps, isHovered } = useHover({ onHoverChange, onHoverEnd, onHoverStart });
-    return (
-      <>
-        {!enabled ? null : (
+  const as = onClick ? 'button' : 'div';
+
+  const inputRef = _inputRef && 'current' in _inputRef ? _inputRef : undefined;
+
+  const clickable = !focusInputOnClick || invisible || Boolean(onClick);
+
+  return (
+    <AnimatePresence mode="popLayout">
+      {!enabled ? null : (
+        // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+        <InputAddonElement
+          grouping={grouping}
+          onClick={() => {
+            inputRef?.current?.focus();
+          }}
+          layout="preserve-aspect"
+        >
           <Wrap
             if={tooltipEnabled}
             wrap={(c) => {
@@ -131,50 +179,60 @@ export const InputAddon = deriveClassed<typeof InputAddonElement, InputAddonProp
               );
             }}
           >
-            <InputAddonElement
+            <MotionInputAddonInnerElement
               ref={forwardedRef}
+              initial={enterAnimation ? { scale: 0 } : {}}
+              animate={{ scale: 1, transition: { delay: 0.2, bounce: 0, duration: 0.3 } }}
+              exit={{ scale: 0 }}
               aria-hidden={invisible}
               disabled={invisible}
               className={className}
               tabIndex={excludeFromTabOrder ? -1 : undefined}
-              grouping={grouping}
-              clickable={!focusInputOnClick}
+              clickable={clickable}
               cursorPointer={tooltipEnabled}
               noPadding={noPadding}
               invisible={invisible}
+              layout="preserve-aspect"
               {...rest}
-              {...hoverProps}
-              onClick={() => {
-                if (focusInputOnClick && _inputRef && 'current' in _inputRef) {
-                  _inputRef.current?.focus();
+              {...(hoverProps as any)}
+              as={as as 'button'}
+              onClick={(e) => {
+                if (!focusInputOnClick) {
+                  e.stopPropagation();
+                }
+
+                if (!focusInputOnClick && (preventDefault ?? as === 'div')) {
+                  e.preventDefault();
+                }
+
+                if (onClick) {
+                  onClick(e);
                 }
               }}
             >
-              <span
-                className={twMerge(
-                  'min-h-[20px] min-w-[20px] flex items-center justify-center h-full w-full rounded-[inherit]',
-                  iconClassName
-                )}
-              >
-                {loadingSpinner && (
-                  <Position position="middle-center" className="bg-surface-soft">
-                    <Spinner size="sm" />
-                  </Position>
-                )}
-                {typeof children === 'function'
-                  ? children({
-                      size,
-                      isHovered,
-                      isGroupHovered: Boolean(isGroupHovered),
-                    })
-                  : children}
-              </span>
-            </InputAddonElement>
+              {iconClassName && (
+                <span className={twMerge('min-h-[20px] min-w-[20px]', iconClassName)} />
+              )}
+              {/* <InputAddonInnerElement className={iconClassName}> */}
+              {loadingSpinner && (
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                  <Spinner size="sm" />
+                </div>
+              )}
+              {typeof children === 'function'
+                ? children({
+                    size,
+                    isHovered,
+                    isGroupHovered: Boolean(isGroupHovered),
+                  })
+                : children}
+              {/* </InputAddonInnerElement> */}
+            </MotionInputAddonInnerElement>
           </Wrap>
-        )}
-      </>
-    );
-  }
-);
+        </InputAddonElement>
+      )}
+    </AnimatePresence>
+  );
+});
 
 InputAddon.displayName = 'InputAddon';

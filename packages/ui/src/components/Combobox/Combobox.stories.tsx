@@ -1,7 +1,7 @@
 /* eslint-disable no-console, react-hooks/rules-of-hooks */
 
 import type { Meta, StoryObj } from '@storybook/react';
-import { UserMockData, generateMockUserList } from 'mock/mock-data';
+import { UserMockData, generateMockOrganizationList, generateMockUserList } from 'mock/mock-data';
 import { useState } from 'react';
 import { Avatar } from 'components/Avatar';
 import { Detail } from 'components/Detail';
@@ -9,7 +9,12 @@ import { Text } from 'components/Text';
 import { Flex } from 'components/Flex';
 import { useMockCharactersQuery } from 'mock/mock-apis';
 import { RenderPaperContainers } from 'utils/storybook-utils';
-import { Combobox } from '.';
+import { IconButton } from 'components/IconButton';
+import { ClampText } from 'components/ClampText/ClampText';
+import { HomeIcon } from '@heroicons/react/24/outline';
+import { clsx } from 'config/plugins/custom-classes-plugin/class-style-utils';
+import { GlyphContainerElement } from 'components/Icon/IconContainer';
+import { Combobox, ComboboxProps } from '.';
 
 const meta = {
   args: {},
@@ -37,23 +42,34 @@ const optionsMap = {
 
 const optionSet = Object.values(optionsMap);
 
-export const Default: StoryObj = {
-  render: () => (
+function ComboboxRenderContainer({
+  children,
+}: {
+  children: (params: { options: UserMockData[]; label: string }) => React.ReactNode;
+}) {
+  return (
     <div className="flex flex-wrap gap-8">
       {optionSet.map(({ options, size }) => (
-        <div>
-          <Combobox
-            label={`Users - ${size}`}
-            options={options}
-            isMultiSelect={false}
-            getOptionLabel={(e) => `${e.name} ${e.name}`}
-            onValueChange={(e) => {
-              console.log('E', e);
-            }}
-          />
-        </div>
+        <div key={size}>{children({ options, label: `Users - ${size}` })}</div>
       ))}
     </div>
+  );
+}
+
+export const Default: StoryObj = {
+  render: () => (
+    <ComboboxRenderContainer>
+      {(props) => (
+        <Combobox
+          {...props}
+          isMultiSelect={false}
+          getOptionLabel={(e) => `${e.name} ${e.name}`}
+          onValueChange={(e) => {
+            console.log('E', e);
+          }}
+        />
+      )}
+    </ComboboxRenderContainer>
   ),
 };
 
@@ -76,21 +92,18 @@ export const Surfaces: StoryObj = {
 export const MultiSelectCombobox: StoryObj = {
   render: () => {
     return (
-      <div className="flex flex-wrap gap-8">
-        {optionSet.map(({ options, size }) => (
-          <div>
-            <Combobox
-              isMultiSelect
-              label={`Users - ${size}`}
-              options={options}
-              getOptionLabel={(e) => `${e.name} ${e.name}`}
-              onValueChange={(e) => {
-                console.log('E', e);
-              }}
-            />
-          </div>
-        ))}
-      </div>
+      <ComboboxRenderContainer>
+        {(props) => (
+          <Combobox
+            {...props}
+            isMultiSelect
+            getOptionLabel={(e) => `${e.name} ${e.name}`}
+            onValueChange={(e) => {
+              console.log('E', e);
+            }}
+          />
+        )}
+      </ComboboxRenderContainer>
     );
   },
 };
@@ -98,34 +111,30 @@ export const MultiSelectCombobox: StoryObj = {
 export const MultiSelectComboboxRenderOption: StoryObj = {
   render: () => {
     return (
-      <div className="flex flex-wrap gap-8">
-        {optionSet.map(({ options, size }) => (
-          <div>
-            <Combobox
-              isMultiSelect
-              label={`Users - ${size}`}
-              options={options}
-              getOptionLabel={(e) => `${e.name} ${e.email}`}
-              onValueChange={(e) => {
-                console.log('Value', e);
-              }}
-              renderOption={(e) => (
-                <Detail
-                  title={
-                    <Flex gap="md" align="center">
-                      <Avatar size="inlineXs" src={e.avatarUrl} label={e.name} />
-                      <Text.Title leading="sm" noWrap>
-                        {e.name}
-                      </Text.Title>
-                    </Flex>
-                  }
-                  description={e.email}
-                />
-              )}
-            />
-          </div>
-        ))}
-      </div>
+      <ComboboxRenderContainer>
+        {(props) => (
+          <Combobox
+            {...props}
+            getOptionLabel={(e) => `${e.name} ${e.email}`}
+            onValueChange={(e) => {
+              console.log('Value', e);
+            }}
+            renderOption={(e) => (
+              <Detail
+                title={
+                  <Flex gap="md" align="center">
+                    <Avatar size="inlineXs" src={e.avatarUrl} label={e.name} />
+                    <Text.Title leading="sm" noWrap>
+                      {e.name}
+                    </Text.Title>
+                  </Flex>
+                }
+                description={e.email}
+              />
+            )}
+          />
+        )}
+      </ComboboxRenderContainer>
     );
   },
 };
@@ -142,6 +151,7 @@ export const MultiSelectTagsCombobox: StoryObj = {
       <div className="flex gap-8">
         {[optionsMap.lg, optionsMap.lg, optionsMap.lg].map(({ options, size }) => (
           <Combobox
+            key={size}
             isMultiSelect
             multiSelectVariant="tags"
             label={`Users - ${size}`}
@@ -190,21 +200,62 @@ export const SearchableMultiSelectCombobox: StoryObj = {
   },
 };
 
-export const ReactAriaTst: StoryObj = {
+export const CustomRenderedSelectValue: StoryObj = {
   render: () => {
-    const options = generateMockUserList({ size: 20 });
+    const options = generateMockOrganizationList({ size: 3 });
     return (
-      <div className="flex flex-wrap gap-8">
+      <RenderPaperContainers>
         <Combobox
-          label="Users"
+          disableSelectAnimation
+          clearable={false}
+          shadow={false}
+          border="subtle"
+          showSearchBox={false}
+          value={options[0]}
+          className="pr-8 ring-boundary-weak/50 focus:ring-highlight-tint"
+          renderSelectValue={({ selected }) => (
+            <Flex align="center" gap w-full>
+              <GlyphContainerElement>
+                <HomeIcon
+                  fill="none"
+                  height="20"
+                  className="z-20 relative"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  width="20"
+                  style={{ color: 'currentcolor' }}
+                />
+              </GlyphContainerElement>
+              <Flex column className="cursor-pointer">
+                <div className="text-xs text-content-subtle">Organization</div>
+                {/* <div className="truncate whitespace-nowrap">{selected?.name ?? <Text.Blank />}</div> */}
+
+                <div className="line-clamp-1 leading-md text-md">
+                  {selected?.name ?? <Text.Blank />}
+                </div>
+              </Flex>
+            </Flex>
+          )}
           options={options}
           isMultiSelect={false}
           getOptionLabel={(e) => `${e.name} ${e.name}`}
           onValueChange={(e) => {
             console.log('E', e);
           }}
-        />
-      </div>
+        >
+          <Combobox.FooterButton>Create New Organizaton</Combobox.FooterButton>
+          {/* <Combobox.Addon className="" focusInputOnClick={false}>
+            <IconButton
+              variant="glass"
+              size="xs"
+              color="secondary"
+              className="group-hover:opacity-100  group-hover:scale-100 opacity-0 scale-0 transition-all duration-300 delay-150"
+            >
+              <span className="i-heroicons-plus-20-solid" />
+            </IconButton>
+          </Combobox.Addon> */}
+        </Combobox>
+      </RenderPaperContainers>
     );
   },
 };

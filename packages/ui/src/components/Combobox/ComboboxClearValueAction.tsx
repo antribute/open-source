@@ -55,7 +55,7 @@ export const ComboboxClearValueAction = ({
         variant="ghost"
         color="secondary"
         className={clsx(
-          'transition-opacity ',
+          'transition-opacity',
           {
             'opacity-0 group-hover:opacity-100': !confirmationPopoverOpen,
           },
@@ -68,7 +68,7 @@ export const ComboboxClearValueAction = ({
         <Tooltip tooltip="Clear" size="xs" side="bottom" sideOffset={5}>
           <div className="absolute h-full w-full top-0" />
         </Tooltip>
-        <XMarkIcon className="text-content-weak stroke-current stroke-2 " />
+        <XMarkIcon className="text-content stroke-[0.5px] stroke-content-weak opacity-50 h-16 w-16" />
       </IconButton>
     </ConfirmationPopover>
   );

@@ -33,7 +33,7 @@ import {
 export interface DetailProps extends DetailSlots {
   className?: string;
   style?: React.CSSProperties;
-  gapY?: SizeProp;
+  gapY?: SizeProp | false;
   gapX?: SizeProp;
   breakpoints?: Record<BreakpointKey, DetailSlots>;
   /** @description Enables responsiveness (WIP) */
