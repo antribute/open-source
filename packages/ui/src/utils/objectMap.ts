@@ -30,8 +30,8 @@ export function objectMap<
 export function transformKeys<T extends SearchableObject, TNewKey extends string>(
   obj: T,
   transformKey: (params: { key: keyof T }) => TNewKey
-) {
+): { [K in keyof T as TNewKey]: T[K] } {
   return objectMap(obj, ({ key, value }) => {
     return [transformKey({ key }), value];
-  });
+  }) as unknown as { [K in keyof T as TNewKey]: T[K] };
 }

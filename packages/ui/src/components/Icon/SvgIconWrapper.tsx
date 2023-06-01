@@ -1,7 +1,5 @@
 import { Slot } from '@radix-ui/react-slot';
-import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { LiteralUnion } from 'type-fest';
 import { ReactSvgProps } from 'types/react-types';
 
 export interface SvgIconWrapperProps {
