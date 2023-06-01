@@ -1,7 +1,6 @@
 import { getByPath } from 'utils/getByPath';
 import { notEmpty } from 'utils/notEmpty';
 import type { Path, PathValue, SearchableObject } from '@clickbar/dot-diver';
-import { changeCase } from 'helpers';
 
 type ObjectKey<T extends SearchableObject> = Path<T, 1>;
 
