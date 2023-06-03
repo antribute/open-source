@@ -25,7 +25,7 @@
     "build": "pnpm run build:components && pnpm run build:helpers && pnpm run build:index && pnpm run build:tailwind",
     "build:index": "tsup --config ./tsup.config.js",
     "build:components": "tsup --config ./tsup.config.components.js",
-    "build:blocks": "tsup --config ./tsup.config.components.js",
+    "build:blocks": "tsup --config ./tsup.config.blocks.js",
     "build:helpers": "tsup --config ./tsup.config.helpers.js",
     "build:tailwind": "tsup --config ./tsup.config.tailwind.js",
     "build-storybook": "storybook build",

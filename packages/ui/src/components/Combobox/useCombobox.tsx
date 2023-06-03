@@ -37,6 +37,7 @@ export function useCombobox<TOptions extends L.List<unknown>>({
   maxListHeight = 500,
   multiSelectVariant,
   toggleViewAllSelectedOnPopoverUnmount,
+  flip,
 }: ComboboxProps<TOptions>) {
   const [selectOptionMap, updateSelectOptionMap] = useImmer<SelectOptionMap>(new Map([]));
 
@@ -162,7 +163,7 @@ export function useCombobox<TOptions extends L.List<unknown>>({
       }
     },
     virtualFocus: true,
-    flip: false,
+    flip: flip ?? false,
     fixed: true,
   });
 
