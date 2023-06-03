@@ -48,6 +48,7 @@ export interface ComboboxBaseProps<TOptions extends ComboboxOptions = ComboboxOp
   /** For rendering combobox input addons */
   children?: React.ReactNode;
   disableSelectAnimation?: boolean;
+  flip?: boolean;
 }
 
 export interface SingleSelectComboboxProps<TOptions extends ComboboxOptions>
@@ -69,6 +70,7 @@ export interface MultiSelectComboboxProps<TOptions extends ComboboxOptions>
   multiSelectVariant?: MultiSelectVariant;
   toggleViewAllSelectedOnPopoverUnmount?: UseToggleViewAllSelectedOnUnmountProps['toggleViewAllSelectedOnPopoverUnmount'];
   onValueChange?: (value: TOptions[number][]) => void;
+
   renderSelectValue?: RenderSelectValueFn<TOptions[number][]>;
 }
 

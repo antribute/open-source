@@ -32,5 +32,6 @@ export * from './components/AppPanels';
 export * from './components/Icon';
 export * from './components/Page';
 export * from './components/KBD';
+export * from './components/AntributeBrand';
 
 export * from './helpers';
