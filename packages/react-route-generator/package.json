@@ -1,0 +1,49 @@
+{
+  "name": "@antribute/react-route-generator",
+  "description": "Generate react route configurations",
+  "version": "0.1.0",
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    "import": "./dist/index.js",
+    "require": "./dist/index.cjs"
+  },
+  "files": [
+    "dist/**"
+  ],
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf text-results && rimraf .eslintcache",
+    "dev": "pnpm run build --watch",
+    "lint": "eslint --cache ./src",
+    "test": "vitest"
+  },
+  "keywords": [
+    "antribute",
+    "antribute-ui",
+    "tanstack-router",
+    "@tanstack/router",
+    "react route generator"
+  ],
+  "author": "Antribute, Inc. (https://www.antribute.com)",
+  "license": "MIT",
+  "dependencies": {
+    "ts-morph": "^18.0.0"
+  },
+  "devDependencies": {
+    "@antribute/config": "workspace:0.1.0",
+    "@tanstack/router-devtools": "0.0.1-beta.89",
+    "eslint": "^8.40.0",
+    "prettier": "2.8.7",
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.4",
+    "vite": "^4.0.4"
+  },
+  "peerDependencies": {
+    "@tanstack/router-devtools": "",
+    "vite": ">=3"
+  }
+}
