@@ -5,7 +5,6 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "types": ["@types/node"],
-    "typeRoots": ["./types"],
     "noEmit": true,
     "noEmitOnError": true
   },
