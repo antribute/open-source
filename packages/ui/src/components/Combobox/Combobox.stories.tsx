@@ -9,12 +9,9 @@ import { Text } from 'components/Text';
 import { Flex } from 'components/Flex';
 import { useMockCharactersQuery } from 'mock/mock-apis';
 import { RenderPaperContainers } from 'utils/storybook-utils';
-import { IconButton } from 'components/IconButton';
-import { ClampText } from 'components/ClampText/ClampText';
 import { HomeIcon } from '@heroicons/react/24/outline';
-import { clsx } from 'config/plugins/custom-classes-plugin/class-style-utils';
 import { GlyphContainerElement } from 'components/Icon/IconContainer';
-import { Combobox, ComboboxProps } from '.';
+import { Combobox } from '.';
 
 const meta = {
   args: {},

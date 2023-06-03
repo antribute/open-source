@@ -1,9 +1,6 @@
-import ReactVirtualizedAutoSizer from 'react-virtualized-auto-sizer';
+import type { HeightAndWidthProps } from 'react-virtualized-auto-sizer';
 
-type ReactVirtualizedAutoSizerComponentProps = React.ComponentProps<
-  typeof ReactVirtualizedAutoSizer
->;
-
+type ReactVirtualizedAutoSizerComponentProps = HeightAndWidthProps;
 export interface ReactVirtualizedAutoSizerProps
   extends Omit<ReactVirtualizedAutoSizerComponentProps, 'children'> {
   /**

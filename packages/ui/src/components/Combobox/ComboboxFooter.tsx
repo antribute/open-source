@@ -4,7 +4,6 @@ import * as SelectPrimitive from 'ariakit/select';
 import { Button, ButtonProps } from 'components/Button';
 import React, { RefObject } from 'react';
 import { elementHasOverflowY } from 'utils/elementHasOverflow';
-import { List } from 'components/List';
 import getDisplayName from 'utils/getDisplayName';
 import { useComboboxContext } from 'components/Combobox/Combobox';
 import { MultiSelectVariant } from './Combobox.types';

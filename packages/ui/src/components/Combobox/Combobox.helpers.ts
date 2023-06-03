@@ -1,11 +1,6 @@
 import { notEmpty } from 'utils/notEmpty';
 import { toArray } from 'utils/toArray';
-import type {
-  ComboboxOptionGetters,
-  MultiSelectVariant,
-  SelectOption,
-  SelectOptionMap,
-} from './Combobox.types';
+import type { ComboboxOptionGetters, SelectOption, SelectOptionMap } from './Combobox.types';
 
 export function isSingleSelectValueString(value: unknown): value is string {
   return typeof value === 'string';
