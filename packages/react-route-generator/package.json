@@ -36,14 +36,15 @@
   "devDependencies": {
     "@antribute/config": "workspace:0.1.0",
     "@tanstack/router-devtools": "0.0.1-beta.89",
+    "@vitest/coverage-c8": "^0.25.3",
     "eslint": "^8.40.0",
     "prettier": "2.8.7",
     "tsup": "^6.7.0",
     "typescript": "^5.0.4",
-    "vite": "^4.0.4"
+    "vite": "^4.0.4",
+    "vitest": "^0.25.3"
   },
   "peerDependencies": {
-    "@tanstack/router-devtools": "",
     "vite": ">=3"
   }
 }
