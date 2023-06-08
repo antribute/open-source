@@ -1,13 +1,12 @@
-import { PanelResizeHandle } from './PanelSpacer';
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import React, { useMemo, useRef } from 'react';
 import useDimensions from 'react-cool-dimensions';
 import {
   Direction,
   ImperativePanelGroupHandle,
-  PanelGroup as _PanelGroup,
-  PanelGroupProps as _PanelGroupProps,
+  PanelGroup as PrimitivePanelGroup,
+  PanelGroupProps as PrimitivePanelGroupProps,
 } from 'react-resizable-panels';
-import { DEFAULT__MIN_PANEL_SIZE, type PanelProps } from './Panel';
 import { createCtx } from 'utils/createContext';
 import { measureElement } from 'utils/measureElement';
 import {
@@ -19,9 +18,12 @@ import { hasChildren } from 'react-children-utilities';
 import { notEmpty } from 'utils';
 import { scaleNumbers } from 'components/AppPanels/helpers';
 import { ZeroTo100 } from 'types/numeric-types';
+import { get } from 'lodash-es';
+import { DEFAULT_MIN_PANEL_SIZE, type PanelProps } from './Panel';
+import { PanelResizeHandle } from './PanelSpacer';
 
 export interface PanelFlexProps<TBreakpoints extends PanelSizeBreakpointMap>
-  extends Omit<_PanelGroupProps, 'children'> {
+  extends Omit<PrimitivePanelGroupProps, 'children'> {
   breakpoints?: TBreakpoints;
   resizeable?: boolean;
   children: this['breakpoints'] extends undefined
@@ -73,8 +75,9 @@ export const PanelGroup = <T extends PanelSizeBreakpointMap<ZeroTo100>>({
     const panelNodes = childrenNodes.map((node) => {
       if (
         React.isValidElement<PanelProps>(node) &&
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         node.props &&
-        (node?.props?.defaultSize ?? 1) >= 1
+        (node.props.defaultSize ?? 1) >= 1
       ) {
         return node;
       }
@@ -85,7 +88,7 @@ export const PanelGroup = <T extends PanelSizeBreakpointMap<ZeroTo100>>({
     // to avoid react-resizeable-panels error.
     const scaledMinSizes = scaleNumbers(
       panelNodes.map((e) => e?.props.minSize),
-      100 - DEFAULT__MIN_PANEL_SIZE
+      100 - DEFAULT_MIN_PANEL_SIZE
     );
 
     const rows = panelNodes.filter(notEmpty).flatMap((node, index, arr) => {
@@ -94,7 +97,7 @@ export const PanelGroup = <T extends PanelSizeBreakpointMap<ZeroTo100>>({
       const order = index + 1;
 
       const child = React.cloneElement(node, {
-        key: node.props.id ?? `panel-${order}-${node.props.id}`,
+        key: node.props.id ?? `panel-${order}-${get(node, 'props.id', '')}`,
         order,
         minSize: minSize || 10,
       });
@@ -123,16 +126,25 @@ export const PanelGroup = <T extends PanelSizeBreakpointMap<ZeroTo100>>({
         : panelGroupHeight - totalResizerHeight;
 
     return { rows, panelGroupRelativeSize };
-  }, [resizerRef, resizeable, direction, childrenProp, panelGroupWidth, panelGroupHeight]);
+  }, [
+    childrenProp,
+    sizes,
+    resizerWidth,
+    resizerHeight,
+    direction,
+    panelGroupWidth,
+    panelGroupHeight,
+    resizeable,
+  ]);
 
   return (
     <PanelFlexProvider
       value={{ panelGroupWidth, panelGroupHeight, direction, panelGroupRelativeSize }}
     >
       <div ref={observe} className="w-full h-full">
-        <_PanelGroup direction={direction} {...props} ref={panelGroupRef} id="imperative">
+        <PrimitivePanelGroup direction={direction} {...props} ref={panelGroupRef} id="imperative">
           {rows}
-        </_PanelGroup>
+        </PrimitivePanelGroup>
       </div>
     </PanelFlexProvider>
   );

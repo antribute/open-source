@@ -125,6 +125,7 @@ export interface BasicCheckboxProps
   pointerEventsNone?: boolean;
   label?: React.ReactNode;
   tooltip?: React.ReactNode;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   containerElement?: React.ComponentType<any>;
 }
 

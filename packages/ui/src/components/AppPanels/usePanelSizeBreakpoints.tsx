@@ -2,14 +2,14 @@ import { BreakpointKey, useBreakpoints } from 'hooks';
 import { ZeroTo100 } from 'types/numeric-types';
 import { objectMap } from 'utils';
 
-type PanelData<T extends number = number> = {
+interface PanelData<T extends number = number> {
   minSize?: T;
   maxSize?: T;
   defaultSize?: T;
   resizeable?: boolean;
   collapsed?: boolean;
   collapsible?: boolean;
-};
+}
 
 export type PanelSizeBreakpointMap<T extends number = number> = Record<
   string,

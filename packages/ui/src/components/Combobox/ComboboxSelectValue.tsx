@@ -5,8 +5,8 @@ import { StatusBadge } from 'components/StatusBadge';
 import { classed } from 'utils/classed';
 import { motion, useWillChange } from 'framer-motion';
 import { useImmer } from 'use-immer';
+import { isMultiSelectValueString } from './Combobox.helpers';
 import { MultiSelectVariant } from './Combobox.types';
-import { isMultiSelectValueString } from 'components/Combobox/Combobox.helpers';
 
 export interface ComboboxSelectValueProps {
   multiSelectVariant?: MultiSelectVariant;
