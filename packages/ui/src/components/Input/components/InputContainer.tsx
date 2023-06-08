@@ -157,4 +157,5 @@ export const pickInputContainerProps = generatePropPickerFn<InputContainerProps>
   success: '_pick_',
   isRequired: '_pick_',
   showValidationMessageInTooltip: '_pick_',
+  isDisabled: '_pick_',
 });
