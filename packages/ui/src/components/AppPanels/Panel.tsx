@@ -15,7 +15,7 @@ const PanelElement = classed(PanelPrimitive, 'flex flex-col', {
 
 const PanelContentElement = classed(Paper, 'w-full h-full overflow-hidden rounded-md');
 
-export const DEFAULT__MIN_PANEL_SIZE = 10;
+export const DEFAULT_MIN_PANEL_SIZE = 10;
 
 export const PanelContent = PanelContentElement;
 
@@ -27,10 +27,10 @@ export interface PanelProps extends PanelElementProps {
 export const PanelGroupItem = (props: PanelProps) => {
   const panelRef = useRef<ImperativePanelHandle>(null);
 
-  const { minSize = DEFAULT__MIN_PANEL_SIZE, maxSize, defaultSize } = props;
+  const { minSize = DEFAULT_MIN_PANEL_SIZE, maxSize, defaultSize } = props;
 
   useEffect(() => {
-    panelRef?.current?.resize(minSize);
+    panelRef.current?.resize(minSize);
   }, [minSize]);
 
   return (

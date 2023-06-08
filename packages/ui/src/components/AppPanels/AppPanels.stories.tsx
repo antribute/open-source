@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { StoryObj, Meta } from '@storybook/react';
 import { Paper } from 'components/Paper';
 import { MockStaticSideBar } from 'components/AppShell/app-shell-mocks';
