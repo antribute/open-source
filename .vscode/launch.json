@@ -16,6 +16,25 @@
         "action": "debugWithChrome",
         "webRoot": "${workspaceFolder}/packages/zephyr-react"
       }
+    },
+    {
+      "name": "Arktype Test Playground",
+      "type": "node-terminal",
+      "command": "pnpm --filter=@feature-type/cli arktype-test-playground",
+      "request": "launch",
+      "cwd": "${workspaceFolder}"
     }
+    // {
+    //   "name": "Arktype Test Playground",
+    //   "type": "node",
+    //   "request": "launch",
+    //   "runtimeExecutable": "pnpm",
+    //   "runtimeArgs": ["run", "arktype-playground"],
+    //   "cwd": "${workspaceFolder}",
+    //   "env": {
+    //     "NODE_ENV": "development"
+    //   },
+    //   "console": "integratedTerminal"
+    // }
   ]
 }

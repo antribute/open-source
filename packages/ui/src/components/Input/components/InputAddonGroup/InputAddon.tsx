@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 /* eslint-disable @typescript-eslint/naming-convention */
 import React, { forwardRef } from 'react';
@@ -40,7 +41,7 @@ const InputAddonElement = classed(
 type InputAddonVariantProps = Classed.VariantProps<typeof InputAddonInnerElement>;
 
 const InputAddonInnerElement = classed(
-  'button',
+  motion.div,
   'relative z-10',
   'text-sm font-semibold',
   'inline-flex items-center justify-center',
@@ -50,6 +51,7 @@ const InputAddonInnerElement = classed(
   'ring-inset focus:ring-inset focus:-outline-offset-2',
   'w-auto',
   'px-4',
+  'rounded-[inherit]',
   {
     variants: {
       fullHeight: {
@@ -80,8 +82,6 @@ const InputAddonInnerElement = classed(
     },
   }
 );
-
-const MotionInputAddonInnerElement = motion(InputAddonInnerElement);
 
 export interface InputAddonProps extends InputAddonVariantProps, Omit<HoverProps, 'isDisabled'> {
   position?: 'leading' | 'trailing';
@@ -179,7 +179,7 @@ export const InputAddon = forwardRef<
               );
             }}
           >
-            <MotionInputAddonInnerElement
+            <InputAddonInnerElement
               ref={forwardedRef}
               initial={enterAnimation ? { scale: 0 } : {}}
               animate={{ scale: 1, transition: { delay: 0.2, bounce: 0, duration: 0.3 } }}
@@ -227,7 +227,7 @@ export const InputAddon = forwardRef<
                   })
                 : children}
               {/* </InputAddonInnerElement> */}
-            </MotionInputAddonInnerElement>
+            </InputAddonInnerElement>
           </Wrap>
         </InputAddonElement>
       )}

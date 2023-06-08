@@ -244,6 +244,23 @@ export const InputAddons: Story = {
           iconClassName="i-heroicons-bars-arrow-up-20-solid"
         />
       </Input>
+      <Input
+        name="Vehicle"
+        label="Username"
+        placeholder="Enter username"
+        errorMessage="This username isn't available"
+        defaultValue="daishi"
+        size="lg"
+      >
+        <Input.Addon grouping="inline" focusInputOnClick={false} position="trailing">
+          <Button size="xs">View</Button>
+        </Input.Addon>
+        <Input.Addon
+          grouping="outside"
+          position="trailing"
+          iconClassName="i-heroicons-bars-arrow-up-20-solid"
+        />
+      </Input>
       <Input.NumberField type="currency" label="Currency" placeholder="Enter amount" />
     </Flex>
   ),
