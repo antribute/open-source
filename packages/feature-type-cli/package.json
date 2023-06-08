@@ -1,0 +1,60 @@
+{
+  "name": "@feature-type/cli",
+  "description": "Generate react route configurations",
+  "version": "0.1.0",
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    "import": "./dist/index.js",
+    "require": "./dist/index.cjs"
+  },
+  "files": [
+    "dist/**"
+  ],
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf text-results && rimraf .eslintcache",
+    "dev": "pnpm run build --watch",
+    "lint": "eslint --cache ./src",
+    "test": "vitest",
+    "arktype-test-playground": "vitest ./type-generation/arktype-playground.test.ts"
+  },
+  "keywords": [
+    "antribute",
+    "antribute-ui",
+    "tanstack-router",
+    "@tanstack/router",
+    "react route generator"
+  ],
+  "author": "Antribute, Inc. (https://www.antribute.com)",
+  "license": "MIT",
+  "dependencies": {
+    "@types/change-case": "^2.3.1",
+    "@types/fs-extra": "^11.0.1",
+    "arktype": "1.0.14-alpha",
+    "change-case": "^4.1.2",
+    "fs-extra": "^11.1.1",
+    "lodash-es": "^4.17.21",
+    "ts-morph": "^18.0.0"
+  },
+  "devDependencies": {
+    "@antribute/config": "workspace:0.1.0",
+    "@tanstack/router-devtools": "0.0.1-beta.89",
+    "@types/lodash-es": "^4.17.6",
+    "@vitest/coverage-c8": "^0.25.3",
+    "eslint": "^8.40.0",
+    "prettier": "2.8.7",
+    "ts-toolbelt": "^9.6.0",
+    "tsup": "^6.7.0",
+    "type-fest": "^3.5.1",
+    "typescript": "^5.0.4",
+    "vite": "^4.0.4",
+    "vitest": "^0.25.3"
+  },
+  "peerDependencies": {
+    "vite": ">=3"
+  }
+}
