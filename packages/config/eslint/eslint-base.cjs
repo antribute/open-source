@@ -16,6 +16,7 @@ module.exports = {
     'no-underscore-dangle': 'off',
 
     'no-extra-boolean-cast': 'off',
+    '@typescript-eslint/no-floating-promises': ['error', { ignoreVoid: true }],
     '@typescript-eslint/naming-convention': [
       'error',
       {

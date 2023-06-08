@@ -30,6 +30,7 @@ export interface InputComponentStateProps {
   loading?: boolean;
   isRequired?: boolean;
   showValidationMessageInTooltip?: boolean;
+  isDisabled?: boolean;
 }
 
 export interface InputFieldProps {

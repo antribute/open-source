@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { get, pick } from 'lodash-es';
+import { get, omit, pick } from 'lodash-es';
 import { O } from 'ts-toolbelt';
 import { LiteralUnion } from 'type-fest';
 import { IsUnion } from 'types/typeUtilities';
@@ -16,6 +16,9 @@ export function generatePropPickerFn<T extends object>(pickedRecord: Record<keyo
   pickerFn.pickedKeys = pickedKeys;
 
   pickerFn.pickedRecord = pickedRecord;
+
+  pickerFn.omit = <const TProps extends object>(props: TProps) =>
+    omit(props, pickedKeys) as Omit<TProps, keyof T>;
 
   return pickerFn;
 }
