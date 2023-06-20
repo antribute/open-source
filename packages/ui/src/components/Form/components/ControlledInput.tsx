@@ -1,33 +1,16 @@
-import { useTsController, useFieldInfo } from '@ts-react/form';
-import { Input, TextFieldProps } from 'components/Input';
+import { Input, TextAreaFieldProps } from 'components/Input';
+import { ControlledInputProps, useControlledInput } from './useControlledInput';
 
-export type ControlledInputProps = Omit<TextFieldProps, 'value' | 'name' | 'ref' | 'onBlur'>;
+export type { ControlledInputProps };
 
-export const ControlledInput = ({ onChange: onChangeProp, ...props }: ControlledInputProps) => {
-  const { field, error } = useTsController<string>();
+export const ControlledInput = (props: ControlledInputProps) => {
+  const controlledInputProps = useControlledInput(props);
+  return <Input {...controlledInputProps} />;
+};
 
-  const { label, placeholder, isOptional } = useFieldInfo();
+export type ControlledTextAreaProps = ControlledInputProps<TextAreaFieldProps>;
 
-  const { onChange, value, name, onBlur, ref } = field;
-
-  return (
-    <>
-      <Input
-        name={name}
-        isRequired={!isOptional}
-        value={value ?? ''} // conditional to prevent "uncontrolled to controlled" react warning
-        onChange={(e) => {
-          onChange(e);
-          onChangeProp?.(e);
-        }}
-        placeholder={placeholder}
-        label={label}
-        onBlur={onBlur}
-        ref={ref}
-        error={Boolean(error)}
-        errorMessage={error?.errorMessage}
-        {...props}
-      />
-    </>
-  );
+export const ControlledTextArea = (props: ControlledTextAreaProps) => {
+  const controlledInputProps = useControlledInput(props);
+  return <Input.TextAreaField {...controlledInputProps} />;
 };

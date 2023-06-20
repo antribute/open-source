@@ -1,6 +1,6 @@
 import React, { useRef, forwardRef, useLayoutEffect } from 'react';
 import clsx from 'clsx';
-import { classed } from 'utils/classed';
+import { ClassedVariantProps, classed } from 'utils/classed';
 import { VisuallyHidden } from 'react-aria';
 import { measureElement } from 'utils/measureElement';
 import { mergeRefs } from '@react-aria/utils';
@@ -11,7 +11,11 @@ import {
   inputSizeClassName,
   inputSurfaceClassName,
 } from 'components/Input/Input.styles';
-import { InputContainer } from 'components/Input/components/InputContainer';
+import {
+  InputContainer,
+  pickInputContainerProps,
+} from 'components/Input/components/InputContainer';
+import { generatePropPickerFn } from 'utils';
 import {
   BaseInputFieldElement,
   InputFieldContainerVariants,
@@ -35,6 +39,7 @@ export const TextAreaField = forwardRef<
         cols={cols}
         placeholder={placeholder}
         resizeable={resizeable}
+        {...props}
       />
     </InputContainer>
   );
@@ -61,6 +66,29 @@ const BaseTextAreaElement = classed(
 
 BaseTextAreaElement.defaultProps = defaultInputProps;
 
+type BaseTextAreaVariantProps = ClassedVariantProps<typeof BaseTextAreaElement> &
+  Pick<BaseTextAreaProps, 'rows' | 'cols'> &
+  Pick<InputComponentProps, 'placeholder'>;
+
+const pickBaseTextAreaProps = generatePropPickerFn<BaseTextAreaVariantProps>({
+  filled: '_pick_',
+  border: '_pick_',
+  shadow: '_pick_',
+  cursor: '_pick_',
+  roundedFull: '_pick_',
+  size: '_pick_',
+  fullWidth: '_pick_',
+  width: '_pick_',
+  minWidth: '_pick_',
+  maxWidth: '_pick_',
+  hasLeadingAddons: '_pick_',
+  hasTrailingAddons: '_pick_',
+  resizeable: '_pick_',
+  cols: '_pick_',
+  rows: '_pick_',
+  placeholder: '_pick_',
+});
+
 export interface BaseTextAreaProps
   extends Omit<AriaInputProps, 'size' | 'width'>,
     InputSizeVariants,
@@ -70,20 +98,19 @@ export interface BaseTextAreaProps
 }
 
 export const BaseTextArea = forwardRef<HTMLTextAreaElement, BaseTextAreaProps>(
-  (
-    {
-      rows = 4,
-      cols,
-      resizeable = false,
-      size,
-      hasLeadingAddons,
-      hasTrailingAddons,
-      minWidth = false,
-      maxWidth = false,
-      ...props
-    },
-    forwardedRef
-  ) => {
+  (props, forwardedRef) => {
+    const inputContainerProps = pickInputContainerProps(props);
+
+    const baseTextAreaProps = pickBaseTextAreaProps(props, {
+      defaultProps: {
+        rows: 4,
+        border: 'subtle',
+        resizeable: false,
+        minWidth: false,
+        maxWidth: false,
+      },
+    });
+
     const inputProps = useInputWithRefContext() ?? {};
 
     const innerRef = useRef<HTMLTextAreaElement>(null);
@@ -110,17 +137,9 @@ export const BaseTextArea = forwardRef<HTMLTextAreaElement, BaseTextAreaProps>(
           onChange={(e) => {
             inputProps.onChange?.(e as never);
           }}
+          {...inputContainerProps}
           ref={ref}
-          {...{
-            minWidth,
-            maxWidth,
-            rows,
-            cols,
-            size,
-            resizeable,
-            hasLeadingAddons,
-            hasTrailingAddons,
-          }}
+          {...baseTextAreaProps}
           style={{ minHeight: initialHeight.current }}
         />
 

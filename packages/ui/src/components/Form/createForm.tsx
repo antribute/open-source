@@ -4,6 +4,7 @@ import { useFormContext } from 'react-hook-form';
 import { EmailField } from 'components/Form/components/fields/EmailField';
 import { SelectField } from 'components/Form/components/fields/SelectField';
 import { twMerge } from 'tailwind-merge';
+import { TextAreaFormField } from 'components/Form/components/fields/TextAreaFormField';
 import { fields } from './components/fields';
 
 export function createForm() {
@@ -14,6 +15,7 @@ export function createForm() {
     CheckboxField,
     EmailField,
     SelectField,
+    TextAreaFormField,
   ]);
 
   const Form = createTsForm(mappings, { FormComponent });

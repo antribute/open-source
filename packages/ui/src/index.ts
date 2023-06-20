@@ -33,5 +33,7 @@ export * from './components/Icon';
 export * from './components/Page';
 export * from './components/KBD';
 export * from './components/AntributeBrand';
-
+export * from './components/Detail';
+export * from './components/StatusDot';
+export * from './components/ConfirmationPopover';
 export * from './helpers';

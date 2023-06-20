@@ -1,9 +1,9 @@
-import { createUniqueFormField } from 'components/Form/Form.helpers';
-import { ControlledInput } from 'components/Form/components/ControlledInput';
 import { z } from 'zod';
+import { createUniqueFormField } from 'components/Form/Form.helpers';
+import { ControlledInput, ControlledInputProps } from '../ControlledInput';
 
-export const StringFieldComponent = () => {
-  return <ControlledInput type="text" />;
+export const StringFieldComponent = (props: ControlledInputProps) => {
+  return <ControlledInput type="text" {...props} />;
 };
 
 export const StringField = createUniqueFormField({

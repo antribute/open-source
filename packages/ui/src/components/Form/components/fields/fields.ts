@@ -3,3 +3,4 @@ export * from './CheckboxField';
 export * from './NumberFieldSchema';
 export * from './StringField';
 export * from './SelectField';
+export * from './TextAreaFormField';

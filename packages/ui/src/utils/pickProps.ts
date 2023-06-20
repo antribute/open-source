@@ -9,8 +9,12 @@ import { objectMap } from 'utils/objectMap';
 export function generatePropPickerFn<T extends object>(pickedRecord: Record<keyof T, '_pick_'>) {
   const pickedKeys = Object.keys(pickedRecord) as (keyof T)[];
 
-  const pickerFn = <TProps extends object & T>(props: TProps) => {
-    return pick(props, pickedKeys) as T;
+  const pickerFn = <TProps extends object & T, TDefaultProps extends Partial<T>>(
+    props: TProps,
+    options?: { defaultProps?: TDefaultProps }
+  ) => {
+    const { defaultProps } = options ?? {};
+    return { ...defaultProps, ...pick(props, pickedKeys) } as O.Merge<T, TDefaultProps>;
   };
 
   pickerFn.pickedKeys = pickedKeys;

@@ -365,18 +365,21 @@ export const TextAreaExample: Story = {
     return (
       <div className="flex flex-wrap gap-16">
         <Input.TextAreaField {...common} label="Resizeable" optionalLabelIndicator="Default" />
+
         <Input.TextAreaField
           {...common}
           label="Resizeable"
           optionalLabelIndicator="True"
           resizeable
         />
+
         <Input.TextAreaField
           {...common}
           label="Resizeable"
           optionalLabelIndicator="X"
           resizeable="x"
         />
+
         <Input.TextAreaField
           {...common}
           label="Resizeable"
