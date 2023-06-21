@@ -36,4 +36,7 @@ export * from './components/AntributeBrand';
 export * from './components/Detail';
 export * from './components/StatusDot';
 export * from './components/ConfirmationPopover';
+export * from './components/ClampText';
+export * from './components/Wrap';
+
 export * from './helpers';
