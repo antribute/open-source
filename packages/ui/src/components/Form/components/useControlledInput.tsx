@@ -7,8 +7,9 @@ export type ControlledInputProps<T = TextFieldProps> = Omit<
   'value' | 'name' | 'ref' | 'onBlur' | 'onChange' | 'onFocus'
 >;
 
-export const useControlledInput = <T,>(props: ControlledInputProps<T>) => {
-  const { field, error } = useTsController<string>();
+export const useControlledInput = <T,>(props: T, options?: { fallbackValue?: unknown }) => {
+  const { field, error } = useTsController();
+  const { fallbackValue } = options ?? {};
 
   const { label, placeholder, isOptional } = useFieldInfo();
 
@@ -21,7 +22,7 @@ export const useControlledInput = <T,>(props: ControlledInputProps<T>) => {
   const controlledInputProps = {
     label,
     placeholder,
-    value: value ?? '',
+    value: (value ?? fallbackValue) as never,
     isRequired: !isOptional,
     name,
     onBlur,

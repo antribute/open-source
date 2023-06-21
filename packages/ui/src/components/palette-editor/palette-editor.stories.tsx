@@ -48,7 +48,7 @@ const { Form, schemas } = createForm();
 
 const CreateSchemeForm = z.object({
   name: schemas.stringfield.describe('Scheme Name // Ex: Neutral-Dark'),
-  p: schemas.selectfield.describe('Sel'),
+  p: schemas.selectField.describe('Sel'),
   // mode: schemas.CheckboxField,
 });
 

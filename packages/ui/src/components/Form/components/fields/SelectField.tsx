@@ -10,7 +10,7 @@ export const SelectFieldComponent = (props: ControlledComboboxProps) => {
 };
 
 export const SelectField = createUniqueFormField({
-  uniqueId: 'selectfield',
+  uniqueId: 'selectField',
   schema: z.string(),
   component: SelectFieldComponent,
 });
