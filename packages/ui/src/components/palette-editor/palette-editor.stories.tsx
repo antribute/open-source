@@ -47,7 +47,7 @@ type Story = StoryObj<typeof meta>;
 const { Form, schemas } = createForm();
 
 const CreateSchemeForm = z.object({
-  name: schemas.stringfield.describe('Scheme Name // Ex: Neutral-Dark'),
+  name: schemas.stringField.describe('Scheme Name // Ex: Neutral-Dark'),
   p: schemas.selectField.describe('Sel'),
   // mode: schemas.CheckboxField,
 });
@@ -152,8 +152,8 @@ function isValidColor(value: string) {
   return Boolean(parse(value));
 }
 const ColorSchema = z.object({
-  name: schemas.stringfield.describe('Color Name // Ex: Sky Blue...'),
-  color: schemas.stringfield
+  name: schemas.stringField.describe('Color Name // Ex: Sky Blue...'),
+  color: schemas.stringField
     .describe('Color // Ex: #00000')
     .refine(isValidColor, { message: 'Invalid color' }),
 });

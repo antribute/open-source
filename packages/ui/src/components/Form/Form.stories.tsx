@@ -23,7 +23,7 @@ type Story = StoryObj<typeof meta>;
 
 const SignUpSchema = z.object({
   email: schemas.email,
-  name: schemas.stringfield.describe('User name // Enter username'),
+  name: schemas.stringField.describe('User name // Enter username'),
   // checked: schemas.CheckboxField,
 });
 
