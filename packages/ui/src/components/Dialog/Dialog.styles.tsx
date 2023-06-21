@@ -44,7 +44,7 @@ export type DialogOverlayElementProps = React.ComponentProps<typeof DialogOverla
 
 export const DialogOverlayElement = classed(
   DialogPrimitive.Overlay,
-  'fixed inset-0 z-20 bg-black/50',
+  'fixed inset-0 z-20 bg-palette-black/50',
   {
     variants: {},
   }
