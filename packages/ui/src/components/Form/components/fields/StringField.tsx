@@ -7,7 +7,7 @@ export const StringFieldComponent = (props: ControlledInputProps) => {
 };
 
 export const StringField = createUniqueFormField({
-  uniqueId: 'stringfield',
+  uniqueId: 'stringField',
   component: StringFieldComponent,
   schema: z.string(),
 });
