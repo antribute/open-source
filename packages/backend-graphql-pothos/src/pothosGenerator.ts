@@ -56,7 +56,7 @@ const createBuilder = async (pothosOutputDir: string, config: Config) => {
     if (config.permissions.platform === '@antribute/backend-perms-auth0-fga') {
       logger.debug('Populating Pothos Config for Permissions: Auth0 FGA', config);
 
-      additionalImports += "import { checkPermissions, PermissionsParams } from '../auth0Fga';";
+      additionalImports += "import { checkPermission, PermissionsParams } from '../auth0Fga';";
       body +=
         'authScopes: (context) => ({ loggedIn: context.loggedIn, hasPermissions: async (perm) => { if (!context.loggedIn) return false; return checkPermission({ ...perm, userId: context.userId }) }}),';
       typings = [
