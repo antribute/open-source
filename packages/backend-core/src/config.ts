@@ -20,7 +20,11 @@ export interface Config {
   };
   permissions: {
     customConfig: Record<string, unknown>;
-    platform: '@antribute/backend-perms-auth0-fga' | '@antribute/backend-perms-permify' | 'none';
+    platform:
+      | '@antribute/backend-perms-auth0-fga'
+      | '@antribute/backend-perms-openfga'
+      | '@antribute/backend-perms-permify'
+      | 'none';
   };
   server: {
     customConfig: Record<string, unknown>;
