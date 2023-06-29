@@ -23,6 +23,7 @@
 ./packages/backend-graphql-pothos/* @jrkienle
 ./packages/backend-orm-prisma/* @jrkienle
 ./packages/backend-perms-auth0-fga/* @jrkienle
+./packages/backend-perms-openfga/* @jrkienle
 ./packages/backend-perms-permify/* @jrkienle
 ./packages/backend-server-koa/* @jrkienle
 ./packages/backend-server-nextjs/* @jrkienle

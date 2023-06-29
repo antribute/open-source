@@ -474,6 +474,9 @@ importers:
       '@antribute/config':
         specifier: workspace:0.1.0
         version: link:../config
+      '@openfga/sdk':
+        specifier: ^0.2.6
+        version: 0.2.6
       '@types/node':
         specifier: 20.1.7
         version: 20.1.7
