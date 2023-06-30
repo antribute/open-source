@@ -24,6 +24,8 @@
   - 'packages/backend-orm-prisma/**'
 'Package: Backend Perms (Auth0 FGA)':
   - 'packages/backend-perms-auth0-fga/**'
+'Package: Backend Perms (OpenFGA)':
+  - 'packages/backend-perms-openfga/**'
 'Package: Backend Perms (Permify)':
   - 'packages/backend-perms-permify/**'
 'Package: Backend Server (Koa)':
