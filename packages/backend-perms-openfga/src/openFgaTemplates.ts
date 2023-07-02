@@ -5,19 +5,23 @@ export const fgaIndexTemplate = `//
 //
 
 import { CredentialsMethod, OpenFgaClient } from '@openfga/sdk';
+import type { WriteAuthorizationModelRequest } from '@openfga/sdk';
+import { readFile } from 'fs/promises';
 
 export interface PermissionsParams {
   objectId: string;
   objectType: string;
   relation: string;
+  tenantId: string;
   userId: string;
+  userType?: string;
 }
 
-export const buildFga = (storeId = process.env.OPENFGA_STORE_ID!) => {
+export const buildFga = (tenantId: string | undefined) => {
   const openFga = new OpenFgaClient({
     apiScheme: process.env.OPENFGA_API_SCHEME || 'https',
     apiHost: process.env.OPENFGA_API_HOST!,
-    storeId,
+    storeId: tenantId,
     credentials: {
       method: CredentialsMethod.ApiToken,
       config: {
@@ -28,20 +32,89 @@ export const buildFga = (storeId = process.env.OPENFGA_STORE_ID!) => {
   return openFga;
 }
 
-export const addPermissions = async (tuples: PermissionsParams[]): Promise<void> => {
-  const autopenFgah0Fga = buildFga();
-  await openFga.writeTuples(tuples.map(({ objectId, objectType, relation, userId }) => ({ object: \`\${objectType}:\${objectId}\`, relation, user: \`user:\${userId}\`})))
+export const addPermissions = async (tuples: Omit<PermissionsParams, 'tenantId'>[], tenantId: string): Promise<void> => {
+  const openFga = buildFga(tenantId);
+  await openFga.writeTuples(
+    tuples.map(({ objectId, objectType, relation, userId, userType }) => ({
+      object: \`\${objectType}:\${objectId}\`,
+      relation,
+      user: \`\${userType || 'user'}:\${userId}\`,
+    }))
+  );
 };
 
-export const checkPermission = async ({ objectId, objectType, relation, userId }: PermissionsParams): Promise<boolean> => {
-  const openFga = buildFga();
-  const res = await openFga.check( { object: \`\${objectType}:\${objectId}\`, relation, user: \`user:\${userId}\` });
+export const checkPermission = async ({
+  objectId,
+  objectType,
+  relation,
+  tenantId,
+  userId,
+  userType,
+}: PermissionsParams): Promise<boolean> => {
+  const openFga = buildFga(tenantId);
+  const res = await openFga.check({
+    object: \`\${objectType}:\${objectId}\`,
+    relation,
+    user: \`\${userType || 'user'}:\${userId}\`,
+  });
   return res.allowed ?? false;
 };
 
-export const removePermissions = async (tuples: PermissionsParams[]): Promise<void> => {
-  const openFga = buildFga();
-  await openFga.deleteTuples(tuples.map(({ objectId, objectType, relation, userId }) => ({ object: \`\${objectType}:\${objectId}\`, relation, user: \`user:\${userId}\` })));
+export const createStore = async (tenantId: string, schemaPath?: string) => {
+  // Undefined is being explicitely passed to tell OpenFGA that these calls are being run outside
+  // of any tenant's context
+  const openFga = buildFga(undefined);
+  const res = await openFga.createStore({
+    name: tenantId,
+  });
+
+  const storeId = res.id;
+  if (!storeId) {
+    throw new Error('An unknown error occurred while creating your OpenFGA store');
+  }
+
+  const openFgaWithStore = buildFga(storeId);
+
+  if (schemaPath) {
+    const schemaContent = JSON.parse(
+      (await readFile(schemaPath)).toString()
+    ) as WriteAuthorizationModelRequest;
+    await openFgaWithStore.writeAuthorizationModel(schemaContent);
+  }
+
+  return { storeId };
+};
+
+export const deleteStore = async (tenantId: string) => {
+  const openFga = buildFga(tenantId);
+  await openFga.deleteStore();
+}
+
+export const getAllObjectsWithPermission = async ({
+  objectType,
+  relation,
+  tenantId,
+  userId,
+  userType,
+}: Omit<PermissionsParams, 'objectId'>) => {
+  const openFga = buildFga(tenantId);
+  const res = await openFga.listObjects({
+    relation,
+    type: objectType,
+    user: \`\${userType || 'user'}:\${userId}\`
+  })
+  return res.objects?.map((obj) => obj.split(':')?.[1] ?? obj) ?? [];
+}
+
+export const removePermissions = async (tuples: Omit<PermissionsParams, 'tenantId'>[], tenantId: string): Promise<void> => {
+  const openFga = buildFga(tenantId);
+  await openFga.deleteTuples(
+    tuples.map(({ objectId, objectType, relation, userId, userType }) => ({
+      object: \`\${objectType}:\${objectId}\`,
+      relation,
+      user: \`\${userType || 'user'}:\${userId}\`,
+    }))
+  );
 };
 
 export default buildFga;

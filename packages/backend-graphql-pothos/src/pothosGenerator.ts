@@ -68,6 +68,33 @@ const createBuilder = async (pothosOutputDir: string, config: Config) => {
       ];
     }
 
+    if (config.permissions.platform === '@antribute/backend-perms-openfga') {
+      logger.debug('Populating Pothos Config for Permissions: OpenFGA', config);
+
+      additionalImports += "import { checkPermission, PermissionsParams } from '../openFga';";
+      body += `  authScopes: (context) => ({
+    loggedIn: context.loggedIn,
+    hasPermissions: async (perm) => {
+      if (!context.loggedIn) {
+        return false
+      }
+      if (typeof perm === 'function') {
+        const asyncPerm = await perm();
+        return checkPermission({ ...asyncPerm, userId: context.userId });
+      }
+      return checkPermission({ ...perm, userId: context.userId });
+    }
+  }),`;
+      typings = [
+        ...typings,
+        {
+          name: 'AuthScopes',
+          value:
+            "{ hasPermissions: Omit<PermissionsParams, 'userId'> | (() => Promise<Omit<PermissionsParams, 'userId'>>), loggedIn: boolean }",
+        },
+      ];
+    }
+
     if (config.permissions.platform === '@antribute/backend-perms-permify') {
       logger.debug('Populating Pothos Config for Permissions: Permify', config);
 
@@ -87,7 +114,7 @@ const createBuilder = async (pothosOutputDir: string, config: Config) => {
   if (config.orm.platform === '@antribute/backend-orm-prisma') {
     logger.debug('Populating Pothos Config for ORM: Prisma', config);
     additionalImports += prismaAdditionalImports;
-    body += '\nprisma: { client: prisma },';
+    body += '\n  prisma: { client: prisma },';
     plugins = [
       ...plugins,
       { name: 'PrismaPlugin', from: '@pothos/plugin-prisma' },
