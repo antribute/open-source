@@ -1,4 +1,0 @@
-[submodule "packages/arktype"]
-	path = packages/arktype
-	url = git@github.com:arktypeio/arktype.git
-	branch = beta
