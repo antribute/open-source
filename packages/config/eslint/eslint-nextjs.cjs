@@ -10,6 +10,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:@typescript-eslint/strict',
     'plugin:tailwindcss/recommended',
+    'plugin:tailwindcss/recommended',
     'plugin:@next/next/recommended',
     'plugin:@next/next/core-web-vitals',
     'prettier',
@@ -18,17 +19,10 @@ module.exports = {
   parserOptions: {
     project: './tsconfig.json',
   },
-  plugins: ['@typescript-eslint', '@next/next', 'tailwindcss'],
+  plugins: ['@typescript-eslint', '@next/next'],
   rules: {
     ...base.rules,
     ...react.rules,
-    // This allows us to import devdeps in tests
   },
-  settings: {
-    tailwindcss: {
-      callees: ['clsx', 'twsx'],
-      config: './node_modules/@antribute/ui/dist/tailwindConfig.js',
-      removeDuplicates: true,
-    },
-  },
+  settings: react.settings,
 };

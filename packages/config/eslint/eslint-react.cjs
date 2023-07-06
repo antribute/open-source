@@ -4,7 +4,9 @@ const base = require('./eslint-base.cjs');
 const tailwindRules = {
   /** Unnecessary rules*/
   'tailwindcss/classnames-order': 'off',
+  'tailwindcss/enforces-shorthand': 'off',
   'tailwindcss/no-custom-classname': 'off',
+  'tailwindcss/no-contradicting-classname': 'off',
 };
 
 /** @type {import('eslint').Linter.Config} */
@@ -23,8 +25,7 @@ module.exports = {
   parserOptions: {
     project: './tsconfig.json',
   },
-
-  plugins: ['@typescript-eslint', 'tailwindcss'],
+  plugins: ['@typescript-eslint'],
   rules: {
     ...base.rules,
     ...tailwindRules,
@@ -59,7 +60,7 @@ module.exports = {
   settings: {
     tailwindcss: {
       callees: ['clsx', 'twsx'],
-      config: './node_modules/@antribute/ui/dist/tailwindConfig.js',
+      config: './node_modules/@antribute/ui/dist/tailwindConfig.cjs',
       removeDuplicates: true,
     },
   },
