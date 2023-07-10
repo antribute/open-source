@@ -42,7 +42,6 @@
   },
   "devDependencies": {
     "@antribute/config": "workspace:0.1.0",
-    "@tanstack/router-devtools": "0.0.1-beta.89",
     "@types/lodash-es": "^4.17.6",
     "@vitest/coverage-c8": "^0.25.3",
     "eslint": "^8.40.0",
