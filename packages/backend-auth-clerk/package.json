@@ -32,7 +32,7 @@
   "devDependencies": {
     "@antribute/backend-core": "workspace:0.1.0",
     "@antribute/config": "workspace:0.1.0",
-    "@clerk/clerk-sdk-node": "^4.9.1",
+    "@clerk/clerk-sdk-node": "4.10.2",
     "@types/node": "20.1.7",
     "@vitest/coverage-c8": "^0.25.3",
     "eslint": "^8.40.0",
@@ -43,6 +43,6 @@
   },
   "peerDependencies": {
     "@antribute/backend-core": "*",
-    "@clerk/clerk-sdk-node": ">= 4.0.0 < 5"
+    "@clerk/clerk-sdk-node": "4.10.2"
   }
 }
