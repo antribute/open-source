@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: false
+  excludeLinksFromLockfile: false
+
 importers:
 
   .:
@@ -21,7 +25,7 @@ importers:
         version: 2.8.1
       turbo:
         specifier: latest
-        version: 1.10.7
+        version: 1.10.14
       typescript:
         specifier: ^5.0.4
         version: 5.1.6
@@ -51,34 +55,34 @@ importers:
         version: 0.9.1
       '@graphql-yoga/plugin-disable-introspection':
         specifier: ^0.8.1
-        version: 0.8.1(graphql-yoga@3.9.1)(graphql@16.7.1)
+        version: 0.8.1(graphql-yoga@3.9.1)(graphql@16.8.1)
       '@next-auth/prisma-adapter':
         specifier: ^1.0.6
         version: 1.0.7(@prisma/client@4.16.2)(next-auth@4.22.1)
       '@pothos/core':
         specifier: ^3.30.0
-        version: 3.30.0(graphql@16.7.1)
+        version: 3.30.0(graphql@16.8.1)
       '@pothos/plugin-prisma':
         specifier: 3.51.1
-        version: 3.51.1(@pothos/core@3.30.0)(@prisma/client@4.16.2)(graphql@16.7.1)(typescript@5.1.6)
+        version: 3.51.1(@pothos/core@3.30.0)(@prisma/client@4.16.2)(graphql@16.8.1)(typescript@5.1.6)
       '@pothos/plugin-prisma-utils':
         specifier: ^0.8.1
-        version: 0.8.2(@pothos/core@3.30.0)(@pothos/plugin-prisma@3.51.1)(@prisma/client@4.16.2)(graphql@16.7.1)
+        version: 0.8.2(@pothos/core@3.30.0)(@pothos/plugin-prisma@3.51.1)(@prisma/client@4.16.2)(graphql@16.8.1)
       '@pothos/plugin-scope-auth':
         specifier: ^3.19.1
-        version: 3.19.2(@pothos/core@3.30.0)(graphql@16.7.1)
+        version: 3.19.2(@pothos/core@3.30.0)(graphql@16.8.1)
       '@prisma/client':
         specifier: ^4.8.1
         version: 4.16.2(prisma@4.16.2)
       graphql:
-        specifier: ^16.6.0
-        version: 16.7.1
+        specifier: ^16.8.1
+        version: 16.8.1
       graphql-scalars:
         specifier: ^1.21.3
-        version: 1.22.2(graphql@16.7.1)
+        version: 1.22.2(graphql@16.8.1)
       graphql-yoga:
         specifier: ^3.1.1
-        version: 3.9.1(graphql@16.7.1)
+        version: 3.9.1(graphql@16.8.1)
       next:
         specifier: 13.3.2
         version: 13.3.2(react-dom@18.2.0)(react@18.2.0)
@@ -346,16 +350,16 @@ importers:
         version: link:../config
       '@pothos/core':
         specifier: ^3.30.0
-        version: 3.30.0(graphql@16.7.1)
+        version: 3.30.0(graphql@16.8.1)
       '@pothos/plugin-prisma':
         specifier: 3.51.1
-        version: 3.51.1(@pothos/core@3.30.0)(@prisma/client@4.16.2)(graphql@16.7.1)(typescript@5.1.6)
+        version: 3.51.1(@pothos/core@3.30.0)(@prisma/client@4.16.2)(graphql@16.8.1)(typescript@5.1.6)
       '@pothos/plugin-prisma-utils':
         specifier: ^0.8.1
-        version: 0.8.2(@pothos/core@3.30.0)(@pothos/plugin-prisma@3.51.1)(@prisma/client@4.16.2)(graphql@16.7.1)
+        version: 0.8.2(@pothos/core@3.30.0)(@pothos/plugin-prisma@3.51.1)(@prisma/client@4.16.2)(graphql@16.8.1)
       '@pothos/plugin-scope-auth':
         specifier: ^3.19.1
-        version: 3.19.2(@pothos/core@3.30.0)(graphql@16.7.1)
+        version: 3.19.2(@pothos/core@3.30.0)(graphql@16.8.1)
       '@prisma/client':
         specifier: ^4.8.1
         version: 4.16.2
@@ -369,11 +373,11 @@ importers:
         specifier: ^8.40.0
         version: 8.44.0
       graphql:
-        specifier: ^16.6.0
-        version: 16.7.1
+        specifier: ^16.8.1
+        version: 16.8.1
       graphql-scalars:
         specifier: ^1.21.3
-        version: 1.22.2(graphql@16.7.1)
+        version: 1.22.2(graphql@16.8.1)
       prettier:
         specifier: 2.8.7
         version: 2.8.7
@@ -542,7 +546,7 @@ importers:
         version: link:../config
       '@graphql-yoga/plugin-disable-introspection':
         specifier: ^0.8.1
-        version: 0.8.1(graphql-yoga@3.9.1)(graphql@16.7.1)
+        version: 0.8.1(graphql-yoga@3.9.1)(graphql@16.8.1)
       '@types/node':
         specifier: 20.1.7
         version: 20.1.7
@@ -553,11 +557,11 @@ importers:
         specifier: ^8.40.0
         version: 8.44.0
       graphql:
-        specifier: ^16.6.0
-        version: 16.7.1
+        specifier: ^16.8.1
+        version: 16.8.1
       graphql-yoga:
         specifier: ^3.1.1
-        version: 3.9.1(graphql@16.7.1)
+        version: 3.9.1(graphql@16.8.1)
       koa:
         specifier: ^2.14.2
         version: 2.14.2
@@ -584,7 +588,7 @@ importers:
         version: link:../config
       '@graphql-yoga/plugin-disable-introspection':
         specifier: ^0.8.1
-        version: 0.8.1(graphql-yoga@3.9.1)(graphql@16.7.1)
+        version: 0.8.1(graphql-yoga@3.9.1)(graphql@16.8.1)
       '@types/node':
         specifier: 20.1.7
         version: 20.1.7
@@ -595,11 +599,11 @@ importers:
         specifier: ^8.40.0
         version: 8.44.0
       graphql:
-        specifier: ^16.6.0
-        version: 16.7.1
+        specifier: ^16.8.1
+        version: 16.8.1
       graphql-yoga:
         specifier: ^3.1.1
-        version: 3.9.1(graphql@16.7.1)
+        version: 3.9.1(graphql@16.8.1)
       next:
         specifier: 13.3.2
         version: 13.3.2
@@ -3789,6 +3793,7 @@ packages:
 
   /@emotion/memoize@0.7.4:
     resolution: {integrity: sha512-Ja/Vfqe3HpuzRsG1oBtWTHk2PGZ7GR+2Vz5iYGelAw8dx32K0y7PjVuxK6z1nMpZOqAFsRUPCkK1YjJ56qJlgw==}
+    requiresBuild: true
     dev: false
     optional: true
 
@@ -3811,14 +3816,14 @@ packages:
     dependencies:
       tslib: 2.6.0
 
-  /@envelop/validation-cache@5.1.3(@envelop/core@3.0.6)(graphql@16.7.1):
+  /@envelop/validation-cache@5.1.3(@envelop/core@3.0.6)(graphql@16.8.1):
     resolution: {integrity: sha512-MkzcScQHJJQ/9YCAPdWShEi3xZv4F4neTs+NszzSrZOdlU8z/THuRt7gZ0sO0y2be+sx+SKjHQP8Gq3VXXcTTg==}
     peerDependencies:
       '@envelop/core': ^3.0.6
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
     dependencies:
       '@envelop/core': 3.0.6
-      graphql: 16.7.1
+      graphql: 16.8.1
       hash-it: 6.0.0
       lru-cache: 6.0.0
       tslib: 2.6.0
@@ -4302,67 +4307,67 @@ packages:
       tslib: 2.6.0
     dev: false
 
-  /@graphql-tools/executor@0.0.18(graphql@16.7.1):
+  /@graphql-tools/executor@0.0.18(graphql@16.8.1):
     resolution: {integrity: sha512-xZC0C+/npXoSHBB5bsJdwxDLgtl1Gu4fL9J2TPQmXoZC3L2N506KJoppf9LgWdHU/xK04luJrhP6WjhfkIN0pQ==}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
-      '@graphql-tools/utils': 9.2.1(graphql@16.7.1)
-      '@graphql-typed-document-node/core': 3.2.0(graphql@16.7.1)
+      '@graphql-tools/utils': 9.2.1(graphql@16.8.1)
+      '@graphql-typed-document-node/core': 3.2.0(graphql@16.8.1)
       '@repeaterjs/repeater': 3.0.4
-      graphql: 16.7.1
+      graphql: 16.8.1
       tslib: 2.6.0
       value-or-promise: 1.0.12
 
-  /@graphql-tools/merge@8.4.2(graphql@16.7.1):
+  /@graphql-tools/merge@8.4.2(graphql@16.8.1):
     resolution: {integrity: sha512-XbrHAaj8yDuINph+sAfuq3QCZ/tKblrTLOpirK0+CAgNlZUCHs0Fa+xtMUURgwCVThLle1AF7svJCxFizygLsw==}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
-      '@graphql-tools/utils': 9.2.1(graphql@16.7.1)
-      graphql: 16.7.1
+      '@graphql-tools/utils': 9.2.1(graphql@16.8.1)
+      graphql: 16.8.1
       tslib: 2.6.0
 
-  /@graphql-tools/schema@9.0.19(graphql@16.7.1):
+  /@graphql-tools/schema@9.0.19(graphql@16.8.1):
     resolution: {integrity: sha512-oBRPoNBtCkk0zbUsyP4GaIzCt8C0aCI4ycIRUL67KK5pOHljKLBBtGT+Jr6hkzA74C8Gco8bpZPe7aWFjiaK2w==}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
-      '@graphql-tools/merge': 8.4.2(graphql@16.7.1)
-      '@graphql-tools/utils': 9.2.1(graphql@16.7.1)
-      graphql: 16.7.1
+      '@graphql-tools/merge': 8.4.2(graphql@16.8.1)
+      '@graphql-tools/utils': 9.2.1(graphql@16.8.1)
+      graphql: 16.8.1
       tslib: 2.6.0
       value-or-promise: 1.0.12
 
-  /@graphql-tools/utils@9.2.1(graphql@16.7.1):
+  /@graphql-tools/utils@9.2.1(graphql@16.8.1):
     resolution: {integrity: sha512-WUw506Ql6xzmOORlriNrD6Ugx+HjVgYxt9KCXD9mHAak+eaXSwuGGPyE60hy9xaDEoXKBsG7SkG69ybitaVl6A==}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
-      '@graphql-typed-document-node/core': 3.2.0(graphql@16.7.1)
-      graphql: 16.7.1
+      '@graphql-typed-document-node/core': 3.2.0(graphql@16.8.1)
+      graphql: 16.8.1
       tslib: 2.6.0
 
-  /@graphql-typed-document-node/core@3.2.0(graphql@16.7.1):
+  /@graphql-typed-document-node/core@3.2.0(graphql@16.8.1):
     resolution: {integrity: sha512-mB9oAsNCm9aM3/SOv4YtBMqZbYj10R7dkq8byBqxGY/ncFwhf2oQzMV+LCRlWoDSEBJ3COiR1yeDvMtsoOsuFQ==}
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
-      graphql: 16.7.1
+      graphql: 16.8.1
 
   /@graphql-yoga/logger@0.0.1:
     resolution: {integrity: sha512-6npFz7eZz33mXgSm1waBLMjUNG0D5hTc/p5Hcs1mojkT3KsLpCOFokzTEKboNsBhKevYcaVa/xeA7WBj4UYMLg==}
     dependencies:
       tslib: 2.6.0
 
-  /@graphql-yoga/plugin-disable-introspection@0.8.1(graphql-yoga@3.9.1)(graphql@16.7.1):
+  /@graphql-yoga/plugin-disable-introspection@0.8.1(graphql-yoga@3.9.1)(graphql@16.8.1):
     resolution: {integrity: sha512-5nul7rIrNsTJL7l3lNY6WRtmGh7bMP8LyS2mwueb7EH8qyZU7lUCBpvF9Fcys5Kau2TcNu2n+Fek5bLDDtD4cw==}
     peerDependencies:
       graphql: ^15.2.0 || ^16.0.0
       graphql-yoga: ^3.9.1
     dependencies:
-      graphql: 16.7.1
-      graphql-yoga: 3.9.1(graphql@16.7.1)
+      graphql: 16.8.1
+      graphql-yoga: 3.9.1(graphql@16.8.1)
 
   /@graphql-yoga/subscription@3.1.0:
     resolution: {integrity: sha512-Vc9lh8KzIHyS3n4jBlCbz7zCjcbtQnOBpsymcRvHhFr2cuH+knmRn0EmzimMQ58jQ8kxoRXXC3KJS3RIxSdPIg==}
@@ -4906,14 +4911,14 @@ packages:
       - typescript
     dev: true
 
-  /@pothos/core@3.30.0(graphql@16.7.1):
+  /@pothos/core@3.30.0(graphql@16.8.1):
     resolution: {integrity: sha512-ZUL2YTv3ODeKBkhkVcEO03lcERdqQaG2zfylNpkrY9ryAIhOuN9Pbo+VnfqhqEQx7jM/56Rro7i9AuhzF0Q3tA==}
     peerDependencies:
       graphql: '>=15.1.0'
     dependencies:
-      graphql: 16.7.1
+      graphql: 16.8.1
 
-  /@pothos/plugin-prisma-utils@0.8.2(@pothos/core@3.30.0)(@pothos/plugin-prisma@3.51.1)(@prisma/client@4.16.2)(graphql@16.7.1):
+  /@pothos/plugin-prisma-utils@0.8.2(@pothos/core@3.30.0)(@pothos/plugin-prisma@3.51.1)(@prisma/client@4.16.2)(graphql@16.8.1):
     resolution: {integrity: sha512-PVNyReO3lL3LhdzIxbOJWebEWJSzDU6DY1FN6QJAoiDmft1U/85uMDUW3Rpc4YcjcyyGYSoyS+IXfQaUqt4U0A==}
     peerDependencies:
       '@pothos/core': '*'
@@ -4921,15 +4926,15 @@ packages:
       '@prisma/client': '*'
       graphql: '>=15.1.0'
     dependencies:
-      '@pothos/core': 3.30.0(graphql@16.7.1)
-      '@pothos/plugin-prisma': 3.51.1(@pothos/core@3.30.0)(@prisma/client@4.16.2)(graphql@16.7.1)(typescript@5.1.6)
+      '@pothos/core': 3.30.0(graphql@16.8.1)
+      '@pothos/plugin-prisma': 3.51.1(@pothos/core@3.30.0)(@prisma/client@4.16.2)(graphql@16.8.1)(typescript@5.1.6)
       '@prisma/client': 4.16.2(prisma@4.16.2)
       '@prisma/generator-helper': 4.16.2
-      graphql: 16.7.1
+      graphql: 16.8.1
     transitivePeerDependencies:
       - supports-color
 
-  /@pothos/plugin-prisma@3.51.1(@pothos/core@3.30.0)(@prisma/client@4.16.2)(graphql@16.7.1)(typescript@5.1.6):
+  /@pothos/plugin-prisma@3.51.1(@pothos/core@3.30.0)(@prisma/client@4.16.2)(graphql@16.8.1)(typescript@5.1.6):
     resolution: {integrity: sha512-L1js/JQ8LgOQ3gCEDKxnSpEspPVLPAem0ypolP/Q+EXoBEg9byXIbA9Dtcei7ElIKqMpqVJEcS5k2a0tq4cE+Q==}
     hasBin: true
     peerDependencies:
@@ -4938,22 +4943,22 @@ packages:
       graphql: '>=15.1.0'
       typescript: '>=4.7.2'
     dependencies:
-      '@pothos/core': 3.30.0(graphql@16.7.1)
+      '@pothos/core': 3.30.0(graphql@16.8.1)
       '@prisma/client': 4.16.2(prisma@4.16.2)
       '@prisma/generator-helper': 4.16.2
-      graphql: 16.7.1
+      graphql: 16.8.1
       typescript: 5.1.6
     transitivePeerDependencies:
       - supports-color
 
-  /@pothos/plugin-scope-auth@3.19.2(@pothos/core@3.30.0)(graphql@16.7.1):
+  /@pothos/plugin-scope-auth@3.19.2(@pothos/core@3.30.0)(graphql@16.8.1):
     resolution: {integrity: sha512-S+jz6sRt4LkRf3wYhq9/H4bu5OiMFoFub1HJRNgkdx9zzIQia20D+SXFlMcQluuOytVmaFXiz2gUYmY3hCQKQw==}
     peerDependencies:
       '@pothos/core': '*'
       graphql: '>=15.1.0'
     dependencies:
-      '@pothos/core': 3.30.0(graphql@16.7.1)
-      graphql: 16.7.1
+      '@pothos/core': 3.30.0(graphql@16.8.1)
+      graphql: 16.8.1
 
   /@prisma/client@4.16.2:
     resolution: {integrity: sha512-qCoEyxv1ZrQ4bKy39GnylE8Zq31IRmm8bNhNbZx7bF2cU5aiCCnSa93J2imF88MBjn7J9eUQneNxUQVJdl/rPQ==}
@@ -12305,36 +12310,36 @@ packages:
   /graphemer@1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
 
-  /graphql-scalars@1.22.2(graphql@16.7.1):
+  /graphql-scalars@1.22.2(graphql@16.8.1):
     resolution: {integrity: sha512-my9FB4GtghqXqi/lWSVAOPiTzTnnEzdOXCsAC2bb5V7EFNQjVjwy3cSSbUvgYOtDuDibd+ZsCDhz+4eykYOlhQ==}
     engines: {node: '>=10'}
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     dependencies:
-      graphql: 16.7.1
+      graphql: 16.8.1
       tslib: 2.6.0
 
-  /graphql-yoga@3.9.1(graphql@16.7.1):
+  /graphql-yoga@3.9.1(graphql@16.8.1):
     resolution: {integrity: sha512-BB6EkN64VBTXWmf9Kym2OsVZFzBC0mAsQNo9eNB5xIr3t+x7qepQ34xW5A353NWol3Js3xpzxwIKFVF6l9VsPg==}
     peerDependencies:
       graphql: ^15.2.0 || ^16.0.0
     dependencies:
       '@envelop/core': 3.0.6
-      '@envelop/validation-cache': 5.1.3(@envelop/core@3.0.6)(graphql@16.7.1)
-      '@graphql-tools/executor': 0.0.18(graphql@16.7.1)
-      '@graphql-tools/schema': 9.0.19(graphql@16.7.1)
-      '@graphql-tools/utils': 9.2.1(graphql@16.7.1)
+      '@envelop/validation-cache': 5.1.3(@envelop/core@3.0.6)(graphql@16.8.1)
+      '@graphql-tools/executor': 0.0.18(graphql@16.8.1)
+      '@graphql-tools/schema': 9.0.19(graphql@16.8.1)
+      '@graphql-tools/utils': 9.2.1(graphql@16.8.1)
       '@graphql-yoga/logger': 0.0.1
       '@graphql-yoga/subscription': 3.1.0
       '@whatwg-node/fetch': 0.8.8
       '@whatwg-node/server': 0.7.7
       dset: 3.1.2
-      graphql: 16.7.1
+      graphql: 16.8.1
       lru-cache: 7.18.3
       tslib: 2.6.0
 
-  /graphql@16.7.1:
-    resolution: {integrity: sha512-DRYR9tf+UGU0KOsMcKAlXeFfX89UiiIZ0dRU3mR0yJfu6OjZqUcp68NnFLnqQU5RexygFoDy1EW+ccOYcPfmHg==}
+  /graphql@16.8.1:
+    resolution: {integrity: sha512-59LZHPdGZVh695Ud9lRzPBVTtlX9ZCV150Er2W43ro37wVof0ctenSaskPPjN7lVTIN8mSZt8PHUNKZuNQUuxw==}
     engines: {node: ^12.22.0 || ^14.16.0 || ^16.0.0 || >=17.0.0}
 
   /gunzip-maybe@1.4.2:
@@ -16720,65 +16725,64 @@ packages:
       safe-buffer: 5.2.1
     dev: true
 
-  /turbo-darwin-64@1.10.7:
-    resolution: {integrity: sha512-N2MNuhwrl6g7vGuz4y3fFG2aR1oCs0UZ5HKl8KSTn/VC2y2YIuLGedQ3OVbo0TfEvygAlF3QGAAKKtOCmGPNKA==}
+  /turbo-darwin-64@1.10.14:
+    resolution: {integrity: sha512-I8RtFk1b9UILAExPdG/XRgGQz95nmXPE7OiGb6ytjtNIR5/UZBS/xVX/7HYpCdmfriKdVwBKhalCoV4oDvAGEg==}
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
     dev: false
     optional: true
 
-  /turbo-darwin-arm64@1.10.7:
-    resolution: {integrity: sha512-WbJkvjU+6qkngp7K4EsswOriO3xrNQag7YEGRtfLoDdMTk4O4QTeU6sfg2dKfDsBpTidTvEDwgIYJhYVGzrz9Q==}
+  /turbo-darwin-arm64@1.10.14:
+    resolution: {integrity: sha512-KAdUWryJi/XX7OD0alOuOa0aJ5TLyd4DNIYkHPHYcM6/d7YAovYvxRNwmx9iv6Vx6IkzTnLeTiUB8zy69QkG9Q==}
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
     dev: false
     optional: true
 
-  /turbo-linux-64@1.10.7:
-    resolution: {integrity: sha512-x1CF2CDP1pDz/J8/B2T0hnmmOQI2+y11JGIzNP0KtwxDM7rmeg3DDTtDM/9PwGqfPotN9iVGgMiMvBuMFbsLhg==}
+  /turbo-linux-64@1.10.14:
+    resolution: {integrity: sha512-BOBzoREC2u4Vgpap/WDxM6wETVqVMRcM8OZw4hWzqCj2bqbQ6L0wxs1LCLWVrghQf93JBQtIGAdFFLyCSBXjWQ==}
     cpu: [x64]
     os: [linux]
     requiresBuild: true
     dev: false
     optional: true
 
-  /turbo-linux-arm64@1.10.7:
-    resolution: {integrity: sha512-JtnBmaBSYbs7peJPkXzXxsRGSGBmBEIb6/kC8RRmyvPAMyqF8wIex0pttsI+9plghREiGPtRWv/lfQEPRlXnNQ==}
+  /turbo-linux-arm64@1.10.14:
+    resolution: {integrity: sha512-D8T6XxoTdN5D4V5qE2VZG+/lbZX/89BkAEHzXcsSUTRjrwfMepT3d2z8aT6hxv4yu8EDdooZq/2Bn/vjMI32xw==}
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
     dev: false
     optional: true
 
-  /turbo-windows-64@1.10.7:
-    resolution: {integrity: sha512-7A/4CByoHdolWS8dg3DPm99owfu1aY/W0V0+KxFd0o2JQMTQtoBgIMSvZesXaWM57z3OLsietFivDLQPuzE75w==}
+  /turbo-windows-64@1.10.14:
+    resolution: {integrity: sha512-zKNS3c1w4i6432N0cexZ20r/aIhV62g69opUn82FLVs/zk3Ie0GVkSB6h0rqIvMalCp7enIR87LkPSDGz9K4UA==}
     cpu: [x64]
     os: [win32]
     requiresBuild: true
     dev: false
     optional: true
 
-  /turbo-windows-arm64@1.10.7:
-    resolution: {integrity: sha512-D36K/3b6+hqm9IBAymnuVgyePktwQ+F0lSXr2B9JfAdFPBktSqGmp50JNC7pahxhnuCLj0Vdpe9RqfnJw5zATA==}
+  /turbo-windows-arm64@1.10.14:
+    resolution: {integrity: sha512-rkBwrTPTxNSOUF7of8eVvvM+BkfkhA2OvpHM94if8tVsU+khrjglilp8MTVPHlyS9byfemPAmFN90oRIPB05BA==}
     cpu: [arm64]
     os: [win32]
     requiresBuild: true
     dev: false
     optional: true
 
-  /turbo@1.10.7:
-    resolution: {integrity: sha512-xm0MPM28TWx1e6TNC3wokfE5eaDqlfi0G24kmeHupDUZt5Wd0OzHFENEHMPqEaNKJ0I+AMObL6nbSZonZBV2HA==}
+  /turbo@1.10.14:
+    resolution: {integrity: sha512-hr9wDNYcsee+vLkCDIm8qTtwhJ6+UAMJc3nIY6+PNgUTtXcQgHxCq8BGoL7gbABvNWv76CNbK5qL4Lp9G3ZYRA==}
     hasBin: true
-    requiresBuild: true
     optionalDependencies:
-      turbo-darwin-64: 1.10.7
-      turbo-darwin-arm64: 1.10.7
-      turbo-linux-64: 1.10.7
-      turbo-linux-arm64: 1.10.7
-      turbo-windows-64: 1.10.7
-      turbo-windows-arm64: 1.10.7
+      turbo-darwin-64: 1.10.14
+      turbo-darwin-arm64: 1.10.14
+      turbo-linux-64: 1.10.14
+      turbo-linux-arm64: 1.10.14
+      turbo-windows-64: 1.10.14
+      turbo-windows-arm64: 1.10.14
     dev: false
 
   /tweetnacl@0.14.5:
