@@ -6,7 +6,9 @@ import { IsUnion } from 'types/typeUtilities';
 import { isDevelopment } from 'utils/environment-utils';
 import { objectMap } from 'utils/objectMap';
 
-export function generatePropPickerFn<T extends object>(pickedRecord: Record<keyof T, '_pick_'>) {
+export function generatePropPickerFn<T extends object>(
+  pickedRecord: Partial<Record<keyof T, '_pick_'>>
+) {
   const pickedKeys = Object.keys(pickedRecord) as (keyof T)[];
 
   const pickerFn = <TProps extends object & T, TDefaultProps extends Partial<T>>(

@@ -4,22 +4,22 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "next build",
-    "clean": "rimraf .next && rimraf .turbo &&  rimraf coverage && rimraf node_modules && rimraf text-results && rimraf .eslintcache",
+    "build": "bun run --bun next build",
+    "clean": "rimraf .next && rimraf .turbo &&  rimraf coverage && rimraf node_modules && rimraf test-results && rimraf .eslintcache",
     "cypress:open": "cypress open",
-    "dev": "next dev",
-    "lint": "eslint ./src",
+    "dev": "bun run --bun next dev",
+    "lint": "bun run --bun eslint ./src",
     "reset": "rimraf node_modules",
-    "start": "next start",
+    "start": "bun run --bun next start",
     "test": "vitest"
   },
   "dependencies": {
     "@antribute/tracking": "workspace:*",
     "@antribute/ui": "workspace:*",
     "cal-sans": "^1.0.1",
-    "next": "13.3.2",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "next": "^13.5.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@antribute/config": "workspace:*",
@@ -27,8 +27,8 @@
     "@bahmutov/cypress-esbuild-preprocessor": "^2.1.5",
     "@testing-library/react": "^13.4.0",
     "@types/node": "20.1.7",
-    "@types/react": "18.0.25",
-    "@types/react-dom": "18.0.9",
+    "@types/react": "^18.2.25",
+    "@types/react-dom": "^18.2.11",
     "@vitest/coverage-c8": "^0.25.3",
     "autoprefixer": "^10.4.13",
     "cypress": "^12.0.2",

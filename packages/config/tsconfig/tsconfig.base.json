@@ -24,7 +24,8 @@
     "target": "ESNext",
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "strict": true
+    "strict": true,
+    "types": ["bun-types"]
   },
   "display": "Default",
   "exclude": ["node_modules", "dist"]

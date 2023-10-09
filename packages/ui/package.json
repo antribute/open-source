@@ -8,10 +8,12 @@
   },
   "exports": {
     ".": {
+      "bun": "./src/index.ts",
       "require": "./dist/index.cjs",
       "import": "./dist/index.js"
     },
     "./tailwindConfig": {
+      "bun": "./src/config/tailwindConfig.js",
       "require": "./dist/tailwindConfig.cjs",
       "import": "./dist/tailwindConfig.js"
     },
@@ -22,17 +24,17 @@
   ],
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "pnpm run build:components && pnpm run build:helpers && pnpm run build:index && pnpm run build:tailwind",
-    "build:index": "tsup --config ./tsup.config.js",
-    "build:components": "tsup --config ./tsup.config.components.js",
-    "build:blocks": "tsup --config ./tsup.config.blocks.js",
-    "build:helpers": "tsup --config ./tsup.config.helpers.js",
-    "build:tailwind": "tsup --config ./tsup.config.tailwind.js",
-    "build-storybook": "storybook build",
-    "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf storybook-static && rimraf text-results && rimraf .eslintcache",
-    "dev": "concurrently \"pnpm run build:components --watch\" \"pnpm run build:helpers --watch\" \"pnpm run build:tailwind --watch\" \"pnpm run build:index --watch --ignore-watch='src/components'\" --raw",
-    "lint": "eslint --cache ./src",
-    "storybook": "storybook dev -p 6006 --no-open",
+    "build": "bun run build:components && bun run build:helpers && bun run build:index && bun run build:tailwind",
+    "build:index": "bun run --bun tsup --config ./tsup.config.js",
+    "build:components": "bun run --bun tsup --config ./tsup.config.components.js",
+    "build:blocks": "bun run --bun tsup --config ./tsup.config.blocks.js",
+    "build:helpers": "bun run --bun tsup --config ./tsup.config.helpers.js",
+    "build:tailwind": "bun run --bun tsup --config ./tsup.config.tailwind.js",
+    "build-storybook": "bun run --bun storybook build",
+    "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf storybook-static && rimraf test-results && rimraf .eslintcache",
+    "dev": "bun run --bun concurrently \"bun run build:components --watch\" \"bun run build:helpers --watch\" \"bun run build:tailwind --watch\" \"bun run build:index --watch --ignore-watch='src/components'\" --raw",
+    "lint": "bun run --bun eslint --cache ./src",
+    "storybook": "bun run --bun storybook dev -p 6006 --no-open",
     "test": "vitest"
   },
   "keywords": [
@@ -116,7 +118,7 @@
     "tailwindcss-radix": "^2.6.2",
     "ts-toolbelt": "^9.6.0",
     "twin.macro": "^3.1.0",
-    "type-fest": "^3.5.1",
+    "type-fest": "latest",
     "use-clamp-text": "^1.1.0",
     "use-debounce": "^9.0.3",
     "use-deep-compare-effect": "^1.8.1",
@@ -126,7 +128,7 @@
     "zod": "^3.20.2"
   },
   "devDependencies": {
-    "@antribute/config": "workspace:0.1.0",
+    "@antribute/config": "workspace:*",
     "@babel/core": "^7.20.5",
     "@mdx-js/react": "^2.1.5",
     "@react-types/shared": "^3.18.1",
@@ -141,8 +143,8 @@
     "@types/culori": "^2.0.0",
     "@types/lodash-es": "^4.17.6",
     "@types/node": "20.1.7",
-    "@types/react": "18.0.25",
-    "@types/react-dom": "18.0.9",
+    "@types/react": "^18.2.25",
+    "@types/react-dom": "^18.2.11",
     "@types/react-is": "^18.2.0",
     "@vitest/coverage-c8": "^0.25.3",
     "autoprefixer": "^10.4.13",
@@ -153,8 +155,8 @@
     "happy-dom": "^7.7.0",
     "postcss": "^8.4.19",
     "prettier": "2.8.7",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "storybook": "7.0.4",
     "tailwindcss": "^3.3.2",
     "tsup": "^6.7.0",

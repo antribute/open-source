@@ -1,5 +1,6 @@
 import { bundleRequire } from 'bundle-require';
 import { resolve } from 'path';
+
 import type { Config } from './config';
 import logger from './logger';
 
@@ -10,14 +11,14 @@ export const buildGeneratorPath = (generator: string) => {
   // bad practice and we need to find a better way to load these modules ASAP because this will
   // block any engineers that use a different build system than ours to write extensions
   const ieEsm = import.meta.url.startsWith('file:');
-  const fullGeneratorPath = resolve(
+
+  return resolve(
     process.cwd(),
     'node_modules',
     generator,
     'dist',
     ieEsm ? 'index.js' : 'index.cjs'
   );
-  return fullGeneratorPath;
 };
 
 export const importModule = async <OutputType>(path: string) => {
@@ -34,7 +35,16 @@ export const importAndRunGenerator = async (
     logger.info(`Platform set to "none" for step ${stepName}, skipping generation`, config);
     return;
   }
-  const rawImport = await importModule<{ default?: GeneratorFunc }>(buildGeneratorPath(generator));
+
+  let rawImport: {
+    default?: GeneratorFunc | undefined;
+  };
+
+  if (typeof Bun !== 'undefined') {
+    rawImport = (await import(generator)) as { default?: GeneratorFunc };
+  } else {
+    rawImport = await importModule<{ default?: GeneratorFunc }>(buildGeneratorPath(generator));
+  }
   if (!rawImport.default) {
     logger.error(
       `Step ${stepName} is attempting to import ${generator}, however no default export was provided.`
