@@ -17,7 +17,6 @@ type ReactComponent = keyof JSX.IntrinsicElements | React.JSXElementConstructor<
 
 interface RenderVariantBaseProps<T extends ReactComponent, TProp extends string = string>
   extends RenderVariantElementProps {
-  className?: string;
   Component: T;
   render?: (children: React.ReactNode) => React.ReactNode;
   props?: React.ComponentProps<T>;

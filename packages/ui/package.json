@@ -13,7 +13,7 @@
       "import": "./dist/index.js"
     },
     "./tailwindConfig": {
-      "bun": "./src/config/tailwindConfig.js",
+      "bun": "./src/config/tailwindConfig.ts",
       "require": "./dist/tailwindConfig.cjs",
       "import": "./dist/tailwindConfig.js"
     },
