@@ -33,6 +33,11 @@ export type TailwindConfig = typeof config;
 
 export type TailwindColorKey = keyof TailwindConfig['theme']['colors'];
 
+const nodeModulesFolder =
+  typeof Bun !== 'undefined'
+    ? resolve(import.meta.dir, '..', '..', 'src')
+    : resolve(process.cwd(), 'node_modules', '@antribute', 'ui', 'src');
+
 const config = {
   plugins: [
     tailwindCssRadixPlugin,
@@ -61,7 +66,7 @@ const config = {
       resolve(process.cwd(), '*.{htm,html}'),
       resolve(process.cwd(), 'public', '**', '*.{htm,html}'),
       resolve(process.cwd(), 'src', '**', '*.{js,jsx,mdx,ts,tsx}'),
-      resolve(process.cwd(), 'node_modules', '@antribute', 'ui', 'dist', '**', '*.js'),
+      resolve(nodeModulesFolder, '**', '*.{ts, tsx}'),
     ],
     transform: createVariantGroupTransformer(),
   },

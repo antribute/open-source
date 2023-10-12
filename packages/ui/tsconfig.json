@@ -4,12 +4,16 @@
   "exclude": ["node_modules"],
   "compilerOptions": {
     "baseUrl": "./src",
-    "types": ["@types/node"],
-    "noEmit": true,
-    "noEmitOnError": true
+    "outDir": "./dist",
+    "paths": {
+      "components": ["./components/*"]
+    }
   },
   "typeAcquisition": {
     "enable": true,
     "include": ["react", "@tw-classed/react", "@tw-classed/core"]
+  },
+  "tsc-alias": {
+    "verbose": true
   }
 }

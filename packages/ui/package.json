@@ -9,32 +9,29 @@
   "exports": {
     ".": {
       "bun": "./src/index.ts",
-      "require": "./dist/index.cjs",
-      "import": "./dist/index.js"
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
     },
     "./tailwindConfig": {
       "bun": "./src/config/tailwindConfig.ts",
-      "require": "./dist/tailwindConfig.cjs",
-      "import": "./dist/tailwindConfig.js"
+      "require": "./dist/config/tailwindConfig.js",
+      "import": "./dist/config/tailwindConfig.mjs",
+      "types": "./dist/config/tailwindConfig.d.ts"
     },
     "./antribute.css": "./antribute.css"
   },
   "files": [
-    "dist/**"
+    "dist/**",
+    "src/**"
   ],
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "bun run build:components && bun run build:helpers && bun run build:index && bun run build:tailwind",
-    "build:index": "bun run --bun tsup --config ./tsup.config.js",
-    "build:components": "bun run --bun tsup --config ./tsup.config.components.js",
-    "build:blocks": "bun run --bun tsup --config ./tsup.config.blocks.js",
-    "build:helpers": "bun run --bun tsup --config ./tsup.config.helpers.js",
-    "build:tailwind": "bun run --bun tsup --config ./tsup.config.tailwind.js",
-    "build-storybook": "bun run --bun storybook build",
+    "build": "bunx --bun unbuild",
+    "build-storybook": "bunx --bun storybook build",
     "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf storybook-static && rimraf test-results && rimraf .eslintcache",
-    "dev": "bun run --bun concurrently \"bun run build:components --watch\" \"bun run build:helpers --watch\" \"bun run build:tailwind --watch\" \"bun run build:index --watch --ignore-watch='src/components'\" --raw",
-    "lint": "bun run --bun eslint --cache ./src",
-    "storybook": "bun run --bun storybook dev -p 6006 --no-open",
+    "dev": "bunx --bun unbuild --watch",
+    "lint": "bunx --bun eslint --cache ./src",
+    "storybook": "bunx --bun storybook dev -p 6006 --no-open",
     "test": "vitest"
   },
   "keywords": [
@@ -159,8 +156,8 @@
     "react-dom": "^18.2.0",
     "storybook": "7.0.4",
     "tailwindcss": "^3.3.2",
-    "tsup": "^6.7.0",
     "typescript": "^5.0.4",
+    "unbuild": "^2.0.0",
     "vite": "^4.0.4",
     "vite-tsconfig-paths": "^3.6.0",
     "vitest": "^0.25.3"

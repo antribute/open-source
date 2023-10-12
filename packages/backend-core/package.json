@@ -11,17 +11,17 @@
   },
   "exports": {
     "bun": "./src/index.ts",
-    "import": "./dist/index.js",
-    "require": "./dist/index.cjs"
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.js"
   },
   "files": [
-    "dist/**"
+    "dist/**",
+    "src/**"
   ],
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsup",
+    "build": "bunx --bun unbuild",
     "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf test-results && rimraf .eslintcache",
-    "dev": "pnpm run build --watch",
     "lint": "eslint --cache ./src",
     "test": "vitest"
   },
@@ -48,8 +48,8 @@
     "@vitest/coverage-c8": "^0.25.3",
     "eslint": "^8.40.0",
     "prettier": "2.8.7",
-    "tsup": "^6.7.0",
     "typescript": "^5.0.4",
+    "unbuild": "^2.0.0",
     "vitest": "^0.25.3"
   }
 }

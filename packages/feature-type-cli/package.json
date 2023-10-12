@@ -8,17 +8,17 @@
   },
   "exports": {
     "bun": "./src/index.ts",
-    "import": "./dist/index.js",
-    "require": "./dist/index.cjs"
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.js"
   },
   "files": [
-    "dist/**"
+    "dist/**",
+    "src/**"
   ],
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsup",
+    "build": "bunx --bun unbuild",
     "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf test-results && rimraf .eslintcache",
-    "dev": "pnpm run build --watch",
     "lint": "eslint --cache ./src",
     "test-dev": "vitest --allow",
     "arktype-test-playground": "vitest ./type-generation/arktype-playground.test.ts"
@@ -48,9 +48,8 @@
     "eslint": "^8.40.0",
     "prettier": "2.8.7",
     "ts-toolbelt": "^9.6.0",
-    "tsup": "^6.7.0",
-    "type-fest": "latest",
     "typescript": "^5.0.4",
+    "unbuild": "^2.0.0",
     "vite": "^4.0.4",
     "vitest": "^0.25.3"
   },

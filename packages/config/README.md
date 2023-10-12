@@ -68,14 +68,14 @@ module.exports = require('@antribute/config/prettier/.prettierrc');
 }
 ```
 
-### Tsup
+### Unbuild
 
 ```javascript
-export { default } from '@antribute/config/tsup/tsup.config.base.mjs';
+export { default } from '@antribute/config/unbuild/unbuild.config.base.ts';
 ```
 
 ```javascript
-export { default } from '@antribute/config/tsup/tsup.config.react.mjs';
+export { default } from '@antribute/config/unbuild/unbuild.config.react.ts';
 ```
 
 ### Vitest

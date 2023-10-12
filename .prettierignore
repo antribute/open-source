@@ -6,7 +6,7 @@
 **/test-results/**
 **/node_modules/**
 
-pnpm-lock.yaml
+bun.lockb
 
 node_modules/**
 .eslintcache

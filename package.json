@@ -1,24 +1,22 @@
 {
   "name": "@antribute/open-source",
   "scripts": {
-    "build": "bun run --bun turbo run build",
-    "build:apps": "bun run --bun turbo run build --filter=./apps/*",
-    "build:packages": "bun run --bun turbo run build --filter=./packages/*",
-    "build:servers": "bun run --bun turbo run build --filter=./servers/*",
-    "clean": "bun run --bun turbo run clean && echo \"⏳ Removing node_modules...\" && rm -r ./node_modules",
-    "dev:adk-todo": "bun run --bun turbo run dev --filter=@antribute/example-adk-todo-list...",
-    "dev:lp": "bun run --bun turbo run dev --filter=@antribute/landing-page...",
-    "dev:ui": "bun run --bun turbo run storybook --filter=@antribute/ui...",
-    "lint": "bun run --bun turbo run lint",
-    "lint:fix": "bun run --bun turbo run lint -- --fix",
-    "lint:package-versions": "bun run --bun manypkg check",
-    "postinstall": "bun run --bun simple-git-hooks && pnpm run lint:package-versions",
-    "style:format": "bun run --bun prettier --ignore-unknown --write .",
-    "style:lint": "bun run --bun prettier --ignore-unknown --check .",
-    "reset": "bun run clean && pnpm i",
-    "reset:hard": "bun run clean && rm pnpm-lock.yaml && pnpm i",
-    "test": "bun run --bun turbo run test -- run",
-    "kill-port": "bun x kill-port"
+    "build": "bunx --bun turbo run build",
+    "build:apps": "bunx --bun turbo run build --filter=./apps/*",
+    "build:packages": "bunx --bun turbo run build --filter=./packages/*",
+    "build:servers": "bunx --bun turbo run build --filter=./servers/*",
+    "clean": "bunx --bun turbo run clean && echo \"⏳ Removing node_modules...\" && rm -r ./node_modules",
+    "dev:adk-todo": "bunx --bun turbo run dev --filter=@antribute/example-adk-todo-list...",
+    "dev:al": "bunx --bun turbo run dev --filter=@antribute/antribute-landing...",
+    "dev:ui": "bunx --bun turbo run storybook --filter=@antribute/ui...",
+    "lint": "bunx --bun turbo run lint",
+    "lint:fix": "bunx --bun turbo run lint -- --fix",
+    "lint:package-versions": "bunx --bun manypkg check",
+    "postinstall": "bunx --bun simple-git-hooks && bun run lint:package-versions",
+    "style:format": "bunx --bun prettier --ignore-unknown --write .",
+    "style:lint": "bunx --bun prettier --ignore-unknown --check .",
+    "test": "bunx --bun turbo run test -- run",
+    "kill-port": "bunx --bun kill-port"
   },
   "dependencies": {
     "@manypkg/cli": "^0.19.2",
@@ -36,10 +34,10 @@
   "prettier": "./packages/config/prettier/.prettierrc.cjs",
   "private": true,
   "simple-git-hooks": {
-    "pre-commit": "pnpm exec lint-staged"
+    "pre-commit": "bunx --bun lint-staged"
   },
   "lint-staged": {
-    "*": "pnpm run style:format"
+    "*": "bun run --bun style:format"
   },
   "manypkg": {
     "ignoredRules": [
