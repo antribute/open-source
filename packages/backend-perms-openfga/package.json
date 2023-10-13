@@ -20,8 +20,7 @@
     "build": "bunx --bun unbuild",
     "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf test-results && rimraf .eslintcache",
     "dev": "bunx --bun unbuild --watch",
-    "lint": "eslint --cache ./src",
-    "test": "vitest"
+    "lint": "eslint --cache ./src"
   },
   "keywords": [
     "antribute",
@@ -36,12 +35,10 @@
     "@antribute/config": "workspace:*",
     "@openfga/sdk": "^0.2.6",
     "@types/node": "20.1.7",
-    "@vitest/coverage-c8": "^0.25.3",
     "eslint": "^8.40.0",
     "prettier": "2.8.7",
     "typescript": "^5.0.4",
-    "unbuild": "^2.0.0",
-    "vitest": "^0.25.3"
+    "unbuild": "^2.0.0"
   },
   "peerDependencies": {
     "@antribute/backend-core": "*",

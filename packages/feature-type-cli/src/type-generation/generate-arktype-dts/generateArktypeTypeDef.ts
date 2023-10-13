@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-// @ts-expect-error This path exists but no types
 import { stringify } from 'arktype/internal/utils/serialize';
 import { pascalCase } from 'change-case';
 

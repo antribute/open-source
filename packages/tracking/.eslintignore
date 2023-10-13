@@ -4,4 +4,3 @@ node_modules
 build.config.ts
 server.d.ts
 server.js
-vitest.config.js

@@ -1,4 +1,7 @@
-import { describe, it } from 'vitest';
+// Bun lacks support for wildcard package.json exports. Until this is added or ArkType changes
+// their export methodology, this test file is disabled
+
+import { describe, it } from 'bun:test';
 import path from 'path';
 import {
   generateArktypeTypeDef,

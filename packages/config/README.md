@@ -77,9 +77,3 @@ export { default } from '@antribute/config/unbuild/unbuild.config.base.ts';
 ```javascript
 export { default } from '@antribute/config/unbuild/unbuild.config.react.ts';
 ```
-
-### Vitest
-
-```javascript
-export { default } from '@antribute/config/vitest/vitest.config.mjs';
-```

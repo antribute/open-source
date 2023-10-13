@@ -1,4 +1,4 @@
-import { describe } from 'vitest';
+import { describe } from 'bun:test';
 // import { TrackingProvider } from '@antribute/tracking';
 // import { render, screen } from '@testing-library/react';
 // import RootPage from './RootPage';

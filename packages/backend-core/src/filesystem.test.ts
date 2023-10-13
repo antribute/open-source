@@ -1,7 +1,7 @@
 import { readFile } from 'fs/promises';
 import { resolve } from 'path';
 import rimraf from 'rimraf';
-import { afterAll, describe, expect, it } from 'vitest';
+import { afterAll, describe, expect, it } from 'bun:test';
 
 import { defaultConfig } from './config';
 import { getGeneratedDir, getServerDir, generateFile } from './filesystem';

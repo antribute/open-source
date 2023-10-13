@@ -17,6 +17,7 @@ export function track(
 ) {
   if (token) {
     const mixpanel = Mixpanel.init(token);
+    console.log('@@@@@@@@', mixpanel);
     mixpanel.track(event, { ...additionalData, ipAddress });
   }
   // eslint-disable-next-line no-console

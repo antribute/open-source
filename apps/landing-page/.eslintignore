@@ -6,4 +6,3 @@ cypress.config.ts
 next.config.js
 postcss.config.cjs
 tailwind.config.js
-vitest.config.js

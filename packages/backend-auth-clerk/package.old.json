@@ -11,23 +11,15 @@
     "import": "./dist/index.mjs",
     "require": "./dist/index.js"
   },
-  "files": [
-    "dist/**",
-    "src/**"
-  ],
+  "files": ["dist/**", "src/**"],
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "bunx --bun unbuild",
     "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf test-results && rimraf .eslintcache",
     "lint": "eslint --cache ./src",
-    "test": "vitest"
+    "test": "bun test"
   },
-  "keywords": [
-    "antribute",
-    "antribute-backend",
-    "antribute-backend-auth",
-    "clerk"
-  ],
+  "keywords": ["antribute", "antribute-backend", "antribute-backend-auth", "clerk"],
   "author": "Antribute, Inc. (https://www.antribute.com)",
   "license": "MIT",
   "devDependencies": {
@@ -35,12 +27,10 @@
     "@antribute/config": "workspace:*",
     "@clerk/clerk-sdk-node": "4.10.2",
     "@types/node": "20.1.7",
-    "@vitest/coverage-c8": "^0.25.3",
     "eslint": "^8.40.0",
     "prettier": "2.8.7",
     "typescript": "^5.0.4",
-    "unbuild": "^2.0.0",
-    "vitest": "^0.25.3"
+    "unbuild": "^2.0.0"
   },
   "peerDependencies": {
     "@antribute/backend-core": "*",

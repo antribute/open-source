@@ -4,4 +4,3 @@ node_modules
 build.config.ts
 postcss.config.cjs
 tailwind.config.js
-vitest.config.js

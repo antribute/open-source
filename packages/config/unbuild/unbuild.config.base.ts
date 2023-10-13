@@ -1,21 +1,8 @@
 import { defineBuildConfig } from 'unbuild';
+import type { BuildConfig, MkdistBuildEntry } from 'unbuild';
 import { replaceTscAliasPaths } from 'tsc-alias';
 
-export default defineBuildConfig({
-  entries: [
-    {
-      cleanDist: false,
-      format: 'cjs',
-      builder: 'mkdist',
-      input: './src',
-    },
-    {
-      cleanDist: false,
-      format: 'esm',
-      builder: 'mkdist',
-      input: './src',
-    },
-  ],
+export const commonConfig: Omit<BuildConfig, 'entries'> = {
   hooks: {
     'build:done': async (ctx) => {
       // We love using TypeScript aliases and absolute imports here at Antribute, however our
@@ -26,4 +13,26 @@ export default defineBuildConfig({
   },
   outDir: 'dist',
   declaration: true,
+};
+
+export const commonEntry: MkdistBuildEntry = {
+  cleanDist: false,
+  builder: 'mkdist',
+  input: './src',
+  pattern: ['**/*.ts', '**/*.tsx', '!**/*.test.ts', '!**/*.test.tsx'],
+};
+
+export const cjsEntry: MkdistBuildEntry = {
+  ...commonEntry,
+  format: 'cjs' as const,
+};
+
+export const esmEntry: MkdistBuildEntry = {
+  ...commonEntry,
+  format: 'esm' as const,
+};
+
+export default defineBuildConfig({
+  entries: [cjsEntry, esmEntry],
+  ...commonConfig,
 });

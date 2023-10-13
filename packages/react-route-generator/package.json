@@ -7,20 +7,21 @@
     "access": "public"
   },
   "exports": {
-    "bun": "./src/index.ts",
-    "import": "./dist/index.mjs",
-    "require": "./dist/index.js"
+    ".": {
+      "bun": "./src/index.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
   },
   "files": [
     "dist/**",
     "src/**"
   ],
-  "types": "./dist/index.d.ts",
   "scripts": {
     "build": "bunx --bun unbuild",
     "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf test-results && rimraf .eslintcache",
-    "lint": "eslint --cache ./src",
-    "test": "vitest"
+    "lint": "eslint --cache ./src"
   },
   "keywords": [
     "antribute",
@@ -36,13 +37,11 @@
   },
   "devDependencies": {
     "@antribute/config": "workspace:*",
-    "@vitest/coverage-c8": "^0.25.3",
     "eslint": "^8.40.0",
     "prettier": "2.8.7",
     "typescript": "^5.0.4",
     "unbuild": "^2.0.0",
-    "vite": "^4.0.4",
-    "vitest": "^0.25.3"
+    "vite": "^4.0.4"
   },
   "peerDependencies": {
     "vite": ">=3"

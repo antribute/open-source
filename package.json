@@ -15,10 +15,10 @@
     "postinstall": "bunx --bun simple-git-hooks && bun run lint:package-versions",
     "style:format": "bunx --bun prettier --ignore-unknown --write .",
     "style:lint": "bunx --bun prettier --ignore-unknown --check .",
-    "test": "bunx --bun turbo run test -- run",
     "kill-port": "bunx --bun kill-port"
   },
   "dependencies": {
+    "@happy-dom/global-registrator": "^12.9.1",
     "@manypkg/cli": "^0.19.2",
     "lint-staged": "^13.0.3",
     "prettier": "2.8.7",

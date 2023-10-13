@@ -3,4 +3,3 @@ node_modules
 test-config-files
 .eslintrc.cjs
 build.config.ts
-vitest.config.js

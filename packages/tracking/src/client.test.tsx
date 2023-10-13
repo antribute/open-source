@@ -1,18 +1,30 @@
 import mixpanel from 'mixpanel-browser';
-import { render, screen } from '@testing-library/react';
+import { cleanup, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterAll, afterEach, beforeEach, describe, expect, it, spyOn } from 'bun:test';
 
 import { TrackingProvider, useTracking } from './client';
 
 describe('useTracking', () => {
-  const mixpanelInitSpy = vi.spyOn(mixpanel, 'init').mockImplementation(() => undefined);
-  const mixpanelTrackSpy = vi.spyOn(mixpanel, 'track').mockImplementation(() => undefined);
-  const user = userEvent.setup();
-  const consoleInfoSpy = vi.spyOn(console, 'info');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const mixpanelInitSpy = spyOn(mixpanel, 'init').mockImplementation(() => ({} as any));
+  const mixpanelTrackSpy = spyOn(mixpanel, 'track').mockImplementation(() => undefined);
+  const consoleInfoSpy = spyOn(console, 'info');
 
   beforeEach(() => {
-    vi.clearAllMocks();
+    mixpanelInitSpy.mockClear();
+    mixpanelTrackSpy.mockClear();
+    consoleInfoSpy.mockClear();
+  });
+
+  afterEach(() => {
+    cleanup();
+  });
+
+  afterAll(() => {
+    mixpanelInitSpy.mockRestore();
+    mixpanelTrackSpy.mockRestore();
+    consoleInfoSpy.mockRestore();
   });
 
   it('should only log when a token is not provided', async () => {
@@ -24,11 +36,12 @@ describe('useTracking', () => {
         </button>
       );
     }
-    render(
+    const screen = render(
       <TrackingProvider value={{}}>
         <TestComponent />
       </TrackingProvider>
     );
+    const user = userEvent.setup();
     await user.click(screen.getByText('Track Me'));
     expect(consoleInfoSpy).toHaveBeenCalledTimes(1);
     expect(mixpanelInitSpy).toHaveBeenCalledTimes(0);
@@ -44,11 +57,12 @@ describe('useTracking', () => {
         </button>
       );
     }
-    render(
+    const screen = render(
       <TrackingProvider value={{ token: 'foo', globalParams: {} }}>
         <TestComponent />
       </TrackingProvider>
     );
+    const user = userEvent.setup();
     await user.click(screen.getByText('Track Me', {}));
     expect(consoleInfoSpy).toHaveBeenCalledTimes(1);
     expect(mixpanelInitSpy).toHaveBeenCalledTimes(1);

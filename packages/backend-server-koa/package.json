@@ -7,20 +7,21 @@
     "access": "public"
   },
   "exports": {
-    "bun": "./src/index.ts",
-    "import": "./dist/index.mjs",
-    "require": "./dist/index.js"
+    ".": {
+      "bun": "./src/index.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
   },
   "files": [
     "dist/**",
     "src/**"
   ],
-  "types": "./dist/index.d.ts",
   "scripts": {
     "build": "bunx --bun unbuild",
     "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf test-results && rimraf .eslintcache",
-    "lint": "eslint --cache ./src",
-    "test": "vitest"
+    "lint": "eslint --cache ./src"
   },
   "keywords": [
     "antribute",
@@ -35,15 +36,13 @@
     "@antribute/config": "workspace:*",
     "@graphql-yoga/plugin-disable-introspection": "^0.8.1",
     "@types/node": "20.1.7",
-    "@vitest/coverage-c8": "^0.25.3",
     "eslint": "^8.40.0",
     "graphql": "^16.6.0",
     "graphql-yoga": "^3.1.1",
     "koa": "^2.14.2",
     "prettier": "2.8.7",
     "typescript": "^5.0.4",
-    "unbuild": "^2.0.0",
-    "vitest": "^0.25.3"
+    "unbuild": "^2.0.0"
   },
   "peerDependencies": {
     "@antribute/backend-core": "*",
