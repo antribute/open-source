@@ -5,7 +5,7 @@ Adds OpenFGA Support to the Antribute Backend
 ## Installation
 
 ```bash
-pnpm i @antribute/backend-perms-openfga -D && pnpm i @openfga/sdk
+bun add @antribute/backend-perms-openfga -D && bun add @openfga/sdk
 ```
 
 ## Usage

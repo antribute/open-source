@@ -5,7 +5,7 @@ Common configuration files used between all Antribute projects
 ## Installation
 
 ```
-pnpm i @antribute/config
+bun add @antribute/config
 ```
 
 ## Usage

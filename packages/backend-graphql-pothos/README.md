@@ -5,19 +5,19 @@ Adds Pothos GraphQL Support to the Antribute Backend
 ## Installation
 
 ```bash
-pnpm i @antribute/backend-graphql-pothos -D && pnpm i @pothos/core graphql graphql-scalars
+bun add @antribute/backend-graphql-pothos -D && bun add @pothos/core graphql graphql-scalars
 ```
 
 If your application is configured to use auth or permissions, also install the following peer dependency
 
 ```bash
-pnpm i @pothos/plugin-scope-auth
+bun add @pothos/plugin-scope-auth
 ```
 
 If your application's ORM is `prisma`, also install the following peer dependencies
 
 ```bash
-pnpm i @pothos/plugin-prisma @pothos/plugin-prisma-utils
+bun add @pothos/plugin-prisma @pothos/plugin-prisma-utils
 ```
 
 ## Usage

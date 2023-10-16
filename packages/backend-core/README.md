@@ -5,7 +5,7 @@ A completely type safe, auto-generated backend framework
 ## Installation
 
 ```bash
-pnpm i @antribute/backend-core
+bun add @antribute/backend-core
 ```
 
 ## Configuration
@@ -48,7 +48,7 @@ In order to use this default config, you'll need to install the following packag
 dependencies
 
 ```bash
-pnpm i @antribute/backend-auth-nextauth @antribute/backend-graphql-pothos @antribute/backend-orm-prisma @antribute/backend-perms-auth0-fga @antribute/backend-server-nextjs -D
+bun add @antribute/backend-auth-nextauth @antribute/backend-graphql-pothos @antribute/backend-orm-prisma @antribute/backend-perms-auth0-fga @antribute/backend-server-nextjs -D
 ```
 
 Any package can be used as a `platform`, however the following platforms are built and maintained by

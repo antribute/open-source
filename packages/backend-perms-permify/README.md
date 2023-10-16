@@ -5,7 +5,7 @@ Adds Permify Support to the Antribute Backend
 ## Installation
 
 ```bash
-pnpm i @antribute/backend-perms-permify -D && pnpm i @permify/permify-node
+bun add @antribute/backend-perms-permify -D && bun add @permify/permify-node
 ```
 
 ## Usage

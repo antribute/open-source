@@ -14,10 +14,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Setup
-        uses: antribute/actions/setup@main
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+      - name: Install Dependencies
+        run: bun install
       - name: Build All Packages
-        run: pnpm run build:packages
+        run: bun run build:packages
       - name: Publish @antribute/backend-auth-clerk Dev Release to NPM
         uses: antribute/actions/publish-dev-package@main
         with:

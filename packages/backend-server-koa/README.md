@@ -5,13 +5,13 @@ Adds Koa Support to the Antribute Backend
 ## Installation
 
 ```bash
-pnpm i @antribute/backend-server-koa -D && pnpm i koa
+bun add @antribute/backend-server-koa -D && bun add koa
 ```
 
 If your application is configured to use GraphQL, also install the following peer dependency
 
 ```bash
-pnpm i @graphql-yoga/plugin-disable-introspection graphql-yoga
+bun add @graphql-yoga/plugin-disable-introspection graphql-yoga
 ```
 
 ## Usage
