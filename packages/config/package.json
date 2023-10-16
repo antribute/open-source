@@ -31,6 +31,7 @@
   "author": "Antribute, Inc. (https://www.antribute.com)",
   "license": "MIT",
   "dependencies": {
+    "@antfu/eslint-config": "^1.0.0-beta.27",
     "@vitejs/plugin-react": "^2.2.0",
     "bun-types": "latest",
     "nextjs-routes": "^1.0.4",
@@ -38,6 +39,7 @@
     "vite-tsconfig-paths": "^3.6.0"
   },
   "devDependencies": {
+    "eslint": "^8.51.0",
     "next": "^13.5.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

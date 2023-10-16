@@ -1,5 +1,0 @@
-dist
-node_modules
-test-config-files
-.eslintrc.cjs
-build.config.ts

@@ -9,6 +9,8 @@ export default antfu({
   yaml: false,
   overrides: {
     typescript: {
+      // More Rules that Conflict with Prettier
+      'arrow-parens': ['off'],
       // We use Bun, so let's disable any node-specific rules
       'node/prefer-global/process': ['off'],
       'unicorn/prefer-node-protocol': ['off'],

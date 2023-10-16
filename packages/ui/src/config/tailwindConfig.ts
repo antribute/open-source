@@ -61,7 +61,7 @@ const config = {
     files: [
       resolve(process.cwd(), '*.{htm,html}'),
       resolve(process.cwd(), 'public', '**', '*.{htm,html}'),
-      resolve(process.cwd(), 'src', '**', '*.{js,jsx,mdx,ts,tsx}'),
+      resolve(process.cwd(), 'src', '**', '*.{js,jsx,mdx,ts,tsx,astro}'),
       resolve(nodeModulesFolder, '**', '*.{ts, tsx}'),
     ],
     transform: createVariantGroupTransformer(),

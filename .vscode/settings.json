@@ -44,5 +44,8 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "[prisma]": {
     "editor.defaultFormatter": "ajmnz.prisma-import"
+  },
+  "[astro]": {
+    "editor.defaultFormatter": "astro-build.astro-vscode"
   }
 }

@@ -9,13 +9,14 @@
   "exports": {
     "bun": "./src/index.ts",
     "import": "./dist/index.mjs",
-    "require": "./dist/index.js"
+    "require": "./dist/index.js",
+    "types": "./dist/index.d.ts"
   },
+  "types": "./dist/index.d.ts",
   "files": [
     "dist/**",
     "src/**"
   ],
-  "types": "./dist/index.d.ts",
   "scripts": {
     "build": "bunx --bun unbuild",
     "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf test-results",

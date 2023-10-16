@@ -1,6 +1,0 @@
-dist
-node_modules
-.eslintrc.cjs
-build.config.ts
-server.d.ts
-server.js

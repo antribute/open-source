@@ -6,20 +6,18 @@
     "build:packages": "bunx --bun turbo run build --filter=./packages/*",
     "build:servers": "bunx --bun turbo run build --filter=./servers/*",
     "clean": "bunx --bun turbo run clean && echo \"⏳ Removing node_modules...\" && rm -r ./node_modules",
-    "dev:adk-todo": "bunx --bun turbo run dev --filter=@antribute/example-adk-todo-list...",
     "dev:al": "bunx --bun turbo run dev --filter=@antribute/antribute-landing...",
     "dev:ui": "bunx --bun turbo run storybook --filter=@antribute/ui...",
+    "kill-port": "bunx --bun kill-port",
     "lint": "bunx --bun eslint . --cache",
-    "lint:fix": "bunx --bun turbo run lint -- --fix",
+    "lint:fix": "bunx --bun eslint . --cache --fix",
     "lint:package-versions": "bunx --bun manypkg check",
     "postinstall": "bunx --bun simple-git-hooks && bun run lint:package-versions",
     "style:format": "bunx --bun prettier --ignore-unknown --write .",
-    "style:lint": "bunx --bun prettier --ignore-unknown --check .",
-    "kill-port": "bunx --bun kill-port"
+    "style:lint": "bunx --bun prettier --ignore-unknown --check ."
   },
   "type": "module",
   "dependencies": {
-    "@antfu/eslint-config": "^1.0.0-beta.27",
     "@happy-dom/global-registrator": "^12.9.1",
     "@manypkg/cli": "^0.19.2",
     "eslint": "^8.51.0",

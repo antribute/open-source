@@ -21,6 +21,7 @@
     },
     "./antribute.css": "./antribute.css"
   },
+  "types": "./dist/index.d.ts",
   "files": [
     "dist/**",
     "src/**"
@@ -29,8 +30,6 @@
     "build": "bunx --bun unbuild",
     "build-storybook": "bunx --bun storybook build",
     "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf storybook-static && rimraf test-results",
-    "dev": "bunx --bun unbuild --watch",
-    "lint": "bunx --bun eslint --cache ./src",
     "storybook": "bunx --bun storybook dev -p 6006 --no-open"
   },
   "keywords": [
@@ -45,7 +44,7 @@
   "license": "MIT",
   "dependencies": {
     "@clickbar/dot-diver": "^1.0.1",
-    "@egoist/tailwindcss-icons": "1.0.7",
+    "@egoist/tailwindcss-icons": "1.4.0",
     "@faker-js/faker": "^7.6.0",
     "@headlessui/react": "^1.7.14",
     "@heroicons/react": "^2.0.13",

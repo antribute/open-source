@@ -13,15 +13,7 @@ pnpm i @antribute/config
 ### ESLint
 
 ```javascript
-module.exports = require('@antribute/config/eslint/eslint-base');
-```
-
-```javascript
-module.exports = require('@antribute/config/eslint/eslint-nextjs');
-```
-
-```javascript
-module.exports = require('@antribute/config/eslint/eslint-react');
+module.exports = require('@antribute/config/eslint/eslint.config.js');
 ```
 
 ### NextJS

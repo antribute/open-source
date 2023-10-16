@@ -1,6 +1,0 @@
-dist
-node_modules
-.eslintrc.cjs
-build.config.ts
-postcss.config.cjs
-tailwind.config.js
