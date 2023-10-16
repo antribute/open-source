@@ -6,7 +6,6 @@ import { afterAll, afterEach, beforeEach, describe, expect, it, spyOn } from 'bu
 import { TrackingProvider, useTracking } from './client';
 
 describe('useTracking', () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const mixpanelInitSpy = spyOn(mixpanel, 'init').mockImplementation(() => ({} as any));
   const mixpanelTrackSpy = spyOn(mixpanel, 'track').mockImplementation(() => undefined);
   const consoleInfoSpy = spyOn(console, 'info');

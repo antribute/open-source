@@ -20,7 +20,7 @@
   ],
   "scripts": {
     "build": "bunx --bun unbuild",
-    "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf test-results && rimraf .eslintcache",
+    "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf test-results",
     "lint": "eslint --cache ./src"
   },
   "keywords": [
@@ -45,10 +45,8 @@
     "@pothos/plugin-scope-auth": "^3.19.1",
     "@prisma/client": "^4.8.1",
     "@types/node": "20.1.7",
-    "eslint": "^8.40.0",
     "graphql": "^16.6.0",
     "graphql-scalars": "^1.21.3",
-    "prettier": "2.8.7",
     "typescript": "^5.0.4",
     "unbuild": "^2.0.0"
   },

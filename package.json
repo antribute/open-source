@@ -9,7 +9,7 @@
     "dev:adk-todo": "bunx --bun turbo run dev --filter=@antribute/example-adk-todo-list...",
     "dev:al": "bunx --bun turbo run dev --filter=@antribute/antribute-landing...",
     "dev:ui": "bunx --bun turbo run storybook --filter=@antribute/ui...",
-    "lint": "bunx --bun turbo run lint",
+    "lint": "bunx --bun eslint . --cache",
     "lint:fix": "bunx --bun turbo run lint -- --fix",
     "lint:package-versions": "bunx --bun manypkg check",
     "postinstall": "bunx --bun simple-git-hooks && bun run lint:package-versions",
@@ -17,9 +17,12 @@
     "style:lint": "bunx --bun prettier --ignore-unknown --check .",
     "kill-port": "bunx --bun kill-port"
   },
+  "type": "module",
   "dependencies": {
+    "@antfu/eslint-config": "^1.0.0-beta.27",
     "@happy-dom/global-registrator": "^12.9.1",
     "@manypkg/cli": "^0.19.2",
+    "eslint": "^8.51.0",
     "lint-staged": "^13.0.3",
     "prettier": "2.8.7",
     "rimraf": "^4.4.1",

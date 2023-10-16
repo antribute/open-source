@@ -21,7 +21,7 @@ export type HexAlphaTransparency = keyof typeof hexAlphaCodes;
  * Hexadecimal color code for transparency
  * Source: https://gist.github.com/lopspower/03fb1cc0ac9f32ef38f4
  *
- * */
+ */
 export const hexAlphaCodes = {
   '100': 'FF',
   '95': 'F2',

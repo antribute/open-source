@@ -1,6 +1,16 @@
 import { classed } from '@tw-classed/react';
 import { twMerge } from 'tailwind-merge';
 
+const AntributeLogoContainerElement = classed(
+  'div',
+  'relative',
+  'bg-palette-black/90',
+  'ring-2',
+  'ring-palette-gray-300 dark:ring-content-moderate',
+  'noisy-surface-texture before:opacity-[0.09]',
+  'rounded-full overflow-hidden'
+);
+
 export const AntributeLogo = ({
   className,
   height,
@@ -34,16 +44,6 @@ export const AntributeLogo = ({
       </svg>
     )}
   </AntributeLogoContainerElement>
-);
-
-const AntributeLogoContainerElement = classed(
-  'div',
-  'relative',
-  'bg-palette-black/90',
-  'ring-2',
-  'ring-palette-gray-300 dark:ring-content-moderate',
-  'noisy-surface-texture before:opacity-[0.09]',
-  'rounded-full overflow-hidden'
 );
 
 // interface SvgGradientStopProp {

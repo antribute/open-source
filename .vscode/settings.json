@@ -40,25 +40,7 @@
     ".*ClassName=\"([^\"]*)", // <div anythingClassName="..." />
     ".*ClassName={\"([^\"}]*)" // <div anythingClassName={"..."} />
   ],
-
-  "eslint.options": {
-    "resolvePluginsRelativeTo": "../packages/config/eslint/eslint-react.cjs"
-  },
-
-  "eslint.workingDirectories": [
-    {
-      "pattern": "apps/*",
-      "changeProcessCWD": true
-    },
-    {
-      "pattern": "packages/*",
-      "changeProcessCWD": true
-    },
-    {
-      "pattern": "servers/*",
-      "changeProcessCWD": true
-    }
-  ],
+  "eslint.experimental.useFlatConfig": true,
   "typescript.tsdk": "node_modules/typescript/lib",
   "[prisma]": {
     "editor.defaultFormatter": "ajmnz.prisma-import"

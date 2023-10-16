@@ -1,19 +1,73 @@
-import { LiteralUnion } from 'type-fest';
-import { VariantProps, classed } from '@tw-classed/react';
+import type { LiteralUnion } from 'type-fest';
+import type { VariantProps } from '@tw-classed/react';
+import { classed } from '@tw-classed/react';
 import { capitalCase } from 'change-case';
-import { ColorProp, SizeProp } from 'types/styles';
-import { Paper, PaperProps } from 'components/Paper';
+import type { ColorProp, SizeProp } from 'types/styles';
+import type { PaperProps } from 'components/Paper';
+import { Paper } from 'components/Paper';
 import { Wrap } from 'components/Wrap';
 import { twMerge } from 'tailwind-merge';
 import clsx from 'clsx';
 import { Tooltip } from 'components/Tooltip';
-import { ColorSchemeName, mainColorSchemeNames } from 'config';
+import type { ColorSchemeName } from 'config';
+import { mainColorSchemeNames } from 'config';
 import { capitalize } from 'lodash-es';
 
 type RenderVariantElementProps = Partial<VariantProps<typeof RenderVariantElement>>;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type ReactComponent = keyof JSX.IntrinsicElements | React.JSXElementConstructor<any>;
+
+export const RenderPaperContainers = ({
+  children,
+  renderTransparentPaper,
+  className,
+  orientation = 'vertical',
+  hasContainer = true,
+  containerClassName,
+  ...props
+}: RenderPaperContainersProps) => {
+  const colors = (['transparent', ...mainColorSchemeNames] as const).filter((color) => {
+    if (color === 'transparent') {
+      return renderTransparentPaper;
+    }
+
+    return color !== 'default';
+  });
+
+  return (
+    <Wrap
+      if={hasContainer}
+      wrap={(c) => (
+        <div
+          className={twMerge(
+            clsx('inline-flex gap-16', {
+              'flex-row': orientation === 'horizontal',
+              'flex-row flex-wrap': orientation === 'vertical',
+            }),
+            containerClassName
+          )}
+        >
+          {c}
+        </div>
+      )}
+    >
+      {colors.map((color) => {
+        const colorScheme = color === 'transparent' ? undefined : color;
+        return (
+          <Paper
+            key={colorScheme}
+            transparent={color === 'transparent'}
+            colorScheme={colorScheme}
+            className={twMerge('flex flex-col gap-16 rounded-md', className)}
+            {...props}
+          >
+            {typeof children === 'function' ? children({ colorScheme }) : children}
+          </Paper>
+        );
+      })}
+    </Wrap>
+  );
+};
 
 interface RenderVariantBaseProps<T extends ReactComponent, TProp extends string = string>
   extends RenderVariantElementProps {
@@ -87,7 +141,6 @@ export const getColorKeys = () => {
 };
 
 export const RenderVariants = <
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   T extends React.ComponentType<any>,
   TElements extends undefined | string[]
 >({
@@ -104,7 +157,6 @@ export const RenderVariants = <
   variantLabelProps,
   noChildren = true,
 }: { elements: TElements; variantPropName: string } & RenderVariantBaseProps<T>) => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const Element = Component as React.ComponentType<any>;
 
   const renderText = (e: string) => {
@@ -152,7 +204,6 @@ export const RenderVariants = <
             >
               {render(
                 <Element
-                  // eslint-disable-next-line react/no-children-prop
                   children={noChildren ? undefined : renderText(e)}
                   {...elementProps}
                   {...{ [variantPropName]: e }}
@@ -226,55 +277,3 @@ interface RenderPaperContainersProps extends Omit<PaperProps, 'color' | 'childre
     | React.ReactNode
     | (({ colorScheme }: { colorScheme?: ColorSchemeName }) => React.ReactNode);
 }
-
-export const RenderPaperContainers = ({
-  children,
-  renderTransparentPaper,
-  className,
-  orientation = 'vertical',
-  hasContainer = true,
-  containerClassName,
-  ...props
-}: RenderPaperContainersProps) => {
-  const colors = (['transparent', ...mainColorSchemeNames] as const).filter((color) => {
-    if (color === 'transparent') {
-      return renderTransparentPaper;
-    }
-
-    return color !== 'default';
-  });
-
-  return (
-    <Wrap
-      if={hasContainer}
-      wrap={(c) => (
-        <div
-          className={twMerge(
-            clsx('inline-flex gap-16', {
-              'flex-row': orientation === 'horizontal',
-              'flex-row flex-wrap': orientation === 'vertical',
-            }),
-            containerClassName
-          )}
-        >
-          {c}
-        </div>
-      )}
-    >
-      {colors.map((color) => {
-        const colorScheme = color === 'transparent' ? undefined : color;
-        return (
-          <Paper
-            key={colorScheme}
-            transparent={color === 'transparent'}
-            colorScheme={colorScheme}
-            className={twMerge('flex flex-col gap-16 rounded-md', className)}
-            {...props}
-          >
-            {typeof children === 'function' ? children({ colorScheme }) : children}
-          </Paper>
-        );
-      })}
-    </Wrap>
-  );
-};

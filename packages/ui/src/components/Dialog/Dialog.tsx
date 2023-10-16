@@ -1,20 +1,24 @@
 import * as DialogPrimitive from '@radix-ui/react-dialog';
-import { Button as ButtonComponent, ButtonProps } from 'components/Button';
+import type { ButtonProps } from 'components/Button';
+import { Button as ButtonComponent } from 'components/Button';
+import type {
+  DialogBodyElementProps,
+  DialogContentElementProps,
+  DialogDescriptionElementProps,
+  DialogFooterElementProps,
+  DialogTitleElementProps,
+} from 'components/Dialog/Dialog.styles';
 import {
   DialogBodyElement,
-  DialogBodyElementProps,
   DialogContentElement,
-  DialogContentElementProps,
   DialogDescriptionElement,
-  DialogDescriptionElementProps,
   DialogFooterElement,
-  DialogFooterElementProps,
   DialogOverlayElement,
   DialogTitleElement,
-  DialogTitleElementProps,
   DialogTitleSectionElement,
 } from 'components/Dialog/Dialog.styles';
-import { ColorSchemeName, getDataAttributes } from 'config';
+import type { ColorSchemeName } from 'config';
+import { getDataAttributes } from 'config';
 import { getNearestColorSchemeAttribute } from 'utils/getNearestColorSchemeAttribute';
 import { useState } from 'react';
 import { Wrap } from 'components/Wrap';

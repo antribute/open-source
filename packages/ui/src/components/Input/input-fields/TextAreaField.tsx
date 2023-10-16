@@ -1,49 +1,23 @@
-import React, { useRef, forwardRef, useLayoutEffect } from 'react';
+import React, { forwardRef, useLayoutEffect, useRef } from 'react';
 import clsx from 'clsx';
-import { ClassedVariantProps, classed } from 'utils/classed';
+import type { ClassedVariantProps } from 'utils/classed';
+import { classed } from 'utils/classed';
 import { VisuallyHidden } from 'react-aria';
 import { measureElement } from 'utils/measureElement';
 import { mergeRefs } from '@react-aria/utils';
 import { Input as AriaInput, TextField as AriaTextField } from 'react-aria-components';
 import type { InputProps as AriaInputProps } from 'react-aria-components';
-import {
-  InputSizeVariants,
-  inputSizeClassName,
-  inputSurfaceClassName,
-} from 'components/Input/Input.styles';
+import type { InputSizeVariants } from 'components/Input/Input.styles';
+import { inputSizeClassName, inputSurfaceClassName } from 'components/Input/Input.styles';
 import {
   InputContainer,
   pickInputContainerProps,
 } from 'components/Input/components/InputContainer';
 import { generatePropPickerFn } from 'utils';
-import {
-  BaseInputFieldElement,
-  InputFieldContainerVariants,
-  defaultInputProps,
-} from '../components/BaseInput';
+import type { InputFieldContainerVariants } from '../components/BaseInput';
+import { BaseInputFieldElement, defaultInputProps } from '../components/BaseInput';
 import { useInputWithRefContext } from '../Input.helpers';
-import type { InputComponentProps, AriaTextFieldProps } from '../Input.types';
-
-export type TextAreaFieldProps = React.ComponentProps<typeof TextAreaField>;
-
-export const TextAreaField = forwardRef<
-  HTMLTextAreaElement,
-  BaseTextAreaProps & InputComponentProps & AriaTextFieldProps
->(({ children, placeholder, resizeable, rows, cols, ...props }, forwardedRef) => {
-  return (
-    <InputContainer {...props} as={AriaTextField}>
-      <BaseTextArea
-        ref={forwardedRef}
-        size={props.size}
-        rows={rows}
-        cols={cols}
-        placeholder={placeholder}
-        resizeable={resizeable}
-        {...props}
-      />
-    </InputContainer>
-  );
-});
+import type { AriaTextFieldProps, InputComponentProps } from '../Input.types';
 
 const BaseTextAreaElement = classed(
   'textarea',
@@ -150,3 +124,24 @@ export const BaseTextArea = forwardRef<HTMLTextAreaElement, BaseTextAreaProps>(
     );
   }
 );
+
+export type TextAreaFieldProps = React.ComponentProps<typeof TextAreaField>;
+
+export const TextAreaField = forwardRef<
+  HTMLTextAreaElement,
+  BaseTextAreaProps & InputComponentProps & AriaTextFieldProps
+>(({ placeholder, resizeable, rows, cols, ...props }, forwardedRef) => {
+  return (
+    <InputContainer {...props} as={AriaTextField}>
+      <BaseTextArea
+        ref={forwardedRef}
+        size={props.size}
+        rows={rows}
+        cols={cols}
+        placeholder={placeholder}
+        resizeable={resizeable}
+        {...props}
+      />
+    </InputContainer>
+  );
+});

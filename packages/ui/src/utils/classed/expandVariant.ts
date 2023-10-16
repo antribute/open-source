@@ -1,4 +1,5 @@
-import clsx, { ClassValue } from 'clsx';
+import type { ClassValue } from 'clsx';
+import clsx from 'clsx';
 import createVariatGroupTransfomer from 'tailwind-group-variant';
 import { twMerge } from 'tailwind-merge';
 import { notEmpty } from 'utils/notEmpty';

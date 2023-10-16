@@ -1,6 +1,6 @@
 import { Slot } from '@radix-ui/react-slot';
 import { twMerge } from 'tailwind-merge';
-import { ReactSvgProps } from 'types/react-types';
+import type { ReactSvgProps } from 'types/react-types';
 
 export interface SvgIconWrapperProps {
   asChild?: boolean;
@@ -20,11 +20,10 @@ export const SvgIconWrapper = ({
   autoSize = true,
   viewbox = '20',
   className,
-  svgProps,
   strokeWidth,
   rounded,
   ...props
-}: SvgIconWrapperProps & { svgProps?: ReactSvgProps }) => {
+}: SvgIconWrapperProps) => {
   const Svg = asChild ? Slot : 'svg';
 
   const size = autoSize ? '100%' : viewbox;

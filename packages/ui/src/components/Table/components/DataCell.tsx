@@ -1,6 +1,7 @@
 import { classed } from 'utils/classed';
-import React, { ComponentProps } from 'react';
-import { Cell } from '../Table.types';
+import type { ComponentProps } from 'react';
+import React from 'react';
+import type { Cell } from '../Table.types';
 import { renderCell } from '../helpers';
 import { BaseCellElement } from './BaseCellElement';
 

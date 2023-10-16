@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { HeadingLevel, SizeProp } from 'types/styles';
+import type { HeadingLevel, SizeProp } from 'types/styles';
 
 const headingTextSize = {
   h1: clsx('text-h1'),

@@ -1,7 +1,7 @@
-/* eslint-disable react/no-unused-prop-types */
-import * as ComboboxPrimitive from 'ariakit/combobox';
-import { useRef, useCallback, useMemo } from 'react';
-import { useVirtualizer, VirtualItem } from '@tanstack/react-virtual';
+import type * as ComboboxPrimitive from 'ariakit/combobox';
+import { useCallback, useMemo, useRef } from 'react';
+import type { VirtualItem } from '@tanstack/react-virtual';
+import { useVirtualizer } from '@tanstack/react-virtual';
 import type { MultiSelectVariant, SelectOptionMap } from './Combobox.types';
 
 export interface UseComboboxListVirtualizerProps {

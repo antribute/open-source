@@ -1,8 +1,9 @@
 import type {
-  CheckboxRenderProps,
   CheckboxProps as AriaCheckboxProps,
+  CheckboxRenderProps,
 } from 'react-aria-components';
-import { Classed, ToClassedVariants, classed } from 'utils/classed';
+import type { Classed, ToClassedVariants } from 'utils/classed';
+import { classed } from 'utils/classed';
 import { Checkbox as AriaCheckbox } from 'react-aria-components';
 
 import { svgIcon } from 'components/Icon/SvgIconWrapper';
@@ -14,12 +15,6 @@ import { Tooltip } from 'components/Tooltip';
 import { forwardRef } from 'react';
 
 type CheckboxElementVariantProps = Classed.VariantProps<typeof CheckboxElement>;
-
-function getSizeVariant<T extends 'checkbox' | 'children'>(prop: T) {
-  return objectMap(sizePropVariants, ({ key, value }) => {
-    return [key, value[prop]];
-  });
-}
 
 const sizePropVariants = {
   auto: {
@@ -43,6 +38,12 @@ const sizePropVariants = {
     children: 'leading-[26px] text-h4 gap-8',
   },
 };
+
+function getSizeVariant<T extends 'checkbox' | 'children'>(prop: T) {
+  return objectMap(sizePropVariants, ({ key, value }) => {
+    return [key, value[prop]];
+  });
+}
 
 const CheckboxElement = classed(
   'div',
@@ -117,6 +118,20 @@ const CheckboxContainerElement = classed(
   }
 );
 
+const CheckedSvg = svgIcon(
+  <svg viewBox="0 0 12 10" className="fill-none stroke-current stroke-2">
+    <polyline points="1.5 6 4.5 9 10.5 1" />
+  </svg>,
+  { autoSize: true, 'aria-hidden': true }
+);
+
+const IndertermidateSvg = svgIcon(
+  <svg strokeWidth="3.5">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M18 12H6" />
+  </svg>,
+  { autoSize: true, 'aria-hidden': true }
+);
+
 export interface BasicCheckboxProps
   extends AriaCheckboxProps,
     Pick<CheckboxElementVariantProps, 'size' | 'focusVisibleRing'> {
@@ -125,7 +140,6 @@ export interface BasicCheckboxProps
   pointerEventsNone?: boolean;
   label?: React.ReactNode;
   tooltip?: React.ReactNode;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   containerElement?: React.ComponentType<any>;
 }
 
@@ -282,17 +296,3 @@ function renderPropsClassName({
 }) {
   return typeof className === 'function' ? className(renderProps) : className;
 }
-
-const CheckedSvg = svgIcon(
-  <svg viewBox="0 0 12 10" className="fill-none stroke-current stroke-2">
-    <polyline points="1.5 6 4.5 9 10.5 1" />
-  </svg>,
-  { autoSize: true, 'aria-hidden': true }
-);
-
-const IndertermidateSvg = svgIcon(
-  <svg strokeWidth="3.5">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M18 12H6" />
-  </svg>,
-  { autoSize: true, 'aria-hidden': true }
-);

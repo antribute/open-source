@@ -1,7 +1,7 @@
 import { Slot } from '@radix-ui/react-slot';
-import { ReactVirtualizedAutoSizerProps } from 'components/AutoSizer/AutoSizer.types';
+import type { ReactVirtualizedAutoSizerProps } from 'components/AutoSizer/AutoSizer.types';
 import { omit, pick } from 'lodash-es';
-import { useCallback, forwardRef } from 'react';
+import { forwardRef, useCallback } from 'react';
 import ReactVirtualizedAutoSizer from 'react-virtualized-auto-sizer';
 import { classed } from 'utils/classed';
 import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area';
@@ -28,7 +28,6 @@ export const AutoSizer = <TAsChild extends true | undefined>({
         return children({ height, width });
       }
 
-      // eslint-disable-next-line react/prop-types
       const { style, ...rest } = props as { style?: React.CSSProperties };
 
       return (
@@ -78,15 +77,11 @@ const ScrollerContainerElementWrapper = classed('div', 'w-full', {
   },
 });
 
-const ScrollArea = forwardRef<HTMLDivElement, ResponsiveScrollerContainerProps>(
-  ({ children, ...props }, forwardedRef) => {
-    return (
-      <ScrollerContainer {...props}>
-        <ScrollAreaViewport ref={forwardedRef}>{children}</ScrollAreaViewport>
-      </ScrollerContainer>
-    );
-  }
-);
+const ScrollAreaViewport = classed(ScrollAreaPrimitive.Viewport, 'w-full h-full');
+
+const ScrollerContainerElement = classed(ScrollAreaPrimitive.Root, 'w-full bg-danger', {
+  variants: {},
+});
 
 const ScrollerContainer = (props: ResponsiveScrollerContainerProps) => {
   const scrollAreaProps = pick(props, Object.keys(pickedScrollAreaProps)) as PickedScrollAreaProps;
@@ -105,11 +100,15 @@ const ScrollerContainer = (props: ResponsiveScrollerContainerProps) => {
   );
 };
 
-const ScrollAreaViewport = classed(ScrollAreaPrimitive.Viewport, 'w-full h-full');
-
-const ScrollerContainerElement = classed(ScrollAreaPrimitive.Root, 'w-full bg-danger', {
-  variants: {},
-});
+const ScrollArea = forwardRef<HTMLDivElement, ResponsiveScrollerContainerProps>(
+  ({ children, ...props }, forwardedRef) => {
+    return (
+      <ScrollerContainer {...props}>
+        <ScrollAreaViewport ref={forwardedRef}>{children}</ScrollAreaViewport>
+      </ScrollerContainer>
+    );
+  }
+);
 
 const Container = classed('div', 'grow flex flex-col');
 const Header = classed('div', 'shrink-0');

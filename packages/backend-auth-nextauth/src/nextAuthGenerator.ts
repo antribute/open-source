@@ -1,7 +1,7 @@
-import { logger, populateTemplate, generateFile, getServerDir } from '@antribute/backend-core';
-import type { Config, GeneratorFunc } from '@antribute/backend-core';
 import { access } from 'fs/promises';
 import { join } from 'path';
+import { generateFile, getServerDir, logger, populateTemplate } from '@antribute/backend-core';
+import type { Config, GeneratorFunc } from '@antribute/backend-core';
 
 import {
   ormNoneUtilsTemplate,

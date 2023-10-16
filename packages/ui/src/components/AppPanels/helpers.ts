@@ -1,11 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import { clamp, sum as lodashSum } from 'lodash-es';
 
 export function percentClamp<T>(v: T, options?: { min?: number | null; max?: number | null }) {
   const min = options?.min ?? 0;
   const max = options?.max ?? 100;
 
-  if (typeof v === undefined) return v;
+  if (typeof v === 'undefined') return v;
 
   if (typeof v === 'number') return clamp(v, Math.max(0, min), Math.min(100, max || 100));
 

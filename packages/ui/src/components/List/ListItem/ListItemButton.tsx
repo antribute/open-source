@@ -1,5 +1,7 @@
-import { Classed, deriveClassed } from 'utils/classed';
-import { ListItemGroup, ListItemGroupBaseProps } from './ListItem';
+import type { Classed } from 'utils/classed';
+import { deriveClassed } from 'utils/classed';
+import type { ListItemGroupBaseProps } from './ListItem';
+import { ListItemGroup } from './ListItem';
 
 export type ListItemButtonProps = React.ComponentProps<typeof ListItemButton>;
 

@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { get, omit, pick } from 'lodash-es';
-import { O } from 'ts-toolbelt';
-import { LiteralUnion } from 'type-fest';
-import { IsUnion } from 'types/typeUtilities';
+import type { O } from 'ts-toolbelt';
+import type { LiteralUnion } from 'type-fest';
+import type { IsUnion } from 'types/typeUtilities';
 import { isDevelopment } from 'utils/environment-utils';
 import { objectMap } from 'utils/objectMap';
 
@@ -138,7 +137,7 @@ export function pickProps<
  *
  *  Used to catch cases where a typo was possibly made when using `_pick_` as a value in `pickProps`
  *
- * */
+ */
 function validatePickProp(input: unknown, pickedProps: object) {
   if (isDevelopment()) {
     const startsWith = ['_p', 'pick'];

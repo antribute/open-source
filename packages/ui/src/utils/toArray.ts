@@ -1,4 +1,4 @@
-import { L } from 'ts-toolbelt';
+import type { L } from 'ts-toolbelt';
 import { notEmpty } from 'utils/notEmpty';
 
 type ToArray<TValue> = TValue extends unknown[] ? TValue : TValue[];

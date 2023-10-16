@@ -1,5 +1,5 @@
-import { bundleRequire } from 'bundle-require';
 import { resolve } from 'path';
+import { bundleRequire } from 'bundle-require';
 
 import type { Config } from './config';
 import logger from './logger';

@@ -1,5 +1,5 @@
 import { mkdir, writeFile } from 'fs/promises';
-import { resolve, join } from 'path';
+import { join, resolve } from 'path';
 
 import type { Config } from './config';
 import logger from './logger';

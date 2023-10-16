@@ -1,5 +1,5 @@
 import { createCtx } from 'utils/createContext';
-import { ReactTable } from './Table.types';
+import type { ReactTable } from './Table.types';
 
 export interface TableContext {
   table: ReactTable;

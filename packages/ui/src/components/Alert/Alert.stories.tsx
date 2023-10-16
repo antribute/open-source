@@ -1,6 +1,7 @@
-import { Meta, StoryObj } from '@storybook/react';
-import { useState, useEffect } from 'react';
-import { Alert, AlertProps } from './Alert';
+import type { Meta, StoryObj } from '@storybook/react';
+import { useEffect, useState } from 'react';
+import type { AlertProps } from './Alert';
+import { Alert } from './Alert';
 
 const meta = {
   args: {},

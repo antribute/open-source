@@ -20,7 +20,7 @@
   ],
   "scripts": {
     "build": "bunx --bun unbuild",
-    "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf test-results && rimraf .eslintcache",
+    "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf test-results",
     "lint": "eslint --cache ./src"
   },
   "keywords": [
@@ -36,11 +36,9 @@
     "@antribute/config": "workspace:*",
     "@graphql-yoga/plugin-disable-introspection": "^0.8.1",
     "@types/node": "20.1.7",
-    "eslint": "^8.40.0",
     "graphql": "^16.6.0",
     "graphql-yoga": "^3.1.1",
     "koa": "^2.14.2",
-    "prettier": "2.8.7",
     "typescript": "^5.0.4",
     "unbuild": "^2.0.0"
   },

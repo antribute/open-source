@@ -28,7 +28,7 @@
   "scripts": {
     "build": "bunx --bun unbuild",
     "build-storybook": "bunx --bun storybook build",
-    "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf storybook-static && rimraf test-results && rimraf .eslintcache",
+    "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf storybook-static && rimraf test-results",
     "dev": "bunx --bun unbuild --watch",
     "lint": "bunx --bun eslint --cache ./src",
     "storybook": "bunx --bun storybook dev -p 6006 --no-open"
@@ -144,12 +144,9 @@
     "@types/react-is": "^18.2.0",
     "autoprefixer": "^10.4.13",
     "concurrently": "^7.6.0",
-    "eslint": "^8.40.0",
-    "eslint-plugin-storybook": "^0.6.11",
     "fast-glob": "^3.2.12",
     "happy-dom": "^7.7.0",
     "postcss": "^8.4.19",
-    "prettier": "2.8.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "storybook": "7.0.4",

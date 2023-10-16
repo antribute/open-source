@@ -1,7 +1,6 @@
 import { defineBuildConfig } from 'unbuild';
-import { replaceTscAliasPaths } from 'tsc-alias';
 
-import { commonConfig, cjsEntry, esmEntry } from './unbuild.config.base';
+import { cjsEntry, commonConfig, esmEntry } from './unbuild.config.base';
 
 export default defineBuildConfig({
   entries: [

@@ -6,6 +6,20 @@ export interface TableHeaderBackgroundProps extends TableHeaderBackgroundElement
   headerElementRef: React.RefObject<HTMLTableSectionElement>;
 }
 
+type TableHeaderBackgroundElementProps = React.ComponentProps<typeof TableHeaderBackgroundElement>;
+
+const TableHeaderBackgroundElement = classed(
+  'div',
+  'absolute -top-px w-full z-20  border-b border-highlight bg-inherit',
+  {
+    variants: {
+      filledHeaderBackground: {
+        true: 'before-absolute-content before:bg-palette-various-gray-500/10',
+      },
+    },
+  }
+);
+
 /**
  * TableHeaderBackground
  *
@@ -30,17 +44,3 @@ export const TableHeaderBackground = ({
 
   return <TableHeaderBackgroundElement {...props} style={{ height }} />;
 };
-
-type TableHeaderBackgroundElementProps = React.ComponentProps<typeof TableHeaderBackgroundElement>;
-
-const TableHeaderBackgroundElement = classed(
-  'div',
-  'absolute -top-px w-full z-20  border-b border-highlight bg-inherit',
-  {
-    variants: {
-      filledHeaderBackground: {
-        true: 'before-absolute-content before:bg-palette-various-gray-500/10',
-      },
-    },
-  }
-);

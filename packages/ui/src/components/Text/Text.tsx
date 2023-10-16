@@ -1,9 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable ts/no-use-before-define */
+
 import { textVariants } from 'styles/text.variants';
-import { Classed, classed, deriveClassed } from 'utils/classed';
-import { HeadingLevel } from 'types/styles';
-import { CSSProperties } from 'react';
-import { TextComponentType, textComponentProps } from 'components/Text/textComponentProps';
+import type { Classed } from 'utils/classed';
+import { classed, deriveClassed } from 'utils/classed';
+import type { HeadingLevel } from 'types/styles';
+import type { CSSProperties } from 'react';
+import type { TextComponentType } from 'components/Text/textComponentProps';
+import { textComponentProps } from 'components/Text/textComponentProps';
 import { Dot } from 'components/Text/Dot';
 import { DuplicateChildren } from 'components/Text/DuplicateChildren';
 
@@ -181,6 +184,8 @@ const SubComponents = {
   Dash,
 };
 
+// NO fuckin idea how to fix this eslint one, @tyler this is on you (line is disable up top because
+// eslint was being weird)
 const Text = Object.assign(TextComponent, SubComponents);
 
 export { Text };

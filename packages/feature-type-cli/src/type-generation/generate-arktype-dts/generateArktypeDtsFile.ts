@@ -1,6 +1,7 @@
 import path from 'path';
 import { ModuleKind, ModuleResolutionKind, Project, ScriptTarget, ts } from 'ts-morph';
-import { GenerateArktypeDtsCodeOptions, generateArktypeDtsCode } from './generateArktypeTypeDef';
+import type { GenerateArktypeDtsCodeOptions } from './generateArktypeTypeDef';
+import { generateArktypeDtsCode } from './generateArktypeTypeDef';
 
 export interface GenerateArktypeDtsFileOptions extends GenerateArktypeDtsCodeOptions {
   /** Output destination for the generated d.ts file */

@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
-/* eslint-disable import/no-extraneous-dependencies */
+
 import { exec } from 'child_process';
 import { existsSync, writeFileSync } from 'fs';
-import { PluginOption } from 'vite';
+import type { PluginOption } from 'vite';
 import { generateRoutes } from './generateRoutes';
 import { resolveOutputFilePath, resolveSourceFilePath } from './helpers';
 

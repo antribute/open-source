@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { SelectState } from 'ariakit';
+import type { SelectState } from 'ariakit';
 import { IconButton } from 'components/IconButton/IconButton';
 import { XMarkIcon } from '@heroicons/react/20/solid';
 import clsx from 'clsx';

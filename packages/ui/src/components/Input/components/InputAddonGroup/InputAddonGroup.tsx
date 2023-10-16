@@ -1,18 +1,16 @@
 import React, { useContext } from 'react';
 import { deriveClassed } from 'utils/classed';
 import { InputContext as AriaInputContext } from 'react-aria-components';
-import { HoverProps, useHover } from 'react-aria';
-import { InputAddonProps } from 'components/Input/components/InputAddonGroup/InputAddon';
+import type { HoverProps } from 'react-aria';
+import { useHover } from 'react-aria';
+import type { InputAddonProps } from 'components/Input/components/InputAddonGroup/InputAddon';
 import { motion } from 'framer-motion';
 import { parseInputStateProps } from '../../Input.helpers';
-import { useInputAddonList } from './useInputAddonList';
 import type { InputComponentProps } from '../../Input.types';
-import {
-  InputGroupElement,
-  InputGroupElementVariantProps,
-  pickInputGroupElementVariantProps,
-} from '../../Input.styles';
+import type { InputGroupElementVariantProps } from '../../Input.styles';
+import { InputGroupElement, pickInputGroupElementVariantProps } from '../../Input.styles';
 import { InputContainerContext } from '../InputContainer';
+import { useInputAddonList } from './useInputAddonList';
 
 export type InputComponentState = 'error' | 'success';
 
@@ -93,7 +91,6 @@ export const InputAddonGroup = deriveClassed<typeof InputGroupElement, InputAddo
         ref={forwardedRef}
         layout="preserve-aspect"
         initial={false}
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         {...(hoverProps as any)}
       >
         {leadingOutsideAddons}

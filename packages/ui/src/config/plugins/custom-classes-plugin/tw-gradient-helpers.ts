@@ -1,7 +1,8 @@
-import { PluginAPI } from 'tailwindcss/types/config';
+import type { PluginAPI } from 'tailwindcss/types/config';
 import { mergeObjects } from '../../helpers/utilities';
 import { clsx } from './class-style-utils';
-import { ClassComponentMap, classComponentMap } from './custom-classes-plugin.helpers';
+import type { ClassComponentMap } from './custom-classes-plugin.helpers';
+import { classComponentMap } from './custom-classes-plugin.helpers';
 
 export type TWGradientDirections = (typeof twGradientDirections)[number];
 
@@ -81,7 +82,7 @@ export function baseTokensWithLightAndDarkColors({ theme }: { theme: PluginAPI['
 function hasPair(token: string, list: string[], suffix1: string, suffix2: string) {
   if (token.endsWith(suffix1)) {
     const baseToken = token.slice(0, -suffix1.length);
-    return list.some((t) => t === baseToken + suffix2);
+    return list.includes(baseToken + suffix2);
   }
   return false;
 }

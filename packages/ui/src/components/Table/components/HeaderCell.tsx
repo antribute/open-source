@@ -1,5 +1,5 @@
 import { classed } from 'utils/classed';
-import { Header } from '../Table.types';
+import type { Header } from '../Table.types';
 import { renderHeader } from '../helpers';
 import { BaseCellElement } from './BaseCellElement';
 

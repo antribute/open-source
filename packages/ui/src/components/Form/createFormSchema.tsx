@@ -1,6 +1,6 @@
-import { List } from 'ts-toolbelt';
+import type { List } from 'ts-toolbelt';
 import { keyBy, mapValues } from 'lodash-es';
-import { FormFieldSchemaData } from 'components/Form/Form.types';
+import type { FormFieldSchemaData } from 'components/Form/Form.types';
 
 type ArrTransform<T extends Readonly<FormFieldSchemaData[]>> = {
   [I in keyof T]: T[I] extends { mapping: infer V } ? V : never;

@@ -1,4 +1,4 @@
-import { ColorSchemeName } from 'config';
+import type { ColorSchemeName } from 'config';
 import { useLayoutEffect, useState } from 'react';
 import { getElement } from 'utils/getElement';
 import { getNearestColorSchemeAttribute } from 'utils/getNearestColorSchemeAttribute';

@@ -1,6 +1,6 @@
 import { defineColorSchemes } from './color-schemes.helpers';
 import { colorSchemeConfigs } from './schemes';
-import { ColorSchemeName } from './color-scheme-config.types';
+import type { ColorSchemeName } from './color-scheme-config.types';
 
 export const mainColorSchemeNames = [
   'default',

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Classed, classed } from 'utils/classed';
+import type { Classed } from 'utils/classed';
+import { classed } from 'utils/classed';
 
 const InlineButtonIconElement = classed('span', 'flex items-center justify-center', {
   variants: {
@@ -32,7 +33,7 @@ export const InlineButtonIcon = ({
   icon,
   className,
 }: InlineButtonIconProps) => {
-  return Boolean(className || icon) ? (
+  return className || icon ? (
     <InlineButtonIconElement
       size={size}
       className={className}

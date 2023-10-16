@@ -1,5 +1,6 @@
 import { classed } from 'utils/classed';
-import { Panel as PanelPrimitive, ImperativePanelHandle } from 'react-resizable-panels';
+import type { ImperativePanelHandle } from 'react-resizable-panels';
+import { Panel as PanelPrimitive } from 'react-resizable-panels';
 import { Paper } from 'components/Paper';
 import { useEffect, useRef } from 'react';
 

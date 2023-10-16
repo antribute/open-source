@@ -1,16 +1,16 @@
+import { appendFile } from 'fs/promises';
+import { join, resolve } from 'path';
+import { fileURLToPath } from 'url';
 import {
+  generateFile,
+  getGeneratedDir,
+  getServerDir,
   logger,
   populateTemplate,
-  generateFile,
-  getServerDir,
-  getGeneratedDir,
 } from '@antribute/backend-core';
 import type { Config, GeneratorFunc } from '@antribute/backend-core';
 import { execa } from 'execa';
-import { appendFile } from 'fs/promises';
-import { join, resolve } from 'path';
 import rimraf from 'rimraf';
-import { fileURLToPath } from 'url';
 
 import {
   additionalSchemaContentTemplate,

@@ -1,5 +1,5 @@
 import { flexRender } from '@tanstack/react-table';
-import { Cell, Header, ReactTable } from 'components/Table/Table.types';
+import type { Cell, Header, ReactTable } from 'components/Table/Table.types';
 
 export function renderCell(cell: Cell) {
   return flexRender(cell.column.columnDef.cell, cell.getContext());

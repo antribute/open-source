@@ -1,5 +1,6 @@
 import { MoonIcon, SunIcon } from '@heroicons/react/24/solid';
-import { IconButton, IconButtonProps } from 'components/IconButton';
+import type { IconButtonProps } from 'components/IconButton';
+import { IconButton } from 'components/IconButton';
 import { Tooltip } from 'components/Tooltip';
 import { useDarkMode } from 'hooks';
 

@@ -1,12 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unnecessary-type-constraint */
 import { BoltIcon } from '@heroicons/react/24/solid';
 import { omit } from 'lodash-es';
 import { notEmpty } from 'utils/notEmpty';
 import { RenderColorVariants, RenderSizeVariants } from 'utils/storybook-utils';
 
 export const PresetButtonStoryVariants = <
-  TProps extends any,
+  TProps,
   T extends React.ComponentType = React.ComponentType
 >(
   Button: T,

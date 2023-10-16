@@ -1,12 +1,12 @@
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { List } from 'components/List';
 import { Avatar } from 'components/Avatar';
 import { Detail } from 'components/Detail';
 import { Flex } from 'components/Flex';
 import { Text } from 'components/Text';
-import { ListItemLinkProps } from 'components/List/ListItem/ListItemLink';
-import { OptionalExceptFor } from 'types/typeUtilities';
+import type { ListItemLinkProps } from 'components/List/ListItem/ListItemLink';
+import type { OptionalExceptFor } from 'types/typeUtilities';
 import { capitalCase } from 'change-case';
 import { Button } from 'components/Button';
 import { Input } from 'components/Input';
@@ -31,96 +31,6 @@ export const Default: Story = {
   args: {},
   render: () => <MockAppExample />,
 };
-
-const DesktopSidebar = () => {
-  return (
-    <AppShell.DesktopSidebarArea>
-      {/* Sidebar component, swap this element with another sidebar if you like */}
-      <AppShell.Sidebar>
-        <AppShell.SidebarHeader>
-          {/* <SidebarBrandImage /> */}
-          <AntributeWordmark
-            className="flex justify-center w-full xl:justify-start"
-            wordmarkClassName="lg:hidden xl:block"
-          />
-        </AppShell.SidebarHeader>
-        <AppShell.SidebarNavigation>
-          {/* <SidebarList role="list"></SidebarList> */}
-          <StaticDesktopSideBar />
-        </AppShell.SidebarNavigation>
-      </AppShell.Sidebar>
-    </AppShell.DesktopSidebarArea>
-  );
-};
-
-const NavBarMock = () => {
-  return (
-    <AppShell.StickyNavBar>
-      <Flex gap justify="between" align="center" className="w-full px-8">
-        <div className="max-w-344 w-full">
-          <Input
-            leadingIcon={
-              <AppShell.Icon className="i-heroicons-magnifying-glass-20-solid h-16 w-16" />
-            }
-            placeholder="Search"
-            roundedFull
-            fullWidth
-            className="border-highlight"
-            size="sm"
-          />
-        </div>
-        <ThemeSwitcher size="sm" />
-      </Flex>
-    </AppShell.StickyNavBar>
-  );
-};
-
-const MainMock = () => {
-  return (
-    <AppShell.Main>
-      <AppShell.Header>
-        <Text.Subheading className="pl-40">Deployments</Text.Subheading>
-      </AppShell.Header>
-      <DeploymentsList />
-    </AppShell.Main>
-  );
-};
-
-const ActivityFeedMock = () => {
-  return (
-    <AppShell.ActivityFeed>
-      <AppShell.Header>
-        <Text.Subheading>Activity</Text.Subheading>
-      </AppShell.Header>
-    </AppShell.ActivityFeed>
-  );
-};
-
-function MockAppExample() {
-  return (
-    <>
-      <div>
-        <AppShell.PageBackgroundColor />
-        {/* <PageBackgroundBottom>
-          
-        </PageBackgroundBottom> */}
-
-        <AppShell.Frame />
-        {/* Static sidebar for desktop */}
-
-        <DesktopSidebar />
-        <AppShell.Container className="pt-16">
-          {/* Sticky search header */}
-          <NavBarMock />
-
-          <MainMock />
-
-          <ActivityFeedMock />
-        </AppShell.Container>
-      </div>
-    </>
-  );
-}
 
 const ResponsiveSidebarItem = ({
   startIcon,
@@ -239,3 +149,93 @@ const DeploymentsList = () => {
     </List.Container>
   );
 };
+
+const DesktopSidebar = () => {
+  return (
+    <AppShell.DesktopSidebarArea>
+      {/* Sidebar component, swap this element with another sidebar if you like */}
+      <AppShell.Sidebar>
+        <AppShell.SidebarHeader>
+          {/* <SidebarBrandImage /> */}
+          <AntributeWordmark
+            className="flex justify-center w-full xl:justify-start"
+            wordmarkClassName="lg:hidden xl:block"
+          />
+        </AppShell.SidebarHeader>
+        <AppShell.SidebarNavigation>
+          {/* <SidebarList role="list"></SidebarList> */}
+          <StaticDesktopSideBar />
+        </AppShell.SidebarNavigation>
+      </AppShell.Sidebar>
+    </AppShell.DesktopSidebarArea>
+  );
+};
+
+const NavBarMock = () => {
+  return (
+    <AppShell.StickyNavBar>
+      <Flex gap justify="between" align="center" className="w-full px-8">
+        <div className="max-w-344 w-full">
+          <Input
+            leadingIcon={
+              <AppShell.Icon className="i-heroicons-magnifying-glass-20-solid h-16 w-16" />
+            }
+            placeholder="Search"
+            roundedFull
+            fullWidth
+            className="border-highlight"
+            size="sm"
+          />
+        </div>
+        <ThemeSwitcher size="sm" />
+      </Flex>
+    </AppShell.StickyNavBar>
+  );
+};
+
+const MainMock = () => {
+  return (
+    <AppShell.Main>
+      <AppShell.Header>
+        <Text.Subheading className="pl-40">Deployments</Text.Subheading>
+      </AppShell.Header>
+      <DeploymentsList />
+    </AppShell.Main>
+  );
+};
+
+const ActivityFeedMock = () => {
+  return (
+    <AppShell.ActivityFeed>
+      <AppShell.Header>
+        <Text.Subheading>Activity</Text.Subheading>
+      </AppShell.Header>
+    </AppShell.ActivityFeed>
+  );
+};
+
+function MockAppExample() {
+  return (
+    <>
+      <div>
+        <AppShell.PageBackgroundColor />
+        {/* <PageBackgroundBottom>
+          
+        </PageBackgroundBottom> */}
+
+        <AppShell.Frame />
+        {/* Static sidebar for desktop */}
+
+        <DesktopSidebar />
+        <AppShell.Container className="pt-16">
+          {/* Sticky search header */}
+          <NavBarMock />
+
+          <MainMock />
+
+          <ActivityFeedMock />
+        </AppShell.Container>
+      </div>
+    </>
+  );
+}

@@ -20,7 +20,7 @@
   ],
   "scripts": {
     "build": "bunx --bun unbuild",
-    "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf test-results && rimraf .eslintcache",
+    "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf test-results",
     "lint": "eslint --cache ./src"
   },
   "keywords": [
@@ -44,8 +44,6 @@
   "devDependencies": {
     "@antribute/config": "workspace:*",
     "@types/lodash-es": "^4.17.6",
-    "eslint": "^8.40.0",
-    "prettier": "2.8.7",
     "ts-toolbelt": "^9.6.0",
     "typescript": "^5.0.4",
     "unbuild": "^2.0.0",

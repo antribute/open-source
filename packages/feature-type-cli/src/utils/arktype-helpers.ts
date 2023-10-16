@@ -1,4 +1,4 @@
-import { PrecompiledDefaults } from 'arktype/dist/types/scopes/ark';
+import type { PrecompiledDefaults } from 'arktype/dist/types/scopes/ark';
 import type { Join } from 'type-fest';
 
 export type ArktypeKeyword = Extract<keyof PrecompiledDefaults, string>;

@@ -1,5 +1,6 @@
 import { positionVariants } from 'styles/position.variants';
-import { Classed, classed } from 'utils/classed';
+import type { Classed } from 'utils/classed';
+import { classed } from 'utils/classed';
 
 export type PositionElementVariantProps = Classed.VariantProps<typeof PositionElement>;
 

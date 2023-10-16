@@ -1,4 +1,4 @@
-import { FlexAlignItemsProp, FlexJustifyItemsProp } from 'types/styles';
+import type { FlexAlignItemsProp, FlexJustifyItemsProp } from 'types/styles';
 
 export const flexAlignItemsVariants = {
   center: 'items-center',

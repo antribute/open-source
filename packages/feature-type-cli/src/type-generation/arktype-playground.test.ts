@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
 import { describe, expect, it } from 'bun:test';
 import { makeEnum } from 'utils/arktype-helpers';

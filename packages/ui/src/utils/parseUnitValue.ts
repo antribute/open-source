@@ -8,11 +8,11 @@ interface ParsedValue {
 export const parseUnitValue = (str: string): ParsedValue => {
   const match = str.match(/^(\d+(?:\.\d+)?)(\D*)$/);
 
-  if (!match) return { value: NaN, unit: null };
+  if (!match) return { value: Number.NaN, unit: null };
 
   const [match1 = '', match2] = match;
 
-  const value = parseFloat(match1);
+  const value = Number.parseFloat(match1);
   const isNumeric = isNumber(value) && !isNaN(value);
 
   return { value, unit: match2 || isNumeric ? 'px' : null };
@@ -25,5 +25,5 @@ export function parseNumericValue(str: string) {
 
   if (!match || !matchValue) return null;
 
-  return parseFloat(matchValue);
+  return Number.parseFloat(matchValue);
 }

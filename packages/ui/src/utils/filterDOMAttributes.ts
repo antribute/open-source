@@ -1,5 +1,5 @@
 import { generatePropPickerFn } from 'helpers';
-import { AllHTMLAttributes } from 'react';
+import type { AllHTMLAttributes } from 'react';
 
 export const filterDOMAttributes = generatePropPickerFn<AllHTMLAttributes<unknown>>({
   accept: '_pick_',

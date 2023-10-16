@@ -1,4 +1,3 @@
-/* eslint-disable prefer-destructuring */
 import React from 'react';
 import * as PopoverPrimitive from '@radix-ui/react-popover';
 import { classed } from 'utils/classed';

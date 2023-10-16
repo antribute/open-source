@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { useTsController, useFieldInfo } from '@ts-react/form';
-import { Combobox, ComboboxProps } from 'components/Combobox';
+import { useFieldInfo, useTsController } from '@ts-react/form';
+import type { ComboboxProps } from 'components/Combobox';
+import { Combobox } from 'components/Combobox';
 
 export type ControlledComboboxProps<T extends unknown[] = string[]> = Omit<
   ComboboxProps<T>,

@@ -1,17 +1,20 @@
 import * as TabsPrimitive from '@radix-ui/react-tabs';
+import type {
+  TabsListElementProps,
+  TabsListItemElementProps,
+  TabsViewContainerElementProps,
+} from 'components/Tabs/Tabs.styles';
 import {
   TabsContainerElement,
   TabsListElement,
-  TabsListElementProps,
   TabsListItemElement,
-  TabsListItemElementProps,
   TabsViewContainerElement,
-  TabsViewContainerElementProps,
 } from 'components/Tabs/Tabs.styles';
 import React, { useEffect, useRef } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { ButtonProps } from 'components/Button';
-import { Classed, classed } from 'utils/classed';
+import type { ButtonProps } from 'components/Button';
+import type { Classed } from 'utils/classed';
+import { classed } from 'utils/classed';
 import { motion } from 'framer-motion';
 import { Wrap } from 'components/Wrap';
 import { IconButton } from 'components/IconButton';
@@ -49,9 +52,40 @@ const TabsListItem = (props: TabsListItemProps) => {
   );
 };
 
+const Chevron = classed('span', 'h-full w-full', {
+  variants: {
+    position: {
+      right: 'i-heroicons-chevron-right-20-solid',
+      left: 'i-heroicons-chevron-left-20-solid',
+    },
+  },
+});
+
+const OverflowScrollButton = React.forwardRef<
+  HTMLButtonElement,
+  {
+    position: 'left' | 'right';
+    enabled: boolean;
+  } & Omit<ButtonProps, 'as' | 'children'>
+>(({ position, enabled, ...props }, ref) => {
+  return (
+    <IconButton
+      color="secondary"
+      className="group-radix-orientation-vertical:hidden"
+      variant="ghost"
+      size="sm"
+      disabled={!enabled}
+      ref={ref}
+      {...props}
+    >
+      <Chevron position={position} />
+    </IconButton>
+  );
+});
+
 type TabsListProps = TabsListElementProps;
 
-const TabsList = ({ children, className, size = 'md', ...props }: TabsListProps) => {
+const TabsList = ({ children, size = 'md', ...props }: TabsListProps) => {
   const tabListRef = useRef<HTMLDivElement>(null);
 
   const leftButtonRef = useRef<HTMLButtonElement>(null);
@@ -121,37 +155,6 @@ const TabsList = ({ children, className, size = 'md', ...props }: TabsListProps)
     </Wrap>
   );
 };
-
-const Chevron = classed('span', 'h-full w-full', {
-  variants: {
-    position: {
-      right: 'i-heroicons-chevron-right-20-solid',
-      left: 'i-heroicons-chevron-left-20-solid',
-    },
-  },
-});
-
-const OverflowScrollButton = React.forwardRef<
-  HTMLButtonElement,
-  {
-    position: 'left' | 'right';
-    enabled: boolean;
-  } & Omit<ButtonProps, 'as' | 'children'>
->(({ position, enabled, ...props }, ref) => {
-  return (
-    <IconButton
-      color="secondary"
-      className="group-radix-orientation-vertical:hidden"
-      variant="ghost"
-      size="sm"
-      disabled={!enabled}
-      ref={ref}
-      {...props}
-    >
-      <Chevron position={position} />
-    </IconButton>
-  );
-});
 
 type TabsViewProps = TabsPrimitive.TabsContentProps;
 

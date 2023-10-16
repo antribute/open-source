@@ -1,4 +1,5 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @tyler please fix the underlying typings and remove the following comments
+// eslint-disable-next-line ts/ban-ts-comment
 // @ts-nocheck
 
 import { useColorSlider } from '@react-aria/color';
@@ -10,7 +11,7 @@ import type { ColorSliderStateOptions } from '@react-stately/color';
 import React from 'react';
 import { classed } from 'utils/classed';
 import { Flex } from 'components/Flex';
-import { O } from 'ts-toolbelt';
+import type { O } from 'ts-toolbelt';
 import { Input } from 'components/Input';
 import { Label } from 'react-aria-components';
 

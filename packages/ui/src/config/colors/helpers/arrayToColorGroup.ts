@@ -1,6 +1,6 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { ColorScaleKey, colorScaleKeys } from '../colors.constants';
-import { ColorGroupArray } from '../colors.types';
+import type { ColorScaleKey } from '../colors.constants';
+import { colorScaleKeys } from '../colors.constants';
+import type { ColorGroupArray } from '../colors.types';
 
 export function arrayToColorGroup<T extends ColorGroupArray>(colorArr: T) {
   const entries = colorArr.map(

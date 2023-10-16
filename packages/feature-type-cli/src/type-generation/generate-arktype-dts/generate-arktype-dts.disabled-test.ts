@@ -1,13 +1,10 @@
 // Bun lacks support for wildcard package.json exports. Until this is added or ArkType changes
 // their export methodology, this test file is disabled
 
-import { describe, it } from 'bun:test';
 import path from 'path';
-import {
-  generateArktypeTypeDef,
-  generateArktypeDtsCode,
-  GenerateArktypeTypeDefOptions,
-} from './generateArktypeTypeDef';
+import { describe, it } from 'bun:test';
+import type { GenerateArktypeTypeDefOptions } from './generateArktypeTypeDef';
+import { generateArktypeDtsCode, generateArktypeTypeDef } from './generateArktypeTypeDef';
 import { generateArktypeDtsFile } from './generateArktypeDtsFile';
 
 const userDefinition: GenerateArktypeTypeDefOptions = {

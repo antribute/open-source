@@ -1,4 +1,5 @@
-import { Button, ButtonProps } from 'components/Button';
+import type { ButtonProps } from 'components/Button';
+import { Button } from 'components/Button';
 import { Flex } from 'components/Flex';
 import { Popover } from 'components/Popover';
 import type {

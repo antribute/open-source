@@ -1,6 +1,7 @@
 import { XMarkIcon } from '@heroicons/react/24/solid';
 import clsx from 'clsx';
-import { IconButton, IconButtonProps } from 'components/IconButton/IconButton';
+import type { IconButtonProps } from 'components/IconButton/IconButton';
+import { IconButton } from 'components/IconButton/IconButton';
 import { forwardRef } from 'react';
 import { twMerge } from 'tailwind-merge';
 

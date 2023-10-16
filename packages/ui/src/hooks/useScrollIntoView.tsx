@@ -1,9 +1,10 @@
-import { useEffect, useRef, useMemo } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import useDimensions from 'react-cool-dimensions';
 import { useImmer } from 'use-immer';
-import { enableMapSet, castDraft } from 'immer';
+import { castDraft, enableMapSet } from 'immer';
 import { sortBy } from 'lodash-es';
-import { OverflowData, getOverflowData } from 'utils/viewport/getOverflowData';
+import type { OverflowData } from 'utils/viewport/getOverflowData';
+import { getOverflowData } from 'utils/viewport/getOverflowData';
 import { inView } from 'framer-motion';
 
 export interface InViewOptions {
@@ -114,7 +115,6 @@ export function useScrollIntoView<TViewportElement extends HTMLElement = HTMLDiv
       return unobserve;
     });
 
-    // eslint-disable-next-line consistent-return
     return () => {
       unobserveList.forEach((unobserve) => {
         unobserve();
@@ -160,7 +160,7 @@ export function useScrollIntoView<TViewportElement extends HTMLElement = HTMLDiv
         leftScrollOffset,
       } = directionData;
 
-      const { index: inViewIndex = NaN } = inViewChildren[inViewWindowStartIndex] ?? {};
+      const { index: inViewIndex = Number.NaN } = inViewChildren[inViewWindowStartIndex] ?? {};
 
       const nextIndex = clampIndex(inViewIndex + nextIndexDelta);
 
@@ -214,7 +214,8 @@ export function useScrollIntoView<TViewportElement extends HTMLElement = HTMLDiv
   const { allElementsInView, inViewElementsCount } = useMemo(() => {
     const inViewElementsCount = inViewState.inViewChildren.length;
 
-    const allElementsInView = (elements?.length ?? NaN) === inViewState.inViewChildren.length;
+    const allElementsInView =
+      (elements?.length ?? Number.NaN) === inViewState.inViewChildren.length;
 
     return { allElementsInView, inViewElementsCount };
   }, [inViewState, elements]);

@@ -4,7 +4,7 @@ import rimraf from 'rimraf';
 import { afterAll, describe, expect, it } from 'bun:test';
 
 import { defaultConfig } from './config';
-import { getGeneratedDir, getServerDir, generateFile } from './filesystem';
+import { generateFile, getGeneratedDir, getServerDir } from './filesystem';
 
 describe.skip('filesystem', () => {
   const config = {

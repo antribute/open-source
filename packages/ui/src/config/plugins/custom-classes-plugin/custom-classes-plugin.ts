@@ -10,8 +10,8 @@ import {
 } from './custom-classes-plugin.helpers';
 import { clsx, prefix } from './class-style-utils';
 import {
-  generateTwGradientClasses,
   baseTokensWithLightAndDarkColors,
+  generateTwGradientClasses,
   twGradient,
 } from './tw-gradient-helpers';
 

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { UserMockData, generateMockUser, generateMockUserList } from 'mock/mock-data';
+import type { UserMockData } from 'mock/mock-data';
+import { generateMockUser, generateMockUserList } from 'mock/mock-data';
 
 import { getAllSizeKeys } from 'utils/storybook-utils';
 import { Paper } from 'components/Paper';

@@ -1,4 +1,5 @@
-import { useColorField, AriaColorFieldProps } from '@react-aria/color';
+import type { AriaColorFieldProps } from '@react-aria/color';
+import { useColorField } from '@react-aria/color';
 import { useColorFieldState } from '@react-stately/color';
 import { useRef } from 'react';
 

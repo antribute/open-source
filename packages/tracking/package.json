@@ -26,7 +26,7 @@
   ],
   "scripts": {
     "build": "bunx --bun unbuild",
-    "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf test-results && rimraf .eslintcache",
+    "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf test-results",
     "lint": "eslint --cache ./src"
   },
   "keywords": [
@@ -50,8 +50,6 @@
     "@types/cli-color": "^2.0.2",
     "@types/mixpanel-browser": "^2.38.0",
     "@types/react": "^18.2.25",
-    "eslint": "^8.40.0",
-    "prettier": "2.8.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "typescript": "^5.0.4",

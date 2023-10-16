@@ -1,7 +1,9 @@
-import { ColorSchemeName } from 'config';
+import type { ColorSchemeName } from 'config';
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
-import React, { CSSProperties, useRef } from 'react';
-import { Classed, classed } from 'utils/classed';
+import type { CSSProperties } from 'react';
+import React, { useRef } from 'react';
+import type { Classed } from 'utils/classed';
+import { classed } from 'utils/classed';
 import { generatePropPickerFn, pickProps } from 'utils/pickProps';
 import { useNearestColorSchemeAttribute } from 'hooks/useNearestColorSchemeAttribute';
 
@@ -101,6 +103,41 @@ const pickTooltipContentProps = generatePropPickerFn<TooltipContentProps>({
   onTooltipClick: '_pick_',
 });
 
+export const TooltipContent = ({
+  children,
+  colorScheme,
+  onTooltipClick,
+  stopPropogation,
+  side = 'bottom',
+  asChild,
+  ...contentProps
+}: {
+  colorScheme?: ColorSchemeName;
+  children?: React.ReactNode;
+  asChild?: boolean;
+} & TooltipContentProps) => {
+  return (
+    <TooltipContentElement
+      size="md"
+      side={side}
+      sideOffset={4}
+      collisionPadding={4}
+      alignOffset={4}
+      data-color-scheme={colorScheme}
+      asChild={asChild}
+      {...contentProps}
+      onClick={(e) => {
+        if (stopPropogation) {
+          e.stopPropagation();
+        }
+        onTooltipClick?.(e);
+      }}
+    >
+      {children}
+    </TooltipContentElement>
+  );
+};
+
 export type TooltipProps = {
   tooltip?: React.ReactNode;
   triggerProps?: TooltipTriggerProps;
@@ -146,41 +183,6 @@ export const Tooltip = (props: TooltipProps) => {
         </TooltipPrimitive.Portal>
       </TooltipPrimitive.Root>
     </>
-  );
-};
-
-export const TooltipContent = ({
-  children,
-  colorScheme,
-  onTooltipClick,
-  stopPropogation,
-  side = 'bottom',
-  asChild,
-  ...contentProps
-}: {
-  colorScheme?: ColorSchemeName;
-  children?: React.ReactNode;
-  asChild?: boolean;
-} & TooltipContentProps) => {
-  return (
-    <TooltipContentElement
-      size="md"
-      side={side}
-      sideOffset={4}
-      collisionPadding={4}
-      alignOffset={4}
-      data-color-scheme={colorScheme}
-      asChild={asChild}
-      {...contentProps}
-      onClick={(e) => {
-        if (stopPropogation) {
-          e.stopPropagation();
-        }
-        onTooltipClick?.(e);
-      }}
-    >
-      {children}
-    </TooltipContentElement>
   );
 };
 

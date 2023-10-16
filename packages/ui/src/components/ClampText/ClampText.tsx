@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
 import { useClampText } from 'use-clamp-text';
-import React, { useState, useMemo, ReactNode } from 'react';
+import type { ReactNode } from 'react';
+import React, { useMemo, useState } from 'react';
 import { onlyText } from 'react-children-utilities';
 import { Tooltip } from 'components/Tooltip';
 import { Wrap } from 'components/Wrap';
@@ -8,6 +8,100 @@ import { twMerge } from 'tailwind-merge';
 import { classed } from 'utils/classed';
 import clsx from 'clsx';
 import { measureElement } from 'utils/measureElement';
+
+const TruncationButtonElement = classed(
+  'button',
+  'm-0 p-0 [font-size:inherit] text-inerit inline',
+  'relative before-absolute-content',
+  'leading-sm',
+  'cursor-pointer',
+  {
+    variants: {
+      clickable: {
+        false: 'cursor-default',
+        true: 'cursor-pointer',
+      },
+      enterAnimation: {
+        true: clsx(
+          'opacity-0 ',
+          'animate-fade-out ',
+          'group-hover:animate-scale-in ',
+          'group-hover:opacity-100 ',
+          'group-hover:px-8 '
+        ),
+      },
+    },
+  }
+);
+
+const TruncationButtonBackgroundElement = classed(
+  'span',
+  'absolute -inset-y-2 -inset-x-4 rounded-sm z-0 transition-colors shrink-0',
+  {
+    variants: {
+      rounded: {
+        sm: 'rounded-sm',
+        md: 'rounded',
+      },
+      border: {
+        true: 'ring-1 ring-highlight-high',
+      },
+      backgroundHover: {
+        true: 'hover:!bg-highlight-high',
+      },
+      backgroundVisible: {
+        true: 'bg-highlight-subtle',
+      },
+      backgroundVisibleOnGroupHover: {
+        true: 'group-hover:bg-highlight-subtle',
+      },
+    },
+    defaultVariants: {
+      backgroundVisible: true,
+      backgroundHover: true,
+    },
+  }
+);
+
+const EllipsisButtonElement = classed(
+  TruncationButtonElement,
+  'group-hover:translate-x-6 transition-transform shrink-0 w-0'
+);
+
+const EllipsisButton = ({
+  children,
+  onClick,
+  ...props
+}: React.ComponentProps<typeof EllipsisButtonElement>) => {
+  const clickable = Boolean(onClick);
+  return (
+    <EllipsisButtonElement clickable={clickable} onClick={onClick} {...props}>
+      <span className="shrink-0 min-w-fit relative">
+        <TruncationButtonBackgroundElement
+          backgroundHover={clickable}
+          backgroundVisible={false}
+          backgroundVisibleOnGroupHover
+          rounded="md"
+        />
+        {children}
+      </span>
+    </EllipsisButtonElement>
+  );
+};
+
+const CollapseButtonElement = classed(TruncationButtonElement, 'scale-90 select-none');
+
+const CollapseButton = ({
+  children,
+  ...props
+}: React.ComponentProps<typeof CollapseButtonElement>) => {
+  return (
+    <CollapseButtonElement {...props}>
+      {children}
+      <TruncationButtonBackgroundElement backgroundHover backgroundVisible border rounded="sm" />
+    </CollapseButtonElement>
+  );
+};
 
 export interface ClampTextProps extends Omit<UseClampTextProps, 'ellipsis' | 'trimmedChars'> {
   className?: string;
@@ -163,100 +257,6 @@ export const ClampText = ({
   );
 };
 
-const TruncationButtonElement = classed(
-  'button',
-  'm-0 p-0 [font-size:inherit] text-inerit inline',
-  'relative before-absolute-content',
-  'leading-sm',
-  'cursor-pointer',
-  {
-    variants: {
-      clickable: {
-        false: 'cursor-default',
-        true: 'cursor-pointer',
-      },
-      enterAnimation: {
-        true: clsx(
-          'opacity-0 ',
-          'animate-fade-out ',
-          'group-hover:animate-scale-in ',
-          'group-hover:opacity-100 ',
-          'group-hover:px-8 '
-        ),
-      },
-    },
-  }
-);
-
-const TruncationButtonBackgroundElement = classed(
-  'span',
-  'absolute -inset-y-2 -inset-x-4 rounded-sm z-0 transition-colors shrink-0',
-  {
-    variants: {
-      rounded: {
-        sm: 'rounded-sm',
-        md: 'rounded',
-      },
-      border: {
-        true: 'ring-1 ring-highlight-high',
-      },
-      backgroundHover: {
-        true: 'hover:!bg-highlight-high',
-      },
-      backgroundVisible: {
-        true: 'bg-highlight-subtle',
-      },
-      backgroundVisibleOnGroupHover: {
-        true: 'group-hover:bg-highlight-subtle',
-      },
-    },
-    defaultVariants: {
-      backgroundVisible: true,
-      backgroundHover: true,
-    },
-  }
-);
-
-const EllipsisButtonElement = classed(
-  TruncationButtonElement,
-  'group-hover:translate-x-6 transition-transform shrink-0 w-0'
-);
-
-const EllipsisButton = ({
-  children,
-  onClick,
-  ...props
-}: React.ComponentProps<typeof EllipsisButtonElement>) => {
-  const clickable = Boolean(onClick);
-  return (
-    <EllipsisButtonElement clickable={clickable} onClick={onClick} {...props}>
-      <span className="shrink-0 min-w-fit relative">
-        <TruncationButtonBackgroundElement
-          backgroundHover={clickable}
-          backgroundVisible={false}
-          backgroundVisibleOnGroupHover
-          rounded="md"
-        />
-        {children}
-      </span>
-    </EllipsisButtonElement>
-  );
-};
-
-const CollapseButtonElement = classed(TruncationButtonElement, 'scale-90 select-none');
-
-const CollapseButton = ({
-  children,
-  ...props
-}: React.ComponentProps<typeof CollapseButtonElement>) => {
-  return (
-    <CollapseButtonElement {...props}>
-      {children}
-      <TruncationButtonBackgroundElement backgroundHover backgroundVisible border rounded="sm" />
-    </CollapseButtonElement>
-  );
-};
-
 interface UseClampTextProps {
   /**
    * To control whether the string should be truncated or not
@@ -301,11 +301,9 @@ function truncateReactChildren(
       const childProps = child.props;
       const renderChildren = childProps?.renderChildren;
       const childrenToProcess = renderChildren ? renderChildren() : childProps.children;
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       const truncatedChildren = React.Children.toArray(childrenToProcess)
         .map(truncateChildrenRecursively)
         .filter((child) => child !== null);
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       return React.cloneElement(child, child.props, truncatedChildren);
     }
 

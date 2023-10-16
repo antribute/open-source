@@ -1,17 +1,16 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
-/* eslint-disable @typescript-eslint/naming-convention */
 import React, { forwardRef } from 'react';
 import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { sizeVariants } from 'styles/size.variants';
-import { Classed, classed, mergeVariants } from 'utils/classed';
-import { UseInputAddonListProps } from 'components/Input/components/InputAddonGroup/useInputAddonList';
+import type { Classed } from 'utils/classed';
+import { classed, mergeVariants } from 'utils/classed';
+import type { UseInputAddonListProps } from 'components/Input/components/InputAddonGroup/useInputAddonList';
 import { Spinner } from 'components/Spinner';
 import type { SizeProp } from 'types/styles';
 import { Wrap } from 'components/Wrap';
 import { Tooltip } from 'components/Tooltip';
-import { HoverProps, useHover } from 'react-aria';
+import type { HoverProps } from 'react-aria';
+import { useHover } from 'react-aria';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const InputAddonElement = classed(
@@ -137,7 +136,6 @@ export const InputAddon = forwardRef<
     onHoverStart,
     isGroupHovered,
     enterAnimation = false,
-    as: asProp,
     ...rest
   } = props;
 
@@ -158,7 +156,6 @@ export const InputAddon = forwardRef<
   return (
     <AnimatePresence mode="popLayout">
       {!enabled ? null : (
-        // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
         <InputAddonElement
           grouping={grouping}
           onClick={() => {

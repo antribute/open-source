@@ -1,43 +1,11 @@
-/* eslint-disable react/no-unused-prop-types */
 import React, { useEffect } from 'react';
-import { SelectState } from 'ariakit';
+import type { SelectState } from 'ariakit';
 import { StatusBadge } from 'components/StatusBadge';
 import { classed } from 'utils/classed';
 import { motion, useWillChange } from 'framer-motion';
 import { useImmer } from 'use-immer';
 import { isMultiSelectValueString } from './Combobox.helpers';
-import { MultiSelectVariant } from './Combobox.types';
-
-export interface ComboboxSelectValueProps {
-  multiSelectVariant?: MultiSelectVariant;
-  placeholder?: string;
-  value: string | string[];
-  selectState: SelectState;
-}
-
-export const ComboboxSelectValue = ({
-  multiSelectVariant = 'count',
-  value,
-  ...props
-}: ComboboxSelectValueProps) => {
-  if (isMultiSelectValueString(value) && multiSelectVariant === 'tags') {
-    return <MultiSelectValueTags {...props} value={value} />;
-  }
-
-  if (isMultiSelectValueString(value)) {
-    return (
-      <SelectValueContainerElement>
-        <MultiSelectValue {...props} value={value} />
-      </SelectValueContainerElement>
-    );
-  }
-
-  return (
-    <SelectValueContainerElement>
-      <SingleSelectValue {...props} value={value} />
-    </SelectValueContainerElement>
-  );
-};
+import type { MultiSelectVariant } from './Combobox.types';
 
 const SelectValueContainerElement = classed(
   'div',
@@ -136,3 +104,34 @@ const MultiSelectValueTags = React.forwardRef<HTMLDivElement, MultiSelectValueTa
     );
   }
 );
+
+export interface ComboboxSelectValueProps {
+  multiSelectVariant?: MultiSelectVariant;
+  placeholder?: string;
+  value: string | string[];
+  selectState: SelectState;
+}
+
+export const ComboboxSelectValue = ({
+  multiSelectVariant = 'count',
+  value,
+  ...props
+}: ComboboxSelectValueProps) => {
+  if (isMultiSelectValueString(value) && multiSelectVariant === 'tags') {
+    return <MultiSelectValueTags {...props} value={value} />;
+  }
+
+  if (isMultiSelectValueString(value)) {
+    return (
+      <SelectValueContainerElement>
+        <MultiSelectValue {...props} value={value} />
+      </SelectValueContainerElement>
+    );
+  }
+
+  return (
+    <SelectValueContainerElement>
+      <SingleSelectValue {...props} value={value} />
+    </SelectValueContainerElement>
+  );
+};

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'bun:test';
-import { defineConfig, defaultConfig, getConfig } from './config';
+import { defaultConfig, defineConfig, getConfig } from './config';
 
 describe.skip('config', () => {
   describe('getConfig', () => {

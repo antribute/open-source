@@ -1,9 +1,8 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable react-hooks/rules-of-hooks */
-import { StoryObj } from '@storybook/react';
+import type { StoryObj } from '@storybook/react';
 import { parseColor } from '@react-stately/color';
 import { useState } from 'react';
-import { Flex, FlexProps } from 'components/Flex';
+import type { FlexProps } from 'components/Flex';
+import { Flex } from 'components/Flex';
 import { Card } from 'components/Card';
 
 import { ColorSwatch } from 'components/ColorPicker/ColorSwatch';

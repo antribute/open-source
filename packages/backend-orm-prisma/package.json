@@ -20,7 +20,7 @@
   ],
   "scripts": {
     "build": "bunx --bun unbuild",
-    "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf test-results && rimraf .eslintcache",
+    "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf test-results",
     "lint": "eslint --cache ./src"
   },
   "keywords": [
@@ -41,8 +41,6 @@
     "@antribute/config": "workspace:*",
     "@prisma/client": "^4.8.1",
     "@types/node": "20.1.7",
-    "eslint": "^8.40.0",
-    "prettier": "2.8.7",
     "prisma": "^4.13.0",
     "typescript": "^5.0.4",
     "unbuild": "^2.0.0"

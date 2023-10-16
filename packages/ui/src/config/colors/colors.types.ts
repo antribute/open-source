@@ -1,6 +1,5 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import { FixedLengthArray, LiteralUnion } from 'type-fest';
-import { ColorScaleKey } from './colors.constants';
+import type { FixedLengthArray, LiteralUnion } from 'type-fest';
+import type { ColorScaleKey } from './colors.constants';
 
 export type ColorGroup = Record<LiteralUnion<ColorScaleKey, 'string'>, string>;
 

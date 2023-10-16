@@ -1,4 +1,5 @@
-import { ColorSchemeName, getDataAttributes } from 'config';
+import type { ColorSchemeName } from 'config';
+import { getDataAttributes } from 'config';
 import {
   CardBodySectionElement,
   CardContainerElement,
@@ -8,10 +9,10 @@ import {
   CardTitleElement,
   CardTitleSectionElement,
 } from 'components/Card/Card.styles';
-import { PaperProps } from 'components/Paper';
+import type { PaperProps } from 'components/Paper';
 import { ScrollViewport } from 'components/ScrollViewport';
 import { forwardRef } from 'react';
-import { Classed } from 'utils/classed';
+import type { Classed } from 'utils/classed';
 
 // Container
 

@@ -1,8 +1,8 @@
 import type { O } from 'ts-toolbelt';
-import { ColorSchemeToken } from './color-scheme-tokens.types';
-import { commonScheme } from './schemes/common-scheme';
-import { PaletteColor } from '../colors';
-import { OptionalExceptFor } from '../../helpers/type-utilities';
+import type { PaletteColor } from '../colors';
+import type { OptionalExceptFor } from '../../helpers/type-utilities';
+import type { ColorSchemeToken } from './color-scheme-tokens.types';
+import type { commonScheme } from './schemes/common-scheme';
 
 export type ColorScheme = Record<ColorSchemeToken, PaletteColor>;
 

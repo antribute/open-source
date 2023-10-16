@@ -1,7 +1,8 @@
 import { buttonVariants } from 'components/Button/Button.styles';
 import { colorSchemeVariants } from 'styles/color-scheme-variants';
 import { inputComponentVariants } from 'styles/input-component.variants';
-import { Classed, classTheme, classed, mergeVariants } from 'utils/classed';
+import type { Classed } from 'utils/classed';
+import { classTheme, classed, mergeVariants } from 'utils/classed';
 
 export type StatusBadgeElementVariants = Classed.VariantProps<typeof StatusBadgeElement>;
 

@@ -1,5 +1,5 @@
 import { clamp, isNaN } from 'lodash-es';
-import { SizeProp } from 'types/styles';
+import type { SizeProp } from 'types/styles';
 
 export const getRelativeElementData = <T extends string>(
   delta: number,

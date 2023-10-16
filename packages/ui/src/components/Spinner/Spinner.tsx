@@ -1,6 +1,7 @@
 import { positionVariants } from 'styles/position.variants';
 import { sizeVariants } from 'styles/size.variants';
-import { Classed, classed, mergeVariants } from 'utils/classed';
+import type { Classed } from 'utils/classed';
+import { classed, mergeVariants } from 'utils/classed';
 
 export const SpinnerSvg = ({ ...props }: React.SVGProps<SVGSVGElement>) => {
   return (

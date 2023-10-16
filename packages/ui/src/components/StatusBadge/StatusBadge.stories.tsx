@@ -32,7 +32,6 @@ export const Discard: Story = {
   args: {},
   render: () => {
     const initialStatuses = ['Pending', 'Cleared', 'Archived', 'In Progress'];
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [statuses, setStatuses] = useState(initialStatuses);
 
     const canReset = statuses.length !== initialStatuses.length;

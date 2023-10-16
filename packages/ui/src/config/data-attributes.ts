@@ -41,8 +41,7 @@ type DataAttributeOptions = {
 /**
  * Retrieves the value of a data attribute for the specified key and values.
  *
- * @param dataAttribute The key of the data attribute to retrieve.
- * @param values Optional values to filter the attribute value.
+ * @param dataAttributeOptions The key of the data attribute to retrieve.
  * @returns An object containing the requested data attribute and its value.
  */
 export function getDataAttributes<TDataAtributeOptions extends DataAttributeOptions>(

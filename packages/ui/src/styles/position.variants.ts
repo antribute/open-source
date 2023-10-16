@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { mapValues } from 'lodash-es';
-import { PositionProp } from 'types/styles';
+import type { PositionProp } from 'types/styles';
 
 export const positionVariants = {
   'top-center': '-translate-y-1/2 translate-x-1/2 right-1/2',

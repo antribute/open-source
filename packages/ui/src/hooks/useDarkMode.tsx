@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unnecessary-condition */
-import { DARK_MODE, LIGHT_MODE, DEFAULT_THEME } from 'constants/theme';
+import { DARK_MODE, DEFAULT_THEME, LIGHT_MODE } from 'constants/theme';
 import { useLayoutEffect, useState } from 'react';
 import { isClientSide } from 'utils/environment-utils';
 

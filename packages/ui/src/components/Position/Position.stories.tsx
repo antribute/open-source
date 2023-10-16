@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Flex } from 'components/Flex';
 import { Position } from 'components/Position/Position';
-import { PositionProp } from 'types/styles';
+import type { PositionProp } from 'types/styles';
 
 const meta = {
   args: {},

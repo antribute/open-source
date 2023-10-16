@@ -2,7 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { RenderPaperContainers, RenderSizeVariants } from 'utils/storybook-utils';
 import { generateMockOrganizationList } from 'mock/mock-data';
 import { IconButton } from 'components/IconButton';
-import { ToggleGroupItemData, ToggleGroup } from './ToggleGroup';
+import type { ToggleGroupItemData } from './ToggleGroup';
+import { ToggleGroup } from './ToggleGroup';
 
 const meta = {
   args: {},
@@ -13,6 +14,8 @@ const meta = {
 export default meta;
 
 function generateItems({ count = 3 }: { count: number }): ToggleGroupItemData[] {
+  // New Array() is an amazing util for mock data, disabling the rule for this case
+  // eslint-disable-next-line unicorn/no-new-array
   return new Array(count).fill(0).map((_, index) => {
     return {
       label: `Item ${index + 1}`,

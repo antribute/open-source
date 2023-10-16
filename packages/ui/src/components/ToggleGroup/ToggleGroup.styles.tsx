@@ -1,9 +1,10 @@
 import { classed } from '@tw-classed/react';
 import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
 import { inputComponentVariants } from 'styles/input-component.variants';
-import { Classed, expandVariant, mergeVariants } from 'utils/classed';
-import { FontWeightProp } from 'types/styles';
-import { ElementPositonData } from './ToggleGroup.helpers';
+import type { Classed } from 'utils/classed';
+import { expandVariant, mergeVariants } from 'utils/classed';
+import type { FontWeightProp } from 'types/styles';
+import type { ElementPositonData } from './ToggleGroup.helpers';
 
 export type ToggleGroupContainerElementVariantProps = Classed.VariantProps<
   typeof ToggleGroupContainerElement

@@ -1,15 +1,15 @@
+import { join, resolve } from 'path';
+import { fileURLToPath } from 'url';
 import {
+  generateFile,
+  getGeneratedDir,
+  getServerDir,
   logger,
   populateTemplate,
-  generateFile,
-  getServerDir,
-  getGeneratedDir,
 } from '@antribute/backend-core';
 import type { Config, GeneratorFunc } from '@antribute/backend-core';
 import { execa } from 'execa';
 import glob from 'fast-glob';
-import { join, resolve } from 'path';
-import { fileURLToPath } from 'url';
 
 import {
   pothosBuilderTemplate,

@@ -1,9 +1,9 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { LiteralUnion } from 'type-fest';
+import type { LiteralUnion } from 'type-fest';
 import type { ColorAlphaVariant } from '../colors.types';
-import { HexAlphaTransparency, hexAlphaCodes, hexTransparencyPresetMap } from '../colors.constants';
+import type { HexAlphaTransparency } from '../colors.constants';
+import { hexAlphaCodes, hexTransparencyPresetMap } from '../colors.constants';
+import type { HexAlphaOptions } from './generateHexAlpha';
 import {
-  HexAlphaOptions,
   generateHexAlpha,
   getTransparencyOption,
   getTransparencyPresetOption,
@@ -66,7 +66,6 @@ export function generateHexAlphaColorGroup<TPrefix extends string | undefined = 
   );
 
   const colorGroup = Object.fromEntries(
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     Object.entries({ ...defaultColorGroup, ...overrides })
       .filter((entry) => Boolean(entry[1]))
       .map(([key, value]) => {

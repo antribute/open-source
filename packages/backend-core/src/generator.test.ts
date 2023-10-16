@@ -14,8 +14,6 @@ describe.skip('generation', () => {
   });
 
   it('should throw if a generator does not have a default export', () => {
-    // Vitest handles rejections safely here
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     expect(() =>
       importAndRunGenerator(
         'testStep',
@@ -26,8 +24,6 @@ describe.skip('generation', () => {
   });
 
   it('should throw if a generator does not export a function by default', () => {
-    // Vitest handles rejections safely here
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     expect(() =>
       importAndRunGenerator(
         'testStep',

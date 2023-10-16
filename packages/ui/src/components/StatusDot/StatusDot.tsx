@@ -1,5 +1,6 @@
 import { colorSchemeVariants } from 'styles/color-scheme-variants';
-import { Classed, classed } from 'utils/classed';
+import type { Classed } from 'utils/classed';
+import { classed } from 'utils/classed';
 
 const StatusDotElement = classed(
   'div',

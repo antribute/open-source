@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { O, String } from 'ts-toolbelt';
-import { StringDigit } from 'type-fest/source/internal';
+import type { O, String } from 'ts-toolbelt';
+import type { StringDigit } from 'type-fest/source/internal';
 
 export type IsUnion<T, U = T> = T extends any ? (U extends T ? false : true) : never;
 

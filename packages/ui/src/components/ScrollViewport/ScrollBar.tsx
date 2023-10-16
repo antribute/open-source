@@ -1,6 +1,5 @@
 'use client';
 
-/* eslint-disable react/prop-types */
 import * as React from 'react';
 import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area';
 import { classed } from 'utils/classed';
@@ -30,7 +29,7 @@ const ScrolllBarThumbElement = classed(
 export const ScrollBar = React.forwardRef<
   React.ElementRef<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>,
   React.ComponentPropsWithoutRef<typeof ScrollBarElement>
->(({ className, orientation = 'vertical', ...props }, ref) => (
+>(({ orientation = 'vertical', ...props }, ref) => (
   <ScrollBarElement ref={ref} orientation={orientation} {...props}>
     <ScrolllBarThumbElement />
   </ScrollBarElement>

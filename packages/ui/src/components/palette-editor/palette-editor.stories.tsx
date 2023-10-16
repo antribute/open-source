@@ -1,19 +1,21 @@
-/* eslint-disable no-console */
-/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @tyler please fix the underlying typings and remove the following comments
+// eslint-disable-next-line ts/ban-ts-comment
 // @ts-nocheck
+/* eslint-disable no-console */
 
-import { StoryObj } from '@storybook/react';
-import { parse, Hsl, hsl, formatCss, nearest, differenceEuclidean } from 'culori';
+import type { StoryObj } from '@storybook/react';
+import type { Hsl } from 'culori';
+import { differenceEuclidean, formatCss, hsl, nearest, parse } from 'culori';
 import { Flex } from 'components/Flex';
 import { proxy, useSnapshot } from 'valtio';
 import { proxyMap } from 'valtio/utils';
-import { Any, O } from 'ts-toolbelt';
+import type { Any, O } from 'ts-toolbelt';
 import { Button } from 'components/Button';
 import { createForm } from 'components/Form/createForm';
 import { z } from 'zod';
 import defaultTailwindColors from 'tailwindcss/colors';
-import { DefaultColors } from 'tailwindcss/types/generated/colors';
-import { Path } from '@clickbar/dot-diver';
+import type { DefaultColors } from 'tailwindcss/types/generated/colors';
+import type { Path } from '@clickbar/dot-diver';
 import { flatten } from 'flat';
 import { mapValues, pickBy } from 'lodash-es';
 import clsx from 'clsx';
@@ -290,7 +292,6 @@ function generateTailwindShades(options: { baseColor: string; name: string }): G
     (name) => flattenedTwColors[name]
   )(baseColor, 1)[0];
 
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (!nearestDefaultColorPath) {
     return { name, baseColor: options.baseColor, baseShade: '', shades: colorScale };
   }
@@ -313,7 +314,6 @@ function generateTailwindShades(options: { baseColor: string; name: string }): G
       const hueDifference = baseHsl.h! - defaultHsl.h!;
 
       const newHsl = {
-        // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
         h: defaultHsl.h! + hueDifference,
         l: defaultHsl.l,
         s: defaultHsl.s,

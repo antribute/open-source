@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { SizeProp } from 'types/styles';
+import type { SizeProp } from 'types/styles';
 
 export const sizeVariants = {
   width: {

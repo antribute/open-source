@@ -1,4 +1,4 @@
-import { O } from 'ts-toolbelt';
+import type { O } from 'ts-toolbelt';
 import { proxy } from 'valtio';
 import { uniqueId } from 'lodash-es';
 import type { ToastData, ToastId, ToastItem } from 'components/Toast/Toast.types';

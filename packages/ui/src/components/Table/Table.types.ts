@@ -1,11 +1,11 @@
-import {
-  Table as _Table,
-  TableOptions as _TableOptions,
-  Header as _Header,
-  Row as _Row,
+import type {
   Cell as _Cell,
   ColumnDef as _ColumnDef,
+  Header as _Header,
+  Row as _Row,
   RowData as _RowData,
+  Table as _Table,
+  TableOptions as _TableOptions,
 } from '@tanstack/react-table';
 
 export type ReactTableOptions<TData = unknown> = _TableOptions<TData>;

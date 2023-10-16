@@ -1,10 +1,11 @@
-import { Children, ReactElement, cloneElement } from 'react';
+import type { ReactElement } from 'react';
+import { Children, cloneElement } from 'react';
 import { notEmpty, objectMap } from 'utils';
 import { mapValues } from 'lodash-es';
 import getDisplayName from 'utils/getDisplayName';
 import clsx from 'clsx';
-import { InputAddon } from './InputAddon';
 import type { ResolvedInputComponentStateProps } from '../../Input.types';
+import { InputAddon } from './InputAddon';
 import type { InputAddonProps } from './InputAddon';
 import type { InputAddonGroupProps } from './InputAddonGroup';
 
@@ -50,6 +51,56 @@ export function useInputAddonList(props: UseInputAddonListProps): UseInputAddonL
 }
 
 type ReducedAddonsData = Omit<InputAddonElements, 'leadingIconAddon' | 'trailingIconAddon'>;
+
+const InputStateAddon = ({
+  inputStateProps,
+  showValidationMessageInTooltip,
+  ...props
+}: {
+  inputStateProps?: ResolvedInputComponentStateProps;
+  showValidationMessageInTooltip?: boolean;
+} & InputAddonProps) => {
+  const stateClassNames = {
+    error: {
+      container: 'ring-danger/30',
+      text: 'text-danger',
+      icon: clsx('i-heroicons-x-circle-20-solid'),
+    },
+    success: {
+      container: 'ring-success/30',
+      text: 'text-success',
+      icon: clsx('i-heroicons-check-circle-20-solid'),
+    },
+  };
+
+  const { inputState, validationMessage } = inputStateProps ?? {};
+
+  const hasValidationState = inputState && inputState in stateClassNames;
+
+  const stateClassName = hasValidationState ? stateClassNames[inputState] : undefined;
+
+  return (
+    <InputAddon
+      grouping="inline"
+      position="trailing"
+      className="!pr-6"
+      excludeFromTabOrder
+      focusInputOnClick
+      enabled={Boolean(showValidationMessageInTooltip && hasValidationState)}
+      tooltip={<span className={clsx(stateClassName?.text)}>{validationMessage}</span>}
+      {...props}
+    >
+      <div
+        className={clsx(
+          'rounded-full ring  ring-inset flex items-center justify-center',
+          stateClassName?.container
+        )}
+      >
+        <div className={clsx('h-18 w-18', stateClassName?.icon, stateClassName?.text)} />
+      </div>
+    </InputAddon>
+  );
+};
 
 function findInputIcons({
   leadingIcon,
@@ -186,57 +237,6 @@ function findInputIcons({
     trailingIconAddon,
   };
 }
-
-const InputStateAddon = ({
-  inputStateProps,
-  tooltip,
-  showValidationMessageInTooltip,
-  ...props
-}: {
-  inputStateProps?: ResolvedInputComponentStateProps;
-  showValidationMessageInTooltip?: boolean;
-} & InputAddonProps) => {
-  const stateClassNames = {
-    error: {
-      container: 'ring-danger/30',
-      text: 'text-danger',
-      icon: clsx('i-heroicons-x-circle-20-solid'),
-    },
-    success: {
-      container: 'ring-success/30',
-      text: 'text-success',
-      icon: clsx('i-heroicons-check-circle-20-solid'),
-    },
-  };
-
-  const { inputState, validationMessage } = inputStateProps ?? {};
-
-  const hasValidationState = inputState && inputState in stateClassNames;
-
-  const stateClassName = hasValidationState ? stateClassNames[inputState] : undefined;
-
-  return (
-    <InputAddon
-      grouping="inline"
-      position="trailing"
-      className="!pr-6"
-      excludeFromTabOrder
-      focusInputOnClick
-      enabled={Boolean(showValidationMessageInTooltip && hasValidationState)}
-      tooltip={<span className={clsx(stateClassName?.text)}>{validationMessage}</span>}
-      {...props}
-    >
-      <div
-        className={clsx(
-          'rounded-full ring  ring-inset flex items-center justify-center',
-          stateClassName?.container
-        )}
-      >
-        <div className={clsx('h-18 w-18', stateClassName?.icon, stateClassName?.text)} />
-      </div>
-    </InputAddon>
-  );
-};
 
 function isInputAddon(element: unknown): element is InputAddonElementProps {
   return getDisplayName(element) === 'InputAddon';

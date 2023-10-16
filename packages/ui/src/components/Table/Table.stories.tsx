@@ -1,11 +1,12 @@
 /* eslint-disable no-console */
 import type { Meta, StoryObj } from '@storybook/react';
-import { UserMockData, generateMockUserList } from 'mock/mock-data';
+import type { UserMockData } from 'mock/mock-data';
+import { generateMockUserList } from 'mock/mock-data';
 import { useMemo } from 'react';
 import { Paper } from 'components/Paper';
 import { MockPageHeader } from 'storybook-utils/components/MockPageHeader';
 import { Table } from './Table';
-import { TableColumns } from './Table.types';
+import type { TableColumns } from './Table.types';
 
 const meta = {
   args: {},
@@ -19,7 +20,6 @@ const users = generateMockUserList({ size: 300 });
 
 export const Default: StoryObj = {
   render: () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const columns = useMemo<TableColumns<UserMockData>>(
       () => [
         // display({ id: 'placeholder-1', minSize: 10, maxSize: 10, size: 10 }),

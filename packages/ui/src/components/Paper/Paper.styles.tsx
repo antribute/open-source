@@ -1,5 +1,6 @@
 import clsx from 'clsx';
-import { Classed, classed } from 'utils/classed';
+import type { Classed } from 'utils/classed';
+import { classed } from 'utils/classed';
 
 export type PaperElementBackgroundVariantProps = Classed.VariantProps<typeof PaperElement>;
 

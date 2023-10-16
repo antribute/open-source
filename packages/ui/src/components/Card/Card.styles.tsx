@@ -1,4 +1,5 @@
-import { Classed, classed, expandVariant } from 'utils/classed';
+import type { Classed } from 'utils/classed';
+import { classed, expandVariant } from 'utils/classed';
 import { Paper } from 'components/Paper';
 import { ScrollViewport } from 'components/ScrollViewport';
 

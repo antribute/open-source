@@ -1,4 +1,4 @@
-import { ThemeConfig } from 'tailwindcss/types/config';
+import type { ThemeConfig } from 'tailwindcss/types/config';
 import { animation as tailwindAnimation } from 'tailwindcss/defaultTheme';
 
 type AnimationConfig = ThemeConfig['animation'];

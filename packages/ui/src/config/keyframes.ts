@@ -1,4 +1,4 @@
-import { ThemeConfig } from 'tailwindcss/types/config';
+import type { ThemeConfig } from 'tailwindcss/types/config';
 import { keyframes as tailwindKeyframes } from 'tailwindcss/defaultTheme';
 
 type KeyframesConfig = ThemeConfig['keyframes'];

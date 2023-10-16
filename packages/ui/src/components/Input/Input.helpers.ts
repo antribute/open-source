@@ -1,7 +1,7 @@
 import { pickProps } from 'utils';
 import { useContext } from 'react';
 import { InputContext as AriaInputContext } from 'react-aria-components';
-import { InputComponentStateProps, ResolvedInputComponentStateProps } from './Input.types';
+import type { InputComponentStateProps, ResolvedInputComponentStateProps } from './Input.types';
 
 export function resolveInputComponentStateProps({
   error,

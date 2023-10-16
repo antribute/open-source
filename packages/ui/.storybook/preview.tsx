@@ -2,11 +2,10 @@ import '../antribute.css';
 
 import React, { useEffect } from 'react';
 import type { API_Layout, GlobalTypes } from '@storybook/types';
-import type { Decorator } from '@storybook/react';
+import type { Decorator, Preview } from '@storybook/react';
 import { colorPalette } from '../src/config';
 import { useDarkMode } from '../src/hooks/useDarkMode';
-import { LIGHT_MODE, DARK_MODE, DEFAULT_THEME } from '../src/constants/theme';
-import { Preview } from '@storybook/react';
+import { DARK_MODE, DEFAULT_THEME, LIGHT_MODE } from '../src/constants/theme';
 import { AntributeUiProvider } from '../src/components/AntributeUiProvider';
 export const preview: Preview = {
   parameters: {
@@ -59,7 +58,6 @@ export const withProvider: Decorator = (Story, context) => {
 
   const { setDarkMode } = useDarkMode();
   useEffect(() => {
-    console.log('THEME', theme);
     if (theme === DARK_MODE) {
       setDarkMode(true);
     } else {

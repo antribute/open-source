@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import { stringify } from 'arktype/internal/utils/serialize';
 import { pascalCase } from 'change-case';
 

@@ -1,4 +1,5 @@
-import { Classed, classed, expandVariant, mergeVariants } from 'utils/classed';
+import type { Classed } from 'utils/classed';
+import { classed, expandVariant, mergeVariants } from 'utils/classed';
 import * as TabsPrimitive from '@radix-ui/react-tabs';
 import { inputComponentVariants } from 'styles/input-component.variants';
 import { highlightBackdropContrastClass } from 'styles/highlightContrast';

@@ -1,18 +1,18 @@
 import {
   BaseInputField,
-  InputFieldContainer,
   InputAddon,
   InputAddonGroup,
   InputContainer,
+  InputFieldContainer,
   InputLabel,
 } from './components';
 
 import {
-  TextField,
-  TextAreaField,
-  NumberField,
   CheckboxField,
   CheckboxGroupField,
+  NumberField,
+  TextAreaField,
+  TextField,
 } from './input-fields';
 
 export const Input = Object.assign(TextField, {

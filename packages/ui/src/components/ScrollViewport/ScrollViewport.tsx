@@ -2,7 +2,8 @@ import { forwardRef } from 'react';
 import { classed } from 'utils/classed';
 import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area';
 import { ScrollBar } from 'components/ScrollViewport/ScrollBar';
-import { ScrollAreaContainer, ScrollAreaContainerProps } from './ScrollAreaContainer';
+import type { ScrollAreaContainerProps } from './ScrollAreaContainer';
+import { ScrollAreaContainer } from './ScrollAreaContainer';
 
 const ScrollArea = forwardRef<HTMLDivElement, ScrollAreaContainerProps>(
   ({ children, ...props }, forwardedRef) => {

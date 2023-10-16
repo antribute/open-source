@@ -6,13 +6,14 @@ import type { FieldAria } from 'react-aria';
 import { generatePropPickerFn } from 'utils';
 import clsx from 'clsx';
 import { resolveInputComponentStateProps } from '../Input.helpers';
-import { InputDescription, InputValidationMessage } from './InputMessage';
-import { InputLabel, InputLabelProps } from './InputLabel';
 import type {
   InputComponentProps,
   InputComponentStateProps,
   ResolvedInputComponentStateProps,
 } from '../Input.types';
+import { InputDescription, InputValidationMessage } from './InputMessage';
+import type { InputLabelProps } from './InputLabel';
+import { InputLabel } from './InputLabel';
 
 export const InputContainerContext = createContext<
   (Omit<InputComponentProps, 'children'> & ResolvedInputComponentStateProps) | null
@@ -63,7 +64,6 @@ export const InputContainer = deriveClassed<
     errorMessageProps,
     showValidationMessageInTooltip,
     hideMessageSlots,
-    loading,
     noContainer,
     ...rest
   } = props;

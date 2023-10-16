@@ -7,7 +7,8 @@ import { Paper } from 'components/Paper';
 import { Detail } from 'components/Detail';
 import { lowerFirst } from 'lodash-es';
 import { Masonry } from 'react-plock';
-import { ClampText, ClampTextProps } from './ClampText';
+import type { ClampTextProps } from './ClampText';
+import { ClampText } from './ClampText';
 
 const meta = {
   args: {},
@@ -60,20 +61,12 @@ export const Default: Story = {
   },
 };
 
-export const CollapsibleTooltip: Story = {
-  args: {},
-  render: () => <ClampTextMock showMoreInCollapisbleArea />,
-};
-
-export const HoverTooltip: Story = {
-  args: {},
-  render: () => <ClampTextMock showMoreInTooltip />,
-};
-
 faker.seed(1);
 
 const ClampTextMock = (props: ClampTextProps) => {
-  const items = new Array(15).fill(0).map((_, i) => i);
+  const items = Array.from({ length: 15 })
+    .fill(0)
+    .map((_, i) => i);
   return (
     <Masonry
       items={items}
@@ -97,9 +90,11 @@ const ClampTextMock = (props: ClampTextProps) => {
             title="Summary"
             body={
               <ClampText className="whitespace-pre-line" maxLines={6} {...props}>
-                {new Array(5).fill(0).map(() => (
-                  <>{faker.lorem.paragraph(5)}</>
-                ))}
+                {Array.from({ length: 5 })
+                  .fill(0)
+                  .map(() => (
+                    <>{faker.lorem.paragraph(5)}</>
+                  ))}
               </ClampText>
             }
           />
@@ -112,4 +107,14 @@ const ClampTextMock = (props: ClampTextProps) => {
       )}
     />
   );
+};
+
+export const CollapsibleTooltip: Story = {
+  args: {},
+  render: () => <ClampTextMock showMoreInCollapisbleArea />,
+};
+
+export const HoverTooltip: Story = {
+  args: {},
+  render: () => <ClampTextMock showMoreInTooltip />,
 };

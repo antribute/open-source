@@ -1,7 +1,9 @@
-import { useColorArea, AriaColorAreaOptions } from '@react-aria/color';
+import type { AriaColorAreaOptions } from '@react-aria/color';
+import { useColorArea } from '@react-aria/color';
 import { useColorAreaState } from '@react-stately/color';
 import { useFocusRing } from '@react-aria/focus';
-import React, { CSSProperties } from 'react';
+import type { CSSProperties } from 'react';
+import React from 'react';
 import { classed } from 'utils/classed';
 
 interface ColorAreaProps

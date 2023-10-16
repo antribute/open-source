@@ -4,9 +4,11 @@ import { twMerge } from 'tailwind-merge';
 import ChevronDownIcon from '@heroicons/react/24/solid/ChevronDownIcon';
 import { pickProps } from 'utils';
 import clsx from 'clsx';
-import { Detail, DetailProps } from 'components/Detail';
+import type { DetailProps } from 'components/Detail';
+import { Detail } from 'components/Detail';
 import { isReactNode } from 'utils/component-is-utils';
-import { ListItemButton, ListItemButtonProps } from './ListItemButton';
+import type { ListItemButtonProps } from './ListItemButton';
+import { ListItemButton } from './ListItemButton';
 import { ListItemContainer } from './ListItemContainer';
 
 const CollapsibleContentElement = classed('ul', '', {
@@ -83,7 +85,6 @@ export const CollapsibleListItem = ({
         </CollapsiblePrimitive.Trigger>
         <CollapsiblePrimitive.CollapsibleContent asChild {...contentProps}>
           <CollapsibleContentElement
-            // eslint-disable-next-line no-nested-ternary
             indented={indentContent ? (startIcon ? 'lg' : 'md') : undefined}
           >
             {children}

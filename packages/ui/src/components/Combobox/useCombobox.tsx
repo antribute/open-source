@@ -1,23 +1,22 @@
-/* eslint-disable react/no-unused-prop-types */
 import * as ComboboxPrimitive from 'ariakit/combobox';
 import * as SelectPrimitive from 'ariakit/select';
-import { useEffect, useMemo, useState, useRef, useCallback } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import {
+  getHasSelected,
   getOptionMap,
   getSelectedCount,
-  getHasSelected,
   valueStringToOriginalValue,
 } from 'components/Combobox/Combobox.helpers';
 import { useDeepCompareEffectNoCheck } from 'use-deep-compare-effect';
 import { useImmer } from 'use-immer';
-import { L } from 'ts-toolbelt';
+import type { L } from 'ts-toolbelt';
 import { enableMapSet } from 'immer';
 import type {
-  ComboboxProps,
   ComboboxBaseProps,
-  SelectOptionMap,
+  ComboboxProps,
   SelectOption,
+  SelectOptionMap,
 } from './Combobox.types';
 
 enableMapSet();
@@ -209,6 +208,7 @@ function useComboboxProps(props: ComboboxPrimitive.ComboboxStateProps) {
 
   // value and setValue shouldn't be passed to the select state because the
   // select value and the combobox value are different things.
+  // eslint-disable-next-line unused-imports/no-unused-vars
   const { value, setValue, ...selectProps } = combobox;
 
   return { selectProps, combobox };
