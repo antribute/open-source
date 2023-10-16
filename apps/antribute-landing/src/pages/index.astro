@@ -1,0 +1,55 @@
+---
+import { AntributeUiProvider, Flex, Text } from '@antribute/ui';
+
+import AntributeLogo from '../components/AntributeLogo.astro';
+import EmphasizeText from '../components/EmphasizeText.astro';
+import LinkButton from '../components/LinkButton.astro';
+
+import Layout from '../layouts/Layout.astro'
+---
+
+<Layout title="Hello, World">
+	<AntributeUiProvider>
+		<div class="fixed top-8 flex justify-center w-full">
+			<div class="container mx-auto  flex h-full min-h-screen flex-col items-center justify-center px-24  before-absolute-content">
+				<Flex justify="center" align="center" gap className="mb-16">
+					<AntributeLogo className="h-56 w-56 sm:h-80 sm:w-80" />
+					<Text.H2 className="sm:text-h1 !font-display">Antribute</Text.H2>
+				</Flex>
+				<Text as="p" fullWidth size="lg" align="center" spaceY="lg" className="mb-16 relative">
+					<Text
+						block
+						color="moderate"
+						fontWeight="regular"
+						className="bg-gradient-to-r from-caution to-heart via-info bg-clip-text !text-content-moderate dark:!text-content-strong mb-16 sm:mb-6 "
+					>
+						A team of
+						<Text className="bg-gradient-to-r from-caution to-info bg-clip-text !text-content-subtle">
+							{' '}
+							world-class
+						</Text>{' '}
+						engineers with one goal
+						<Text.Dash />
+					</Text>
+					<EmphasizeText>
+						create the best tech to support the <Text fontWeight="medium">even better ideas</Text>.
+					</EmphasizeText>
+				</Text>
+				<Flex gap="xs">
+					<LinkButton
+						startIconClassName="i-fa6-brands-twitter text-[#00acee]"
+						href="https://twitter.com/antribute"
+					>
+						Twitter
+					</LinkButton>
+					<LinkButton
+						endIconClassName="i-fa6-brands-linkedin text-[#0072b1]"
+						href="https://linkedin.com/company/antribute"
+					>
+						LinkedIn
+					</LinkButton>
+				</Flex>
+			</div>
+		</div>
+	</AntributeUiProvider>
+</Layout>

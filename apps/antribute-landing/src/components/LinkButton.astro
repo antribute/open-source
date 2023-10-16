@@ -1,0 +1,25 @@
+---
+import { Button } from '@antribute/ui';
+import type { ButtonProps } from '@antribute/ui';
+
+interface Props extends Partial<Pick<
+  ButtonProps,
+  'onClick' | 'startIconClassName' | 'endIconClassName' | 'startIcon' | 'endIcon' | 'children'
+>> {
+	href: string
+}
+
+const props = Astro.props;
+---
+<Button
+  as="a"
+  variant="ghost"
+  size="sm"
+  color="primary"
+  rounded
+  rel="noopener noreferrer"
+  target="_blank"
+  {...props}
+>
+  <slot />
+</Button>

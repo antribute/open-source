@@ -1,0 +1,12 @@
+---
+import { Text } from '@antribute/ui';
+---
+<Text
+  className="before-absolute-content before:!w-auto before:block before:p-4 before:from-caution/10  before:via-info/20  before:to-heart/10 before:bg-gradient-to-r  before:scale-105 before:rounded-sm relative mx-4 gradient-mask-b-95 before:gradient-mask-t-10 rounded-[14px] px-6 pb-2"
+  color="intense"
+  align="center"
+>
+  <Text className="w-full shrink-0  relative bg-gradient-to-r from-caution to-heart via-info bg-clip-text !text-content-ghost dark:!text-content-subtle">
+    <slot />
+  </Text>
+</Text>
