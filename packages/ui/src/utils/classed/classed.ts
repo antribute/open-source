@@ -1,11 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { ClassedVariantMap, SizeProp } from 'types/styles';
+import type { ClassedVariantMap, SizeProp } from 'types/styles';
 import { extendTailwindMerge } from 'tailwind-merge';
 import { map, mapValues, transform } from 'lodash-es';
 import { createClassed, deriveClassed } from '@tw-classed/react';
 import { createClassed as createClassedCore } from '@tw-classed/core';
 import type * as Classed from '@tw-classed/react';
-import clsx, { ClassValue } from 'clsx';
+import type { ClassValue } from 'clsx';
+import clsx from 'clsx';
 import { getRelativeSizePropData } from 'utils/getRelativeSizeProp';
 
 export { makeStrict } from '@tw-classed/react';

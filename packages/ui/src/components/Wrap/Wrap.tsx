@@ -36,7 +36,7 @@ export function Wrap<const TCondition>({
 }: WrapProps<TCondition>) {
   const fallbackWrapperFn: ConditionWrapRenderFn = fallback ?? ((c?: React.ReactNode) => <>{c}</>);
 
-  if (!Boolean(conditionProp)) return fallbackWrapperFn(children);
+  if (!conditionProp) return fallbackWrapperFn(children);
 
   const getCondition = () => {
     if (typeof conditionProp === 'object') {
@@ -60,7 +60,7 @@ export function Wrap<const TCondition>({
   const wrapperFn = getWrapperFn();
 
   if (typeof condition === 'boolean') {
-    return Boolean(condition) ? wrapperFn(children) : <>{children}</>;
+    return condition ? wrapperFn(children) : <>{children}</>;
   }
 
   return wrapperFn(children);

@@ -1,34 +1,32 @@
-/* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import clsx from 'clsx';
 import { Flex } from 'components/Flex';
 import { Text } from 'components/Text';
 import { textComponentProps } from 'components/Text/textComponentProps';
 import { capitalize, get, groupBy, isEmpty, omitBy, orderBy, pick, uniq } from 'lodash-es';
-import { CSSProperties, useLayoutEffect, useMemo, useRef, useState, forwardRef } from 'react';
+import type { CSSProperties } from 'react';
+import { forwardRef, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { objectMap } from 'utils';
 import { measureElement } from 'utils/measureElement';
 import { Wrap } from 'components/Wrap';
-import { SizeProp } from 'types/styles';
+import type { SizeProp } from 'types/styles';
 import { classed } from 'utils/classed';
 import useDimensions from 'react-cool-dimensions';
-import { BreakpointKey, useBreakpoints } from 'hooks';
-import {
+import type { BreakpointKey } from 'hooks';
+import { useBreakpoints } from 'hooks';
+import type {
   DetailSlots,
-  SlotItemProps,
-  SlotItemData,
-  SlotData,
-  SlotColumn,
-  startSlotIds,
-  endSlotIds,
-  SlotId,
-  SlotColumnId,
-  mainSlotIds,
-  LeadingDetailSlots,
-  TrailingDetailSlots,
   LabelDetailSlots,
-  labelSlotIds,
+  LeadingDetailSlots,
+  SlotColumn,
+  SlotColumnId,
+  SlotData,
+  SlotId,
+  SlotItemData,
+  SlotItemProps,
+  TrailingDetailSlots,
 } from './Detail.types';
+import { endSlotIds, labelSlotIds, mainSlotIds, startSlotIds } from './Detail.types';
 
 export interface DetailProps extends DetailSlots {
   className?: string;
@@ -151,10 +149,56 @@ function useDetailSlotProps(props: DetailProps): DetailSlotPropBuckets {
   };
 }
 
-export const Detail = (props: DetailProps) => {
-  const detailProps = useDetailSlotProps(props);
-  return <>{detailProps.hasSlots ? <DetailComponent {...detailProps} /> : null}</>;
-};
+interface AlignSlotProps {
+  slot?: SlotItemData;
+  position: 'start' | 'end';
+  gridArea?: string;
+  gridHeight: number;
+  slotRows: SlotData[][];
+  activeSlotIds: SlotId[];
+}
+
+const AlignedSlot = forwardRef<HTMLDivElement, AlignSlotProps>(
+  ({ slot, position, slotRows }, forwardedRef) => {
+    const rowCount = slotRows.length;
+
+    const innerElDimensions = useDimensions();
+
+    const { value: children, ...textProps } = normalizeSlotPropData(slot);
+
+    const atIndex = position === 'start' ? 0 : -1;
+
+    return (
+      <>
+        {slot ? (
+          <div
+            ref={forwardedRef}
+            className="relative w-full"
+            style={{
+              gridArea: slotRows[0]?.at(atIndex)?.gridArea,
+              gridRow: '1 / -1',
+              minWidth: innerElDimensions.width,
+            }}
+          >
+            <Flex
+              gap
+              className={clsx('absolute -translate-y-1/2 top-2/4 z-10', {
+                'left-0': position === 'start',
+                'right-0': position === 'end',
+              })}
+              justify={position}
+              ref={innerElDimensions.observe}
+            >
+              <Wrap if={rowCount >= 3} wrap={(c) => <div className="translate-y-1/3">{c}</div>}>
+                <Text {...textProps}> {children}</Text>
+              </Wrap>
+            </Flex>
+          </div>
+        ) : null}
+      </>
+    );
+  }
+);
 
 export const DetailComponent = ({
   endDetailSlots,
@@ -389,6 +433,11 @@ export const DetailComponent = ({
   );
 };
 
+export const Detail = (props: DetailProps) => {
+  const detailProps = useDetailSlotProps(props);
+  return <>{detailProps.hasSlots ? <DetailComponent {...detailProps} /> : null}</>;
+};
+
 function DetailText(props: {
   slotId?: SlotId;
   slotProps: SlotItemData;
@@ -421,57 +470,6 @@ function DetailText(props: {
     </>
   );
 }
-
-interface AlignSlotProps {
-  slot?: SlotItemData;
-  position: 'start' | 'end';
-  gridArea?: string;
-  gridHeight: number;
-  slotRows: SlotData[][];
-  activeSlotIds: SlotId[];
-}
-
-const AlignedSlot = forwardRef<HTMLDivElement, AlignSlotProps>(
-  ({ slot, position, slotRows }, forwardedRef) => {
-    const rowCount = slotRows.length;
-
-    const innerElDimensions = useDimensions();
-
-    const { value: children, ...textProps } = normalizeSlotPropData(slot);
-
-    const atIndex = position === 'start' ? 0 : -1;
-
-    return (
-      <>
-        {slot ? (
-          <div
-            ref={forwardedRef}
-            className="relative w-full"
-            style={{
-              gridArea: slotRows[0]?.at(atIndex)?.gridArea,
-              gridRow: '1 / -1',
-              minWidth: innerElDimensions.width,
-            }}
-          >
-            <Flex
-              gap
-              className={clsx('absolute -translate-y-1/2 top-2/4 z-10', {
-                'left-0': position === 'start',
-                'right-0': position === 'end',
-              })}
-              justify={position}
-              ref={innerElDimensions.observe}
-            >
-              <Wrap if={rowCount >= 3} wrap={(c) => <div className="translate-y-1/3">{c}</div>}>
-                <Text {...textProps}> {children}</Text>
-              </Wrap>
-            </Flex>
-          </div>
-        ) : null}
-      </>
-    );
-  }
-);
 
 type RefMap<K extends string> = Record<`${K}Ref`, React.RefObject<HTMLDivElement>>;
 

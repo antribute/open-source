@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import { TextField as AriaTextField } from 'react-aria-components';
-import { AriaTextFieldProps, InputComponentProps } from '../Input.types';
+import type { AriaTextFieldProps, InputComponentProps } from '../Input.types';
 import { InputContainer } from '../components/InputContainer';
 import { InputAddonGroup } from '../components/InputAddonGroup/InputAddonGroup';
 import type { InputAddonGroupRenderFnOptions } from '../components/InputAddonGroup';

@@ -1,8 +1,3 @@
-/* eslint-disable @typescript-eslint/restrict-plus-operands */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable no-bitwise */
-
 const hexCharacters = 'a-f\\d';
 const match3or4Hex = `#?[${hexCharacters}]{3}[${hexCharacters}]?`;
 const match6or8Hex = `#?[${hexCharacters}]{6}([${hexCharacters}]{2})?`;

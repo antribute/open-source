@@ -16,16 +16,6 @@
     "format": {
       "cache": false
     },
-    "lint": {
-      "cache": true,
-      "dependsOn": ["^build"],
-      "outputs": [".eslintcache"]
-    },
-    "test": {
-      "cache": true,
-      "dependsOn": ["^build"],
-      "outputs": ["coverage/**", "test-results/**"]
-    },
     "storybook": {
       "cache": false,
       "dependsOn": ["^build"],

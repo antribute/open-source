@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import path from 'path';
 
 export function notEmpty<TValue>(value: TValue | null | undefined): value is TValue {

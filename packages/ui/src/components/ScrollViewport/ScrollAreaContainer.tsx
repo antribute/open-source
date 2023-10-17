@@ -2,10 +2,22 @@ import { omit } from 'lodash-es';
 import { classed } from 'utils/classed';
 import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area';
 import AutoSizer from 'react-virtualized-auto-sizer';
-import { ReactVirtualizedAutoSizerProps } from 'components/AutoSizer/AutoSizer.types';
+import type { ReactVirtualizedAutoSizerProps } from 'components/AutoSizer/AutoSizer.types';
 import { twMerge } from 'tailwind-merge';
 import { pickProps } from 'utils/pickProps';
 import { ScrollBar } from './ScrollBar';
+
+const ScrollAreaContainerElement = classed('div', 'w-full  bg-inherit', {
+  variants: {
+    grow: {
+      true: '!grow',
+      false: '!grow',
+    },
+  },
+  defaultVariants: {
+    grow: true,
+  },
+});
 
 type PickedScrollAreaProps = Pick<
   ScrollAreaPrimitive.ScrollAreaProps,
@@ -86,15 +98,3 @@ export const ScrollAreaContainer = ({
     </ScrollAreaContainerElement>
   );
 };
-
-const ScrollAreaContainerElement = classed('div', 'w-full  bg-inherit', {
-  variants: {
-    grow: {
-      true: '!grow',
-      false: '!grow',
-    },
-  },
-  defaultVariants: {
-    grow: true,
-  },
-});

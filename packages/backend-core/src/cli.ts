@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { command, run, string, positional, option, optional, oneOf } from 'cmd-ts';
+import { command, oneOf, option, optional, positional, run, string } from 'cmd-ts';
 
 import generate from 'commands/generate';
 import logger from 'logger';

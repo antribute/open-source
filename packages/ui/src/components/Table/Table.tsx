@@ -1,6 +1,7 @@
-import { useReactTable, getCoreRowModel } from '@tanstack/react-table';
+import { getCoreRowModel, useReactTable } from '@tanstack/react-table';
 import { classed } from 'utils/classed';
-import { TableContext, TableProvider } from 'components/Table/Table.context';
+import type { TableContext } from 'components/Table/Table.context';
+import { TableProvider } from 'components/Table/Table.context';
 import { TableBody } from 'components/Table/components/TableBody';
 import { DataRow } from 'components/Table/components/DataRow';
 import { DataCell } from 'components/Table/components/DataCell';
@@ -8,22 +9,21 @@ import { HeaderCell } from 'components/Table/components/HeaderCell';
 import { THeaderElement } from 'components/Table/components/THeaderElement';
 import { TableElement } from 'components/Table/components/TableElement';
 import type { RowData } from '@tanstack/react-table';
-import { CSSProperties, useRef } from 'react';
+import type { CSSProperties } from 'react';
+import { useRef } from 'react';
 import { TableHeaderBackground } from 'components/Table/components/TableHeaderBackground';
 import { ScrollViewport } from 'components/ScrollViewport';
 import { twMerge } from 'tailwind-merge';
 import { useTableVirtualizer } from './useTableVirtualizer';
-import { ReactTable, ReactTableOptions } from './Table.types';
+import type { ReactTable, ReactTableOptions } from './Table.types';
 
 interface TableComponentMetaProps<TData extends RowData = unknown> {
   onRowClick?: (data: TData) => void;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface ReactTableMeta<TData extends RowData> extends TableComponentMetaProps<TData> {}
 
 declare module '@tanstack/react-table' {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
   interface TableMeta<TData extends RowData> extends ReactTableMeta<TData> {}
 }
 
@@ -56,13 +56,7 @@ function getTableMetaProps<T = unknown>({ onRowClick }: TableProps<T>): TableCom
   return { onRowClick };
 }
 
-export const Table = <T,>({
-  className,
-  zebraRows,
-  filledHeaderBackground,
-  height,
-  ...props
-}: TableProps<T>) => {
+export const Table = <T,>({ className, zebraRows, ...props }: TableProps<T>) => {
   const meta = getTableMetaProps(props);
   const table = useTable({ ...props, meta }) as ReactTable;
 

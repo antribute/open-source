@@ -1,6 +1,6 @@
 import { ChevronUpDownIcon } from '@heroicons/react/24/solid';
 import { iconSizeVariants } from 'components/Avatar';
-import { SizeProp } from 'types/styles';
+import type { SizeProp } from 'types/styles';
 import { classed } from 'utils/classed';
 
 const ChevronContainerElement = classed(

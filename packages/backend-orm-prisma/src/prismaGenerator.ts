@@ -1,16 +1,16 @@
+import { appendFile } from 'fs/promises';
+import { join, resolve } from 'path';
+import { fileURLToPath } from 'url';
 import {
+  generateFile,
+  getGeneratedDir,
+  getServerDir,
   logger,
   populateTemplate,
-  generateFile,
-  getServerDir,
-  getGeneratedDir,
 } from '@antribute/backend-core';
 import type { Config, GeneratorFunc } from '@antribute/backend-core';
 import { execa } from 'execa';
-import { appendFile } from 'fs/promises';
-import { join, resolve } from 'path';
 import rimraf from 'rimraf';
-import { fileURLToPath } from 'url';
 
 import {
   additionalSchemaContentTemplate,
@@ -74,9 +74,21 @@ const runPrismaGenerate = async (config: Config) => {
 
   const schemaOutputPath = resolve(process.cwd(), 'prisma', 'schema.prisma');
 
-  const prismaBin = resolve(process.cwd(), 'node_modules', '.bin', 'prisma');
-  logger.debug(`Prisma script path set to ${prismaBin}`, config);
-  await execa(prismaBin, ['generate', '--schema', schemaOutputPath]);
+  if (typeof Bun !== 'undefined') {
+    const binPath = (await execa('bun', ['pm', 'bin'])).stdout;
+    await execa('bun', [
+      'run',
+      '--bun',
+      resolve(binPath, 'prisma'),
+      'generate',
+      '--schema',
+      schemaOutputPath,
+    ]);
+  } else {
+    const prismaBin = resolve(process.cwd(), 'node_modules', '.bin', 'prisma');
+    logger.debug(`Prisma script path set to ${prismaBin}`, config);
+    await execa(prismaBin, ['generate', '--schema', schemaOutputPath]);
+  }
 };
 
 const stitchSchemas = async (serverDir: string, config: Config) => {
@@ -93,11 +105,31 @@ const stitchSchemas = async (serverDir: string, config: Config) => {
   logger.debug('Deleting current generated Prisma schema if exists', config);
   await rimraf(schemaOutputPath);
 
-  const prismaImportBin = resolve(dirname, '..', 'node_modules', '.bin', 'prisma-import');
-  logger.debug(`Prisma Import script path set to ${prismaImportBin}`, config);
+  if (typeof Bun !== 'undefined') {
+    const binPath = (await execa('bun', ['pm', 'bin'])).stdout;
+    await execa('bun', [
+      'run',
+      '--bun',
+      join(binPath, 'prisma-import'),
+      '--schemas',
+      schemaGlob,
+      '--output',
+      schemaOutputPath,
+      '--force',
+    ]);
+  } else {
+    const prismaImportBin = resolve(dirname, '..', 'node_modules', '.bin', 'prisma-import');
+    logger.debug(`Prisma Import script path set to ${prismaImportBin}`, config);
 
-  logger.debug('Stitching schemas', config);
-  await execa(prismaImportBin, ['--schemas', schemaGlob, '--output', schemaOutputPath, '--force']);
+    logger.debug('Stitching schemas', config);
+    await execa(prismaImportBin, [
+      '--schemas',
+      schemaGlob,
+      '--output',
+      schemaOutputPath,
+      '--force',
+    ]);
+  }
 };
 
 const prismaGenerator: GeneratorFunc = async (config) => {

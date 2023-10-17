@@ -1,3 +1,4 @@
+import type { ResolvedColorSchemeConfig } from '../color-scheme-config.types';
 import danger from './danger';
 import neutral from './neutral';
 import neutralDark from './neutral-dark';
@@ -12,7 +13,6 @@ import defaultScheme from './default';
 import defaultDarkScheme from './default.darkmode';
 import inverseColorSchemes from './inverse-scheme';
 
-import { ResolvedColorSchemeConfig } from '../color-scheme-config.types';
 import stateColorSchemes from './state-schemes';
 
 export const colorSchemeConfigs = [

@@ -1,4 +1,5 @@
-import { ClassedVariantProps, classed, mergeVariants } from 'utils/classed';
+import type { ClassedVariantProps } from 'utils/classed';
+import { classed, mergeVariants } from 'utils/classed';
 import { sizeVariants } from 'styles/size.variants';
 import { primitiveInputClassName } from 'components/Input/Input.styles';
 

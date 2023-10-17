@@ -1,5 +1,5 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @tyler please fix the underlying typings and remove the following comments
+// eslint-disable-next-line ts/ban-ts-comment
 // @ts-nocheck
 
 import type { Meta, StoryObj } from '@storybook/react';
@@ -15,14 +15,15 @@ import {
   mainSlotIds,
   startSlotIds,
 } from 'components/Detail/Detail.types';
-import { InputType } from '@storybook/types';
+import type { InputType } from '@storybook/types';
 import { Masonry } from 'react-plock';
 import { Text } from 'components/Text';
-import { useState, useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import clsx from 'clsx';
 import { Combobox } from 'components/Combobox';
-import { CenterDetailSlots } from 'components/Detail/Detail.old';
-import { Detail, DetailProps } from '.';
+import type { CenterDetailSlots } from 'components/Detail/Detail.old';
+import type { DetailProps } from '.';
+import { Detail } from '.';
 
 const meta = {
   args: {},
@@ -89,9 +90,11 @@ const MockDetailExample = (props: DetailProps) => (
 const MockDetailExample3 = (props: DetailProps) => {
   return (
     <Flex gap>
-      {new Array(3).fill(0).map((_, index) => (
-        <MockDetailExample {...props} key={index} />
-      ))}
+      {Array.from({ length: 3 })
+        .fill(0)
+        .map((_, index) => (
+          <MockDetailExample {...props} key={index} />
+        ))}
     </Flex>
   );
 };
@@ -118,14 +121,20 @@ export const Default: Story = {
     const [labelPropIds] = labelPropIdsState;
 
     const propCombinations = useMemo((): DetailProps[] => {
-      return new Array(3).fill(0).map(() => {
-        const props = Object.fromEntries(
-          [...mainPropIds, ...startEndPropIds, ...startPropIds, ...labelPropIds, ...endPropIds].map(
-            (key) => [key, args[key]]
-          )
-        ) as DetailProps;
-        return props;
-      });
+      return Array.from({ length: 3 })
+        .fill(0)
+        .map(() => {
+          const props = Object.fromEntries(
+            [
+              ...mainPropIds,
+              ...startEndPropIds,
+              ...startPropIds,
+              ...labelPropIds,
+              ...endPropIds,
+            ].map((key) => [key, args[key]])
+          ) as DetailProps;
+          return props;
+        });
     }, [mainPropIds, startPropIds, endPropIds, startEndPropIds, labelPropIds]);
 
     const hasIsolated = storedKeys.length > 0;

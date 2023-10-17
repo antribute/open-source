@@ -3,11 +3,12 @@ import { mockDataDeploymentStatuses, mockDataEnvironments } from 'mock/mock-data
 import { changeCase } from 'utils/changeCase';
 import { Flex } from 'components/Flex';
 import { Paper } from 'components/Paper';
-import { InputComponentProps, TextAreaFieldProps } from 'components/Input';
+import type { InputComponentProps, TextAreaFieldProps } from 'components/Input';
 import { getSizeKeys } from 'utils/storybook-utils';
 import { Button } from 'components/Button';
 import { useState } from 'react';
-import { Input, TextFieldProps } from '.';
+import type { TextFieldProps } from '.';
+import { Input } from '.';
 
 const meta = {
   title: 'Input/Input',

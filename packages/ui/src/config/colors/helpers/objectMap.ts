@@ -1,4 +1,4 @@
-import type { SearchableObject, Path, PathValue } from '@clickbar/dot-diver';
+import type { Path, PathValue, SearchableObject } from '@clickbar/dot-diver';
 import { notEmpty } from './generateHexAlphaColorGroup';
 
 type ObjectKey<T extends SearchableObject> = Path<T, 1>;

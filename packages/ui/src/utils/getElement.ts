@@ -1,4 +1,4 @@
-import { ReactElementOrRef } from 'types/react-types';
+import type { ReactElementOrRef } from 'types/react-types';
 
 export function getElement<TElement extends HTMLElement | Element | null>(
   elementOrRef: ReactElementOrRef<TElement>

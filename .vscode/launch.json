@@ -8,7 +8,7 @@
       "name": "Storybook Debug",
       "type": "node-terminal",
       "request": "launch",
-      "command": "pnpm run storybook-react",
+      "command": "bun run storybook-react",
       "internalConsoleOptions": "openOnFirstSessionStart",
       "serverReadyAction": {
         "pattern": "Local:.+(https?://[^:]+:[0-9]+)",

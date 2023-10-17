@@ -1,6 +1,6 @@
-import { useTsController, useFieldInfo } from '@ts-react/form';
-import { Input, TextFieldProps } from 'components/Input';
-import { O } from 'ts-toolbelt';
+import { useFieldInfo, useTsController } from '@ts-react/form';
+import type { Input, TextFieldProps } from 'components/Input';
+import type { O } from 'ts-toolbelt';
 
 export type ControlledInputProps<T = TextFieldProps> = Omit<
   T,

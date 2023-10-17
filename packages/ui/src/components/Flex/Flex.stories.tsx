@@ -2,7 +2,8 @@ import { BoltIcon } from '@heroicons/react/24/solid';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Card } from 'components/Card';
-import { Flex, FlexProps } from 'components/Flex/Flex';
+import type { FlexProps } from 'components/Flex/Flex';
+import { Flex } from 'components/Flex/Flex';
 import { IconButton } from 'components/IconButton/IconButton';
 import { getSizeKeys } from 'utils/storybook-utils';
 

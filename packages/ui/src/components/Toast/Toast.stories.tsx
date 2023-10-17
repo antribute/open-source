@@ -1,12 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from 'components/Button';
-import { ToastItem } from 'components/Toast/Toast.types';
+import type { ToastItem } from 'components/Toast/Toast.types';
 import { useState } from 'react';
 import { capitalCase } from 'change-case';
 import { Input } from 'components/Input';
 import { Toaster, toast } from '.';
 
 function addManyToasts(props: ToastItem, count = 6) {
+  // New Array() is an amazing util for mock data, disabling the rule for this case
+  // eslint-disable-next-line unicorn/no-new-array
   new Array(count).fill(0).forEach(() => {
     toast(props);
   });
@@ -101,7 +103,6 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {},
   render: () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [showDescription, setShowDescription] = useState(false);
     return (
       <div className="relative flex w-full flex-wrap items-center gap-16">

@@ -4,10 +4,9 @@
   - '.gitignore'
   - 'nvmrc'
   - './package.json'
-  - 'pnpm-workspace.yaml'
   - 'turbo.json'
 'Dependency':
-  - 'pnpm-lock.yaml'
+  - 'bun.lockb'
 'App: ADK Todo List Example':
   - 'apps/example-adk-todo-list/**'
 'App: Antribute Landing Page':

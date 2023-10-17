@@ -1,6 +1,6 @@
-import { logger, populateTemplate, generateFile, getGeneratedDir } from '@antribute/backend-core';
-import type { Config, GeneratorFunc } from '@antribute/backend-core';
 import { join } from 'path';
+import { generateFile, getGeneratedDir, logger, populateTemplate } from '@antribute/backend-core';
+import type { Config, GeneratorFunc } from '@antribute/backend-core';
 
 import { koaHandlerTemplate } from './koaTemplates';
 import type { KoaHandlerTemplate } from './koaTemplates';

@@ -2,7 +2,8 @@ import BoltIcon from '@heroicons/react/24/solid/BoltIcon';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { PresetButtonStoryVariants } from 'components/Button/preset-button-story-variants';
-import { IconButton, IconButtonProps } from 'components/IconButton/IconButton';
+import type { IconButtonProps } from 'components/IconButton/IconButton';
+import { IconButton } from 'components/IconButton/IconButton';
 
 const meta = {
   args: {},

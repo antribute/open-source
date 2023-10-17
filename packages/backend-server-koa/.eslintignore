@@ -1,7 +1,0 @@
-dist
-node_modules
-test-config-files
-.eslintrc.cjs
-tsup.config.js
-vitest.config.js
-generated

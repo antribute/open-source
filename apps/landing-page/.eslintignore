@@ -1,9 +1,0 @@
-.next
-node_modules
-.eslintrc.cjs
-cypress
-cypress.config.ts
-next.config.js
-postcss.config.cjs
-tailwind.config.js
-vitest.config.js

@@ -1,12 +1,13 @@
-/* eslint-disable react/no-unused-prop-types */
-import * as ComboboxPrimitive from 'ariakit/combobox';
-import * as SelectPrimitive from 'ariakit/select';
-import { Button, ButtonProps } from 'components/Button';
-import React, { RefObject } from 'react';
+import type * as ComboboxPrimitive from 'ariakit/combobox';
+import type * as SelectPrimitive from 'ariakit/select';
+import type { ButtonProps } from 'components/Button';
+import { Button } from 'components/Button';
+import type { RefObject } from 'react';
+import React from 'react';
 import { elementHasOverflowY } from 'utils/elementHasOverflow';
 import getDisplayName from 'utils/getDisplayName';
 import { useComboboxContext } from 'components/Combobox/Combobox';
-import { MultiSelectVariant } from './Combobox.types';
+import type { MultiSelectVariant } from './Combobox.types';
 
 export interface ComboboxFooterProps {
   optionsCount: number;
@@ -19,6 +20,35 @@ export interface ComboboxFooterProps {
   multiSelectVariant?: MultiSelectVariant;
   comboboxChildren?: React.ReactNode;
 }
+
+export const ComboboxFooterButton = ({
+  onClick,
+  closePopoverOnClick = true,
+  ...props
+}: ButtonProps & {
+  closePopoverOnClick?: boolean;
+}) => {
+  const { combobox } = useComboboxContext();
+  return (
+    <Button
+      fullWidth
+      size="xs"
+      variant="glass"
+      color="secondary"
+      className="text-content-weak"
+      onClick={(e) => {
+        if (closePopoverOnClick) {
+          combobox.hide();
+        }
+
+        onClick?.(e);
+      }}
+      {...props}
+    />
+  );
+};
+
+ComboboxFooterButton.displayName = 'ComboboxFooterButton';
 
 export const ComboboxFooter = ({
   select,
@@ -93,32 +123,3 @@ export const ComboboxFooter = ({
     </div>
   ) : null;
 };
-
-export const ComboboxFooterButton = ({
-  onClick,
-  closePopoverOnClick = true,
-  ...props
-}: ButtonProps & {
-  closePopoverOnClick?: boolean;
-}) => {
-  const { combobox } = useComboboxContext();
-  return (
-    <Button
-      fullWidth
-      size="xs"
-      variant="glass"
-      color="secondary"
-      className="text-content-weak"
-      onClick={(e) => {
-        if (closePopoverOnClick) {
-          combobox.hide();
-        }
-
-        onClick?.(e);
-      }}
-      {...props}
-    />
-  );
-};
-
-ComboboxFooterButton.displayName = 'ComboboxFooterButton';

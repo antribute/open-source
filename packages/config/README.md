@@ -5,7 +5,7 @@ Common configuration files used between all Antribute projects
 ## Installation
 
 ```
-pnpm i @antribute/config
+bun add @antribute/config
 ```
 
 ## Usage
@@ -13,15 +13,7 @@ pnpm i @antribute/config
 ### ESLint
 
 ```javascript
-module.exports = require('@antribute/config/eslint/eslint-base');
-```
-
-```javascript
-module.exports = require('@antribute/config/eslint/eslint-nextjs');
-```
-
-```javascript
-module.exports = require('@antribute/config/eslint/eslint-react');
+module.exports = require('@antribute/config/eslint/eslint.config.js');
 ```
 
 ### NextJS
@@ -68,18 +60,12 @@ module.exports = require('@antribute/config/prettier/.prettierrc');
 }
 ```
 
-### Tsup
+### Unbuild
 
 ```javascript
-export { default } from '@antribute/config/tsup/tsup.config.base.mjs';
+export { default } from '@antribute/config/unbuild/unbuild.config.base.ts';
 ```
 
 ```javascript
-export { default } from '@antribute/config/tsup/tsup.config.react.mjs';
-```
-
-### Vitest
-
-```javascript
-export { default } from '@antribute/config/vitest/vitest.config.mjs';
+export { default } from '@antribute/config/unbuild/unbuild.config.react.ts';
 ```

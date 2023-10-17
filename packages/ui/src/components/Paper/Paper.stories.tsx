@@ -1,4 +1,5 @@
-import { Paper, PaperProps } from 'components/Paper/Paper';
+import type { PaperProps } from 'components/Paper/Paper';
+import { Paper } from 'components/Paper/Paper';
 import { SimpleList } from 'components/SimpleList';
 import { twMerge } from 'tailwind-merge';
 

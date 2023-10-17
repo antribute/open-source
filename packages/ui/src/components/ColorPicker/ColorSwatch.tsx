@@ -1,6 +1,7 @@
 import { classed } from 'utils/classed';
 
-import { parseColor, Color } from '@react-stately/color';
+import { parseColor } from '@react-stately/color';
+import type { Color } from '@react-stately/color';
 
 const ColorSwatchElement = classed('div', 'rounded-lg flex-shrink-0 aspect', {
   defaultVariants: {

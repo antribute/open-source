@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'bun:test';
 import { makeEnum } from 'utils/arktype-helpers';
 
-describe.only('arktype-playground', () => {
+describe('arktype-playground', () => {
   it('createBox', () => {
     expect(true).toEqual(true);
   });

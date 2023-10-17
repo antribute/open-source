@@ -1,15 +1,10 @@
 import clsx from 'clsx';
 import { flexGapVariants } from 'components/Flex';
 
-import { SizeProp } from 'types/styles';
+import type { SizeProp } from 'types/styles';
 import { generatePropPickerFn, objectMap } from 'utils';
-import {
-  ClassedVariantProps,
-  classed,
-  classedCore,
-  generateCompoundVariants,
-  mergeVariants,
-} from 'utils/classed';
+import type { ClassedVariantProps } from 'utils/classed';
+import { classed, classedCore, generateCompoundVariants, mergeVariants } from 'utils/classed';
 
 export type InputSurfaceVariants = ClassedVariantProps<typeof inputSurfaceClassName>;
 

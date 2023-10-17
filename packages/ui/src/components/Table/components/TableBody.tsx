@@ -17,7 +17,6 @@ export const TableBody = ({ tablePadding, children, ...props }: TableBodyProps) 
     <TableBodyElement {...props}>
       {paddingTop > 0 && (
         <tr>
-          {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
           <td style={{ height: `${paddingTop}px` }} />
         </tr>
       )}
@@ -25,7 +24,6 @@ export const TableBody = ({ tablePadding, children, ...props }: TableBodyProps) 
       {children}
       {paddingBottom > 0 && (
         <tr>
-          {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
           <td style={{ height: `${paddingBottom}px` }} />
         </tr>
       )}

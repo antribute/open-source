@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import XMarkIcon from '@heroicons/react/20/solid/XMarkIcon';
 import { classed, deriveClassed, mergeVariants } from 'utils/classed';
 import React, { useState } from 'react';
@@ -8,7 +7,7 @@ import { twMerge } from 'tailwind-merge';
 import { fetchStatusColor } from 'components/StatusBadge/fetchStatusColors';
 import { ButtonElement } from 'components/Button/Button.styles';
 import { inputComponentVariants } from 'styles/input-component.variants';
-import { StatusBadgeElementProps } from './StatusBadge.styles';
+import type { StatusBadgeElementProps } from './StatusBadge.styles';
 
 export const DiscardButtonElement = classed(
   'button',

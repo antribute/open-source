@@ -1,7 +1,8 @@
 import { classed } from 'utils/classed';
 import InformationCircleIcon from '@heroicons/react/24/outline/InformationCircleIcon';
-import { Tooltip, TooltipProps } from 'components/Tooltip/Tooltip';
-import { IconButtonProps } from 'components/IconButton';
+import type { TooltipProps } from 'components/Tooltip/Tooltip';
+import { Tooltip } from 'components/Tooltip/Tooltip';
+import type { IconButtonProps } from 'components/IconButton';
 
 type InformationTooltipIconProps = IconButtonProps & {
   tooltip: TooltipProps['tooltip'];
@@ -19,8 +20,6 @@ const IconButtonElement = classed('button', 'focus:ring-boundary-tint rounded-fu
 
 export const InfoTooltipIcon = ({
   iconClassName,
-  size,
-  onClick,
   tooltipProps,
   tooltip,
   hideWhenTooltipIsEmpty = true,

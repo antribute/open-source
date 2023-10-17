@@ -5,7 +5,7 @@ Adds Auth0 FGA Support to the Antribute Backend
 ## Installation
 
 ```bash
-pnpm i @antribute/backend-perms-auth0-fga -D && pnpm i @auth0/fga
+bun add @antribute/backend-perms-auth0-fga -D && bun add @auth0/fga
 ```
 
 ## Usage

@@ -1,4 +1,4 @@
-import { TextProps } from 'components/Text/Text';
+import type { TextProps } from 'components/Text/Text';
 
 export type TextComponentType = keyof typeof textComponentProps;
 

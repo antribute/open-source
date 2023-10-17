@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/prefer-reduce-type-parameter */
-import { Primitive } from 'zod';
+import type { Primitive } from 'zod';
 
 type PickPrimitiveObjectProperties<T> = {
   [K in keyof T as T[K] extends Exclude<Primitive, symbol> ? K : never]: T[K];

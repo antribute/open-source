@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable react/no-unused-prop-types */
-/* eslint-disable react/no-unused-prop-types */
 import * as ComboboxPrimitive from 'ariakit/combobox';
 import * as SelectPrimitive from 'ariakit/select';
 
@@ -12,12 +9,11 @@ import clsx from 'clsx';
 import { Text } from 'components/Text';
 import { BasicCheckbox } from 'components/BasicCheckbox';
 import { ScrollViewport } from 'components/ScrollViewport';
-import { ComboboxFooter, ComboboxFooterProps } from 'components/Combobox/ComboboxFooter';
+import type { ComboboxFooterProps } from 'components/Combobox/ComboboxFooter';
+import { ComboboxFooter } from 'components/Combobox/ComboboxFooter';
 import { useComboboxListVirtualizer } from 'components/Combobox/useComboboxListVirtualizer';
-import {
-  UseToggleViewAllSelectedOnUnmountProps,
-  useToggleViewAllSelectedOnUnmount,
-} from 'components/Combobox/useToggleViewAllSelected';
+import type { UseToggleViewAllSelectedOnUnmountProps } from 'components/Combobox/useToggleViewAllSelected';
+import { useToggleViewAllSelectedOnUnmount } from 'components/Combobox/useToggleViewAllSelected';
 import { Flex } from 'components/Flex';
 import { elementHasOverflowY } from 'utils/elementHasOverflow';
 import { Input } from 'components/Input';

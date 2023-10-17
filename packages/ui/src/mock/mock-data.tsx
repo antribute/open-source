@@ -186,6 +186,8 @@ function makeListFactory<T extends MockDataGeneratorFn<unknown>, TReturnType ext
   return (options?: MakeListFnOptions<TReturnType>) => {
     const { size = 10, seed: seedProp = 0, uniqueBy } = options ?? {};
 
+    // New Array() is an amazing util for mock data, disabling the rule for this case
+    // eslint-disable-next-line unicorn/no-new-array
     const result = new Array(size).fill(0).map((_e, i) => {
       const seed = 100 + (seedProp + i);
       faker.seed(seed + i);
@@ -239,15 +241,12 @@ function generateMockDataHook<
 
               setData(newList as T[]);
             } catch (error) {
-              // eslint-disable-next-line no-console
               console.error('ERRORRR', error);
             }
             setLoading(false);
           };
-          // eslint-disable-next-line @typescript-eslint/no-floating-promises
           fetchData();
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [offset]);
 
       return { data, loading };

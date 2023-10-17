@@ -1,6 +1,7 @@
-import { ColorSchemeName } from 'config';
+import type { ColorSchemeName } from 'config';
 import clsx from 'clsx';
-import { PaperElement, PaperElementVariantProps } from 'components/Paper/Paper.styles';
+import type { PaperElementVariantProps } from 'components/Paper/Paper.styles';
+import { PaperElement } from 'components/Paper/Paper.styles';
 import { Position } from 'components/Position';
 import { Spinner } from 'components/Spinner';
 import { Wrap } from 'components/Wrap';

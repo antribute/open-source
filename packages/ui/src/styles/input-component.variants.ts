@@ -1,7 +1,7 @@
 import { classed } from '@tw-classed/react';
 import clsx from 'clsx';
 import { sizeVariants } from 'styles/size.variants';
-import { OrientationProp } from 'types/styles';
+import type { OrientationProp } from 'types/styles';
 import { classedVariantMap, mergeVariants } from 'utils/classed';
 
 export const inputComponentVariants = classedVariantMap({

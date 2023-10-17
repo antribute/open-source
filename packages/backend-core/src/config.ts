@@ -1,7 +1,7 @@
+import { parse, resolve } from 'path';
 import { bundleRequire } from 'bundle-require';
 import Joycon from 'joycon';
 import { merge } from 'lodash-es';
-import { parse, resolve } from 'path';
 
 export interface Config {
   auth: {

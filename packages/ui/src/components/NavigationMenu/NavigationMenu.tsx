@@ -1,19 +1,31 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable prefer-destructuring */
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
 import clsx from 'clsx';
 import React from 'react';
 import { NavigationMenuContentLink } from 'components/NavigationMenu/NavigationMenu.ContentLink';
-import {
-  NavigationMenuListElement,
-  NavigationMenuListElementProps,
-  NavigationMenuTriggerElement,
-  NavigationMenuContentElement,
-  NavigationMenuLinkElement,
-  NavigationMenuIndicatorElement,
-  NavigationMenuViewPortElement,
+import type {
   NavigationMenuContentElementProps,
+  NavigationMenuListElementProps,
 } from './NavigationMenu.styles';
+import {
+  NavigationMenuContentElement,
+  NavigationMenuIndicatorElement,
+  NavigationMenuLinkElement,
+  NavigationMenuListElement,
+  NavigationMenuTriggerElement,
+  NavigationMenuViewPortElement,
+} from './NavigationMenu.styles';
+
+// ViewPort
+const NavigationMenuViewport = React.forwardRef<
+  React.ElementRef<typeof NavigationMenuPrimitive.Viewport>,
+  React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Viewport>
+>(({ className, ...props }, ref) => (
+  <div className={clsx('absolute flex justify-center', 'top-[80%] left-0 w-full')}>
+    <NavigationMenuViewPortElement className={className} ref={ref} {...props} />
+  </div>
+));
+
+NavigationMenuViewport.displayName = NavigationMenuPrimitive.Viewport.displayName;
 
 // Root
 const NavigationMenuRoot = React.forwardRef<
@@ -29,18 +41,6 @@ const NavigationMenuRoot = React.forwardRef<
     <NavigationMenuViewport />
   </NavigationMenuPrimitive.Root>
 ));
-
-// ViewPort
-const NavigationMenuViewport = React.forwardRef<
-  React.ElementRef<typeof NavigationMenuPrimitive.Viewport>,
-  React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Viewport>
->(({ className, ...props }, ref) => (
-  <div className={clsx('absolute flex justify-center', 'top-[80%] left-0 w-full')}>
-    <NavigationMenuViewPortElement className={className} ref={ref} {...props} />
-  </div>
-));
-
-NavigationMenuViewport.displayName = NavigationMenuPrimitive.Viewport.displayName;
 
 // List
 type NavigationMenuListProps = NavigationMenuListElementProps;

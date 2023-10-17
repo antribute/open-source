@@ -1,23 +1,22 @@
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import React, { useMemo, useRef } from 'react';
 import useDimensions from 'react-cool-dimensions';
-import {
+import type {
   Direction,
   ImperativePanelGroupHandle,
-  PanelGroup as PrimitivePanelGroup,
   PanelGroupProps as PrimitivePanelGroupProps,
 } from 'react-resizable-panels';
+import { PanelGroup as PrimitivePanelGroup } from 'react-resizable-panels';
 import { createCtx } from 'utils/createContext';
 import { measureElement } from 'utils/measureElement';
-import {
+import type {
   PanelSizeBreakpointMap,
   UsePanelSizeBreakpointsReturn,
-  usePanelSizeBreakpoints,
 } from 'components/AppPanels/usePanelSizeBreakpoints';
+import { usePanelSizeBreakpoints } from 'components/AppPanels/usePanelSizeBreakpoints';
 import { hasChildren } from 'react-children-utilities';
 import { notEmpty } from 'utils';
 import { scaleNumbers } from 'components/AppPanels/helpers';
-import { ZeroTo100 } from 'types/numeric-types';
+import type { ZeroTo100 } from 'types/numeric-types';
 import { get } from 'lodash-es';
 import { DEFAULT_MIN_PANEL_SIZE, type PanelProps } from './Panel';
 import { PanelResizeHandle } from './PanelSpacer';
@@ -75,7 +74,6 @@ export const PanelGroup = <T extends PanelSizeBreakpointMap<ZeroTo100>>({
     const panelNodes = childrenNodes.map((node) => {
       if (
         React.isValidElement<PanelProps>(node) &&
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         node.props &&
         (node.props.defaultSize ?? 1) >= 1
       ) {

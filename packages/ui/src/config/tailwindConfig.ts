@@ -1,6 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-
 import { resolve } from 'path';
 import defaultTailwindTheme from 'tailwindcss/defaultTheme';
 import type { Config } from 'tailwindcss';
@@ -13,12 +10,11 @@ import tailwindCssLineClampPlugin from '@tailwindcss/line-clamp';
 import tailwindContainerQueriesPlugin from '@tailwindcss/container-queries';
 import tailwindGridAreaPlugin from 'tailwindcss-grid-area';
 import createVariantGroupTransformer from 'tailwind-group-variant';
-import { iconsPlugin, getIconCollections } from '@egoist/tailwindcss-icons';
+import { getIconCollections, iconsPlugin } from '@egoist/tailwindcss-icons';
 import plugin from 'tailwindcss/plugin';
 import { multiThemePlugin } from './plugins/multi-theme-plugin';
 import { linearGradientMaskImagePlugin } from './plugins/linear-gradient-mask-image-plugin';
 
-// eslint-disable-next-line import/extensions
 import { create8PtGrid } from './helpers/create8PtGrid';
 import { colorSchemeDataAttributes, colorSchemeTokens } from './colors/color-schemes';
 import { colorPalette } from './colors/colors';
@@ -32,6 +28,11 @@ import { customClassesPlugin } from './plugins/custom-classes-plugin';
 export type TailwindConfig = typeof config;
 
 export type TailwindColorKey = keyof TailwindConfig['theme']['colors'];
+
+const nodeModulesFolder =
+  typeof Bun !== 'undefined'
+    ? resolve(import.meta.dir, '..', '..', 'src')
+    : resolve(process.cwd(), 'node_modules', '@antribute', 'ui', 'src');
 
 const config = {
   plugins: [
@@ -60,8 +61,8 @@ const config = {
     files: [
       resolve(process.cwd(), '*.{htm,html}'),
       resolve(process.cwd(), 'public', '**', '*.{htm,html}'),
-      resolve(process.cwd(), 'src', '**', '*.{js,jsx,mdx,ts,tsx}'),
-      resolve(process.cwd(), 'node_modules', '@antribute', 'ui', 'dist', '**', '*.js'),
+      resolve(process.cwd(), 'src', '**', '*.{js,jsx,mdx,ts,tsx,astro}'),
+      resolve(nodeModulesFolder, '**', '*.{ts, tsx}'),
     ],
     transform: createVariantGroupTransformer(),
   },

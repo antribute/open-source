@@ -1,5 +1,6 @@
-import { BreakpointKey, useBreakpoints } from 'hooks';
-import { ZeroTo100 } from 'types/numeric-types';
+import type { BreakpointKey } from 'hooks';
+import { useBreakpoints } from 'hooks';
+import type { ZeroTo100 } from 'types/numeric-types';
 import { objectMap } from 'utils';
 
 interface PanelData<T extends number = number> {

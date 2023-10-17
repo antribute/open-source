@@ -1,5 +1,6 @@
 import { useDescription, useTsController } from '@ts-react/form';
-import { CheckboxFieldProps, Input } from 'components/Input';
+import type { CheckboxFieldProps } from 'components/Input';
+import { Input } from 'components/Input';
 
 export type ControlledCheckboxProps = Omit<
   CheckboxFieldProps,

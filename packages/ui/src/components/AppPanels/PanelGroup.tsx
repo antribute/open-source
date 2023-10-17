@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { classed } from 'utils/classed';
 import { PanelGroup as PanelGroupPrimitive } from 'react-resizable-panels';
 import React, { forwardRef } from 'react';

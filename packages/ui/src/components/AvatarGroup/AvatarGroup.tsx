@@ -2,7 +2,8 @@ import React, { useMemo } from 'react';
 import getDisplayName from 'utils/getDisplayName';
 import { classed } from 'utils/classed';
 import { AvatarElementName } from 'components/Avatar/Avatar.types';
-import { Avatar, AvatarProps } from 'components/Avatar';
+import type { AvatarProps } from 'components/Avatar';
+import { Avatar } from 'components/Avatar';
 import { SimpleList } from 'components/SimpleList';
 import { Wrap } from 'components/Wrap';
 

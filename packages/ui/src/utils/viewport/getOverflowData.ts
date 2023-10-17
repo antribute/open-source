@@ -18,12 +18,12 @@ export function getOverflowData(
   const element = getElement(elementRef);
 
   const {
-    scrollWidth = NaN,
-    scrollHeight = NaN,
-    scrollTop = NaN,
-    scrollLeft = NaN,
-    clientWidth = NaN,
-    clientHeight = NaN,
+    scrollWidth = Number.NaN,
+    scrollHeight = Number.NaN,
+    scrollTop = Number.NaN,
+    scrollLeft = Number.NaN,
+    clientWidth = Number.NaN,
+    clientHeight = Number.NaN,
   } = element ?? {};
 
   const hasOverflowX = scrollWidth > clientWidth;

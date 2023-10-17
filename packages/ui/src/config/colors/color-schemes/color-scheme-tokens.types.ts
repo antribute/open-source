@@ -1,5 +1,5 @@
 // import { ColorScaleKey } from '../colors.constants';
-import type { ColorShadeVariant, ColorAlphaVariant } from '../colors.types';
+import type { ColorAlphaVariant, ColorShadeVariant } from '../colors.types';
 import type { ColorSchemeBaseTokens } from './color-schemes';
 
 export type ColorSchemeToken =

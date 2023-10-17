@@ -1,4 +1,5 @@
-import { classed, Classed, deriveClassed, mergeVariants } from 'utils/classed';
+import type { Classed } from 'utils/classed';
+import { classed, deriveClassed, mergeVariants } from 'utils/classed';
 import { Text } from 'components/Text';
 import { sizeVariants } from 'styles/size.variants';
 import clsx from 'clsx';
@@ -37,6 +38,11 @@ export const InputLabelElement = classed(
   }
 );
 
+const OptionalLabelElement = classed(
+  'span',
+  'ml-4 px-4 font-medium rounded inline-block text-xs text-content-weak bg-highlight absolute'
+);
+
 export type InputLabelProps<T = InputLabelElementProps> = {
   /** adds an "Optional" indicator next to the label */
   optionalLabel?: boolean | string;
@@ -64,7 +70,7 @@ export const InputLabel = deriveClassed<typeof InputLabelElement, InputLabelProp
 
     const hasOptionalLabel = !required && optionalLabel;
 
-    const hideLabel = hideLabelProp ?? !Boolean(children);
+    const hideLabel = hideLabelProp ?? !children;
 
     return (
       <>
@@ -94,11 +100,6 @@ export const InputLabel = deriveClassed<typeof InputLabelElement, InputLabelProp
       </>
     );
   }
-);
-
-const OptionalLabelElement = classed(
-  'span',
-  'ml-4 px-4 font-medium rounded inline-block text-xs text-content-weak bg-highlight absolute'
 );
 
 export default InputLabel;

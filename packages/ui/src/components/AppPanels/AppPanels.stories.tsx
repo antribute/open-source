@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { StoryObj, Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { Paper } from 'components/Paper';
 import { MockStaticSideBar } from 'components/AppShell/app-shell-mocks';
 import { Panels } from './AppPanels';
@@ -15,13 +14,6 @@ const meta = {
 export default meta;
 
 type Story = StoryObj<Record<string, never>>;
-
-export const Default: Story = {
-  args: {},
-  render: () => {
-    return <AppPanelsExample />;
-  },
-};
 
 const AppPanelsExample = () => {
   // const panelSize = usePanelSizes();
@@ -72,6 +64,13 @@ const AppPanelsExample = () => {
       </Panels.Group>
     </Panels>
   );
+};
+
+export const Default: Story = {
+  args: {},
+  render: () => {
+    return <AppPanelsExample />;
+  },
 };
 
 const PanelCard = ({ name }: { name: string }) => {

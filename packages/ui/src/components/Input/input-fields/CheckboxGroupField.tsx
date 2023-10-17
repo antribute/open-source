@@ -1,5 +1,6 @@
 import React from 'react';
-import { BasicCheckbox, BasicCheckboxProps } from 'components/BasicCheckbox';
+import type { BasicCheckboxProps } from 'components/BasicCheckbox';
+import { BasicCheckbox } from 'components/BasicCheckbox';
 import { CheckboxGroup as AriaCheckboxGroup } from 'react-aria-components';
 import type { CheckboxGroupProps as AriaCheckboxGroupProps } from 'react-aria-components';
 import { InputContainer } from 'components/Input/components/InputContainer';
@@ -25,8 +26,6 @@ const gridColumns = {
 };
 
 export const CheckboxGroupField = ({
-  children,
-  placeholder,
   label,
   size,
   options,

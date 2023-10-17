@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-import { Classed } from 'utils/classed/classed';
+import type { Classed } from 'utils/classed/classed';
 
 type InferrableClassedType = Classed.VariantProps<any> extends Classed.VariantProps<infer U>
   ? U

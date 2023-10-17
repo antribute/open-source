@@ -1,4 +1,4 @@
-import { ColorSchemeConfig, ColorSchemeName } from '../color-scheme-config.types';
+import type { ColorSchemeConfig, ColorSchemeName } from '../color-scheme-config.types';
 import { defineColorScheme } from '../color-schemes.helpers';
 
 const stateColors = ['success', 'info', 'danger', 'caution', 'heart'] satisfies ColorSchemeName[];

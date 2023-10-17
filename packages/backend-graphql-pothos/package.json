@@ -7,19 +7,22 @@
     "access": "public"
   },
   "exports": {
-    "import": "./dist/index.js",
-    "require": "./dist/index.cjs"
+    ".": {
+      "bun": "./src/index.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
   },
-  "files": [
-    "dist/**"
-  ],
   "types": "./dist/index.d.ts",
+  "files": [
+    "dist/**",
+    "src/**"
+  ],
   "scripts": {
-    "build": "tsup",
-    "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf text-results && rimraf .eslintcache",
-    "dev": "pnpm run build --watch",
-    "lint": "eslint --cache ./src",
-    "test": "vitest"
+    "build": "bunx --bun unbuild",
+    "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf test-results",
+    "lint": "eslint --cache ./src"
   },
   "keywords": [
     "antribute",
@@ -35,22 +38,18 @@
     "tsx": "^3.12.7"
   },
   "devDependencies": {
-    "@antribute/backend-core": "workspace:0.1.0",
-    "@antribute/config": "workspace:0.1.0",
+    "@antribute/backend-core": "workspace:*",
+    "@antribute/config": "workspace:*",
     "@pothos/core": "^3.30.0",
     "@pothos/plugin-prisma": "3.51.1",
     "@pothos/plugin-prisma-utils": "^0.8.1",
     "@pothos/plugin-scope-auth": "^3.19.1",
     "@prisma/client": "^4.8.1",
     "@types/node": "20.1.7",
-    "@vitest/coverage-c8": "^0.25.3",
-    "eslint": "^8.40.0",
     "graphql": "^16.6.0",
     "graphql-scalars": "^1.21.3",
-    "prettier": "2.8.7",
-    "tsup": "^6.7.0",
     "typescript": "^5.0.4",
-    "vitest": "^0.25.3"
+    "unbuild": "^2.0.0"
   },
   "peerDependencies": {
     "@antribute/backend-core": "*",

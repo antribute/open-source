@@ -5,13 +5,13 @@ Adds Clerk Support to the Antribute Backend
 ## Installation
 
 ```bash
-pnpm i @antribute/backend-clerk -D && pnpm i @clerk/clerk-sdk-node
+bun add @antribute/backend-clerk -D && bun add @clerk/clerk-sdk-node
 ```
 
 If your application's ORM is `prisma`, also install the following peer dependency
 
 ```bash
-pnpm i @next-auth/prisma-adapter
+bun add @next-auth/prisma-adapter
 ```
 
 ## Usage

@@ -10,7 +10,7 @@ export interface ReactVirtualizedAutoSizerProps
    *
    * ({ height: number, width: number }) => </>
    *
-   * */
+   */
   onResize?: ReactVirtualizedAutoSizerComponentProps['onResize'];
 
   /**
@@ -19,7 +19,7 @@ export interface ReactVirtualizedAutoSizerProps
    * Height passed to child for initial render; useful for server-side rendering.
    * This value will be overridden with an accurate height after mounting.
    *
-   * */
+   */
   defaultHeight?: ReactVirtualizedAutoSizerComponentProps['defaultHeight'];
 
   /**

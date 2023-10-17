@@ -4,12 +4,26 @@
   "exclude": ["node_modules"],
   "compilerOptions": {
     "baseUrl": "./src",
-    "types": ["@types/node"],
-    "noEmit": true,
-    "noEmitOnError": true
+    "outDir": "./dist",
+    "paths": {
+      "blocks": ["./blocks/*"],
+      "components": ["./components/*"],
+      "config": ["./config/*"],
+      "constants": ["./constants/*"],
+      "hooks": ["./hooks/*"],
+      "mock": ["./mock/*"],
+      "storybook-utils": ["./storybook-utils/*"],
+      "styles": ["./styles/*"],
+      "types": ["./types/*"],
+      "utils": ["./utils/*"],
+      "helpers": ["./helpers.ts"]
+    }
   },
   "typeAcquisition": {
     "enable": true,
     "include": ["react", "@tw-classed/react", "@tw-classed/core"]
+  },
+  "tsc-alias": {
+    "verbose": true
   }
 }

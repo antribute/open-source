@@ -1,6 +1,6 @@
 import type { FlexProps } from 'components/Flex';
 import type { TextProps } from 'components/Text';
-import { TextComponentType } from 'components/Text/textComponentProps';
+import type { TextComponentType } from 'components/Text/textComponentProps';
 import { capitalize } from 'lodash-es';
 
 export type SlotId = (typeof mainSlotIds)[number];

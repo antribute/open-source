@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ButtonComponent } from 'components/Button/Button';
-import { Button, ButtonProps } from '.';
 import { PresetButtonStoryVariants } from './preset-button-story-variants';
+import type { ButtonProps } from '.';
+import { Button } from '.';
 
 const meta = {
   args: {},

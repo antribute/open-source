@@ -19,9 +19,8 @@ function hashCode(s: string): number {
   const hash = 37;
 
   let h = hash;
-  // eslint-disable-next-line no-plusplus
+
   for (let i = 0; i < s.length; i++) {
-    // eslint-disable-next-line no-bitwise
     h = (h * A) ^ (s.charCodeAt(i) * B);
   }
   h = (h * C) % 4294967296;

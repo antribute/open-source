@@ -5,7 +5,7 @@ Adds Prisma Support to the Antribute Backend
 ## Installation
 
 ```bash
-pnpm i @antribute/backend-orm-prisma -D && pnpm i @prisma/client prisma
+bun add @antribute/backend-orm-prisma -D && bun add @prisma/client prisma
 ```
 
 ## Usage

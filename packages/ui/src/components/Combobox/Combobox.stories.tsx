@@ -1,7 +1,8 @@
-/* eslint-disable no-console, react-hooks/rules-of-hooks */
+/* eslint-disable no-console */
 
 import type { Meta, StoryObj } from '@storybook/react';
-import { UserMockData, generateMockOrganizationList, generateMockUserList } from 'mock/mock-data';
+import type { UserMockData } from 'mock/mock-data';
+import { generateMockOrganizationList, generateMockUserList } from 'mock/mock-data';
 import { useState } from 'react';
 import { Avatar } from 'components/Avatar';
 import { Detail } from 'components/Detail';

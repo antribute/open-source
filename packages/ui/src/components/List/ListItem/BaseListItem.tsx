@@ -1,6 +1,6 @@
-/* eslint-disable tailwindcss/no-custom-classname */
 import clsx from 'clsx';
-import { Classed, classed, expandVariant } from 'utils/classed';
+import type { Classed } from 'utils/classed';
+import { classed, expandVariant } from 'utils/classed';
 
 export type BaseListItemElementProps = Classed.ComponentProps<typeof BaseListItemElement>;
 

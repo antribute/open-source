@@ -5,7 +5,7 @@ An Antribute abstraction over Mixpanel
 ## Installation
 
 ```bash
-pnpm i @antribute/tracking
+bun add @antribute/tracking
 ```
 
 ## Usage

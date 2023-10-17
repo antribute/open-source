@@ -16,8 +16,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Setup
-        uses: antribute/actions/setup@main
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+      - name: Install Dependencies
+        run: bun install
       - name: Check If Version is Valid
         uses: antribute/actions/check-tag-release@main
         with:
@@ -32,11 +34,12 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_STAGING }}
           PRODUCTION: true
           GITHUB_DEPLOYMENT: false
-      - name: Globally Install Cypress
-        run: pnpm i -g cypress
-      - name: Run E:E Tests
-        run: cypress run
-        working-directory: ./apps/landing-page
+      # TODO: In a separate PR, replace this with Playwright
+      # - name: Globally Install Cypress
+      #   run: bun add -g cypress
+      # - name: Run E:E Tests
+      #   run: cypress run
+      #   working-directory: ./apps/landing-page
       - name: Deploy Antribute Landing to Vercel Production
         uses: BetaHuhn/deploy-to-vercel-action@v1
         with:
@@ -58,8 +61,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Setup
-        uses: antribute/actions/setup@main
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+      - name: Install Dependencies
+        run: bun install
       - name: Check If Version is Valid
         uses: antribute/actions/check-tag-release@main
         with:
@@ -84,8 +89,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Setup
-        uses: antribute/actions/setup@main
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+      - name: Install Dependencies
+        run: bun install
       - name: Check If Version is Valid
         uses: antribute/actions/check-tag-release@main
         with:
@@ -110,8 +117,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Setup
-        uses: antribute/actions/setup@main
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+      - name: Install Dependencies
+        run: bun install
       - name: Check If Version is Valid
         uses: antribute/actions/check-tag-release@main
         with:
@@ -136,8 +145,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Setup
-        uses: antribute/actions/setup@main
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+      - name: Install Dependencies
+        run: bun install
       - name: Check If Version is Valid
         uses: antribute/actions/check-tag-release@main
         with:
@@ -162,8 +173,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Setup
-        uses: antribute/actions/setup@main
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+      - name: Install Dependencies
+        run: bun install
       - name: Check If Version is Valid
         uses: antribute/actions/check-tag-release@main
         with:
@@ -188,8 +201,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Setup
-        uses: antribute/actions/setup@main
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+      - name: Install Dependencies
+        run: bun install
       - name: Check If Version is Valid
         uses: antribute/actions/check-tag-release@main
         with:
@@ -214,8 +229,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Setup
-        uses: antribute/actions/setup@main
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+      - name: Install Dependencies
+        run: bun install
       - name: Check If Version is Valid
         uses: antribute/actions/check-tag-release@main
         with:
@@ -240,8 +257,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Setup
-        uses: antribute/actions/setup@main
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+      - name: Install Dependencies
+        run: bun install
       - name: Check If Version is Valid
         uses: antribute/actions/check-tag-release@main
         with:
@@ -266,8 +285,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Setup
-        uses: antribute/actions/setup@main
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+      - name: Install Dependencies
+        run: bun install
       - name: Check If Version is Valid
         uses: antribute/actions/check-tag-release@main
         with:
@@ -292,8 +313,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Setup
-        uses: antribute/actions/setup@main
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+      - name: Install Dependencies
+        run: bun install
       - name: Check If Version is Valid
         uses: antribute/actions/check-tag-release@main
         with:
@@ -318,8 +341,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Setup
-        uses: antribute/actions/setup@main
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+      - name: Install Dependencies
+        run: bun install
       - name: Check If Version is Valid
         uses: antribute/actions/check-tag-release@main
         with:
@@ -344,8 +369,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Setup
-        uses: antribute/actions/setup@main
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+      - name: Install Dependencies
+        run: bun install
       - name: Check If Version is Valid
         uses: antribute/actions/check-tag-release@main
         with:

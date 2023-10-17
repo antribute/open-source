@@ -12,10 +12,10 @@
 }
 @layer base {
   html {
-    @apply bg-base h-full;
+    @apply bg-base min-h-screen;
   }
   body {
-    @apply h-full;
+    @apply min-h-screen;
   }
 
   :focus-visible {

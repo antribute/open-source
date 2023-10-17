@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable react/no-unused-prop-types */
-import { L } from 'ts-toolbelt';
-import { ComboboxState, Select, SelectArrow, SelectState } from 'ariakit';
-import { Input, InputComponentProps } from 'components/Input';
+import type { L } from 'ts-toolbelt';
+import type { ComboboxState, SelectState } from 'ariakit';
+import { Select, SelectArrow } from 'ariakit';
+import type { InputComponentProps } from 'components/Input';
+import { Input } from 'components/Input';
 import { pickInputContainerProps } from 'components/Input/components';
 import { forwardRef } from 'react';
 import { clsx } from 'clsx';
@@ -13,7 +13,7 @@ import { ComboboxSelectValue } from './ComboboxSelectValue';
 import { ComboboxClearValueAction } from './ComboboxClearValueAction';
 import { useCombobox } from './useCombobox';
 import { ComboboxPopover } from './ComboboxPopover';
-import { ComboboxProps } from './Combobox.types';
+import type { ComboboxProps } from './Combobox.types';
 import { ComboboxFooterButton } from './ComboboxFooter';
 
 export const { Provider: ComboboxProvider, useContext: useComboboxContext } = createCtx<{
@@ -63,7 +63,6 @@ function ComboboxComponent<TOptions extends L.List<unknown>>(
 
   const showSearchBox = Boolean(props.searchOptions ?? props.onSearch ?? showSearchBoxProp);
 
-  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
   const loading = loadingProp || searching;
 
   const showClearValueAction = clearable && select.value.length > 0;
@@ -177,7 +176,6 @@ function ComboboxComponent<TOptions extends L.List<unknown>>(
   );
 }
 
-// eslint-disable-next-line @typescript-eslint/naming-convention, no-underscore-dangle
 const Combobox = forwardRef(ComboboxComponent) as unknown as typeof ComboboxComponent;
 
 const _Combobbox = Object.assign(Combobox, {

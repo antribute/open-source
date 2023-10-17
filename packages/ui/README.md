@@ -5,7 +5,7 @@ The Antribute Design Language and Component Library
 ## Installation
 
 ```bash
-pnpm i @antribute/ui
+bun add @antribute/ui
 ```
 
 ## Setup
@@ -21,7 +21,7 @@ pnpm i @antribute/ui
 ## Running Storybook for Local Development
 
 ```bash
-pnpm run storybook
+bun run storybook
 ```
 
 ## Usage

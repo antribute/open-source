@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { createUniqueFormField } from 'components/Form/Form.helpers';
-import { ControlledNumberInput, ControlledNumberInputProps } from '../ControlledInput';
+import type { ControlledNumberInputProps } from '../ControlledInput';
+import { ControlledNumberInput } from '../ControlledInput';
 
 export const NumberFieldComponent = (props: ControlledNumberInputProps) => {
   return <ControlledNumberInput {...props} />;

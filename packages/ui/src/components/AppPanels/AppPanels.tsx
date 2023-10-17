@@ -1,6 +1,7 @@
-import { IClassedComponent, classed, deriveClassed } from 'utils/classed';
+import type { IClassedComponent } from 'utils/classed';
+import { classed, deriveClassed } from 'utils/classed';
 import { PanelResizeHandle } from './PanelSpacer';
-import { PanelGroupItem, PanelContent } from './Panel';
+import { PanelContent, PanelGroupItem } from './Panel';
 import { PanelGroup } from './PanelFlex';
 
 // const containerClass = classed('div', 'w-full h-full flex flex-col gap-1');

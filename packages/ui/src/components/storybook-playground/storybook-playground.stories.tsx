@@ -1,5 +1,4 @@
-import type { StoryObj } from '@storybook/react';
-import { StoryFn, Meta } from '@storybook/react';
+import type { Meta, StoryFn, StoryObj } from '@storybook/react';
 import { Avatar } from 'components/Avatar';
 import { Detail } from 'components/Detail';
 import { Flex } from 'components/Flex';

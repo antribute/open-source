@@ -42,7 +42,6 @@ export const ListItemContainer = deriveClassed<
   ListItemContainerBaseProps
 >(({ fragment, children, ...props }, forwardedRef) =>
   fragment ? (
-    // eslint-disable-next-line react/jsx-no-useless-fragment
     <>{children}</>
   ) : (
     <ListItemContainerElement ref={forwardedRef} {...props}>

@@ -1,15 +1,15 @@
+import { join, resolve } from 'path';
+import { fileURLToPath } from 'url';
 import {
+  generateFile,
+  getGeneratedDir,
+  getServerDir,
   logger,
   populateTemplate,
-  generateFile,
-  getServerDir,
-  getGeneratedDir,
 } from '@antribute/backend-core';
 import type { Config, GeneratorFunc } from '@antribute/backend-core';
 import { execa } from 'execa';
 import glob from 'fast-glob';
-import { join, resolve } from 'path';
-import { fileURLToPath } from 'url';
 
 import {
   pothosBuilderTemplate,
@@ -165,8 +165,13 @@ const generateSchema = async (generatedDir: string, config: Config) => {
   );
 
   logger.debug('Running Generation Script', config);
-  const tsxBin = resolve(dirname, '..', 'node_modules', '.bin', 'tsx');
-  await execa(tsxBin, [resolve(generatedDir, 'pothos', 'generateSchema.ts')]);
+
+  if (typeof Bun !== 'undefined') {
+    await execa('bun', ['tsx', resolve(generatedDir, 'pothos', 'generateSchema.ts')]);
+  } else {
+    const tsxBin = resolve(dirname, '..', 'node_modules', '.bin', 'tsx');
+    await execa(tsxBin, [resolve(generatedDir, 'pothos', 'generateSchema.ts')]);
+  }
 };
 
 const stitchSchema = async (generatedDir: string, config: Config) => {

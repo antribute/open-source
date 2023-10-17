@@ -1,5 +1,5 @@
 import { classed, mergeVariants } from 'utils/classed';
-import { SizeProp } from 'types/styles';
+import type { SizeProp } from 'types/styles';
 import { sizeVariants } from 'styles/size.variants';
 import { clsx } from 'clsx';
 
@@ -20,7 +20,6 @@ const KBDElement = classed(
 
 export const KBD = ({
   size = 'md',
-  children,
   keys,
   ...props
 }: { keys: string[]; size?: KBDSize } & React.ComponentProps<typeof KBDElement>) => {

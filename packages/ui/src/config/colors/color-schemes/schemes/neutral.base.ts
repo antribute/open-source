@@ -1,4 +1,4 @@
-import { ColorScheme } from '../color-scheme-config.types';
+import type { ColorScheme } from '../color-scheme-config.types';
 
 export const neutralBaseColors = {
   boundary: 'palette-various-slate-600',

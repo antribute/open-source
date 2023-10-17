@@ -1,4 +1,4 @@
-import { ColorGroup, ColorPropKey } from '../colors.types';
+import type { ColorGroup, ColorPropKey } from '../colors.types';
 
 export function generateColorGroup<TColorGroup extends ColorGroup>(colorGroup: TColorGroup) {
   return <TProps extends Record<ColorPropKey, keyof TColorGroup>>(props: TProps) => {

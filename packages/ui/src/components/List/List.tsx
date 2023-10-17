@@ -2,11 +2,11 @@ import React from 'react';
 import { classed, expandVariant } from 'utils/classed';
 import { getDataAttributes } from 'config';
 import {
-  listItemSizingClassName,
-  ListItemGroup,
-  ListItemButton,
-  ListItemLink,
   CollapsibleListItem,
+  ListItemButton,
+  ListItemGroup,
+  ListItemLink,
+  listItemSizingClassName,
 } from './ListItem';
 
 export type {
@@ -16,6 +16,25 @@ export type {
   ListItemProps,
   ListItemContainerProps,
 } from './ListItem';
+
+// SectionTitle
+
+const ListSectionTitle = classed(
+  'div',
+  listItemSizingClassName,
+  'font-medium text-content-subtle select-none text-sm',
+  'py-8',
+  {
+    variants: {
+      bottomGutter: {
+        true: 'mb-8',
+      },
+    },
+    defaultVariants: {
+      bottomGutter: false,
+    },
+  }
+);
 
 // Container
 
@@ -82,25 +101,6 @@ const ListContainer = ({
     </>
   );
 };
-
-// SectionTitle
-
-const ListSectionTitle = classed(
-  'div',
-  listItemSizingClassName,
-  'font-medium text-content-subtle select-none text-sm',
-  'py-8',
-  {
-    variants: {
-      bottomGutter: {
-        true: 'mb-8',
-      },
-    },
-    defaultVariants: {
-      bottomGutter: false,
-    },
-  }
-);
 
 // SectionItem
 const ListSectionItemContainer = classed(

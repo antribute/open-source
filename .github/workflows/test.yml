@@ -14,19 +14,23 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Setup
-        uses: antribute/actions/setup@main
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+      - name: Install Dependencies
+        run: bun install
       - name: Run Test
-        run: pnpm run test
-      - name: Upload Tracking Coverage to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          files: ./packages/tracking/coverage/cobertura-coverage.xml
-          flags: tracking
-          fail_ci_if_error: true
-      - name: Upload Antribute UI Coverage to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          files: ./packages/ui/coverage/cobertura-coverage.xml
-          flags: ui
-          fail_ci_if_error: true
+        run: bun test
+      # Bun test currently doesn't output coverage files. Until this is implemented, uploads to
+      # Codecov will be disabled
+      # - name: Upload Tracking Coverage to Codecov
+      #   uses: codecov/codecov-action@v3
+      #   with:
+      #     files: ./packages/tracking/coverage/cobertura-coverage.xml
+      #     flags: tracking
+      #     fail_ci_if_error: true
+      # - name: Upload Antribute UI Coverage to Codecov
+      #   uses: codecov/codecov-action@v3
+      #   with:
+      #     files: ./packages/ui/coverage/cobertura-coverage.xml
+      #     flags: ui
+      #     fail_ci_if_error: true

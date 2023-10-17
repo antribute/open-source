@@ -1,9 +1,9 @@
-/* eslint-disable tailwindcss/no-custom-classname */
 import clsx from 'clsx';
 import { inputComponentVariants } from 'styles/input-component.variants';
 import { sizeVariants } from 'styles/size.variants';
 import { textVariants } from 'styles/text.variants';
-import { Classed, classed, generateCompoundVariants, mergeVariants } from 'utils/classed';
+import type { Classed } from 'utils/classed';
+import { classed, generateCompoundVariants, mergeVariants } from 'utils/classed';
 
 export type ButtonVariant = 'filled' | 'glass' | 'ghost' | 'text' | 'outlined';
 

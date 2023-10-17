@@ -1,4 +1,4 @@
-import { ColorSchemeName } from 'config';
+import type { ColorSchemeName } from 'config';
 import { isClientSide } from 'utils/environment-utils';
 
 export function getNearestColorSchemeAttribute(

@@ -1,4 +1,5 @@
-import { WriteFileOptions, outputFileSync } from 'fs-extra';
+import type { WriteFileOptions } from 'fs-extra';
+import { outputFileSync } from 'fs-extra';
 
 export function createNewFile({
   filePath,

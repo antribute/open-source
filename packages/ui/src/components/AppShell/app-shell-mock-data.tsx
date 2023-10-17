@@ -6,8 +6,9 @@ import {
   ServerIcon,
   SignalIcon,
 } from '@heroicons/react/24/outline';
-import { ButtonProps } from 'components/Button';
-import { DeploymentMockData, generateMockDeploymentList } from 'mock/mock-data';
+import type { ButtonProps } from 'components/Button';
+import type { DeploymentMockData } from 'mock/mock-data';
+import { generateMockDeploymentList } from 'mock/mock-data';
 
 const navigation = [
   { name: 'Projects', href: '#', icon: FolderIcon, current: false },

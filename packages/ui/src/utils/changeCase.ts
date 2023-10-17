@@ -1,24 +1,24 @@
 import {
-  paramCase,
-  capitalCase,
   camelCase,
+  capitalCase,
+  constantCase,
   dotCase,
   headerCase,
   noCase,
+  paramCase,
+  pascalCase,
   pathCase,
-  constantCase,
   sentenceCase,
   snakeCase,
-  pascalCase,
 } from 'change-case';
 import { upperFirst } from 'lodash-es';
-import {
+import type {
   CamelCase as _CamelCase,
   DelimiterCase as _DelimiterCase,
-  PascalCase as _PascalCase,
   KebabCase as _KebabCase,
-  SnakeCase as _SnakeCase,
+  PascalCase as _PascalCase,
   ScreamingSnakeCase as _ScreamingSnakeCase,
+  SnakeCase as _SnakeCase,
 } from 'type-fest';
 
 export type StringCase = keyof IStringCase<string>;

@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { RTFSupportedZodTypes } from '@ts-react/form';
+import type { RTFSupportedZodTypes } from '@ts-react/form';
 import type { z } from 'zod';
 
 export interface FormFieldSchemaData {

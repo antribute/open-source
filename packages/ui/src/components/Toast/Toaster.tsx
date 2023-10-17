@@ -1,12 +1,14 @@
-import { Classed, classed } from 'utils/classed';
+import type { Classed } from 'utils/classed';
+import { classed } from 'utils/classed';
 import React, { useMemo } from 'react';
-import { ButtonProps } from 'components/Button';
+import type { ButtonProps } from 'components/Button';
 import { toastActions, toastState } from 'components/Toast/toast-function';
 import { Toast } from 'components/Toast';
 import type { ToastData, ToastVariant } from 'components/Toast/Toast.types';
 import type { ToastState } from 'components/Toast/toast-function';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Flex, FlexProps } from 'components/Flex';
+import { AnimatePresence, motion } from 'framer-motion';
+import type { FlexProps } from 'components/Flex';
+import { Flex } from 'components/Flex';
 import { CloseButton } from 'components/IconButton';
 import { twMerge } from 'tailwind-merge';
 import { toArray } from 'utils/toArray';
@@ -71,54 +73,6 @@ const ToastActionButtons = ({
   );
 };
 
-/** @jsxImportSource valtio-signal */
-
-const ToasterToast = motion((props: ToastData) => {
-  const {
-    action,
-    id,
-    open: openProp,
-    defaultOpen,
-    title,
-    description,
-    closing,
-    duration,
-    onOpenChange,
-    variant = 'neutral',
-    ...rest
-  } = props;
-
-  const isDarkMode = useIsDarkMode();
-
-  function getColorScheme() {
-    if (!isDarkMode && variant === 'neutral') return 'surface';
-    if (variant === 'neutral') return 'neutral-dark';
-    return variant;
-  }
-
-  return (
-    <Toast.Container
-      open
-      defaultOpen={defaultOpen}
-      onOpenChange={onOpenChange}
-      data-color-scheme={getColorScheme()}
-      id={id}
-      layout
-      {...rest}
-    >
-      {closing && (
-        <motion.div
-          className="bg-content-ghost absolute left-0 top-0 h-6 w-full origin-right "
-          initial={{ opacity: 0 }}
-          animate={{ scaleX: 0, opacity: 100 }}
-          transition={{ duration: (duration ?? NaN) / 1000 }}
-        />
-      )}
-      <ToasterContent {...props} />
-    </Toast.Container>
-  );
-});
-
 const ToastContainer = ({
   variant,
   children,
@@ -177,6 +131,42 @@ const ToasterContent = (props: ToastData) => {
     </ToastContainer>
   );
 };
+
+/** @jsxImportSource valtio-signal */
+
+const ToasterToast = motion((props: ToastData) => {
+  const { id, defaultOpen, closing, duration, onOpenChange, variant = 'neutral', ...rest } = props;
+
+  const isDarkMode = useIsDarkMode();
+
+  function getColorScheme() {
+    if (!isDarkMode && variant === 'neutral') return 'surface';
+    if (variant === 'neutral') return 'neutral-dark';
+    return variant;
+  }
+
+  return (
+    <Toast.Container
+      open
+      defaultOpen={defaultOpen}
+      onOpenChange={onOpenChange}
+      data-color-scheme={getColorScheme()}
+      id={id}
+      layout
+      {...rest}
+    >
+      {closing && (
+        <motion.div
+          className="bg-content-ghost absolute left-0 top-0 h-6 w-full origin-right "
+          initial={{ opacity: 0 }}
+          animate={{ scaleX: 0, opacity: 100 }}
+          transition={{ duration: (duration ?? Number.NaN) / 1000 }}
+        />
+      )}
+      <ToasterContent {...props} />
+    </Toast.Container>
+  );
+});
 
 export const Toaster = () => {
   const { toasts, maxToasts, showAllToasts, isStacked } = useSnapshot(

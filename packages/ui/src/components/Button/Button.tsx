@@ -1,7 +1,8 @@
 import React, { forwardRef } from 'react';
 import { deriveClassed } from '@tw-classed/react';
 import { ButtonElement } from 'components/Button/Button.styles';
-import { InlineButtonIcon, InlineButtonIconProps } from 'components/Button/InlineButtonIcon';
+import type { InlineButtonIconProps } from 'components/Button/InlineButtonIcon';
+import { InlineButtonIcon } from 'components/Button/InlineButtonIcon';
 import type { ComponentProps } from 'react';
 
 type ButtonComponentProps = {

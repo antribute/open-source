@@ -1,9 +1,10 @@
-import { useVirtualizer, VirtualizerOptions, Virtualizer } from '@tanstack/react-virtual';
-import { useRef, useEffect, useMemo } from 'react';
+import type { Virtualizer, VirtualizerOptions } from '@tanstack/react-virtual';
+import { useVirtualizer } from '@tanstack/react-virtual';
+import { useEffect, useMemo, useRef } from 'react';
 import useMousePosition from '@react-hook/mouse-position';
 import { isEqual } from 'lodash-es';
-import { MousePosition } from 'hooks/useMousePosition';
-import { Rows } from './Table.types';
+import type { MousePosition } from 'hooks/useMousePosition';
+import type { Rows } from './Table.types';
 
 export type TableVirtualizerProps = Pick<
   VirtualizerOptions<Element, Element>,

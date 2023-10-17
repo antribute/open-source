@@ -1,12 +1,13 @@
 import { HorizontalResizeIcon, VerticalResizeIcon } from 'components/Icon/ResizeIcon';
 import { forwardRef } from 'react';
-import type { Direction } from 'react-resizable-panels';
-import {
-  PanelResizeHandle as PanelResizeHandlePrimitive,
+import type {
+  Direction,
   PanelResizeHandleProps as PanelResizeHandlePrimitiveProps,
 } from 'react-resizable-panels';
+import { PanelResizeHandle as PanelResizeHandlePrimitive } from 'react-resizable-panels';
 import { classed } from 'utils/classed';
-import './test.css';
+// TODO: Ask Tyler if we still need this
+// import './test.css';
 import { clsx } from 'config/plugins/custom-classes-plugin/class-style-utils';
 
 const ResizeHandle = classed(

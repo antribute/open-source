@@ -1,8 +1,10 @@
-import React, { useState, useMemo, useRef } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import * as AvatarPrimitive from '@radix-ui/react-avatar';
-import { Classed, classed, mergeVariants } from 'utils/classed';
+import type { Classed } from 'utils/classed';
+import { classed, mergeVariants } from 'utils/classed';
 import { Wrap } from 'components/Wrap';
-import { Tooltip, TooltipProps } from 'components/Tooltip';
+import type { TooltipProps } from 'components/Tooltip';
+import { Tooltip } from 'components/Tooltip';
 import { getTruncatedName } from 'utils/getTruncatedName';
 import { sizeVariants } from 'styles/size.variants';
 import { twMerge } from 'tailwind-merge';
@@ -10,9 +12,11 @@ import { stringToDistinctColorClass } from 'utils/stringToDistinctColorClass';
 import clsx from 'clsx';
 import { objectMap } from 'utils';
 import { capitalize, isEmpty, pick, truncate } from 'lodash-es';
-import { SizeProp } from 'types/styles';
-import { Detail, DetailProps } from 'components/Detail';
-import { DetailSlots, SlotItemData, slotIds } from 'components/Detail/Detail.types';
+import type { SizeProp } from 'types/styles';
+import type { DetailProps } from 'components/Detail';
+import { Detail } from 'components/Detail';
+import type { DetailSlots, SlotItemData } from 'components/Detail/Detail.types';
+import { slotIds } from 'components/Detail/Detail.types';
 import { AvatarElementName } from './Avatar.types';
 
 const inlineSizeVariants = objectMap(

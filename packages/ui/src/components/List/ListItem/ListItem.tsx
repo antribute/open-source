@@ -1,8 +1,9 @@
 import { deriveClassed } from '@tw-classed/react';
-import { Classed } from 'utils/classed';
+import type { Classed } from 'utils/classed';
 import { Detail } from 'components/Detail';
 import { BaseListItemElement } from './BaseListItem';
-import { ListItemContainer, ListItemContainerProps } from './ListItemContainer';
+import type { ListItemContainerProps } from './ListItemContainer';
+import { ListItemContainer } from './ListItemContainer';
 
 type ListItemElementVariantProps = Classed.VariantProps<typeof BaseListItemElement>;
 

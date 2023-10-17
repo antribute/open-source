@@ -1,4 +1,5 @@
-import { BoxShadowOptions, buildBoxShadow } from './buildBoxShadow';
+import type { BoxShadowOptions } from './buildBoxShadow';
+import { buildBoxShadow } from './buildBoxShadow';
 
 export function shadowBorder(options: BoxShadowOptions[]) {
   const defaultColor = 'rgb(var(--color-highlight-subtle) / var(--alpha-highlight-subtle))';

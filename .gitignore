@@ -1,4 +1,5 @@
 # Build Output
+.astro
 .next
 dist
 **/storybook-static

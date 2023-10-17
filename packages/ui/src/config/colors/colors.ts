@@ -1,15 +1,14 @@
 // @ts-expect-error No type definition
 import flattenColorPaletteImport from 'tailwindcss/lib/util/flattenColorPalette';
 import tailwindColors from 'tailwindcss/colors';
+import type { ParamCasePathName, StripPostfix } from '../helpers/type-utilities';
 import { variousColors } from './variousColors';
 import { generateColorGroup } from './helpers/generateColorGroup';
 import { arrayToColorGroup } from './helpers/arrayToColorGroup';
 import { generateHexAlphaColorGroup } from './helpers/generateHexAlphaColorGroup';
 import { objectMap } from './helpers/objectMap';
-import { ParamCasePathName, StripPostfix } from '../helpers/type-utilities';
 
 // Webpack fucks up these imports so we gotta manually handle it
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const flattenColorPalette =
   typeof flattenColorPaletteImport === 'function'
     ? flattenColorPaletteImport

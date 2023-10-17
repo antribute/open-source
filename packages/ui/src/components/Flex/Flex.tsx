@@ -1,4 +1,5 @@
-import { Classed, classed } from 'utils/classed';
+import type { Classed } from 'utils/classed';
+import { classed } from 'utils/classed';
 
 export type FlexProps = { className?: string; children?: React.ReactNode } & Partial<
   Classed.VariantProps<typeof Flex>

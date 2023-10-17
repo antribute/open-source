@@ -1,5 +1,6 @@
 import type { ColorAlphaVariant } from '../colors.types';
-import { HexAlphaTransparency, hexAlphaCodes, hexTransparencyPresetMap } from '../colors.constants';
+import type { HexAlphaTransparency } from '../colors.constants';
+import { hexAlphaCodes, hexTransparencyPresetMap } from '../colors.constants';
 
 interface TransparencyPresetOption {
   transparencyPreset?: ColorAlphaVariant | undefined;

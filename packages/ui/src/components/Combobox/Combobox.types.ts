@@ -1,7 +1,7 @@
 import type { L } from 'ts-toolbelt';
 import type { InputComponentProps } from 'components/Input';
 import type { UseToggleViewAllSelectedOnUnmountProps } from 'components/Combobox/useToggleViewAllSelected';
-import { ChevronIconVariant } from 'components/Icon/ChevronIcon';
+import type { ChevronIconVariant } from 'components/Icon/ChevronIcon';
 
 type ComboboxOptions = L.List<unknown>;
 

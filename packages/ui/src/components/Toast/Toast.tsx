@@ -1,17 +1,11 @@
-/* eslint-disable @typescript-eslint/no-floating-promises */
 import { classed, expandVariant } from 'utils/classed';
 import * as ToastPrimitive from '@radix-ui/react-toast';
-import React, { useState, forwardRef } from 'react';
-import { Button, ButtonProps } from 'components/Button';
+import React, { forwardRef, useState } from 'react';
+import type { ButtonProps } from 'components/Button';
+import { Button } from 'components/Button';
 import { CloseButton } from 'components/IconButton';
-import {
-  motion,
-  Variants as MotionVariants,
-  Variant as MotionVariant,
-  interpolate,
-  easeIn,
-  AnimatePresence,
-} from 'framer-motion';
+import type { Variant as MotionVariant, Variants as MotionVariants } from 'framer-motion';
+import { AnimatePresence, easeIn, interpolate, motion } from 'framer-motion';
 import { toastActions, toastState } from 'components/Toast/toast-function';
 import clsx from 'clsx';
 import { mergeRefs } from 'react-merge-refs';
@@ -75,119 +69,6 @@ interface Custom {
   index: number;
   count: number;
 }
-
-const ToastContainer = React.forwardRef<HTMLLIElement, ToastProps>(
-  ({ children, id, index = 0, ...props }, forwardRef) => {
-    const { toasts, isStacked } = useSnapshot(toastState);
-
-    const [swipeComplete, setSwipeComplete] = useState(false);
-
-    const { observe } = useDimensions<HTMLLIElement>();
-
-    const ref = mergeRefs([forwardRef, observe]);
-
-    const custom: Custom = { index, count: toasts.length };
-
-    const animate: MotionVariant = {
-      opacity: [0, 0.9, 1],
-      y: 0,
-    };
-    const initial: MotionVariant = {
-      // opacity: isStacked ? (index === 0 ? 1 : [0, 0.9, 1]) : 0,
-      opacity: 0,
-      y: isStacked ? 0 : 40,
-      position: 'relative',
-    };
-
-    const isDarkMode = useIsDarkMode();
-    const toastMotionVariants: MotionVariants = {
-      initial,
-      animate,
-      exit: { opacity: 0 },
-      exitStacked: { opacity: 0, y: 0 },
-      initialStacked: { y: 0, opacity: index === 0 ? 1 : 0 },
-
-      animateStacked: ({ index, count }: Custom) => {
-        const input = [0, count - 1];
-
-        const lightModeBrightness = interpolate([0, count], [1, 1.5])(index);
-        const darkModeBrightness = interpolate(input, [1, 0.3])(index);
-        const brightness = isDarkMode ? darkModeBrightness : lightModeBrightness;
-
-        const zIndex = interpolate(input, [100, 50])(index);
-        const opacity = interpolate(input, [1, 0], { ease: easeIn })(index);
-
-        const blur = interpolate(input, [0, 1.2])(index);
-        const scaleX = interpolate(input, [1, 0.7])(index);
-        const y = interpolate(input, [0, -30])(index);
-
-        return {
-          opacity,
-          scaleX,
-          transition: { bounce: 0, duration: 2, restSpeed: 0.5 },
-          x: 0,
-          y: index === 0 ? 0 : y,
-          zIndex,
-          position: 'absolute',
-          filter: `brightness(${brightness}) blur(${blur}px)`,
-          // backdropFilter: ``,
-          // right: 8,
-        };
-      },
-    };
-
-    return (
-      <ToastPrimitive.Root
-        onSwipeEnd={() => {
-          setSwipeComplete(true);
-        }}
-        onSwipeStart={() => {
-          setSwipeComplete(false);
-        }}
-        {...props}
-        forceMount
-        id={id}
-        asChild
-        ref={ref}
-      >
-        <motion.li layout className="group relative w-full max-w-[400px] px-8">
-          <Wrap
-            if={isStacked}
-            wrap={(c) => (
-              <motion.div layout className="relative">
-                {c}
-              </motion.div>
-            )}
-          >
-            <ToastViewportActions index={index}>
-              <ToastContainerElement
-                variants={toastMotionVariants}
-                custom={custom}
-                exit="exit"
-                initial="initial"
-                animate={isStacked ? 'animateStacked' : 'animate'}
-                // initial={isStacked ? 'initialStacked' : 'initial'}
-                // exit={isStacked ? 'existStacked' : 'exit'}
-                drag="x"
-                dragDirectionLock
-                dragConstraints={{ left: 0, right: 600 }}
-                dragElastic={0.05}
-                layoutId={id}
-                layout="position"
-                className="right-0"
-                dragSnapToOrigin={!swipeComplete}
-                firstStackItem={isStacked && index === 0}
-                stacked={isStacked}
-              >
-                {children}
-              </ToastContainerElement>
-            </ToastViewportActions>
-          </Wrap>
-        </motion.li>
-      </ToastPrimitive.Root>
-    );
-  }
-);
 
 const ToastViewportActionButton = ({
   children,
@@ -305,6 +186,119 @@ const ToastViewportActions = ({
   );
 };
 
+const ToastContainer = React.forwardRef<HTMLLIElement, ToastProps>(
+  ({ children, id, index = 0, ...props }, forwardRef) => {
+    const { toasts, isStacked } = useSnapshot(toastState);
+
+    const [swipeComplete, setSwipeComplete] = useState(false);
+
+    const { observe } = useDimensions<HTMLLIElement>();
+
+    const ref = mergeRefs([forwardRef, observe]);
+
+    const custom: Custom = { index, count: toasts.length };
+
+    const animate: MotionVariant = {
+      opacity: [0, 0.9, 1],
+      y: 0,
+    };
+    const initial: MotionVariant = {
+      // opacity: isStacked ? (index === 0 ? 1 : [0, 0.9, 1]) : 0,
+      opacity: 0,
+      y: isStacked ? 0 : 40,
+      position: 'relative',
+    };
+
+    const isDarkMode = useIsDarkMode();
+    const toastMotionVariants: MotionVariants = {
+      initial,
+      animate,
+      exit: { opacity: 0 },
+      exitStacked: { opacity: 0, y: 0 },
+      initialStacked: { y: 0, opacity: index === 0 ? 1 : 0 },
+
+      animateStacked: ({ index, count }: Custom) => {
+        const input = [0, count - 1];
+
+        const lightModeBrightness = interpolate([0, count], [1, 1.5])(index);
+        const darkModeBrightness = interpolate(input, [1, 0.3])(index);
+        const brightness = isDarkMode ? darkModeBrightness : lightModeBrightness;
+
+        const zIndex = interpolate(input, [100, 50])(index);
+        const opacity = interpolate(input, [1, 0], { ease: easeIn })(index);
+
+        const blur = interpolate(input, [0, 1.2])(index);
+        const scaleX = interpolate(input, [1, 0.7])(index);
+        const y = interpolate(input, [0, -30])(index);
+
+        return {
+          opacity,
+          scaleX,
+          transition: { bounce: 0, duration: 2, restSpeed: 0.5 },
+          x: 0,
+          y: index === 0 ? 0 : y,
+          zIndex,
+          position: 'absolute',
+          filter: `brightness(${brightness}) blur(${blur}px)`,
+          // backdropFilter: ``,
+          // right: 8,
+        };
+      },
+    };
+
+    return (
+      <ToastPrimitive.Root
+        onSwipeEnd={() => {
+          setSwipeComplete(true);
+        }}
+        onSwipeStart={() => {
+          setSwipeComplete(false);
+        }}
+        {...props}
+        forceMount
+        id={id}
+        asChild
+        ref={ref}
+      >
+        <motion.li layout className="group relative w-full max-w-[400px] px-8">
+          <Wrap
+            if={isStacked}
+            wrap={(c) => (
+              <motion.div layout className="relative">
+                {c}
+              </motion.div>
+            )}
+          >
+            <ToastViewportActions index={index}>
+              <ToastContainerElement
+                variants={toastMotionVariants}
+                custom={custom}
+                exit="exit"
+                initial="initial"
+                animate={isStacked ? 'animateStacked' : 'animate'}
+                // initial={isStacked ? 'initialStacked' : 'initial'}
+                // exit={isStacked ? 'existStacked' : 'exit'}
+                drag="x"
+                dragDirectionLock
+                dragConstraints={{ left: 0, right: 600 }}
+                dragElastic={0.05}
+                layoutId={id}
+                layout="position"
+                className="right-0"
+                dragSnapToOrigin={!swipeComplete}
+                firstStackItem={isStacked && index === 0}
+                stacked={isStacked}
+              >
+                {children}
+              </ToastContainerElement>
+            </ToastViewportActions>
+          </Wrap>
+        </motion.li>
+      </ToastPrimitive.Root>
+    );
+  }
+);
+
 export type ToastActionProps = Pick<ToastPrimitive.ToastActionProps, 'altText'> & ButtonProps;
 
 export type ToastActionReactElement = React.ReactElement<typeof ToastAction>;
@@ -319,7 +313,7 @@ export const ToastAction = ({ altText, ...props }: ToastActionProps) => {
 
 export type ToastCloseProps = ButtonProps;
 
-const ToastClose = ({ className, ...props }: ToastCloseProps) => {
+const ToastClose = (props: ToastCloseProps) => {
   return (
     <ToastPrimitive.Close asChild>
       <CloseButton {...props} />

@@ -1,7 +1,3 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
-/* eslint-disable no-console */
-/* eslint-disable import/no-extraneous-dependencies */
 import { Project, SyntaxKind } from 'ts-morph';
 import type { ResolvedRouteGeneratorPluginOptions } from './tanstack-route-generator-plugin';
 import {

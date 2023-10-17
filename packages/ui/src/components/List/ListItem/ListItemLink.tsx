@@ -1,11 +1,13 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMemo } from 'react';
 import clsx from 'clsx';
 import ArrowTopRightOnSquareIcon from '@heroicons/react/24/solid/ArrowTopRightOnSquareIcon';
-import { Classed, deriveClassed } from 'utils/classed';
-import { Tooltip, TooltipProps } from 'components/Tooltip';
+import type { Classed } from 'utils/classed';
+import { deriveClassed } from 'utils/classed';
+import type { TooltipProps } from 'components/Tooltip';
+import { Tooltip } from 'components/Tooltip';
 import { Wrap } from 'components/Wrap';
-import { ListItemGroup, ListItemGroupBaseProps } from './ListItem';
+import type { ListItemGroupBaseProps } from './ListItem';
+import { ListItemGroup } from './ListItem';
 
 // List Item Link
 

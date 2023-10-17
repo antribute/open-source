@@ -3,6 +3,10 @@
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"],
   "compilerOptions": {
-    "baseUrl": "src"
+    "baseUrl": "./src",
+    "outDir": "./dist",
+    "paths": {
+      "tanstack-route-generator-plugin": ["./tanstack-route-generator-plugin/*"]
+    }
   }
 }

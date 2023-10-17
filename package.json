@@ -1,27 +1,26 @@
 {
   "name": "@antribute/open-source",
   "scripts": {
-    "build": "turbo run build",
-    "build:apps": "turbo run build --filter=./apps/*",
-    "build:packages": "turbo run build --filter=./packages/*",
-    "build:servers": "turbo run build --filter=./servers/*",
-    "clean": "turbo run clean && echo \"⏳ Removing node_modules...\" && rm -r ./node_modules",
-    "dev:adk-todo": "turbo run dev --filter=@antribute/example-adk-todo-list...",
-    "dev:lp": "turbo run dev --filter=@antribute/landing-page...",
-    "dev:ui": "turbo run storybook --filter=@antribute/ui...",
-    "lint": "turbo run lint",
-    "lint:fix": "turbo run lint -- --fix",
-    "lint:package-versions": "manypkg check",
-    "postinstall": "simple-git-hooks && pnpm run lint:package-versions",
-    "style:format": "prettier --ignore-unknown --write .",
-    "style:lint": "prettier --ignore-unknown --check .",
-    "reset": "pnpm run clean && pnpm i",
-    "reset:hard": "pnpm run clean && rm pnpm-lock.yaml && pnpm i",
-    "test": "turbo run test -- run",
-    "kill-port": "pnpm dlx kill-port"
+    "build": "bunx --bun turbo run build",
+    "build:apps": "bunx --bun turbo run build --filter=./apps/*",
+    "build:packages": "bunx --bun turbo run build --filter=./packages/*",
+    "build:servers": "bunx --bun turbo run build --filter=./servers/*",
+    "clean": "bunx --bun turbo run clean && echo \"⏳ Removing node_modules...\" && rm -r ./node_modules",
+    "dev:al": "bunx --bun turbo run dev --filter=@antribute/antribute-landing...",
+    "dev:ui": "bunx --bun turbo run storybook --filter=@antribute/ui...",
+    "kill-port": "bunx --bun kill-port",
+    "lint": "bunx --bun eslint . --cache",
+    "lint:fix": "bunx --bun eslint . --cache --fix",
+    "lint:package-versions": "bunx --bun manypkg check",
+    "postinstall": "bunx --bun simple-git-hooks && bun run lint:package-versions",
+    "style:format": "bunx --bun prettier --ignore-unknown --write .",
+    "style:lint": "bunx --bun prettier --ignore-unknown --check ."
   },
+  "type": "module",
   "dependencies": {
+    "@happy-dom/global-registrator": "^12.9.1",
     "@manypkg/cli": "^0.19.2",
+    "eslint": "^8.51.0",
     "lint-staged": "^13.0.3",
     "prettier": "2.8.7",
     "rimraf": "^4.4.1",
@@ -29,17 +28,17 @@
     "turbo": "latest",
     "typescript": "^5.0.4"
   },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "prettier": "./packages/config/prettier/.prettierrc.cjs",
   "private": true,
-  "engines": {
-    "node": ">=20",
-    "pnpm": ">=8"
-  },
   "simple-git-hooks": {
-    "pre-commit": "pnpm exec lint-staged"
+    "pre-commit": "bunx --bun lint-staged"
   },
   "lint-staged": {
-    "*": "pnpm run style:format"
+    "*": "bun run --bun style:format"
   },
   "manypkg": {
     "ignoredRules": [

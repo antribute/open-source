@@ -3,7 +3,8 @@
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "jsx": "react-jsx",
-    "lib": ["ESNext", "Dom"]
+    "lib": ["ESNext", "Dom"],
+    "types": ["bun-types"]
   },
   "display": "React"
 }

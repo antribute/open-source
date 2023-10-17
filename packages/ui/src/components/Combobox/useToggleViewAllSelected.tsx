@@ -1,6 +1,5 @@
-/* eslint-disable react/no-unused-prop-types */
 import { useEffect } from 'react';
-import * as SelectPrimitive from 'ariakit/select';
+import type * as SelectPrimitive from 'ariakit/select';
 import type { MultiSelectVariant } from './Combobox.types';
 
 export interface UseToggleViewAllSelectedOnUnmountProps {
@@ -28,7 +27,6 @@ export function useToggleViewAllSelectedOnUnmount({
 }: UseToggleViewAllSelectedOnUnmountProps) {
   const { value: selectValue } = select;
 
-  // eslint-disable-next-line consistent-return
   useEffect(() => {
     if (!select.mounted && toggleViewAllSelectedOnPopoverUnmount) {
       if (

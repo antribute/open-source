@@ -22,7 +22,6 @@ export type RemoveNumberPostfix<T extends string, TDelimeter extends string = '-
 export type HasPostfix<
   T extends string,
   TPostfix extends string
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
 > = T extends `${infer _}${TPostfix}` ? true : false;
 
 export type DotToDash<

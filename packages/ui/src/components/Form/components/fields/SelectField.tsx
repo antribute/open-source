@@ -1,8 +1,6 @@
 import { createUniqueFormField } from 'components/Form/Form.helpers';
-import {
-  ControlledCombobox,
-  ControlledComboboxProps,
-} from 'components/Form/components/ControlledCombobox';
+import type { ControlledComboboxProps } from 'components/Form/components/ControlledCombobox';
+import { ControlledCombobox } from 'components/Form/components/ControlledCombobox';
 import { z } from 'zod';
 
 export const SelectFieldComponent = (props: ControlledComboboxProps) => {
