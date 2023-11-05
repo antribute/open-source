@@ -1,0 +1,9 @@
+{
+  "extends": "@antribute/config/tsconfig/tsconfig.base.json",
+  "include": ["TypeAPI.d.ts", "src/**/*.ts", "example/**/*.ts"],
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "baseUrl": "src",
+    "types": ["./TypeAPI.d.ts"]
+  }
+}
