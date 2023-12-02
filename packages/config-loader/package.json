@@ -1,0 +1,48 @@
+{
+  "name": "@antribute/config-loader",
+  "description": "Loads TypeScript, JavaScript, and JSON configs in a Bun and Node friendly manner",
+  "version": "0.1.0",
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    "bun": "./src/index.ts",
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.js",
+    "types": "./dist/index.d.ts"
+  },
+  "files": [
+    "dist/**",
+    "src/**"
+  ],
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "bunx --bun unbuild",
+    "clean": "rimraf .turbo &&  rimraf coverage && rimraf dist && rimraf node_modules && rimraf test-results",
+    "lint": "eslint --cache ./src",
+    "test": "bun test"
+  },
+  "keywords": [
+    "antribute",
+    "antribute-backend",
+    "antribute-backend-auth",
+    "clerk"
+  ],
+  "author": "Antribute, Inc. (https://www.antribute.com)",
+  "license": "MIT",
+  "dependencies": {
+    "@antribute/typebox-errors": "workspace:*",
+    "@sinclair/typebox": "^0.31.17",
+    "bundle-require": "^4.0.1",
+    "esbuild": "^0.17.18",
+    "joycon": "^3.1.1",
+    "lodash-es": "^4.17.21",
+    "type-fest": "^3.5.1"
+  },
+  "devDependencies": {
+    "@antribute/config": "workspace:*",
+    "typescript": "^5.0.4",
+    "unbuild": "^2.0.0"
+  }
+}

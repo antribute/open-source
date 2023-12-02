@@ -1,6 +1,6 @@
 {
-  "name": "@antribute/hono-typebox-validator",
-  "description": "An unofficial validator middleware using TypeBox for Hono applications",
+  "name": "@antribute/typebox-errors",
+  "description": "Helpful utilities surrounding TypeBox validation errors",
   "version": "0.1.0",
   "type": "module",
   "publishConfig": {
@@ -24,22 +24,18 @@
   },
   "keywords": [
     "antribute",
-    "hono",
     "typeapi",
     "typebox"
   ],
   "author": "Antribute, Inc. (https://www.antribute.com)",
   "license": "MIT",
   "devDependencies": {
-    "@antribute/config": "workspace:*",
-    "@antribute/typebox-errors": "workspace:*",
+    "@antribute/config": "workspace:0.1.0",
     "@sinclair/typebox": "^0.31.17",
-    "hono": "^3.8.3",
     "typescript": "^5.0.4",
     "unbuild": "^2.0.0"
   },
   "peerDependencies": {
-    "@sinclair/typebox": ">= 0.31.17 < 1",
-    "hono": ">= 3.8.3 < 4"
+    "@sinclair/typebox": ">= 0.31.17 < 1"
   }
 }

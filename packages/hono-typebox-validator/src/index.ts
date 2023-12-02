@@ -1,5 +1,5 @@
+import { Errors } from '@antribute/typebox-errors';
 import type { Static, TAnySchema, TProperties } from '@sinclair/typebox';
-import { Value } from '@sinclair/typebox/value';
 import type { ValueError } from '@sinclair/typebox/value';
 import type { Context, Env, MiddlewareHandler, TypedResponse, ValidationTargets } from 'hono';
 import { validator } from 'hono/validator';
@@ -12,32 +12,6 @@ export type Hook<Schema extends TAnySchema, E extends Env, P extends string, O =
 ) => Response | Promise<Response> | void | Promise<Response | void> | TypedResponse<O>;
 
 type HasUndefined<T> = undefined extends T ? true : false;
-
-export const formatErrorMessage = (errors: ValueError[]) => {
-  const errorMessagesByField: Record<string, string[]> = {};
-  errors.forEach(({ message, path }) => {
-    const property = path.slice(1);
-    if (!errorMessagesByField[property]) {
-      errorMessagesByField[property] = [message];
-      return;
-    }
-    errorMessagesByField[property] = [...(errorMessagesByField[property] || []), message];
-  });
-  const message = Object.entries(errorMessagesByField)
-    .map(([property, errors]) => `${property} (${errors.join(', ')})`)
-    .join(', ');
-  return `The following fields are invalid: ${message}`;
-};
-
-// This mimics Zod's SafeParseAsync function and conditionally returns errors if Value.Check fails
-export const checkWithErrors = <Schema extends TAnySchema>(schema: Schema, value: unknown) => {
-  const success = Value.Check(schema, value);
-  const data = Value.Cast(schema, value);
-  if (success) {
-    return { success, data };
-  }
-  return { success, data, error: [...Value.Errors(schema, value)] };
-};
 
 export const tbValidator = <
   Schema extends TAnySchema,
@@ -59,7 +33,7 @@ export const tbValidator = <
   hook?: Hook<Schema, Environment, Path>
 ): MiddlewareHandler<Environment, Path, V> =>
   validator(target, async (value, c) => {
-    const result = checkWithErrors(schema, value);
+    const result = Errors.Check(schema, value);
 
     if (hook) {
       const hookResult = hook(result, c);
@@ -74,7 +48,7 @@ export const tbValidator = <
     }
 
     if (!result.success) {
-      return c.json({ message: formatErrorMessage(result.error) }, 422);
+      return c.json({ message: Errors.Message(result.error) }, 422);
     }
 
     const data = result.data;
