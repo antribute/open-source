@@ -16,33 +16,25 @@ Additionally, the following things are nice to have, and have built-in support i
 ## Setup
 
 1. Clone the repository and CD into it
-1. Run `nvm use` from the repo root. This ensures you're using the correct node version
+1. Ensure bun is running on the latest version by running `bun upgrade`
 1. Run `bun add` to install all dependencies. This might take awhile on your first run
 
 ## List of Apps
 
-| Name                   | Location                     | Port | Start Command          |
-| ---------------------- | ---------------------------- | ---- | ---------------------- |
-| Antribute Landing Page | `apps/landing-page`          | 3000 | `bun run dev:lp`       |
-| ADK Todo List Example  | `apps/example-adk-todo-list` | 3000 | `bun run dev:adk-todo` |
+| Name                   | Location            | Port | Start Command    |
+| ---------------------- | ------------------- | ---- | ---------------- |
+| Antribute Landing Page | `apps/landing-page` | 3000 | `bun run dev:lp` |
 
 ## List of Packages
 
-| Name                      | Location                           |
-| ------------------------- | ---------------------------------- |
-| `backend-auth-clerk`      | `packages/backend-auth-clerk`      |
-| `backend-auth-nextauth`   | `packages/backend-auth-nextauth`   |
-| `backend-core`            | `packages/backend-core`            |
-| `backend-graphql-pothos`  | `packages/backend-graphql-pothos`  |
-| `backend-orm-prisma`      | `packages/backend-orm-prisma`      |
-| `backend-perms-auth0-fga` | `packages/backend-perms-auth0-fga` |
-| `backend-perms-openfga`   | `packages/backend-perms-openfga`   |
-| `backend-perms-permify`   | `packages/backend-perms-permify`   |
-| `backend-server-koa`      | `packages/backend-server-koa`      |
-| `backend-server-nextjs`   | `packages/backend-server-nextjs`   |
-| `config`                  | `packages/config`                  |
-| `tracking`                | `packages/tracking`                |
-| `ui`                      | `packages/ui`                      |
+| Name                     | Description                                     |
+| ------------------------ | ----------------------------------------------- |
+| `config`                 | Shared config files                             |
+| `feature-type-cli`       | Coming soon 👀                                  |
+| `hono-typebox-validator` | Hono Validation Middleware using TypeBox        |
+| `react-route-generator`  | File-based React routing tooling                |
+| `tracking`               | A safer, easier to use Mixpanel SDK             |
+| `ui`                     | Antribute's Component Library and Design System |
 
 <!-- ## List of Servers
 

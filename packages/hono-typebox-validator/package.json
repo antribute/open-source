@@ -1,0 +1,44 @@
+{
+  "name": "@antribute/hono-typebox-validator",
+  "description": "An unofficial validator middleware using TypeBox for Hono applications",
+  "version": "0.1.0",
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    ".": {
+      "bun": "./src/index.ts",
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist/**"
+  ],
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "bunx --bun unbuild",
+    "clean": "rimraf .turbo && rimraf dist"
+  },
+  "keywords": [
+    "antribute",
+    "hono",
+    "typeapi",
+    "typebox"
+  ],
+  "author": "Antribute, Inc. (https://www.antribute.com)",
+  "license": "MIT",
+  "devDependencies": {
+    "@antribute/config": "workspace:0.1.0",
+    "@sinclair/typebox": "^0.31.17",
+    "hono": "^3.8.3",
+    "typescript": "^5.0.4",
+    "unbuild": "^2.0.0"
+  },
+  "peerDependencies": {
+    "@sinclair/typebox": ">= 0.31.17 < 1",
+    "hono": ">= 3.8.3 < 4"
+  }
+}
