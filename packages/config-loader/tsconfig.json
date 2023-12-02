@@ -1,0 +1,9 @@
+{
+  "extends": "@antribute/config/tsconfig/tsconfig.base.json",
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "outDir": "./dist"
+  }
+}

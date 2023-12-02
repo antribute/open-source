@@ -9,7 +9,11 @@ export const Errors = {
     if (success) {
       return { success, data };
     }
-    return { success, data: value as Static<Schema>, error: [...Value.Errors(schema, value)] };
+    return {
+      success,
+      data: value as Static<Schema>,
+      error: [...Value.Errors(schema, value)] as ValueError[],
+    };
   },
   Message: (errors: ValueError[]) => {
     if (!errors.length) {
