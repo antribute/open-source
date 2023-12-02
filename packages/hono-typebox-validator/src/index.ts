@@ -2,7 +2,6 @@ import type { Static, TAnySchema, TProperties } from '@sinclair/typebox';
 import { Value } from '@sinclair/typebox/value';
 import type { ValueError } from '@sinclair/typebox/value';
 import type { Context, Env, MiddlewareHandler, TypedResponse, ValidationTargets } from 'hono';
-import { HTTPException } from 'hono/http-exception';
 import { validator } from 'hono/validator';
 
 export type Hook<Schema extends TAnySchema, E extends Env, P extends string, O = object> = (
@@ -45,16 +44,14 @@ export const tbValidator = <
   Target extends keyof ValidationTargets,
   Environment extends Env,
   Path extends string,
-  // So like, I'm gonna be honest, I have NO IDEA what this typing does and I'm too lazy to look
-  // any further into it, but this was included in Hono's Zod validation middleware which this is
-  // based off of, so I'm gonna keep it in here
   Input extends TProperties,
+  Output extends Static<Schema>,
   V extends {
     in: HasUndefined<Input> extends true ? { [K in Target]?: Input } : { [K in Target]: Input };
-    out: Static<Schema>;
+    out: { [K in Target]: Output };
   } = {
     in: HasUndefined<Input> extends true ? { [K in Target]?: Input } : { [K in Target]: Input };
-    out: Static<Schema>;
+    out: { [K in Target]: Output };
   }
 >(
   target: Target,
@@ -77,7 +74,7 @@ export const tbValidator = <
     }
 
     if (!result.success) {
-      throw new HTTPException(422, { message: formatErrorMessage(result.error) });
+      return c.json({ message: formatErrorMessage(result.error) }, 422);
     }
 
     const data = result.data;
