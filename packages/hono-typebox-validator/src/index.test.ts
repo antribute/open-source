@@ -10,7 +10,7 @@ const Schema = Type.Object({
   role: Type.Optional(Type.String()),
 });
 
-describe.only('tbValidator', () => {
+describe('tbValidator', () => {
   const app = new Hono();
 
   app.post('/test-endpoint', tbValidator('json', Schema), (c) => {
