@@ -1,6 +1,6 @@
 {
   "name": "@antribute/tracking",
-  "description": "An Antribute abstraction over Mixpanel",
+  "description": "A safer, easier to use Mixpanel SDK",
   "version": "0.1.0",
   "type": "module",
   "publishConfig": {

@@ -3,45 +3,54 @@
 ##############
 
 # Core Monorepo Files
-./.gitignore @jrkienle @tyler-mitchell
-./.nvmrc @jrkienle @tyler-mitchell
-./package.json @jrkienle @tyler-mitchell
-./turbo.json @jrkienle @tyler-mitchell
+./.vscode/* @jrkienle
+./.gitignore @jrkienle
+./.npmrc @jrkienle
+./.prettierignore @jrkienle
+./bunfig.toml @jrkienle
+./codecov.yml @jrkienle
+./eslint.config.js @jrkienle
+./LICENSE @jrkienle
+./package.json @jrkienle
+./README.md @jrkienle
+./setupTests.ts @jrkienle
+./tsconfig.json @jrkienle
+./turbo.json @jrkienle
 
 # GitHub Actions Configurations
 .github/* @jrkienle
 
-############
-# Packages #
-############
+########
+# Core #
+########
 
-# Backend
-./packages/backend-auth-clerk/* @jrkienle
-./packages/backend-auth-nextauth/* @jrkienle
-./packages/backend-core/* @jrkienle
-./packages/backend-graphql-pothos/* @jrkienle
-./packages/backend-orm-prisma/* @jrkienle
-./packages/backend-perms-auth0-fga/* @jrkienle
-./packages/backend-perms-openfga/* @jrkienle
-./packages/backend-perms-permify/* @jrkienle
-./packages/backend-server-koa/* @jrkienle
-./packages/backend-server-nextjs/* @jrkienle
+# Analytics
+./packages/tracking/* @jrkienle @tyler-mitchell
 
-# Config
+# Shared Configuration
 ./packages/config/* @jrkienle @tyler-mitchell
 
-# Tracking
-./packages/tracking/* @jrkienle
-
 # UI
-./packages/ui @jrkienle @tyler-mitchell
+./packages/react-route-generator/* @tyler-mitchell
+./packages/ui @tyler-mitchell
+
+###############
+# FeatureType #
+###############
+
+# TODO: Should we move FeatureType to its own repo / org?
+./packages/feature-type-cli @tyler-mitchell
+
+###########
+# TypeAPI #
+###########
+
+# Hono Middlware
+./packages/hono-typebox-validator/* @jrkienle
 
 ########
 # Apps #
 ########
-
-# ADK Example Apps
-./apps/example-adk-todo-list/* @jrkienle
 
 # Landing Page
 ./apps/landing-page/* @jrkienle @tyler-mitchell
