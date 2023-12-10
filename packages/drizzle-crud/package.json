@@ -7,11 +7,17 @@
     "access": "public"
   },
   "exports": {
+    "./pg-core": {
+      "bun": "./src/pg-core.ts",
+      "require": "./dist/pg-core.js",
+      "import": "./dist/pg-core.mjs",
+      "types": "./dist/pg-core.d.ts"
+    },
     "./sqlite-core": {
-      "bun": "./src/sqlite-core/sqlite-core.ts",
-      "require": "./dist/sqlite-core/sqlite-core.js",
-      "import": "./dist/sqlite-core/sqlite-core.mjs",
-      "types": "./dist/sqlite-core/sqlite-core.d.ts"
+      "bun": "./src/sqlite-core.ts",
+      "require": "./dist/sqlite-core.js",
+      "import": "./dist/sqlite-core.mjs",
+      "types": "./dist/sqlite-core.d.ts"
     }
   },
   "files": [
@@ -31,12 +37,14 @@
   "license": "MIT",
   "devDependencies": {
     "@antribute/config": "workspace:0.1.0",
-    "@antribute/drizzle-pagination": "workspace:0.1.0",
     "drizzle-orm": "^0.29.1",
     "typescript": "^5.0.4",
     "unbuild": "^2.0.0"
   },
   "peerDependencies": {
     "drizzle-orm": ">= 0.29.1 < 1"
+  },
+  "dependencies": {
+    "@antribute/drizzle-pagination": "workspace:0.1.0"
   }
 }
