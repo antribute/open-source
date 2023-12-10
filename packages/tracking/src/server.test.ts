@@ -1,5 +1,6 @@
-import Mixpanel from 'mixpanel';
 import { afterAll, beforeEach, describe, expect, it, mock, spyOn } from 'bun:test';
+
+import Mixpanel from 'mixpanel';
 import { track, updateUser } from './server';
 
 describe('server', () => {

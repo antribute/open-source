@@ -1,7 +1,8 @@
+import { afterAll, afterEach, beforeEach, describe, expect, it, spyOn } from 'bun:test';
+
 import mixpanel from 'mixpanel-browser';
 import { cleanup, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { afterAll, afterEach, beforeEach, describe, expect, it, spyOn } from 'bun:test';
 
 import { TrackingProvider, useTracking } from './client';
 

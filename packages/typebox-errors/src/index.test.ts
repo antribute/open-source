@@ -1,5 +1,6 @@
-import { Type } from '@sinclair/typebox';
 import { describe, expect, it } from 'bun:test';
+
+import { Type } from '@sinclair/typebox';
 
 import { Errors } from '.';
 

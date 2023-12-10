@@ -1,0 +1,53 @@
+{
+  "name": "@antribute/drizzle-pagination",
+  "description": "Drizzle wrappers for Cursor and Limit / Offset Pagination",
+  "version": "0.1.0",
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    "./mysql-core": {
+      "bun": "./src/mysql-core.ts",
+      "require": "./dist/mysql-core.js",
+      "import": "./dist/mysql-core.mjs",
+      "types": "./dist/mysql-core.d.ts"
+    },
+    "./pg-core": {
+      "bun": "./src/pg-core.ts",
+      "require": "./dist/pg-core.js",
+      "import": "./dist/pg-core.mjs",
+      "types": "./dist/pg-core.d.ts"
+    },
+    "./sqlite-core": {
+      "bun": "./src/sqlite-core.ts",
+      "require": "./dist/sqlite-core.js",
+      "import": "./dist/sqlite-core.mjs",
+      "types": "./dist/sqlite-core.d.ts"
+    }
+  },
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "build": "bunx --bun unbuild",
+    "clean": "rimraf .turbo && rimraf dist"
+  },
+  "keywords": [
+    "antribute",
+    "drizzle",
+    "typeapi"
+  ],
+  "author": "Antribute, Inc. (https://www.antribute.com)",
+  "license": "MIT",
+  "devDependencies": {
+    "@antribute/config": "workspace:0.1.0",
+    "drizzle-kit": "^0.20.6",
+    "drizzle-orm": "^0.29.1",
+    "typescript": "^5.0.4",
+    "unbuild": "^2.0.0"
+  },
+  "peerDependencies": {
+    "drizzle-orm": ">= 0.29.0 < 1"
+  }
+}

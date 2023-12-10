@@ -1,8 +1,8 @@
 import { join } from 'path';
+import { describe, expect, it } from 'bun:test';
 
 import { Type } from '@sinclair/typebox';
 import type { Static } from '@sinclair/typebox';
-import { describe, expect, it } from 'bun:test';
 
 import { loadAndValidateConfig, mergeConfig } from '.';
 import type { DefineConfigFn } from '.';
