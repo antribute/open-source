@@ -4,14 +4,15 @@ import {
 } from '@antribute/drizzle-pagination/sqlite-core';
 import { eq, inArray, sql } from 'drizzle-orm';
 import type { GetColumnData, SQL } from 'drizzle-orm';
-import type { SQLiteTable } from 'drizzle-orm/sqlite-core';
-import type { BunSQLiteDatabase } from 'drizzle-orm/bun-sqlite';
+import type { BaseSQLiteDatabase, SQLiteTable } from 'drizzle-orm/sqlite-core';
 
 import type { ColumnOfTable, PaginatedData, PaginationMethods, PaginationParams } from './shared';
 
-// TODO: Replace BunSQLiteDatabase with generic SQLite
+// We're not supporting async sqlite at this point due to issues with count
+type SQLiteDatabase = BaseSQLiteDatabase<'sync', unknown>;
+
 export const createCrudMethods = <
-  Db extends BunSQLiteDatabase,
+  Db extends SQLiteDatabase,
   Table extends SQLiteTable,
   PrimaryKeyCol extends ColumnOfTable<Table>,
   PaginationMethod extends PaginationMethods
