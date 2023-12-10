@@ -1,0 +1,42 @@
+{
+  "name": "@antribute/drizzle-crud",
+  "description": "Instant CRUD Methods for Drizzle Models",
+  "version": "0.1.0",
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    "./sqlite-core": {
+      "bun": "./src/sqlite-core/sqlite-core.ts",
+      "require": "./dist/sqlite-core/sqlite-core.js",
+      "import": "./dist/sqlite-core/sqlite-core.mjs",
+      "types": "./dist/sqlite-core/sqlite-core.d.ts"
+    }
+  },
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "build": "bunx --bun unbuild",
+    "clean": "rimraf .turbo && rimraf dist"
+  },
+  "keywords": [
+    "antribute",
+    "drizzle",
+    "pagination",
+    "typeapi"
+  ],
+  "author": "Antribute, Inc. (https://www.antribute.com)",
+  "license": "MIT",
+  "devDependencies": {
+    "@antribute/config": "workspace:0.1.0",
+    "@antribute/drizzle-pagination": "workspace:0.1.0",
+    "drizzle-orm": "^0.29.1",
+    "typescript": "^5.0.4",
+    "unbuild": "^2.0.0"
+  },
+  "peerDependencies": {
+    "drizzle-orm": ">= 0.29.1 < 1"
+  }
+}
