@@ -1,0 +1,18 @@
+.ruleGroup {
+  @apply bg-none flex flex-col gap-8;
+}
+
+.ruleGroup-header {
+  @apply flex items-center flex-nowrap gap-8;
+}
+
+.ruleGroup-body {
+  @apply flex flex-col gap-8;
+}
+
+.rule {
+  @apply flex items-center gap-16;
+}
+
+.queryBuilder {
+}
