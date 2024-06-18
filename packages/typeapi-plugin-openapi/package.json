@@ -1,0 +1,48 @@
+{
+  "name": "@antribute/typeapi-plugin-openapi",
+  "description": "Automatic OpenAPI schema and Swagger UI generation for TypeAPI",
+  "version": "0.1.0",
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    ".": {
+      "bun": "./src/index.ts",
+      "require": "./src/index.ts",
+      "import": "./src/index.ts",
+      "types": "./src/index.ts"
+    }
+  },
+  "files": [
+    "dist/**"
+  ],
+  "types": "./src/index.ts",
+  "scripts": {
+    "build": "bunx --bun unbuild",
+    "clean": "rimraf .turbo && rimraf dist"
+  },
+  "keywords": [
+    "antribute",
+    "openapi",
+    "swagger",
+    "typeapi"
+  ],
+  "author": "Antribute, Inc. (https://www.antribute.com)",
+  "license": "MIT",
+  "devDependencies": {
+    "@antribute/config": "workspace:*",
+    "@antribute/typeapi": "workspace:*",
+    "@sinclair/typebox": "^0.32.13",
+    "openapi-types": "^12.1.3",
+    "typescript": "^5.0.4",
+    "unbuild": "^2.0.0"
+  },
+  "peerDependencies": {
+    "@antribute/typeapi": "*",
+    "@sinclair/typebox": ">= 0.32.13 < 1"
+  },
+  "dependencies": {
+    "@hono/swagger-ui": "^0.2.0"
+  }
+}

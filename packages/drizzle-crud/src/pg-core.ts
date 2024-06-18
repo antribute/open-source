@@ -6,7 +6,14 @@ import { eq, inArray, sql } from 'drizzle-orm';
 import type { GetColumnData, SQL } from 'drizzle-orm';
 import type { PgDatabase, PgTable } from 'drizzle-orm/pg-core';
 
-import type { ColumnOfTable, PaginatedData, PaginationMethods, PaginationParams } from './shared';
+import type {
+  ColumnOfTable,
+  Methods,
+  PaginatedData,
+  PaginationMethods,
+  PaginationParams,
+} from './shared';
+export type { ColumnOfTable, Methods, PaginatedData, PaginationMethods, PaginationParams };
 
 export const createCrudMethods = <
   Db extends PgDatabase<any>,

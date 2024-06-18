@@ -1,9 +1,3 @@
 {
-  "recommendations": [
-    "astro-build.astro-vscode",
-    "orta.vscode-twoslash-queries",
-    "arktypeio.arkdark",
-    "mikestead.dotenv",
-    "dbaeumer.vscode-eslint"
-  ]
+  "recommendations": ["mikestead.dotenv", "dbaeumer.vscode-eslint"]
 }

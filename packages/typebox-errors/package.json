@@ -31,11 +31,11 @@
   "license": "MIT",
   "devDependencies": {
     "@antribute/config": "workspace:0.1.0",
-    "@sinclair/typebox": "^0.31.17",
+    "@sinclair/typebox": "^0.32.13",
     "typescript": "^5.0.4",
     "unbuild": "^2.0.0"
   },
   "peerDependencies": {
-    "@sinclair/typebox": ">= 0.31.17 < 1"
+    "@sinclair/typebox": ">= 0.32.13 < 1"
   }
 }

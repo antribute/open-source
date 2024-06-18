@@ -1,0 +1,20 @@
+{
+  "name": "@antribute/typeapi-example-todo-list",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "clean": "rimraf .turbo && rimraf node_modules",
+    "dev": "bun --watch src/index.ts",
+    "start": "bun src/index.ts"
+  },
+  "dependencies": {
+    "@antribute/typeapi": "workspace:*",
+    "@sinclair/typebox": "^0.32.13",
+    "drizzle-orm": "^0.29.1",
+    "drizzle-typebox": "^0.1.1"
+  },
+  "devDependencies": {
+    "@antribute/config": "workspace:*",
+    "typescript": "^5.0.4"
+  }
+}
